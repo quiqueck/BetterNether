@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -17,10 +19,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BlockEntityForge;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
 
 import java.util.Random;
 import java.util.function.ToIntFunction;
+import javax.annotation.Nullable;
 
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
 	public BlockCincinnasiteForge() {
@@ -65,5 +69,10 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
 			world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
 			world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
 		}
+	}
+
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+		return checkType(world, type, BlockEntitiesRegistry.CINCINNASITE_FORGE);
 	}
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.world.structures.city.CityFeature;
+import paulevs.betternether.world.structures.plants.AnchorTreeFeature;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.world.structures.BCLStructureFeature;
@@ -18,6 +19,14 @@ public class NetherStructures {
 		new ResourceLocation(BetterNether.MOD_ID, "nether_city"),
 		new CityFeature(),
 		Decoration.STRONGHOLDS,
+		CITY_SPACING,
+		CITY_SPACING>>1
+	);
+	
+	public static final BCLStructureFeature ANCHOR_TREE_STRUCTURE = new BCLStructureFeature(
+		new ResourceLocation(BetterNether.MOD_ID, "anchor_tree"),
+		new AnchorTreeFeature(),
+		Decoration.VEGETAL_DECORATION,
 		CITY_SPACING,
 		CITY_SPACING>>1
 	);
@@ -34,7 +43,7 @@ public class NetherStructures {
 	
 	public static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
 		if (biomeID!=null && !biomeID.equals(BiomeAPI.BASALT_DELTAS_BIOME.getID()) && !biomeID.equals(Biomes.THE_VOID.location())) {
-			BiomeAPI.addBiomeStructure(biome, CITY_STRUCTURE.getFeatureConfigured());
+			//BiomeAPI.addBiomeStructure(biome, CITY_STRUCTURE.getFeatureConfigured());
 		}
 	}
 	

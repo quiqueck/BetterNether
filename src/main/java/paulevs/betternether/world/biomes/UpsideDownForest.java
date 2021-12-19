@@ -59,6 +59,7 @@ public class UpsideDownForest extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE())
+				   .structure(NetherStructures.ANCHOR_TREE_STRUCTURE)
 				   .feature(NetherFeatures.NETHER_RUBY_ORE);
 		}
 		
@@ -109,7 +110,7 @@ public class UpsideDownForest extends NetherBiome {
 	protected void onInit(){
 		this.setNoiseDensity(0.5F);
 		
-		addStructure("anchor_tree", new StructureAnchorTree(), StructureType.CEIL, 0.2F, false);
+		//addStructure("anchor_tree", new StructureAnchorTree(), StructureType.CEIL, 0.2F, false);
 		addStructure("anchor_tree_root", new StructureAnchorTreeRoot(), StructureType.CEIL, 0.03F, false);
 		addStructure("anchor_tree_branch", new StructureAnchorTreeBranch(), StructureType.CEIL, 0.02F, true);
 		addStructure("nether_sakura", new StructureNetherSakura(), StructureType.CEIL, 0.01F, true);

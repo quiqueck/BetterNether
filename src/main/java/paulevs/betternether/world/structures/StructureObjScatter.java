@@ -8,8 +8,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class StructureObjScatter implements IStructure {
-	private static final MutableBlockPos POS = new MutableBlockPos();
-
 	final StructureWorld[] structures;
 	final int distance;
 	final int manDist;
@@ -21,10 +19,10 @@ public abstract class StructureObjScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (isGround(world.getBlockState(pos.below())) && isGround(world.getBlockState(pos.below(2))) && noObjNear(world, pos)) {
 			StructureWorld tree = structures[random.nextInt(structures.length)];
-			tree.generate(world, pos, random, MAX_HEIGHT);
+			tree.generate(world, pos, random, MAX_HEIGHT, context);
 		}
 	}
 
@@ -33,6 +31,8 @@ public abstract class StructureObjScatter implements IStructure {
 	protected abstract boolean isGround(BlockState state);
 
 	private boolean noObjNear(LevelAccessor world, BlockPos pos) {
+		final MutableBlockPos POS = new MutableBlockPos();
+
 		int x1 = pos.getX() - distance;
 		int z1 = pos.getZ() - distance;
 		int x2 = pos.getX() + distance;

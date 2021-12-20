@@ -13,6 +13,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureCrystal implements IStructure {
 	private static final Block[] PALETTES = new Block[] {
@@ -22,13 +23,13 @@ public class StructureCrystal implements IStructure {
 			NetherBlocks.BLUE_OBSIDIAN
 	};
 	private static final double SQRT05 = Math.sqrt(0.5);
-	private static final MutableBlockPos POS = new MutableBlockPos();
 	private static final float MAX_ANGLE_X = (float) Math.toRadians(45);
 	private static final float MAX_ANGLE_Y = (float) (Math.PI * 2);
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+		final MutableBlockPos POS = new MutableBlockPos();
 		final float scale_factor = ((MAX_HEIGHT/128.0f)-1)*0.5f+1;
 		
 		final int index = random.nextInt(PALETTES.length >> 1);

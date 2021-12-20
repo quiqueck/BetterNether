@@ -2,7 +2,6 @@ package paulevs.betternether.world.structures.plants;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -12,12 +11,11 @@ import paulevs.betternether.blocks.BlockProperties.JellyShape;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureJellyfishMushroom implements IStructure {
-	MutableBlockPos npos = new MutableBlockPos();
-
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		
@@ -28,11 +26,11 @@ public class StructureJellyfishMushroom implements IStructure {
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
 				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
 				for (int j = 0; j < RANDOM_BOUND; j++) {
-					npos.set(x, y - j, z);
-					if (npos.getY() > 32) {
-						under = world.getBlockState(npos.below()).getBlock();
-						if (BlockTags.NYLIUM.contains(under) && world.isEmptyBlock(npos)) {
-							grow(world, npos, random);
+					context.POS.set(x, y - j, z);
+					if (context.POS.getY() > 32) {
+						under = world.getBlockState(context.POS.below()).getBlock();
+						if (BlockTags.NYLIUM.contains(under) && world.isEmptyBlock(context.POS)) {
+							grow(world, context.POS, random);
 						}
 					}
 					else

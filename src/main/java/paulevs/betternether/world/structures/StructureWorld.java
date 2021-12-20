@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 
 public class StructureWorld extends StructureNBT implements IStructure {
-	protected static final MutableBlockPos POS = new MutableBlockPos();
 	protected final StructureType type;
 	protected final int offsetY;
 
@@ -20,7 +19,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		randomRM(random);
 		if (canGenerate(world, pos)) {
 			generateCentered(world, pos.above(offsetY));
@@ -46,6 +45,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	private float getAirFraction(LevelAccessor world, BlockPos pos) {
+		final MutableBlockPos POS = new MutableBlockPos();
 		int airCount = 0;
 
 		MutableBlockPos size = new MutableBlockPos().set(new BlockPos(structure.getSize()).rotate(rotation));
@@ -73,6 +73,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	private float getLavaFractionFoundation(LevelAccessor world, BlockPos pos) {
+		final MutableBlockPos POS = new MutableBlockPos();
 		int lavaCount = 0;
 
 		MutableBlockPos size = new MutableBlockPos().set(new BlockPos(structure.getSize()).rotate(rotation));
@@ -98,6 +99,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	private float getAirFractionFoundation(LevelAccessor world, BlockPos pos) {
+		final MutableBlockPos POS = new MutableBlockPos();
 		int airCount = 0;
 
 		MutableBlockPos size = new MutableBlockPos().set(new BlockPos(structure.getSize()).rotate(rotation));
@@ -125,6 +127,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	private float getAirFractionBottom(LevelAccessor world, BlockPos pos) {
+		final MutableBlockPos POS = new MutableBlockPos();
 		int airCount = 0;
 
 		MutableBlockPos size = new MutableBlockPos().set(new BlockPos(structure.getSize()).rotate(rotation));

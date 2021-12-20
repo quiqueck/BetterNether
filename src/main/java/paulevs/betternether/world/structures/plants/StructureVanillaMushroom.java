@@ -10,16 +10,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureVanillaMushroom implements IStructure {
-	private MutableBlockPos npos = new MutableBlockPos();
-
 	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {
 		return world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM;
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(8*scale_factor);
 		
@@ -30,9 +29,9 @@ public class StructureVanillaMushroom implements IStructure {
 				int z = pos.getZ() + (int) (random.nextGaussian() * 4);
 				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
 				for (int j = 0; j < RANDOM_BOUND; j++) {
-					npos.set(x, y - j, z);
-					if (world.isEmptyBlock(npos) && canPlaceAt(world, npos)) {
-						BlocksHelper.setWithoutUpdate(world, npos, state);
+					context.POS.set(x, y - j, z);
+					if (world.isEmptyBlock(context.POS) && canPlaceAt(world, context.POS)) {
+						BlocksHelper.setWithoutUpdate(world, context.POS, state);
 					}
 				}
 			}

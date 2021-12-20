@@ -25,12 +25,11 @@ import paulevs.betternether.world.structures.city.palette.CityPalette;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 
 public class CityPiece extends CustomPiece {
-	private static final MutableBlockPos POS = new MutableBlockPos();
-
-	private StructureProcessor paletteProcessor;
-	private StructureCityBuilding building;
-	private CityPalette palette;
-	private BlockPos pos;
+	private final MutableBlockPos POS = new MutableBlockPos();
+	private final StructureProcessor paletteProcessor;
+	private final StructureCityBuilding building;
+	private final CityPalette palette;
+	private final BlockPos pos;
 
 	public CityPiece(StructureCityBuilding building, BlockPos pos, int id, CityPalette palette) {
 		super(StructureTypes.NETHER_CITY, id, building.getBoundingBox(pos));
@@ -43,8 +42,8 @@ public class CityPiece extends CustomPiece {
 
 	public CityPiece(StructurePieceSerializationContext context, CompoundTag tag) {
 		super(StructureTypes.NETHER_CITY, tag);
-		this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"));
-		this.building = this.building.getRotated(Rotation.values()[tag.getInt("rotation")]);
+		this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"))
+				.getRotated(Rotation.values()[tag.getInt("rotation")]);
 		this.building.setMirror(Mirror.values()[tag.getInt("mirror")]);
 		this.pos = NbtUtils.readBlockPos(tag.getCompound("pos"));
 		this.boundingBox = building.getBoundingBox(pos);
@@ -67,6 +66,7 @@ public class CityPiece extends CustomPiece {
 		if (!this.boundingBox.intersects(blockBox))
 			return;
 
+		
         BoundingBox clamped = new BoundingBox(boundingBox.minX(), boundingBox.minY(), boundingBox.minZ(), boundingBox.maxX(), boundingBox.maxY(), boundingBox.maxZ());
 		//clamped.encompass(blockBox);
 		int cminZ = Math.max(clamped.minZ(), blockBox.minZ());

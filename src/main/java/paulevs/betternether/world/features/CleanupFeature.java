@@ -17,6 +17,7 @@ import java.util.List;
 public class CleanupFeature extends DefaultFeature {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		if (featurePlaceContext!=null) return false;
 		if (!NetherBiomes.useLegacyGeneration) return false;
 		
 		final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();

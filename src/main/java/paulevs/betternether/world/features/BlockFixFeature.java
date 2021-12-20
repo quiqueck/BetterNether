@@ -17,6 +17,8 @@ import java.util.Random;
 public class BlockFixFeature extends DefaultFeature {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		if (featurePlaceContext!=null) return false;
+
 		final BlockPos worldPos = featurePlaceContext.origin();
 		final WorldGenLevel level = featurePlaceContext.level();
 		final int sx = (worldPos.getX() >> 4) << 4;

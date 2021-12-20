@@ -67,7 +67,7 @@ public class AnchorTreeFeature extends NoiseAffectingStructureFeature<NoneFeatur
 		int touchPointCount = random.nextInt(3, 7);
 		List<List<Vector3f>> topAnchors = new ArrayList<>(touchPointCount*2);
 
-		List<Vector3f> trunk = SplineHelper.makeSpline(pos.getX(), bottomHeight, pos.getZ(), pos.getX(), topHeight, pos.getZ(), distance / 10);
+		List<Vector3f> trunk = SplineHelper.makeSpline(pos.getX(), bottomHeight, pos.getZ(), pos.getX(), topHeight, pos.getZ(), distance / 8);
 		trunk.forEach(v-> v.add(random.nextFloat(-2, 2), 0, random.nextFloat(-2, 2)));
 		topAnchors.add(trunk);
 
@@ -87,7 +87,7 @@ public class AnchorTreeFeature extends NoiseAffectingStructureFeature<NoneFeatur
 			Vector3f end = new Vector3f(x, branchHeight, z);
 
 
-			List<Vector3f> branch = SplineHelper.makeSpline(start.x(), start.y(), start.z(), end.x(), end.y(), end.z(), branchHeight / 5);
+			List<Vector3f> branch = SplineHelper.makeSpline(start.x(), start.y(), start.z(), end.x(), end.y(), end.z(), (branchHeight-(int)start.y()) / 8);
 			branch.forEach(v-> v.add(random.nextFloat(-2, 2), 0, random.nextFloat(-2, 2)));
 
 			topAnchors.add(branch);
@@ -97,13 +97,14 @@ public class AnchorTreeFeature extends NoiseAffectingStructureFeature<NoneFeatur
 		for (int i=1; i<topAnchors.size(); i++){
 			if (count<0 || random.nextInt(4)!=0) continue;
 			List<Vector3f> branch = topAnchors.get(i);
+			if (branch.size()<3) continue;
 
 			int idx = random.nextInt(1, branch.size()-1);
 			Vector3f start = branch.get(idx);
 			int branchHeight = surfaceProvider.bclGetUpwardBaseHeight((int)start.x(), (int)start.z(), SurfaceProvider.NOT_AIR_OR_FLUID, heightLimitView, (int)start.y(), MAX_HEIGHT-5);
+		int length = branchHeight-(int)start.y();
 
-
-			if (branchHeight>9) {
+			if (length>9) {
 				count--;
 
 				float radius = (random.nextFloat() * 0.25f + 0.75f)*(searchRadius/3);
@@ -113,7 +114,7 @@ public class AnchorTreeFeature extends NoiseAffectingStructureFeature<NoneFeatur
 				Vector3f end = new Vector3f(x, branchHeight, z);
 
 
-				List<Vector3f> newBranch = SplineHelper.makeSpline(start.x(), start.y(), start.z(), end.x(), end.y(), end.z(), branchHeight / 5);
+				List<Vector3f> newBranch = SplineHelper.makeSpline(start.x(), start.y(), start.z(), end.x(), end.y(), end.z(), length / 8);
 				newBranch.forEach(v -> v.add(random.nextFloat(-2, 2), 0, random.nextFloat(-2, 2)));
 				topAnchors.add(newBranch);
 			}
@@ -180,7 +181,8 @@ public class AnchorTreeFeature extends NoiseAffectingStructureFeature<NoneFeatur
 
 			tag.putBoolean("ok", isOK);
 		}
-		
+
+		static int colorIdx = 0;
 		@Override
 		public void postProcess(WorldGenLevel level, StructureFeatureManager structureFeatureManager, ChunkGenerator chunkGenerator, Random random, BoundingBox bb, ChunkPos chunkPos, BlockPos blockPos) {
 //			for (int y=boundingBox.minY(); y<boundingBox.maxY(); y++){
@@ -236,6 +238,7 @@ BlockState[] colors = {Blocks.BLUE_CONCRETE.defaultBlockState(),
 
 			BlockPos ZERO = new BlockPos(0,0,0);
 			for (int i=0; i<branches.size(); i++) {
+				colorIdx++;
 				List<Vector3f> branch = branches.get(i);
 				if (branch.size()>0) {
 					Vector3f start = branch.get(0);
@@ -243,7 +246,7 @@ BlockState[] colors = {Blocks.BLUE_CONCRETE.defaultBlockState(),
 					for (int j = 1; j < branch.size(); j++) {
 						Vector3f end = branch.get(j);
 						placeBlock(level, colors[i % colors.length], (int) end.x(), (int) end.y(), (int) end.z(), bb);
-						//SplineHelper.fillLine(start, end, level, colors[i % colors.length], ZERO, (state)->true);
+						SplineHelper.fillLine(start, end, level, colors[i % colors.length], ZERO, (state)->true);
 						start = end;
 					}
 				}

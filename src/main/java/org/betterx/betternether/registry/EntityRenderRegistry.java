@@ -6,6 +6,7 @@ import org.betterx.betternether.entity.model.*;
 import org.betterx.betternether.entity.render.*;
 
 import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -45,8 +46,8 @@ public class EntityRenderRegistry {
         registerRenderMob(NetherEntities.JUNGLE_SKELETON.type(), RenderJungleSkeleton.class);
         registerRenderMob(NetherEntities.SKULL.type(), RenderSkull.class);
 
-        LayerDefinition boatModel = BoatModel.createBodyModel(false);
-        LayerDefinition chestBoatModel = BoatModel.createBodyModel(true);
+        LayerDefinition boatModel = BoatModel.createBodyModel();
+        LayerDefinition chestBoatModel = ChestBoatModel.createBodyModel();
 
         BoatTypeOverride.values().forEach(type -> {
             EntityModelLayerRegistry.registerModelLayer(type.boatModelName, () -> boatModel);

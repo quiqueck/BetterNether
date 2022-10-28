@@ -30,7 +30,7 @@ dependencies {
     compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 
 
-    modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}" // compile against the API
+    //modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}" // compile against the API
     //modRuntime "mcp.mobius.waila:wthit:fabric-${project.wthit_version}" // run against the full jar
 
     println "Using local BCLib: ${local_bclib}"
@@ -40,7 +40,7 @@ dependencies {
         modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
     }
 
-    modCompileOnly "dev.emi:emi:${emi_version}"
+    //modCompileOnly "dev.emi:emi:${emi_version}"
 }
 
 repositories {

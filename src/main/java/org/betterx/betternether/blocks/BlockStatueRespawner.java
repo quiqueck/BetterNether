@@ -4,7 +4,6 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherBlocks;
 
-import com.mojang.math.Vector3f;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -36,9 +35,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
+import org.wunder.lib.math.Float3;
+
 public class BlockStatueRespawner extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 16, 15);
-    private static final DustParticleOptions EFFECT = new DustParticleOptions(Vector3f.XP, 1.0F);
+    private static final DustParticleOptions EFFECT = new DustParticleOptions(Float3.X_AXIS.toVector3(), 1.0F);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty TOP = BooleanProperty.create("top");
     private final ItemStack requiredItem;

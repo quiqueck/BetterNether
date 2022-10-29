@@ -1,7 +1,5 @@
 package org.betterx.betternether.items;
 
-import org.betterx.betternether.tab.CreativeTabs;
-
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +16,8 @@ public class ItemBlackApple extends Item {
 
     public ItemBlackApple() {
         super(new Item.Properties()
-                .tab(CreativeTabs.BN_TAB)
+                //TODO: 1.19.3 HANDLED DIFFERENTLY NOW
+                //.tab(CreativeTabs.BN_TAB)
                 .food(BLACK_APPLE)
                 .food(Foods.APPLE));
     }

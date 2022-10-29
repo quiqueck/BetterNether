@@ -26,7 +26,8 @@ public class ConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        this.addRenderableWidget(new Button(this.width / 2 - 100, this.height - 27, 200, 20, CommonComponents.GUI_DONE,
+        this.addRenderableWidget(Button.builder(
+                CommonComponents.GUI_DONE,
                 new OnPress() {
                     @Override
                     public void onPress(Button button) {
@@ -34,7 +35,7 @@ public class ConfigScreen extends Screen {
                         ConfigScreen.this.minecraft.setScreen(parrent);
                     }
                 }
-        ));
+        ).bounds(this.width / 2 - 100, this.height - 27, 200, 20).build());
 
         header = Component.translatable("\u00A7b* ")
                           .append(Component.translatable("config.betternether.mod_reload").getString());
@@ -83,34 +84,24 @@ public class ConfigScreen extends Screen {
 //				}).createButton(this.minecraft.options, this.width / 2 - 100, 27, 150);
         this.addRenderableWidget(fogButton);
 
-        this.addRenderableWidget(new Button(
-                this.width / 2 + 40 + 20,
-                27,
-                40,
-                20,
-                Component.translatable("config.betternether.reset"),
-                new OnPress() {
+        this.addRenderableWidget(Button.builder(Component.translatable("config.betternether.reset"), new OnPress() {
                     @Override
                     public void onPress(Button button) {
                         Configs.MAIN.setFloat("improvement", varFog, fogDefault);
                         BetterNether.changeFogDensity(fogDefault);
                         fogButton.onClick(
-                                fogButton.getWidth() * fogDefault + fogButton.x,
-                                fogButton.y
+                                fogButton.getWidth() * fogDefault + fogButton.getX(),
+                                fogButton.getY()
                         );
                     }
                 }
-        ));
+        ).bounds(this.width / 2 + 40 + 20, 27, 40, 20).build());
 
         // Thin Armor //
         final String varArmour = "smaller_armor_offset";
         boolean hasArmour = Configs.MAIN.getBoolean("improvement", varArmour, true);
 
-        AbstractWidget armorButton = new Button(
-                this.width / 2 - 100,
-                27 * 2,
-                150,
-                20,
+        AbstractWidget armorButton = Button.builder(
                 Component.translatable("config.betternether.armour"),
                 new OnPress() {
                     @Override
@@ -128,17 +119,13 @@ public class ConfigScreen extends Screen {
                                                            value).getString()));
                     }
                 }
-        );
+        ).bounds(this.width / 2 - 100, 27 * 2, 150, 20).build();
         String color = hasArmour ? ": \u00A7a" : ": \u00A7c";
         armorButton.setMessage(Component.translatable("config.betternether.armour")
                                         .append(color + CommonComponents.optionStatus(hasArmour).getString()));
         this.addRenderableWidget(armorButton);
 
-        this.addRenderableWidget(new Button(
-                this.width / 2 + 40 + 20,
-                27 * 2,
-                40,
-                20,
+        this.addRenderableWidget(Button.builder(
                 Component.translatable("config.betternether.reset"),
                 new OnPress() {
                     @Override
@@ -151,17 +138,13 @@ public class ConfigScreen extends Screen {
                                                                 true).getString()));
                     }
                 }
-        ));
+        ).bounds(this.width / 2 + 40 + 20, 27 * 2, 40, 20).build());
 
         // Lavafalls //
         final String varLava = "lavafall_particles";
         boolean hasLava = Configs.MAIN.getBoolean("improvement", varLava, true);
 
-        AbstractWidget lavaButton = new Button(
-                this.width / 2 - 100,
-                27 * 3,
-                150,
-                20,
+        AbstractWidget lavaButton = Button.builder(
                 Component.translatable("config.betternether.armour"),
                 new OnPress() {
                     @Override
@@ -179,17 +162,13 @@ public class ConfigScreen extends Screen {
                                                            value).getString()));
                     }
                 }
-        );
+        ).bounds(this.width / 2 - 100, 27 * 3, 150, 20).build();
         color = hasLava ? ": \u00A7a" : ": \u00A7c";
         lavaButton.setMessage(Component.translatable("config.betternether.lavafalls")
                                        .append(color + CommonComponents.optionStatus(hasLava).getString()));
         this.addRenderableWidget(lavaButton);
 
-        this.addRenderableWidget(new Button(
-                this.width / 2 + 40 + 20,
-                27 * 3,
-                40,
-                20,
+        this.addRenderableWidget(Button.builder(
                 Component.translatable("config.betternether.reset"),
                 new OnPress() {
                     @Override
@@ -202,7 +181,7 @@ public class ConfigScreen extends Screen {
                                                                true).getString()));
                     }
                 }
-        ));
+        ).bounds(this.width / 2 + 40 + 20, 27 * 3, 40, 20).build());
     }
 
     public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {

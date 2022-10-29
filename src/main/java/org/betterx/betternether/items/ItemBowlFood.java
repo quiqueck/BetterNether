@@ -5,7 +5,6 @@ import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.betternether.tab.CreativeTabs;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -24,7 +23,12 @@ public class ItemBowlFood extends Item {
     private final FoodShape bowlFood;
 
     public ItemBowlFood(FoodProperties component, FoodShape food) {
-        super(new Item.Properties().tab(CreativeTabs.BN_TAB).food(component).stacksTo(16));
+        super(new Item.Properties()
+                //TODO: 1.19.3 handled differently now
+                //        .tab(CreativeTabs.BN_TAB)
+                .food(component)
+                .stacksTo(16)
+        );
         food.setItem(this);
         this.bowlFood = food;
     }

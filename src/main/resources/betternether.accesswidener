@@ -14,6 +14,9 @@ accessible    class    net/minecraft/client/particle/DripParticle$DripHangPartic
 accessible    class    net/minecraft/world/level/levelgen/SurfaceRules$VerticalGradientConditionSource
 accessible    class    net/minecraft/world/level/levelgen/flat/FlatLevelGeneratorPresets$Bootstrap
 
+# Methods
+accessible method net/minecraft/server/commands/LocateCommand getHolders (Lnet/minecraft/commands/arguments/ResourceOrTagKeyArgument$Result;Lnet/minecraft/core/Registry;)Ljava/util/Optional;
+
 # Constructors
 accessible method net/minecraft/client/particle/DripParticle$DripHangParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
 accessible method net/minecraft/client/particle/DripParticle$FallAndLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V

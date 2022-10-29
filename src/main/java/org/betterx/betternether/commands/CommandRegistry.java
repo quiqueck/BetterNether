@@ -19,12 +19,11 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.math.Vector3d;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
+import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -57,6 +56,8 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+
+import org.joml.Vector3d;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -178,14 +179,14 @@ public class CommandRegistry {
                     0,
                     Collections.EMPTY_SET
             );
-            ResourceOrTagLocationArgument.Result result = new ResourceOrTagLocationArgument.Result() {
+            ResourceOrTagKeyArgument.Result result = new ResourceOrTagKeyArgument.Result() {
                 @Override
                 public Either<ResourceKey, TagKey> unwrap() {
                     return Either.left(biome.getBiomeKey());
                 }
 
                 @Override
-                public Optional<ResourceOrTagLocationArgument.Result> cast(ResourceKey resourceKey) {
+                public Optional<ResourceOrTagKeyArgument.Result> cast(ResourceKey resourceKey) {
                     return Optional.empty();
                 }
 

@@ -8,16 +8,14 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
+import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.structure.Structure;
-
-import java.util.Optional;
 
 public class PlaceCommand {
     private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((object) -> {
@@ -32,12 +30,12 @@ public class PlaceCommand {
                         .literal("structure")
                         .then(Commands.argument(
                                               "structure",
-                                              ResourceOrTagLocationArgument.resourceOrTag(Registry.STRUCTURE_REGISTRY)
+                                              ResourceOrTagKeyArgument.resourceOrTagKey(Registry.STRUCTURE_REGISTRY)
                                       )
                                       .executes(
                                               commandContext -> placeStructure(
                                                       commandContext.getSource(),
-                                                      ResourceOrTagLocationArgument.getRegistryType(
+                                                      ResourceOrTagKeyArgument.getResourceOrTagKey(
                                                               commandContext,
                                                               "structure",
                                                               Registry.STRUCTURE_REGISTRY,
@@ -54,17 +52,17 @@ public class PlaceCommand {
 
     public static int placeStructure(
             CommandSourceStack stack,
-            ResourceOrTagLocationArgument.Result<Structure> structureResult
+            ResourceOrTagKeyArgument.Result<Structure> result
     ) throws CommandSyntaxException {
         Registry<Structure> registry = stack.getLevel()
                                             .registryAccess()
                                             .registryOrThrow(Registry.STRUCTURE_REGISTRY);
-        HolderSet<Structure> holderSet = getHolders(structureResult, registry)
-                .orElseThrow(() -> ERROR_STRUCTURE_INVALID.create(structureResult.asPrintable()));
+        HolderSet<Structure> holderSet = LocateCommand.getHolders(result, registry)
+                                                      .orElseThrow(() -> ERROR_STRUCTURE_INVALID.create(result.asPrintable()));
 
         BlockPos blockPos = new BlockPos(stack.getPosition());
         ServerLevel serverLevel = stack.getLevel();
-        if (holderSet.size() == 0) throw ERROR_STRUCTURE_INVALID.create(structureResult.asPrintable());
+        if (holderSet.size() == 0) throw ERROR_STRUCTURE_INVALID.create(result.asPrintable());
 
         Structure s = holderSet.get(0).value();
         //serverLevel.getStructureManager().getOrCreate(null);
@@ -75,16 +73,5 @@ public class PlaceCommand {
             //throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
         }
         return Command.SINGLE_SUCCESS;
-    }
-
-    private static Optional<? extends HolderSet.ListBacked<Structure>> getHolders(
-            ResourceOrTagLocationArgument.Result<Structure> result,
-            Registry<Structure> registry
-    ) {
-        return result.unwrap().map(
-                (resourceKey) -> registry.getHolder(resourceKey)
-                                         .map((holder) -> HolderSet.direct(new Holder[]{holder})),
-                registry::getTag
-        );
     }
 }

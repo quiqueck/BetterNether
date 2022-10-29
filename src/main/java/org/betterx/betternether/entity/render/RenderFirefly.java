@@ -7,10 +7,6 @@ import org.betterx.betternether.registry.EntityRenderRegistry;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -23,7 +19,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
-import org.apache.commons.lang3.tuple.Triple;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 
 
 class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListModel<EntityFirefly>> {
@@ -107,8 +105,9 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
         //Get inverse rotation to make view-aligned
         Matrix3f normalMatrix = matrices.last().normal();
         normalMatrix.transpose();
-        Triple<Quaternion, Vector3f, Quaternion> trip = normalMatrix.svdDecompose();
-        matrices.mulPose(trip.getLeft());
+//        Triple<Quaternion, Vector3f, Quaternion> trip = normalMatrix.svdDecompose();
+//        matrices.mulPose(trip.getLeft());
+        matrices.mulPose(normalMatrix.transpose(new Matrix3f()).getNormalizedRotation(new Quaternionf()));
 
         PoseStack.Pose entry = matrices.last();
         Matrix4f matrix4f = entry.pose();

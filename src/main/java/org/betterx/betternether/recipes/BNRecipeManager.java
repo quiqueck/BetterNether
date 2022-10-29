@@ -85,6 +85,7 @@ public class BNRecipeManager extends BCLRecipeManager {
         ShapedRecipe recipe = new ShapedRecipe(
                 new ResourceLocation(BetterNether.MOD_ID, name),
                 group,
+                CraftingBookCategory.MISC,
                 width,
                 height,
                 list,
@@ -98,7 +99,13 @@ public class BNRecipeManager extends BCLRecipeManager {
     }
 
     public static ShapelessRecipe makeEmptyRecipe(ResourceLocation id) {
-        ShapelessRecipe recipe = new ShapelessRecipe(id, "empty", new ItemStack(Items.AIR), NonNullList.create());
+        ShapelessRecipe recipe = new ShapelessRecipe(
+                id,
+                "empty",
+                CraftingBookCategory.MISC,
+                new ItemStack(Items.AIR),
+                NonNullList.create()
+        );
         return recipe;
     }
 }

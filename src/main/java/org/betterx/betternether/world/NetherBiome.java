@@ -2,7 +2,6 @@ package org.betterx.betternether.world;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
-import org.betterx.bclib.util.WeightedList;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -35,7 +34,6 @@ public class NetherBiome extends BCLBiome {
             ResourceLocation biomeID,
             Optional<List<Climate.ParameterPoint>> parameterPoints,
             Optional<ResourceLocation> biomeParent,
-            Optional<WeightedList<ResourceLocation>> subbiomes,
             Optional<String> intendedType
     ) {
         super(
@@ -48,7 +46,6 @@ public class NetherBiome extends BCLBiome {
                 biomeID,
                 parameterPoints,
                 biomeParent,
-                subbiomes,
                 intendedType
         );
     }

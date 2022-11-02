@@ -113,7 +113,7 @@ public class NetherBiomesDatagen {
             BiomeAPI.registerNetherBiome(biome);
         }
 
-        if (biome.getEdge() != null && edge.getGenChance() > 0.0f && biome.getEdgeSize() > 0) {
+        if (biome.hasEdge() && edge.getGenChance() > 0.0f && biome.getEdgeSize() > 0) {
             BiomeAPI.registerNetherBiome(edge);
         }
 

@@ -1,5 +1,6 @@
 package org.betterx.betternether;
 
+import org.betterx.bclib.BCLib;
 import org.betterx.bclib.api.v2.dataexchange.DataExchangeAPI;
 import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
@@ -26,6 +27,11 @@ public class BetterNether implements ModInitializer {
     private static boolean lavafallParticles = true;
     private static float fogStart = 0.05F;
     private static float fogEnd = 0.5F;
+
+
+    private void onDatagen() {
+        NetherBiomesDatagen.registerForDatagen();
+    }
 
     @Override
     public void onInitialize() {
@@ -60,6 +66,10 @@ public class BetterNether implements ModInitializer {
         WorldConfig.registerModCache(MOD_ID);
         DataExchangeAPI.registerMod(BetterNether.MOD_ID);
         Patcher.register();
+
+        if (BCLib.isDatagen()) {
+            onDatagen();
+        }
     }
 
     private void initOptions() {

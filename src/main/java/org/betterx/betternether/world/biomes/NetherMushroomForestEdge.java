@@ -5,49 +5,20 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
-import org.betterx.bclib.interfaces.NumericProvider;
-import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
+import org.betterx.betternether.world.biomes.providers.NetherMushroomForestEdgeNumericProvider;
 
-import com.mojang.serialization.Codec;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import java.util.List;
-
-class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
-    public static final NetherMushroomForestEdgeNumericProvider DEFAULT = new NetherMushroomForestEdgeNumericProvider();
-    public static final Codec<NetherMushroomForestEdgeNumericProvider> CODEC = Codec.BYTE.fieldOf(
-            "nether_mushroom_forrest_edge").xmap((obj) -> DEFAULT, obj -> (byte) 0).codec();
-
-    @Override
-    public int getNumber(SurfaceRulesContextAccessor ctx) {
-        return MHelper.RANDOM.nextInt(4) > 0 ? 0 : (MHelper.RANDOM.nextBoolean() ? 1 : 2);
-    }
-
-    @Override
-    public Codec<? extends NumericProvider> pcodec() {
-        return CODEC;
-    }
-
-    static {
-        Registry.register(
-                NumericProvider.NUMERIC_PROVIDER,
-                BetterNether.makeID("nether_mushroom_forrest_edge"),
-                NetherMushroomForestEdgeNumericProvider.CODEC
-        );
-    }
-}
 
 public class NetherMushroomForestEdge extends NetherBiome {
     public static class Config extends NetherBiomeConfig {

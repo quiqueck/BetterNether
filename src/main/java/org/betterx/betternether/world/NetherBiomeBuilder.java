@@ -2,6 +2,8 @@ package org.betterx.betternether.world;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.util.MHelper;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEntities;
@@ -9,7 +11,9 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.registry.NetherTags;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.worlds.together.world.event.WorldBootstrap;
 
+import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
@@ -28,8 +32,13 @@ import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NetherBiomeBuilder {
     private static final RandomSource RANDOM = new LegacyRandomSource(130520221830l);
+    //TODO: 1.19.3 this is not changed anywhere in the code
+    public static boolean useLegacyGeneration = false;
     private static Biome BASE_BIOME;
     static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
     //(ResourceLocation randomName, VerticalAnchor trueAtAndBelow, VerticalAnchor falseAtAndAbove)
@@ -127,5 +136,21 @@ public class NetherBiomeBuilder {
 
         NetherBiome b = builder.build(data.getSupplier());
         return b;
+    }
+
+    public static List<BCLBiome> getAllBnBiomes() {
+        List<BCLBiome> res = new ArrayList<>();
+        var access = WorldBootstrap.getLastRegistryAccess();
+        Registry<BCLBiome> reg;
+        if (access == null) reg = BCLBiomeRegistry.BUILTIN_BCL_BIOMES;
+        else reg = access.registryOrThrow(BCLBiomeRegistry.BCL_BIOMES_REGISTRY);
+
+        for (var e : reg.entrySet()) {
+            if (e.getValue().getIntendedType().equals(BiomeAPI.BiomeType.NETHER)) {
+                res.add(e.getValue());
+            }
+        }
+
+        return res;
     }
 }

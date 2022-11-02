@@ -4,8 +4,8 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockPlantWall;
 import org.betterx.betternether.noise.OpenSimplexNoise;
-import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.features.AnchorTreeFeature;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
@@ -55,7 +55,7 @@ public class LegacyStructureAnchorTree implements IStructure {
         final int HEIGHT_64;
         final int HEIGHT_45;
         final int HEIGHT_90;
-        if (NetherBiomes.useLegacyGeneration) {
+        if (NetherBiomeBuilder.useLegacyGeneration) {
             HEIGHT_64 = MAX_HEIGHT / 2;
             HEIGHT_45 = (int) (MAX_HEIGHT * 0.36);
             HEIGHT_90 = (int) (MAX_HEIGHT * 0.7);

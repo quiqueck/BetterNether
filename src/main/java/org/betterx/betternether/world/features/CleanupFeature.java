@@ -2,7 +2,7 @@ package org.betterx.betternether.world.features;
 
 import org.betterx.bclib.api.v2.levelgen.features.features.DefaultFeature;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.registry.NetherBiomes;
+import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 import net.minecraft.core.BlockPos;
@@ -23,7 +23,7 @@ public class CleanupFeature extends DefaultFeature {
 
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-        if (!NetherBiomes.useLegacyGeneration) return false;
+        if (!NetherBiomeBuilder.useLegacyGeneration) return false;
         final StructureGeneratorThreadContext ctx = NetherThreadDataStorage.generatorForThread().context;
         final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
         final MutableBlockPos popPos = ctx.POS;

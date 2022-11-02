@@ -9,6 +9,7 @@ import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
+import org.betterx.betternether.world.biomes.providers.NetherGrasslandsNumericProvider;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;

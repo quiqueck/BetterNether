@@ -4,6 +4,7 @@ import org.betterx.bclib.api.v2.advancement.AdvancementManager;
 import org.betterx.bclib.items.complex.EquipmentSet;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.advancements.BNCriterion;
+import org.betterx.betternether.world.NetherBiomeBuilder;
 
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
@@ -210,7 +211,10 @@ public class NetherAdvancements {
                 .startDisplay(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.BOOTS_SLOT))
                 .frame(FrameType.CHALLENGE)
                 .endDisplay()
-                .addVisitBiomesCriterion(NetherBiomes.ALL_BN_BIOMES.stream().map(b -> b.getBiomeKey()).toList())
+                .addVisitBiomesCriterion(NetherBiomeBuilder.getAllBnBiomes()
+                                                           .stream()
+                                                           .map(b -> b.getBiomeKey())
+                                                           .toList())
                 .requirements(RequirementsStrategy.AND)
                 .rewardXP(1500)
                 .buildAndRegister();

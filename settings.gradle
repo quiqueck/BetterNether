@@ -1,6 +1,5 @@
 pluginManagement {
     repositories {
-        jcenter()
         maven {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
@@ -21,15 +20,15 @@ def BCLibPath = '../BCLib'
 
 
 // #### Logic ####
-def isIDE = properties.containsKey('android.injected.invoked.from.ide') 
-            || (System.getenv("XPC_SERVICE_NAME") ?: "").contains("intellij")
-            || (System.getenv("XPC_SERVICE_NAME") ?: "").contains(".idea") 
-            || System.getenv("IDEA_INITIAL_DIRECTORY") != null
+def isIDE = properties.containsKey('android.injected.invoked.from.ide')
+        || (System.getenv("XPC_SERVICE_NAME") ?: "").contains("intellij")
+        || (System.getenv("XPC_SERVICE_NAME") ?: "").contains(".idea")
+        || System.getenv("IDEA_INITIAL_DIRECTORY") != null
 
 println "IntelliJ: ${isIDE}"
 
-def BCLibFolder = new File( BCLibPath )
-if( allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode)  && BCLibFolder.exists() ) {
+def BCLibFolder = new File(BCLibPath)
+if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && BCLibFolder.exists()) {
     println "Using local BCLib from '${BCLibFolder}' in IntelliJ"
     println "If you do not want to load the local version of BClib"
     println "either rename the Folder containing BCLib to something"
@@ -42,5 +41,5 @@ if( allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode)  && BCLibFolder.ex
 
     include ':BCLib'
     project(":BCLib").projectDir = BCLibFolder
-    project(':BCLib').buildFileName = './bclib-composit.gradle'    
+    project(':BCLib').buildFileName = './bclib-composit.gradle'
 } 

@@ -30,7 +30,7 @@
       "org.betterx.betternether.integrations.emi.EMIPlugin"
     ],
     "fabric-datagen": [
-      "org.betterx.betternether.BetterNetherDatagen"
+      "org.betterx.datagen.betternether.BetterNetherDatagen"
     ]
   },
   "accessWidener": "betternether.accesswidener",
@@ -44,10 +44,10 @@
     "minecraft": [
       "1.19.3-alpha.22.43.a"
     ],
-    "bclib": "2.1.x"
+    "bclib": "2.2.x"
   },
   "breaks": {
-    "bclib": "<2.1.2"
+    "bclib": "<2.2.0"
   },
   "custom": {
     "bclib": {

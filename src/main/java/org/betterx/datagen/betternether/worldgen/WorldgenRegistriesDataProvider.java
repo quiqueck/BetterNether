@@ -21,6 +21,8 @@ public class WorldgenRegistriesDataProvider extends FabricDynamicRegistryProvide
         entries.addAll(registries.lookupOrThrow(Registries.BIOME));
         entries.addAll(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE));
         entries.addAll(registries.lookupOrThrow(Registries.PLACED_FEATURE));
+        entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE));
+        entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE_SET));
     }
 
     @Override

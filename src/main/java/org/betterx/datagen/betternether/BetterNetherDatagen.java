@@ -17,6 +17,7 @@ public class BetterNetherDatagen implements DataGeneratorEntrypoint {
 
         final FabricDataGenerator.Pack pack = dataGenerator.createPack();
         pack.addProvider(WorldgenRegistriesDataProvider::new);
+        pack.addProvider(NetherBiomesDataProvider::new);
         pack.addProvider(BCLibRegistriesDataProvider::new);
     }
 
@@ -25,5 +26,7 @@ public class BetterNetherDatagen implements DataGeneratorEntrypoint {
         registryBuilder.add(Registries.BIOME, NetherBiomesDataProvider::bootstrap);
         registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureDataProvider::bootstrap);
         registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureDataProvider::bootstrap);
+        registryBuilder.add(Registries.STRUCTURE, StructureDataProvider::bootstrap);
+        registryBuilder.add(Registries.STRUCTURE_SET, StructureDataProvider::bootstrapSets);
     }
 }

@@ -6,7 +6,7 @@ import org.betterx.betternether.registry.BrewingRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -274,7 +274,7 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
                 if (item == Items.BLAZE_POWDER) {
                     return true;
                 }
-                ResourceLocation id = Registry.ITEM.getKey(item);
+                ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
                 return id.getNamespace().equals("biomemakeover") && id.getPath().equals("soul_embers");
             } else {
                 return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION || item == Items.GLASS_BOTTLE) && this.getItem(

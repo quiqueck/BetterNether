@@ -13,6 +13,7 @@ import org.betterx.betternether.recipes.IntegrationRecipes;
 import org.betterx.betternether.recipes.ItemRecipes;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.world.BNWorldGenerator;
+import org.betterx.datagen.betternether.worldgen.NetherBiomesDataProvider;
 import org.betterx.worlds.together.util.Logger;
 import org.betterx.worlds.together.world.WorldConfig;
 
@@ -30,7 +31,7 @@ public class BetterNether implements ModInitializer {
 
 
     private void onDatagen() {
-        NetherBiomesDatagen.registerForDatagen();
+        NetherBiomesDataProvider.registerForDatagen();
     }
 
     @Override
@@ -38,7 +39,7 @@ public class BetterNether implements ModInitializer {
         LOGGER.info("=^..^=    BetterNether for 1.19    =^..^=");
         //MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures/lava"));
         initOptions();
-        SoundsRegistry.register();
+        SoundsRegistry.ensureStaticallyLoaded();
         NetherBlocks.register();
         BlockEntitiesRegistry.register();
         NetherItems.register();

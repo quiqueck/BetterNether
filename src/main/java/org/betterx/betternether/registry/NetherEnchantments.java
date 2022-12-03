@@ -5,6 +5,7 @@ import org.betterx.betternether.enchantments.ObsidianBreaker;
 import org.betterx.betternether.enchantments.RubyFire;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 public class NetherEnchantments {
@@ -12,6 +13,6 @@ public class NetherEnchantments {
     public static RubyFire RUBY_FIRE = register("ruby_fire", new RubyFire());
 
     private static <T extends Enchantment> T register(String name, T enchantment) {
-        return Registry.register(Registry.ENCHANTMENT, BetterNether.makeID(name), enchantment);
+        return Registry.register(BuiltInRegistries.ENCHANTMENT, BetterNether.makeID(name), enchantment);
     }
 }

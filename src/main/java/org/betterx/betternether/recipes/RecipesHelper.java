@@ -1,6 +1,7 @@
 package org.betterx.betternether.recipes;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -20,8 +21,9 @@ public class RecipesHelper {
     private static final String[] SHAPE_FIRE_BOWL = new String[]{"#I#", " # ", "L L"};
 
     private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count) {
-        if (Registry.BLOCK.getKey(source) != Registry.BLOCK.getDefaultKey()) {
-            String name = Registry.BLOCK.getKey(source).getPath() + "_" + Registry.BLOCK.getKey(result).getPath();
+        if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
+            String name = BuiltInRegistries.BLOCK.getKey(source)
+                                                 .getPath() + "_" + BuiltInRegistries.BLOCK.getKey(result).getPath();
             ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
             BNRecipeManager.addCraftingRecipe(name, group, shape, materials, new ItemStack(result, count));
         }
@@ -32,18 +34,18 @@ public class RecipesHelper {
     }
 
     public static void makeStairsRecipe(Block source, Block stairs) {
-        //String group = Registry.BLOCK.getKey(stairs).getPath().contains("roof_tile") ? "roof_tile_stairs" : stairs.getSoundType(stairs.defaultBlockState()) == SoundType.WOOD ? "nether_wooden_stairs" : "nether_rock_stairs";
+        //String group = BuiltInRegistries.BLOCK.getKey(stairs).getPath().contains("roof_tile") ? "roof_tile_stairs" : stairs.getSoundType(stairs.defaultBlockState()) == SoundType.WOOD ? "nether_wooden_stairs" : "nether_rock_stairs";
         //woods are now registered through different means
-        String group = Registry.BLOCK.getKey(stairs).getPath().contains("roof_tile")
+        String group = BuiltInRegistries.BLOCK.getKey(stairs).getPath().contains("roof_tile")
                 ? "roof_tile_stairs"
                 : "nether_rock_stairs";
         makeSingleRecipe(group, source, stairs, SHAPE_STAIR, 4);
     }
 
     public static void makeSlabRecipe(Block source, Block slab) {
-        //String group = Registry.BLOCK.getKey(slab).getPath().contains("roof_tile") ? "roof_tile_slab" : slab.getSoundType(slab.defaultBlockState()) == SoundType.WOOD ? "nether_wooden_slab" : "nether_rock_slab";
+        //String group = BuiltInRegistries.BLOCK.getKey(slab).getPath().contains("roof_tile") ? "roof_tile_slab" : slab.getSoundType(slab.defaultBlockState()) == SoundType.WOOD ? "nether_wooden_slab" : "nether_rock_slab";
         //woods are now registered through different means
-        String group = Registry.BLOCK.getKey(slab).getPath().contains("roof_tile")
+        String group = BuiltInRegistries.BLOCK.getKey(slab).getPath().contains("roof_tile")
                 ? "roof_tile_slab"
                 : "nether_rock_slab";
         makeSingleRecipe(group, source, slab, SHAPE_SLAB, 6);
@@ -66,16 +68,16 @@ public class RecipesHelper {
     }
 
     public static void makeWallRecipe(Block source, Block wall) {
-        if (Registry.BLOCK.getKey(source) != Registry.BLOCK.getDefaultKey()) {
-            String name = Registry.BLOCK.getKey(wall).getPath();
+        if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
+            String name = BuiltInRegistries.BLOCK.getKey(wall).getPath();
             ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
             BNRecipeManager.addCraftingRecipe(name, "nether_wall", SHAPE_3X2, materials, new ItemStack(wall, 6));
         }
     }
 
     public static void makeColoringRecipe(Block source, Block result, Item dye, String group) {
-        if (Registry.BLOCK.getKey(source) != Registry.BLOCK.getDefaultKey()) {
-            String name = Registry.BLOCK.getKey(result).getPath();
+        if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
+            String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
             ImmutableMap<String, ItemStack> materials = ImmutableMap.of(
                     "#",
                     new ItemStack(source),
@@ -87,17 +89,18 @@ public class RecipesHelper {
     }
 
     public static void makeRoundRecipe(Block source, Block result, String group) {
-        if (Registry.BLOCK.getKey(source) != Registry.BLOCK.getDefaultKey()) {
-            String name = Registry.BLOCK.getKey(result).getPath();
+        if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
+            String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
             ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
             BNRecipeManager.addCraftingRecipe(name, group, SHAPE_ROUND, materials, new ItemStack(result));
         }
     }
 
     public static void makeFireBowlRecipe(Block material, Block inside, Item leg, Block result) {
-        if (Registry.BLOCK.getKey(material) != Registry.BLOCK.getDefaultKey() && Registry.BLOCK.getKey(inside) != Registry.BLOCK.getDefaultKey() && Registry.ITEM.getKey(
+        if (BuiltInRegistries.BLOCK.getKey(material) != BuiltInRegistries.BLOCK.getDefaultKey() && BuiltInRegistries.BLOCK.getKey(
+                inside) != BuiltInRegistries.BLOCK.getDefaultKey() && Registry.ITEM.getKey(
                 leg) != Registry.ITEM.getDefaultKey()) {
-            String name = Registry.BLOCK.getKey(result).getPath();
+            String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
             ImmutableMap<String, ItemStack> materials = ImmutableMap.of(
                     "#",
                     new ItemStack(material),

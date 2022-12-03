@@ -39,13 +39,14 @@ public abstract class MapMixin extends ComplexItem {
     @Inject(method = "update", at = @At(value = "HEAD"), cancellable = true)
     private void customColors(Level level, Entity entity, MapItemSavedData state, CallbackInfo info) {
         //Code derived and adapted from Vanilla Minecraft Code in net.minecraft.world.item.MapItem.update
+        //TODO:1.19.3 Compare with vanilla
         if (level.dimensionType().hasCeiling() && level.dimension() == state.dimension && entity instanceof Player) {
             BlockPos.MutableBlockPos POS2 = new BlockPos.MutableBlockPos();
             final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 
             int scale = 1 << state.scale;
-            int sx = state.x;
-            int sz = state.z;
+            int sx = state.centerX;
+            int sz = state.centerZ;
             int px = Mth.floor(entity.getX() - (double) sx) / scale + 64;
             int py = Mth.floor(entity.getZ() - (double) sz) / scale + 64;
             int stepWidth = 128 / scale;

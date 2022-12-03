@@ -6,7 +6,7 @@ import org.betterx.betternether.blocks.BlockSmallLantern;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -193,7 +193,7 @@ public class CityPalette {
         else if (list.size() == 1)
             return list.get(0);
 
-        String seed = Registry.BLOCK.getKey(state.getBlock()).getPath();
+        String seed = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
         RANDOM.setSeed(seed.hashCode());
         return list.get(RANDOM.nextInt(list.size()));
     }
@@ -518,7 +518,7 @@ public class CityPalette {
     }
 
     public BlockState getPlant(BlockState input) {
-        String seed = Registry.BLOCK.getKey(input.getBlock()).getPath();
+        String seed = BuiltInRegistries.BLOCK.getKey(input.getBlock()).getPath();
         RANDOM.setSeed(seed.hashCode());
         return NetherBlocks.POTTED_PLANT.defaultBlockState()
                                         .setValue(

@@ -65,7 +65,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
         return true;
     }
 

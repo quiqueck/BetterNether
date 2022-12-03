@@ -20,7 +20,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.worlds.together.tag.v3.CommonItemTags;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -212,7 +212,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     protected void initDefaultFurniture() {
         final Block slab = getSlab();
 
-        if (Registry.BLOCK.getKey(slab) != Registry.BLOCK.getDefaultKey()) {
+        if (BuiltInRegistries.BLOCK.getKey(slab) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             addRecipeEntry(new RecipeEntry(BLOCK_TABURET, (material, config, id) -> {
                 makeTaburetRecipe(config, id, getBlock(BLOCK_TABURET), slab);
             }));

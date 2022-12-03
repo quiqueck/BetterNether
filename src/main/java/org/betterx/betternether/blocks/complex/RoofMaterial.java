@@ -7,7 +7,7 @@ import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -55,7 +55,7 @@ public class RoofMaterial extends NetherWoodenMaterial {
         final Block slab = getBlock(BLOCK_SLAB);
         final Block roof = getBlock(BLOCK_ROOF);
 
-        if (Registry.BLOCK.getKey(slab) != Registry.BLOCK.getDefaultKey()) {
+        if (BuiltInRegistries.BLOCK.getKey(slab) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             addRecipeEntry(new RecipeEntry(BLOCK_ROOF, (material, config, id) -> {
                 BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF))
                                 .checkConfig(config)

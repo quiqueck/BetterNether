@@ -7,7 +7,7 @@ import org.betterx.betternether.world.structures.city.palette.CityPalette;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
@@ -43,7 +43,7 @@ public class BuildingStructureProcessor extends StructureProcessor {
             return structureBlockInfo2;
 
         Block block = state.getBlock();
-        String name = Registry.BLOCK.getKey(block).getPath();
+        String name = BuiltInRegistries.BLOCK.getKey(block).getPath();
 
         if (name.startsWith("roof_tile")) {
             if (block instanceof StairBlock) {

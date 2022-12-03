@@ -14,6 +14,7 @@ import org.betterx.ui.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.EntityType.EntityFactory;
@@ -240,7 +241,7 @@ public class NetherEntities {
                                                     .fireImmune() //Nether Entities are by default immune to fire
                                                     .build();
 
-        type = Registry.register(Registry.ENTITY_TYPE, id, type);
+        type = Registry.register(BuiltInRegistries.ENTITY_TYPE, id, type);
         FabricDefaultAttributeRegistry.register(type, attributes);
         NetherItems.makeEgg("spawn_egg_" + name, type, eggColor, dotsColor);
 
@@ -326,7 +327,7 @@ public class NetherEntities {
     }
 
     public static void registerEntity(String name, EntityType<? extends Entity> entity, AttributeSupplier container) {
-        Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), entity);
+        Registry.register(BuiltInRegistries.ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), entity);
         ATTRIBUTES.put(entity, container);
     }
 

@@ -6,6 +6,7 @@ import org.betterx.betternether.world.structures.piece.CityPiece;
 import org.betterx.betternether.world.structures.piece.DestructionPiece;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 
 public class NetherStructurePieces {
@@ -15,7 +16,7 @@ public class NetherStructurePieces {
     public static final StructurePieceType ANCHOR_TREE_PIECE = register("anchor_tree", DestructionPiece::new);
 
     private static StructurePieceType register(String id, StructurePieceType pieceType) {
-        return Registry.register(Registry.STRUCTURE_PIECE, BetterNether.makeID(id), pieceType);
+        return Registry.register(BuiltInRegistries.STRUCTURE_PIECE, BetterNether.makeID(id), pieceType);
     }
 
     public static void ensureStaticLoad() {

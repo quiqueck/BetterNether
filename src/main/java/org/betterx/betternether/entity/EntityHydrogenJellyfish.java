@@ -193,7 +193,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
                 Explosion.BlockInteraction destructionType = this.level.getGameRules()
                                                                        .getBoolean(GameRules.RULE_MOBGRIEFING)
                         ? Explosion.BlockInteraction.DESTROY
-                        : Explosion.BlockInteraction.NONE;
+                        : Explosion.BlockInteraction.KEEP;
                 this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
             }
         }

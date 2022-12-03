@@ -7,7 +7,7 @@ import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -341,10 +341,10 @@ public class ItemRecipes {
     }
 
     private static boolean itemExists(Item item) {
-        return Registry.ITEM.getKey(item) != Registry.ITEM.getDefaultKey();
+        return BuiltInRegistries.ITEM.getKey(item) != BuiltInRegistries.ITEM.getDefaultKey();
     }
 
     private static boolean blockExists(Block block) {
-        return Registry.BLOCK.getKey(block) != Registry.BLOCK.getDefaultKey();
+        return BuiltInRegistries.BLOCK.getKey(block) != BuiltInRegistries.BLOCK.getDefaultKey();
     }
 }

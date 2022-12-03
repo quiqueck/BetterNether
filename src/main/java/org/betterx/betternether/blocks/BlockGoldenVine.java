@@ -100,7 +100,7 @@ public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlo
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
         MutableBlockPos blockPos = new MutableBlockPos().set(pos);
         for (int y = pos.getY() - 1; y > 1; y--) {
             blockPos.setY(y);

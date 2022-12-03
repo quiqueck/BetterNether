@@ -5,7 +5,7 @@ import org.betterx.betternether.integrations.VanillaHammersIntegration;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,8 +26,8 @@ public class IntegrationRecipes {
             );
             makeHammerRecipe(NetherItems.NETHER_RUBY_HAMMER, NetherBlocks.NETHER_RUBY_BLOCK, NetherItems.NETHER_RUBY);
 
-            ResourceLocation id = Registry.ITEM.getKey(NetherItems.CINCINNASITE_HAMMER_DIAMOND);
-            boolean register = id != Registry.ITEM.getDefaultKey() && Registry.ITEM.getKey(NetherItems.CINCINNASITE_HAMMER) != Registry.ITEM.getDefaultKey();
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(NetherItems.CINCINNASITE_HAMMER_DIAMOND);
+            boolean register = id != BuiltInRegistries.ITEM.getDefaultKey() && BuiltInRegistries.ITEM.getKey(NetherItems.CINCINNASITE_HAMMER) != BuiltInRegistries.ITEM.getDefaultKey();
             if (register) {
                 String[] shape = new String[]{"#I#"};
                 Map<String, ItemStack> materials = ImmutableMap.of(
@@ -51,8 +51,8 @@ public class IntegrationRecipes {
                     NetherItems.NETHER_RUBY
             );
 
-            ResourceLocation id = Registry.ITEM.getKey(NetherItems.CINCINNASITE_EXCAVATOR_DIAMOND);
-            boolean register = id != Registry.ITEM.getDefaultKey() && Registry.ITEM.getKey(NetherItems.CINCINNASITE_EXCAVATOR) != Registry.ITEM.getDefaultKey();
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(NetherItems.CINCINNASITE_EXCAVATOR_DIAMOND);
+            boolean register = id != BuiltInRegistries.ITEM.getDefaultKey() && BuiltInRegistries.ITEM.getKey(NetherItems.CINCINNASITE_EXCAVATOR) != BuiltInRegistries.ITEM.getDefaultKey();
             if (register) {
                 String[] shape = new String[]{"#I#"};
                 Map<String, ItemStack> materials = ImmutableMap.of(
@@ -66,11 +66,11 @@ public class IntegrationRecipes {
     }
 
     private static void makeHammerRecipe(Item hammer, Block block, Item item) {
-        ResourceLocation id = Registry.ITEM.getKey(hammer);
-        boolean register = id != Registry.ITEM.getDefaultKey() &&
-                Registry.BLOCK.getKey(NetherBlocks.MAT_REED.getStem()) != Registry.BLOCK.getDefaultKey() &&
-                Registry.BLOCK.getKey(block) != Registry.BLOCK.getDefaultKey() &&
-                Registry.ITEM.getKey(item) != Registry.ITEM.getDefaultKey();
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(hammer);
+        boolean register = id != BuiltInRegistries.ITEM.getDefaultKey() &&
+                BuiltInRegistries.BLOCK.getKey(NetherBlocks.MAT_REED.getStem()) != BuiltInRegistries.BLOCK.getDefaultKey() &&
+                BuiltInRegistries.BLOCK.getKey(block) != BuiltInRegistries.BLOCK.getDefaultKey() &&
+                BuiltInRegistries.ITEM.getKey(item) != BuiltInRegistries.ITEM.getDefaultKey();
         if (register) {
             Map<String, ItemStack> materials = ImmutableMap.of(
                     "#", new ItemStack(block),
@@ -83,11 +83,11 @@ public class IntegrationRecipes {
     }
 
     private static void makeExcavatorRecipe(Item excavator, Block block, Item item) {
-        ResourceLocation id = Registry.ITEM.getKey(excavator);
-        boolean register = id != Registry.ITEM.getDefaultKey() &&
-                Registry.BLOCK.getKey(NetherBlocks.MAT_REED.getStem()) != Registry.BLOCK.getDefaultKey() &&
-                Registry.BLOCK.getKey(block) != Registry.BLOCK.getDefaultKey() &&
-                Registry.ITEM.getKey(item) != Registry.ITEM.getDefaultKey();
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(excavator);
+        boolean register = id != BuiltInRegistries.ITEM.getDefaultKey() &&
+                BuiltInRegistries.BLOCK.getKey(NetherBlocks.MAT_REED.getStem()) != BuiltInRegistries.BLOCK.getDefaultKey() &&
+                BuiltInRegistries.BLOCK.getKey(block) != BuiltInRegistries.BLOCK.getDefaultKey() &&
+                BuiltInRegistries.ITEM.getKey(item) != BuiltInRegistries.ITEM.getDefaultKey();
         if (register) {
             Map<String, ItemStack> materials = ImmutableMap.of(
                     "#", new ItemStack(block),

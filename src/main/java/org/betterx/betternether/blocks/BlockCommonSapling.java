@@ -77,7 +77,7 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
         return true;
     }
 

@@ -110,7 +110,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
         return world.getBlockState(pos.above(3)).getBlock() != this && world.getBlockState(pos.below())
                                                                             .getBlock() != this;
     }

@@ -6,8 +6,8 @@ import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,9 +53,9 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
         String itemName = Configs.MAIN.getString(
                 "respawn_statue",
                 "respawn_item",
-                Registry.ITEM.getKey(Items.GLOWSTONE).toString()
+                BuiltInRegistries.ITEM.getKey(Items.GLOWSTONE).toString()
         );
-        Item item = Registry.ITEM.get(new ResourceLocation(itemName));
+        Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(itemName));
         if (item == Items.AIR)
             item = Items.GLOWSTONE;
         int count = Configs.MAIN.getInt("respawn_statue", "item_count", 4);

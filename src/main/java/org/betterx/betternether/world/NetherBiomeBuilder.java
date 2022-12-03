@@ -109,6 +109,8 @@ public class NetherBiomeBuilder {
                 .loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
                 .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
                 .edge(edgeBiome)
+                .parentBiome(parentBiome)
+                .netherBiome()
                 .addNetherClimateParamater(
                         MHelper.randRange(-1.5F, 1.5F, RANDOM),
                         MHelper.randRange(-1.5F, 1.5F, RANDOM)

@@ -15,7 +15,6 @@ import org.betterx.worlds.together.world.event.WorldBootstrap;
 
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.Carvers;
-import net.minecraft.data.worldgen.biome.NetherBiomes;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
 import net.minecraft.data.worldgen.placement.OrePlacements;
@@ -24,7 +23,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -39,7 +37,6 @@ public class NetherBiomeBuilder {
     private static final RandomSource RANDOM = new LegacyRandomSource(130520221830l);
     //TODO: 1.19.3 this is not changed anywhere in the code
     public static boolean useLegacyGeneration = false;
-    private static Biome BASE_BIOME;
     static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
     //(ResourceLocation randomName, VerticalAnchor trueAtAndBelow, VerticalAnchor falseAtAndAbove)
     static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM =
@@ -85,11 +82,15 @@ public class NetherBiomeBuilder {
         return create(data, null);
     }
 
-
     public static NetherBiome create(NetherBiomeConfig data, BCLBiome edgeBiome) {
-        if (BASE_BIOME == null) {
-            BASE_BIOME = NetherBiomes.netherWastes();
-        }
+        return create(data, null, edgeBiome);
+    }
+
+    public static NetherBiome createSubBiome(NetherBiomeConfig data, BCLBiome parentBiome) {
+        return create(data, parentBiome, null);
+    }
+
+    private static NetherBiome create(NetherBiomeConfig data, BCLBiome parentBiome, BCLBiome edgeBiome) {
         final ResourceLocation ID = data.ID;
 
         BCLBiomeBuilder builder = BCLBiomeBuilder
@@ -97,12 +98,12 @@ public class NetherBiomeBuilder {
                 //.category(BiomeCategory.NETHER)
                 .surface(data.surface().build())
                 .tag(NetherTags.BETTER_NETHER)
-                .temperature(BASE_BIOME.getBaseTemperature())
-                .wetness(BASE_BIOME.getDownfall())
+                .temperature(BCLBiomeBuilder.DEFAULT_NETHER_TEMPERATURE)
+                .wetness(BCLBiomeBuilder.DEFAULT_NETHER_WETNESS)
                 .precipitation(Precipitation.NONE)
-                .waterColor(BASE_BIOME.getWaterColor())
-                .waterFogColor(BASE_BIOME.getWaterFogColor())
-                .skyColor(BASE_BIOME.getSkyColor())
+                .waterColor(BCLBiomeBuilder.DEFAULT_NETHER_WATER_COLOR)
+                .waterFogColor(BCLBiomeBuilder.DEFAULT_NETHER_WATER_FOG_COLOR)
+                .skyColor(BCLBiomeBuilder.calculateSkyColor(BCLBiomeBuilder.DEFAULT_NETHER_TEMPERATURE))
                 .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
                 .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
                 .loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
@@ -134,8 +135,7 @@ public class NetherBiomeBuilder {
 
         data.addCustomBuildData(builder);
 
-        NetherBiome b = builder.build(data.getSupplier());
-        return b;
+        return builder.build(data.getSupplier()).biome();
     }
 
     public static List<BCLBiome> getAllBnBiomes() {

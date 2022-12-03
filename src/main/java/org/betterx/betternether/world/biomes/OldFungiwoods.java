@@ -14,7 +14,7 @@ import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
@@ -59,8 +59,8 @@ public class OldFungiwoods extends NetherBiome {
         }
     }
 
-    public OldFungiwoods(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
-        super(biomeID, biome, settings);
+    public OldFungiwoods(ResourceKey<Biome> biomeID, BCLBiomeSettings settings) {
+        super(biomeID, settings);
     }
 
 }

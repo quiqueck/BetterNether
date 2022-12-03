@@ -18,7 +18,7 @@ import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.biome.Biome;
@@ -118,7 +118,7 @@ public class NetherWartForest extends NetherBiome {
         }
     }
 
-    public NetherWartForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
-        super(biomeID, biome, settings);
+    public NetherWartForest(ResourceKey<Biome> biomeID, BCLBiomeSettings settings) {
+        super(biomeID, settings);
     }
 }

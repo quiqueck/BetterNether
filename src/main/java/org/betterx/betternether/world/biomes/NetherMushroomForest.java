@@ -14,7 +14,7 @@ import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
@@ -59,7 +59,7 @@ public class NetherMushroomForest extends NetherBiome {
         }
     }
 
-    public NetherMushroomForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
-        super(biomeID, biome, settings);
+    public NetherMushroomForest(ResourceKey<Biome> biomeID, BCLBiomeSettings settings) {
+        super(biomeID, settings);
     }
 }

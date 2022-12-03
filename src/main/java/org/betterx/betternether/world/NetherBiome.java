@@ -5,6 +5,7 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.biome.Biome;
@@ -50,7 +51,7 @@ public class NetherBiome extends BCLBiome {
         );
     }
 
-    protected NetherBiome(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
-        super(biomeID, biome, settings);
+    protected NetherBiome(ResourceKey<Biome> biomeID, BCLBiomeSettings settings) {
+        super(biomeID, settings);
     }
 }

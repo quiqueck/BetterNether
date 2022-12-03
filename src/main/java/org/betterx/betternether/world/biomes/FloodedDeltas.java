@@ -12,7 +12,7 @@ import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.providers.NetherGrasslandsNumericProvider;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
@@ -76,7 +76,7 @@ public class FloodedDeltas extends NetherBiome {
     }
 
 
-    public FloodedDeltas(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
-        super(biomeID, biome, settings);
+    public FloodedDeltas(ResourceKey<Biome> biomeID, BCLBiomeSettings settings) {
+        super(biomeID, settings);
     }
 }

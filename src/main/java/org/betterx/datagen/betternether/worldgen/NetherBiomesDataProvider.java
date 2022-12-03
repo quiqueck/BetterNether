@@ -1,13 +1,17 @@
-package org.betterx.betternether.registry;
+package org.betterx.datagen.betternether.worldgen;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.*;
 
-public class NetherBiomesDatagen {
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.world.level.biome.Biome;
+
+public class NetherBiomesDataProvider {
     private static class Config {
         private static final NetherBiomeConfig BIOME_GRAVEL_DESERT = new NetherGravelDesert.Config("Gravel Desert");
         private static final NetherBiomeConfig BIOME_NETHER_JUNGLE = new NetherJungle.Config("Nether Jungle");
@@ -72,63 +76,41 @@ public class NetherBiomesDatagen {
     private static final BCLBiome SOUL_PLAIN = registerSubBiome(Config.SOUL_PLAIN, BIOME_WART_FOREST);
     private static final BCLBiome CRIMSON_GLOWING_WOODS = registerSubBiome(
             Config.CRIMSON_GLOWING_WOODS,
-            BiomeAPI.CRIMSON_FOREST_BIOME
+            BCLBiomeRegistry.CRIMSON_FOREST_BIOME
     );
     private static final BCLBiome OLD_WARPED_WOODS = registerSubBiome(
             Config.OLD_WARPED_WOODS,
-            BiomeAPI.WARPED_FOREST_BIOME
+            BCLBiomeRegistry.WARPED_FOREST_BIOME
     );
     private static final BCLBiome CRIMSON_PINEWOOD = registerSubBiome(
             Config.CRIMSON_PINEWOOD,
-            BiomeAPI.CRIMSON_FOREST_BIOME
+            BCLBiomeRegistry.CRIMSON_FOREST_BIOME
     );
     private static final BCLBiome OLD_FUNGIWOODS = registerSubBiome(Config.OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST);
     private static final BCLBiome FLOODED_DELTAS = registerSubBiome(
             Config.FLOODED_DELTAS,
-            BiomeAPI.BASALT_DELTAS_BIOME
+            BCLBiomeRegistry.BASALT_DELTAS_BIOME
     );
     private static final BCLBiome UPSIDE_DOWN_FOREST = registerNetherBiome(Config.UPSIDE_DOWN_FOREST);
     private static final BCLBiome UPSIDE_DOWN_FOREST_CLEARED = registerNetherBiome(Config.UPSIDE_DOWN_FOREST_CLEARED);
     private static final BCLBiome OLD_SWAMPLAND = registerSubBiome(Config.OLD_SWAMPLAND, NETHER_SWAMPLAND);
 
-    public static void registerForDatagen() {
-
-    }
-
     private static NetherBiome registerNetherBiome(NetherBiomeConfig config) {
-        final NetherBiome biome = NetherBiomeBuilder.create(config);
-
-        if (biome.getGenChance() > 0.0F) {
-            BiomeAPI.registerNetherBiome(biome);
-        }
-
-        return biome;
+        return NetherBiomeBuilder.create(config);
     }
 
     private static NetherBiome registerNetherBiome(NetherBiomeConfig config, NetherBiomeConfig edgeConfig) {
         final NetherBiome edge = NetherBiomeBuilder.create(edgeConfig);
         final NetherBiome biome = NetherBiomeBuilder.create(config, edge);
 
-        if (biome.getGenChance() > 0.0F) {
-            BiomeAPI.registerNetherBiome(biome);
-        }
-
-        if (biome.hasEdge() && edge.getGenChance() > 0.0f && biome.getEdgeSize() > 0) {
-            BiomeAPI.registerNetherBiome(edge);
-        }
-
         return biome;
     }
-
 
     private static NetherBiome registerSubBiome(NetherBiomeConfig config, BCLBiome mainBiome) {
-        final NetherBiome biome = NetherBiomeBuilder.create(config);
-
-        if (biome.getGenChance() > 0.0F) {
-            BiomeAPI.registerSubBiome(mainBiome, biome, BiomeAPI.BiomeType.BCL_NETHER);
-        }
-
-        return biome;
+        return NetherBiomeBuilder.createSubBiome(config, mainBiome);
     }
 
+    public static void bootstrap(BootstapContext<Biome> ctx) {
+        BCLBiomeBuilder.registerUnbound(ctx);
+    }
 }

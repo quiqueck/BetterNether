@@ -13,7 +13,6 @@ import org.betterx.betternether.recipes.IntegrationRecipes;
 import org.betterx.betternether.recipes.ItemRecipes;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.world.BNWorldGenerator;
-import org.betterx.datagen.betternether.worldgen.NetherBiomesDataProvider;
 import org.betterx.worlds.together.util.Logger;
 import org.betterx.worlds.together.world.WorldConfig;
 
@@ -31,7 +30,6 @@ public class BetterNether implements ModInitializer {
 
 
     private void onDatagen() {
-        NetherBiomesDataProvider.registerForDatagen();
     }
 
     @Override

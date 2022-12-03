@@ -15,7 +15,6 @@ public class BetterNetherDatagen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
         final FabricDataGenerator.Pack pack = dataGenerator.createPack();
-
         pack.addProvider(WorldgenRegistriesDataProvider::new);
     }
 

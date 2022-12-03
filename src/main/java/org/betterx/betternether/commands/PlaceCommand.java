@@ -12,6 +12,7 @@ import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
@@ -30,7 +31,7 @@ public class PlaceCommand {
                         .literal("structure")
                         .then(Commands.argument(
                                               "structure",
-                                              ResourceOrTagKeyArgument.resourceOrTagKey(Registry.STRUCTURE_REGISTRY)
+                                              ResourceOrTagKeyArgument.resourceOrTagKey(Registries.STRUCTURE)
                                       )
                                       .executes(
                                               commandContext -> placeStructure(
@@ -38,7 +39,7 @@ public class PlaceCommand {
                                                       ResourceOrTagKeyArgument.getResourceOrTagKey(
                                                               commandContext,
                                                               "structure",
-                                                              Registry.STRUCTURE_REGISTRY,
+                                                              Registries.STRUCTURE,
                                                               ERROR_STRUCTURE_INVALID
                                                       )
                                               ))))
@@ -56,7 +57,7 @@ public class PlaceCommand {
     ) throws CommandSyntaxException {
         Registry<Structure> registry = stack.getLevel()
                                             .registryAccess()
-                                            .registryOrThrow(Registry.STRUCTURE_REGISTRY);
+                                            .registryOrThrow(Registries.STRUCTURE);
         HolderSet<Structure> holderSet = LocateCommand.getHolders(result, registry)
                                                       .orElseThrow(() -> ERROR_STRUCTURE_INVALID.create(result.asPrintable()));
 

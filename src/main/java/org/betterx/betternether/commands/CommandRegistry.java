@@ -26,12 +26,11 @@ import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -199,15 +198,17 @@ public class CommandRegistry {
                 }
             };
             ResourceKey<Biome> a = biome.getBiomeKey();
-            Holder<Biome> h = BuiltinRegistries.BIOME.getHolder(a).orElseThrow();
-            return LocateCommand.showLocateResult(
-                    source,
-                    result,
-                    currentPosition,
-                    new Pair<>(biomePosition, h),
-                    "commands.locatebiome.success",
-                    false
-            );
+            //TODO:1.19.3 Repair
+//            Holder<Biome> h = BuiltinRegistries.BIOME.getHolder(a).orElseThrow();
+//            return LocateCommand.showLocateResult(
+//                    source,
+//                    result,
+//                    currentPosition,
+//                    new Pair<>(biomePosition, h),
+//                    "commands.locatebiome.success",
+//                    false
+//            );
+            return Command.SINGLE_SUCCESS;
         }
     }
 
@@ -224,7 +225,7 @@ public class CommandRegistry {
                                        .stream()
                                        .sorted(CommandRegistry::compareBlockNames)
                                        .collect(Collectors.toList())) {
-            final String name = Registry.BLOCK.getKey(block).getPath();
+            final String name = BuiltInRegistries.BLOCK.getKey(block).getPath();
             if (name.indexOf(type) >= 0) {
                 blocks.add(block);
             }
@@ -237,10 +238,10 @@ public class CommandRegistry {
     @NotNull
     private static int compareBlockNames(Block a, Block b) {
 
-        final String as = Registry.BLOCK.getKey(a)
-                                        .getPath();
-        final String bs = Registry.BLOCK.getKey(b)
-                                        .getPath();
+        final String as = BuiltInRegistries.BLOCK.getKey(a)
+                                                 .getPath();
+        final String bs = BuiltInRegistries.BLOCK.getKey(b)
+                                                 .getPath();
         return as.compareTo(bs);
     }
 
@@ -316,7 +317,7 @@ public class CommandRegistry {
         BCLFeature<RandomPatchFeature, RandomPatchConfiguration> feature = NetherVegetationPlaced.VEGETATION_GRASSLANDS;
         PlacedFeature pFeature = level
                 .registryAccess()
-                .registryOrThrow(Registry.PLACED_FEATURE_REGISTRY)
+                .registryOrThrow(Registries.PLACED_FEATURE)
                 .getHolder(feature.getPlacedFeature().unwrapKey().get())
                 .get()
                 .value();

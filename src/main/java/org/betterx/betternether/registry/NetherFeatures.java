@@ -2,6 +2,7 @@ package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v2.LifeCycleAPI;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
@@ -192,7 +193,7 @@ public class NetherFeatures {
                         "air_discard_chance",
                         airDiscardChance
                 ))
-                .buildAndRegister()
+                .build()
                 .place()
                 .decoration(Decoration.UNDERGROUND_DECORATION);
 
@@ -204,7 +205,7 @@ public class NetherFeatures {
 
         builder.modifier(placement).squarePlacement().onlyInBiome();
 
-        return builder.buildAndRegister();
+        return builder.build();
     }
 
     private static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> registerOre(
@@ -263,11 +264,11 @@ public class NetherFeatures {
         BiomeAPI.addBiomeFeature(biome, NETHER_LAPIS_ORE);
         BiomeAPI.addBiomeFeature(biome, NETHER_REDSTONE_ORE);
 
-        if (biomeID.equals(BiomeAPI.SOUL_SAND_VALLEY_BIOME.getID())) {
+        if (biomeID.equals(BCLBiomeRegistry.SOUL_SAND_VALLEY_BIOME.getID())) {
             BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE_LARGE);
         }
 
-        if (biomeID.equals(BiomeAPI.CRIMSON_FOREST_BIOME.getID()) || biomeID.equals(BiomeAPI.WARPED_FOREST_BIOME.getID())) {
+        if (biomeID.equals(BCLBiomeRegistry.CRIMSON_FOREST_BIOME.getID()) || biomeID.equals(BCLBiomeRegistry.WARPED_FOREST_BIOME.getID())) {
             BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE);
         }
     }

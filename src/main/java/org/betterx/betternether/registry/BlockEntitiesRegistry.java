@@ -10,6 +10,7 @@ import org.betterx.betternether.blockentities.BlockEntityFurnace;
 import org.betterx.betternether.blocks.BlockNetherFurnace;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -44,7 +45,7 @@ public class BlockEntitiesRegistry {
     }
 
     public static void RegisterBlockEntity(String name, BlockEntityType<? extends BlockEntity> type) {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), type);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), type);
     }
 
     private static Block[] getChests() {

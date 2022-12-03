@@ -59,7 +59,7 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
         projectile.setParams(this, target);
         level.addFreshEntity(projectile);
         this.playSound(
-                SoundsRegistry.MOB_NAGA_ATTACK,
+                SoundsRegistry.MOB_NAGA_ATTACK.value(),
                 MHelper.randRange(3F, 5F, random),
                 MHelper.randRange(0.75F, 1.25F, random)
         );
@@ -77,7 +77,7 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundsRegistry.MOB_NAGA_IDLE;
+        return SoundsRegistry.MOB_NAGA_IDLE.value();
     }
 
     @Override

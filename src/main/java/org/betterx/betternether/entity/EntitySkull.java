@@ -142,7 +142,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
                 setDeltaMovement(velocity);
                 this.lookAt(target, 360, 360);
                 this.playSound(
-                        SoundsRegistry.MOB_SKULL_FLIGHT,
+                        SoundsRegistry.MOB_SKULL_FLIGHT.value(),
                         MHelper.randRange(0.15F, 0.3F, random),
                         MHelper.randRange(0.9F, 1.5F, random)
                 );
@@ -191,7 +191,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
         setDeltaMovement(dx, dy, dz);
         lookAt(this.position().add(this.getDeltaMovement()));
         this.playSound(
-                SoundsRegistry.MOB_SKULL_FLIGHT,
+                SoundsRegistry.MOB_SKULL_FLIGHT.value(),
                 MHelper.randRange(0.15F, 0.3F, random),
                 MHelper.randRange(0.75F, 1.25F, random)
         );

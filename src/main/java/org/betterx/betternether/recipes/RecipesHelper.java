@@ -1,6 +1,5 @@
 package org.betterx.betternether.recipes;
 
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -98,8 +97,8 @@ public class RecipesHelper {
 
     public static void makeFireBowlRecipe(Block material, Block inside, Item leg, Block result) {
         if (BuiltInRegistries.BLOCK.getKey(material) != BuiltInRegistries.BLOCK.getDefaultKey() && BuiltInRegistries.BLOCK.getKey(
-                inside) != BuiltInRegistries.BLOCK.getDefaultKey() && Registry.ITEM.getKey(
-                leg) != Registry.ITEM.getDefaultKey()) {
+                inside) != BuiltInRegistries.BLOCK.getDefaultKey() && BuiltInRegistries.ITEM.getKey(
+                leg) != BuiltInRegistries.ITEM.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
             ImmutableMap<String, ItemStack> materials = ImmutableMap.of(
                     "#",

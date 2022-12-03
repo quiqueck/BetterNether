@@ -467,7 +467,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundsRegistry.MOB_FIREFLY_FLY;
+        return SoundsRegistry.MOB_FIREFLY_FLY.value();
     }
 
     @Override

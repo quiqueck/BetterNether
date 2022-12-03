@@ -21,8 +21,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -190,18 +188,14 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
                 );
         } else {
             if (source != DamageSource.OUT_OF_WORLD) {
-                Explosion.BlockInteraction destructionType = this.level.getGameRules()
-                                                                       .getBoolean(GameRules.RULE_MOBGRIEFING)
-                        ? Explosion.BlockInteraction.DESTROY
-                        : Explosion.BlockInteraction.KEEP;
-                this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
+                this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), Level.ExplosionInteraction.MOB);
             }
         }
     }
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundsRegistry.MOB_JELLYFISH;
+        return SoundsRegistry.MOB_JELLYFISH.value();
     }
 
     @Override

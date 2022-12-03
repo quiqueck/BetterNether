@@ -2,16 +2,40 @@ package org.betterx.datagen.betternether.worldgen;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.*;
+import org.betterx.worlds.together.tag.v3.TagManager;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.biome.Biome;
 
-public class NetherBiomesDataProvider {
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+
+import java.util.concurrent.CompletableFuture;
+
+public class NetherBiomesDataProvider extends FabricTagProvider<Biome> {
+    /**
+     * Constructs a new {@link FabricTagProvider} with the default computed path.
+     *
+     * <p>Common implementations of this class are provided.
+     *
+     * @param output           the {@link FabricDataOutput} instance
+     * @param registryKey
+     * @param registriesFuture the backing registry for the tag type
+     */
+    public NetherBiomesDataProvider(
+            FabricDataOutput output,
+            CompletableFuture<HolderLookup.Provider> registriesFuture
+    ) {
+        super(output, Registries.BIOME, registriesFuture);
+    }
+
     private static class Config {
         private static final NetherBiomeConfig BIOME_GRAVEL_DESERT = new NetherGravelDesert.Config("Gravel Desert");
         private static final NetherBiomeConfig BIOME_NETHER_JUNGLE = new NetherJungle.Config("Nether Jungle");
@@ -76,20 +100,20 @@ public class NetherBiomesDataProvider {
     private static final BCLBiome SOUL_PLAIN = registerSubBiome(Config.SOUL_PLAIN, BIOME_WART_FOREST);
     private static final BCLBiome CRIMSON_GLOWING_WOODS = registerSubBiome(
             Config.CRIMSON_GLOWING_WOODS,
-            BCLBiomeRegistry.CRIMSON_FOREST_BIOME
+            BiomeAPI.CRIMSON_FOREST_BIOME
     );
     private static final BCLBiome OLD_WARPED_WOODS = registerSubBiome(
             Config.OLD_WARPED_WOODS,
-            BCLBiomeRegistry.WARPED_FOREST_BIOME
+            BiomeAPI.WARPED_FOREST_BIOME
     );
     private static final BCLBiome CRIMSON_PINEWOOD = registerSubBiome(
             Config.CRIMSON_PINEWOOD,
-            BCLBiomeRegistry.CRIMSON_FOREST_BIOME
+            BiomeAPI.CRIMSON_FOREST_BIOME
     );
     private static final BCLBiome OLD_FUNGIWOODS = registerSubBiome(Config.OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST);
     private static final BCLBiome FLOODED_DELTAS = registerSubBiome(
             Config.FLOODED_DELTAS,
-            BCLBiomeRegistry.BASALT_DELTAS_BIOME
+            BiomeAPI.BASALT_DELTAS_BIOME
     );
     private static final BCLBiome UPSIDE_DOWN_FOREST = registerNetherBiome(Config.UPSIDE_DOWN_FOREST);
     private static final BCLBiome UPSIDE_DOWN_FOREST_CLEARED = registerNetherBiome(Config.UPSIDE_DOWN_FOREST_CLEARED);
@@ -112,5 +136,18 @@ public class NetherBiomesDataProvider {
 
     public static void bootstrap(BootstapContext<Biome> ctx) {
         BCLBiomeBuilder.registerUnbound(ctx);
+    }
+
+    public static void ensureStaticallyLoaded() {
+    }
+
+    @Override
+    protected void addTags(HolderLookup.Provider arg) {
+        TagManager.BIOMES.forEachTag((tag, locs, tags) -> {
+            final FabricTagProvider<Biome>.FabricTagBuilder builder = getOrCreateTagBuilder(tag);
+
+            locs.forEach(builder::add);
+            tags.forEach(builder::addTag);
+        });
     }
 }

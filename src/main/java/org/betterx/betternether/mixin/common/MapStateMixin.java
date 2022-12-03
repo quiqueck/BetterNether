@@ -29,10 +29,10 @@ public abstract class MapStateMixin extends SavedData {
     public byte scale;
     @Shadow
     @Final
-    public int x;
+    public int centerX;
     @Shadow
     @Final
-    public int z;
+    public int centerZ;
     @Shadow
     @Final
     private Map<String, MapDecoration> decorations;
@@ -57,13 +57,14 @@ public abstract class MapStateMixin extends SavedData {
             CallbackInfo info
     ) {
         if (level != null && level.dimensionType().hasCeiling()) {
+            //TODO: 1.19.3 check against vanilla
             //Code derived and adapted from Vanilla Minecraft Code in net.minecraft.world.item.MapItemSaveData.update
             MapDecoration mapDecoration;
 
             byte displayRotation;
             int scale = 1 << this.scale;
-            float px = (float) (x - (double) this.x) / (float) scale;
-            float pz = (float) (z - (double) this.z) / (float) scale;
+            float px = (float) (x - (double) this.centerX) / (float) scale;
+            float pz = (float) (z - (double) this.centerZ) / (float) scale;
             byte mapX = (byte) ((double) (px * 2.0f) + 0.5);
             byte mapZ = (byte) ((double) (pz * 2.0f) + 0.5);
             final int VALID_REGION = 63;

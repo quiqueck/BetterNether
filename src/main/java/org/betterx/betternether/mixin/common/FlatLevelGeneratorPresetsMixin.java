@@ -3,7 +3,6 @@ package org.betterx.betternether.mixin.common;
 
 import org.betterx.betternether.registry.FlatLevelPresetsRegistry;
 
-import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
@@ -18,7 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collections;
 import java.util.Set;
@@ -27,10 +26,8 @@ import java.util.Set;
 //see also FlatLevelGeneratorPresetTagsProviderMixin
 @Mixin(FlatLevelGeneratorPresets.Bootstrap.class)
 public abstract class FlatLevelGeneratorPresetsMixin {
-
-
     @Shadow
-    protected abstract Holder<FlatLevelGeneratorPreset> register(
+    protected abstract void register(
             ResourceKey<FlatLevelGeneratorPreset> resourceKey,
             ItemLike itemLike,
             ResourceKey<Biome> resourceKey2,
@@ -41,7 +38,7 @@ public abstract class FlatLevelGeneratorPresetsMixin {
     );
 
     @Inject(method = "run", at = @At(value = "HEAD"))
-    void bcl_run(CallbackInfoReturnable<Holder<FlatLevelGeneratorPreset>> cir) {
+    void bcl_run(CallbackInfo ci) {
         this.register(FlatLevelPresetsRegistry.BN_FLAT,
                 Blocks.NETHERRACK,
                 Biomes.NETHER_WASTES,

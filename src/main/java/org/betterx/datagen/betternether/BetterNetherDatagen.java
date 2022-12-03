@@ -1,9 +1,7 @@
 package org.betterx.datagen.betternether;
 
-import org.betterx.datagen.betternether.worldgen.ConfiguredFeatureDataProvider;
-import org.betterx.datagen.betternether.worldgen.NetherBiomesDataProvider;
-import org.betterx.datagen.betternether.worldgen.PlacedFeatureDataProvider;
-import org.betterx.datagen.betternether.worldgen.WorldgenRegistriesDataProvider;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
+import org.betterx.datagen.betternether.worldgen.*;
 
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -14,8 +12,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 public class BetterNetherDatagen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
+        BCLBiomeRegistry.prepareForDatagen();
+        NetherBiomesDataProvider.ensureStaticallyLoaded();
+
         final FabricDataGenerator.Pack pack = dataGenerator.createPack();
         pack.addProvider(WorldgenRegistriesDataProvider::new);
+        pack.addProvider(BCLibRegistriesDataProvider::new);
     }
 
     @Override

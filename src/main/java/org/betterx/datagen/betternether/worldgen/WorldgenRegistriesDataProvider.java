@@ -19,6 +19,7 @@ public class WorldgenRegistriesDataProvider extends FabricDynamicRegistryProvide
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
         entries.addAll(registries.lookupOrThrow(Registries.BIOME));
+        entries.addAll(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE));
     }
 
     @Override

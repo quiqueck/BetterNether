@@ -22,24 +22,24 @@ import java.util.List;
 public class NetherTerrain {
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> MAGMA_BLOBS = BCLFeatureBuilder
             .start(BetterNether.makeID("magma_block"), Blocks.MAGMA_BLOCK)
-            .buildAndRegister();
+            .build();
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_PITS = BCLFeatureBuilder
             .start(BN.id("lava_pit"), Blocks.LAVA)
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> BASALT_OR_AIR = BCLFeatureBuilder
             .startWeighted(BN.id("basalt_or_air"))
 
             .add(Blocks.BASALT, 15)
             .add(Blocks.AIR, 15)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature MARK = BCLFeatureBuilder
             .start(BN.id("mark"), BCLFeature.MARK_POSTPROCESSING)
             .build()
             .place()
             .is(BlockPredicate.matchesBlocks(Blocks.LAVA))
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature EXTEND_BASALT = BCLFeatureBuilder
             .start(BN.id("extend_basalt"), Blocks.BASALT)
@@ -47,7 +47,7 @@ public class NetherTerrain {
             .place()
             .offset(Direction.DOWN)
             .extendDown(1, 3)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<Feature<ConditionFeatureConfig>, ConditionFeatureConfig> FLOODED_LAVA_PIT_SURFACE = BCLFeatureBuilder
             .start(BN.id("flooded_lava_pit_surface"), BCLFeature.CONDITION)
@@ -63,15 +63,15 @@ public class NetherTerrain {
             ))
             .build()
             .place()
-            .buildAndRegister();
+            .build();
     public static final BCLConfigureFeature<Feature<SequenceFeatureConfig>, SequenceFeatureConfig> FLOODED_LAVA_PIT = BCLFeatureBuilder
             .start(BN.id("flooded_lava_pit"), BCLFeature.SEQUENCE)
             .configuration(SequenceFeatureConfig.createSequence(List.of(EXTEND_BASALT, FLOODED_LAVA_PIT_SURFACE, MARK)))
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> SOUL_SAND = BCLFeatureBuilder
             .start(BN.id("soul_sand"), Blocks.SOUL_SAND)
-            .buildAndRegister();
+            .build();
 
 
     public static void ensureStaticInitialization() {

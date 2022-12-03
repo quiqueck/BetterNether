@@ -1,5 +1,6 @@
 package org.betterx.datagen.betternether;
 
+import org.betterx.datagen.betternether.worldgen.ConfiguredFeatureDataProvider;
 import org.betterx.datagen.betternether.worldgen.NetherBiomesDataProvider;
 import org.betterx.datagen.betternether.worldgen.WorldgenRegistriesDataProvider;
 
@@ -20,5 +21,6 @@ public class BetterNetherDatagen implements DataGeneratorEntrypoint {
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
         registryBuilder.add(Registries.BIOME, NetherBiomesDataProvider::bootstrap);
+        registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureDataProvider::bootstrap);
     }
 }

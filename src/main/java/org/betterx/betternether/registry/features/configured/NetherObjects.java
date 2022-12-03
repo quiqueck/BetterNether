@@ -2,6 +2,7 @@ package org.betterx.betternether.registry.features.configured;
 
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
+import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
 import org.betterx.bclib.api.v3.levelgen.features.config.PillarFeatureConfig;
@@ -15,7 +16,6 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkShriekerBlock;
@@ -26,42 +26,41 @@ import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class NetherObjects {
 
     public static final BCLConfigureFeature<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = BCLFeatureBuilder
             .start(BN.id("obsidian_crystal"), NetherFeatures.OBSIDIAN_CRYSTAL)
-            .buildAndRegister();
+            .build();
     public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> BONES = BCLFeatureBuilder
             .startWithTemplates(BN.id("bones"))
             .add(BN.id("bone_01"), 0, StructurePlacementType.FLOOR, 1.0f)
             .add(BN.id("bone_02"), 0, StructurePlacementType.FLOOR, 1.0f)
             .add(BN.id("bone_03"), 0, StructurePlacementType.FLOOR, 1.0f)
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> JUNGLE_BONES = BCLFeatureBuilder
             .startWithTemplates(BN.id("jungle_bones"))
             .add(BN.id("jungle_bones_3"), 0, StructurePlacementType.FLOOR, 1.0f)
             .add(BN.id("jungle_bones_2"), 0, StructurePlacementType.FLOOR, 1.0f)
             .add(BN.id("jungle_bones_1"), 0, StructurePlacementType.FLOOR, 1.0f)
-            .buildAndRegister();
+            .build();
 
-    public static final Holder<PlacedFeature> PATCH_BONE_CLUMP = BCLFeatureBuilder
+    public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> PATCH_BONE_CLUMP = BCLFeatureBuilder
             .start(BN.id("temp_bone_clump"), NetherBlocks.BONE_BLOCK)
             .inlinePlace()
             .extendXYZ(3, 3)
             .is(BlockPredicates.ONLY_NETHER_GROUND)
             .build();
 
-    public static final Holder<PlacedFeature> PATCH_TERRACOTTA_CLUMP = BCLFeatureBuilder
+    public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> PATCH_TERRACOTTA_CLUMP = BCLFeatureBuilder
             .start(BN.id("temp_terracotta_clump"), Blocks.BLACK_GLAZED_TERRACOTTA)
             .inlinePlace()
             .extendXYZ(3, 3)
             .is(BlockPredicate.matchesBlocks(Blocks.BASALT))
             .build();
 
-    public static final Holder<PlacedFeature> PATCH_BONE_STALAGMITE = BCLFeatureBuilder
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BONE_STALAGMITE = BCLFeatureBuilder
             .startPillar(BN.id("temp_patch_bone_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.UP)
             .blockState(NetherBlocks.BONE_STALACTITE)
@@ -82,7 +81,7 @@ public class NetherObjects {
             .inlinePlace()
             .isEmptyAndUnderNetherGround()
             .inRandomPatch(BN.id("patch_stalactite"))
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_STALAGMITE = BCLFeatureBuilder
             .startPillar(BN.id("temp_patch_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
@@ -92,9 +91,9 @@ public class NetherObjects {
             .inlinePlace()
             .isEmptyAndOnNetherGround()
             .inRandomPatch(BN.id("patch_stalagmite"))
-            .buildAndRegister();
+            .build();
 
-    public static final Holder<PlacedFeature> PATCH_BLACKSTONE_STALACTITE = BCLFeatureBuilder
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BLACKSTONE_STALACTITE = BCLFeatureBuilder
             .startPillar(BN.id("temp_patch_blackstone_stalactite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.DOWN)
             .blockState(NetherBlocks.BLACKSTONE_STALACTITE)
@@ -105,7 +104,7 @@ public class NetherObjects {
             .inlinePlace()
             .build();
 
-    public static final Holder<PlacedFeature> PATCH_BLACKSTONE_STALAGMITE = BCLFeatureBuilder
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BLACKSTONE_STALAGMITE = BCLFeatureBuilder
             .startPillar(BN.id("temp_patch_blackstone_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.UP)
             .blockState(NetherBlocks.BLACKSTONE_STALACTITE)
@@ -124,7 +123,7 @@ public class NetherObjects {
             .inlinePlace()
             .isEmptyAndUnder(BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
             .inRandomPatch(BN.id("patch_basalt_stalactite"))
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BASALT_STALAGMITE = BCLFeatureBuilder
             .startPillar(BN.id("temp_patch_basalt_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
@@ -134,26 +133,26 @@ public class NetherObjects {
             .inlinePlace()
             .isEmptyAndOn(BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
             .inRandomPatch(BN.id("patch_basalt_stalagmite"))
-            .buildAndRegister();
+            .build();
 
 
     public static final BCLConfigureFeature<SequenceFeature, SequenceFeatureConfig> PATCH_BONE_STALAGMITE_ON_GROUND = BCLFeatureBuilder
             .startSequence(BN.id("patch_bone_stalagmite_on_ground"))
             .add(PATCH_BONE_CLUMP)
             .add(PATCH_BONE_STALAGMITE)
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<SequenceFeature, SequenceFeatureConfig> PATCH_BLACKSTONE_STALAGMITE_ON_GROUND = BCLFeatureBuilder
             .startSequence(BN.id("patch_blackstone_stalagmite_on_ground"))
             .add(PATCH_TERRACOTTA_CLUMP)
             .add(PATCH_BLACKSTONE_STALAGMITE)
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<SequenceFeature, SequenceFeatureConfig> PATCH_BLACKSTONE_STALACTITE_ON_CEIL = BCLFeatureBuilder
             .startSequence(BN.id("patch_blackstone_stalactite_on_ceil"))
             .add(PATCH_TERRACOTTA_CLUMP)
             .add(PATCH_BLACKSTONE_STALACTITE)
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_SMOKER = BCLFeatureBuilder
             .startColumn(BN.id("temp_smoker"))
@@ -166,24 +165,24 @@ public class NetherObjects {
             .tries(18)
             .spreadXZ(4)
             .spreadY(3)
-            .buildAndRegister();
+            .build();
     public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> WART_DEADWOOD = BCLFeatureBuilder
             .startWithTemplates(BN.id("war_deadwood"))
             .add(BetterNether.makeID("trees/wart_root_01"), -0, StructurePlacementType.FLOOR, 1.0f)
             .add(BetterNether.makeID("trees/wart_root_02"), -0, StructurePlacementType.FLOOR, 1.0f)
             .add(BetterNether.makeID("trees/wart_root_03"), -1, StructurePlacementType.FLOOR, 1.0f)
             .add(BetterNether.makeID("trees/wart_fallen_log"), 0, StructurePlacementType.FLOOR, 1.0f)
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> SCULK_HIDDEN = BCLFeatureBuilder
             .startWeighted(BN.id("sculk_hidden"))
             .add(Blocks.SCULK_CATALYST, 30)
             .add(Blocks.SCULK_SHRIEKER.defaultBlockState().setValue(SculkShriekerBlock.CAN_SUMMON, true), 10)
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> SCULK_TOP = BCLFeatureBuilder
             .start(BN.id("sculk_top"), Blocks.SCULK_SENSOR)
-            .buildAndRegister();
+            .build();
 
     public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> FOREST_LITTER = BCLFeatureBuilder
             .startWithTemplates(BN.id("forest_litter"))
@@ -192,7 +191,7 @@ public class NetherObjects {
             .add(BN.id("upside_down_forest/tree_root"), -1, StructurePlacementType.FLOOR, 1.0f)
             .add(BN.id("upside_down_forest/tree_stump"), -1, StructurePlacementType.FLOOR, 1.0f)
             .add(BN.id("upside_down_forest/tree_small_branch"), 1, StructurePlacementType.FLOOR, 1.0f)
-            .buildAndRegister();
+            .build();
 
     public static void ensureStaticInitialization() {
     }

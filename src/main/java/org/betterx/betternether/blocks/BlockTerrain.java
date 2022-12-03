@@ -12,7 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -65,7 +65,7 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
 
     @Override
     public boolean isValidBonemealTarget(
-            BlockGetter blockGetter,
+            LevelReader blockGetter,
             BlockPos blockPos,
             BlockState blockState,
             boolean bl

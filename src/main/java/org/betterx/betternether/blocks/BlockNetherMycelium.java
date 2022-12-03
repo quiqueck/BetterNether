@@ -9,8 +9,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -72,7 +72,7 @@ public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike
 
     @Override
     public boolean isValidBonemealTarget(
-            BlockGetter blockGetter,
+            LevelReader blockGetter,
             BlockPos blockPos,
             BlockState blockState,
             boolean bl

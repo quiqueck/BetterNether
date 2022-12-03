@@ -28,7 +28,7 @@ public class NetherTerrainPlaced {
             .offset(Direction.DOWN)
             .is(BlockPredicates.ONLY_GROUND)
             .extendDown(0, 3)
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_PITS_SPARSE = NetherTerrain
             .LAVA_PITS
@@ -41,7 +41,7 @@ public class NetherTerrainPlaced {
             .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
             .onceEvery(6)
             .onlyInBiome()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_PITS_DENSE = NetherTerrain
             .LAVA_PITS
@@ -54,7 +54,7 @@ public class NetherTerrainPlaced {
             .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
             .onceEvery(2)
             .onlyInBiome()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature<Feature<SequenceFeatureConfig>, SequenceFeatureConfig> FLOODED_LAVA_PIT = NetherTerrain
             .FLOODED_LAVA_PIT
@@ -64,7 +64,7 @@ public class NetherTerrainPlaced {
             .onEveryLayer()
             .offset(Direction.DOWN)
             .onlyInBiome()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> REPLACE_SOUL_SANDSTONE = NetherTerrain
             .SOUL_SAND
@@ -74,7 +74,7 @@ public class NetherTerrainPlaced {
             .onEveryLayerMin4()
             .offset(Direction.DOWN)
             .is(BlockPredicate.matchesBlocks(NetherBlocks.SOUL_SANDSTONE))
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_SWAMP = NetherTerrain
             .LAVA_PITS
@@ -85,7 +85,7 @@ public class NetherTerrainPlaced {
             .offset(Direction.DOWN)
             .noiseAbove(0.1f, 20, 10)
             .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
-            .buildAndRegister();
+            .build();
     public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_TERRACE = NetherTerrain
             .LAVA_PITS
             .place(BN.id("lava_terrace"))
@@ -95,7 +95,7 @@ public class NetherTerrainPlaced {
             .onlyInBiome()
             .offset(Direction.DOWN)
             .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
-            .buildAndRegister();
+            .build();
 
     public static void ensureStaticInitialization() {
     }

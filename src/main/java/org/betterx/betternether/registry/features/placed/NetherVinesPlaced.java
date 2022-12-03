@@ -12,21 +12,21 @@ public class NetherVinesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(12)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
     public static final BCLFeature GOLDEN_LUMABUS_VINE = NetherVines
             .PATCH_GOLDEN_LUMABUS_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(8)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
     public static final BCLFeature GOLDEN_VINE = NetherVines
             .PATCH_GOLDEN_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(4)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature GOLDEN_VINE_SPARSE = NetherVines
             .PATCH_GOLDEN_VINE_SPARSE
@@ -34,7 +34,7 @@ public class NetherVinesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(4)
             .onceEvery(3)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature EYE_VINE = NetherVines
             .PATCH_EYE_VINE
@@ -42,7 +42,7 @@ public class NetherVinesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(4)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature BLACK_VINE = NetherVines
             .PATCH_BLACK_VINE
@@ -50,7 +50,7 @@ public class NetherVinesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(4)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature BLOOMING_VINE = NetherVines
             .PATCH_BLOOMING_VINE
@@ -58,7 +58,7 @@ public class NetherVinesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(4)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature TWISTING_VINES = NetherVines
             .PATCH_TWISTING_VINES
@@ -66,7 +66,7 @@ public class NetherVinesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(12)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature NEON_EQUISETUM = NetherVines
             .PATCH_NEON_EQUISETUM
@@ -74,7 +74,7 @@ public class NetherVinesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(12)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature WHISPERING_GOURD_VINE = NetherVines
             .PATCH_WHISPERING_GOURD_VINE
@@ -82,7 +82,7 @@ public class NetherVinesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(4)
             .onceEvery(2)
-            .buildAndRegister();
+            .build();
 
     public static void ensureStaticInitialization() {
     }

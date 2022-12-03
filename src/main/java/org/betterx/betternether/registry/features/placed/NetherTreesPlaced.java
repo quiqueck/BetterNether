@@ -18,7 +18,7 @@ public class NetherTreesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(12)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature CRIMSON_PINE = NetherTrees
             .CRIMSON_PINE
@@ -26,7 +26,7 @@ public class NetherTreesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(12)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature RUBEUS_TREE = NetherTrees
             .RUBEUS_TREE
@@ -34,7 +34,7 @@ public class NetherTreesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(12)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature MUSHROOM_FIR = NetherTrees
             .MUSHROOM_FIR
@@ -42,7 +42,7 @@ public class NetherTreesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(14)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> STALAGNATE = NetherTrees
             .PATCH_STALAGNATE
@@ -51,7 +51,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(6)
             .onceEvery(5)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> GIANT_MOLD = NetherTrees
             .PATCH_GIANT_MOLD
@@ -60,7 +60,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(6)
             .onceEvery(5)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BIG_RED_MUSHROOM = NetherTrees
             .PATCH_BIG_RED_MUSHROOM
@@ -69,7 +69,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(6)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BIG_BROWN_MUSHROOM = NetherTrees
             .PATCH_BIG_BROWN_MUSHROOM
@@ -78,7 +78,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(6)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> OLD_RED_MUSHROOM = NetherTrees
             .OLD_RED_MUSHROOM
@@ -87,7 +87,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(5)
             .onceEvery(3)
             .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> OLD_BROWN_MUSHROOM = NetherTrees
             .OLD_BROWN_MUSHROOM
@@ -96,7 +96,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(4)
             .onceEvery(3)
             .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> SOUL_LILY = NetherTrees
             .PATCH_SOUL_LILY
@@ -104,7 +104,7 @@ public class NetherTreesPlaced {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(6)
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature WART_TREE = NetherTrees
             .WART_TREE
@@ -113,7 +113,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(14)
             .onceEvery(2)
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature WILLOW_TREE = NetherTrees
             .WILLOW_TREE
@@ -122,7 +122,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(14)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature OLD_WILLOW_TREE = NetherTrees
             .OLD_WILLOW_TREE
@@ -131,7 +131,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(14)
             .onceEvery(4)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature SAKURA_TREE = NetherTrees
             .SAKURA_TREE
@@ -140,7 +140,7 @@ public class NetherTreesPlaced {
             .betterNetherCeiling(5)
             .onceEvery(6)
             .isEmptyAndUnderNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature ANCHOR_TREE = NetherTrees
             .ANCHOR_TREE
@@ -149,7 +149,7 @@ public class NetherTreesPlaced {
             .betterNetherCeiling(5)
             .isEmptyAndUnderNetherGround()
             .onceEvery(15)
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature ANCHOR_TREE_SPARSE = NetherTrees
             .ANCHOR_TREE
@@ -160,7 +160,7 @@ public class NetherTreesPlaced {
             .findSolidCeil(5)
             .isEmptyAndUnderNetherGround()
             .onceEvery(3)
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature ANCHOR_TREE_BRANCH = NetherTrees
             .ANCHOR_TREE_BRANCH
@@ -169,7 +169,7 @@ public class NetherTreesPlaced {
             .betterNetherCeiling(3)
             .isEmptyAndUnderNetherGround()
             .onceEvery(8)
-            .buildAndRegister();
+            .build();
 
     public static BCLFeature ANCHOR_TREE_ROOT = NetherTrees
             .ANCHOR_TREE_ROOT
@@ -178,7 +178,7 @@ public class NetherTreesPlaced {
             .betterNetherCeiling(3)
             .onceEvery(6)
             .isEmptyAndUnderNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> BIG_WARPED_TREE = NetherTrees
             .BIG_WARPED_TREE
@@ -187,7 +187,7 @@ public class NetherTreesPlaced {
             .vanillaNetherGround(6)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
-            .buildAndRegister();
+            .build();
 
     public static void ensureStaticInitialization() {
     }

@@ -28,7 +28,6 @@ public class NetherBiomesDataProvider extends TagDataProvider<Biome> {
      * <p>Common implementations of this class are provided.
      *
      * @param output           the {@link FabricDataOutput} instance
-     * @param registryKey
      * @param registriesFuture the backing registry for the tag type
      */
     public NetherBiomesDataProvider(
@@ -141,17 +140,5 @@ public class NetherBiomesDataProvider extends TagDataProvider<Biome> {
     }
 
     public static void ensureStaticallyLoaded() {
-    }
-
-    @Override
-    protected void addTags(HolderLookup.Provider arg) {
-        TagManager.BIOMES.forEachTag((tag, locs, tags) -> {
-            final FabricTagProvider<Biome>.FabricTagBuilder builder = getOrCreateTagBuilder(tag);
-            boolean modTag = tag.location().getNamespace().equals(BetterNether.MOD_ID);
-            locs.stream().filter(l -> modTag || l.getNamespace().equals(BetterNether.MOD_ID)).forEach(builder::add);
-            tags.stream()
-                .filter(t -> modTag || t.location().getNamespace().equals(BetterNether.MOD_ID))
-                .forEach(builder::addTag);
-        });
     }
 }

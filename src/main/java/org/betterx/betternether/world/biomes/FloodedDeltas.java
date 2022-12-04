@@ -41,6 +41,7 @@ public class FloodedDeltas extends NetherBiome {
                    .feature(NetherObjectsPlaced.BLACKSTONE_STALAGMITE)
                    .feature(NetherObjectsPlaced.BASALT_STALACTITE)
                    .feature(NetherObjectsPlaced.BLACKSTONE_STALACTITE)
+                   .addNetherClimateParamater(-0.5f, -0.1f, 0.175f)
                    .genChance(0.3f)
             ;
         }

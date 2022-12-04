@@ -58,6 +58,7 @@ public class UpsideDownForest extends NetherBiome {
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_LUCIS)
                    .feature(NetherVegetationPlaced.WALL_UPSIDE_DOWN)
+                   .addNetherClimateParamater(0.45f, 0.8f, 0.125f)
                    .vertical()
                    .genChance(0.25f);
         }

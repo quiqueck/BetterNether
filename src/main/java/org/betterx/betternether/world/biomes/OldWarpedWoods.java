@@ -43,6 +43,7 @@ public class OldWarpedWoods extends NetherBiome {
                    .feature(NetherVinesPlaced.BLACK_VINE)
                    .feature(NetherVinesPlaced.TWISTING_VINES)
                    .feature(NetherObjectsPlaced.STALACTITE)
+                   .addNetherClimateParamater(0.0f, 0.55f, 0.375f)
             ;
         }
 

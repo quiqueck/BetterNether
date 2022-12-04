@@ -44,6 +44,7 @@ public class NetherMushroomForest extends NetherBiome {
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_LUCIS)
                    .feature(NetherVegetationPlaced.WALL_MUSHROOMS)
+                   .addNetherClimateParamater(0.0f, 0.7f, 0)
                    .edgeSize(6)
             ;
         }

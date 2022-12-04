@@ -51,6 +51,7 @@ public class NetherSoulPlain extends NetherBiome {
                    .feature(NetherVegetationPlaced.BLACK_BUSH)
                    .feature(NetherVegetationPlaced.VEGETATION_SOUL_PLAIN)
                    .feature(NetherObjectsPlaced.BASALT_STALACTITE_SPARSE)
+                   .addNetherClimateParamater(0.01f, -0.5f, 0.0f)
             ;
         }
 

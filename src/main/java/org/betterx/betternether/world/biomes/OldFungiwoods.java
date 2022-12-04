@@ -44,6 +44,7 @@ public class OldFungiwoods extends NetherBiome {
                    .feature(NetherVegetationPlaced.VEGETATION_MUSHROOM_FORREST)
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_MUSHROOM_RED_WITH_MOSS)
+                   .addNetherClimateParamater(0.0f, 0.65f, 0)
                    .genChance(0.3f)
             ;
         }

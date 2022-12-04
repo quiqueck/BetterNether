@@ -51,6 +51,7 @@ public class NetherJungle extends NetherBiome {
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_LUCIS)
                    .feature(NetherVegetationPlaced.WALL_JUNGLE)
+                   .addNetherClimateParamater(0.5f, 0.8f, 0)
             ;
         }
 

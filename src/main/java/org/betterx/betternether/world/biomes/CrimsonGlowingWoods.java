@@ -48,7 +48,7 @@ public class CrimsonGlowingWoods extends NetherBiome {
                    .feature(NetherVinesPlaced.GOLDEN_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_MUSHROOM_RED_WITH_MOSS)
-
+                   .addNetherClimateParamater(0.4f, -0.05f, 0.0f)
 //                   .feature(BiomeFeatures.CRIMSON_GLOWING_WOODS_FLOOR)
 //                   .feature(BiomeFeatures.CRIMSON_GLOWING_WOODS_CEIL)
 //                   .feature(BiomeFeatures.CRIMSON_GLOWING_WOODS_WALL)

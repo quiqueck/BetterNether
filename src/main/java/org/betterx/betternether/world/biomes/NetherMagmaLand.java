@@ -40,6 +40,7 @@ public class NetherMagmaLand extends NetherBiome {
                    .feature(NetherVegetationPlaced.VEGETATION_MAGMA_LAND)
                    .feature(NetherVinesPlaced.GOLDEN_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
+                   .addNetherClimateParamater(0.8f, -0.7f, 0)
             ;
         }
 

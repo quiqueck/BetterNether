@@ -52,7 +52,7 @@ public class NetherSwampland extends NetherBiome {
         }
 
         protected void addCustomSwamplandBuildData(BCLBiomeBuilder builder) {
-            builder.feature(NetherTerrainPlaced.LAVA_SWAMP);
+            builder.feature(NetherTerrainPlaced.LAVA_SWAMP).addNetherClimateParamater(0.1f, 0.8f, 0.1f);
         }
 
         @Override

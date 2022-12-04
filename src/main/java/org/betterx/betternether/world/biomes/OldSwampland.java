@@ -50,6 +50,7 @@ public class OldSwampland extends NetherBiome {
                    .feature(NetherVinesPlaced.BLOOMING_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_MUSHROOMS_WITH_MOSS)
+                   .addNetherClimateParamater(0.1f, 0.75f, 0.1f)
             ;
         }
 

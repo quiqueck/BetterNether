@@ -22,7 +22,7 @@ public class NetherSwamplandTerraces extends NetherSwampland {
 
         @Override
         protected void addCustomSwamplandBuildData(BCLBiomeBuilder builder) {
-            builder.feature(NetherTerrainPlaced.LAVA_TERRACE);
+            builder.feature(NetherTerrainPlaced.LAVA_TERRACE).addNetherClimateParamater(0.08f, 0.85f, 0.1f);
         }
     }
 

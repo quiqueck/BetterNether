@@ -44,6 +44,7 @@ public class CrimsonPinewood extends NetherBiome {
                    .feature(NetherVinesPlaced.GOLDEN_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_MUSHROOM_RED_WITH_MOSS)
+                   .addNetherClimateParamater(0.35f, 0.1f, 0.0f)
                    .genChance(0.3f)
             ;
         }

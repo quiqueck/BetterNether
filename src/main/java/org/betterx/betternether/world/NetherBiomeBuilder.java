@@ -4,7 +4,6 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
-import org.betterx.bclib.util.MHelper;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
@@ -111,10 +110,6 @@ public class NetherBiomeBuilder {
                 .edge(edgeBiome)
                 .parentBiome(parentBiome)
                 .netherBiome()
-                .addNetherClimateParamater(
-                        MHelper.randRange(-1.5F, 1.5F, RANDOM),
-                        MHelper.randRange(-1.5F, 1.5F, RANDOM)
-                )
                 .feature(NetherVegetationPlaced.WART_CAP);
 
 

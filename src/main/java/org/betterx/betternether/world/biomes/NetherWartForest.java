@@ -50,6 +50,7 @@ public class NetherWartForest extends NetherBiome {
                    .feature(NetherVegetationPlaced.BLACK_BUSH)
                    .feature(NetherVegetationPlaced.VEGETATION_WART_FOREST)
                    .feature(NetherObjectsPlaced.BASALT_STALACTITE_SPARSE)
+                   .addNetherClimateParamater(-0.5f, 0.5f, 0.0f)
                    .edgeSize(9)
             ;
         }

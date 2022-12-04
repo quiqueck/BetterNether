@@ -38,6 +38,7 @@ public class NetherSulfuricBoneReef extends NetherBiome {
                    .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
                    .feature(NetherVinesPlaced.GOLDEN_LUMABUS_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
+                   .addNetherClimateParamater(0.0f, 0.6f, 0.370f)
                    .genChance(0.3f);
         }
 

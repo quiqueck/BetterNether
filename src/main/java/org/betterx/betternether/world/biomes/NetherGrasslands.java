@@ -63,6 +63,7 @@ public class NetherGrasslands extends NetherBiome {
                    .feature(NetherObjectsPlaced.SMOKER)
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_MUSHROOMS_WITH_MOSS)
+                   .addNetherClimateParamater(0.0f, 0.7f, 0.0f)
             ;
         }
 

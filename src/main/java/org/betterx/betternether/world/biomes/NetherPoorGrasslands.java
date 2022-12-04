@@ -38,6 +38,7 @@ public class NetherPoorGrasslands extends NetherBiome {
                    .feature(NetherVegetationPlaced.BLACK_BUSH_SPARSE)
                    .feature(NetherVegetationPlaced.VEGETATION_POOR_GRASSLANDS)
                    .feature(NetherObjectsPlaced.SMOKER_SPARSE)
+                   .addNetherClimateParamater(0.0f, 0.3f, 0.0f)
                    .genChance(0.3F)
             ;
         }

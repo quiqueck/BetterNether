@@ -36,6 +36,7 @@ public class NetherMushroomForestEdge extends NetherBiome {
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
                    .feature(NetherObjectsPlaced.STALAGMITE)
                    .feature(NetherVegetationPlaced.VEGETATION_MUSHROOM_FORREST_EDGE)
+                   .addNetherClimateParamater(0.0f, 0.7f, 0.1f)
             ;
         }
 

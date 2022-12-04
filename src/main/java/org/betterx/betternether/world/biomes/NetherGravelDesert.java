@@ -42,6 +42,7 @@ public class NetherGravelDesert extends NetherBiome {
                    .feature(NetherVegetationPlaced.NETHER_CACTUS)
                    .feature(NetherVegetationPlaced.VEGETATION_GRAVEL_DESERT)
                    .feature(NetherObjectsPlaced.STALACTITE)
+                   .addNetherClimateParamater(0.5f, -0.7f, 0)
             ;
         }
 

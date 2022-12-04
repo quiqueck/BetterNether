@@ -40,6 +40,7 @@ public class NetherBoneReef extends NetherBiome {
                    .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
                    .feature(NetherVinesPlaced.LUMABUS_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
+                   .addNetherClimateParamater(0.0f, 0.7f, 0.375f)
             ;
         }
 

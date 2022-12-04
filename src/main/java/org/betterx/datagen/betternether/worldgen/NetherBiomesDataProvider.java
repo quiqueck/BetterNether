@@ -3,6 +3,7 @@ package org.betterx.datagen.betternether.worldgen;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v3.datagen.TagDataProvider;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeBuilder;
@@ -11,16 +12,16 @@ import org.betterx.betternether.world.biomes.*;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.biome.Biome;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class NetherBiomesDataProvider extends FabricTagProvider<Biome> {
+public class NetherBiomesDataProvider extends TagDataProvider<Biome> {
     /**
      * Constructs a new {@link FabricTagProvider} with the default computed path.
      *
@@ -34,7 +35,7 @@ public class NetherBiomesDataProvider extends FabricTagProvider<Biome> {
             FabricDataOutput output,
             CompletableFuture<HolderLookup.Provider> registriesFuture
     ) {
-        super(output, Registries.BIOME, registriesFuture);
+        super(TagManager.BIOMES, List.of(BetterNether.MOD_ID), output, registriesFuture);
     }
 
     private static class Config {

@@ -1,7 +1,6 @@
 package org.betterx.datagen.betternether.worldgen;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
@@ -18,11 +17,12 @@ public class WorldgenRegistriesDataProvider extends FabricDynamicRegistryProvide
 
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
-        entries.addAll(registries.lookupOrThrow(Registries.BIOME));
-        entries.addAll(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE));
-        entries.addAll(registries.lookupOrThrow(Registries.PLACED_FEATURE));
-        entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE));
-        entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE_SET));
+//        entries.addAll(registries.lookupOrThrow(Registries.BIOME));
+//        entries.addAll(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE));
+//        entries.addAll(registries.lookupOrThrow(Registries.PLACED_FEATURE));
+//        entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE));
+//        entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE_SET));
+//        entries.addAll(registries.lookupOrThrow(Registries.FLAT_LEVEL_GENERATOR_PRESET));
     }
 
     @Override

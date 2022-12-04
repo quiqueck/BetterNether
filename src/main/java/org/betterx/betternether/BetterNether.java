@@ -50,7 +50,6 @@ public class BetterNether implements ModInitializer {
         NetherBiomes.register();
         BrewingRegistry.register();
         CommandRegistry.register();
-        FlatLevelPresetsRegistry.register();
         ObsidianBreaker.register();
         Config.save();
 

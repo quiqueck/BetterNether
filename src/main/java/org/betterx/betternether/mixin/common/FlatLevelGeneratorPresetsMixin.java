@@ -1,13 +1,9 @@
 package org.betterx.betternether.mixin.common;
 
 
-import org.betterx.betternether.registry.FlatLevelPresetsRegistry;
-
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.flat.FlatLayerInfo;
 import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorPreset;
 import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorPresets;
@@ -19,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Collections;
 import java.util.Set;
 
 
@@ -39,14 +34,15 @@ public abstract class FlatLevelGeneratorPresetsMixin {
 
     @Inject(method = "run", at = @At(value = "HEAD"))
     void bcl_run(CallbackInfo ci) {
-        this.register(FlatLevelPresetsRegistry.BN_FLAT,
-                Blocks.NETHERRACK,
-                Biomes.NETHER_WASTES,
-                Collections.emptySet(),
-                false, false,
-                new FlatLayerInfo(63, Blocks.NETHERRACK),
-                new FlatLayerInfo(1, Blocks.BEDROCK)
-        );
+//        this.register(
+//                FlatLevelPresetsDataProvider.BN_FLAT,
+//                Blocks.NETHERRACK,
+//                Biomes.NETHER_WASTES,
+//                Collections.emptySet(),
+//                false, false,
+//                new FlatLayerInfo(63, Blocks.NETHERRACK),
+//                new FlatLayerInfo(1, Blocks.BEDROCK)
+//        );
 
     }
 }

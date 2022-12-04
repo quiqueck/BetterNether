@@ -3,6 +3,7 @@ package org.betterx.datagen.betternether.worldgen;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -145,9 +146,11 @@ public class NetherBiomesDataProvider extends FabricTagProvider<Biome> {
     protected void addTags(HolderLookup.Provider arg) {
         TagManager.BIOMES.forEachTag((tag, locs, tags) -> {
             final FabricTagProvider<Biome>.FabricTagBuilder builder = getOrCreateTagBuilder(tag);
-
-            locs.forEach(builder::add);
-            tags.forEach(builder::addTag);
+            boolean modTag = tag.location().getNamespace().equals(BetterNether.MOD_ID);
+            locs.stream().filter(l -> modTag || l.getNamespace().equals(BetterNether.MOD_ID)).forEach(builder::add);
+            tags.stream()
+                .filter(t -> modTag || t.location().getNamespace().equals(BetterNether.MOD_ID))
+                .forEach(builder::addTag);
         });
     }
 }

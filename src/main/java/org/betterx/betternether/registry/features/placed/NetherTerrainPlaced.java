@@ -69,6 +69,7 @@ public class NetherTerrainPlaced {
     public static BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> REPLACE_SOUL_SANDSTONE = NetherTerrain
             .SOUL_SAND
             .place(BN.id("replace_soul_sandstone"))
+            .onlyInBiome()
             .decoration(GenerationStep.Decoration.RAW_GENERATION)
             .all()
             .onEveryLayerMin4()
@@ -79,6 +80,7 @@ public class NetherTerrainPlaced {
     public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_SWAMP = NetherTerrain
             .LAVA_PITS
             .place(BN.id("lava_swamp"))
+            .onlyInBiome()
             .decoration(GenerationStep.Decoration.LAKES)
             .all()
             .onEveryLayer()

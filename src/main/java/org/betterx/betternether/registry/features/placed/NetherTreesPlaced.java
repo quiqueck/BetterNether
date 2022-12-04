@@ -154,6 +154,7 @@ public class NetherTreesPlaced {
     public static BCLFeature ANCHOR_TREE_SPARSE = NetherTrees
             .ANCHOR_TREE
             .place(BN.id("anchor_tree_sparse"))
+            .onlyInBiome()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .count(1)
             .randomHeight4FromFloorCeil()

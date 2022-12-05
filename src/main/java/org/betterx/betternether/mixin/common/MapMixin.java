@@ -1,6 +1,7 @@
 package org.betterx.betternether.mixin.common;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -37,9 +38,9 @@ public abstract class MapMixin extends ComplexItem {
     }
 
     @Inject(method = "update", at = @At(value = "HEAD"), cancellable = true)
-    private void customColors(Level level, Entity entity, MapItemSavedData state, CallbackInfo info) {
+    private void bn_update(Level level, Entity entity, MapItemSavedData state, CallbackInfo info) {
+        //TODO: Check for new Version
         //Code derived and adapted from Vanilla Minecraft Code in net.minecraft.world.item.MapItem.update
-        //TODO:1.19.3 Compare with vanilla
         if (level.dimensionType().hasCeiling() && level.dimension() == state.dimension && entity instanceof Player) {
             BlockPos.MutableBlockPos POS2 = new BlockPos.MutableBlockPos();
             final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
@@ -70,7 +71,10 @@ public abstract class MapMixin extends ComplexItem {
                     int x = (sx / scale + xx - 64) * scale;
                     int z = (sz / scale + yy - 64) * scale;
                     LinkedHashMultiset<MaterialColor> multiset = LinkedHashMultiset.create();
-                    LevelChunk levelChunk = level.getChunkAt(new BlockPos(x, 0, z));
+                    LevelChunk levelChunk = level.getChunk(
+                            SectionPos.blockToSectionCoord(x),
+                            SectionPos.blockToSectionCoord(z)
+                    );
                     if (levelChunk.isEmpty()) continue;
                     ChunkPos chunkPos = levelChunk.getPos();
                     int cx = x & 0xF;
@@ -86,16 +90,12 @@ public abstract class MapMixin extends ComplexItem {
                     for (int bx = 0; bx < scale; ++bx) {
                         for (int bz = 0; bz < scale; ++bz) {
                             BlockState blockState;
+                            POS.set(chunkPos.getMinBlockX() + bx + cx, 0, chunkPos.getMinBlockZ() + bz + cz);
                             int testY = levelChunk.getHeight(Heightmap.Types.WORLD_SURFACE, bx + cx, bz + cz) + 1;
                             if (testY > level.getMinBuildHeight() + 1) {
-
                                 //make sure we get under the nether ceiling and find the first "AIR" block
                                 do {
-                                    POS.set(
-                                            chunkPos.getMinBlockX() + bx + cx,
-                                            --testY,
-                                            chunkPos.getMinBlockZ() + bz + cz
-                                    );
+                                    POS.setY(--testY);
                                     blockState = levelChunk.getBlockState(POS);
                                 } while (blockState.is(Blocks.BEDROCK) || blockState.getMapColor(
                                         level,
@@ -103,15 +103,12 @@ public abstract class MapMixin extends ComplexItem {
                                 ) != MaterialColor.NONE && testY > level.getMinBuildHeight());
 
                                 do {
-                                    POS.set(
-                                            chunkPos.getMinBlockX() + bx + cx,
-                                            --testY,
-                                            chunkPos.getMinBlockZ() + bz + cz
-                                    );
-                                } while ((blockState = levelChunk.getBlockState(POS)).getMapColor(
-                                        level,
-                                        POS
-                                ) == MaterialColor.NONE && testY > level.getMinBuildHeight());
+                                    POS.setY(--testY);
+                                    blockState = levelChunk.getBlockState(POS);
+                                } while (
+                                        blockState.getMapColor(level, POS) == MaterialColor.NONE
+                                                && testY > level.getMinBuildHeight()
+                                );
                                 if (testY > level.getMinBuildHeight() && !blockState.getFluidState()
                                                                                     .isEmpty()) {
                                     BlockState blockState2;
@@ -128,11 +125,7 @@ public abstract class MapMixin extends ComplexItem {
                             } else {
                                 blockState = Blocks.BEDROCK.defaultBlockState();
                             }
-                            state.checkBanners(
-                                    level,
-                                    chunkPos.getMinBlockX() + bx + cx,
-                                    chunkPos.getMinBlockZ() + bz + cz
-                            );
+                            state.checkBanners(level, POS.getX(), POS.getZ());
                             height += (double) testY / (double) (scale * scale);
                             multiset.add(blockState.getMapColor(level, POS));
                         }
@@ -143,8 +136,9 @@ public abstract class MapMixin extends ComplexItem {
                             Multisets.copyHighestCountFirst(multiset),
                             MaterialColor.NONE
                     );
+                    w /= scale * scale;
                     Brightness br = mc == MaterialColor.WATER
-                            ? ((y = (double) (w /= scale * scale) * 0.1 + (double) (xx + yy & 1) * 0.2) < 0.5
+                            ? ((y = (double) w * 0.1 + (double) (xx + yy & 1) * 0.2) < 0.5
                             ? MaterialColor.Brightness.HIGH
                             : (y > 0.9 ? MaterialColor.Brightness.LOW : MaterialColor.Brightness.NORMAL))
                             : ((y = (height - d) * 4.0 / (double) (scale + 4) + ((double) (xx + yy & 1) - 0.5) * 0.4) > 0.6

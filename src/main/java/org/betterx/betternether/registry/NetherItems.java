@@ -261,8 +261,7 @@ public class NetherItems extends ItemRegistry {
     }
 
     public static Properties defaultSettings() {
-        //TODO: 1.19.3 Handled differently now
-        return new Item.Properties();//.tab(CreativeTabs.BN_TAB);
+        return new Item.Properties();
     }
 
     public static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {

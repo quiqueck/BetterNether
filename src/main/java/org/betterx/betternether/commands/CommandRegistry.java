@@ -8,6 +8,7 @@ import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeBuilder;
+import org.betterx.worlds.together.world.event.WorldBootstrap;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
@@ -19,6 +20,7 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -26,11 +28,13 @@ import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -54,6 +58,7 @@ import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
+import com.google.common.base.Stopwatch;
 import org.joml.Vector3d;
 
 import java.util.Collections;
@@ -198,16 +203,24 @@ public class CommandRegistry {
                 }
             };
             ResourceKey<Biome> a = biome.getBiomeKey();
-            //TODO:1.19.3 Repair
-//            Holder<Biome> h = BuiltinRegistries.BIOME.getHolder(a).orElseThrow();
-//            return LocateCommand.showLocateResult(
-//                    source,
-//                    result,
-//                    currentPosition,
-//                    new Pair<>(biomePosition, h),
-//                    "commands.locatebiome.success",
-//                    false
-//            );
+            if (WorldBootstrap.getLastRegistryAccess() != null) {
+                Stopwatch stopwatch = Stopwatch.createStarted(Util.TICKER);
+                Holder<Biome> h = WorldBootstrap.getLastRegistryAccess()
+                                                .registryOrThrow(Registries.BIOME)
+                                                .getHolder(a)
+                                                .orElseThrow();
+                stopwatch.stop();
+                return LocateCommand.showLocateResult(
+                        source,
+                        result,
+                        currentPosition,
+                        new Pair<>(biomePosition, h),
+                        "commands.locatebiome.success",
+                        false,
+                        stopwatch.elapsed()
+
+                );
+            }
             return Command.SINGLE_SUCCESS;
         }
     }

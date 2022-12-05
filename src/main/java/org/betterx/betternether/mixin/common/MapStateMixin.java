@@ -46,7 +46,7 @@ public abstract class MapStateMixin extends SavedData {
     private int trackedDecorationCount;
 
     @Inject(method = "addDecoration", at = @At(value = "HEAD"), cancellable = true)
-    private void updatePlayer(
+    private void bn_addDecoration(
             MapDecoration.Type type,
             LevelAccessor level,
             String key,
@@ -57,8 +57,8 @@ public abstract class MapStateMixin extends SavedData {
             CallbackInfo info
     ) {
         if (level != null && level.dimensionType().hasCeiling()) {
-            //TODO: 1.19.3 check against vanilla
-            //Code derived and adapted from Vanilla Minecraft Code in net.minecraft.world.item.MapItemSaveData.update
+            //TODO: Check for new Version
+            //Code derived and adapted from Vanilla Minecraft Code in net.minecraft.world.item.MapItemSaveData.addDecoration
             MapDecoration mapDecoration;
 
             byte displayRotation;
@@ -69,7 +69,8 @@ public abstract class MapStateMixin extends SavedData {
             byte mapZ = (byte) ((double) (pz * 2.0f) + 0.5);
             final int VALID_REGION = 63;
             if (px >= -VALID_REGION && pz >= -VALID_REGION && px <= VALID_REGION && pz <= VALID_REGION) {
-                displayRotation = (byte) ((rotation + (rotation < 0.0 ? -8.0 : 8.0)) * 16.0 / 360.0);
+                rotation += rotation < 0.0 ? -8.0 : 8.0;
+                displayRotation = (byte) ((int) (rotation * 16.0 / 360.0));
                 //We do want the actual rotation of the player here
 //				if (this.dimension == Level.NETHER && level != null) {
 //					int time = (int) (level.getLevelData().getDayTime() / 10L);

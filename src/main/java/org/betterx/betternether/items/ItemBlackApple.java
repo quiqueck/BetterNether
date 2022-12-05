@@ -16,8 +16,6 @@ public class ItemBlackApple extends Item {
 
     public ItemBlackApple() {
         super(new Item.Properties()
-                //TODO: 1.19.3 HANDLED DIFFERENTLY NOW
-                //.tab(CreativeTabs.BN_TAB)
                 .food(BLACK_APPLE)
                 .food(Foods.APPLE));
     }

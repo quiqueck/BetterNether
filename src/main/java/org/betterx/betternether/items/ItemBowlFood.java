@@ -24,8 +24,6 @@ public class ItemBowlFood extends Item {
 
     public ItemBowlFood(FoodProperties component, FoodShape food) {
         super(new Item.Properties()
-                //TODO: 1.19.3 handled differently now
-                //        .tab(CreativeTabs.BN_TAB)
                 .food(component)
                 .stacksTo(16)
         );

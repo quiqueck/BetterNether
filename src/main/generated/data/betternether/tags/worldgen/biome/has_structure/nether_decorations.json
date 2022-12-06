@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:old_fungiwoods",
+    "betternether:flooded_deltas",
+    "betternether:soul_plain",
+    "betternether:nether_grasslands",
+    "betternether:crimson_glowing_woods",
+    "betternether:sulfuric_bone_reef",
+    "betternether:crimson_pinewood",
+    "betternether:gravel_desert",
+    "betternether:wart_forest_edge",
+    "betternether:nether_mushroom_forest_edge",
+    "betternether:magma_land",
+    "betternether:nether_mushroom_forest",
+    "betternether:nether_jungle",
+    "betternether:wart_forest",
+    "betternether:bone_reef",
+    "betternether:nether_swampland_terraces",
+    "betternether:poor_nether_grasslands",
+    "betternether:old_warped_woods",
+    "betternether:nether_swampland",
+    "betternether:old_swampland"
+  ]
+}

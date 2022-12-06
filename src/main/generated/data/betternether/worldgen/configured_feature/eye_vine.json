@@ -1,0 +1,50 @@
+{
+  "type": "minecraft:block_column",
+  "config": {
+    "allowed_placement": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:air"
+    },
+    "direction": "down",
+    "layers": [
+      {
+        "height": {
+          "type": "minecraft:clamped_normal",
+          "value": {
+            "deviation": 3.0,
+            "max_inclusive": 16,
+            "mean": 6.0,
+            "min_inclusive": 3
+          }
+        },
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "betternether:eye_vine"
+          }
+        }
+      },
+      {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "betternether:eyeball"
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "betternether:eyeball_small"
+              },
+              "weight": 1
+            }
+          ]
+        }
+      }
+    ],
+    "prioritize_tip": true
+  }
+}

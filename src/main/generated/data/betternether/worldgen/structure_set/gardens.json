@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 13333015,
+    "separation": 16,
+    "spacing": 50
+  },
+  "structures": [
+    {
+      "structure": "betternether:gardens",
+      "weight": 1
+    }
+  ]
+}

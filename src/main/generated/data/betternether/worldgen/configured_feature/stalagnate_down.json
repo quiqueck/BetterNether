@@ -1,0 +1,22 @@
+{
+  "type": "bclib:pillar",
+  "config": {
+    "allowed_placement": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:air"
+    },
+    "direction": "down",
+    "max_height": 64,
+    "min_height": 3,
+    "state": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "betternether:stalagnate_trunk",
+        "Properties": {
+          "shape": "middle"
+        }
+      }
+    },
+    "transform": "triple_shape_fill"
+  }
+}

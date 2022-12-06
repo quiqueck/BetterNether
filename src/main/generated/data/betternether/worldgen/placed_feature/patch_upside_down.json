@@ -1,0 +1,39 @@
+{
+  "feature": "betternether:patch_upside_down",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 50
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 4
+        },
+        "min_inclusive": {
+          "above_bottom": 4
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "bclib:solid_in_dir",
+      "dir": [
+        "north",
+        "east",
+        "west",
+        "south"
+      ],
+      "dist": 16,
+      "offset_in_dir": 1,
+      "random_select": false
+    }
+  ]
+}

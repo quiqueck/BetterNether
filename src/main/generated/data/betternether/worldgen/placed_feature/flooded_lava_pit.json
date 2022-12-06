@@ -1,0 +1,22 @@
+{
+  "feature": "betternether:flooded_lava_pit",
+  "placement": [
+    {
+      "type": "bclib:all"
+    },
+    {
+      "type": "bclib:on_every_layer"
+    },
+    {
+      "type": "bclib:offset",
+      "blocks": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

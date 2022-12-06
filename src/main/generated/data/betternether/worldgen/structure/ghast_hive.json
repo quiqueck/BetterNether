@@ -1,0 +1,14 @@
+{
+  "type": "betternether:ghast_hive",
+  "biomes": "#betternether:has_structure/ghast_hive",
+  "configs": [
+    {
+      "chance": 1.0,
+      "location": "betternether:ghast_hive",
+      "offset_y": 0,
+      "placement": "ceil"
+    }
+  ],
+  "spawn_overrides": {},
+  "step": "surface_structures"
+}

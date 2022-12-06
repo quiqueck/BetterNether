@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "betternether:soul_vein"
+                },
+                "weight": 150
+              },
+              {
+                "data": {
+                  "Name": "betternether:soul_grass"
+                },
+                "weight": 200
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        },
+        {
+          "type": "bclib:is",
+          "offset": [
+            0,
+            -1,
+            0
+          ],
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "c:soul_ground"
+          }
+        }
+      ]
+    },
+    "tries": 9,
+    "xz_spread": 3,
+    "y_spread": 1
+  }
+}

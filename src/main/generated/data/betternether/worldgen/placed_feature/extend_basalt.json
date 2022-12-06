@@ -1,0 +1,24 @@
+{
+  "feature": "betternether:extend_basalt",
+  "placement": [
+    {
+      "type": "bclib:offset",
+      "blocks": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "type": "bclib:extend",
+      "direction": "down",
+      "length": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 3,
+          "min_inclusive": 1
+        }
+      }
+    }
+  ]
+}

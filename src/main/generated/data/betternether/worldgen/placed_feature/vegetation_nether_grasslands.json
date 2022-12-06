@@ -1,0 +1,38 @@
+{
+  "feature": "betternether:vegetation_nether_grasslands",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 12
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "bclib:on_every_layer",
+      "min": 4
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      }
+    },
+    {
+      "type": "bclib:is",
+      "offset": [
+        0,
+        -1,
+        0
+      ],
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "c:nether_terrain"
+      }
+    }
+  ]
+}

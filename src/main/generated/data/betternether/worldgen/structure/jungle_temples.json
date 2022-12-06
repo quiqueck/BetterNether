@@ -1,0 +1,26 @@
+{
+  "type": "betternether:jungle_temples",
+  "biomes": "#betternether:has_structure/nether_decorations",
+  "configs": [
+    {
+      "chance": 1.0,
+      "location": "betternether:ruined_temple",
+      "offset_y": -4,
+      "placement": "ceil"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:jungle_temple_altar",
+      "offset_y": -2,
+      "placement": "ceil"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:jungle_temple_2",
+      "offset_y": -2,
+      "placement": "ceil"
+    }
+  ],
+  "spawn_overrides": {},
+  "step": "surface_structures"
+}

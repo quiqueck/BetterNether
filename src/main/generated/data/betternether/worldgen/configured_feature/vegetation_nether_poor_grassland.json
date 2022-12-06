@@ -1,0 +1,435 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": {
+        "type": "minecraft:random_patch",
+        "config": {
+          "feature": {
+            "feature": {
+              "type": "minecraft:simple_block",
+              "config": {
+                "to_place": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "betternether:wart_seed",
+                    "Properties": {
+                      "facing": "up"
+                    }
+                  }
+                }
+              }
+            },
+            "placement": [
+              {
+                "type": "minecraft:block_predicate_filter",
+                "predicate": {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:air"
+                }
+              },
+              {
+                "type": "bclib:is",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "predicate": {
+                  "type": "minecraft:matching_block_tag",
+                  "tag": "c:nether_terrain"
+                }
+              }
+            ]
+          },
+          "tries": 96,
+          "xz_spread": 7,
+          "y_spread": 3
+        }
+      },
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.07017544,
+        "feature": {
+          "feature": {
+            "type": "minecraft:random_patch",
+            "config": {
+              "feature": {
+                "feature": {
+                  "type": "minecraft:simple_block",
+                  "config": {
+                    "to_place": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "minecraft:nether_wart",
+                            "Properties": {
+                              "age": "0"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "minecraft:nether_wart",
+                            "Properties": {
+                              "age": "1"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "minecraft:nether_wart",
+                            "Properties": {
+                              "age": "2"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "minecraft:nether_wart",
+                            "Properties": {
+                              "age": "3"
+                            }
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  }
+                },
+                "placement": [
+                  {
+                    "type": "minecraft:block_predicate_filter",
+                    "predicate": {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air"
+                    }
+                  },
+                  {
+                    "type": "bclib:is",
+                    "offset": [
+                      0,
+                      -1,
+                      0
+                    ],
+                    "predicate": {
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "c:nether_terrain"
+                    }
+                  }
+                ]
+              },
+              "tries": 96,
+              "xz_spread": 7,
+              "y_spread": 3
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.21052632,
+        "feature": {
+          "feature": {
+            "type": "minecraft:random_patch",
+            "config": {
+              "feature": {
+                "feature": {
+                  "type": "minecraft:simple_block",
+                  "config": {
+                    "to_place": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "betternether:magma_flower",
+                            "Properties": {
+                              "age": "0"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:magma_flower",
+                            "Properties": {
+                              "age": "1"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:magma_flower",
+                            "Properties": {
+                              "age": "2"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:magma_flower",
+                            "Properties": {
+                              "age": "3"
+                            }
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  }
+                },
+                "placement": [
+                  {
+                    "type": "minecraft:block_predicate_filter",
+                    "predicate": {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air"
+                    }
+                  },
+                  {
+                    "type": "bclib:is",
+                    "offset": [
+                      0,
+                      -1,
+                      0
+                    ],
+                    "predicate": {
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "c:nether_terrain"
+                    }
+                  }
+                ]
+              },
+              "tries": 96,
+              "xz_spread": 7,
+              "y_spread": 3
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.3508772,
+        "feature": {
+          "feature": {
+            "type": "minecraft:random_patch",
+            "config": {
+              "feature": {
+                "feature": {
+                  "type": "minecraft:simple_block",
+                  "config": {
+                    "to_place": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "betternether:nether_grass"
+                      }
+                    }
+                  }
+                },
+                "placement": [
+                  {
+                    "type": "minecraft:block_predicate_filter",
+                    "predicate": {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air"
+                    }
+                  },
+                  {
+                    "type": "bclib:is",
+                    "offset": [
+                      0,
+                      -1,
+                      0
+                    ],
+                    "predicate": {
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "c:nether_terrain"
+                    }
+                  }
+                ]
+              },
+              "tries": 96,
+              "xz_spread": 7,
+              "y_spread": 3
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.14035088,
+        "feature": {
+          "feature": {
+            "type": "minecraft:random_patch",
+            "config": {
+              "feature": {
+                "feature": {
+                  "type": "minecraft:simple_block",
+                  "config": {
+                    "to_place": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "betternether:ink_bush",
+                            "Properties": {
+                              "age": "0"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:ink_bush",
+                            "Properties": {
+                              "age": "1"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:ink_bush",
+                            "Properties": {
+                              "age": "2"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:ink_bush",
+                            "Properties": {
+                              "age": "3"
+                            }
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  }
+                },
+                "placement": [
+                  {
+                    "type": "minecraft:block_predicate_filter",
+                    "predicate": {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air"
+                    }
+                  },
+                  {
+                    "type": "bclib:is",
+                    "offset": [
+                      0,
+                      -1,
+                      0
+                    ],
+                    "predicate": {
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "c:nether_terrain"
+                    }
+                  }
+                ]
+              },
+              "tries": 96,
+              "xz_spread": 7,
+              "y_spread": 3
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.0877193,
+        "feature": {
+          "feature": {
+            "type": "minecraft:random_patch",
+            "config": {
+              "feature": {
+                "feature": {
+                  "type": "minecraft:simple_block",
+                  "config": {
+                    "to_place": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "betternether:black_apple",
+                            "Properties": {
+                              "age": "0"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:black_apple",
+                            "Properties": {
+                              "age": "1"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:black_apple",
+                            "Properties": {
+                              "age": "2"
+                            }
+                          },
+                          "weight": 1
+                        },
+                        {
+                          "data": {
+                            "Name": "betternether:black_apple",
+                            "Properties": {
+                              "age": "3"
+                            }
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  }
+                },
+                "placement": [
+                  {
+                    "type": "minecraft:block_predicate_filter",
+                    "predicate": {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air"
+                    }
+                  },
+                  {
+                    "type": "bclib:is",
+                    "offset": [
+                      0,
+                      -1,
+                      0
+                    ],
+                    "predicate": {
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "c:nether_terrain"
+                    }
+                  }
+                ]
+              },
+              "tries": 96,
+              "xz_spread": 7,
+              "y_spread": 3
+            }
+          },
+          "placement": []
+        }
+      }
+    ]
+  }
+}

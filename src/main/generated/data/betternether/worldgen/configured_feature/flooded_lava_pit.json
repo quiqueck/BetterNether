@@ -1,0 +1,10 @@
+{
+  "type": "bclib:sequence",
+  "config": {
+    "features": [
+      "betternether:extend_basalt",
+      "betternether:flooded_lava_pit_surface",
+      "betternether:mark"
+    ]
+  }
+}

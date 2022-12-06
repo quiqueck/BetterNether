@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": "betternether:soul_lily",
+    "tries": 96,
+    "xz_spread": 3,
+    "y_spread": 3
+  }
+}

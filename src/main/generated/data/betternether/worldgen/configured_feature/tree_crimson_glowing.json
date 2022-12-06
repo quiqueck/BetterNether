@@ -1,0 +1,31 @@
+{
+  "type": "bclib:template",
+  "config": {
+    "structures": [
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/crimson_glow_tree_01",
+        "offset_y": 0,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/crimson_glow_tree_02",
+        "offset_y": 0,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/crimson_glow_tree_03",
+        "offset_y": 0,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/crimson_glow_tree_04",
+        "offset_y": 0,
+        "placement": "floor"
+      }
+    ]
+  }
+}

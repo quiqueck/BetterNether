@@ -1,0 +1,39 @@
+{
+  "feature": "betternether:wart_cap",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 32
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 10
+        },
+        "min_inclusive": {
+          "above_bottom": 10
+        }
+      }
+    },
+    {
+      "type": "bclib:solid_in_dir",
+      "dir": [
+        "north",
+        "east",
+        "west",
+        "south"
+      ],
+      "dist": 12,
+      "offset_in_dir": 0,
+      "random_select": false
+    }
+  ]
+}

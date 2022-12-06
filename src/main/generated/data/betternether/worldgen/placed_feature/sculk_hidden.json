@@ -1,0 +1,43 @@
+{
+  "feature": "betternether:sculk_hidden",
+  "placement": [
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 8
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 4
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      }
+    },
+    {
+      "type": "bclib:is",
+      "offset": [
+        0,
+        -1,
+        0
+      ],
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:sculk"
+      }
+    },
+    {
+      "type": "bclib:offset",
+      "blocks": [
+        0,
+        -1,
+        0
+      ]
+    }
+  ]
+}

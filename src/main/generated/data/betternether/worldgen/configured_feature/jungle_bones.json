@@ -1,0 +1,25 @@
+{
+  "type": "bclib:template",
+  "config": {
+    "structures": [
+      {
+        "chance": 1.0,
+        "location": "betternether:jungle_bones_3",
+        "offset_y": 0,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:jungle_bones_2",
+        "offset_y": 0,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:jungle_bones_1",
+        "offset_y": 0,
+        "placement": "floor"
+      }
+    ]
+  }
+}

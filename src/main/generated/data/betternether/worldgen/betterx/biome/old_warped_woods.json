@@ -1,0 +1,22 @@
+{
+  "type": "betternether:biome",
+  "parent": "minecraft:warped_forest",
+  "biome": "betternether:old_warped_woods",
+  "edgeSize": 0,
+  "fogDensity": 1.0,
+  "genChance": 1.0,
+  "intended_for": "BCL_NETHER",
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": 0.55,
+      "offset": 0.375,
+      "temperature": 0.0,
+      "weirdness": 0.0
+    }
+  ],
+  "terrainHeight": 0.1,
+  "vertical": false
+}

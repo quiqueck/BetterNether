@@ -1,0 +1,24 @@
+{
+  "feature": "betternether:soul_lily",
+  "placement": [
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      }
+    },
+    {
+      "type": "bclib:is",
+      "offset": [
+        0,
+        -1,
+        0
+      ],
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "c:nether_terrain"
+      }
+    }
+  ]
+}

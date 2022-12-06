@@ -1,0 +1,20 @@
+{
+  "type": "betternether:portals",
+  "biomes": "#betternether:has_structure/nether_decorations",
+  "configs": [
+    {
+      "chance": 1.0,
+      "location": "betternether:portal_01",
+      "offset_y": -4,
+      "placement": "floor"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:portal_02",
+      "offset_y": -3,
+      "placement": "floor"
+    }
+  ],
+  "spawn_overrides": {},
+  "step": "surface_structures"
+}

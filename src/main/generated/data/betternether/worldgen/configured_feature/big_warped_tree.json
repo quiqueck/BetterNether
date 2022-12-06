@@ -1,0 +1,37 @@
+{
+  "type": "bclib:template",
+  "config": {
+    "structures": [
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/warped_tree_01",
+        "offset_y": -1,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/warped_tree_02",
+        "offset_y": -1,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/warped_tree_03",
+        "offset_y": -1,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/warped_tree_04",
+        "offset_y": -1,
+        "placement": "floor"
+      },
+      {
+        "chance": 1.0,
+        "location": "betternether:trees/warped_tree_05",
+        "offset_y": -3,
+        "placement": "floor"
+      }
+    ]
+  }
+}

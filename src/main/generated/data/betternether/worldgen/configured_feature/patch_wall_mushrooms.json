@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "bclib:place_block",
+        "config": {
+          "dir": [
+            "north",
+            "east",
+            "west",
+            "south"
+          ],
+          "entries": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "betternether:wall_mushroom_red",
+                  "Properties": {
+                    "facing": "north"
+                  }
+                },
+                "weight": 40
+              },
+              {
+                "data": {
+                  "Name": "betternether:wall_mushroom_brown",
+                  "Properties": {
+                    "facing": "north"
+                  }
+                },
+                "weight": 35
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:solid"
+          }
+        }
+      ]
+    },
+    "tries": 120,
+    "xz_spread": 4,
+    "y_spread": 7
+  }
+}

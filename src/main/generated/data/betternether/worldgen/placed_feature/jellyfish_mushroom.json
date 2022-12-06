@@ -1,0 +1,33 @@
+{
+  "feature": "betternether:jellyfish_mushroom",
+  "placement": [
+    {
+      "type": "bclib:solid_in_dir",
+      "dir": [
+        "down"
+      ],
+      "dist": 4,
+      "offset_in_dir": 0,
+      "random_select": false
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      }
+    },
+    {
+      "type": "bclib:is",
+      "offset": [
+        0,
+        -1,
+        0
+      ],
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "minecraft:nylium"
+      }
+    }
+  ]
+}

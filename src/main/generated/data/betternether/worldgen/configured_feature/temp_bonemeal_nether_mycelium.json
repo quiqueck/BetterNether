@@ -1,0 +1,131 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "betternether:gray_mold"
+                },
+                "weight": 200
+              },
+              {
+                "data": {
+                  "Name": "betternether:red_mold"
+                },
+                "weight": 180
+              },
+              {
+                "data": {
+                  "Name": "betternether:orange_mushroom",
+                  "Properties": {
+                    "age": "0"
+                  }
+                },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "betternether:orange_mushroom",
+                  "Properties": {
+                    "age": "1"
+                  }
+                },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "betternether:orange_mushroom",
+                  "Properties": {
+                    "age": "2"
+                  }
+                },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "betternether:orange_mushroom",
+                  "Properties": {
+                    "age": "3"
+                  }
+                },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "minecraft:red_mushroom"
+                },
+                "weight": 60
+              },
+              {
+                "data": {
+                  "Name": "minecraft:brown_mushroom"
+                },
+                "weight": 60
+              },
+              {
+                "data": {
+                  "Name": "minecraft:crimson_fungus"
+                },
+                "weight": 80
+              },
+              {
+                "data": {
+                  "Name": "minecraft:warped_fungus"
+                },
+                "weight": 80
+              },
+              {
+                "data": {
+                  "Name": "betternether:sepia_bone_grass"
+                },
+                "weight": 30
+              },
+              {
+                "data": {
+                  "Name": "betternether:bone_grass"
+                },
+                "weight": 30
+              },
+              {
+                "data": {
+                  "Name": "betternether:jungle_plant"
+                },
+                "weight": 30
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        },
+        {
+          "type": "bclib:is",
+          "offset": [
+            0,
+            -1,
+            0
+          ],
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "c:mycelium"
+          }
+        }
+      ]
+    },
+    "tries": 9,
+    "xz_spread": 3,
+    "y_spread": 1
+  }
+}

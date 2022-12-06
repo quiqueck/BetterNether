@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": "betternether:lucis",
+    "tries": 120,
+    "xz_spread": 12,
+    "y_spread": 10
+  }
+}

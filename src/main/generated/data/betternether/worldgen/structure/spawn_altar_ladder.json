@@ -1,0 +1,14 @@
+{
+  "type": "betternether:spawn_altar_ladder",
+  "biomes": "#betternether:has_structure/nether_decorations",
+  "configs": [
+    {
+      "chance": 1.0,
+      "location": "betternether:spawn_altar_ladder",
+      "offset_y": -5,
+      "placement": "floor"
+    }
+  ],
+  "spawn_overrides": {},
+  "step": "surface_structures"
+}

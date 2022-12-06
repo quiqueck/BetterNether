@@ -1,0 +1,19 @@
+{
+  "feature": "betternether:patch_basalt_stalactite",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 8
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "bclib:under_every_layer",
+      "min": 4
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

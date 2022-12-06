@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:nether_forest_vegetation",
+  "config": {
+    "spread_height": 1,
+    "spread_width": 3,
+    "state_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "betternether:bone_grass"
+          },
+          "weight": 180
+        },
+        {
+          "data": {
+            "Name": "betternether:feather_fern",
+            "Properties": {
+              "age": "0"
+            }
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "betternether:feather_fern",
+            "Properties": {
+              "age": "1"
+            }
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "betternether:feather_fern",
+            "Properties": {
+              "age": "2"
+            }
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "betternether:feather_fern",
+            "Properties": {
+              "age": "3"
+            }
+          },
+          "weight": 5
+        }
+      ]
+    }
+  }
+}

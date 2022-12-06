@@ -1,0 +1,22 @@
+{
+  "type": "betternether:biome",
+  "parent": "minecraft:crimson_forest",
+  "biome": "betternether:crimson_pinewood",
+  "edgeSize": 0,
+  "fogDensity": 1.0,
+  "genChance": 0.3,
+  "intended_for": "BCL_NETHER",
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": 0.1,
+      "offset": 0.0,
+      "temperature": 0.35,
+      "weirdness": 0.0
+    }
+  ],
+  "terrainHeight": 0.1,
+  "vertical": false
+}

@@ -1,0 +1,56 @@
+{
+  "type": "betternether:altars",
+  "biomes": "#betternether:has_structure/nether_decorations",
+  "configs": [
+    {
+      "chance": 1.0,
+      "location": "betternether:altar_01",
+      "offset_y": -2,
+      "placement": "floor"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:altar_02",
+      "offset_y": -4,
+      "placement": "floor"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:altar_03",
+      "offset_y": -3,
+      "placement": "floor"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:altar_04",
+      "offset_y": -3,
+      "placement": "floor"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:altar_05",
+      "offset_y": -2,
+      "placement": "floor"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:altar_06",
+      "offset_y": -2,
+      "placement": "floor"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:altar_07",
+      "offset_y": -2,
+      "placement": "floor"
+    },
+    {
+      "chance": 1.0,
+      "location": "betternether:altar_08",
+      "offset_y": -2,
+      "placement": "floor"
+    }
+  ],
+  "spawn_overrides": {},
+  "step": "surface_structures"
+}

@@ -1,0 +1,57 @@
+{
+  "type": "minecraft:block_column",
+  "config": {
+    "allowed_placement": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:air"
+    },
+    "direction": "up",
+    "layers": [
+      {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "betternether:giant_mold",
+            "Properties": {
+              "shape": "bottom"
+            }
+          }
+        }
+      },
+      {
+        "height": {
+          "type": "minecraft:clamped_normal",
+          "value": {
+            "deviation": 1.3,
+            "max_inclusive": 8,
+            "mean": 5.0,
+            "min_inclusive": 3
+          }
+        },
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "betternether:giant_mold",
+            "Properties": {
+              "shape": "middle"
+            }
+          }
+        }
+      },
+      {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "betternether:giant_mold",
+            "Properties": {
+              "shape": "top"
+            }
+          }
+        }
+      }
+    ],
+    "prioritize_tip": false
+  }
+}

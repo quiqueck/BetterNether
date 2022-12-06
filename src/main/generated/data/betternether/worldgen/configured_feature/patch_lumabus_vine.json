@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": "betternether:lumabus_vine",
+    "tries": 48,
+    "xz_spread": 5,
+    "y_spread": 3
+  }
+}

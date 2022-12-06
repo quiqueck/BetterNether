@@ -1,0 +1,43 @@
+{
+  "feature": "betternether:lava_pit",
+  "placement": [
+    {
+      "type": "bclib:all"
+    },
+    {
+      "type": "bclib:on_every_layer"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "bclib:offset",
+      "blocks": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "type": "bclib:is_basin",
+      "predicate": {
+        "type": "minecraft:any_of",
+        "predicates": [
+          {
+            "type": "minecraft:any_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "tag": "c:terrain"
+              },
+              {
+                "type": "minecraft:matching_fluids",
+                "fluids": "minecraft:lava"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

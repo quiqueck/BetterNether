@@ -1,0 +1,57 @@
+{
+  "type": "minecraft:block_column",
+  "config": {
+    "allowed_placement": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:air"
+    },
+    "direction": "down",
+    "layers": [
+      {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "betternether:golden_lumabus_vine",
+            "Properties": {
+              "shape": "top"
+            }
+          }
+        }
+      },
+      {
+        "height": {
+          "type": "minecraft:clamped_normal",
+          "value": {
+            "deviation": 3.3,
+            "max_inclusive": 23,
+            "mean": 12.0,
+            "min_inclusive": 2
+          }
+        },
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "betternether:golden_lumabus_vine",
+            "Properties": {
+              "shape": "middle"
+            }
+          }
+        }
+      },
+      {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "betternether:golden_lumabus_vine",
+            "Properties": {
+              "shape": "bottom"
+            }
+          }
+        }
+      }
+    ],
+    "prioritize_tip": true
+  }
+}

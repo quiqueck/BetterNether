@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:nether_forest_vegetation",
+  "config": {
+    "spread_height": 4,
+    "spread_width": 8,
+    "state_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:crimson_roots"
+          },
+          "weight": 120
+        },
+        {
+          "data": {
+            "Name": "minecraft:crimson_fungus"
+          },
+          "weight": 80
+        },
+        {
+          "data": {
+            "Name": "betternether:wart_seed",
+            "Properties": {
+              "facing": "up"
+            }
+          },
+          "weight": 80
+        }
+      ]
+    }
+  }
+}

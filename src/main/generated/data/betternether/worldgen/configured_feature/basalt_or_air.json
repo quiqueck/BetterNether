@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:basalt",
+            "Properties": {
+              "axis": "y"
+            }
+          },
+          "weight": 15
+        },
+        {
+          "data": {
+            "Name": "minecraft:air"
+          },
+          "weight": 15
+        }
+      ]
+    }
+  }
+}

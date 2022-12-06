@@ -1,0 +1,30 @@
+{
+  "feature": "betternether:soul_sand",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "bclib:all"
+    },
+    {
+      "type": "bclib:on_every_layer",
+      "min": 4
+    },
+    {
+      "type": "bclib:offset",
+      "blocks": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "betternether:soul_sandstone"
+      }
+    }
+  ]
+}

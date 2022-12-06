@@ -26,9 +26,6 @@
     "client": [
       "org.betterx.betternether.client.BetterNetherClient"
     ],
-    "emi": [
-      "org.betterx.betternether.integrations.emi.EMIPlugin"
-    ],
     "fabric-datagen": [
       "org.betterx.datagen.betternether.BetterNetherDatagen"
     ]
@@ -39,10 +36,10 @@
     "betternether.mixins.client.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.10",
-    "fabric": ">=0.65.1",
+    "fabricloader": ">=0.14.11",
+    "fabric": ">=0.68.1",
     "minecraft": [
-      "1.19.3-rc.1"
+      "1.19.3-rc.3"
     ],
     "bclib": "2.2.x"
   },

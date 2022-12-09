@@ -28,6 +28,9 @@
     ],
     "fabric-datagen": [
       "org.betterx.datagen.betternether.BetterNetherDatagen"
+    ],
+    "emi": [
+      "org.betterx.betternether.integrations.emi.EMIPlugin"
     ]
   },
   "accessWidener": "betternether.accesswidener",
@@ -39,7 +42,7 @@
     "fabricloader": ">=0.14.11",
     "fabric": ">=0.68.1",
     "minecraft": [
-      "1.19.3-rc.3"
+      "1.19.3"
     ],
     "bclib": "2.2.x"
   },

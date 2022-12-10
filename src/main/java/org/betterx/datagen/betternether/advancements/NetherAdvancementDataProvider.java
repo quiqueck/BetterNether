@@ -192,24 +192,24 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .addWoodCriterion(NetherBlocks.MAT_MUSHROOM_FIR)
                 .addWoodCriterion(NetherBlocks.MAT_ANCHOR_TREE)
                 .addWoodCriterion(NetherBlocks.MAT_NETHER_SAKURA)
-                .addInventoryChangedCriterion(
-                        "nether_reed",
+                .addInventoryChangedAnyCriterion(
+                        "got_nether_reed",
                         NetherBlocks.MAT_REED.getStem(),
                         NetherBlocks.MAT_REED.getPlanks()
                 )
-                .addInventoryChangedCriterion(
-                        "nether_mushroom",
+                .addInventoryChangedAnyCriterion(
+                        "got_nether_mushroom",
                         NetherBlocks.MAT_NETHER_MUSHROOM.getStem(),
                         NetherBlocks.MAT_NETHER_MUSHROOM.getPlanks()
                 )
-                .addInventoryChangedCriterion(
-                        "crimson",
+                .addInventoryChangedAnyCriterion(
+                        "got_crimson",
                         Blocks.CRIMSON_STEM,
                         Blocks.CRIMSON_HYPHAE,
                         Blocks.CRIMSON_PLANKS
                 )
-                .addInventoryChangedCriterion(
-                        "warped",
+                .addInventoryChangedAnyCriterion(
+                        "got_warped",
                         Blocks.WARPED_STEM,
                         Blocks.WARPED_HYPHAE,
                         Blocks.WARPED_PLANKS

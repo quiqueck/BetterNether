@@ -1,65 +1,41 @@
 {
   "parent": "betternether:root",
   "criteria": {
-    "anchor_tree": {
+    "got_anchor_tree": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:anchor_tree_log"
-            ]
-          },
-          {
-            "items": [
+              "betternether:anchor_tree_log",
+              "betternether:anchor_tree_planks",
               "betternether:anchor_tree_bark"
             ]
-          },
-          {
-            "items": [
-              "betternether:anchor_tree_planks"
-            ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "crimson": {
+    "got_crimson": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:crimson_stem"
-            ]
-          },
-          {
-            "items": [
+              "minecraft:crimson_stem",
+              "minecraft:crimson_planks",
               "minecraft:crimson_hyphae"
             ]
-          },
-          {
-            "items": [
-              "minecraft:crimson_planks"
-            ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "mushroom_fir": {
+    "got_mushroom_fir": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:mushroom_fir_log"
-            ]
-          },
-          {
-            "items": [
-              "betternether:mushroom_fir_bark"
-            ]
-          },
-          {
-            "items": [
+              "betternether:mushroom_fir_log",
+              "betternether:mushroom_fir_bark",
               "betternether:mushroom_fir_planks"
             ]
           }
@@ -67,16 +43,12 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_mushroom": {
+    "got_nether_mushroom": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:nether_mushroom_stem"
-            ]
-          },
-          {
-            "items": [
+              "betternether:nether_mushroom_stem",
               "betternether:nether_mushroom_planks"
             ]
           }
@@ -84,16 +56,12 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_reed": {
+    "got_nether_reed": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:nether_reed_stem"
-            ]
-          },
-          {
-            "items": [
+              "betternether:nether_reed_stem",
               "betternether:nether_reed_planks"
             ]
           }
@@ -101,132 +69,84 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_sakura": {
+    "got_nether_sakura": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:nether_sakura_log"
-            ]
-          },
-          {
-            "items": [
+              "betternether:nether_sakura_log",
+              "betternether:nether_sakura_planks",
               "betternether:nether_sakura_bark"
             ]
-          },
-          {
-            "items": [
-              "betternether:nether_sakura_planks"
-            ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "rubeus": {
+    "got_rubeus": {
       "conditions": {
         "items": [
           {
             "items": [
+              "betternether:rubeus_bark",
+              "betternether:rubeus_planks",
               "betternether:rubeus_log"
             ]
-          },
-          {
-            "items": [
-              "betternether:rubeus_bark"
-            ]
-          },
-          {
-            "items": [
-              "betternether:rubeus_planks"
-            ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "stalagnate": {
+    "got_stalagnate": {
       "conditions": {
         "items": [
           {
             "items": [
+              "betternether:stalagnate_bark",
+              "betternether:stalagnate_planks",
               "betternether:stalagnate_log"
             ]
-          },
-          {
-            "items": [
-              "betternether:stalagnate_bark"
-            ]
-          },
-          {
-            "items": [
-              "betternether:stalagnate_planks"
-            ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "warped": {
+    "got_warped": {
       "conditions": {
         "items": [
           {
             "items": [
+              "minecraft:warped_planks",
+              "minecraft:warped_hyphae",
               "minecraft:warped_stem"
             ]
-          },
-          {
-            "items": [
-              "minecraft:warped_hyphae"
-            ]
-          },
-          {
-            "items": [
-              "minecraft:warped_planks"
-            ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "wart": {
+    "got_wart": {
       "conditions": {
         "items": [
           {
             "items": [
+              "betternether:wart_planks",
+              "betternether:wart_bark",
               "betternether:wart_log"
             ]
-          },
-          {
-            "items": [
-              "betternether:wart_bark"
-            ]
-          },
-          {
-            "items": [
-              "betternether:wart_planks"
-            ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "willow": {
+    "got_willow": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:willow_log"
-            ]
-          },
-          {
-            "items": [
+              "betternether:willow_planks",
+              "betternether:willow_log",
               "betternether:willow_bark"
-            ]
-          },
-          {
-            "items": [
-              "betternether:willow_planks"
             ]
           }
         ]
@@ -251,37 +171,37 @@
   },
   "requirements": [
     [
-      "willow"
+      "got_willow"
     ],
     [
-      "stalagnate"
+      "got_stalagnate"
     ],
     [
-      "rubeus"
+      "got_rubeus"
     ],
     [
-      "wart"
+      "got_wart"
     ],
     [
-      "mushroom_fir"
+      "got_mushroom_fir"
     ],
     [
-      "anchor_tree"
+      "got_anchor_tree"
     ],
     [
-      "nether_sakura"
+      "got_nether_sakura"
     ],
     [
-      "nether_reed"
+      "got_nether_reed"
     ],
     [
-      "nether_mushroom"
+      "got_nether_mushroom"
     ],
     [
-      "crimson"
+      "got_crimson"
     ],
     [
-      "warped"
+      "got_warped"
     ]
   ]
 }

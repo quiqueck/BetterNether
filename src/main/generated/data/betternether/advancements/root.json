@@ -1,10 +1,16 @@
 {
   "criteria": {
-    "entered_nether": {
+    "welcome": {
       "conditions": {
-        "to": "minecraft:the_nether"
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        ]
       },
-      "trigger": "minecraft:changed_dimension"
+      "trigger": "minecraft:location"
     }
   },
   "display": {
@@ -18,14 +24,14 @@
     "icon": {
       "item": "betternether:nether_grass"
     },
-    "show_toast": false,
+    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.root.title"
     }
   },
   "requirements": [
     [
-      "entered_nether"
+      "welcome"
     ]
   ]
 }

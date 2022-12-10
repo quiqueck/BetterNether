@@ -1,5 +1,5 @@
 {
-  "parent": "betternether:root",
+  "parent": "betternether:enter_nether",
   "criteria": {
     "got_anchor_tree": {
       "conditions": {

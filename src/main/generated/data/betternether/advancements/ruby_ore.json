@@ -1,5 +1,5 @@
 {
-  "parent": "betternether:root",
+  "parent": "betternether:enter_nether",
   "criteria": {
     "ruby_ore": {
       "conditions": {

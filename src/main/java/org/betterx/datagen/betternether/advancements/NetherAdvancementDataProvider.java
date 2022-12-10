@@ -13,6 +13,8 @@ import org.betterx.betternether.world.NetherBiomeBuilder;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.ChangeDimensionTrigger;
+import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -32,9 +34,20 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .create(BetterNether.makeID("root"))
                 .startDisplay(NetherBlocks.NETHER_GRASS)
                 .frame(FrameType.TASK)
-                .hideToast()
                 .hideFromChat()
                 .background(new ResourceLocation("textures/gui/advancements/backgrounds/nether.png"))
+                .endDisplay()
+                .addCriterion(
+                        "welcome",
+                        PlayerTrigger.TriggerInstance.located(LocationPredicate.ANY)
+                )
+                .requirements(RequirementsStrategy.OR)
+                .build();
+
+        ResourceLocation enterNether = AdvancementManager.Builder
+                .create(BetterNether.makeID("enter_nether"))
+                .parent(root)
+                .startDisplay(NetherBlocks.JUNGLE_MOSS)
                 .endDisplay()
                 .addCriterion(
                         "entered_nether",
@@ -98,7 +111,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
 
         ResourceLocation city = AdvancementManager.Builder
                 .create(BetterNether.makeID("city"))
-                .parent(root)
+                .parent(enterNether)
                 .startDisplay(NetherBlocks.CINCINNASITE_CARVED)
                 .endDisplay()
                 .addAtStructureCriterion("ncity", NetherStructures.CITY_STRUCTURE)
@@ -108,7 +121,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
 
         ResourceLocation rubyOre = AdvancementManager.Builder
                 .create(BetterNether.makeID("ruby_ore"))
-                .parent(root)
+                .parent(enterNether)
                 .startDisplay(NetherItems.NETHER_RUBY)
                 .endDisplay()
                 .addInventoryChangedCriterion("ruby_ore", NetherItems.NETHER_RUBY)
@@ -135,7 +148,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
 
         ResourceLocation cincinnasiteOre = AdvancementManager.Builder
                 .create(BetterNether.makeID("cincinnasite_ore"))
-                .parent(root)
+                .parent(enterNether)
                 .startDisplay(NetherItems.CINCINNASITE_INGOT)
                 .endDisplay()
                 .addInventoryChangedCriterion("cincinnasite_ore", NetherItems.CINCINNASITE_INGOT)
@@ -182,7 +195,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
 
         ResourceLocation netherWood = AdvancementManager.Builder
                 .create(BetterNether.makeID("nether_wood"))
-                .parent(root)
+                .parent(enterNether)
                 .startDisplay(NetherBlocks.MAT_WILLOW.getLog())
                 .endDisplay()
                 .addWoodCriterion(NetherBlocks.MAT_WILLOW)

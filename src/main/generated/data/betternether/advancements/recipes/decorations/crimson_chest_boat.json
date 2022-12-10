@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_437_crimson_boat": {
+    "has_443_crimson_boat": {
       "conditions": {
         "items": [
           {
@@ -48,7 +48,7 @@
   "requirements": [
     [
       "has_tag_chest",
-      "has_437_crimson_boat",
+      "has_443_crimson_boat",
       "has_the_recipe"
     ]
   ],

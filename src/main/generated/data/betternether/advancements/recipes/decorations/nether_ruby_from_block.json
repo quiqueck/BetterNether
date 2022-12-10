@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_446_nether_ruby_block": {
+    "has_452_nether_ruby_block": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_446_nether_ruby_block",
+      "has_452_nether_ruby_block",
       "has_the_recipe"
     ]
   ],

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_464_stalagnate_bowl": {
+    "has_470_stalagnate_bowl": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_465_agave_leaf": {
+    "has_471_agave_leaf": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_466_black_apple": {
+    "has_472_black_apple": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_467_hook_mushroom_cooked": {
+    "has_473_hook_mushroom_cooked": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_468_nether_wart": {
+    "has_474_nether_wart": {
       "conditions": {
         "items": [
           {
@@ -85,11 +85,11 @@
   },
   "requirements": [
     [
-      "has_464_stalagnate_bowl",
-      "has_465_agave_leaf",
-      "has_466_black_apple",
-      "has_467_hook_mushroom_cooked",
-      "has_468_nether_wart",
+      "has_470_stalagnate_bowl",
+      "has_471_agave_leaf",
+      "has_472_black_apple",
+      "has_473_hook_mushroom_cooked",
+      "has_474_nether_wart",
       "has_the_recipe"
     ]
   ],

@@ -404,76 +404,76 @@
   },
   "requirements": [
     [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:sulfuric_bone_reef"
-    ],
-    [
-      "betternether:bone_reef"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:nether_mushroom_forest"
-    ],
-    [
-      "betternether:old_swampland"
-    ],
-    [
-      "betternether:soul_plain"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
       "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:gravel_desert"
-    ],
-    [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:nether_swampland"
     ],
     [
       "betternether:nether_swampland_terraces"
     ],
     [
-      "betternether:wart_forest"
+      "betternether:old_fungiwoods"
     ],
     [
-      "betternether:upside_down_forest_cleared"
-    ],
-    [
-      "betternether:old_warped_woods"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
+      "betternether:soul_plain"
     ],
     [
       "bclib:the_purple"
     ],
     [
-      "betternether:nether_jungle"
+      "betternether:gravel_desert"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
     ],
     [
       "betternether:magma_land"
     ],
     [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:nether_mushroom_forest"
+    ],
+    [
+      "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:old_warped_woods"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
       "betternether:upside_down_forest"
     ],
     [
-      "bclib:the_orange"
+      "betternether:old_swampland"
     ],
     [
-      "betternether:old_fungiwoods"
+      "betternether:nether_swampland"
+    ],
+    [
+      "betternether:sulfuric_bone_reef"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:nether_jungle"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "bclib:the_orange"
     ]
   ],
   "rewards": {

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_533_obsidian_bricks": {
+    "has_539_obsidian_bricks": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_533_obsidian_bricks",
+      "has_539_obsidian_bricks",
       "has_the_recipe"
     ]
   ],

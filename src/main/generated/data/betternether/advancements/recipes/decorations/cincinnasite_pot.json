@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_505_cincinnasite_ingot": {
+    "has_511_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_506_soul_sand": {
+    "has_512_soul_sand": {
       "conditions": {
         "items": [
           {
@@ -49,8 +49,8 @@
   },
   "requirements": [
     [
-      "has_505_cincinnasite_ingot",
-      "has_506_soul_sand",
+      "has_511_cincinnasite_ingot",
+      "has_512_soul_sand",
       "has_the_recipe"
     ]
   ],

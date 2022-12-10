@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_480_bone_block": {
+    "has_486_bone_block": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_480_bone_block",
+      "has_486_bone_block",
       "has_the_recipe"
     ]
   ],

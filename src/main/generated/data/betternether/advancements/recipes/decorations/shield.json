@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_455_cincinnasite_ingot": {
+    "has_461_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
   "requirements": [
     [
       "has_tag_planks",
-      "has_455_cincinnasite_ingot",
+      "has_461_cincinnasite_ingot",
       "has_the_recipe"
     ]
   ],

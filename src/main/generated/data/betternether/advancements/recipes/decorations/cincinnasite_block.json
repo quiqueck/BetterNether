@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_487_cincinnasite": {
+    "has_493_cincinnasite": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_487_cincinnasite",
+      "has_493_cincinnasite",
       "has_the_recipe"
     ]
   ],

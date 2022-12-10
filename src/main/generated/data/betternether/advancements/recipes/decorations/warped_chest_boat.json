@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_439_warped_boat": {
+    "has_445_warped_boat": {
       "conditions": {
         "items": [
           {
@@ -48,7 +48,7 @@
   "requirements": [
     [
       "has_tag_chest",
-      "has_439_warped_boat",
+      "has_445_warped_boat",
       "has_the_recipe"
     ]
   ],

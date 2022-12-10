@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_534_stalagnate_planks": {
+    "has_540_stalagnate_planks": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_535_stalagnate_slab": {
+    "has_541_stalagnate_slab": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_536_netherrack": {
+    "has_542_netherrack": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_537_soul_sand": {
+    "has_543_soul_sand": {
       "conditions": {
         "items": [
           {
@@ -73,10 +73,10 @@
   },
   "requirements": [
     [
-      "has_534_stalagnate_planks",
-      "has_535_stalagnate_slab",
-      "has_536_netherrack",
-      "has_537_soul_sand",
+      "has_540_stalagnate_planks",
+      "has_541_stalagnate_slab",
+      "has_542_netherrack",
+      "has_543_soul_sand",
       "has_the_recipe"
     ]
   ],

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_436_crimson_planks": {
+    "has_442_crimson_planks": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_436_crimson_planks",
+      "has_442_crimson_planks",
       "has_the_recipe"
     ]
   ],

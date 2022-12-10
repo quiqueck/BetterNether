@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_515_cincinnasite_ingot": {
+    "has_521_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_516_quartz_glass": {
+    "has_522_quartz_glass": {
       "conditions": {
         "items": [
           {
@@ -49,8 +49,8 @@
   },
   "requirements": [
     [
-      "has_515_cincinnasite_ingot",
-      "has_516_quartz_glass",
+      "has_521_cincinnasite_ingot",
+      "has_522_quartz_glass",
       "has_the_recipe"
     ]
   ],

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_538_nether_reed_planks": {
+    "has_544_nether_reed_planks": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_539_bone_block": {
+    "has_545_bone_block": {
       "conditions": {
         "items": [
           {
@@ -49,8 +49,8 @@
   },
   "requirements": [
     [
-      "has_538_nether_reed_planks",
-      "has_539_bone_block",
+      "has_544_nether_reed_planks",
+      "has_545_bone_block",
       "has_the_recipe"
     ]
   ],

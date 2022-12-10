@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_522_blue_obsidian_tile": {
+    "has_528_blue_obsidian_tile": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_522_blue_obsidian_tile",
+      "has_528_blue_obsidian_tile",
       "has_the_recipe"
     ]
   ],

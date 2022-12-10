@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_459_stalagnate_stem": {
+    "has_465_stalagnate_stem": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_459_stalagnate_stem",
+      "has_465_stalagnate_stem",
       "has_the_recipe"
     ]
   ],

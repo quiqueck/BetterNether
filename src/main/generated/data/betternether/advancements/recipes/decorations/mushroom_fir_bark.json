@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_316_mushroom_fir_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:mushroom_fir_log"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:mushroom_fir_bark"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/mushroom_fir_bark.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:mushroom_fir_bark"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/mushroom_fir_bark.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_316_mushroom_fir_log",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:mushroom_fir_bark"
+    ]
+  }
+}

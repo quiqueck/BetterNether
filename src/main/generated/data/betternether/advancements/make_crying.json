@@ -1,0 +1,77 @@
+{
+  "parent": "betternether:blue_obsidian",
+  "criteria": {
+    "made_blue_crying": {
+      "conditions": {
+        "item": {
+          "items": [
+            "betternether:blue_crying_obsidian"
+          ]
+        }
+      },
+      "trigger": "betternether:convert_by_lightning"
+    },
+    "made_blue_weeping": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:crying_obsidian"
+          ]
+        }
+      },
+      "trigger": "betternether:convert_by_lightning"
+    },
+    "made_crying": {
+      "conditions": {
+        "item": {
+          "items": [
+            "betternether:blue_weeping_obsidian"
+          ]
+        }
+      },
+      "trigger": "betternether:convert_by_lightning"
+    },
+    "made_weeping": {
+      "conditions": {
+        "item": {
+          "items": [
+            "betternether:weeping_obsidian"
+          ]
+        }
+      },
+      "trigger": "betternether:convert_by_lightning"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.betternether.make_crying.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:blue_weeping_obsidian"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.betternether.make_crying.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_blue_crying"
+    ],
+    [
+      "made_crying"
+    ],
+    [
+      "made_blue_weeping"
+    ],
+    [
+      "made_weeping"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  }
+}

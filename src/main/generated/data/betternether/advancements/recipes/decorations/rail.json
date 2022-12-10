@@ -1,0 +1,62 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_454_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stick"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_455_cincinnasite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:cincinnasite_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:rail"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/rail.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:rail"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/rail.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_454_stick",
+      "has_455_cincinnasite_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:rail"
+    ]
+  }
+}

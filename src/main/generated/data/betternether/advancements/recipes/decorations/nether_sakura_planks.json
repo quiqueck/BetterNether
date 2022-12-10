@@ -1,0 +1,64 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_402_nether_sakura_log_nether_sakura_ba": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_sakura_log"
+            ]
+          },
+          {
+            "items": [
+              "betternether:nether_sakura_bark"
+            ]
+          },
+          {
+            "items": [
+              "betternether:nether_sakura_stripped_log"
+            ]
+          },
+          {
+            "items": [
+              "betternether:nether_sakura_stripped_bark"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:nether_sakura_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/nether_sakura_planks.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:nether_sakura_planks"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/nether_sakura_planks.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_402_nether_sakura_log_nether_sakura_ba",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:nether_sakura_planks"
+    ]
+  }
+}

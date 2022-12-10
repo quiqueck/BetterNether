@@ -1,0 +1,62 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_229_birch_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:birch_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_230_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stick"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:birch_chair"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/birch_chair.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:birch_chair"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/birch_chair.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_229_birch_slab",
+      "has_230_stick",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:birch_chair"
+    ]
+  }
+}

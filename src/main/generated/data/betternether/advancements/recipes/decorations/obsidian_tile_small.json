@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_539_obsidian_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:obsidian_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:obsidian_tile_small"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/obsidian_tile_small.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:obsidian_tile_small"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/obsidian_tile_small.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_539_obsidian_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:obsidian_tile_small"
+    ]
+  }
+}

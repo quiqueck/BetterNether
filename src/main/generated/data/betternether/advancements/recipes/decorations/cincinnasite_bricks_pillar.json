@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_498_cincinnasite_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:cincinnasite_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:cincinnasite_bricks_pillar"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/cincinnasite_bricks_pillar.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:cincinnasite_bricks_pillar"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/cincinnasite_bricks_pillar.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_498_cincinnasite_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:cincinnasite_bricks_pillar"
+    ]
+  }
+}

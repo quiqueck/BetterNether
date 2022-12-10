@@ -1,0 +1,60 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_73_nether_reed_boat": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_reed_boat"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tag_chest": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:nether_reed_chest_boat"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/nether_reed_chest_boat.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:nether_reed_chest_boat"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/nether_reed_chest_boat.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_tag_chest",
+      "has_73_nether_reed_boat",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:nether_reed_chest_boat"
+    ]
+  }
+}

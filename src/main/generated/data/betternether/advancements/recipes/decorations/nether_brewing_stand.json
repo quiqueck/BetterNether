@@ -1,0 +1,75 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_515_cincinnasite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:cincinnasite_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_516_blaze_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:blaze_rod"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_517_nether_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:nether_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:nether_brewing_stand"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/nether_brewing_stand.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:nether_brewing_stand"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/nether_brewing_stand.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_515_cincinnasite_ingot",
+      "has_516_blaze_rod",
+      "has_517_nether_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:nether_brewing_stand"
+    ]
+  }
+}

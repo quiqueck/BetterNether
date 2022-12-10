@@ -1,0 +1,63 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_40_nether_ruby": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_ruby"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_41_nether_reed_stem": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_reed_stem"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:nether_ruby_axe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/tools/nether_ruby_axe.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:nether_ruby_axe",
+      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:ruby_fire\",lvl:1s}]}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/tools/nether_ruby_axe.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_40_nether_ruby",
+      "has_41_nether_reed_stem",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:nether_ruby_axe"
+    ]
+  }
+}

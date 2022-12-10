@@ -1,0 +1,88 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_540_stalagnate_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:stalagnate_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_541_stalagnate_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:stalagnate_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_542_netherrack": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:netherrack"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_543_soul_sand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:soul_sand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:farmland"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/farmland.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:farmland"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/farmland.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_540_stalagnate_planks",
+      "has_541_stalagnate_slab",
+      "has_542_netherrack",
+      "has_543_soul_sand",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:farmland"
+    ]
+  }
+}

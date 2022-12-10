@@ -1,0 +1,63 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_33_nether_ruby": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_ruby"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_34_nether_reed_stem": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_reed_stem"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:nether_ruby_pickaxe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/tools/nether_ruby_pickaxe.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:nether_ruby_pickaxe",
+      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:obsidian_breaker\",lvl:2s},{id:\"betternether:ruby_fire\",lvl:1s}]}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/tools/nether_ruby_pickaxe.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_33_nether_ruby",
+      "has_34_nether_reed_stem",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:nether_ruby_pickaxe"
+    ]
+  }
+}

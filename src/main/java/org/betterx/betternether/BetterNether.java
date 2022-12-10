@@ -59,7 +59,6 @@ public class BetterNether implements ModInitializer {
         BlockRecipes.register();
         BNLoot.register();
         BNCriterion.register();
-        NetherAdvancements.register();
         NetherVegetation.setupBonemealFeatures();
 
         Configs.saveConfigs();

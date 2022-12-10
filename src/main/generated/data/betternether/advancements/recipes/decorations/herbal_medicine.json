@@ -1,0 +1,101 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_470_stalagnate_bowl": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:stalagnate_bowl"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_471_agave_leaf": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:agave_leaf"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_472_black_apple": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:black_apple"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_473_hook_mushroom_cooked": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:hook_mushroom_cooked"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_474_nether_wart": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:nether_wart"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:herbal_medicine"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/herbal_medicine.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:herbal_medicine"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/herbal_medicine.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_470_stalagnate_bowl",
+      "has_471_agave_leaf",
+      "has_472_black_apple",
+      "has_473_hook_mushroom_cooked",
+      "has_474_nether_wart",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:herbal_medicine"
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_475_brown_mushroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:brown_mushroom"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_476_red_mushroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:red_mushroom"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_477_stalagnate_bowl": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:stalagnate_bowl"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:stalagnate_bowl_mushroom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/stalagnate_bowl_mushroom.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:stalagnate_bowl_mushroom"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/stalagnate_bowl_mushroom.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_475_brown_mushroom",
+      "has_476_red_mushroom",
+      "has_477_stalagnate_bowl",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:stalagnate_bowl_mushroom"
+    ]
+  }
+}

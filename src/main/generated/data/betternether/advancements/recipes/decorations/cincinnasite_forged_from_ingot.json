@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_503_cincinnasite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:cincinnasite_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:cincinnasite_forged_from_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/cincinnasite_forged_from_ingot.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:cincinnasite_forged"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/cincinnasite_forged_from_ingot.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_503_cincinnasite_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:cincinnasite_forged_from_ingot"
+    ]
+  }
+}

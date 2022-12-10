@@ -1,0 +1,63 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_7_cincinnasite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:cincinnasite_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_8_nether_reed_stem": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_reed_stem"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:cincinnasite_shovel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/tools/cincinnasite_shovel.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:cincinnasite_shovel",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/tools/cincinnasite_shovel.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_7_cincinnasite_ingot",
+      "has_8_nether_reed_stem",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:cincinnasite_shovel"
+    ]
+  }
+}

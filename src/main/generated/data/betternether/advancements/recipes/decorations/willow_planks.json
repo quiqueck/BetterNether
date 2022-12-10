@@ -1,0 +1,64 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_115_willow_log_willow_bark_willow_stri": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:willow_log"
+            ]
+          },
+          {
+            "items": [
+              "betternether:willow_bark"
+            ]
+          },
+          {
+            "items": [
+              "betternether:willow_stripped_log"
+            ]
+          },
+          {
+            "items": [
+              "betternether:willow_stripped_bark"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:willow_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/willow_planks.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:willow_planks"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/willow_planks.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_115_willow_log_willow_bark_willow_stri",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:willow_planks"
+    ]
+  }
+}

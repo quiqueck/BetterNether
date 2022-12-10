@@ -1,24 +1,24 @@
 {
   "replace": false,
   "values": [
-    "betternether:crimson_glowing_woods",
-    "betternether:gravel_desert",
-    "betternether:nether_swampland_terraces",
-    "betternether:old_swampland",
-    "betternether:wart_forest",
-    "betternether:poor_nether_grasslands",
-    "betternether:wart_forest_edge",
     "betternether:sulfuric_bone_reef",
-    "betternether:crimson_pinewood",
-    "betternether:nether_grasslands",
-    "betternether:flooded_deltas",
-    "betternether:old_warped_woods",
-    "betternether:magma_land",
     "betternether:soul_plain",
-    "betternether:bone_reef",
+    "betternether:flooded_deltas",
     "betternether:nether_mushroom_forest_edge",
+    "betternether:crimson_glowing_woods",
+    "betternether:poor_nether_grasslands",
+    "betternether:gravel_desert",
+    "betternether:bone_reef",
     "betternether:old_fungiwoods",
+    "betternether:nether_swampland_terraces",
+    "betternether:nether_grasslands",
+    "betternether:old_warped_woods",
+    "betternether:nether_swampland",
+    "betternether:wart_forest_edge",
+    "betternether:old_swampland",
     "betternether:nether_mushroom_forest",
-    "betternether:nether_swampland"
+    "betternether:crimson_pinewood",
+    "betternether:wart_forest",
+    "betternether:magma_land"
   ]
 }

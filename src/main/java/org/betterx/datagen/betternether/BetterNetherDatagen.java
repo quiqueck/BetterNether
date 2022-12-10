@@ -1,6 +1,7 @@
 package org.betterx.datagen.betternether;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
+import org.betterx.datagen.betternether.worldgen.NetherAdvancementDataProvider;
 import org.betterx.datagen.betternether.worldgen.NetherBiomesDataProvider;
 import org.betterx.datagen.betternether.worldgen.NetherRegistriesDataProvider;
 import org.betterx.datagen.betternether.worldgen.WorldgenRegistriesDataProvider;
@@ -21,6 +22,7 @@ public class BetterNetherDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(WorldgenRegistriesDataProvider::new);
         pack.addProvider(NetherBiomesDataProvider::new);
         pack.addProvider(NetherRegistriesDataProvider::new);
+        pack.addProvider(NetherAdvancementDataProvider::new);
     }
 
     @Override

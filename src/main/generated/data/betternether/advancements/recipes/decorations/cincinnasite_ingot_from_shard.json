@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_2_cincinnasite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:cincinnasite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:cincinnasite_ingot_from_shard_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/cincinnasite_ingot_from_shard.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/cincinnasite_ingot_from_shard.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_2_cincinnasite",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:cincinnasite_ingot_from_shard_smelting"
+    ]
+  }
+}

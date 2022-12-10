@@ -1,0 +1,62 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_355_nether_mushroom_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_mushroom_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_356_nether_mushroom_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:nether_mushroom_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:nether_mushroom_barrel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/nether_mushroom_barrel.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:nether_mushroom_barrel"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/nether_mushroom_barrel.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_355_nether_mushroom_planks",
+      "has_356_nether_mushroom_slab",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:nether_mushroom_barrel"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_457_stalagnate_bowl": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:stalagnate_bowl"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_458_black_apple": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:black_apple"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:stalagnate_bowl_apple"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.betternether.recipes/decorations/stalagnate_bowl_apple.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:stalagnate_bowl_apple"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.betternether.recipes/decorations/stalagnate_bowl_apple.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_457_stalagnate_bowl",
+      "has_458_black_apple",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:stalagnate_bowl_apple"
+    ]
+  }
+}

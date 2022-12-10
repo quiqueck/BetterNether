@@ -1,0 +1,37 @@
+{
+  "parent": "betternether:root",
+  "criteria": {
+    "cincinnasite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:cincinnasite_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.betternether.cincinnasite_ore.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.betternether.cincinnasite_ore.title"
+    }
+  },
+  "requirements": [
+    [
+      "cincinnasite_ore"
+    ]
+  ]
+}

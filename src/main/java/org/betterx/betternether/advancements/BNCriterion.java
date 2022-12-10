@@ -25,5 +25,10 @@ public class BNCriterion {
                 BNCriterion.USED_FORGE.getId(),
                 EntityPredicate.Composite.ANY
         );
+
+        BREW_BLUE_TRIGGER = new PlayerTrigger.TriggerInstance(
+                BNCriterion.BREW_BLUE.getId(),
+                EntityPredicate.Composite.ANY
+        );
     }
 }

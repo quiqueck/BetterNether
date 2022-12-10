@@ -404,73 +404,73 @@
   },
   "requirements": [
     [
-      "betternether:wart_forest"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "bclib:the_purple"
-    ],
-    [
-      "betternether:nether_swampland_terraces"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:gravel_desert"
-    ],
-    [
-      "bclib:the_orange"
-    ],
-    [
-      "betternether:old_swampland"
-    ],
-    [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:soul_plain"
-    ],
-    [
       "betternether:nether_mushroom_forest"
     ],
     [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:nether_swampland"
+      "betternether:sulfuric_bone_reef"
     ],
     [
       "betternether:nether_mushroom_forest_edge"
     ],
     [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:bone_reef"
+      "betternether:nether_swampland"
     ],
     [
       "betternether:poor_nether_grasslands"
     ],
     [
+      "betternether:old_fungiwoods"
+    ],
+    [
       "betternether:nether_jungle"
+    ],
+    [
+      "betternether:soul_plain"
     ],
     [
       "betternether:upside_down_forest"
     ],
     [
-      "betternether:old_fungiwoods"
+      "betternether:flooded_deltas"
     ],
     [
-      "betternether:upside_down_forest_cleared"
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:old_swampland"
+    ],
+    [
+      "betternether:nether_swampland_terraces"
+    ],
+    [
+      "betternether:gravel_desert"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:nether_grasslands"
     ],
     [
       "betternether:old_warped_woods"
     ],
     [
-      "betternether:sulfuric_bone_reef"
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
+      "bclib:the_purple"
+    ],
+    [
+      "betternether:magma_land"
+    ],
+    [
+      "bclib:the_orange"
     ],
     [
       "betternether:wart_forest_edge"

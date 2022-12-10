@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_525_nether_grass": {
+    "has_519_nether_grass": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_525_nether_grass",
+      "has_519_nether_grass",
       "has_the_recipe"
     ]
   ],

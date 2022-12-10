@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_515_cincinnasite_ingot": {
+    "has_509_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_516_blaze_rod": {
+    "has_510_blaze_rod": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_517_nether_bricks": {
+    "has_511_nether_bricks": {
       "conditions": {
         "items": [
           {
@@ -61,9 +61,9 @@
   },
   "requirements": [
     [
-      "has_515_cincinnasite_ingot",
-      "has_516_blaze_rod",
-      "has_517_nether_bricks",
+      "has_509_cincinnasite_ingot",
+      "has_510_blaze_rod",
+      "has_511_nether_bricks",
       "has_the_recipe"
     ]
   ],

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_446_cincinnasite_forged": {
+    "has_440_cincinnasite_forged": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_446_cincinnasite_forged",
+      "has_440_cincinnasite_forged",
       "has_the_recipe"
     ]
   ],

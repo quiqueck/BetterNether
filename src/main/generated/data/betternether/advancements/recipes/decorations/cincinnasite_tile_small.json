@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_514_cincinnasite_tile_large": {
+    "has_508_cincinnasite_tile_large": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_514_cincinnasite_tile_large",
+      "has_508_cincinnasite_tile_large",
       "has_the_recipe"
     ]
   ],

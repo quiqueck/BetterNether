@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_466_stalagnate_bowl": {
+    "has_460_stalagnate_bowl": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_467_agave_leaf": {
+    "has_461_agave_leaf": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_468_agave_leaf": {
+    "has_462_agave_leaf": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_469_agave_leaf": {
+    "has_463_agave_leaf": {
       "conditions": {
         "items": [
           {
@@ -73,10 +73,10 @@
   },
   "requirements": [
     [
-      "has_466_stalagnate_bowl",
-      "has_467_agave_leaf",
-      "has_468_agave_leaf",
-      "has_469_agave_leaf",
+      "has_460_stalagnate_bowl",
+      "has_461_agave_leaf",
+      "has_462_agave_leaf",
+      "has_463_agave_leaf",
       "has_the_recipe"
     ]
   ],

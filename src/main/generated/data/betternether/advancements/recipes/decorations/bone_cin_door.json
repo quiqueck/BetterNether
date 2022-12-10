@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_487_cincinnasite_forged": {
+    "has_481_cincinnasite_forged": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_488_bone_block": {
+    "has_482_bone_block": {
       "conditions": {
         "items": [
           {
@@ -49,8 +49,8 @@
   },
   "requirements": [
     [
-      "has_487_cincinnasite_forged",
-      "has_488_bone_block",
+      "has_481_cincinnasite_forged",
+      "has_482_bone_block",
       "has_the_recipe"
     ]
   ],

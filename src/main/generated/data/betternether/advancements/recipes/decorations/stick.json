@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_459_nether_reed_stem": {
+    "has_453_nether_reed_stem": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_459_nether_reed_stem",
+      "has_453_nether_reed_stem",
       "has_the_recipe"
     ]
   ],

@@ -407,10 +407,7 @@
       "betternether:nether_mushroom_forest"
     ],
     [
-      "betternether:sulfuric_bone_reef"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
+      "betternether:soul_plain"
     ],
     [
       "betternether:nether_swampland"
@@ -419,61 +416,64 @@
       "betternether:poor_nether_grasslands"
     ],
     [
-      "betternether:old_fungiwoods"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:soul_plain"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:bone_reef"
-    ],
-    [
-      "betternether:old_swampland"
-    ],
-    [
-      "betternether:nether_swampland_terraces"
+      "betternether:wart_forest"
     ],
     [
       "betternether:gravel_desert"
     ],
     [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:wart_forest"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:old_warped_woods"
-    ],
-    [
-      "betternether:upside_down_forest_cleared"
+      "betternether:nether_jungle"
     ],
     [
       "bclib:the_purple"
     ],
     [
+      "betternether:upside_down_forest"
+    ],
+    [
       "betternether:magma_land"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:old_swampland"
+    ],
+    [
+      "betternether:old_warped_woods"
+    ],
+    [
+      "betternether:nether_swampland_terraces"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
     ],
     [
       "bclib:the_orange"
     ],
     [
       "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:old_fungiwoods"
+    ],
+    [
+      "betternether:sulfuric_bone_reef"
     ]
   ],
   "rewards": {

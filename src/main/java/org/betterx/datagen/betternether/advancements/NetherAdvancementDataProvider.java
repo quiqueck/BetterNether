@@ -1,4 +1,4 @@
-package org.betterx.datagen.betternether.worldgen;
+package org.betterx.datagen.betternether.advancements;
 
 import org.betterx.bclib.api.v2.advancement.AdvancementManager;
 import org.betterx.bclib.api.v3.datagen.AdvancementDataProvider;

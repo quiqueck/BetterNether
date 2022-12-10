@@ -1,6 +1,7 @@
 package org.betterx.datagen.betternether.worldgen;
 
 import org.betterx.bclib.api.v2.advancement.AdvancementManager;
+import org.betterx.bclib.api.v3.datagen.AdvancementDataProvider;
 import org.betterx.bclib.items.complex.EquipmentSet;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.advancements.BNCriterion;
@@ -9,7 +10,6 @@ import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.world.NetherBiomeBuilder;
 
-import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.ChangeDimensionTrigger;
@@ -18,17 +18,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 
 import java.util.List;
-import java.util.function.Consumer;
 
-public class NetherAdvancementDataProvider extends FabricAdvancementProvider {
+public class NetherAdvancementDataProvider extends AdvancementDataProvider {
     public NetherAdvancementDataProvider(FabricDataOutput output) {
-        super(output);
+        super(List.of(BetterNether.MOD_ID), output);
     }
 
-    void bootstrap() {
+    @Override
+    protected void bootstrap() {
         ResourceLocation root = AdvancementManager.Builder
                 .create(BetterNether.makeID("root"))
                 .startDisplay(NetherBlocks.NETHER_GRASS)
@@ -232,11 +231,5 @@ public class NetherAdvancementDataProvider extends FabricAdvancementProvider {
                 .requirements(RequirementsStrategy.AND)
                 .rewardXP(1500)
                 .build();
-    }
-
-    @Override
-    public void generateAdvancement(Consumer<Advancement> consumer) {
-        bootstrap();
-        AdvancementManager.registerAllDataGen(List.of(BetterNether.MOD_ID), consumer);
     }
 }

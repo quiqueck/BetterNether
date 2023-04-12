@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_cincinnasite_pillar",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    }
+  },
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "result": {
+    "count": 2,
+    "item": "betternether:cincinnasite_pillar"
+  },
+  "show_notification": true
+}

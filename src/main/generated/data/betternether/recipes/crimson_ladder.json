@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_ladders",
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_planks"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "I I",
+    "I#I",
+    "I I"
+  ],
+  "result": {
+    "count": 3,
+    "item": "betternether:crimson_ladder"
+  },
+  "show_notification": true
+}

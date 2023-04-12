@@ -74,7 +74,7 @@
       "betternether:patch_golden_vine"
     ]
   ],
-  "precipitation": "none",
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [

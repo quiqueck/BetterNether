@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_bone_tile",
+  "key": {
+    "#": {
+      "item": "betternether:bone_slab"
+    }
+  },
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "result": {
+    "item": "betternether:bone_tile"
+  },
+  "show_notification": true
+}

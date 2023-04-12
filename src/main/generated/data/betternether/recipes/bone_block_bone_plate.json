@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_rock_plate",
+  "key": {
+    "#": {
+      "item": "betternether:bone_block"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "betternether:bone_plate"
+  },
+  "show_notification": true
+}

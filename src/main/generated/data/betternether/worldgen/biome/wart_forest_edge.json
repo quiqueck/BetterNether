@@ -71,7 +71,7 @@
       "betternether:vegetation_wart_forest_edge"
     ]
   ],
-  "precipitation": "none",
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_102_stalagnate_slab": {
+    "has_stalagnate_slab": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/stalagnate_composter.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:stalagnate_composter"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/stalagnate_composter.title"
-    }
-  },
   "requirements": [
     [
-      "has_102_stalagnate_slab",
+      "has_stalagnate_slab",
       "has_the_recipe"
     ]
   ],

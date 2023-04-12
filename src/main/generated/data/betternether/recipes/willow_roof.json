@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "roof",
+  "key": {
+    "#": {
+      "item": "betternether:willow_planks"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###",
+    " # "
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:willow_roof"
+  },
+  "show_notification": true
+}

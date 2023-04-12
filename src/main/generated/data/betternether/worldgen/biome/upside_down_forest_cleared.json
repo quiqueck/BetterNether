@@ -77,7 +77,7 @@
       "betternether:patch_upside_down"
     ]
   ],
-  "precipitation": "none",
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [

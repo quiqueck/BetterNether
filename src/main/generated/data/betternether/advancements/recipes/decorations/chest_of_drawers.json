@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_546_cincinnasite_forged": {
+    "has_cincinnasite_forged": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_547_nether_reed_planks": {
+    "has_nether_reed_planks": {
       "conditions": {
         "items": [
           {
@@ -32,25 +32,10 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/chest_of_drawers.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:chest_of_drawers"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/chest_of_drawers.title"
-    }
-  },
   "requirements": [
     [
-      "has_546_cincinnasite_forged",
-      "has_547_nether_reed_planks",
+      "has_nether_reed_planks",
+      "has_cincinnasite_forged",
       "has_the_recipe"
     ]
   ],

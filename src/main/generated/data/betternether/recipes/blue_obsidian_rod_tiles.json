@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_blue_obsidian_rod_tiles",
+  "key": {
+    "#": {
+      "item": "betternether:blue_obsidian_tile"
+    }
+  },
+  "pattern": [
+    " ##",
+    "## "
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:blue_obsidian_rod_tiles"
+  },
+  "show_notification": true
+}

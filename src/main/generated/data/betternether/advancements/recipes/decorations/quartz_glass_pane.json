@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_524_quartz_glass": {
+    "has_quartz_glass": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/quartz_glass_pane.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:quartz_glass_pane"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/quartz_glass_pane.title"
-    }
-  },
   "requirements": [
     [
-      "has_524_quartz_glass",
+      "has_quartz_glass",
       "has_the_recipe"
     ]
   ],

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_boat",
+  "key": {
+    "#": {
+      "item": "betternether:rubeus_planks"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "result": {
+    "item": "betternether:rubeus_boat"
+  },
+  "show_notification": true
+}

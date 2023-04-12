@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_ladders",
+  "key": {
+    "#": {
+      "item": "minecraft:warped_planks"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "I I",
+    "I#I",
+    "I I"
+  ],
+  "result": {
+    "count": 3,
+    "item": "betternether:warped_ladder"
+  },
+  "show_notification": true
+}

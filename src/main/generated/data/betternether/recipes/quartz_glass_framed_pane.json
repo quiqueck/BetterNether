@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_quartz_glass_framed_pane",
+  "key": {
+    "#": {
+      "item": "betternether:quartz_glass_framed"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 16,
+    "item": "betternether:quartz_glass_framed_pane"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "nether_ruby_leggings",
+  "key": {
+    "#": {
+      "item": "betternether:nether_ruby"
+    }
+  },
+  "pattern": [
+    "###",
+    "# #",
+    "# #"
+  ],
+  "result": {
+    "item": "betternether:nether_ruby_leggings"
+  },
+  "show_notification": true
+}

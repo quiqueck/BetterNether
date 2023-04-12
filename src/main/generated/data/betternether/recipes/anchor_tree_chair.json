@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_chair",
+  "key": {
+    "#": {
+      "item": "betternether:anchor_tree_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "I ",
+    "##",
+    "II"
+  ],
+  "result": {
+    "item": "betternether:anchor_tree_chair"
+  },
+  "show_notification": true
+}

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_511_cincinnasite_ingot": {
+    "has_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_512_soul_sand": {
+    "has_soul_sand": {
       "conditions": {
         "items": [
           {
@@ -32,25 +32,10 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/cincinnasite_pot.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:cincinnasite_pot"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/cincinnasite_pot.title"
-    }
-  },
   "requirements": [
     [
-      "has_511_cincinnasite_ingot",
-      "has_512_soul_sand",
+      "has_soul_sand",
+      "has_cincinnasite_ingot",
       "has_the_recipe"
     ]
   ],

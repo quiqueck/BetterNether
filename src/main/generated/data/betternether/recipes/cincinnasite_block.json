@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_cincinnasite_block",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_block"
+  },
+  "show_notification": true
+}

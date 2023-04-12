@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_275_rubeus_planks": {
+    "has_rubeus_planks": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_276_stick": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
@@ -32,25 +32,10 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/rubeus_sign.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:rubeus_sign"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/rubeus_sign.title"
-    }
-  },
   "requirements": [
     [
-      "has_275_rubeus_planks",
-      "has_276_stick",
+      "has_rubeus_planks",
+      "has_stick",
       "has_the_recipe"
     ]
   ],

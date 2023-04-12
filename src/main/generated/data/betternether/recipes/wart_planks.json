@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    [
+      {
+        "item": "betternether:wart_log"
+      },
+      {
+        "item": "betternether:wart_bark"
+      },
+      {
+        "item": "betternether:wart_stripped_log"
+      },
+      {
+        "item": "betternether:wart_stripped_bark"
+      }
+    ]
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:wart_planks"
+  }
+}

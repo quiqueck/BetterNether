@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "button",
+  "ingredients": [
+    {
+      "item": "betternether:wart_planks"
+    }
+  ],
+  "result": {
+    "item": "betternether:wart_button"
+  }
+}

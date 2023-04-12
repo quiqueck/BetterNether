@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "barrel",
+  "key": {
+    "#": {
+      "item": "betternether:rubeus_planks"
+    },
+    "S": {
+      "item": "betternether:rubeus_slab"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "result": {
+    "item": "betternether:rubeus_barrel"
+  },
+  "show_notification": true
+}

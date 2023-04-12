@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:willow_roof_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_willow_roof": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:willow_roof"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_willow_roof",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:willow_roof_slab"
+    ]
+  }
+}

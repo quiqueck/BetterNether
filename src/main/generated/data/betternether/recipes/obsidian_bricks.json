@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_obsidian_bricks",
+  "key": {
+    "#": {
+      "item": "betternether:obsidian_tile"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:obsidian_bricks"
+  },
+  "show_notification": true
+}

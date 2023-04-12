@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_bar_stool",
+  "key": {
+    "#": {
+      "item": "betternether:nether_reed_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "##",
+    "II",
+    "II"
+  ],
+  "result": {
+    "item": "betternether:nether_reed_bar_stool"
+  },
+  "show_notification": true
+}

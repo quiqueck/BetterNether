@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_wall",
+  "key": {
+    "#": {
+      "item": "betternether:basalt_bricks"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "betternether:basalt_bricks_wall"
+  },
+  "show_notification": true
+}

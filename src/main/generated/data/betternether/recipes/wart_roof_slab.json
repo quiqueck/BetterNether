@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "roof_slabs",
+  "key": {
+    "#": {
+      "item": "betternether:wart_roof"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "betternether:wart_roof_slab"
+  },
+  "show_notification": true
+}

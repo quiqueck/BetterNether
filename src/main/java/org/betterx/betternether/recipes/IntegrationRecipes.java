@@ -1,20 +1,18 @@
 package org.betterx.betternether.recipes;
 
+import org.betterx.bclib.recipes.BCLRecipeBuilder;
+import org.betterx.betternether.BN;
 import org.betterx.betternether.integrations.VanillaExcavatorsIntegration;
 import org.betterx.betternether.integrations.VanillaHammersIntegration;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-
-import com.google.common.collect.ImmutableMap;
-
-import java.util.Map;
 
 public class IntegrationRecipes {
     public static void register() {
@@ -29,13 +27,13 @@ public class IntegrationRecipes {
             ResourceLocation id = BuiltInRegistries.ITEM.getKey(NetherItems.CINCINNASITE_HAMMER_DIAMOND);
             boolean register = id != BuiltInRegistries.ITEM.getDefaultKey() && BuiltInRegistries.ITEM.getKey(NetherItems.CINCINNASITE_HAMMER) != BuiltInRegistries.ITEM.getDefaultKey();
             if (register) {
-                String[] shape = new String[]{"#I#"};
-                Map<String, ItemStack> materials = ImmutableMap.of(
-                        "#", new ItemStack(Items.DIAMOND),
-                        "I", new ItemStack(NetherItems.CINCINNASITE_HAMMER)
-                );
-                ItemStack result = new ItemStack(NetherItems.CINCINNASITE_HAMMER_DIAMOND);
-                BNRecipeManager.addCraftingRecipe("cincinnasite_hammer_diamond", shape, materials, result);
+                BCLRecipeBuilder
+                        .crafting(BN.id("cincinnasite_hammer_diamond"), NetherItems.CINCINNASITE_HAMMER_DIAMOND)
+                        .setShape("#I#")
+                        .addMaterial('#', Items.DIAMOND)
+                        .addMaterial('I', NetherItems.CINCINNASITE_HAMMER)
+                        .setCategory(RecipeCategory.TOOLS)
+                        .build();
             }
         }
 
@@ -54,13 +52,13 @@ public class IntegrationRecipes {
             ResourceLocation id = BuiltInRegistries.ITEM.getKey(NetherItems.CINCINNASITE_EXCAVATOR_DIAMOND);
             boolean register = id != BuiltInRegistries.ITEM.getDefaultKey() && BuiltInRegistries.ITEM.getKey(NetherItems.CINCINNASITE_EXCAVATOR) != BuiltInRegistries.ITEM.getDefaultKey();
             if (register) {
-                String[] shape = new String[]{"#I#"};
-                Map<String, ItemStack> materials = ImmutableMap.of(
-                        "#", new ItemStack(Items.DIAMOND),
-                        "I", new ItemStack(NetherItems.CINCINNASITE_EXCAVATOR)
-                );
-                ItemStack result = new ItemStack(NetherItems.CINCINNASITE_EXCAVATOR_DIAMOND);
-                BNRecipeManager.addCraftingRecipe("cincinnasite_excavator_diamond", shape, materials, result);
+                BCLRecipeBuilder
+                        .crafting(BN.id("cincinnasite_excavator_diamond"), NetherItems.CINCINNASITE_EXCAVATOR_DIAMOND)
+                        .setShape("#I#")
+                        .addMaterial('#', Items.DIAMOND)
+                        .addMaterial('I', NetherItems.CINCINNASITE_EXCAVATOR)
+                        .setCategory(RecipeCategory.TOOLS)
+                        .build();
             }
         }
     }
@@ -72,13 +70,14 @@ public class IntegrationRecipes {
                 BuiltInRegistries.BLOCK.getKey(block) != BuiltInRegistries.BLOCK.getDefaultKey() &&
                 BuiltInRegistries.ITEM.getKey(item) != BuiltInRegistries.ITEM.getDefaultKey();
         if (register) {
-            Map<String, ItemStack> materials = ImmutableMap.of(
-                    "#", new ItemStack(block),
-                    "I", new ItemStack(item),
-                    "S", new ItemStack(NetherBlocks.MAT_REED.getStem())
-            );
-            ItemStack result = new ItemStack(hammer);
-            BNRecipeManager.addCraftingRecipe(id.getPath(), new String[]{"#I#", " S ", " S "}, materials, result);
+            BCLRecipeBuilder
+                    .crafting(BN.id(id.getPath()), hammer)
+                    .setShape("#I#", " S ", " S ")
+                    .addMaterial('#', block)
+                    .addMaterial('I', item)
+                    .addMaterial('S', NetherBlocks.MAT_REED.getStem())
+                    .setCategory(RecipeCategory.TOOLS)
+                    .build();
         }
     }
 
@@ -89,13 +88,14 @@ public class IntegrationRecipes {
                 BuiltInRegistries.BLOCK.getKey(block) != BuiltInRegistries.BLOCK.getDefaultKey() &&
                 BuiltInRegistries.ITEM.getKey(item) != BuiltInRegistries.ITEM.getDefaultKey();
         if (register) {
-            Map<String, ItemStack> materials = ImmutableMap.of(
-                    "#", new ItemStack(block),
-                    "I", new ItemStack(item),
-                    "S", new ItemStack(NetherBlocks.MAT_REED.getStem())
-            );
-            ItemStack result = new ItemStack(excavator);
-            BNRecipeManager.addCraftingRecipe(id.getPath(), new String[]{" I ", "#S#", " S "}, materials, result);
+            BCLRecipeBuilder
+                    .crafting(BN.id(id.getPath()), excavator)
+                    .setShape(" I ", "#S#", " S ")
+                    .addMaterial('#', block)
+                    .addMaterial('I', item)
+                    .addMaterial('S', NetherBlocks.MAT_REED.getStem())
+                    .setCategory(RecipeCategory.TOOLS)
+                    .build();
         }
     }
 }

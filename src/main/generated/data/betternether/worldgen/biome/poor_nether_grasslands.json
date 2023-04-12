@@ -69,7 +69,7 @@
       "betternether:vegetation_nether_poor_grassland"
     ]
   ],
-  "precipitation": "none",
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [

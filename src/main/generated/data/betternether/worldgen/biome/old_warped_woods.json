@@ -78,7 +78,7 @@
       "betternether:patch_twisting_vine"
     ]
   ],
-  "precipitation": "none",
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [

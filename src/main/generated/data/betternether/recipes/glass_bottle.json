@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_glass_bottle",
+  "key": {
+    "#": {
+      "item": "betternether:quartz_glass"
+    }
+  },
+  "pattern": [
+    "# #",
+    " # "
+  ],
+  "result": {
+    "count": 3,
+    "item": "minecraft:glass_bottle"
+  },
+  "show_notification": true
+}

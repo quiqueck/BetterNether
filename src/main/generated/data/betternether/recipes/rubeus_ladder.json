@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "ladder",
+  "key": {
+    "#": {
+      "item": "betternether:rubeus_planks"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "I I",
+    "I#I",
+    "I I"
+  ],
+  "result": {
+    "count": 3,
+    "item": "betternether:rubeus_ladder"
+  },
+  "show_notification": true
+}

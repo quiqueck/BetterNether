@@ -7,6 +7,7 @@ import org.betterx.betternether.blocks.BlockMushroomFir;
 import org.betterx.betternether.blocks.BlockMushroomFirSapling;
 import org.betterx.betternether.blocks.BlockStem;
 
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -50,11 +51,11 @@ public class MushroomFirMaterial extends NetherWoodenMaterial {
             final Block stem = getBlock(BLOCK_STEM);
 
             BCLRecipeBuilder.crafting(id, log)
-                            .checkConfig(config)
                             .setOutputCount(1)
                             .setShape("##", "##")
                             .addMaterial('#', stem)
-                            .setGroup(receipGroupPrefix + "_planks")
+                            .setGroup("planks")
+                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
     }

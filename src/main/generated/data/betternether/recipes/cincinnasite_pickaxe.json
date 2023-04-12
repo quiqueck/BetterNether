@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "cincinnasite_pickaxe",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+    "I": {
+      "item": "betternether:nether_reed_stem"
+    }
+  },
+  "pattern": [
+    "###",
+    " I ",
+    " I "
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_pickaxe"
+  },
+  "show_notification": true
+}

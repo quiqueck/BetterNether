@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:bn_red_mushroom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wall_mushroom_red": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:wall_mushroom_red"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wall_mushroom_red",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:bn_red_mushroom"
+    ]
+  }
+}

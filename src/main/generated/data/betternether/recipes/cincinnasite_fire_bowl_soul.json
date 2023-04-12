@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fire_bowl",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    },
+    "I": {
+      "item": "minecraft:soul_sand"
+    },
+    "L": {
+      "item": "betternether:cincinnasite_ingot"
+    }
+  },
+  "pattern": [
+    "#I#",
+    " # ",
+    "L L"
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_fire_bowl_soul"
+  },
+  "show_notification": true
+}

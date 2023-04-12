@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_492_cincinnasite_ingot": {
+    "has_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/cincinnasite_bars.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:cincinnasite_bars"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/cincinnasite_bars.title"
-    }
-  },
   "requirements": [
     [
-      "has_492_cincinnasite_ingot",
+      "has_cincinnasite_ingot",
       "has_the_recipe"
     ]
   ],

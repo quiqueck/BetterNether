@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "roof_stairs",
+  "key": {
+    "#": {
+      "item": "betternether:stalagnate_roof"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:stalagnate_roof_stairs"
+  },
+  "show_notification": true
+}

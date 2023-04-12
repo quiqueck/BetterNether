@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_427_nether_sakura_slab": {
+    "has_nether_sakura_slab": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/nether_sakura_composter.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:nether_sakura_composter"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/nether_sakura_composter.title"
-    }
-  },
   "requirements": [
     [
-      "has_427_nether_sakura_slab",
+      "has_nether_sakura_slab",
       "has_the_recipe"
     ]
   ],

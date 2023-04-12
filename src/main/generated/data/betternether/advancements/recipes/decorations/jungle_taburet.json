@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_215_jungle_slab": {
+    "has_jungle_slab": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_216_stick": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
@@ -32,25 +32,10 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/jungle_taburet.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:jungle_taburet"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/jungle_taburet.title"
-    }
-  },
   "requirements": [
     [
-      "has_215_jungle_slab",
-      "has_216_stick",
+      "has_jungle_slab",
+      "has_stick",
       "has_the_recipe"
     ]
   ],

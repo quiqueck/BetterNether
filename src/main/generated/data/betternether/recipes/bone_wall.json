@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_wall",
+  "key": {
+    "#": {
+      "item": "betternether:bone_block"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "betternether:bone_wall"
+  },
+  "show_notification": true
+}

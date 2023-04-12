@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_465_stalagnate_stem": {
+    "has_stalagnate_stem": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/stalagnate_bowl.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:stalagnate_bowl"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/stalagnate_bowl.title"
-    }
-  },
   "requirements": [
     [
-      "has_465_stalagnate_stem",
+      "has_stalagnate_stem",
       "has_the_recipe"
     ]
   ],

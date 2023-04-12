@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_cincinnasite_lantern",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#G#",
+    " # "
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_lantern"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "cincinnasite_sword",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+    "I": {
+      "item": "betternether:nether_reed_stem"
+    }
+  },
+  "pattern": [
+    "#",
+    "#",
+    "I"
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_sword"
+  },
+  "show_notification": true
+}

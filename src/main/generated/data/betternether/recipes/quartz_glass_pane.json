@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_quartz_glass_pane",
+  "key": {
+    "#": {
+      "item": "betternether:quartz_glass"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 16,
+    "item": "betternether:quartz_glass_pane"
+  },
+  "show_notification": true
+}

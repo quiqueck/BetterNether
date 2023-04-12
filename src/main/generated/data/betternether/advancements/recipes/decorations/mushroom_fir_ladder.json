@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_307_mushroom_fir_planks": {
+    "has_mushroom_fir_planks": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_308_stick": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
@@ -32,25 +32,10 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/mushroom_fir_ladder.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:mushroom_fir_ladder"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/mushroom_fir_ladder.title"
-    }
-  },
   "requirements": [
     [
-      "has_307_mushroom_fir_planks",
-      "has_308_stick",
+      "has_stick",
+      "has_mushroom_fir_planks",
       "has_the_recipe"
     ]
   ],

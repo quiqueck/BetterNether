@@ -1,19 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_255_warped_slab": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:warped_slab"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_256_stick": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
@@ -30,27 +18,24 @@
         "recipe": "betternether:warped_bar_stool"
       },
       "trigger": "minecraft:recipe_unlocked"
-    }
-  },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/warped_bar_stool.description"
     },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:warped_bar_stool"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/warped_bar_stool.title"
+    "has_warped_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:warped_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
-      "has_255_warped_slab",
-      "has_256_stick",
+      "has_warped_slab",
+      "has_stick",
       "has_the_recipe"
     ]
   ],

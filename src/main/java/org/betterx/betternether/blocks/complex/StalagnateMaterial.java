@@ -8,6 +8,7 @@ import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.BlockStem;
 
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -56,11 +57,11 @@ public class StalagnateMaterial extends RoofMaterial {
             Block stem = getStem();
 
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_LOG))
-                            .checkConfig(config)
                             .setOutputCount(1)
                             .setShape("##", "##")
                             .addMaterial('#', stem)
-                            .setGroup(receipGroupPrefix + "_logs")
+                            .setGroup("logs")
+                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
     }

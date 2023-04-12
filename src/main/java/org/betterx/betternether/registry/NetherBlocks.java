@@ -814,7 +814,6 @@ public class NetherBlocks extends BlockRegistry {
         registerBlock(name, shelf, CommonBlockTags.BOOKSHELVES);
 
         BCLRecipeBuilder.crafting(BetterNether.makeID(name), shelf)
-                        .checkConfig(Configs.RECIPES)
                         .setShape("###", "BBB", "###")
                         .addMaterial('#', baseBlock)
                         .addMaterial('B', Items.BOOK)
@@ -829,7 +828,6 @@ public class NetherBlocks extends BlockRegistry {
         registerBlock(name, composter, CommonPoiTags.FARMER_WORKSTATION);
 
         BCLRecipeBuilder.crafting(BetterNether.makeID(name), composter)
-                        .checkConfig(Configs.RECIPES)
                         .setShape("# #", "# #", "###")
                         .addMaterial('#', baseSlab)
                         .setGroup("nether" + "_composter")
@@ -995,7 +993,6 @@ public class NetherBlocks extends BlockRegistry {
             TagManager.ITEMS.add(block.asItem(), org.betterx.worlds.together.tag.v3.CommonItemTags.WORKBENCHES);
 
             BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                            .checkConfig(Configs.RECIPES)
                             .setShape("##", "##")
                             .addMaterial('#', source)
                             .setGroup("nether" + "_tables")
@@ -1016,7 +1013,6 @@ public class NetherBlocks extends BlockRegistry {
             addFuel(planks, chest);
             //RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
             BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), chest)
-                            .checkConfig(Configs.RECIPES)
                             .setShape("###", "# #", "###")
                             .addMaterial('#', planks)
                             .setGroup("nether" + "_chests")
@@ -1035,7 +1031,6 @@ public class NetherBlocks extends BlockRegistry {
             addFuel(source, block);
             //RecipesHelper.makeBarrelRecipe(source, slab, block);
             BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                            .checkConfig(Configs.RECIPES)
                             .setShape("#S#", "# #", "#S#")
                             .addMaterial('#', source)
                             .addMaterial('S', slab)
@@ -1059,7 +1054,6 @@ public class NetherBlocks extends BlockRegistry {
             //RecipesHelper.makeLadderRecipe(source, block);
 
             BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                            .checkConfig(Configs.RECIPES)
                             .setOutputCount(3)
                             .setShape("I I", "I#I", "I I")
                             .addMaterial('#', source)

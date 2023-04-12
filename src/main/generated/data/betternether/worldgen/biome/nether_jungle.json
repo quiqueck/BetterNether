@@ -80,7 +80,7 @@
       "betternether:patch_wall_jungle"
     ]
   ],
-  "precipitation": "none",
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [

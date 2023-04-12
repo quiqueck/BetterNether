@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_529_blue_obsidian_glass": {
+    "has_blue_obsidian_glass": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/blue_obsidian_glass_pane.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:blue_obsidian_glass_pane"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/blue_obsidian_glass_pane.title"
-    }
-  },
   "requirements": [
     [
-      "has_529_blue_obsidian_glass",
+      "has_blue_obsidian_glass",
       "has_the_recipe"
     ]
   ],

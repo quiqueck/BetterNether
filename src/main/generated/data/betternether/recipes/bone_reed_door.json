@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "nether_bone_reed_door",
+  "key": {
+    "A": {
+      "item": "betternether:nether_reed_planks"
+    },
+    "B": {
+      "item": "betternether:bone_block"
+    }
+  },
+  "pattern": [
+    "AB",
+    "BB",
+    "BA"
+  ],
+  "result": {
+    "count": 3,
+    "item": "betternether:bone_reed_door"
+  },
+  "show_notification": true
+}

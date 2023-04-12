@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_10_cincinnasite_ingot": {
+    "has_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -20,25 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/tools/cincinnasite_leggings.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:cincinnasite_leggings",
-      "nbt": "{Damage:0}"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/tools/cincinnasite_leggings.title"
-    }
-  },
   "requirements": [
     [
-      "has_10_cincinnasite_ingot",
+      "has_cincinnasite_ingot",
       "has_the_recipe"
     ]
   ],

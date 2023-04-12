@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_bookshelf",
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_planks"
+    },
+    "B": {
+      "item": "minecraft:book"
+    }
+  },
+  "pattern": [
+    "###",
+    "BBB",
+    "###"
+  ],
+  "result": {
+    "item": "betternether:crimson_bookshelf"
+  },
+  "show_notification": true
+}

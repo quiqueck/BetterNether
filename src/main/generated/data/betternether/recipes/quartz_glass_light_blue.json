@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "quartz_glass",
+  "key": {
+    "#": {
+      "item": "betternether:quartz_glass"
+    },
+    "I": {
+      "item": "minecraft:light_blue_dye"
+    }
+  },
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "betternether:quartz_glass_light_blue"
+  },
+  "show_notification": true
+}

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_384_anchor_tree_planks": {
+    "has_anchor_tree_planks": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/anchor_tree_chest.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:anchor_tree_chest"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/anchor_tree_chest.title"
-    }
-  },
   "requirements": [
     [
-      "has_384_anchor_tree_planks",
+      "has_anchor_tree_planks",
       "has_the_recipe"
     ]
   ],

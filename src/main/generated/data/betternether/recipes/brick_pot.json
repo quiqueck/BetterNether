@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_brick_pot",
+  "key": {
+    "#": {
+      "item": "minecraft:nether_brick"
+    },
+    "N": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "pattern": [
+    "#N#",
+    " # "
+  ],
+  "result": {
+    "item": "betternether:brick_pot"
+  },
+  "show_notification": true
+}

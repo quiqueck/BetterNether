@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    [
+      {
+        "item": "betternether:rubeus_log"
+      },
+      {
+        "item": "betternether:rubeus_bark"
+      },
+      {
+        "item": "betternether:rubeus_stripped_log"
+      },
+      {
+        "item": "betternether:rubeus_stripped_bark"
+      }
+    ]
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:rubeus_planks"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "betternether:wall_mushroom_brown"
+    }
+  ],
+  "result": {
+    "item": "minecraft:brown_mushroom"
+  }
+}

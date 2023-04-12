@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "roof_stairs",
+  "key": {
+    "#": {
+      "item": "betternether:wart_roof"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:wart_roof_stairs"
+  },
+  "show_notification": true
+}

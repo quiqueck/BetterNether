@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "barrel",
+  "key": {
+    "#": {
+      "item": "betternether:anchor_tree_planks"
+    },
+    "S": {
+      "item": "betternether:anchor_tree_slab"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "result": {
+    "item": "betternether:anchor_tree_barrel"
+  },
+  "show_notification": true
+}

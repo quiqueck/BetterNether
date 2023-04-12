@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_nether_tile_large",
+  "key": {
+    "#": {
+      "item": "minecraft:nether_brick_slab"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 2,
+    "item": "betternether:nether_brick_tile_large"
+  },
+  "show_notification": true
+}

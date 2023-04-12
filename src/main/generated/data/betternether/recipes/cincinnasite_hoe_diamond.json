@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "cincinnasite_hoe_diamond",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "betternether:cincinnasite_hoe"
+    }
+  },
+  "pattern": [
+    " #",
+    "#P"
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_hoe_diamond"
+  },
+  "show_notification": true
+}

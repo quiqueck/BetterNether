@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_nether_tile_small",
+  "key": {
+    "#": {
+      "item": "betternether:nether_brick_tile_large"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:nether_brick_tile_small"
+  },
+  "show_notification": true
+}

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_428_nether_sakura_slab": {
+    "has_nether_sakura_slab": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_429_stick": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
@@ -32,25 +32,10 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/nether_sakura_taburet.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:nether_sakura_taburet"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/nether_sakura_taburet.title"
-    }
-  },
   "requirements": [
     [
-      "has_428_nether_sakura_slab",
-      "has_429_stick",
+      "has_stick",
+      "has_nether_sakura_slab",
       "has_the_recipe"
     ]
   ],

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "cincinnasite_axe_diamond",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "betternether:cincinnasite_axe"
+    }
+  },
+  "pattern": [
+    " #",
+    "#P"
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_axe_diamond"
+  },
+  "show_notification": true
+}

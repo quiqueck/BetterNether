@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_320_mushroom_fir_slab": {
+    "has_mushroom_fir_slab": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/mushroom_fir_composter.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:mushroom_fir_composter"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/mushroom_fir_composter.title"
-    }
-  },
   "requirements": [
     [
-      "has_320_mushroom_fir_slab",
+      "has_mushroom_fir_slab",
       "has_the_recipe"
     ]
   ],

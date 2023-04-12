@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:wart_stripped_log"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wart_stripped_bark": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:wart_stripped_bark"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wart_stripped_bark",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:wart_stripped_log"
+    ]
+  }
+}

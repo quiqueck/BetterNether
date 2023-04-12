@@ -6,6 +6,7 @@ import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockStem;
 
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
@@ -116,143 +117,144 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
             Block log = getBlock(BLOCK_STEM);
 
             BCLRecipeBuilder.crafting(id, planks)
-                            .checkConfig(config)
                             .setOutputCount(4)
-                            .setList("#")
+                            .shapeless()
                             .addMaterial('#', log)
-                            .setGroup(receipGroupPrefix + "_planks")
+                            .setGroup("planks")
+                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_STAIRS, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_STAIRS))
-                            .checkConfig(config)
                             .setOutputCount(4)
                             .setShape("#  ", "## ", "###")
                             .addMaterial('#', planks)
-                            .setGroup(receipGroupPrefix + "_planks_stairs")
+                            .setGroup(receipGroupPrefix + "stairs")
+                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_SLAB, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_SLAB))
-                            .checkConfig(config)
                             .setOutputCount(6)
                             .setShape("###")
                             .addMaterial('#', planks)
-                            .setGroup(receipGroupPrefix + "_planks_slabs")
+                            .setGroup("slab")
+                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_FENCE, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_FENCE))
-                            .checkConfig(config)
                             .setOutputCount(3)
                             .setShape("#I#", "#I#")
                             .addMaterial('#', planks)
                             .addMaterial('I', Items.STICK)
-                            .setGroup(receipGroupPrefix + "_planks_fences")
+                            .setGroup("fence")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_GATE, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_GATE))
-                            .checkConfig(config)
                             .setShape("I#I", "I#I")
                             .addMaterial('#', planks)
                             .addMaterial('I', Items.STICK)
-                            .setGroup(receipGroupPrefix + "_planks_gates")
+                            .setGroup("gate")
+                            .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_BUTTON, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_BUTTON))
-                            .checkConfig(config)
-                            .setList("#")
+                            .shapeless()
                             .addMaterial('#', planks)
-                            .setGroup(receipGroupPrefix + "_planks_buttons")
+                            .setGroup("button")
+                            .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_PRESSURE_PLATE, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_PRESSURE_PLATE))
-                            .checkConfig(config)
                             .setShape("##")
                             .addMaterial('#', planks)
-                            .setGroup(receipGroupPrefix + "_planks_plates")
+                            .setGroup("pressure_plate")
+                            .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_TRAPDOOR, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_TRAPDOOR))
-                            .checkConfig(config)
                             .setOutputCount(2)
                             .setShape("###", "###")
                             .addMaterial('#', planks)
-                            .setGroup(receipGroupPrefix + "_trapdoors")
+                            .setGroup("trapdoor")
+                            .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_DOOR, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_DOOR))
-                            .checkConfig(config)
                             .setOutputCount(3)
                             .setShape("##", "##", "##")
                             .addMaterial('#', planks)
-                            .setGroup(receipGroupPrefix + "_doors")
+                            .setGroup("door")
+                            .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_CRAFTING_TABLE, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_CRAFTING_TABLE))
-                            .checkConfig(config)
                             .setShape("##", "##")
                             .addMaterial('#', planks)
-                            .setGroup(receipGroupPrefix + "_tables")
+                            .setGroup("table")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_LADDER, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_LADDER))
-                            .checkConfig(config)
                             .setOutputCount(3)
                             .setShape("I I", "I#I", "I I")
                             .addMaterial('#', planks)
                             .addMaterial('I', Items.STICK)
-                            .setGroup(receipGroupPrefix + "_ladders")
+                            .setGroup("ladder")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_SIGN, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_SIGN))
-                            .checkConfig(config)
                             .setOutputCount(3)
                             .setShape("###", "###", " I ")
                             .addMaterial('#', planks)
                             .addMaterial('I', Items.STICK)
-                            .setGroup(receipGroupPrefix + "_signs")
+                            .setGroup("sign")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_CHEST, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_CHEST))
-                            .checkConfig(config)
                             .setShape("###", "# #", "###")
                             .addMaterial('#', planks)
-                            .setGroup(receipGroupPrefix + "_chests")
+                            .setGroup("chest")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_BARREL, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_BARREL))
-                            .checkConfig(config)
                             .setShape("#S#", "# #", "#S#")
                             .addMaterial('#', planks)
                             .addMaterial('S', getBlock(BLOCK_SLAB))
-                            .setGroup(receipGroupPrefix + "_barrels")
+                            .setGroup("barrel")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_BOOKSHELF, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_BOOKSHELF))
-                            .checkConfig(config)
                             .setShape("###", "PPP", "###")
                             .addMaterial('#', planks)
                             .addMaterial('P', Items.BOOK)
-                            .setGroup(receipGroupPrefix + "_bookshelves")
+                            .setGroup("bookshelf")
+                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
         addRecipeEntry(new RecipeEntry(BLOCK_COMPOSTER, (material, config, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_COMPOSTER))
-                            .checkConfig(config)
                             .setShape("# #", "# #", "###")
                             .addMaterial('#', getBlock(BLOCK_SLAB))
+                            .setGroup("composter")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
 

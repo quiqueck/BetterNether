@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "button",
+  "ingredients": [
+    {
+      "item": "betternether:willow_planks"
+    }
+  ],
+  "result": {
+    "item": "betternether:willow_button"
+  }
+}

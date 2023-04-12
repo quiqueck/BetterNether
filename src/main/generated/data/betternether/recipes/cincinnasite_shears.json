@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "cincinnasite_shears",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_ingot"
+    }
+  },
+  "pattern": [
+    " #",
+    "# "
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_shears"
+  },
+  "show_notification": true
+}

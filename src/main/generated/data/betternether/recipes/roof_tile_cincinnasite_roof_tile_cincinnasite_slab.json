@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "roof_tile_slab",
+  "key": {
+    "#": {
+      "item": "betternether:roof_tile_cincinnasite"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "betternether:roof_tile_cincinnasite_slab"
+  },
+  "show_notification": true
+}

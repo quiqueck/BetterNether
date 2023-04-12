@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fence",
+  "key": {
+    "#": {
+      "item": "betternether:stalagnate_planks"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "#I#",
+    "#I#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "betternether:stalagnate_fence"
+  },
+  "show_notification": true
+}

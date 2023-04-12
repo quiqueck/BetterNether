@@ -8,6 +8,7 @@ import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -58,31 +59,31 @@ public class RoofMaterial extends NetherWoodenMaterial {
         if (BuiltInRegistries.BLOCK.getKey(slab) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             addRecipeEntry(new RecipeEntry(BLOCK_ROOF, (material, config, id) -> {
                 BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF))
-                                .checkConfig(config)
                                 .setOutputCount(4)
                                 .setShape("# #", "###", " # ")
                                 .addMaterial('#', planks)
-                                .setGroup(receipGroupPrefix + "_planks_roof")
+                                .setGroup("roof")
+                                .setCategory(RecipeCategory.BUILDING_BLOCKS)
                                 .build();
             }));
 
             addRecipeEntry(new RecipeEntry(BLOCK_ROOF_STAIRS, (material, config, id) -> {
                 BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF_STAIRS))
-                                .checkConfig(config)
                                 .setOutputCount(4)
                                 .setShape("#  ", "## ", "###")
                                 .addMaterial('#', roof)
-                                .setGroup(receipGroupPrefix + "_planks_roof_stairs")
+                                .setGroup("roof_stairs")
+                                .setCategory(RecipeCategory.BUILDING_BLOCKS)
                                 .build();
             }));
 
             addRecipeEntry(new RecipeEntry(BLOCK_ROOF_SLAB, (material, config, id) -> {
                 BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF_SLAB))
-                                .checkConfig(config)
                                 .setOutputCount(6)
                                 .setShape("###")
                                 .addMaterial('#', roof)
-                                .setGroup(receipGroupPrefix + "_planks_roof_slabs")
+                                .setGroup("roof_slabs")
+                                .setCategory(RecipeCategory.BUILDING_BLOCKS)
                                 .build();
             }));
         }

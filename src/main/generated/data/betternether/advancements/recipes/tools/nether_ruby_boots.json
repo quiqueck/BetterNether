@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_38_nether_ruby": {
+    "has_nether_ruby": {
       "conditions": {
         "items": [
           {
@@ -20,25 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/tools/nether_ruby_boots.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:nether_ruby_boots",
-      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:ruby_fire\",lvl:1s}]}"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/tools/nether_ruby_boots.title"
-    }
-  },
   "requirements": [
     [
-      "has_38_nether_ruby",
+      "has_nether_ruby",
       "has_the_recipe"
     ]
   ],

@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mushroom_fir_log_mushroom_fir_bark_mus": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:mushroom_fir_log"
+            ]
+          },
+          {
+            "items": [
+              "betternether:mushroom_fir_bark"
+            ]
+          },
+          {
+            "items": [
+              "betternether:mushroom_fir_stripped_log"
+            ]
+          },
+          {
+            "items": [
+              "betternether:mushroom_fir_stripped_bark"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:mushroom_fir_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_mushroom_fir_log_mushroom_fir_bark_mus",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:mushroom_fir_planks"
+    ]
+  }
+}

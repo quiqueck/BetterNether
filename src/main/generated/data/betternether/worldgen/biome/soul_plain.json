@@ -78,7 +78,7 @@
       "betternether:vegetation_soul_plain"
     ]
   ],
-  "precipitation": "none",
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [

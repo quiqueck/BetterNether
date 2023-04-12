@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "nether_chest_boat",
+  "ingredients": [
+    {
+      "tag": "c:chest"
+    },
+    {
+      "item": "betternether:stalagnate_boat"
+    }
+  ],
+  "result": {
+    "item": "betternether:stalagnate_chest_boat"
+  }
+}

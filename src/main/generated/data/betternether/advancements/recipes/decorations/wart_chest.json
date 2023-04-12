@@ -1,7 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_168_wart_planks": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:wart_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wart_planks": {
       "conditions": {
         "items": [
           {
@@ -12,32 +18,11 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "betternether:wart_chest"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    }
-  },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/wart_chest.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:wart_chest"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/wart_chest.title"
     }
   },
   "requirements": [
     [
-      "has_168_wart_planks",
+      "has_wart_planks",
       "has_the_recipe"
     ]
   ],

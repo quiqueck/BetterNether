@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "nether_herbal_medicine",
+  "ingredients": [
+    {
+      "item": "betternether:agave_leaf"
+    },
+    {
+      "item": "betternether:black_apple"
+    },
+    {
+      "item": "betternether:stalagnate_bowl"
+    },
+    {
+      "item": "betternether:hook_mushroom_cooked"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "result": {
+    "item": "betternether:herbal_medicine"
+  }
+}

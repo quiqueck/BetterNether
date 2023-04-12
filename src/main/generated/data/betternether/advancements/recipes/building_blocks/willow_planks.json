@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:willow_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_willow_log_willow_bark_willow_stripped": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:willow_log"
+            ]
+          },
+          {
+            "items": [
+              "betternether:willow_bark"
+            ]
+          },
+          {
+            "items": [
+              "betternether:willow_stripped_log"
+            ]
+          },
+          {
+            "items": [
+              "betternether:willow_stripped_bark"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_willow_log_willow_bark_willow_stripped",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:willow_planks"
+    ]
+  }
+}

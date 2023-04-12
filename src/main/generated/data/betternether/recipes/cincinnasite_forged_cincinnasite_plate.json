@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_rock_plate",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_plate"
+  },
+  "show_notification": true
+}

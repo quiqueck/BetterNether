@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_taburet",
+  "key": {
+    "#": {
+      "item": "betternether:rubeus_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "##",
+    "II"
+  ],
+  "result": {
+    "item": "betternether:rubeus_taburet"
+  },
+  "show_notification": true
+}

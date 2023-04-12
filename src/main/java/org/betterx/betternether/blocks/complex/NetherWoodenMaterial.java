@@ -21,6 +21,7 @@ import org.betterx.betternether.registry.NetherItems;
 import org.betterx.worlds.together.tag.v3.CommonItemTags;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -155,31 +156,31 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 
     public static void makeTaburetRecipe(PathConfig config, ResourceLocation id, Block taburet, Block planks) {
         BCLRecipeBuilder.crafting(id, taburet)
-                        .checkConfig(config)
                         .setShape("##", "II")
                         .addMaterial('#', planks)
                         .addMaterial('I', Items.STICK)
                         .setGroup("nether" + "_taburet")
+                        .setCategory(RecipeCategory.DECORATIONS)
                         .build();
     }
 
     public static void makeChairRecipe(PathConfig config, ResourceLocation id, Block chair, Block planks) {
         BCLRecipeBuilder.crafting(id, chair)
-                        .checkConfig(config)
                         .setShape("I ", "##", "II")
                         .addMaterial('#', planks)
                         .addMaterial('I', Items.STICK)
                         .setGroup("nether" + "_chair")
+                        .setCategory(RecipeCategory.DECORATIONS)
                         .build();
     }
 
     public static void makeBarStoolRecipe(PathConfig config, ResourceLocation id, Block barStool, Block planks) {
         BCLRecipeBuilder.crafting(id, barStool)
-                        .checkConfig(config)
                         .setShape("##", "II", "II")
                         .addMaterial('#', planks)
                         .addMaterial('I', Items.STICK)
                         .setGroup("nether" + "_bar_stool")
+                        .setCategory(RecipeCategory.DECORATIONS)
                         .build();
     }
 
@@ -193,18 +194,18 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     ) {
         if (hasChest) {
             BCLRecipeBuilder.crafting(id, chestBoat)
-                            .checkConfig(config)
-                            .setList("C#")
+                            .shapeless()
                             .addMaterial('C', CommonItemTags.CHEST)
                             .addMaterial('#', boat)
                             .setGroup("nether" + "_chest_boat")
+                            .setCategory(RecipeCategory.TRANSPORTATION)
                             .build();
         } else {
             BCLRecipeBuilder.crafting(id, boat)
-                            .checkConfig(config)
                             .setShape("# #", "###")
                             .addMaterial('#', planks)
                             .setGroup("nether" + "_boat")
+                            .setCategory(RecipeCategory.TRANSPORTATION)
                             .build();
         }
     }

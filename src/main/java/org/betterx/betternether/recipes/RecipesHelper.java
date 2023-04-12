@@ -1,11 +1,12 @@
 package org.betterx.betternether.recipes;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
+import org.betterx.bclib.recipes.BCLRecipeBuilder;
+import org.betterx.betternether.BN;
 
-import com.google.common.collect.ImmutableMap;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class RecipesHelper {
     private static final String[] SHAPE_ROOF = new String[]{"# #", "###", " # "};
@@ -23,8 +24,14 @@ public class RecipesHelper {
         if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(source)
                                                  .getPath() + "_" + BuiltInRegistries.BLOCK.getKey(result).getPath();
-            ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
-            BNRecipeManager.addCraftingRecipe(name, group, shape, materials, new ItemStack(result, count));
+
+            BCLRecipeBuilder
+                    .crafting(BN.id(name), result)
+                    .setOutputCount(count)
+                    .setGroup(group)
+                    .setShape(shape)
+                    .addMaterial('#', source)
+                    .build();
         }
     }
 
@@ -69,29 +76,42 @@ public class RecipesHelper {
     public static void makeWallRecipe(Block source, Block wall) {
         if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(wall).getPath();
-            ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
-            BNRecipeManager.addCraftingRecipe(name, "nether_wall", SHAPE_3X2, materials, new ItemStack(wall, 6));
+
+            BCLRecipeBuilder
+                    .crafting(BN.id(name), wall)
+                    .setOutputCount(6)
+                    .setGroup("nether_wall")
+                    .setShape(SHAPE_3X2)
+                    .addMaterial('#', source)
+                    .build();
         }
     }
 
     public static void makeColoringRecipe(Block source, Block result, Item dye, String group) {
         if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
-            ImmutableMap<String, ItemStack> materials = ImmutableMap.of(
-                    "#",
-                    new ItemStack(source),
-                    "I",
-                    new ItemStack(dye)
-            );
-            BNRecipeManager.addCraftingRecipe(name, group, SHAPE_COLORING, materials, new ItemStack(result, 8));
+
+            BCLRecipeBuilder
+                    .crafting(BN.id(name), result)
+                    .setOutputCount(8)
+                    .setGroup(group)
+                    .setShape(SHAPE_COLORING)
+                    .addMaterial('#', source)
+                    .addMaterial('I', dye)
+                    .build();
         }
     }
 
     public static void makeRoundRecipe(Block source, Block result, String group) {
         if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
-            ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
-            BNRecipeManager.addCraftingRecipe(name, group, SHAPE_ROUND, materials, new ItemStack(result));
+
+            BCLRecipeBuilder
+                    .crafting(BN.id(name), result)
+                    .setGroup(group)
+                    .setShape(SHAPE_ROUND)
+                    .addMaterial('#', source)
+                    .build();
         }
     }
 
@@ -100,15 +120,16 @@ public class RecipesHelper {
                 inside) != BuiltInRegistries.BLOCK.getDefaultKey() && BuiltInRegistries.ITEM.getKey(
                 leg) != BuiltInRegistries.ITEM.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
-            ImmutableMap<String, ItemStack> materials = ImmutableMap.of(
-                    "#",
-                    new ItemStack(material),
-                    "I",
-                    new ItemStack(inside),
-                    "L",
-                    new ItemStack(leg)
-            );
-            BNRecipeManager.addCraftingRecipe(name, "fire_bowl", SHAPE_FIRE_BOWL, materials, new ItemStack(result));
+
+            BCLRecipeBuilder
+                    .crafting(BN.id(name), result)
+                    .setGroup("fire_bowl")
+                    .setShape(SHAPE_FIRE_BOWL)
+                    .addMaterial('#', material)
+                    .addMaterial('I', inside)
+                    .addMaterial('L', leg)
+                    .setCategory(RecipeCategory.DECORATIONS)
+                    .build();
         }
     }
 }

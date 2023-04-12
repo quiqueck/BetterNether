@@ -1,24 +1,24 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_30_nether_ruby": {
+    "has_nether_reed_stem": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:nether_ruby"
+              "betternether:nether_reed_stem"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_31_nether_reed_stem": {
+    "has_nether_ruby": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:nether_reed_stem"
+              "betternether:nether_ruby"
             ]
           }
         ]
@@ -32,26 +32,10 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/tools/nether_ruby_sword.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:nether_ruby_sword",
-      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:ruby_fire\",lvl:1s}]}"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/tools/nether_ruby_sword.title"
-    }
-  },
   "requirements": [
     [
-      "has_30_nether_ruby",
-      "has_31_nether_reed_stem",
+      "has_nether_ruby",
+      "has_nether_reed_stem",
       "has_the_recipe"
     ]
   ],

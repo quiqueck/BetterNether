@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_505_cincinnasite_ingot": {
+    "has_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_506_glowstone": {
+    "has_glowstone": {
       "conditions": {
         "items": [
           {
@@ -32,25 +32,10 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/cincinnasite_lantern.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:cincinnasite_lantern"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/cincinnasite_lantern.title"
-    }
-  },
   "requirements": [
     [
-      "has_505_cincinnasite_ingot",
-      "has_506_glowstone",
+      "has_cincinnasite_ingot",
+      "has_glowstone",
       "has_the_recipe"
     ]
   ],

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_509_cincinnasite_forged": {
+    "has_cincinnasite_forged": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/cincinnasite_pedestal.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:cincinnasite_pedestal"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/cincinnasite_pedestal.title"
-    }
-  },
   "requirements": [
     [
-      "has_509_cincinnasite_forged",
+      "has_cincinnasite_forged",
       "has_the_recipe"
     ]
   ],

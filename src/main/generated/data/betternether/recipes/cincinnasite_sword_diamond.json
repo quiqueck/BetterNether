@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "cincinnasite_sword_diamond",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "betternether:cincinnasite_sword"
+    }
+  },
+  "pattern": [
+    " #",
+    "#P"
+  ],
+  "result": {
+    "item": "betternether:cincinnasite_sword_diamond"
+  },
+  "show_notification": true
+}

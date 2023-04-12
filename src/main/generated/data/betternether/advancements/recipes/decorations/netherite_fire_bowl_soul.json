@@ -1,24 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_0_cincinnasite_fire_bowl_soul": {
+    "has_block.betternether.cincinnasite_fire_bowl_soul": {
       "conditions": {
         "items": [
           {
             "items": [
               "betternether:cincinnasite_fire_bowl_soul"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_1_netherite_ingot": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:netherite_ingot"
             ]
           }
         ]
@@ -32,25 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/netherite_fire_bowl_soul.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:netherite_fire_bowl_soul"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/netherite_fire_bowl_soul.title"
-    }
-  },
   "requirements": [
     [
-      "has_0_cincinnasite_fire_bowl_soul",
-      "has_1_netherite_ingot",
+      "has_block.betternether.cincinnasite_fire_bowl_soul",
       "has_the_recipe"
     ]
   ],

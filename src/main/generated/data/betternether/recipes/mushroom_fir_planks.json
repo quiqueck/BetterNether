@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    [
+      {
+        "item": "betternether:mushroom_fir_log"
+      },
+      {
+        "item": "betternether:mushroom_fir_bark"
+      },
+      {
+        "item": "betternether:mushroom_fir_stripped_log"
+      },
+      {
+        "item": "betternether:mushroom_fir_stripped_bark"
+      }
+    ]
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:mushroom_fir_planks"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "group": "nether_obsidian_rod_tiles",
+  "ingredient": {
+    "item": "minecraft:obsidian"
+  },
+  "result": "betternether:obsidian_rod_tiles"
+}

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_55_nether_reed_planks": {
+    "has_nether_reed_planks": {
       "conditions": {
         "items": [
           {
@@ -20,24 +20,9 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "display": {
-    "announce_to_chat": false,
-    "description": {
-      "translate": "advancements.betternether.recipes/decorations/nether_reed_crafting_table.description"
-    },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "betternether:nether_reed_crafting_table"
-    },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.betternether.recipes/decorations/nether_reed_crafting_table.title"
-    }
-  },
   "requirements": [
     [
-      "has_55_nether_reed_planks",
+      "has_nether_reed_planks",
       "has_the_recipe"
     ]
   ],

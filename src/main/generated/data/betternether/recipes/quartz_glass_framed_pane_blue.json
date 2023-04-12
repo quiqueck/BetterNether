@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "quartz_glass_framed_pane",
+  "key": {
+    "#": {
+      "item": "betternether:quartz_glass_framed_pane"
+    },
+    "I": {
+      "item": "minecraft:blue_dye"
+    }
+  },
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "betternether:quartz_glass_framed_pane_blue"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "netherstairs",
+  "key": {
+    "#": {
+      "item": "betternether:nether_mushroom_planks"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "betternether:nether_mushroom_stairs"
+  },
+  "show_notification": true
+}

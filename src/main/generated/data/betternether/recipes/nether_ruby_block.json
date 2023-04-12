@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_nether_ruby_block",
+  "key": {
+    "#": {
+      "item": "betternether:nether_ruby"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "betternether:nether_ruby_block"
+  },
+  "show_notification": true
+}

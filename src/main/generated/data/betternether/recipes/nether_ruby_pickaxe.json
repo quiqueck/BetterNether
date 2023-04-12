@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "nether_ruby_pickaxe",
+  "key": {
+    "#": {
+      "item": "betternether:nether_ruby"
+    },
+    "I": {
+      "item": "betternether:nether_reed_stem"
+    }
+  },
+  "pattern": [
+    "###",
+    " I ",
+    " I "
+  ],
+  "result": {
+    "item": "betternether:nether_ruby_pickaxe"
+  },
+  "show_notification": true
+}

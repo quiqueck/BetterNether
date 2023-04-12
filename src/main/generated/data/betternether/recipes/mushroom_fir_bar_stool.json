@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_bar_stool",
+  "key": {
+    "#": {
+      "item": "betternether:mushroom_fir_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "##",
+    "II",
+    "II"
+  ],
+  "result": {
+    "item": "betternether:mushroom_fir_bar_stool"
+  },
+  "show_notification": true
+}

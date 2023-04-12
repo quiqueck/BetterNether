@@ -21,7 +21,7 @@ public class CreativeTabs {
         BN_TAB = FabricItemGroup
                 .builder(BetterNether.makeID("blocks"))
                 .icon(() -> new ItemStack(NetherBlocks.NETHER_GRASS))
-                .displayItems((featureFlagSet, output, bl) -> {
+                .displayItems((featureFlagSet, output) -> {
                     List<ItemStack> stacks = NetherBlocks
                             .getModBlockItems()
                             .stream()
@@ -34,7 +34,7 @@ public class CreativeTabs {
         TAB_ITEMS = FabricItemGroup
                 .builder(BetterNether.makeID("items"))
                 .icon(() -> new ItemStack(NetherItems.BLACK_APPLE))
-                .displayItems((featureFlagSet, output, bl) -> {
+                .displayItems((featureFlagSet, output) -> {
                     List<ItemStack> saplings = NetherBlocks
                             .getModBlockItems()
                             .stream()
@@ -46,7 +46,7 @@ public class CreativeTabs {
                             .stream()
                             .map(ItemStack::new)
                             .toList();
-                    
+
                     output.acceptAll(saplings);
                     output.acceptAll(stacks);
                 }).build();

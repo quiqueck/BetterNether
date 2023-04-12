@@ -44,7 +44,7 @@ public class RenderJungleSkeleton extends MobRenderer<EntityJungleSkeleton, Skel
         final SkeletonModel<EntityJungleSkeleton> afm_sem_legins = new SkeletonModel<EntityJungleSkeleton>(ctx.bakeLayer(
                 legArmorLayer));
         final HumanoidArmorLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>, SkeletonModel<EntityJungleSkeleton>> afm;
-        afm = new HumanoidArmorLayer<>(this, afm_sem_legins, afm_sem_body);
+        afm = new HumanoidArmorLayer<>(this, afm_sem_legins, afm_sem_body, ctx.getModelManager());
         this.addLayer(afm);
 
         final ItemInHandRenderer itemInHandRenderer = ctx.getItemInHandRenderer();

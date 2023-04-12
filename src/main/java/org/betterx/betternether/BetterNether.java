@@ -8,9 +8,7 @@ import org.betterx.betternether.config.Config;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.enchantments.ObsidianBreaker;
 import org.betterx.betternether.loot.BNLoot;
-import org.betterx.betternether.recipes.BlockRecipes;
 import org.betterx.betternether.recipes.IntegrationRecipes;
-import org.betterx.betternether.recipes.ItemRecipes;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.world.BNWorldGenerator;
@@ -55,8 +53,6 @@ public class BetterNether implements ModInitializer {
 
         IntegrationRecipes.register();
         NetherTags.register();
-        ItemRecipes.register();
-        BlockRecipes.register();
         BNLoot.register();
         BNCriterion.register();
         NetherVegetation.setupBonemealFeatures();

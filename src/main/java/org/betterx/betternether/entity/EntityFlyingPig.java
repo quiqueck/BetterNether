@@ -66,7 +66,11 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
         this.setPathfindingMalus(BlockPathTypes.LAVA, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.xpReward = 2;
-        this.flyingSpeed = 0.3F;
+    }
+
+    @Override
+    protected float getFlyingSpeed() {
+        return this.getControllingPassenger() instanceof Player ? this.getSpeed() * 0.1F : 0.3F;
     }
 
     @Override
@@ -247,7 +251,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
                 BlockPos pos = this.getRandomLocation();
                 Path path = EntityFlyingPig.this.navigation.createPath(pos, 1);
                 if (path != null)
-                    EntityFlyingPig.this.navigation.moveTo(path, EntityFlyingPig.this.flyingSpeed);
+                    EntityFlyingPig.this.navigation.moveTo(path, EntityFlyingPig.this.getFlyingSpeed());
                 else
                     EntityFlyingPig.this.setDeltaMovement(0, -0.2, 0);
                 EntityFlyingPig.this.setRoosting(false);
@@ -320,7 +324,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
             if (pos != null) {
                 Path path = EntityFlyingPig.this.navigation.createPath(pos, 1);
                 if (path != null) {
-                    EntityFlyingPig.this.navigation.moveTo(path, EntityFlyingPig.this.flyingSpeed);
+                    EntityFlyingPig.this.navigation.moveTo(path, EntityFlyingPig.this.getFlyingSpeed());
                     this.roosting = pos;
                 }
             }
@@ -401,7 +405,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
             BlockPos pos = getFood();
             Path path = EntityFlyingPig.this.navigation.createPath(pos, 1);
             if (path != null) {
-                EntityFlyingPig.this.navigation.moveTo(path, EntityFlyingPig.this.flyingSpeed);
+                EntityFlyingPig.this.navigation.moveTo(path, EntityFlyingPig.this.getFlyingSpeed());
                 EntityFlyingPig.this.setRoosting(false);
             }
             super.start();

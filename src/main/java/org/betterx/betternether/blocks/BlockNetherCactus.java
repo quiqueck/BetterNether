@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -96,6 +95,6 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
 
     @Override
     public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        entity.hurt(DamageSource.CACTUS, 1.0F);
+        entity.hurt(world.damageSources().cactus(), 1.0F);
     }
 }

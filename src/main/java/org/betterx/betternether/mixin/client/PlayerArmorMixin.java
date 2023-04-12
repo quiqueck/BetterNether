@@ -46,7 +46,8 @@ public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClie
                     new HumanoidArmorLayer(
                             this,
                             new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
-                            new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))
+                            new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR)),
+                            context.getModelManager()
                     )
             );
         }

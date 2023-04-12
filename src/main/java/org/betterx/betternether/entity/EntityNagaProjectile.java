@@ -2,7 +2,6 @@ package org.betterx.betternether.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -102,7 +101,7 @@ public class EntityNagaProjectile extends FlyingMob {
                 LivingEntity living = (LivingEntity) entity;
                 if (!(living.hasEffect(MobEffects.WITHER))) {
                     living.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
-                    living.hurt(DamageSource.GENERIC, 1.0F);
+                    living.hurt(living.damageSources().generic(), 1.0F);
                 }
                 effectKill();
             }

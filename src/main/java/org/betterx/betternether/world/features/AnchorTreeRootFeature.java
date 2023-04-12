@@ -177,7 +177,7 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
         double x = Mth.lerp(v, start.getX(), end.getX());
         double y = Mth.lerp(v, start.getY(), end.getY());
         double z = Mth.lerp(v, start.getZ(), end.getZ());
-        return new BlockPos(x, y, z);
+        return new BlockPos((int) x, (int) y, (int) z);
     }
 
     private double lcos(double mix) {
@@ -197,7 +197,7 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
             double x = Mth.lerp(delta, start.getX(), end.getX()) + random.nextGaussian() * range;
             double y = Mth.lerp(delta, start.getY(), end.getY()) - offset * size;
             double z = Mth.lerp(delta, start.getZ(), end.getZ()) + random.nextGaussian() * range;
-            result.add(new BlockPos(x, y, z));
+            result.add(new BlockPos((int) x, (int) y, (int) z));
         }
         result.add(end);
         return result;

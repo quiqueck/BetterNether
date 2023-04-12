@@ -3,6 +3,7 @@ package org.betterx.betternether.integrations.emi;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blockentities.BlockEntityForge;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
@@ -34,7 +35,7 @@ public class EMIForgeRecipe implements EmiRecipe {
         );
 
         this.input = EmiIngredient.of(recipe.getIngredients().get(0));
-        this.output = EmiStack.of(recipe.getResultItem());
+        this.output = EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()));
         this.recipe = recipe;
         this.speedup = speedup;
     }

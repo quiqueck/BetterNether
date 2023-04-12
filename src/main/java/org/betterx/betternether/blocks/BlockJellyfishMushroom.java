@@ -10,7 +10,6 @@ import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -116,7 +115,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
         if (entity.isSuppressingBounce())
             super.fallOn(world, state, pos, entity, fallDistance);
         else
-            entity.causeFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+            entity.causeFallDamage(fallDistance, 0.0F, world.damageSources().fall());
     }
 
     @Override

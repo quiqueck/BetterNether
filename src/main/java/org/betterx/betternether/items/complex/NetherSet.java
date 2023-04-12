@@ -10,7 +10,7 @@ import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class NetherSet extends EquipmentSet {
@@ -35,10 +35,10 @@ public class NetherSet extends EquipmentSet {
         add(HOE_SLOT, EquipmentDescription::new, NetherHoe::new);
         add(SWORD_SLOT, EquipmentDescription::new, NetherSword::new);
 
-        add(HELMET_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.HEAD)));
-        add(CHESTPLATE_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.CHEST)));
-        add(LEGGINGS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.LEGS)));
-        add(BOOTS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.FEET)));
+        add(HELMET_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, ArmorItem.Type.HELMET)));
+        add(CHESTPLATE_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, ArmorItem.Type.CHESTPLATE)));
+        add(LEGGINGS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, ArmorItem.Type.LEGGINGS)));
+        add(BOOTS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, ArmorItem.Type.BOOTS)));
 
         if (withShears) {
             add(

@@ -154,7 +154,7 @@ public class ItemRecipes {
 
         BCLRecipeBuilder.crafting(BetterNether.makeID("cincinnasite_ingot"), NetherItems.CINCINNASITE_INGOT)
                         .checkConfig(Configs.RECIPE_CONFIG)
-                        .setShape("#")
+                        .shapeless()
                         .addMaterial('#', NetherBlocks.CINCINNASITE_FORGED)
                         .setGroup("nether_cincinnasite_ingot")
                         .setOutputCount(4)
@@ -179,14 +179,14 @@ public class ItemRecipes {
                         .build();
         BCLRecipeBuilder.crafting(BetterNether.makeID("gray_dye"), Items.GRAY_DYE)
                         .checkConfig(Configs.RECIPE_CONFIG)
-                        .setShape("#")
+                        .shapeless()
                         .addMaterial('#', NetherBlocks.GRAY_MOLD)
                         .setGroup("nether_gray_dye")
                         .build();
 
         BCLRecipeBuilder.crafting(BetterNether.makeID("nether_ruby_from_block"), NetherItems.NETHER_RUBY)
                         .checkConfig(Configs.RECIPE_CONFIG)
-                        .setShape("#")
+                        .shapeless()
                         .addMaterial('#', NetherBlocks.NETHER_RUBY_BLOCK)
                         .setGroup("nether_nether_ruby_from_block")
                         .setOutputCount(9)
@@ -208,7 +208,7 @@ public class ItemRecipes {
                         .build();
         BCLRecipeBuilder.crafting(BetterNether.makeID("red_dye"), Items.RED_DYE)
                         .checkConfig(Configs.RECIPE_CONFIG)
-                        .setShape("#")
+                        .shapeless()
                         .addMaterial('#', NetherBlocks.RED_MOLD)
                         .setGroup("nether_red_dye")
                         .setOutputCount(2)
@@ -231,7 +231,7 @@ public class ItemRecipes {
 
         BCLRecipeBuilder.crafting(BetterNether.makeID("sugar"), Items.SUGAR)
                         .checkConfig(Configs.RECIPE_CONFIG)
-                        .setShape("#")
+                        .shapeless()
                         .addMaterial('#', NetherBlocks.NETHER_REED_STEM)
                         .setGroup("nether_sugar")
                         .build();
@@ -308,32 +308,24 @@ public class ItemRecipes {
 
     private static void registerSmelting() {
         BCLRecipeBuilder.smelting(BetterNether.makeID("black_dye"), Items.BLACK_DYE)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(NetherBlocks.INK_BUSH_SEED)
-                        .setGroup("nether_black_dye")
+                        .setPrimaryInputAndUnlock(NetherBlocks.INK_BUSH_SEED)
                         .setCookingTime(200)
                         .build();
 
         BCLRecipeBuilder.smelting(BetterNether.makeID("hook_mushroom_cooked"), NetherItems.HOOK_MUSHROOM_COOKED)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(NetherBlocks.HOOK_MUSHROOM)
-                        .setGroup("nether_hook_mushroom_cooked")
+                        .setPrimaryInputAndUnlock(NetherBlocks.HOOK_MUSHROOM)
                         .setCookingTime(200)
                         .setExperience(0.1f)
                         .build();
 
         BCLRecipeBuilder.smelting(BetterNether.makeID("cincinnasite_ingot_from_shard"), NetherItems.CINCINNASITE_INGOT)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(NetherItems.CINCINNASITE)
-                        .setGroup("nether_cincinnasite_ingot_from_shard")
+                        .setPrimaryInputAndUnlock(NetherItems.CINCINNASITE)
                         .setCookingTime(200)
                         .setExperience(0.5f)
                         .buildWithBlasting();
 
         BCLRecipeBuilder.smelting(BetterNether.makeID("cincinnasite_ingot_from_ore"), NetherItems.CINCINNASITE_INGOT)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(NetherBlocks.CINCINNASITE_ORE)
-                        .setGroup("nether_cincinnasite_ingot_from_ore")
+                        .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_ORE)
                         .setCookingTime(200)
                         .setExperience(0.5f)
                         .buildWithBlasting();

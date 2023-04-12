@@ -296,14 +296,14 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         double x = Mth.lerp(mix, start.getX(), end.getX());
         double y = Mth.lerp(mix, start.getY(), end.getY());
         double z = Mth.lerp(mix, start.getZ(), end.getZ());
-        return new BlockPos(x, y, z);
+        return new BlockPos((int) x, (int) y, (int) z);
     }
 
     private BlockPos lerpCos(BlockPos start, BlockPos end, int y, double mix) {
         double v = lcos(mix);
         double x = Mth.lerp(v, start.getX(), end.getX());
         double z = Mth.lerp(v, start.getZ(), end.getZ());
-        return new BlockPos(x, y, z);
+        return new BlockPos((int) x, (int) y, (int) z);
     }
 
     private double lcos(double mix) {
@@ -319,7 +319,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             double x = Mth.lerp(delta, start.getX(), end.getX()) + random.nextGaussian() * range;
             double y = Mth.lerp(delta, start.getY(), end.getY());
             double z = Mth.lerp(delta, start.getZ(), end.getZ()) + random.nextGaussian() * range;
-            result.add(new BlockPos(x, y, z));
+            result.add(new BlockPos((int) x, (int) y, (int) z));
         }
         result.add(end);
         return result;
@@ -374,7 +374,11 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             if (z - seedPos.getZ() > MAX_DIST) z = seedPos.getZ() + MAX_DIST - random.nextInt(10);
             if (z - seedPos.getZ() < -MAX_DIST) z = seedPos.getZ() - MAX_DIST + random.nextInt(10);
 
-            BlockPos end = new BlockPos(x, pos.getY() + length + length * random.nextDouble() * 0.5, z);
+            BlockPos end = new BlockPos(
+                    (int) x,
+                    (int) (pos.getY() + length + length * random.nextDouble() * 0.5),
+                    (int) z
+            );
             List<BlockPos> elem = new ArrayList<>(2);
             elem.add(pos);
             elem.add(end);

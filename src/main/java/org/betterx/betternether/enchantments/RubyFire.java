@@ -10,7 +10,6 @@ import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -89,7 +88,7 @@ public class RubyFire extends Enchantment {
         );
         if (shouldHit(i, random)) {
             if (entity != null) {
-                entity.hurt(DamageSource.indirectMagic(entity, entity), getDamage(i, random));
+                entity.hurt(player.damageSources().indirectMagic(entity, entity), getDamage(i, random));
                 entity.setRemainingFireTicks(100 + 50 * random.nextInt(3));
                 if (entity instanceof LivingEntity living) {
                     living.knockback(
@@ -142,7 +141,7 @@ public class RubyFire extends Enchantment {
                     BlastingRecipe result = FIRE_CONVERSIONS.get(stack.getItem());
                     if (result != null) {
                         didConvert = true;
-                        final ItemStack resultStack = result.getResultItem();
+                        final ItemStack resultStack = result.getResultItem(level.registryAccess());
                         xpDrop += result.getExperience();
                         convertedDrops.get()
                                       .add(new ItemStack(

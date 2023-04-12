@@ -6,6 +6,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
@@ -19,11 +20,12 @@ public class BlockRecipes {
                         .addMaterial('X', NetherItems.CINCINNASITE_INGOT)
                         .setGroup("nether_activator_rail")
                         .setOutputCount(6)
+                        .setCategory(RecipeCategory.REDSTONE)
                         .build();
 
         BCLRecipeBuilder.crafting(BetterNether.makeID("black_apple_seed"), NetherBlocks.BLACK_APPLE_SEED)
                         .checkConfig(Configs.RECIPE_CONFIG)
-                        .setShape("#")
+                        .shapeless()
                         .addMaterial('#', NetherItems.BLACK_APPLE)
                         .setGroup("nether_black_apple_seed")
                         .setOutputCount(4)
@@ -35,6 +37,7 @@ public class BlockRecipes {
                         .addMaterial('#', Items.BONE_BLOCK)
                         .setGroup("nether_bn_bone_block")
                         .setOutputCount(4)
+                        .setCategory(RecipeCategory.BUILDING_BLOCKS)
                         .build();
         BCLRecipeBuilder.crafting(BetterNether.makeID("bone_cin_door"), NetherBlocks.BONE_CINCINNASITE_DOOR)
                         .checkConfig(Configs.RECIPE_CONFIG)
@@ -43,6 +46,7 @@ public class BlockRecipes {
                         .addMaterial('B', NetherBlocks.BONE_BLOCK)
                         .setGroup("nether_bone_cin_door")
                         .setOutputCount(3)
+                        .setCategory(RecipeCategory.DECORATIONS)
                         .build();
 
         BCLRecipeBuilder.crafting(BetterNether.makeID("bone_tile"), NetherBlocks.BONE_TILE)
@@ -104,7 +108,7 @@ public class BlockRecipes {
                         .build();
         BCLRecipeBuilder.crafting(BetterNether.makeID("cincinnasite_button"), NetherBlocks.CINCINNASITE_BUTTON)
                         .checkConfig(Configs.RECIPE_CONFIG)
-                        .setShape("#")
+                        .shapeless()
                         .addMaterial('#', NetherItems.CINCINNASITE_INGOT)
                         .setGroup("nether_cincinnasite_button")
                         .build();
@@ -252,7 +256,7 @@ public class BlockRecipes {
 
         BCLRecipeBuilder.crafting(BetterNether.makeID("wall_moss"), NetherBlocks.WALL_MOSS)
                         .checkConfig(Configs.RECIPE_CONFIG)
-                        .setShape("#")
+                        .shapeless()
                         .addMaterial('#', NetherBlocks.NETHER_GRASS)
                         .setGroup("nether_wall_moss")
                         .build();
@@ -390,50 +394,36 @@ public class BlockRecipes {
     private static void registerSmithing() {
         BCLRecipeBuilder
                 .smithing(BetterNether.makeID("netherite_fire_bowl"), NetherBlocks.NETHERITE_FIRE_BOWL)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setBase(NetherBlocks.CINCINNASITE_FIRE_BOWL)
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FIRE_BOWL)
                 .setAddition(Items.NETHERITE_INGOT)
-                .setGroup("nether_netherite_fire_bowl")
                 .build();
 
         BCLRecipeBuilder
                 .smithing(BetterNether.makeID("netherite_fire_bowl_soul"), NetherBlocks.NETHERITE_FIRE_BOWL_SOUL)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setBase(NetherBlocks.CINCINNASITE_FIRE_BOWL_SOUL)
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FIRE_BOWL_SOUL)
                 .setAddition(Items.NETHERITE_INGOT)
-                .setGroup("nether_netherite_fire_bowl_soul")
                 .build();
     }
 
     private static void registerSmelting() {
         BCLRecipeBuilder.smelting(BetterNether.makeID("blue_obsidian_glass"), NetherBlocks.BLUE_OBSIDIAN_GLASS)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(NetherBlocks.BLUE_OBSIDIAN)
-                        .setGroup("nether_blue_obsidian_glass")
+                        .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                         .setCookingTime(200)
                         .build();
         BCLRecipeBuilder.smelting(BetterNether.makeID("cincinnasite_forged"), NetherBlocks.CINCINNASITE_FORGED)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(NetherBlocks.CINCINNASITE_BLOCK)
-                        .setGroup("nether_cincinnasite_forged")
+                        .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_BLOCK)
                         .setCookingTime(200)
                         .build();
         BCLRecipeBuilder.smelting(BetterNether.makeID("obsidian_glass"), NetherBlocks.OBSIDIAN_GLASS)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(Blocks.OBSIDIAN)
-                        .setGroup("nether_obsidian_glass")
+                        .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                         .setCookingTime(200)
                         .build();
         BCLRecipeBuilder.smelting(BetterNether.makeID("quartz_glass"), NetherBlocks.QUARTZ_GLASS)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(Items.QUARTZ)
-                        .setGroup("nether_quartz_glass")
+                        .setPrimaryInputAndUnlock(Items.QUARTZ)
                         .setCookingTime(200)
                         .build();
         BCLRecipeBuilder.smelting(BetterNether.makeID("soul_sandstone"), NetherBlocks.SOUL_SANDSTONE_SMOOTH)
-                        .checkConfig(Configs.RECIPE_CONFIG)
-                        .setInput(NetherBlocks.SOUL_SANDSTONE)
-                        .setGroup("nether_soul_sandstone")
+                        .setPrimaryInputAndUnlock(NetherBlocks.SOUL_SANDSTONE)
                         .setCookingTime(200)
                         .setExperience(0.1f)
                         .build();
@@ -442,9 +432,7 @@ public class BlockRecipes {
     private static void registerBlasting() {
         BCLRecipeBuilder
                 .blasting(BetterNether.makeID("cincinnasite_forged_blasting"), NetherBlocks.CINCINNASITE_FORGED)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.CINCINNASITE_BLOCK)
-                .setGroup("nether_cincinnasite_forged_blasting")
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_BLOCK)
                 .setCookingTime(100)
                 .build();
     }
@@ -455,8 +443,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_bricks_from_tile_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_BRICKS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN_TILE)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN_TILE)
                 .setGroup("nether_blue_obsidian_bricks_from_tile_stonecutter")
                 .build();
 
@@ -465,8 +452,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_bricks_slab_from_bricks_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_BRICKS_SLAB
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
                 .setGroup("nether_blue_obsidian_bricks_slab_from_bricks_stonecutter")
                 .setOutputCount(2)
                 .build();
@@ -476,8 +462,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_bricks_slab_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_BRICKS_SLAB
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                 .setGroup("nether_blue_obsidian_bricks_slab_stonecutter")
                 .setOutputCount(2)
                 .build();
@@ -487,8 +472,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_bricks_stairs_from_bricks_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_BRICKS_STAIRS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
                 .setGroup("nether_blue_obsidian_bricks_stairs_from_bricks_stonecutter")
                 .build();
 
@@ -497,8 +481,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_bricks_stairs_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_BRICKS_STAIRS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                 .setGroup("nether_blue_obsidian_bricks_stairs_stonecutter")
                 .build();
 
@@ -507,8 +490,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_bricks_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_BRICKS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                 .setGroup("nether_blue_obsidian_bricks_stonecutter")
                 .build();
 
@@ -517,8 +499,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_rod_tiles_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_ROD_TILES
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                 .setGroup("nether_blue_obsidian_rod_tiles_stonecutter")
                 .build();
 
@@ -527,8 +508,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_tile_slab_from_tile_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_TILE_SLAB
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN_TILE)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN_TILE)
                 .setGroup("nether_blue_obsidian_tile_slab_from_tile_stonecutter")
                 .setOutputCount(2)
                 .build();
@@ -538,8 +518,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_tile_slab_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_TILE_SLAB
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                 .setGroup("nether_blue_obsidian_tile_slab_stonecutter")
                 .setOutputCount(2)
                 .build();
@@ -549,8 +528,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_tile_small_from_bricks_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_TILE_SMALL
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
                 .setGroup("nether_blue_obsidian_tile_small_from_bricks_stonecutter")
                 .build();
 
@@ -559,8 +537,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_tile_small_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_TILE_SMALL
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                 .setGroup("nether_blue_obsidian_tile_small_stonecutter")
                 .build();
 
@@ -569,8 +546,7 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_tile_stairs_from_tile_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_TILE_STAIRS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN_TILE)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN_TILE)
                 .setGroup("nether_blue_obsidian_tile_stairs_from_tile_stonecutter")
                 .build();
 
@@ -579,15 +555,13 @@ public class BlockRecipes {
                         BetterNether.makeID("blue_obsidian_tile_stairs_stonecutter"),
                         NetherBlocks.BLUE_OBSIDIAN_TILE_STAIRS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                 .setGroup("nether_blue_obsidian_tile_stairs_stonecutter")
                 .build();
 
         BCLRecipeBuilder
                 .stonecutting(BetterNether.makeID("blue_obsidian_tile_stonecutter"), NetherBlocks.BLUE_OBSIDIAN_TILE)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setPrimaryInputAndUnlock(NetherBlocks.BLUE_OBSIDIAN)
                 .setGroup("nether_blue_obsidian_tile_stonecutter")
                 .build();
 
@@ -596,8 +570,7 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_bricks_from_tile_stonecutter"),
                         NetherBlocks.OBSIDIAN_BRICKS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.OBSIDIAN_TILE)
+                .setPrimaryInputAndUnlock(NetherBlocks.OBSIDIAN_TILE)
                 .setGroup("nether_obsidian_bricks_from_tile_stonecutter")
                 .build();
 
@@ -606,8 +579,7 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_bricks_slab_from_bricks_stonecutter"),
                         NetherBlocks.OBSIDIAN_BRICKS_SLAB
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.OBSIDIAN_BRICKS)
+                .setPrimaryInputAndUnlock(NetherBlocks.OBSIDIAN_BRICKS)
                 .setGroup("nether_obsidian_bricks_slab_from_bricks_stonecutter")
                 .setOutputCount(2)
                 .build();
@@ -617,8 +589,7 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_bricks_slab_stonecutter"),
                         NetherBlocks.OBSIDIAN_BRICKS_SLAB
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(Blocks.OBSIDIAN)
+                .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                 .setGroup("nether_obsidian_bricks_slab_stonecutter")
                 .setOutputCount(2)
                 .build();
@@ -628,8 +599,7 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_bricks_stairs_from_bricks_stonecutter"),
                         NetherBlocks.OBSIDIAN_BRICKS_STAIRS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.OBSIDIAN_BRICKS)
+                .setPrimaryInputAndUnlock(NetherBlocks.OBSIDIAN_BRICKS)
                 .setGroup("nether_obsidian_bricks_stairs_from_bricks_stonecutter")
                 .build();
 
@@ -638,22 +608,19 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_bricks_stairs_stonecutter"),
                         NetherBlocks.OBSIDIAN_BRICKS_STAIRS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(Blocks.OBSIDIAN)
+                .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                 .setGroup("nether_obsidian_bricks_stairs_stonecutter")
                 .build();
 
         BCLRecipeBuilder
                 .stonecutting(BetterNether.makeID("obsidian_bricks_stonecutter"), NetherBlocks.OBSIDIAN_BRICKS)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(Blocks.OBSIDIAN)
+                .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                 .setGroup("nether_obsidian_bricks_stonecutter")
                 .build();
 
         BCLRecipeBuilder
                 .stonecutting(BetterNether.makeID("obsidian_rod_tiles_stonecutting"), NetherBlocks.OBSIDIAN_ROD_TILES)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(Blocks.OBSIDIAN)
+                .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                 .setGroup("nether_obsidian_rod_tiles_stonecutting")
                 .build();
 
@@ -662,16 +629,14 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_tile_slab_from_tile_stonecutter"),
                         NetherBlocks.OBSIDIAN_TILE_SLAB
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.OBSIDIAN_TILE)
+                .setPrimaryInputAndUnlock(NetherBlocks.OBSIDIAN_TILE)
                 .setGroup("nether_obsidian_tile_slab_from_tile_stonecutter")
                 .setOutputCount(2)
                 .build();
 
         BCLRecipeBuilder
                 .stonecutting(BetterNether.makeID("obsidian_tile_slab_stonecutter"), NetherBlocks.OBSIDIAN_TILE_SLAB)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(Blocks.OBSIDIAN)
+                .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                 .setGroup("nether_obsidian_tile_slab_stonecutter")
                 .setOutputCount(2)
                 .build();
@@ -681,15 +646,13 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_tile_small_from_bricks_stonecutter"),
                         NetherBlocks.OBSIDIAN_TILE_SMALL
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.OBSIDIAN_BRICKS)
+                .setPrimaryInputAndUnlock(NetherBlocks.OBSIDIAN_BRICKS)
                 .setGroup("nether_obsidian_tile_small_from_bricks_stonecutter")
                 .build();
 
         BCLRecipeBuilder
                 .stonecutting(BetterNether.makeID("obsidian_tile_small_stonecutter"), NetherBlocks.OBSIDIAN_TILE_SMALL)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(Blocks.OBSIDIAN)
+                .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                 .setGroup("nether_obsidian_tile_small_stonecutter")
                 .build();
 
@@ -698,8 +661,7 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_tile_stairs_from_tile_stonecutter"),
                         NetherBlocks.OBSIDIAN_TILE_STAIRS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(NetherBlocks.OBSIDIAN_TILE)
+                .setPrimaryInputAndUnlock(NetherBlocks.OBSIDIAN_TILE)
                 .setGroup("nether_obsidian_tile_stairs_from_tile_stonecutter")
                 .build();
 
@@ -708,15 +670,13 @@ public class BlockRecipes {
                         BetterNether.makeID("obsidian_tile_stairs_stonecutter"),
                         NetherBlocks.OBSIDIAN_TILE_STAIRS
                 )
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(Blocks.OBSIDIAN)
+                .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                 .setGroup("nether_obsidian_tile_stairs_stonecutter")
                 .build();
 
         BCLRecipeBuilder
                 .stonecutting(BetterNether.makeID("obsidian_tile_stonecutter"), NetherBlocks.OBSIDIAN_TILE)
-                .checkConfig(Configs.RECIPE_CONFIG)
-                .setInput(Blocks.OBSIDIAN)
+                .setPrimaryInputAndUnlock(Blocks.OBSIDIAN)
                 .setGroup("nether_obsidian_tile_stonecutter")
                 .build();
 

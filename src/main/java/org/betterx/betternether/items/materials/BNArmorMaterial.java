@@ -4,7 +4,7 @@ import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -71,14 +71,15 @@ public enum BNArmorMaterial implements ArmorMaterial {
         this.knockbackResistance = knockback;
     }
 
+
     @Override
-    public int getDurabilityForSlot(EquipmentSlot slot) {
-        return DURABILITY[slot.getIndex()] * multiplier;
+    public int getDurabilityForType(ArmorItem.Type type) {
+        return DURABILITY[type.getSlot().getIndex()] * multiplier;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlot slot) {
-        return protection[slot.getIndex()];
+    public int getDefenseForType(ArmorItem.Type type) {
+        return protection[type.getSlot().getIndex()];
     }
 
     @Override

@@ -45,7 +45,8 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, A
                     new HumanoidArmorLayer(
                             this,
                             new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
-                            new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))
+                            new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR)),
+                            ctx.getModelManager()
                     )
             );
         }

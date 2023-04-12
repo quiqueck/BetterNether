@@ -141,7 +141,11 @@ public class CommandRegistry {
                                     .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
         biomeIndex = (biomeIndex + 1) % biomes.size();
 
-        final BlockPos currentPosition = new BlockPos(source.getPosition());
+        final BlockPos currentPosition = new BlockPos(
+                (int) source.getPosition().x,
+                (int) source.getPosition().y,
+                (int) source.getPosition().z
+        );
         final BlockPos biomePosition = source.getLevel()
                                              .findClosestBiome3d(
                                                      b -> b.unwrapKey().orElseThrow().location().equals(biome.getID()),
@@ -162,7 +166,7 @@ public class CommandRegistry {
             double yPos = source.getPosition().y();
             boolean didWrap = false;
             do {
-                target = new BlockPos(biomePosition.getX(), yPos, biomePosition.getZ());
+                target = new BlockPos(biomePosition.getX(), (int) yPos, biomePosition.getZ());
                 state = player.level.getBlockState(target);
                 yPos--;
                 if (yPos <= player.level.getMinBuildHeight() + 1) {
@@ -289,7 +293,7 @@ public class CommandRegistry {
         final ServerPlayer player = source.getPlayerOrException();
         Vec3 pos = source.getPosition();
         final ServerLevel level = source.getLevel();
-        MutableBlockPos mPos = new BlockPos(pos).mutable();
+        MutableBlockPos mPos = new BlockPos((int) pos.x, (int) pos.y, (int) pos.z).mutable();
         System.out.println("Staring at: " + mPos + " -> " + level.getBlockState(mPos));
         boolean found = org.betterx.bclib.util.BlocksHelper.findSurroundingSurface(
                 level,
@@ -300,7 +304,11 @@ public class CommandRegistry {
                         state)
         );
         System.out.println("Ending at: " + mPos + " -> " + level.getBlockState(mPos) + " = " + found);
-        org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, new BlockPos(pos), Blocks.YELLOW_CONCRETE);
+        org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(
+                level,
+                new BlockPos((int) pos.x, (int) pos.y, (int) pos.z),
+                Blocks.YELLOW_CONCRETE
+        );
         org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, mPos, Blocks.LIGHT_BLUE_CONCRETE);
         return Command.SINGLE_SUCCESS;
     }
@@ -340,7 +348,7 @@ public class CommandRegistry {
                 level.getChunkSource().getGenerator(),
                 Optional.of(pFeature)
         );
-        Stream<BlockPos> s = Stream.of(new BlockPos(pos));
+        Stream<BlockPos> s = Stream.of(new BlockPos((int) pos.x, (int) pos.y, (int) pos.z));
         RandomSource rnd = new LegacyRandomSource(121212);
         placeMapIdx = 0;
         List<Pair<BlockPos, BlockState>> posStates = new LinkedList<>();

@@ -50,7 +50,6 @@ public class EntitySkull extends Monster implements FlyingAnimal {
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
         this.xpReward = 1;
-        this.flyingSpeed = 0.5F;
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -61,6 +60,11 @@ public class EntitySkull extends Monster implements FlyingAnimal {
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.FLYING_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0);
+    }
+
+    @Override
+    protected float getFlyingSpeed() {
+        return this.getControllingPassenger() instanceof Player ? this.getSpeed() * 0.1F : 0.5F;
     }
 
     @Override
@@ -106,7 +110,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
                     }
                     return;
                 }
-                player.hurt(DamageSource.GENERIC, 1);
+                player.hurt(player.damageSources().generic(), 1);
                 if (random.nextInt(16) == 0)
                     player.setSecondsOnFire(3);
             }
@@ -138,7 +142,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
                         .add(0, target.getBbHeight() * 0.5F, 0)
                         .subtract(EntitySkull.this.position())
                         .normalize()
-                        .scale(EntitySkull.this.flyingSpeed);
+                        .scale(EntitySkull.this.getFlyingSpeed());
                 setDeltaMovement(velocity);
                 this.lookAt(target, 360, 360);
                 this.playSound(
@@ -184,7 +188,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
             l = 1;
         else
             l = (float) Math.sqrt(l);
-        l /= this.flyingSpeed;
+        l /= this.getFlyingSpeed();
         dx /= l;
         dy /= l;
         dz /= l;

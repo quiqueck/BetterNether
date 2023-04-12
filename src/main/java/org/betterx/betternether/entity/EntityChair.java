@@ -102,8 +102,11 @@ public class EntityChair extends Entity {
 
     @Nullable
     @Override
-    public Entity getControllingPassenger() {
-        return this.getFirstPassenger();
+    public LivingEntity getControllingPassenger() {
+        for (Entity e : getPassengers()) {
+            if (e instanceof LivingEntity le) return le;
+        }
+        return null;
     }
 
     @Override

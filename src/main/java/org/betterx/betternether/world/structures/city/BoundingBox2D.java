@@ -61,7 +61,7 @@ public class BoundingBox2D {
     }
 
     public BlockPos getCenter() {
-        return new BlockPos((x2 + x1) * 0.5, 0, (z2 + z1) * 0.5);
+        return new BlockPos((int) ((x2 + x1) * 0.5), 0, (int) ((z2 + z1) * 0.5));
     }
 
     public int getSideX() {

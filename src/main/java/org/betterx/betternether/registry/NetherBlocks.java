@@ -28,6 +28,8 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MaterialColor;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -85,13 +87,13 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
     public static final Block CINCINNASITE_BUTTON = registerBlock(
             "cincinnasite_button",
-            new org.betterx.bclib.blocks.BaseWoodenButtonBlock(
-                    CINCINNASITE_FORGED)
+            new org.betterx.bclib.blocks.BaseWoodenButtonBlock(CINCINNASITE_FORGED, BlockSetType.GOLD)
     );
     public static final Block CINCINNASITE_PLATE = registerPlate(
             "cincinnasite_plate",
             CINCINNASITE_FORGED,
-            Sensitivity.MOBS
+            Sensitivity.MOBS,
+            BlockSetType.GOLD
     );
     public static final Block CINCINNASITE_LANTERN = registerBlock(
             "cincinnasite_lantern",
@@ -171,14 +173,17 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BONE_BLOCK = registerBlock("bone_block", new BNBoneBlock());
     public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK, false);
     public static final Block BONE_SLAB = registerSlab("bone_slab", BONE_BLOCK, false);
-    public static final Block BONE_BUTTON = registerButton("bone_button", BONE_BLOCK);
-    public static final Block BONE_PLATE = registerPlate("bone_plate", BONE_BLOCK);
+    public static final Block BONE_BUTTON = registerButton("bone_button", BONE_BLOCK, BlockSetType.CRIMSON);
+    public static final Block BONE_PLATE = registerPlate("bone_plate", BONE_BLOCK, BlockSetType.CRIMSON);
     public static final Block BONE_WALL = registerWall("bone_wall", BONE_BLOCK);
     public static final Block BONE_TILE = registerBlock("bone_tile", new BNBoneBlock());
-    public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BNWoodlikeDoor(BONE_BLOCK));
+    public static final Block BONE_REED_DOOR = registerBlock(
+            "bone_reed_door",
+            new BNWoodlikeDoor(BONE_BLOCK, WoodType.CRIMSON)
+    );
     public static final Block BONE_CINCINNASITE_DOOR = registerBlock(
             "bone_cincinnasite_door",
-            new BNWoodlikeDoor(BONE_BLOCK)
+            new BNWoodlikeDoor(BONE_BLOCK, WoodType.CRIMSON)
     );
     // Quartz Glass //
     public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", new BNGlass(Blocks.GLASS));
@@ -913,8 +918,8 @@ public class NetherBlocks extends BlockRegistry {
         return roof;
     }
 
-    public static Block registerButton(String name, Block source) {
-        Block button = new org.betterx.bclib.blocks.BaseWoodenButtonBlock(source);
+    public static Block registerButton(String name, Block source, BlockSetType type) {
+        Block button = new org.betterx.bclib.blocks.BaseWoodenButtonBlock(source, type);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, button);
             addFuel(source, button);
@@ -923,8 +928,8 @@ public class NetherBlocks extends BlockRegistry {
         return button;
     }
 
-    public static Block registerPlate(String name, Block source) {
-        Block plate = new org.betterx.bclib.blocks.BasePressurePlateBlock(Sensitivity.EVERYTHING, source);
+    public static Block registerPlate(String name, Block source, BlockSetType type) {
+        Block plate = new org.betterx.bclib.blocks.BasePressurePlateBlock(Sensitivity.EVERYTHING, source, type);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, plate);
             addFuel(source, plate);
@@ -933,8 +938,8 @@ public class NetherBlocks extends BlockRegistry {
         return plate;
     }
 
-    private static Block registerPlate(String name, Block source, Sensitivity rule) {
-        Block plate = new org.betterx.bclib.blocks.BasePressurePlateBlock(rule, source);
+    private static Block registerPlate(String name, Block source, Sensitivity rule, BlockSetType type) {
+        Block plate = new org.betterx.bclib.blocks.BasePressurePlateBlock(rule, source, type);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, plate);
             addFuel(source, plate);

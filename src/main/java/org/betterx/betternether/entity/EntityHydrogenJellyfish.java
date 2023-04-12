@@ -11,11 +11,12 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -105,7 +106,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
 
     @Override
     public void playerTouch(Player player) {
-        player.hurt(DamageSource.GENERIC, 3);
+        player.hurt(player.damageSources().generic(), 3);
     }
 
     @Override
@@ -133,11 +134,11 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
 
             double rads = Math.toRadians(nextYaw + 90);
 
-            double vx = Math.cos(rads) * this.flyingSpeed;
-            double vz = Math.sin(rads) * this.flyingSpeed;
+            double vx = Math.cos(rads) * this.getFlyingSpeed();
+            double vz = Math.sin(rads) * this.getFlyingSpeed();
 
             BlockPos bp = blockPosition();
-            double vy = random.nextDouble() * this.flyingSpeed * 0.75;
+            double vy = random.nextDouble() * this.getFlyingSpeed() * 0.75;
             if (level.getBlockState(bp).isAir() &&
                     level.getBlockState(bp.below(2)).isAir() &&
                     level.getBlockState(bp.below(3)).isAir() &&
@@ -187,7 +188,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
                         0, 0, 0
                 );
         } else {
-            if (source != DamageSource.OUT_OF_WORLD) {
+            if (source != level.damageSources().outOfWorld()) {
                 this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), Level.ExplosionInteraction.MOB);
             }
         }
@@ -224,7 +225,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (source == DamageSource.WITHER || source instanceof EntityDamageSource || source == DamageSource.OUT_OF_WORLD) {
+        if (source.is(DamageTypes.WITHER) || source.getDirectEntity() != null || source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return super.hurt(source, amount);
         }
         return false;

@@ -389,9 +389,9 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         public boolean canUse() {
             if (EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isDone()) {
                 BlockPos pos = new BlockPos(
-                        EntityFirefly.this.getX(),
-                        EntityFirefly.this.getY(),
-                        EntityFirefly.this.getZ()
+                        (int) EntityFirefly.this.getX(),
+                        (int) EntityFirefly.this.getY(),
+                        (int) EntityFirefly.this.getZ()
                 );
                 BlockState state = EntityFirefly.this.level.getBlockState(pos.below());
                 return !state.isAir() && !state.getMaterial().isLiquid();
@@ -454,7 +454,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
             );
             if (velocity.lengthSqr() == 0)
                 velocity = new Vec3(1, 0, 0);
-            EntityFirefly.this.setDeltaMovement(velocity.normalize().scale(EntityFirefly.this.flyingSpeed));
+            EntityFirefly.this.setDeltaMovement(velocity.normalize().scale(EntityFirefly.this.getFlyingSpeed()));
             super.start();
         }
 

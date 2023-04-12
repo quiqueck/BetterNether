@@ -61,7 +61,11 @@ public class PlaceCommand {
         HolderSet<Structure> holderSet = LocateCommand.getHolders(result, registry)
                                                       .orElseThrow(() -> ERROR_STRUCTURE_INVALID.create(result.asPrintable()));
 
-        BlockPos blockPos = new BlockPos(stack.getPosition());
+        BlockPos blockPos = new BlockPos(
+                (int) stack.getPosition().x,
+                (int) stack.getPosition().y,
+                (int) stack.getPosition().z
+        );
         ServerLevel serverLevel = stack.getLevel();
         if (holderSet.size() == 0) throw ERROR_STRUCTURE_INVALID.create(result.asPrintable());
 

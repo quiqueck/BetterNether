@@ -9,7 +9,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -96,9 +95,9 @@ public class BlockFireBowl extends BlockBaseNotFull {
     }
 
     @Override
-    public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        if (!entity.fireImmune() && entity instanceof LivingEntity && world.getBlockState(pos).getValue(FIRE)) {
-            entity.hurt(DamageSource.HOT_FLOOR, 1.0F);
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        if (!entity.fireImmune() && entity instanceof LivingEntity && level.getBlockState(pos).getValue(FIRE)) {
+            entity.hurt(level.damageSources().hotFloor(), 1.0F);
         }
     }
 

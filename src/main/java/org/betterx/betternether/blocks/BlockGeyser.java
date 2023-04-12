@@ -8,7 +8,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -112,7 +111,7 @@ public class BlockGeyser extends BlockBaseNotFull {
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
         if (!entity.fireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
-            entity.hurt(DamageSource.IN_FIRE, 3F);
+            entity.hurt(world.damageSources().inFire(), 3F);
             entity.setSecondsOnFire(1);
         }
 

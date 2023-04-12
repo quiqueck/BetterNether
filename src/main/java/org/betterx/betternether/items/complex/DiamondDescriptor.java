@@ -1,7 +1,7 @@
 package org.betterx.betternether.items.complex;
 
 import org.betterx.bclib.items.complex.EquipmentDescription;
-import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.CraftingRecipeBuilder;
 
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
@@ -17,7 +17,7 @@ public class DiamondDescriptor<I extends Item> extends EquipmentDescription<I> {
     }
 
     @Override
-    protected boolean buildRecipe(Item tool, ItemLike stick, GridRecipe builder) {
+    protected boolean buildRecipe(Item tool, ItemLike stick, CraftingRecipeBuilder builder) {
         builder.addMaterial('P', base);
         builder.addMaterial('#', Items.DIAMOND);
         if (tool instanceof PickaxeItem) {

@@ -6,7 +6,6 @@ import org.betterx.betternether.items.materials.BNArmorMaterial;
 import org.betterx.betternether.registry.NetherEnchantments;
 import org.betterx.betternether.registry.NetherItems;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -16,8 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NetherArmor extends BaseArmorItem implements InitialStackStateProvider {
-    public NetherArmor(ArmorMaterial material, EquipmentSlot slot) {
-        super(material, slot, NetherItems.defaultSettings().fireResistant());
+    public NetherArmor(ArmorMaterial material, Type type) {
+        super(material, type, NetherItems.defaultSettings().fireResistant());
     }
 
     static final Map<Enchantment, Integer> DEFAULT_RUBY_ENCHANTS;

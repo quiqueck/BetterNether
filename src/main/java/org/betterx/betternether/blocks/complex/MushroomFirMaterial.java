@@ -45,7 +45,7 @@ public class MushroomFirMaterial extends NetherWoodenMaterial {
     @Override
     public void initDefaultRecipes() {
         super.initDefaultRecipes();
-        addRecipeEntry(new RecipeEntry(BLOCK_LOG, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_LOG + "_" + BLOCK_STEM, (material, config, id) -> {
             final Block log = getBlock(BLOCK_LOG);
             final Block stem = getBlock(BLOCK_STEM);
 
@@ -57,8 +57,6 @@ public class MushroomFirMaterial extends NetherWoodenMaterial {
                             .setGroup(receipGroupPrefix + "_planks")
                             .build();
         }));
-
-        initDefaultFurniture();
     }
 
     public Block getStem() {

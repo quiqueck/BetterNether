@@ -20,7 +20,14 @@ public class RecipesHelper {
     private static final String[] SHAPE_ROUND = new String[]{"###", "# #", "###"};
     private static final String[] SHAPE_FIRE_BOWL = new String[]{"#I#", " # ", "L L"};
 
-    private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count) {
+    private static void makeSingleRecipe(
+            String group,
+            Block source,
+            Block result,
+            String[] shape,
+            int count,
+            RecipeCategory category
+    ) {
         if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(source)
                                                  .getPath() + "_" + BuiltInRegistries.BLOCK.getKey(result).getPath();
@@ -29,6 +36,7 @@ public class RecipesHelper {
                     .crafting(BN.id(name), result)
                     .setOutputCount(count)
                     .setGroup(group)
+                    .setCategory(category)
                     .setShape(shape)
                     .addMaterial('#', source)
                     .build();
@@ -36,7 +44,7 @@ public class RecipesHelper {
     }
 
     public static void makeRoofRecipe(Block source, Block roof) {
-        makeSingleRecipe("roof_tile", source, roof, SHAPE_ROOF, 6);
+        makeSingleRecipe("roof_tile", source, roof, SHAPE_ROOF, 6, RecipeCategory.BUILDING_BLOCKS);
     }
 
     public static void makeStairsRecipe(Block source, Block stairs) {
@@ -45,7 +53,7 @@ public class RecipesHelper {
         String group = BuiltInRegistries.BLOCK.getKey(stairs).getPath().contains("roof_tile")
                 ? "roof_tile_stairs"
                 : "nether_rock_stairs";
-        makeSingleRecipe(group, source, stairs, SHAPE_STAIR, 4);
+        makeSingleRecipe(group, source, stairs, SHAPE_STAIR, 4, RecipeCategory.BUILDING_BLOCKS);
     }
 
     public static void makeSlabRecipe(Block source, Block slab) {
@@ -54,23 +62,23 @@ public class RecipesHelper {
         String group = BuiltInRegistries.BLOCK.getKey(slab).getPath().contains("roof_tile")
                 ? "roof_tile_slab"
                 : "nether_rock_slab";
-        makeSingleRecipe(group, source, slab, SHAPE_SLAB, 6);
+        makeSingleRecipe(group, source, slab, SHAPE_SLAB, 6, RecipeCategory.BUILDING_BLOCKS);
     }
 
     public static void makeButtonRecipe(Block source, Block button) {
         //String group = button.getSoundType(button.defaultBlockState()) == SoundType.WOOD ? "nether_wooden_button" : "nether_rock_button";
         String group = "nether_rock_plate"; //woods are now registered through different means
-        makeSingleRecipe(group, source, button, SHAPE_BUTTON, 1);
+        makeSingleRecipe(group, source, button, SHAPE_BUTTON, 1, RecipeCategory.REDSTONE);
     }
 
     public static void makePlateRecipe(Block source, Block plate) {
         //String group = plate.getSoundType(plate.defaultBlockState()) == SoundType.WOOD ? "nether_wooden_plate" : "nether_rock_plate";
         String group = "nether_rock_plate"; //woods are now registered through different means
-        makeSingleRecipe(group, source, plate, SHAPE_PLATE, 1);
+        makeSingleRecipe(group, source, plate, SHAPE_PLATE, 1, RecipeCategory.REDSTONE);
     }
 
-    public static void makeSimpleRecipe2(Block source, Block result, int count, String group) {
-        makeSingleRecipe(group, source, result, SHAPE_X2, count);
+    public static void makeSimpleRecipe2(Block source, Block result, int count, String group, RecipeCategory category) {
+        makeSingleRecipe(group, source, result, SHAPE_X2, count, category);
     }
 
     public static void makeWallRecipe(Block source, Block wall) {
@@ -82,12 +90,13 @@ public class RecipesHelper {
                     .setOutputCount(6)
                     .setGroup("nether_wall")
                     .setShape(SHAPE_3X2)
+                    .setCategory(RecipeCategory.DECORATIONS)
                     .addMaterial('#', source)
                     .build();
         }
     }
 
-    public static void makeColoringRecipe(Block source, Block result, Item dye, String group) {
+    public static void makeColoringRecipe(Block source, Block result, Item dye, String group, RecipeCategory category) {
         if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
 
@@ -95,6 +104,7 @@ public class RecipesHelper {
                     .crafting(BN.id(name), result)
                     .setOutputCount(8)
                     .setGroup(group)
+                    .setCategory(category)
                     .setShape(SHAPE_COLORING)
                     .addMaterial('#', source)
                     .addMaterial('I', dye)
@@ -102,13 +112,14 @@ public class RecipesHelper {
         }
     }
 
-    public static void makeRoundRecipe(Block source, Block result, String group) {
+    public static void makeRoundRecipe(Block source, Block result, String group, RecipeCategory category) {
         if (BuiltInRegistries.BLOCK.getKey(source) != BuiltInRegistries.BLOCK.getDefaultKey()) {
             String name = BuiltInRegistries.BLOCK.getKey(result).getPath();
 
             BCLRecipeBuilder
                     .crafting(BN.id(name), result)
                     .setGroup(group)
+                    .setCategory(category)
                     .setShape(SHAPE_ROUND)
                     .addMaterial('#', source)
                     .build();

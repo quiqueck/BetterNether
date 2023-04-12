@@ -18,6 +18,7 @@ import org.betterx.worlds.together.tag.v3.CommonItemTags;
 import org.betterx.worlds.together.tag.v3.CommonPoiTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -378,12 +379,14 @@ public class NetherBlocks extends BlockRegistry {
             "soul_sandstone",
             new BlockSoulSandstone(),
             "soul_sandstone",
+            RecipeCategory.BUILDING_BLOCKS,
             Blocks.SOUL_SAND
     );
     public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2Soul(
             "soul_sandstone_cut",
             new BlockSoulSandstone(),
             "soul_sandstone",
+            RecipeCategory.BUILDING_BLOCKS,
             SOUL_SANDSTONE
     );
     public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs(
@@ -408,6 +411,7 @@ public class NetherBlocks extends BlockRegistry {
             new BlockBase(FabricBlockSettings.copyOf(
                     Blocks.SANDSTONE)),
             "soul_sandstone",
+            RecipeCategory.BUILDING_BLOCKS,
             SOUL_SANDSTONE_SMOOTH
     );
     public static final Block SOUL_SANDSTONE_STAIRS = registerStairs(
@@ -435,6 +439,7 @@ public class NetherBlocks extends BlockRegistry {
             "basalt_bricks",
             new BlockBase(FabricBlockSettings.copyOf(Blocks.BASALT)),
             "basalt_bricks",
+            RecipeCategory.BUILDING_BLOCKS,
             Blocks.POLISHED_BASALT
     );
     public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS, false);
@@ -818,6 +823,7 @@ public class NetherBlocks extends BlockRegistry {
                         .addMaterial('#', baseBlock)
                         .addMaterial('B', Items.BOOK)
                         .setGroup("nether" + "_bookshelf")
+                        .setCategory(RecipeCategory.BUILDING_BLOCKS)
                         .build();
 
         return shelf;
@@ -831,6 +837,7 @@ public class NetherBlocks extends BlockRegistry {
                         .setShape("# #", "# #", "###")
                         .addMaterial('#', baseSlab)
                         .setGroup("nether" + "_composter")
+                        .setCategory(RecipeCategory.DECORATIONS)
                         .build();
         return composter;
     }
@@ -955,8 +962,14 @@ public class NetherBlocks extends BlockRegistry {
         );
     }
 
-    public static Block registerMakeable2X2Soul(String name, Block result, String group, Block... sources) {
-        final Block block = registerMakeable2X2(name, result, group, sources);
+    public static Block registerMakeable2X2Soul(
+            String name,
+            Block result,
+            String group,
+            RecipeCategory category,
+            Block... sources
+    ) {
+        final Block block = registerMakeable2X2(name, result, group, category, sources);
         TagManager.BLOCKS.add(
                 block,
                 BlockTags.SOUL_FIRE_BASE_BLOCKS,
@@ -965,11 +978,17 @@ public class NetherBlocks extends BlockRegistry {
         return block;
     }
 
-    public static Block registerMakeable2X2(String name, Block result, String group, Block... sources) {
+    public static Block registerMakeable2X2(
+            String name,
+            Block result,
+            String group,
+            RecipeCategory category,
+            Block... sources
+    ) {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, result);
             for (Block source : sources) {
-                RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
+                RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
             }
         }
         return result;
@@ -996,6 +1015,7 @@ public class NetherBlocks extends BlockRegistry {
                             .setShape("##", "##")
                             .addMaterial('#', source)
                             .setGroup("nether" + "_tables")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
 
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
@@ -1016,6 +1036,7 @@ public class NetherBlocks extends BlockRegistry {
                             .setShape("###", "# #", "###")
                             .addMaterial('#', planks)
                             .setGroup("nether" + "_chests")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
 
             FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
@@ -1035,6 +1056,7 @@ public class NetherBlocks extends BlockRegistry {
                             .addMaterial('#', source)
                             .addMaterial('S', slab)
                             .setGroup("nether" + "_barrels")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
 
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
@@ -1059,6 +1081,7 @@ public class NetherBlocks extends BlockRegistry {
                             .addMaterial('#', source)
                             .addMaterial('I', Items.STICK)
                             .setGroup("nether" + "_ladders")
+                            .setCategory(RecipeCategory.DECORATIONS)
                             .build();
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
         }
@@ -1118,7 +1141,7 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new BlockNetherFurnace(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            RecipesHelper.makeRoundRecipe(source, block, "nether_furnace");
+            RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
         }
 
         return block;
@@ -1128,7 +1151,7 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new BlockStalactite(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite");
+            RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite", RecipeCategory.DECORATIONS);
         }
 
         return block;

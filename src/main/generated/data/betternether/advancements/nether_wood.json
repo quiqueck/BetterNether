@@ -6,8 +6,8 @@
         "items": [
           {
             "items": [
-              "betternether:anchor_tree_log",
               "betternether:anchor_tree_bark",
+              "betternether:anchor_tree_log",
               "betternether:anchor_tree_planks"
             ]
           }
@@ -20,8 +20,8 @@
         "items": [
           {
             "items": [
-              "minecraft:crimson_hyphae",
               "minecraft:crimson_planks",
+              "minecraft:crimson_hyphae",
               "minecraft:crimson_stem"
             ]
           }
@@ -35,8 +35,8 @@
           {
             "items": [
               "betternether:mushroom_fir_bark",
-              "betternether:mushroom_fir_log",
-              "betternether:mushroom_fir_planks"
+              "betternether:mushroom_fir_planks",
+              "betternether:mushroom_fir_log"
             ]
           }
         ]
@@ -48,8 +48,8 @@
         "items": [
           {
             "items": [
-              "betternether:nether_mushroom_stem",
-              "betternether:nether_mushroom_planks"
+              "betternether:nether_mushroom_planks",
+              "betternether:nether_mushroom_stem"
             ]
           }
         ]
@@ -74,9 +74,9 @@
         "items": [
           {
             "items": [
+              "betternether:nether_sakura_bark",
               "betternether:nether_sakura_log",
-              "betternether:nether_sakura_planks",
-              "betternether:nether_sakura_bark"
+              "betternether:nether_sakura_planks"
             ]
           }
         ]
@@ -88,9 +88,9 @@
         "items": [
           {
             "items": [
-              "betternether:rubeus_log",
+              "betternether:rubeus_bark",
               "betternether:rubeus_planks",
-              "betternether:rubeus_bark"
+              "betternether:rubeus_log"
             ]
           }
         ]
@@ -102,8 +102,8 @@
         "items": [
           {
             "items": [
-              "betternether:stalagnate_bark",
               "betternether:stalagnate_log",
+              "betternether:stalagnate_bark",
               "betternether:stalagnate_planks"
             ]
           }
@@ -144,8 +144,8 @@
         "items": [
           {
             "items": [
-              "betternether:willow_bark",
               "betternether:willow_log",
+              "betternether:willow_bark",
               "betternether:willow_planks"
             ]
           }

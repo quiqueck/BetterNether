@@ -113,7 +113,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
     @Override
     public void initDefaultRecipes() {
         Block planks = getBlock(BLOCK_PLANKS);
-        addRecipeEntry(new RecipeEntry(BLOCK_PLANKS, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_PLANKS, (material, id) -> {
             Block log = getBlock(BLOCK_STEM);
 
             BCLRecipeBuilder.crafting(id, planks)
@@ -124,7 +124,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_STAIRS, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_STAIRS, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_STAIRS))
                             .setOutputCount(4)
                             .setShape("#  ", "## ", "###")
@@ -133,7 +133,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_SLAB, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_SLAB, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_SLAB))
                             .setOutputCount(6)
                             .setShape("###")
@@ -142,7 +142,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_FENCE, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_FENCE, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_FENCE))
                             .setOutputCount(3)
                             .setShape("#I#", "#I#")
@@ -152,7 +152,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_GATE, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_GATE, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_GATE))
                             .setShape("I#I", "I#I")
                             .addMaterial('#', planks)
@@ -161,7 +161,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_BUTTON, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_BUTTON, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_BUTTON))
                             .shapeless()
                             .addMaterial('#', planks)
@@ -169,7 +169,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_PRESSURE_PLATE, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_PRESSURE_PLATE, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_PRESSURE_PLATE))
                             .setShape("##")
                             .addMaterial('#', planks)
@@ -177,7 +177,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_TRAPDOOR, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_TRAPDOOR, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_TRAPDOOR))
                             .setOutputCount(2)
                             .setShape("###", "###")
@@ -186,7 +186,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_DOOR, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_DOOR, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_DOOR))
                             .setOutputCount(3)
                             .setShape("##", "##", "##")
@@ -195,7 +195,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.REDSTONE)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_CRAFTING_TABLE, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_CRAFTING_TABLE, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_CRAFTING_TABLE))
                             .setShape("##", "##")
                             .addMaterial('#', planks)
@@ -203,7 +203,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_LADDER, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_LADDER, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_LADDER))
                             .setOutputCount(3)
                             .setShape("I I", "I#I", "I I")
@@ -213,7 +213,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_SIGN, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_SIGN, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_SIGN))
                             .setOutputCount(3)
                             .setShape("###", "###", " I ")
@@ -223,7 +223,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_CHEST, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_CHEST, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_CHEST))
                             .setShape("###", "# #", "###")
                             .addMaterial('#', planks)
@@ -231,7 +231,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_BARREL, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_BARREL, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_BARREL))
                             .setShape("#S#", "# #", "#S#")
                             .addMaterial('#', planks)
@@ -240,7 +240,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.DECORATIONS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_BOOKSHELF, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_BOOKSHELF, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_BOOKSHELF))
                             .setShape("###", "PPP", "###")
                             .addMaterial('#', planks)
@@ -249,7 +249,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                             .setCategory(RecipeCategory.BUILDING_BLOCKS)
                             .build();
         }));
-        addRecipeEntry(new RecipeEntry(BLOCK_COMPOSTER, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_COMPOSTER, (material, id) -> {
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_COMPOSTER))
                             .setShape("# #", "# #", "###")
                             .addMaterial('#', getBlock(BLOCK_SLAB))

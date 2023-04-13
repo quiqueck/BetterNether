@@ -6,8 +6,6 @@ import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.ItemEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
-import org.betterx.bclib.config.Configs;
-import org.betterx.bclib.config.PathConfig;
 import org.betterx.bclib.items.boat.BoatTypeOverride;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.bclib.registry.BlockRegistry;
@@ -60,15 +58,14 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     }
 
     @Override
-    public ComplexMaterial init(BlockRegistry blocksRegistry, ItemRegistry itemsRegistry, PathConfig recipeConfig) {
-        return super.init(blocksRegistry, itemsRegistry, recipeConfig);
+    public ComplexMaterial init(BlockRegistry blocksRegistry, ItemRegistry itemsRegistry) {
+        return super.init(blocksRegistry, itemsRegistry);
     }
 
     public NetherWoodenMaterial init() {
         return (NetherWoodenMaterial) super.init(
                 NetherBlocks.getBlockRegistry(),
-                NetherItems.getItemRegistry(),
-                Configs.RECIPE_CONFIG
+                NetherItems.getItemRegistry()
         );
     }
 
@@ -154,7 +151,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
         initBoats(itemSettings);
     }
 
-    public static void makeTaburetRecipe(PathConfig config, ResourceLocation id, Block taburet, Block planks) {
+    public static void makeTaburetRecipe(ResourceLocation id, Block taburet, Block planks) {
         BCLRecipeBuilder.crafting(id, taburet)
                         .setShape("##", "II")
                         .addMaterial('#', planks)
@@ -164,7 +161,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
                         .build();
     }
 
-    public static void makeChairRecipe(PathConfig config, ResourceLocation id, Block chair, Block planks) {
+    public static void makeChairRecipe(ResourceLocation id, Block chair, Block planks) {
         BCLRecipeBuilder.crafting(id, chair)
                         .setShape("I ", "##", "II")
                         .addMaterial('#', planks)
@@ -174,7 +171,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
                         .build();
     }
 
-    public static void makeBarStoolRecipe(PathConfig config, ResourceLocation id, Block barStool, Block planks) {
+    public static void makeBarStoolRecipe(ResourceLocation id, Block barStool, Block planks) {
         BCLRecipeBuilder.crafting(id, barStool)
                         .setShape("##", "II", "II")
                         .addMaterial('#', planks)
@@ -185,7 +182,6 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     }
 
     public static void makeBoatRecipe(
-            PathConfig config,
             ResourceLocation id,
             Block planks,
             Item boat,
@@ -214,24 +210,24 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
         final Block slab = getSlab();
 
         if (BuiltInRegistries.BLOCK.getKey(slab) != BuiltInRegistries.BLOCK.getDefaultKey()) {
-            addRecipeEntry(new RecipeEntry(BLOCK_TABURET, (material, config, id) -> {
-                makeTaburetRecipe(config, id, getBlock(BLOCK_TABURET), slab);
+            addRecipeEntry(new RecipeEntry(BLOCK_TABURET, (material, id) -> {
+                makeTaburetRecipe(id, getBlock(BLOCK_TABURET), slab);
             }));
 
-            addRecipeEntry(new RecipeEntry(BLOCK_CHAIR, (material, config, id) -> {
-                makeChairRecipe(config, id, getBlock(BLOCK_CHAIR), slab);
+            addRecipeEntry(new RecipeEntry(BLOCK_CHAIR, (material, id) -> {
+                makeChairRecipe(id, getBlock(BLOCK_CHAIR), slab);
             }));
 
-            addRecipeEntry(new RecipeEntry(BLOCK_BAR_STOOL, (material, config, id) -> {
-                makeBarStoolRecipe(config, id, getBlock(BLOCK_BAR_STOOL), slab);
+            addRecipeEntry(new RecipeEntry(BLOCK_BAR_STOOL, (material, id) -> {
+                makeBarStoolRecipe(id, getBlock(BLOCK_BAR_STOOL), slab);
             }));
 
-            addRecipeEntry(new RecipeEntry(ITEM_BOAT, (material, config, id) -> {
-                makeBoatRecipe(config, id, getPlanks(), getItem(ITEM_BOAT), getItem(ITEM_CHEST_BOAT), false);
+            addRecipeEntry(new RecipeEntry(ITEM_BOAT, (material, id) -> {
+                makeBoatRecipe(id, getPlanks(), getItem(ITEM_BOAT), getItem(ITEM_CHEST_BOAT), false);
             }));
 
-            addRecipeEntry(new RecipeEntry(ITEM_CHEST_BOAT, (material, config, id) -> {
-                makeBoatRecipe(config, id, getPlanks(), getItem(ITEM_BOAT), getItem(ITEM_CHEST_BOAT), true);
+            addRecipeEntry(new RecipeEntry(ITEM_CHEST_BOAT, (material, id) -> {
+                makeBoatRecipe(id, getPlanks(), getItem(ITEM_BOAT), getItem(ITEM_CHEST_BOAT), true);
             }));
         }
     }

@@ -1,6 +1,5 @@
 package org.betterx.betternether.recipes;
 
-import org.betterx.bclib.config.Configs;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
@@ -80,25 +79,25 @@ public class ItemRecipes {
 
 
         NetherWoodenMaterial.makeBoatRecipe(
-                Configs.RECIPE_CONFIG, BetterNether.makeID("crimson_boat"),
+                BetterNether.makeID("crimson_boat"),
                 Blocks.CRIMSON_PLANKS, NetherItems.CRIMSON_BOAT, NetherItems.CRIMSON_CHEST_BOAT, false
         );
 
 
         NetherWoodenMaterial.makeBoatRecipe(
-                Configs.RECIPE_CONFIG, BetterNether.makeID("crimson_chest_boat"),
+                BetterNether.makeID("crimson_chest_boat"),
                 Blocks.CRIMSON_PLANKS, NetherItems.CRIMSON_BOAT, NetherItems.CRIMSON_CHEST_BOAT, true
         );
 
 
         NetherWoodenMaterial.makeBoatRecipe(
-                Configs.RECIPE_CONFIG, BetterNether.makeID("warped_boat"),
+                BetterNether.makeID("warped_boat"),
                 Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT, false
         );
 
 
         NetherWoodenMaterial.makeBoatRecipe(
-                Configs.RECIPE_CONFIG, BetterNether.makeID("warped_chest_boat"),
+                BetterNether.makeID("warped_chest_boat"),
                 Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT, true
         );
 

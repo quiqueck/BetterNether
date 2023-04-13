@@ -57,7 +57,7 @@ public class RoofMaterial extends NetherWoodenMaterial {
         final Block roof = getBlock(BLOCK_ROOF);
 
         if (BuiltInRegistries.BLOCK.getKey(slab) != BuiltInRegistries.BLOCK.getDefaultKey()) {
-            addRecipeEntry(new RecipeEntry(BLOCK_ROOF, (material, config, id) -> {
+            addRecipeEntry(new RecipeEntry(BLOCK_ROOF, (material, id) -> {
                 BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF))
                                 .setOutputCount(4)
                                 .setShape("# #", "###", " # ")
@@ -67,7 +67,7 @@ public class RoofMaterial extends NetherWoodenMaterial {
                                 .build();
             }));
 
-            addRecipeEntry(new RecipeEntry(BLOCK_ROOF_STAIRS, (material, config, id) -> {
+            addRecipeEntry(new RecipeEntry(BLOCK_ROOF_STAIRS, (material, id) -> {
                 BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF_STAIRS))
                                 .setOutputCount(4)
                                 .setShape("#  ", "## ", "###")
@@ -77,7 +77,7 @@ public class RoofMaterial extends NetherWoodenMaterial {
                                 .build();
             }));
 
-            addRecipeEntry(new RecipeEntry(BLOCK_ROOF_SLAB, (material, config, id) -> {
+            addRecipeEntry(new RecipeEntry(BLOCK_ROOF_SLAB, (material, id) -> {
                 BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF_SLAB))
                                 .setOutputCount(6)
                                 .setShape("###")

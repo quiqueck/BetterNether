@@ -46,7 +46,7 @@ public class MushroomFirMaterial extends NetherWoodenMaterial {
     @Override
     public void initDefaultRecipes() {
         super.initDefaultRecipes();
-        addRecipeEntry(new RecipeEntry(BLOCK_LOG + "_" + BLOCK_STEM, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_LOG + "_" + BLOCK_STEM, (material, id) -> {
             final Block log = getBlock(BLOCK_LOG);
             final Block stem = getBlock(BLOCK_STEM);
 

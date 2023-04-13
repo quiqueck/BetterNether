@@ -53,7 +53,7 @@ public class StalagnateMaterial extends RoofMaterial {
     public void initDefaultRecipes() {
         super.initDefaultRecipes();
 
-        addRecipeEntry(new RecipeEntry(BLOCK_LOG + "_" + BLOCK_STEM, (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_LOG + "_" + BLOCK_STEM, (material, id) -> {
             Block stem = getStem();
 
             BCLRecipeBuilder.crafting(id, getBlock(BLOCK_LOG))

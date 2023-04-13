@@ -1095,7 +1095,6 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             NetherWoodenMaterial.makeTaburetRecipe(
-                    Configs.RECIPES,
                     new ResourceLocation(BetterNether.MOD_ID, name),
                     block,
                     source
@@ -1111,7 +1110,6 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             NetherWoodenMaterial.makeChairRecipe(
-                    Configs.RECIPES,
                     new ResourceLocation(BetterNether.MOD_ID, name),
                     block,
                     source
@@ -1127,7 +1125,6 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             NetherWoodenMaterial.makeBarStoolRecipe(
-                    Configs.RECIPES,
                     new ResourceLocation(BetterNether.MOD_ID, name),
                     block,
                     source

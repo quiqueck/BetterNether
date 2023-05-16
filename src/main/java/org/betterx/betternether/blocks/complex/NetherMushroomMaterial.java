@@ -65,7 +65,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                 BLOCK_GATE,
                 (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseGateBlock(
                         getBlock(BLOCK_PLANKS),
-                        woodType
+                        woodType.type
                 )
         ).setBlockTags(BlockTags.FENCE_GATES));
         addBlockEntry(new BlockEntry(
@@ -106,7 +106,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
         ).setBlockTags(BlockTags.CLIMBABLE));
         addBlockEntry(new BlockEntry(
                 BLOCK_SIGN,
-                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseSignBlock(getBlock(BLOCK_PLANKS))
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseSignBlock(woodType)
         ).setBlockTags(BlockTags.SIGNS).setItemTags(ItemTags.SIGNS));
     }
 

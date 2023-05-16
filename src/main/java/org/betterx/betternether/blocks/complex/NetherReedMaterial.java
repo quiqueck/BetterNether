@@ -106,7 +106,7 @@ public class NetherReedMaterial extends RoofMaterial {
         }).setBlockTags(BlockTags.FENCES, BlockTags.WOODEN_FENCES)
           .setItemTags(ItemTags.FENCES, ItemTags.WOODEN_FENCES));
         addBlockEntry(new BlockEntry(BLOCK_GATE, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseGateBlock(getBlock(BLOCK_PLANKS), woodType);
+            return new org.betterx.bclib.blocks.BaseGateBlock(getBlock(BLOCK_PLANKS), woodType.type);
         }).setBlockTags(BlockTags.FENCE_GATES));
         addBlockEntry(new BlockEntry(BLOCK_BUTTON, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseWoodenButtonBlock(getBlock(BLOCK_PLANKS), woodType.setType());
@@ -130,7 +130,7 @@ public class NetherReedMaterial extends RoofMaterial {
             return new BaseLadderBlock(getBlock(BLOCK_PLANKS));
         }).setBlockTags(BlockTags.CLIMBABLE));
         addBlockEntry(new BlockEntry(BLOCK_SIGN, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseSignBlock(getBlock(BLOCK_PLANKS));
+            return new org.betterx.bclib.blocks.BaseSignBlock(woodType);
         }).setBlockTags(BlockTags.SIGNS).setItemTags(ItemTags.SIGNS));
     }
 

@@ -10,6 +10,7 @@ public class NetherVinesPlaced {
             .PATCH_LUMABUS_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(12)
             .onceEvery(2)
             .buildAndRegister();
@@ -17,6 +18,7 @@ public class NetherVinesPlaced {
             .PATCH_GOLDEN_LUMABUS_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(8)
             .onceEvery(2)
             .buildAndRegister();
@@ -24,6 +26,7 @@ public class NetherVinesPlaced {
             .PATCH_GOLDEN_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(4)
             .onceEvery(2)
             .buildAndRegister();
@@ -32,6 +35,7 @@ public class NetherVinesPlaced {
             .PATCH_GOLDEN_VINE_SPARSE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(4)
             .onceEvery(3)
             .buildAndRegister();
@@ -40,6 +44,7 @@ public class NetherVinesPlaced {
             .PATCH_EYE_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(4)
             .onceEvery(2)
             .buildAndRegister();
@@ -48,6 +53,7 @@ public class NetherVinesPlaced {
             .PATCH_BLACK_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(4)
             .onceEvery(2)
             .buildAndRegister();
@@ -56,6 +62,7 @@ public class NetherVinesPlaced {
             .PATCH_BLOOMING_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(4)
             .onceEvery(2)
             .buildAndRegister();
@@ -64,6 +71,7 @@ public class NetherVinesPlaced {
             .PATCH_TWISTING_VINES
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(12)
             .onceEvery(2)
             .buildAndRegister();
@@ -72,6 +80,7 @@ public class NetherVinesPlaced {
             .PATCH_NEON_EQUISETUM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(12)
             .onceEvery(2)
             .buildAndRegister();
@@ -80,6 +89,7 @@ public class NetherVinesPlaced {
             .PATCH_WHISPERING_GOURD_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(4)
             .onceEvery(2)
             .buildAndRegister();

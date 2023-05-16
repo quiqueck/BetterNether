@@ -31,6 +31,7 @@ public class NetherObjectsPlaced {
     public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> JUNGLE_BONES = NetherObjects
             .JUNGLE_BONES
             .place()
+            .onlyInBiome()
             .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
             .vanillaNetherGround(1)
             .onceEvery(4)
@@ -39,6 +40,7 @@ public class NetherObjectsPlaced {
     public static final BCLFeature<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = NetherObjects
             .OBSIDIAN_CRYSTAL
             .place()
+            .onlyInBiome()
             .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
             .vanillaNetherGround(1)
             .onceEvery(2)

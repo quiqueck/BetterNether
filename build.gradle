@@ -12,6 +12,7 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 def local_bclib = findProject(':BCLib') != null
+def local_wunderlib = findProject(':WunderLib') != null
 
 loom {
     accessWidenerPath = file("src/main/resources/betternether.accesswidener")
@@ -66,6 +67,11 @@ dependencies {
     }
 
     modCompileOnly "dev.emi:emi:${emi_version}"
+
+    if (local_wunderlib) {
+        println "Using local WunderLib"
+        implementation project(path: ":WunderLib", configuration: 'dev')
+    }
 }
 
 repositories {

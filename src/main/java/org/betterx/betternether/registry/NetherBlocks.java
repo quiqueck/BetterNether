@@ -12,7 +12,6 @@ import org.betterx.betternether.blocks.complex.*;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
-import org.betterx.betternether.tab.CreativeTabs;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 import org.betterx.worlds.together.tag.v3.CommonItemTags;
 import org.betterx.worlds.together.tag.v3.CommonPoiTags;
@@ -22,7 +21,6 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tiers;
@@ -794,14 +792,14 @@ public class NetherBlocks extends BlockRegistry {
             new BlockLumabusSeed(GOLDEN_LUMABUS_VINE, NetherVines.GOLDEN_LUMABUS_VINE)
     );
 
-    protected NetherBlocks(CreativeModeTab creativeTab) {
-        super(creativeTab, Configs.BLOCKS);
+    protected NetherBlocks() {
+        super(Configs.BLOCKS);
     }
 
     @NotNull
     public static BlockRegistry getBlockRegistry() {
         if (BLOCKS_REGISTRY == null) {
-            BLOCKS_REGISTRY = new NetherBlocks(CreativeTabs.BN_TAB);
+            BLOCKS_REGISTRY = new NetherBlocks();
         }
         return BLOCKS_REGISTRY;
     }

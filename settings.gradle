@@ -17,6 +17,7 @@ def allowLocalLibInConsoleMode = false
 
 //The path were to look for the local BCLib
 def BCLibPath = '../BCLib'
+def WunderLibPath = '../WunderLib'
 
 
 // #### Logic ####
@@ -28,6 +29,7 @@ def isIDE = properties.containsKey('android.injected.invoked.from.ide')
 println "IntelliJ: ${isIDE}"
 
 def BCLibFolder = new File(BCLibPath)
+def WunderLibFolder = new File(WunderLibPath)
 if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && BCLibFolder.exists()) {
     println "Using local BCLib from '${BCLibFolder}' in IntelliJ"
     println "If you do not want to load the local version of BClib"
@@ -42,4 +44,8 @@ if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && BCLibFolder.exi
     include ':BCLib'
     project(":BCLib").projectDir = BCLibFolder
     project(':BCLib').buildFileName = './bclib-composit.gradle'
+
+    include ':WunderLib'
+    project(":WunderLib").projectDir = WunderLibFolder
+    project(':WunderLib').buildFileName = './wunderlib-composit.gradle'
 } 

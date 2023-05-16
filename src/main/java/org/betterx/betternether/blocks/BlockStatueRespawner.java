@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import de.ambertation.wunderlib.math.Float3;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -34,8 +35,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.wunder.lib.math.Float3;
 
 public class BlockStatueRespawner extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 16, 15);

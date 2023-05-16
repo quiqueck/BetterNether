@@ -13,7 +13,6 @@ import org.betterx.betternether.items.complex.DiamondSet;
 import org.betterx.betternether.items.complex.NetherSet;
 import org.betterx.betternether.items.materials.BNArmorMaterial;
 import org.betterx.betternether.items.materials.BNToolMaterial;
-import org.betterx.betternether.tab.CreativeTabs;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.core.BlockSource;
@@ -159,8 +158,8 @@ public class NetherItems extends ItemRegistry {
             CRIMSON_BOAT_TYPE.createItem(true)
     );
 
-    protected NetherItems(CreativeModeTab creativeTab) {
-        super(creativeTab, Configs.ITEMS);
+    protected NetherItems() {
+        super(Configs.ITEMS);
     }
 
     private static ItemRegistry ITEMS_REGISTRY;
@@ -168,7 +167,7 @@ public class NetherItems extends ItemRegistry {
     @NotNull
     public static ItemRegistry getItemRegistry() {
         if (ITEMS_REGISTRY == null) {
-            ITEMS_REGISTRY = new NetherItems(CreativeTabs.TAB_ITEMS);
+            ITEMS_REGISTRY = new NetherItems();
         }
         return ITEMS_REGISTRY;
     }

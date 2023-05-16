@@ -2,6 +2,9 @@
   "feature": "betternether:vegetation_magma_land",
   "placement": [
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "minecraft:count",
       "count": 8
     },

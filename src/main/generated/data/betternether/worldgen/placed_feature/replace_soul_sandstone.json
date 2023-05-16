@@ -12,6 +12,9 @@
       "min": 4
     },
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "bclib:offset",
       "blocks": [
         0,

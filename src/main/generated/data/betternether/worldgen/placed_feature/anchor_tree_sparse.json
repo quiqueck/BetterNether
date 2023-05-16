@@ -5,6 +5,9 @@
       "type": "minecraft:biome"
     },
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "minecraft:count",
       "count": 1
     },

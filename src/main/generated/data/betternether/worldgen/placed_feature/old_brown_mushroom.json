@@ -2,6 +2,9 @@
   "feature": "betternether:old_brown_mushroom",
   "placement": [
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "minecraft:count_on_every_layer",
       "count": 4
     },

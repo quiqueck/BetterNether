@@ -2,6 +2,9 @@
   "feature": "betternether:lava_pit",
   "placement": [
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "bclib:on_every_layer"
     },
     {
@@ -276,6 +279,9 @@
       "random_select": false
     },
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "bclib:offset",
       "blocks": [
         0,
@@ -307,9 +313,6 @@
     {
       "type": "minecraft:rarity_filter",
       "chance": 6
-    },
-    {
-      "type": "minecraft:biome"
     }
   ]
 }

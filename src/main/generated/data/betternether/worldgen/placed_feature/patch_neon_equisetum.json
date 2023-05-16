@@ -2,6 +2,9 @@
   "feature": "betternether:patch_neon_equisetum",
   "placement": [
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "minecraft:count",
       "count": 12
     },

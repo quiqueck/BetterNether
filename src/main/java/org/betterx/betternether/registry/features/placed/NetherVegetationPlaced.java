@@ -23,6 +23,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_BONE_REEF
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(24)
             .build();
 
@@ -30,6 +31,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_SULFURIC_BONE_REEF
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(8)
             .build();
 
@@ -37,6 +39,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_MAGMA_LAND
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherGround(8)
             .isEmptyAndOnNetherGround()
             .build();
@@ -45,6 +48,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_CRIMSON_GLOWING_WOODS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherGround(12)
             .isEmptyAndOnNetherGround()
             .build();
@@ -53,6 +57,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_GRASSLANDS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherGround(12)
             .isEmptyAndOnNetherGround()
             .build();
@@ -61,6 +66,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_GRAVEL_DESERT
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(9)
             .onceEvery(5)
             .isEmptyAndOnNetherGround()
@@ -70,6 +76,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_JUNGLE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(18)
             .isEmptyAndOnNetherGround()
             .build();
@@ -78,6 +85,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_MUSHROOM_FORREST
             .place(BN.id("vegetation_mushroom_forrest_edge"))
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(12)
             .isEmptyAndOnNetherGround()
             .build();
@@ -86,6 +94,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_MUSHROOM_FORREST
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(8)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
@@ -95,6 +104,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_POOR_GRASSLAND
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(8)
             .onceEvery(3)
             .isEmptyAndOnNetherGround()
@@ -104,6 +114,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_SOUL_PLAIN
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(8)
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
             .build();
@@ -112,6 +123,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_WART_FOREST
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(10)
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
             .build();
@@ -120,6 +132,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_WART_FOREST_EDGE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(5)
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
             .build();
@@ -128,6 +141,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_SWAMPLAND
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(20)
             .isEmptyAndOnNetherGround()
             .build();
@@ -136,6 +150,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_OLD_SWAMPLAND
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(22)
             .isEmptyAndOnNetherGround()
             .build();
@@ -144,6 +159,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_OLD_WARPED_WOODS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(8)
             .isEmptyAndOn(BlockPredicates.ONLY_NYLIUM)
             .build();
@@ -152,6 +168,7 @@ public class NetherVegetationPlaced {
             .PATCH_JELLYFISH_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(6)
             .onceEvery(4)
             .build();
@@ -160,6 +177,7 @@ public class NetherVegetationPlaced {
             .PATCH_JELLYFISH_MUSHROOM
             .place(BN.id("patch_jellyfish_mushroom_dense"))
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(4)
             .onceEvery(2)
             .build();
@@ -168,6 +186,7 @@ public class NetherVegetationPlaced {
             .PATCH_NETHER_CACTUS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherGround(4)
             .onceEvery(5)
             .build();
@@ -176,6 +195,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_MUSHROOM_RED_WITH_MOSS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherInWall(25)
             .build();
 
@@ -183,6 +203,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_MUSHROOMS_WITH_MOSS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherInWall(25)
             .build();
 
@@ -190,6 +211,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_MUSHROOMS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherInWall(25)
             .build();
 
@@ -197,6 +219,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_JUNGLE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherInWall(50)
             .build();
 
@@ -204,6 +227,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_UPSIDE_DOWN
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherInWall(50)
             .build();
 
@@ -211,6 +235,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_LUCIS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherOnWall(5)
             .onceEvery(2)
             .isEmpty()
@@ -220,6 +245,7 @@ public class NetherVegetationPlaced {
             .PATCH_NETHER_REED
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(6)
             .build();
 
@@ -228,6 +254,7 @@ public class NetherVegetationPlaced {
             .PATCH_BLACK_BUSH
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(6)
             .build();
 
@@ -235,6 +262,7 @@ public class NetherVegetationPlaced {
             .PATCH_BLACK_BUSH
             .place(BN.id("patch_black_bush_sparse"))
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(3)
             .onceEvery(2)
             .build();
@@ -243,6 +271,7 @@ public class NetherVegetationPlaced {
             .PATCH_WART_BUSH
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(4)
             .onceEvery(3)
             .build();
@@ -251,6 +280,7 @@ public class NetherVegetationPlaced {
             .PATCH_WILLOW_BUSH
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(4)
             .onceEvery(3)
             .build();
@@ -259,6 +289,7 @@ public class NetherVegetationPlaced {
             .PATCH_RUBEUS_BUSH
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(4)
             .onceEvery(2)
             .build();
@@ -267,6 +298,7 @@ public class NetherVegetationPlaced {
             .PATCH_SAKURA_BUSH
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(4)
             .onceEvery(6)
             .build();
@@ -284,6 +316,7 @@ public class NetherVegetationPlaced {
             .SCULK_VEGETATION
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(12)
             .onceEvery(2)
             .isEmptyAndOn(BlockPredicate.matchesBlocks(Blocks.SCULK))
@@ -293,6 +326,7 @@ public class NetherVegetationPlaced {
             .PATCH_HOOK_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .betterNetherCeiling(8)
             .onceEvery(2)
             .isEmptyAndUnderNetherGround()
@@ -302,6 +336,7 @@ public class NetherVegetationPlaced {
             .PATCH_MOSS_COVER
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .onlyInBiome()
             .vanillaNetherGround(8)
             .isEmptyAndOnNetherGround()
             .build();

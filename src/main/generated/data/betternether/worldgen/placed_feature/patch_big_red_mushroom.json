@@ -2,6 +2,9 @@
   "feature": "betternether:patch_big_red_mushroom",
   "placement": [
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "minecraft:count_on_every_layer",
       "count": 6
     },

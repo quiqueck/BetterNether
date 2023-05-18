@@ -1,9 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.blocks.BaseBookshelfBlock;
-import org.betterx.bclib.blocks.BaseComposterBlock;
-import org.betterx.bclib.blocks.BaseCraftingTableBlock;
-import org.betterx.bclib.blocks.BaseLadderBlock;
+import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.client.models.ModelsHelper;
 import org.betterx.bclib.client.models.PatternsHelper;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
@@ -129,9 +126,25 @@ public class NetherReedMaterial extends RoofMaterial {
         addBlockEntry(new BlockEntry(BLOCK_LADDER, (complexMaterial, settings) -> {
             return new BaseLadderBlock(getBlock(BLOCK_PLANKS));
         }).setBlockTags(BlockTags.CLIMBABLE));
-        addBlockEntry(new BlockEntry(BLOCK_SIGN, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseSignBlock(woodType);
-        }).setBlockTags(BlockTags.SIGNS).setItemTags(ItemTags.SIGNS));
+
+        addBlockEntry(new BlockEntry(
+                BLOCK_SIGN,
+                (complexMaterial, settings) -> new BaseSignBlock(woodType)
+        )
+                .setBlockTags(BlockTags.SIGNS)
+                .setItemTags(ItemTags.SIGNS));
+
+        addBlockEntry(new BlockEntry(
+                BLOCK_WALL_SIGN,
+                false,
+                (complexMaterial, settings) -> {
+                    if (getBlock(BLOCK_SIGN) instanceof BaseSignBlock sign) {
+                        return sign.wallSign;
+                    }
+                    return null;
+                }
+        )
+                .setBlockTags(BlockTags.WALL_SIGNS));
     }
 
     @Override

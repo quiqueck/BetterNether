@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
 import org.betterx.bclib.blocks.BaseLadderBlock;
+import org.betterx.bclib.blocks.BaseSignBlock;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
@@ -104,10 +105,26 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                 BLOCK_LADDER,
                 (complexMaterial, settings) -> new BaseLadderBlock(getBlock(BLOCK_PLANKS))
         ).setBlockTags(BlockTags.CLIMBABLE));
+
         addBlockEntry(new BlockEntry(
                 BLOCK_SIGN,
-                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseSignBlock(woodType)
-        ).setBlockTags(BlockTags.SIGNS).setItemTags(ItemTags.SIGNS));
+                (complexMaterial, settings) -> new BaseSignBlock(woodType)
+        )
+                .setBlockTags(BlockTags.SIGNS)
+                .setItemTags(ItemTags.SIGNS));
+
+        addBlockEntry(new BlockEntry(
+                BLOCK_WALL_SIGN,
+                false,
+                (complexMaterial, settings) -> {
+                    if (getBlock(BLOCK_SIGN) instanceof BaseSignBlock sign) {
+                        return sign.wallSign;
+                    }
+                    return null;
+                }
+        )
+                .setBlockTags(BlockTags.WALL_SIGNS));
+        
     }
 
     @Override

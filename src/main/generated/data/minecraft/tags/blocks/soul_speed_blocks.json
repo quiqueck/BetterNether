@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:soul_sandstone",
+    "betternether:soul_sandstone_chiseled",
+    "betternether:soul_sandstone_cut",
+    "betternether:soul_sandstone_cut_stairs",
+    "betternether:soul_sandstone_smooth",
+    "betternether:soul_sandstone_smooth_stairs",
+    "betternether:soul_sandstone_stairs"
+  ]
+}

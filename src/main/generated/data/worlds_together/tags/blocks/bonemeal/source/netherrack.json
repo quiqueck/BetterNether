@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:ceiling_mushrooms",
+    "betternether:jungle_grass",
+    "betternether:mushroom_grass",
+    "betternether:nether_mycelium",
+    "betternether:netherrack_moss",
+    "betternether:sepia_mushroom_grass",
+    "betternether:swampland_grass",
+    "minecraft:crimson_nylium",
+    "minecraft:warped_nylium"
+  ]
+}

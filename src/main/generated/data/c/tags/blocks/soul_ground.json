@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:farmland",
+    "betternether:veined_sand",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil"
+  ]
+}

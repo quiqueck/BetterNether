@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:anchor_tree_sapling",
+    "betternether:mushroom_fir_sapling",
+    "betternether:nether_sakura_sapling",
+    "betternether:rubeus_sapling",
+    "betternether:stalagnate_seed",
+    "betternether:willow_sapling"
+  ]
+}

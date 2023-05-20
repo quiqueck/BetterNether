@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:anchor_tree_barrel",
+    "betternether:crimson_barrel",
+    "betternether:mushroom_fir_barrel",
+    "betternether:nether_mushroom_barrel",
+    "betternether:nether_reed_barrel",
+    "betternether:nether_sakura_barrel",
+    "betternether:rubeus_barrel",
+    "betternether:stalagnate_barrel",
+    "betternether:warped_barrel",
+    "betternether:wart_barrel",
+    "betternether:willow_barrel"
+  ]
+}

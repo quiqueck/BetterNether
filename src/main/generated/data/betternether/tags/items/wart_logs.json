@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:wart_bark",
+    "betternether:wart_log",
+    "betternether:wart_stripped_bark",
+    "betternether:wart_stripped_log"
+  ]
+}

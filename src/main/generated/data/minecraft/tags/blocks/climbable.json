@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:anchor_tree_ladder",
+    "betternether:anchor_tree_vine",
+    "betternether:black_vine",
+    "betternether:blooming_vine",
+    "betternether:crimson_ladder",
+    "betternether:eye_vine",
+    "betternether:golden_vine",
+    "betternether:mushroom_fir_ladder",
+    "betternether:nether_mushroom_ladder",
+    "betternether:nether_reed_ladder",
+    "betternether:nether_sakura_ladder",
+    "betternether:rubeus_ladder",
+    "betternether:stalagnate_ladder",
+    "betternether:stalagnate_trunk",
+    "betternether:warped_ladder",
+    "betternether:wart_ladder",
+    "betternether:willow_ladder"
+  ]
+}

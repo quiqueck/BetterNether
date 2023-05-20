@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bone_block",
+    "minecraft:glowstone",
+    "minecraft:gravel",
+    "minecraft:magma_block",
+    "minecraft:red_sand",
+    "minecraft:sand",
+    "minecraft:sculk",
+    "#c:end_stones",
+    "#c:mycelium",
+    "#c:nether_terrain",
+    "#minecraft:base_stone_overworld",
+    "#minecraft:dripstone_replaceable_blocks",
+    "#minecraft:nylium"
+  ]
+}

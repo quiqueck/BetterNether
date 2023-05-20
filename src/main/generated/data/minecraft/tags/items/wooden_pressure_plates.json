@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:anchor_tree_plate",
+    "betternether:mushroom_fir_plate",
+    "betternether:nether_mushroom_plate",
+    "betternether:nether_reed_plate",
+    "betternether:nether_sakura_plate",
+    "betternether:rubeus_plate",
+    "betternether:stalagnate_plate",
+    "betternether:wart_plate",
+    "betternether:willow_plate"
+  ]
+}

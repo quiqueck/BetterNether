@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:anchor_tree_stairs",
+    "betternether:mushroom_fir_stairs",
+    "betternether:nether_mushroom_stairs",
+    "betternether:nether_reed_stairs",
+    "betternether:nether_sakura_stairs",
+    "betternether:rubeus_stairs",
+    "betternether:stalagnate_stairs",
+    "betternether:wart_stairs",
+    "betternether:willow_stairs"
+  ]
+}

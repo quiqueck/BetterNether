@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "nether_taburet",
+  "group": "taburet",
   "key": {
     "#": {
       "item": "minecraft:dark_oak_slab"

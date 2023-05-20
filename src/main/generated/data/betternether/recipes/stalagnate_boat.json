@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "nether_boat",
+  "group": "boat",
   "key": {
     "#": {
       "item": "betternether:stalagnate_planks"

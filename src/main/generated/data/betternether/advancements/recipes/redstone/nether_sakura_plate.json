@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rubeus_planks": {
+    "has_nether_sakura_planks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:rubeus_planks"
+              "betternether:nether_sakura_planks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:rubeus_pressure_plate"
+        "recipe": "betternether:nether_sakura_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_rubeus_planks",
+      "has_nether_sakura_planks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "betternether:rubeus_pressure_plate"
+      "betternether:nether_sakura_plate"
     ]
   }
 }

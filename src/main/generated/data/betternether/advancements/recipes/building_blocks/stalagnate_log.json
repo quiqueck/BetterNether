@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stalagnate_bark": {
+    "has_stalagnate_stem": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:stalagnate_bark"
+              "betternether:stalagnate_stem"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_stalagnate_bark",
+      "has_stalagnate_stem",
       "has_the_recipe"
     ]
   ],

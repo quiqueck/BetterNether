@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stalagnate_planks": {
+    "has_mushroom_fir_planks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:stalagnate_planks"
+              "betternether:mushroom_fir_planks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:stalagnate_pressure_plate"
+        "recipe": "betternether:mushroom_fir_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_stalagnate_planks",
+      "has_mushroom_fir_planks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "betternether:stalagnate_pressure_plate"
+      "betternether:mushroom_fir_plate"
     ]
   }
 }

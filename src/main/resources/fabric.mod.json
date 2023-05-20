@@ -40,14 +40,14 @@
   ],
   "depends": {
     "fabricloader": ">=0.14.19",
-    "fabric": ">=0.77.0",
+    "fabric": ">=0.81.2",
     "minecraft": [
-      "1.19.4"
+      "1.20-beta.2"
     ],
-    "bclib": "2.3.x"
+    "bclib": "3.0.x"
   },
   "breaks": {
-    "bclib": "<2.3.2"
+    "bclib": "<3.0.0"
   },
   "custom": {
     "bclib": {

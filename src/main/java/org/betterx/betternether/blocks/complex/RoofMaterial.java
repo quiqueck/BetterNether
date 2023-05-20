@@ -1,91 +1,21 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.blocks.BaseBlock;
-import org.betterx.bclib.blocks.BaseSlabBlock;
-import org.betterx.bclib.blocks.BaseStairsBlock;
-import org.betterx.bclib.complexmaterials.entry.BlockEntry;
-import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
-import org.betterx.bclib.recipes.BCLRecipeBuilder;
+import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.SlotMap;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-public class RoofMaterial extends NetherWoodenMaterial {
-    public final static String BLOCK_ROOF = BLOCK_OPTIONAL_ROOF;
-    public final static String BLOCK_ROOF_STAIRS = BLOCK_OPTIONAL_ROOF_STAIRS;
-    public final static String BLOCK_ROOF_SLAB = BLOCK_OPTIONAL_ROOF_SLAB;
-
+public class RoofMaterial<T extends RoofMaterial<T>> extends NetherWoodenMaterial<T> {
     public RoofMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
         super(name, woodColor, planksColor);
     }
 
     @Override
-    public RoofMaterial init() {
-        return (RoofMaterial) super.init();
-    }
-
-    @Override
-    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        super.initDefault(blockSettings, itemSettings);
-
-        addBlockEntry(new BlockEntry(BLOCK_ROOF, (complexMaterial, settings) -> {
-            return new BaseBlock(FabricBlockSettings.copyOf(getBlock(BLOCK_PLANKS)));
-        }));
-        addBlockEntry(new BlockEntry(BLOCK_ROOF_STAIRS, (complexMaterial, settings) -> {
-            return new BaseStairsBlock(getBlock(BLOCK_ROOF), false);
-        }));
-        addBlockEntry(new BlockEntry(BLOCK_ROOF_SLAB, (complexMaterial, settings) -> {
-            return new BaseSlabBlock(getBlock(BLOCK_ROOF), false);
-        }));
-    }
-
-    @Override
-    public void initDefaultRecipes() {
-        super.initDefaultRecipes();
-        initRoofRecipes();
-    }
-
-    public void initRoofRecipes() {
-        final Block planks = getBlock(BLOCK_PLANKS);
-        final Block slab = getBlock(BLOCK_SLAB);
-        final Block roof = getBlock(BLOCK_ROOF);
-
-        if (BuiltInRegistries.BLOCK.getKey(slab) != BuiltInRegistries.BLOCK.getDefaultKey()) {
-            addRecipeEntry(new RecipeEntry(BLOCK_ROOF, (material, id) -> {
-                BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF))
-                                .setOutputCount(4)
-                                .setShape("# #", "###", " # ")
-                                .addMaterial('#', planks)
-                                .setGroup("roof")
-                                .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                                .build();
-            }));
-
-            addRecipeEntry(new RecipeEntry(BLOCK_ROOF_STAIRS, (material, id) -> {
-                BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF_STAIRS))
-                                .setOutputCount(4)
-                                .setShape("#  ", "## ", "###")
-                                .addMaterial('#', roof)
-                                .setGroup("roof_stairs")
-                                .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                                .build();
-            }));
-
-            addRecipeEntry(new RecipeEntry(BLOCK_ROOF_SLAB, (material, id) -> {
-                BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF_SLAB))
-                                .setOutputCount(6)
-                                .setShape("###")
-                                .addMaterial('#', roof)
-                                .setGroup("roof_slabs")
-                                .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                                .build();
-            }));
-        }
+    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
+        return super.createMaterialSlots()
+                    .add(NetherSlots.ROOF)
+                    .add(NetherSlots.ROOF_STAIRS)
+                    .add(NetherSlots.ROOF_SLAB);
     }
 }

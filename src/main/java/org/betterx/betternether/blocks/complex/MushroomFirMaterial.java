@@ -1,74 +1,39 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.entry.BlockEntry;
-import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
-import org.betterx.bclib.recipes.BCLRecipeBuilder;
+import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.SlotMap;
+import org.betterx.bclib.complexmaterials.set.wood.AbstractSaplingSlot;
+import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.BlockMushroomFir;
 import org.betterx.betternether.blocks.BlockMushroomFirSapling;
-import org.betterx.betternether.blocks.BlockStem;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 
-public class MushroomFirMaterial extends NetherWoodenMaterial {
-    public final static String BLOCK_SAPLING = BLOCK_OPTIONAL_SAPLING;
-    public final static String BLOCK_STEM = BLOCK_OPTIONAL_STEM;
-    public final static String BLOCK_TRUNK = BLOCK_OPTIONAL_TRUNK;
-
+public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMaterial> {
     public MushroomFirMaterial() {
         super("mushroom_fir", MaterialColor.COLOR_BLUE, MaterialColor.COLOR_BLUE);
     }
 
     @Override
-    public MushroomFirMaterial init() {
-        return (MushroomFirMaterial) super.init();
-    }
-
-    @Override
-    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        super.initDefault(blockSettings, itemSettings);
-        addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> {
-            return new BlockMushroomFir();
-        }));
-
-        addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> {
-            return new BlockMushroomFirSapling();
-        }));
-
-        addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) -> {
-            return new BlockStem(MaterialColor.TERRACOTTA_BLACK);
-        }));
-    }
-
-    @Override
-    public void initDefaultRecipes() {
-        super.initDefaultRecipes();
-        addRecipeEntry(new RecipeEntry(BLOCK_LOG + "_" + BLOCK_STEM, (material, id) -> {
-            final Block log = getBlock(BLOCK_LOG);
-            final Block stem = getBlock(BLOCK_STEM);
-
-            BCLRecipeBuilder.crafting(id, log)
-                            .setOutputCount(1)
-                            .setShape("##", "##")
-                            .addMaterial('#', stem)
-                            .setGroup("planks")
-                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                            .build();
-        }));
+    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
+        return super.createMaterialSlots()
+                    .add(TrunkSlot.create(BlockMushroomFir::new))
+                    .add(AbstractSaplingSlot.create(BlockMushroomFirSapling::new))
+                    .add(NetherSlots.STEM);
     }
 
     public Block getStem() {
-        return getBlock(BLOCK_STEM);
+        return getBlock(NetherSlots.STEM);
     }
 
     public Block getSapling() {
-        return getBlock(BLOCK_SAPLING);
+        return getBlock(WoodSlots.SAPLING);
     }
 
     public Block getTrunk() {
-        return getBlock(BLOCK_TRUNK);
+        return getBlock(NetherSlots.TRUNK);
     }
 }

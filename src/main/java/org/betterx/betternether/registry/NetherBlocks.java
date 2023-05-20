@@ -9,6 +9,9 @@ import org.betterx.bclib.registry.BlockRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
+import org.betterx.betternether.blocks.complex.slots.BarStool;
+import org.betterx.betternether.blocks.complex.slots.Chair;
+import org.betterx.betternether.blocks.complex.slots.Taburet;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
@@ -1092,7 +1095,7 @@ public class NetherBlocks extends BlockRegistry {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);
-            NetherWoodenMaterial.makeTaburetRecipe(
+            Taburet.makeTaburetRecipe(
                     new ResourceLocation(BetterNether.MOD_ID, name),
                     block,
                     source
@@ -1107,7 +1110,7 @@ public class NetherBlocks extends BlockRegistry {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);
-            NetherWoodenMaterial.makeChairRecipe(
+            Chair.makeChairRecipe(
                     new ResourceLocation(BetterNether.MOD_ID, name),
                     block,
                     source
@@ -1122,7 +1125,7 @@ public class NetherBlocks extends BlockRegistry {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);
-            NetherWoodenMaterial.makeBarStoolRecipe(
+            BarStool.makeBarStoolRecipe(
                     new ResourceLocation(BetterNether.MOD_ID, name),
                     block,
                     source

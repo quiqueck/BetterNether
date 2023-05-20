@@ -1,9 +1,10 @@
 package org.betterx.betternether.recipes;
 
+import org.betterx.bclib.complexmaterials.set.wood.Boat;
+import org.betterx.bclib.complexmaterials.set.wood.ChestBoat;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
@@ -78,27 +79,27 @@ public class ItemRecipes {
                 .build();
 
 
-        NetherWoodenMaterial.makeBoatRecipe(
+        Boat.makeBoatRecipe(
                 BetterNether.makeID("crimson_boat"),
-                Blocks.CRIMSON_PLANKS, NetherItems.CRIMSON_BOAT, NetherItems.CRIMSON_CHEST_BOAT, false
+                Blocks.CRIMSON_PLANKS, NetherItems.CRIMSON_BOAT
         );
 
 
-        NetherWoodenMaterial.makeBoatRecipe(
+        ChestBoat.makeChestBoatRecipe(
                 BetterNether.makeID("crimson_chest_boat"),
-                Blocks.CRIMSON_PLANKS, NetherItems.CRIMSON_BOAT, NetherItems.CRIMSON_CHEST_BOAT, true
+                NetherItems.CRIMSON_BOAT, NetherItems.CRIMSON_CHEST_BOAT
         );
 
 
-        NetherWoodenMaterial.makeBoatRecipe(
+        Boat.makeBoatRecipe(
                 BetterNether.makeID("warped_boat"),
-                Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT, false
+                Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT
         );
 
 
-        NetherWoodenMaterial.makeBoatRecipe(
+        ChestBoat.makeChestBoatRecipe(
                 BetterNether.makeID("warped_chest_boat"),
-                Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT, true
+                NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT
         );
 
 

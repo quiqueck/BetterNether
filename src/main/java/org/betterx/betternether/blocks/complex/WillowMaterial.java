@@ -1,21 +1,23 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.entry.BlockEntry;
+import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.SimpleBlockOnlyMaterialSlot;
+import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
+import org.betterx.bclib.complexmaterials.entry.SlotMap;
+import org.betterx.bclib.complexmaterials.set.wood.AbstractSaplingSlot;
+import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.BlockWillowBranch;
 import org.betterx.betternether.blocks.BlockWillowSapling;
 import org.betterx.betternether.blocks.BlockWillowTorch;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 
-public class WillowMaterial extends RoofMaterial {
+public class WillowMaterial extends RoofMaterial<WillowMaterial> {
     public final static String BLOCK_TORCH = "torch";
-    public final static String BLOCK_TRUNK = BLOCK_OPTIONAL_TRUNK;
-    public final static String BLOCK_BRANCH = BLOCK_OPTIONAL_BRANCH;
-    public final static String BLOCK_SAPLING = BLOCK_OPTIONAL_SAPLING;
 
 
     public WillowMaterial() {
@@ -28,28 +30,24 @@ public class WillowMaterial extends RoofMaterial {
     }
 
     @Override
-    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        super.initDefault(blockSettings, itemSettings);
-
-        addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> new BlockWillowTrunk()));
-
-        addBlockEntry(new BlockEntry(BLOCK_BRANCH, false, (complexMaterial, settings) -> new BlockWillowBranch()));
-
-        addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> new BlockWillowSapling()));
-
-        addBlockEntry(new BlockEntry(BLOCK_TORCH, (complexMaterial, settings) -> new BlockWillowTorch()));
+    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
+        return super.createMaterialSlots()
+                    .add(TrunkSlot.create(BlockWillowTrunk::new))
+                    .add(AbstractSaplingSlot.create(BlockWillowSapling::new))
+                    .add(SimpleBlockOnlyMaterialSlot.createBlockOnly(NetherSlots.BRANCH, BlockWillowBranch::new))
+                    .add(SimpleMaterialSlot.createBlockItem(BLOCK_TORCH, BlockWillowTorch::new));
     }
 
     public Block getTrunk() {
-        return getBlock(BLOCK_TRUNK);
+        return getBlock(NetherSlots.TRUNK);
     }
 
     public Block getBranch() {
-        return getBlock(BLOCK_BRANCH);
+        return getBlock(NetherSlots.BRANCH);
     }
 
     public Block getSapling() {
-        return getBlock(BLOCK_SAPLING);
+        return getBlock(WoodSlots.SAPLING);
     }
 
     public Block getTorch() {

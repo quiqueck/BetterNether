@@ -1,69 +1,27 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.blocks.BaseRotatedPillarBlock;
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.BlockEntry;
-import org.betterx.bclib.complexmaterials.entry.ItemEntry;
-import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
-import org.betterx.bclib.items.boat.BoatTypeOverride;
-import org.betterx.bclib.recipes.BCLRecipeBuilder;
-import org.betterx.bclib.registry.BlockRegistry;
-import org.betterx.bclib.registry.ItemRegistry;
+import org.betterx.bclib.complexmaterials.entry.SlotMap;
+import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.BNBarStool;
-import org.betterx.betternether.blocks.BNNormalChair;
-import org.betterx.betternether.blocks.BNTaburet;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.worlds.together.tag.v3.CommonItemTags;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 
-public class NetherWoodenMaterial extends WoodenComplexMaterial {
-    protected final static String BLOCK_OPTIONAL_TRUNK = "trunk";
-    protected final static String BLOCK_OPTIONAL_BRANCH = "branch";
-    protected final static String BLOCK_OPTIONAL_ROOT = "roots";
-    protected final static String BLOCK_OPTIONAL_SAPLING = "sapling";
-    protected final static String BLOCK_OPTIONAL_SEED = "seed";
-    protected final static String BLOCK_OPTIONAL_STEM = "stem";
-    protected final static String BLOCK_OPTIONAL_ROOF = "roof";
-    protected final static String BLOCK_OPTIONAL_ROOF_STAIRS = "roof_stairs";
-    protected final static String BLOCK_OPTIONAL_ROOF_SLAB = "roof_slab";
-
-    public final static String BLOCK_TABURET = "taburet";
-    public final static String BLOCK_CHAIR = "chair";
-    public final static String BLOCK_BAR_STOOL = "bar_stool";
-    public final static String ITEM_BOAT = "boat";
-    public final static String ITEM_CHEST_BOAT = "chest_boat";
-
-    private BoatTypeOverride BOAT_TYPE;
-
+public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends WoodenComplexMaterial {
     public NetherWoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
         super(BetterNether.MOD_ID, name, "nether", woodColor, planksColor);
     }
 
-    @Override
-    public ComplexMaterial init(BlockRegistry blocksRegistry, ItemRegistry itemsRegistry) {
-        return super.init(blocksRegistry, itemsRegistry);
-    }
-
-    public NetherWoodenMaterial init() {
-        return (NetherWoodenMaterial) super.init(
+    public T init() {
+        return (T) super.init(
                 NetherBlocks.getBlockRegistry(),
                 NetherItems.getItemRegistry()
         );
@@ -75,167 +33,35 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
                                   .mapColor(planksColor);
     }
 
-    protected void _initBase(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        super.initBase(blockSettings, itemSettings);
-        final TagKey<Block> tagBlockLog = getBlockTag(TAG_LOGS);
-        final TagKey<Item> tagItemLog = getItemTag(TAG_LOGS);
-
-        replaceOrAddBlockEntry(
-                new BlockEntry(BLOCK_STRIPPED_LOG, (complexMaterial, settings) -> new BaseRotatedPillarBlock(settings))
-                        .setBlockTags(BlockTags.LOGS, tagBlockLog)
-                        .setItemTags(ItemTags.LOGS, tagItemLog)
-        );
-        replaceOrAddBlockEntry(
-                new BlockEntry(
-                        BLOCK_STRIPPED_BARK,
-                        (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseBarkBlock(settings)
-                )
-                        .setBlockTags(BlockTags.LOGS, tagBlockLog)
-                        .setItemTags(ItemTags.LOGS, tagItemLog)
-        );
-
-        replaceOrAddBlockEntry(
-                new BlockEntry(
-                        BLOCK_LOG,
-                        (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseStripableLogBlock(
-                                woodColor,
-                                getBlock(BLOCK_STRIPPED_LOG)
-                        )
-                )
-                        .setBlockTags(BlockTags.LOGS, tagBlockLog)
-                        .setItemTags(ItemTags.LOGS, tagItemLog)
-        );
-        replaceOrAddBlockEntry(
-                new BlockEntry(
-                        BLOCK_BARK,
-                        (complexMaterial, settings) -> new org.betterx.bclib.blocks.StripableBarkBlock(
-                                woodColor,
-                                getBlock(
-                                        BLOCK_STRIPPED_BARK)
-                        )
-                )
-                        .setBlockTags(BlockTags.LOGS, tagBlockLog)
-                        .setItemTags(ItemTags.LOGS, tagItemLog)
-        );
-    }
-
-    protected void initBoats(Item.Properties itemSettings) {
-        BOAT_TYPE = BoatTypeOverride.create(BetterNether.MOD_ID, baseName, this.getPlanks());
-
-        addItemEntry(new ItemEntry(ITEM_BOAT, (cmx, settings) -> BOAT_TYPE.createItem(false)));
-        addItemEntry(new ItemEntry(
-                ITEM_CHEST_BOAT,
-                (cmx, settings) -> BOAT_TYPE.createItem(true)
-        ).setItemTags(new TagKey[]{ItemTags.CHEST_BOATS}));
-    }
-
     @Override
-    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        _initBase(blockSettings, itemSettings);
-        super.initStorage(blockSettings, itemSettings);
-        initDecorations(blockSettings, itemSettings);
-
-        addBlockEntry(new BlockEntry(
-                BLOCK_TABURET,
-                (complexMaterial, settings) -> new BNTaburet(getBlock(BLOCK_SLAB))
-        ));
-        addBlockEntry(new BlockEntry(
-                BLOCK_CHAIR,
-                (complexMaterial, settings) -> new BNNormalChair(getBlock(BLOCK_SLAB))
-        ));
-        addBlockEntry(new BlockEntry(
-                BLOCK_BAR_STOOL,
-                (complexMaterial, settings) -> new BNBarStool(getBlock(BLOCK_SLAB))
-        ));
-
-        initBoats(itemSettings);
-    }
-
-    public static void makeTaburetRecipe(ResourceLocation id, Block taburet, Block planks) {
-        BCLRecipeBuilder.crafting(id, taburet)
-                        .setShape("##", "II")
-                        .addMaterial('#', planks)
-                        .addMaterial('I', Items.STICK)
-                        .setGroup("nether" + "_taburet")
-                        .setCategory(RecipeCategory.DECORATIONS)
-                        .build();
-    }
-
-    public static void makeChairRecipe(ResourceLocation id, Block chair, Block planks) {
-        BCLRecipeBuilder.crafting(id, chair)
-                        .setShape("I ", "##", "II")
-                        .addMaterial('#', planks)
-                        .addMaterial('I', Items.STICK)
-                        .setGroup("nether" + "_chair")
-                        .setCategory(RecipeCategory.DECORATIONS)
-                        .build();
-    }
-
-    public static void makeBarStoolRecipe(ResourceLocation id, Block barStool, Block planks) {
-        BCLRecipeBuilder.crafting(id, barStool)
-                        .setShape("##", "II", "II")
-                        .addMaterial('#', planks)
-                        .addMaterial('I', Items.STICK)
-                        .setGroup("nether" + "_bar_stool")
-                        .setCategory(RecipeCategory.DECORATIONS)
-                        .build();
-    }
-
-    public static void makeBoatRecipe(
-            ResourceLocation id,
-            Block planks,
-            Item boat,
-            Item chestBoat,
-            boolean hasChest
-    ) {
-        if (hasChest) {
-            BCLRecipeBuilder.crafting(id, chestBoat)
-                            .shapeless()
-                            .addMaterial('C', CommonItemTags.CHEST)
-                            .addMaterial('#', boat)
-                            .setGroup("nether" + "_chest_boat")
-                            .setCategory(RecipeCategory.TRANSPORTATION)
-                            .build();
-        } else {
-            BCLRecipeBuilder.crafting(id, boat)
-                            .setShape("# #", "###")
-                            .addMaterial('#', planks)
-                            .setGroup("nether" + "_boat")
-                            .setCategory(RecipeCategory.TRANSPORTATION)
-                            .build();
-        }
-    }
-
-    protected void initDefaultFurniture() {
-        final Block slab = getSlab();
-
-        if (BuiltInRegistries.BLOCK.getKey(slab) != BuiltInRegistries.BLOCK.getDefaultKey()) {
-            addRecipeEntry(new RecipeEntry(BLOCK_TABURET, (material, id) -> {
-                makeTaburetRecipe(id, getBlock(BLOCK_TABURET), slab);
-            }));
-
-            addRecipeEntry(new RecipeEntry(BLOCK_CHAIR, (material, id) -> {
-                makeChairRecipe(id, getBlock(BLOCK_CHAIR), slab);
-            }));
-
-            addRecipeEntry(new RecipeEntry(BLOCK_BAR_STOOL, (material, id) -> {
-                makeBarStoolRecipe(id, getBlock(BLOCK_BAR_STOOL), slab);
-            }));
-
-            addRecipeEntry(new RecipeEntry(ITEM_BOAT, (material, id) -> {
-                makeBoatRecipe(id, getPlanks(), getItem(ITEM_BOAT), getItem(ITEM_CHEST_BOAT), false);
-            }));
-
-            addRecipeEntry(new RecipeEntry(ITEM_CHEST_BOAT, (material, id) -> {
-                makeBoatRecipe(id, getPlanks(), getItem(ITEM_BOAT), getItem(ITEM_CHEST_BOAT), true);
-            }));
-        }
-    }
-
-    @Override
-    public void initDefaultRecipes() {
-        super.initDefaultRecipes();
-        initDefaultFurniture();
+    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
+        return SlotMap.of(
+                NetherSlots.STRIPPED_LOG,
+                NetherSlots.STRIPPED_BARK,
+                NetherSlots.LOG,
+                NetherSlots.BARK,
+                WoodSlots.PLANKS,
+                WoodSlots.STAIRS,
+                WoodSlots.SLAB,
+                WoodSlots.FENCE,
+                WoodSlots.GATE,
+                WoodSlots.BUTTON,
+                WoodSlots.PRESSURE_PLATE,
+                WoodSlots.TRAPDOOR,
+                WoodSlots.DOOR,
+                WoodSlots.LADDER,
+                WoodSlots.SIGN,
+                WoodSlots.CHEST,
+                WoodSlots.BARREL,
+                WoodSlots.CRAFTING_TABLE,
+                WoodSlots.BOOKSHELF,
+                WoodSlots.COMPOSTER,
+                WoodSlots.BOAT,
+                WoodSlots.CHEST_BOAT,
+                NetherSlots.TABURET,
+                NetherSlots.CHAIR,
+                NetherSlots.BAR_STOOL
+        );
     }
 
     @Override
@@ -244,26 +70,26 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     }
 
     public Block getPlanks() {
-        return getBlock(BLOCK_PLANKS);
+        return getBlock(WoodSlots.PLANKS);
     }
 
     public Block getSlab() {
-        return getBlock(BLOCK_SLAB);
+        return getBlock(WoodSlots.SLAB);
     }
 
     public Block getLog() {
-        return getBlock(BLOCK_LOG);
+        return getBlock(WoodSlots.LOG);
     }
 
     public Block getBark() {
-        return getBlock(BLOCK_BARK);
+        return getBlock(WoodSlots.BARK);
     }
 
     public Block getStrippedLog() {
-        return getBlock(BLOCK_STRIPPED_LOG);
+        return getBlock(WoodSlots.STRIPPED_LOG);
     }
 
     public Block getStrippedBark() {
-        return getBlock(BLOCK_STRIPPED_BARK);
+        return getBlock(WoodSlots.STRIPPED_BARK);
     }
 }

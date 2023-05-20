@@ -1,43 +1,35 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.entry.BlockEntry;
+import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.SimpleBlockOnlyMaterialSlot;
+import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.betternether.blocks.BlockWartRoots;
 import org.betterx.betternether.blocks.BlockWartSeed;
+import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 
-public class WartMaterial extends RoofMaterial {
-    public final static String BLOCK_SEED = BLOCK_OPTIONAL_SEED;
-    public final static String BLOCK_ROOTS = BLOCK_OPTIONAL_ROOT;
-
+public class WartMaterial extends RoofMaterial<WartMaterial> {
     public WartMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
         super(name, woodColor, planksColor);
     }
 
     @Override
-    public WartMaterial init() {
-        return (WartMaterial) super.init();
+    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
+        return super
+                .createMaterialSlots()
+                .add(AbstractSeed.create(BlockWartSeed::new))
+                .add(SimpleBlockOnlyMaterialSlot.createBlockOnly(NetherSlots.ROOTS, BlockWartRoots::new));
     }
 
-    @Override
-    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        super.initDefault(blockSettings, itemSettings);
-        addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockWartSeed()).setBlockTags(
-                BlockTags.SAPLINGS).setItemTags(ItemTags.SAPLINGS));
-
-        addBlockEntry(new BlockEntry(BLOCK_ROOTS, false, (complexMaterial, settings) -> new BlockWartRoots()));
-    }
 
     public Block getRoot() {
-        return getBlock(BLOCK_ROOTS);
+        return getBlock(NetherSlots.ROOTS);
     }
 
     public Block getSeed() {
-        return getBlock(BLOCK_SEED);
+        return getBlock(NetherSlots.SEED);
     }
 }

@@ -1,8 +1,8 @@
 package org.betterx.betternether.world.structures.city.palette;
 
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.betternether.blocks.complex.RoofMaterial;
-import org.betterx.betternether.blocks.complex.WillowMaterial;
+import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.util.RandomSource;
@@ -18,9 +18,9 @@ public class Palettes {
     public static final CityPalette EMPTY = register(new CityPalette("empty"));
 
     public static final CityPalette RED = register(new CityPalette("red")
-            .addRoofBlocks(NetherBlocks.MAT_WART.getBlock(RoofMaterial.BLOCK_ROOF))
-            .addRoofSlabs(NetherBlocks.MAT_WART.getBlock(RoofMaterial.BLOCK_ROOF_SLAB))
-            .addRoofStairs(NetherBlocks.MAT_WART.getBlock(RoofMaterial.BLOCK_ROOF_STAIRS))
+            .addRoofBlocks(NetherBlocks.MAT_WART.getBlock(NetherSlots.ROOF))
+            .addRoofSlabs(NetherBlocks.MAT_WART.getBlock(NetherSlots.ROOF_SLAB))
+            .addRoofStairs(NetherBlocks.MAT_WART.getBlock(NetherSlots.ROOF_STAIRS))
             .addPlanksBlocks(NetherBlocks.MAT_WART.getPlanks())
             .addPlanksSlabs(NetherBlocks.MAT_WART.getSlab())
             .addPlanksStairs(NetherBlocks.MAT_WART.getBlock(
@@ -32,12 +32,12 @@ public class Palettes {
             .addWalls(NetherBlocks.NETHER_BRICK_WALL)
             .addLogs(
                     NetherBlocks.MAT_WART.getLog(),
-                    NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_LOG),
+                    NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.LOG),
                     NetherBlocks.MAT_WART.getStrippedLog()
             )
             .addBark(
                     NetherBlocks.MAT_WART.getBark(),
-                    NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK),
+                    NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.BARK),
                     NetherBlocks.MAT_WART.getStrippedBark()
             )
             .addStoneBlocks(

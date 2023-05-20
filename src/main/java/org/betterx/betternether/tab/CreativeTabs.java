@@ -17,6 +17,10 @@ public class CreativeTabs {
     public static final CreativeModeTab BN_TAB;
     public static final CreativeModeTab TAB_ITEMS;
 
+    public static void ensureStaicallyLoaded() {
+        // NO-OP
+    }
+
     static {
         BN_TAB = FabricItemGroup
                 .builder(BetterNether.makeID("blocks"))

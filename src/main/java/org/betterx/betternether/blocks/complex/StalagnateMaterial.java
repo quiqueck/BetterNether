@@ -1,84 +1,68 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.entry.BlockEntry;
-import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
+import org.betterx.bclib.complexmaterials.ComplexMaterial;
+import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.SimpleBlockOnlyMaterialSlot;
+import org.betterx.bclib.complexmaterials.entry.SlotMap;
+import org.betterx.bclib.complexmaterials.set.wood.Log;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
-import org.betterx.betternether.blocks.BlockStem;
+import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 
-public class StalagnateMaterial extends RoofMaterial {
-    public final static String BLOCK_BOWL = "bowl";
-    public final static String BLOCK_TRUNK = BLOCK_OPTIONAL_TRUNK;
-    public final static String BLOCK_SEED = BLOCK_OPTIONAL_SEED;
-    public final static String BLOCK_STEM = BLOCK_OPTIONAL_STEM;
+import org.jetbrains.annotations.Nullable;
 
+public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
     public StalagnateMaterial() {
         super("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN);
     }
 
     @Override
-    public StalagnateMaterial init() {
-        return (StalagnateMaterial) super.init();
-    }
-
-    @Override
-    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        super.initDefault(blockSettings, itemSettings);
-
-        addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) -> new BlockStem(woodColor)));
-        addBlockEntry(new BlockEntry(
-                BLOCK_TRUNK,
-                false,
-                (complexMaterial, settings) -> new BlockStalagnate()
-        ).setBlockTags(BlockTags.CLIMBABLE));
-        addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockStalagnateSeed()));
-        addBlockEntry(new BlockEntry(
-                BLOCK_BOWL,
-                false,
-                (complexMaterial, settings) -> new BlockStalagnateBowl(getBlock(
-                        BLOCK_OPTIONAL_TRUNK))
-        ));
-    }
-
-    @Override
-    public void initDefaultRecipes() {
-        super.initDefaultRecipes();
-
-        addRecipeEntry(new RecipeEntry(BLOCK_LOG + "_" + BLOCK_STEM, (material, id) -> {
-            Block stem = getStem();
-
-            BCLRecipeBuilder.crafting(id, getBlock(BLOCK_LOG))
-                            .setOutputCount(1)
-                            .setShape("##", "##")
-                            .addMaterial('#', stem)
-                            .setGroup("logs")
-                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                            .build();
-        }));
+    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
+        return super.createMaterialSlots()
+                    .add(NetherSlots.STEM)
+                    .add(TrunkSlot.createClimbable(BlockStalagnate::new))
+                    .add(AbstractSeed.create(BlockStalagnateSeed::new))
+                    .add(SimpleBlockOnlyMaterialSlot.createBlockOnly(
+                            NetherSlots.BOWL,
+                            (c, p) -> new BlockStalagnateBowl(c.getBlock(NetherSlots.TRUNK))
+                    ))
+                    .replace(new Log() {
+                        @Override
+                        protected @Nullable void makeRecipe(ComplexMaterial material, ResourceLocation id) {
+                            BCLRecipeBuilder
+                                    .crafting(id, material.getBlock(suffix))
+                                    .setOutputCount(1)
+                                    .setShape("##", "##")
+                                    .addMaterial('#', material.getBlock(NetherSlots.STEM))
+                                    .setGroup("logs")
+                                    .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                                    .build();
+                        }
+                    });
     }
 
     public Block getTrunk() {
-        return getBlock(BLOCK_TRUNK);
+        return getBlock(NetherSlots.TRUNK);
     }
 
     public Block getStem() {
-        return getBlock(BLOCK_STEM);
+        return getBlock(NetherSlots.STEM);
     }
 
     public Block getBowl() {
-        return getBlock(BLOCK_BOWL);
+        return getBlock(NetherSlots.BOWL);
     }
 
     public Block getSeed() {
-        return getBlock(BLOCK_SEED);
+        return getBlock(NetherSlots.SEED);
     }
 }

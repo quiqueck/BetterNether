@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_nether_sakura_planks": {
+    "has_stalagnate_planks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:nether_sakura_planks"
+              "betternether:stalagnate_planks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_sakura_pressure_plate"
+        "recipe": "betternether:stalagnate_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_nether_sakura_planks",
+      "has_stalagnate_planks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "betternether:nether_sakura_pressure_plate"
+      "betternether:stalagnate_plate"
     ]
   }
 }

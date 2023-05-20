@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "nether_chair",
+  "group": "chair",
   "key": {
     "#": {
       "item": "betternether:wart_slab"

@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
@@ -25,6 +26,10 @@ public class Stem extends SimpleMaterialSlot<WoodenComplexMaterial> {
             WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
     ) {
         return new BlockStem(parentMaterial.woodColor);
+    }
+
+    protected @Nullable RecipeEntry getRecipeEntry(WoodenComplexMaterial parentMaterial) {
+        return new RecipeEntry(WoodSlots.LOG.suffix + "_" + suffix, this::makeRecipe);
     }
 
     @Override

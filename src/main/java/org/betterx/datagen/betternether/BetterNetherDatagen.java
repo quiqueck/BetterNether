@@ -22,6 +22,8 @@ public class BetterNetherDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(NetherRegistriesDataProvider::new);
         pack.addProvider(NetherRecipeDataProvider::new);
         pack.addProvider(NetherAdvancementDataProvider::new);
+        pack.addProvider(NetherBlockTagDataProvider::new);
+        pack.addProvider(NetherItemTagDataProvider::new);
     }
 
     @Override

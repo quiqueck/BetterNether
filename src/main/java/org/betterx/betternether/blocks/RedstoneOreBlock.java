@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -48,7 +48,7 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
 
     @Override
     @SuppressWarnings("deprecation")
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         return BaseOreBlock.getDroppedItems(
                 this,
                 Items.REDSTONE,

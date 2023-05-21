@@ -5,7 +5,7 @@ import org.betterx.betternether.client.IRenderTypeable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +28,7 @@ public class BlockBase extends Block implements IRenderTypeable {
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         if (dropItself)
             return Collections.singletonList(new ItemStack(this.asItem()));
         else

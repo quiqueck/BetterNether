@@ -224,7 +224,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 
     @Override
     public boolean isFlying() {
-        return !this.onGround;
+        return !this.onGround();
     }
 
     class FreflyLookControl extends LookControl {

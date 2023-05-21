@@ -71,7 +71,7 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
             else
                 BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
-            if (!blockUp && world.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
+            if (!blockUp && world.getBlockState(bpos.above()).canBeReplaced()) {
                 BlocksHelper.setWithoutUpdate(world, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
             }
 
@@ -151,7 +151,7 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
     }
 
     private boolean canReplace(BlockState state) {
-        return state.getMaterial().isReplaceable()
+        return state.canBeReplaced()
                 || state.getBlock() == NetherBlocks.GIANT_LUCIS
                 || state.getBlock() == NetherBlocks.LUCIS_MUSHROOM
                 || state.getBlock() instanceof BlockPlantWall;

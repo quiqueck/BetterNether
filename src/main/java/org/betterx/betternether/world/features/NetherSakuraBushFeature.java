@@ -96,7 +96,7 @@ public class NetherSakuraBushFeature extends ContextFeature<NoneFeatureConfigura
     }
 
     private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {
-        if (world.getBlockState(pos).getMaterial().isReplaceable())
+        if (world.getBlockState(pos).canBeReplaced())
             BlocksHelper.setWithoutUpdate(world, pos, state);
     }
 }

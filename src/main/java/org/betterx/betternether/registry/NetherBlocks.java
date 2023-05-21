@@ -883,7 +883,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     private static void addFuel(Block source, Block result) {
-        if (source.defaultBlockState().getMaterial().isFlammable()) {
+        if (source.defaultBlockState().ignitedByLava()) {
             FuelRegistry.INSTANCE.add(result, 40);
         }
     }

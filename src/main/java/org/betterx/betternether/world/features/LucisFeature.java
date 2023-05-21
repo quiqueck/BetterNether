@@ -156,7 +156,7 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> imple
     }
 
     private boolean canReplace(BlockState state) {
-        return state.getBlock() == NetherBlocks.LUCIS_SPORE || state.getMaterial().isReplaceable();
+        return state.getBlock() == NetherBlocks.LUCIS_SPORE || state.canBeReplaced();
     }
 
     private boolean canGenerate(ServerLevelAccessor world, BlockPos pos) {

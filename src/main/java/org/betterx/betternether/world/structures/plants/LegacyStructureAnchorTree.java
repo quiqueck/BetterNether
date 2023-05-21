@@ -100,7 +100,7 @@ public class LegacyStructureAnchorTree implements IStructure {
         );
         for (BlockPos bpos : context.BLOCKS) {
             if (!blockBox.isInside(bpos)) continue;
-            if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable())
+            if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.canBeReplaced())
                 continue;
             boolean blockUp;
             if ((blockUp = context.BLOCKS.contains(bpos.above())) && context.BLOCKS.contains(bpos.below()))
@@ -124,7 +124,7 @@ public class LegacyStructureAnchorTree implements IStructure {
             }
 
             if (bpos.getY() > HEIGHT_64) {
-                if (!blockUp && level.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
+                if (!blockUp && level.getBlockState(bpos.above()).canBeReplaced()) {
                     BlocksHelper.setWithUpdate(level, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
                 }
 
@@ -268,7 +268,7 @@ public class LegacyStructureAnchorTree implements IStructure {
     }
 
     protected static void makeMushroom(ServerLevelAccessor world, BlockPos pos, double radius, BoundingBox bounds) {
-        if (!world.getBlockState(pos).getMaterial().isReplaceable()) return;
+        if (!world.getBlockState(pos).canBeReplaced()) return;
 
         int x1 = MHelper.floor(pos.getX() - radius);
         int z1 = MHelper.floor(pos.getZ() - radius);
@@ -285,7 +285,7 @@ public class LegacyStructureAnchorTree implements IStructure {
                 pz2 *= pz2;
                 if (px2 + pz2 <= radius) {
                     BlockPos p = new BlockPos(x, pos.getY(), z);
-                    if (world.getBlockState(p).getMaterial().isReplaceable() && bounds.isInside(p)) {
+                    if (world.getBlockState(p).canBeReplaced() && bounds.isInside(p)) {
                         placed.add(p);
                     }
                 }

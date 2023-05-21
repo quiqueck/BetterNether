@@ -392,7 +392,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
                     int cz2 = cz * cz;
                     if (cx2 + cy2_out + cz2 < r2 && cx2 + cy2_in + cz2 > r2) {
                         context.POS.setZ(pos.getZ() + cz);
-                        if (world.getBlockState(context.POS).getMaterial().isReplaceable()) {
+                        if (world.getBlockState(context.POS).canBeReplaced()) {
                             int length = BlocksHelper.downRay(world, context.POS, HEIGHT_17);
                             if (length < 5) {
                                 safeSet(world, context.POS, leaves);
@@ -429,7 +429,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
     }
 
     private boolean canReplace(BlockState state) {
-        return BlocksHelper.isNetherGround(state) || state.getMaterial().isReplaceable();
+        return BlocksHelper.isNetherGround(state) || state.canBeReplaced();
     }
 
     @Override

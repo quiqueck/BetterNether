@@ -162,7 +162,7 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
                     int cz2 = cz * cz;
                     if (cx2 + cy2 + cz2 < r2) {
                         context.POS2.setZ(pos.getZ() + cz);
-                        if (world.getBlockState(context.POS2).getMaterial().isReplaceable())
+                        if (world.getBlockState(context.POS2).canBeReplaced())
                             BlocksHelper.setWithUpdate(world, context.POS2, leaves);
                     }
                 }
@@ -176,8 +176,7 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
             context.POS2.setX(pos.getX());
             context.POS2.setZ(pos.getZ());
             context.POS2.setY(pos.getY() - cy);
-            if (!(state = world.getBlockState(context.POS2)).getMaterial()
-                                                            .isReplaceable() && !NetherBlocks.MAT_NETHER_SAKURA.isTreeLog(
+            if (!(state = world.getBlockState(context.POS2)).canBeReplaced() && !NetherBlocks.MAT_NETHER_SAKURA.isTreeLog(
                     state.getBlock())) return;
             for (int cx = start; cx <= radius; cx++) {
                 int cx2 = cx * cx;
@@ -186,7 +185,7 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
                     int cz2 = cz * cz;
                     if (cx2 + cz2 < r2) {
                         context.POS2.setZ(pos.getZ() + cz);
-                        if (world.getBlockState(context.POS2).getMaterial().isReplaceable())
+                        if (world.getBlockState(context.POS2).canBeReplaced())
                             BlocksHelper.setWithUpdate(world, context.POS2, leaves);
                     }
                 }
@@ -195,7 +194,7 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
     }
 
     private boolean canReplace(BlockState state) {
-        return BlocksHelper.isNetherGround(state) || state.getMaterial().isReplaceable();
+        return BlocksHelper.isNetherGround(state) || state.canBeReplaced();
     }
 
     @Override

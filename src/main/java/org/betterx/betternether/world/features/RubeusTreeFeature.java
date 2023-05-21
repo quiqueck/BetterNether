@@ -381,7 +381,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
     private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {
         BlockState bState = world.getBlockState(pos);
         if (world.isEmptyBlock(pos)
-                || bState.getMaterial().isReplaceable()
+                || bState.canBeReplaced()
                 || bState.getBlock() == NetherBlocks.RUBEUS_LEAVES
         ) {
             if (state.canSurvive(world, pos)) {
@@ -394,7 +394,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
         BlockState bState = world.getBlockState(pos);
         if (bState.isAir()
                 || bState.getBlock() == NetherBlocks.RUBEUS_LEAVES
-                || bState.getMaterial().isReplaceable()
+                || bState.canBeReplaced()
                 || BlocksHelper.isNetherGround(bState)) {
             if (state.canSurvive(world, pos)) {
                 BlocksHelper.setWithoutUpdate(world, pos, state);
@@ -404,7 +404,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
 
     private void setIfAirLeaves(LevelAccessor world, BlockPos pos, BlockState state) {
         BlockState bState = world.getBlockState(pos);
-        if (world.isEmptyBlock(pos) || bState.getMaterial().isReplaceable())
+        if (world.isEmptyBlock(pos) || bState.canBeReplaced())
             BlocksHelper.setWithoutUpdate(world, pos, state);
     }
 

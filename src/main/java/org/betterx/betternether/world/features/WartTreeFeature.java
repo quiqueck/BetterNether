@@ -164,7 +164,7 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
 
     private boolean isReplaceable(BlockState state) {
         Block block = state.getBlock();
-        return state.getMaterial().isReplaceable() ||
+        return state.canBeReplaced() ||
                 block == Blocks.AIR ||
                 block == NetherBlocks.MAT_WART.getSeed() ||
                 block == NetherBlocks.BLACK_BUSH ||

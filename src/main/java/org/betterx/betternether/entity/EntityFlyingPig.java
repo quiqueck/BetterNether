@@ -423,7 +423,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
                 ItemParticleOption effect = new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(stack.getItem()));
 
-                Iterator<?> var14 = level.players().iterator();
+                Iterator<?> var14 = level().players().iterator();
 
                 while (var14.hasNext()) {
                     ServerPlayer serverPlayerEntity = (ServerPlayer) var14.next();

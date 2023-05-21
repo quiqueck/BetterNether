@@ -120,7 +120,7 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
 
         for (BlockPos bpos : context.BLOCKS) {
             if (!blockBox.isInside(bpos)) continue;
-            if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.getMaterial().isReplaceable()) {
+            if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.canBeReplaced()) {
                 if (!context.BLOCKS.contains(bpos.above()) || !context.BLOCKS.contains(bpos.below()))
                     BlocksHelper.setWithUpdate(
                             world,
@@ -283,7 +283,7 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                     int cz2 = cz * cz * 2;
                     if (cx2 + cy2_out + cz2 < r2 && cx2 + cy2_in + cz2 > r2) {
                         POS.setZ(pos.getZ() + cz);
-                        if (world.getBlockState(POS).getMaterial().isReplaceable()) {
+                        if (world.getBlockState(POS).canBeReplaced()) {
                             if (random.nextBoolean()) {
                                 int length = BlocksHelper.downRay(world, POS, 12);
                                 if (length < 3) {
@@ -304,8 +304,7 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                                         bounds
                                 );
                             } else if (random.nextBoolean() && world.getBlockState(POS.below())
-                                                                    .getMaterial()
-                                                                    .isReplaceable()) {
+                                                                    .canBeReplaced()) {
                                 BlocksHelper.setWithUpdate(world, POS.below(), leaves, bounds);
                             }
                             BlocksHelper.setWithUpdate(world, POS, leaves, bounds);

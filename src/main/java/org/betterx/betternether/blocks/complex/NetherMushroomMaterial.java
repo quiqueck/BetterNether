@@ -7,6 +7,7 @@ import org.betterx.bclib.complexmaterials.set.wood.Planks;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.Stem;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +28,11 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomM
                     .remove(WoodSlots.BARK)
                     .remove(WoodSlots.STRIPPED_LOG)
                     .remove(WoodSlots.STRIPPED_BARK)
-                    .add(NetherSlots.STEM)
+                    .add(new Stem() {
+                        @Override
+                        protected @Nullable void makeRecipe(ComplexMaterial material, ResourceLocation id) {
+                        }
+                    })
                     .replace(new Planks() {
                         @Override
                         protected @Nullable void makeRecipe(ComplexMaterial material, ResourceLocation id) {

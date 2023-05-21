@@ -3,9 +3,7 @@ package org.betterx.betternether.registry;
 import org.betterx.bclib.api.v2.ComposterAPI;
 import org.betterx.bclib.blocks.SimpleLeavesBlock;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
-import org.betterx.worlds.together.tag.v3.MineableTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.tags.BlockTags;
@@ -44,18 +42,18 @@ public class NetherTags {
             BlockBehaviour.Properties properties = ((BlockBehaviourAccessor) block).getProperties();
             Item item = block.asItem();
 
-            if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
-                TagManager.BLOCKS.add(MineableTags.PICKAXE, block);
-            } else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
-                TagManager.BLOCKS.add(MineableTags.AXE, block);
-            } else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || material.equals(
-                    Material.WATER_PLANT)) {
-                TagManager.BLOCKS.add(MineableTags.HOE, block);
-                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
-                ComposterAPI.allowCompost(0.3f, item);
-            } else if (material.equals(Material.SAND)) {
-                TagManager.BLOCKS.add(MineableTags.SHOVEL, block);
-            }
+//            if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
+//                TagManager.BLOCKS.add(MineableTags.PICKAXE, block);
+//            } else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
+//                TagManager.BLOCKS.add(MineableTags.AXE, block);
+//            } else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || material.equals(
+//                    Material.WATER_PLANT)) {
+//                TagManager.BLOCKS.add(MineableTags.HOE, block);
+//                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
+//                ComposterAPI.allowCompost(0.3f, item);
+//            } else if (material.equals(Material.SAND)) {
+//                TagManager.BLOCKS.add(MineableTags.SHOVEL, block);
+//            }
 
             if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
                 TagManager.BLOCKS.add(BlockTags.LEAVES, block);
@@ -65,10 +63,10 @@ public class NetherTags {
 				TagHelper.addTag(PEDESTALS, block);
 			}*/
 
-            Material mat = block.defaultBlockState().getMaterial();
-            if (mat.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || mat.equals(Material.REPLACEABLE_PLANT)) {
-                ComposterAPI.allowCompost(0.1f, item);
-            }
+//            Material mat = block.defaultBlockState().getMaterial();
+//            if (mat.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || mat.equals(Material.REPLACEABLE_PLANT)) {
+//                ComposterAPI.allowCompost(0.1f, item);
+//            }
         });
 
         TagManager.ITEMS.add(ItemTags.CHEST_BOATS, NetherItems.WARPED_CHEST_BOAT, NetherItems.CRIMSON_CHEST_BOAT);

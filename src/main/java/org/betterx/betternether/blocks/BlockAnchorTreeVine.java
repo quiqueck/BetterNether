@@ -40,9 +40,9 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
     }
 
     protected static ToIntFunction<BlockState> getLuminance() {
-        return (state) -> {
-            return state.getValue(SHAPE) == TripleShape.BOTTOM ? 15 : 0;
-        };
+        return (blockState) -> blockState.getOptionalValue(SHAPE).orElse(TripleShape.TOP) == TripleShape.BOTTOM
+                ? 15
+                : 0;
     }
 
     public BlockBehaviour.OffsetType getOffsetType() {

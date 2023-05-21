@@ -7,6 +7,7 @@ import org.betterx.betternether.registry.NetherItems;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -49,6 +50,7 @@ public class CreativeTabs {
         TAB_BLOCKS = FabricItemGroup
                 .builder()
                 .icon(() -> new ItemStack(NetherBlocks.NETHER_GRASS))
+                .title(Component.translatable("itemGroup.betternether.blocks"))
                 .displayItems((featureFlagSet, output) -> {
                     List<ItemStack> stacks = NetherBlocks
                             .getModBlockItems()
@@ -62,6 +64,7 @@ public class CreativeTabs {
         TAB_ITEMS = FabricItemGroup
                 .builder()
                 .icon(() -> new ItemStack(NetherItems.BLACK_APPLE))
+                .title(Component.translatable("itemGroup.betternether.items"))
                 .displayItems((featureFlagSet, output) -> {
                     List<ItemStack> saplings = NetherBlocks
                             .getModBlockItems()

@@ -55,9 +55,9 @@ public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlo
     }
 
     private static ToIntFunction<BlockState> getLuminance() {
-        return (blockState) -> {
-            return blockState.getValue(SHAPE) == TripleShape.BOTTOM ? 15 : 0;
-        };
+        return (blockState) -> blockState.getOptionalValue(SHAPE).orElse(TripleShape.TOP) == TripleShape.BOTTOM
+                ? 15
+                : 0;
     }
 
     @Override

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
-    @Inject(method = "<init>(Lnet/minecraft/world/level/ItemLike;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;updateEmptyCacheFlag()V"))
+    @Inject(method = "<init>(Lnet/minecraft/world/level/ItemLike;I)V", at = @At(value = "TAIL"))
     public void bn_init(ItemLike itemLike, int i, CallbackInfo ci) {
         ItemStack stack = (ItemStack) (Object) this;
         if (itemLike instanceof InitialStackStateProvider forced) {

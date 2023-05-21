@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.blocks.BlockProperties;
+import org.betterx.bclib.interfaces.tools.AddMineableSword;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -21,7 +22,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockNetherReed extends BlockBase {
+public class BlockNetherReed extends BlockBase implements AddMineableSword {
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherReed() {

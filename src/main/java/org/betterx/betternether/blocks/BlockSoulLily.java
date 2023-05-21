@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -36,7 +37,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGround {
+public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGround, AddMineableAxe {
     public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.create("shape", SoulLilyShape.class);
 
     private static final VoxelShape SHAPE_SMALL = box(6, 0, 6, 10, 16, 10);

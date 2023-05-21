@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 
 import net.minecraft.core.BlockPos;
@@ -22,7 +23,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockStalagnateBowl extends BlockBaseNotFull {
+public class BlockStalagnateBowl extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape SHAPE = box(5, 0, 5, 11, 3, 11);
     public static final EnumProperty<FoodShape> FOOD = BNBlockProperties.FOOD;
 

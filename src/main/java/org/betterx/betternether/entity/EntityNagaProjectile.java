@@ -61,7 +61,7 @@ public class EntityNagaProjectile extends FlyingMob {
                 0, 0, 0
         );
 
-        HitResult hitResult = ProjectileUtil.getHitResult(this, (entity) -> {
+        HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, (entity) -> {
             return entity.isAlive() && entity instanceof LivingEntity;
         });
         if (hitResult.getType() != HitResult.Type.MISS) {

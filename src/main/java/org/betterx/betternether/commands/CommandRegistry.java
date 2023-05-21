@@ -134,8 +134,8 @@ public class CommandRegistry {
             return 0;
         }
         final BCLBiome biome = biomes.get(biomeIndex);
-        source.sendSuccess(Component.literal("Locating Biome " + biome)
-                                    .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
+        source.sendSuccess(() -> Component.literal("Locating Biome " + biome)
+                                          .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
         biomeIndex = (biomeIndex + 1) % biomes.size();
 
         final BlockPos currentPosition = new BlockPos(

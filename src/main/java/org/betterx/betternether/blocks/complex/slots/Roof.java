@@ -3,12 +3,14 @@ package org.betterx.betternether.blocks.complex.slots;
 import org.betterx.bclib.blocks.BaseBlock;
 import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -28,6 +30,11 @@ public class Roof extends SimpleMaterialSlot<WoodenComplexMaterial> {
     ) {
         return new BaseBlock(FabricBlockSettings.copyOf(parentMaterial.getBlock(
                 WoodSlots.PLANKS)));
+    }
+
+    @Override
+    protected void modifyBlockEntry(WoodenComplexMaterial parentMaterial, @NotNull BlockEntry entry) {
+        entry.setBlockTags(BlockTags.MINEABLE_WITH_AXE);
     }
 
     @Override

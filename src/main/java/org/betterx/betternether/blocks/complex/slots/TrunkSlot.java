@@ -23,7 +23,9 @@ public class TrunkSlot extends MaterialSlot<WoodenComplexMaterial> {
         super(TRUNK_SUFFIX);
         trunkEntry = new BlockEntry(suffix, false, maker);
         if (climable) {
-            trunkEntry.setBlockTags(BlockTags.CLIMBABLE);
+            trunkEntry.setBlockTags(BlockTags.MINEABLE_WITH_AXE, BlockTags.CLIMBABLE);
+        } else {
+            trunkEntry.setBlockTags(BlockTags.MINEABLE_WITH_AXE);
         }
     }
 

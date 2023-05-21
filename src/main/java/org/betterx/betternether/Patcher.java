@@ -14,6 +14,21 @@ import java.util.Map;
 public class Patcher {
     public static void register() {
         DataFixerAPI.registerPatch(Patcher_001::new);
+        DataFixerAPI.registerPatch(Patcher_002::new);
+    }
+}
+
+class Patcher_002 extends Patch {
+    public Patcher_002() {
+        super(BetterNether.MOD_ID, "8.0.0");
+    }
+
+    @Override
+    public Map<String, String> getIDReplacements() {
+        return Map.ofEntries(
+                Map.entry("betternether:crafting_table_crimson", "betternether:crimson_crafting_table"),
+                Map.entry("betternether:crafting_table_warped", "betternether:warped_crafting_table")
+        );
     }
 }
 

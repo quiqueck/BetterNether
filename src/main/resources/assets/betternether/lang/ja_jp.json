@@ -534,8 +534,8 @@
 	"config.betternether.lavafalls": "§b*§rLavafall Particles",
 	"config.betternether.armour": "§b*§rThin Armor",
 	
-	"block.betternether.crafting_table_crimson": "深紅の作業台",
-	"block.betternether.crafting_table_warped": "歪んだ作業台",
+	"block.betternether.crimson_crafting_table": "深紅の作業台",
+	"block.betternether.warped_crafting_table": "歪んだ作業台",
 	
 	"block.betternether.stalagnate_crafting_table": "スタラグネートの作業台",
 	"block.betternether.nether_reed_crafting_table": "リードの作業台",

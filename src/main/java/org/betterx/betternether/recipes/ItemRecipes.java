@@ -1,7 +1,5 @@
 package org.betterx.betternether.recipes;
 
-import org.betterx.bclib.complexmaterials.set.wood.Boat;
-import org.betterx.bclib.complexmaterials.set.wood.ChestBoat;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
@@ -14,7 +12,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 public class ItemRecipes {
     public static void register() {
@@ -77,30 +74,6 @@ public class ItemRecipes {
                 .shapeless()
                 .addMaterial('#', Items.RED_MUSHROOM)
                 .build();
-
-
-        Boat.makeBoatRecipe(
-                BetterNether.makeID("crimson_boat"),
-                Blocks.CRIMSON_PLANKS, NetherItems.CRIMSON_BOAT
-        );
-
-
-        ChestBoat.makeChestBoatRecipe(
-                BetterNether.makeID("crimson_chest_boat"),
-                NetherItems.CRIMSON_BOAT, NetherItems.CRIMSON_CHEST_BOAT
-        );
-
-
-        Boat.makeBoatRecipe(
-                BetterNether.makeID("warped_boat"),
-                Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT
-        );
-
-
-        ChestBoat.makeChestBoatRecipe(
-                BetterNether.makeID("warped_chest_boat"),
-                NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT
-        );
 
 
         BCLRecipeBuilder.crafting(BetterNether.makeID("cincinnasite_ingot"), NetherItems.CINCINNASITE_INGOT)

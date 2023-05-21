@@ -7,7 +7,6 @@ import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -69,7 +68,6 @@ public class NetherTags {
 //            }
         });
 
-        TagManager.ITEMS.add(ItemTags.CHEST_BOATS, NetherItems.WARPED_CHEST_BOAT, NetherItems.CRIMSON_CHEST_BOAT);
         TagManager.BLOCKS.add(BlockTags.BEACON_BASE_BLOCKS, NetherBlocks.NETHER_RUBY_BLOCK);
     }
 }

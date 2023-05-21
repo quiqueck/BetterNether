@@ -4,10 +4,9 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Config;
 import org.betterx.betternether.config.Configs;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.Codec;
 import net.minecraft.client.OptionInstance;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Button.OnPress;
@@ -184,10 +183,10 @@ public class ConfigScreen extends Screen {
         ).bounds(this.width / 2 + 40 + 20, 27 * 3, 40, 20).build());
     }
 
-    public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(guiGraphics);
+        super.render(guiGraphics, mouseX, mouseY, delta);
 
-        GuiComponent.drawCenteredString(matrices, this.font, header, this.width / 2, 14, 16777215);
+        guiGraphics.drawCenteredString(this.font, header, this.width / 2, 14, 16777215);
     }
 }

@@ -16,6 +16,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -99,7 +100,8 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         FlyingPathNavigation birdNavigation = new FlyingPathNavigation(this, world) {
             public boolean isStableDestination(BlockPos pos) {
                 BlockState state = this.level.getBlockState(pos.below());
-                boolean valid = !state.isAir() && state.getMaterial() != Material.LAVA;
+
+                boolean valid = !state.isAir() && !world.getFluidState(pos.below()).is(FluidTags.LAVA);
                 if (valid) {
                     state = this.level.getBlockState(pos);
                     valid = state.isAir() || !state.blocksMotion();

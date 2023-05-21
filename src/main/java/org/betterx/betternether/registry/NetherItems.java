@@ -1,6 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.items.boat.BoatTypeOverride;
 import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
@@ -31,7 +30,6 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 
 import java.util.ArrayList;
@@ -144,19 +142,6 @@ public class NetherItems extends ItemRegistry {
     public static final Item AGAVE_LEAF = registerItem("agave_leaf", new Item(defaultSettings()));
     public static final Item AGAVE_MEDICINE = registerMedicine("agave_medicine", 40, 2, true);
     public static final Item HERBAL_MEDICINE = registerMedicine("herbal_medicine", 10, 5, true);
-
-    public static final BoatTypeOverride WARPED_BOAT_TYPE = BoatTypeOverride
-            .create(BetterNether.MOD_ID, "warped", Blocks.WARPED_PLANKS);
-    public static final Item WARPED_BOAT = registerItem("warped_boat", WARPED_BOAT_TYPE.createItem(false));
-    public static final Item WARPED_CHEST_BOAT = registerItem("warped_chest_boat", WARPED_BOAT_TYPE.createItem(true)
-    );
-    public static final BoatTypeOverride CRIMSON_BOAT_TYPE = BoatTypeOverride
-            .create(BetterNether.MOD_ID, "crimson", Blocks.CRIMSON_PLANKS);
-    public static final Item CRIMSON_BOAT = registerItem("crimson_boat", CRIMSON_BOAT_TYPE.createItem(false));
-    public static final Item CRIMSON_CHEST_BOAT = registerItem(
-            "crimson_chest_boat",
-            CRIMSON_BOAT_TYPE.createItem(true)
-    );
 
     protected NetherItems() {
         super(Configs.ITEMS);

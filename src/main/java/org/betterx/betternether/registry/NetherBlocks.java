@@ -1,23 +1,15 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
-import org.betterx.bclib.blocks.BaseBookshelfBlock;
-import org.betterx.bclib.blocks.BaseComposterBlock;
-import org.betterx.bclib.blocks.BaseLadderBlock;
-import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.bclib.registry.BlockRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
-import org.betterx.betternether.blocks.complex.slots.BarStool;
-import org.betterx.betternether.blocks.complex.slots.Chair;
-import org.betterx.betternether.blocks.complex.slots.Taburet;
+import org.betterx.betternether.blocks.complex.slots.*;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
-import org.betterx.worlds.together.tag.v3.CommonItemTags;
-import org.betterx.worlds.together.tag.v3.CommonPoiTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.data.recipes.RecipeCategory;
@@ -35,7 +27,6 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MaterialColor;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 
 import java.util.List;
@@ -660,68 +651,29 @@ public class NetherBlocks extends BlockRegistry {
             new BlockCincinnasiteAnvil(),
             BlockTags.ANVIL
     );
-    public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable(
-            "crafting_table_crimson",
-            Blocks.CRIMSON_PLANKS
-    );
-    public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable(
-            "crafting_table_warped",
-            Blocks.WARPED_PLANKS
-    );
 
-    public static final Block CRIMSON_BOOKSHELF = registerBookshelf("crimson_bookshelf", Blocks.CRIMSON_PLANKS);
-    public static final Block WARPED_BOOKSHELF = registerBookshelf("warped_bookshelf", Blocks.WARPED_PLANKS);
+    public static final VanillaNetherWood WARPED_WOOD = new VanillaNetherWood(
+            "warped",
+            Blocks.WARPED_PLANKS.defaultMapColor(),
+            MapColor.WARPED_STEM
+    ).init();
 
-    public static final Block CRIMSON_COMPOSTER = registerComposter(
-            "crimson_composter",
-            Blocks.CRIMSON_PLANKS,
-            Blocks.CRIMSON_SLAB
-    );
-    public static final Block WARPED_COMPOSTER = registerComposter(
-            "warped_composter",
-            Blocks.WARPED_PLANKS,
-            Blocks.WARPED_SLAB
-    );
+    public static final VanillaNetherWood CRIMSON_WOOD = new VanillaNetherWood(
+            "crimson",
+            Blocks.CRIMSON_PLANKS.defaultMapColor(),
+            MapColor.CRIMSON_STEM
+    ).init();
+
+    public static final VanillaWood OAK_WOOD = VanillaWood.create("oak");
+    public static final VanillaWood SPRUCE_WOOD = VanillaWood.create("spruce");
+    public static final VanillaWood BIRCH_WOOD = VanillaWood.create("birch");
+    public static final VanillaWood JUNGLE_WOOD = VanillaWood.create("jungle");
+    public static final VanillaWood ACACIA_WOOD = VanillaWood.create("acacia");
+    public static final VanillaWood DARK_OAK_WOOD = VanillaWood.create("dark_oak");
+
     // Storage
     public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
-    public static final Block CHEST_CRIMSON = registerChest("crimson_chest", Blocks.CRIMSON_PLANKS);
-    public static final Block CHEST_WARPED = registerChest("warped_chest", Blocks.WARPED_PLANKS);
-    public static final Block BARREL_CRIMSON = registerBarrel(
-            "crimson_barrel",
-            Blocks.CRIMSON_PLANKS,
-            Blocks.CRIMSON_SLAB
-    );
-    public static final Block BARREL_WARPED = registerBarrel("warped_barrel", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
-    // Taburets //
-    public static final Block TABURET_OAK = registerTaburet("oak_taburet", Blocks.OAK_SLAB);
-    public static final Block TABURET_SPRUCE = registerTaburet("spruce_taburet", Blocks.SPRUCE_SLAB);
-    public static final Block TABURET_BIRCH = registerTaburet("birch_taburet", Blocks.BIRCH_SLAB);
-    public static final Block TABURET_JUNGLE = registerTaburet("jungle_taburet", Blocks.JUNGLE_SLAB);
-    public static final Block TABURET_ACACIA = registerTaburet("acacia_taburet", Blocks.ACACIA_SLAB);
-    public static final Block TABURET_DARK_OAK = registerTaburet("dark_oak_taburet", Blocks.DARK_OAK_SLAB);
-    public static final Block TABURET_CRIMSON = registerTaburet("crimson_taburet", Blocks.CRIMSON_SLAB);
-    public static final Block TABURET_WARPED = registerTaburet("warped_taburet", Blocks.WARPED_SLAB);
-    // Chairs
-    public static final Block CHAIR_OAK = registerChair("oak_chair", Blocks.OAK_SLAB);
-    public static final Block CHAIR_SPRUCE = registerChair("spruce_chair", Blocks.SPRUCE_SLAB);
-    public static final Block CHAIR_BIRCH = registerChair("birch_chair", Blocks.BIRCH_SLAB);
-    public static final Block CHAIR_JUNGLE = registerChair("jungle_chair", Blocks.JUNGLE_SLAB);
-    public static final Block CHAIR_ACACIA = registerChair("acacia_chair", Blocks.ACACIA_SLAB);
-    public static final Block CHAIR_DARK_OAK = registerChair("dark_oak_chair", Blocks.DARK_OAK_SLAB);
-    public static final Block CHAIR_CRIMSON = registerChair("crimson_chair", Blocks.CRIMSON_SLAB);
-    public static final Block CHAIR_WARPED = registerChair("warped_chair", Blocks.WARPED_SLAB);
-    // Stools //
-    public static final Block BAR_STOOL_OAK = registerBarStool("oak_bar_stool", Blocks.OAK_SLAB);
-    public static final Block BAR_STOOL_SPRUCE = registerBarStool("spruce_bar_stool", Blocks.SPRUCE_SLAB);
-    public static final Block BAR_STOOL_BIRCH = registerBarStool("birch_bar_stool", Blocks.BIRCH_SLAB);
-    public static final Block BAR_STOOL_JUNGLE = registerBarStool("jungle_bar_stool", Blocks.JUNGLE_SLAB);
-    public static final Block BAR_STOOL_ACACIA = registerBarStool("acacia_bar_stool", Blocks.ACACIA_SLAB);
-    public static final Block BAR_STOOL_DARK_OAK = registerBarStool("dark_oak_bar_stool", Blocks.DARK_OAK_SLAB);
-    public static final Block BAR_STOOL_CRIMSON = registerBarStool("crimson_bar_stool", Blocks.CRIMSON_SLAB);
-    public static final Block BAR_STOOL_WARPED = registerBarStool("warped_bar_stool", Blocks.WARPED_SLAB);
-    // Ladders //
-    public static final Block CRIMSON_LADDER = registerLadder("crimson_ladder", Blocks.CRIMSON_PLANKS);
-    public static final Block WARPED_LADDER = registerLadder("warped_ladder", Blocks.WARPED_PLANKS);
+
     private static BlockRegistry BLOCKS_REGISTRY;
     // Rubeus //
     public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
@@ -813,36 +765,6 @@ public class NetherBlocks extends BlockRegistry {
 
     public static List<Item> getModBlockItems() {
         return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
-    }
-
-    public static Block registerBookshelf(String name, Block baseBlock) {
-        Block shelf = new BaseBookshelfBlock.WithVanillaWood(baseBlock);
-        registerBlock(name, shelf, CommonBlockTags.BOOKSHELVES);
-
-        BCLRecipeBuilder.crafting(BetterNether.makeID(name), shelf)
-                        .setShape("###", "BBB", "###")
-                        .addMaterial('#', baseBlock)
-                        .addMaterial('B', Items.BOOK)
-                        .setGroup("nether" + "_bookshelf")
-                        .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                        .build();
-        TagManager.BLOCKS.add(shelf, BlockTags.MINEABLE_WITH_AXE, CommonBlockTags.BOOKSHELVES);
-        return shelf;
-    }
-
-    public static Block registerComposter(String name, Block baseBlock, Block baseSlab) {
-        Block composter = new BaseComposterBlock(baseBlock);
-        registerBlock(name, composter, CommonPoiTags.FARMER_WORKSTATION);
-
-        BCLRecipeBuilder.crafting(BetterNether.makeID(name), composter)
-                        .setShape("# #", "# #", "###")
-                        .addMaterial('#', baseSlab)
-                        .setGroup("nether" + "_composter")
-                        .setCategory(RecipeCategory.DECORATIONS)
-                        .build();
-
-        TagManager.BLOCKS.add(composter, BlockTags.MINEABLE_WITH_AXE);
-        return composter;
     }
 
     @SafeVarargs
@@ -1007,99 +929,6 @@ public class NetherBlocks extends BlockRegistry {
         return wall;
     }
 
-    public static Block registerCraftingTable(String name, Block source) {
-        Block block = new org.betterx.bclib.blocks.BaseCraftingTableBlock(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            TagManager.BLOCKS.add(
-                    block,
-                    BlockTags.MINEABLE_WITH_AXE,
-                    org.betterx.worlds.together.tag.v3.CommonBlockTags.WORKBENCHES
-            );
-            TagManager.ITEMS.add(block.asItem(), org.betterx.worlds.together.tag.v3.CommonItemTags.WORKBENCHES);
-
-            BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                            .setShape("##", "##")
-                            .addMaterial('#', source)
-                            .setGroup("nether" + "_tables")
-                            .setCategory(RecipeCategory.DECORATIONS)
-                            .build();
-
-            FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
-        }
-
-        return block;
-    }
-
-    public static Block registerChest(String name, Block planks) {
-        Block chest = new org.betterx.bclib.blocks.BaseChestBlock(planks);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, chest);
-            TagManager.BLOCKS.add(chest, BlockTags.MINEABLE_WITH_AXE, CommonBlockTags.CHEST);
-            TagManager.ITEMS.add(chest, CommonItemTags.CHEST);
-            addFuel(planks, chest);
-            //RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
-            BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), chest)
-                            .setShape("###", "# #", "###")
-                            .addMaterial('#', planks)
-                            .setGroup("nether" + "_chests")
-                            .setCategory(RecipeCategory.DECORATIONS)
-                            .build();
-
-            FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
-        }
-
-        return chest;
-    }
-
-    public static Block registerBarrel(String name, Block source, Block slab) {
-        Block block = new org.betterx.bclib.blocks.BaseBarrelBlock(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            addFuel(source, block);
-            //RecipesHelper.makeBarrelRecipe(source, slab, block);
-            BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                            .setShape("#S#", "# #", "#S#")
-                            .addMaterial('#', source)
-                            .addMaterial('S', slab)
-                            .setGroup("nether" + "_barrels")
-                            .setCategory(RecipeCategory.DECORATIONS)
-                            .build();
-
-            FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
-            TagManager.BLOCKS.add(
-                    block,
-                    BlockTags.MINEABLE_WITH_AXE,
-                    CommonBlockTags.WOODEN_BARREL,
-                    CommonBlockTags.BARREL
-            );
-        }
-
-        return block;
-    }
-
-    public static Block registerLadder(String name, Block source) {
-        Block block = new BaseLadderBlock(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_AXE, BlockTags.CLIMBABLE);
-
-            addFuel(source, block);
-            //RecipesHelper.makeLadderRecipe(source, block);
-
-            BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                            .setOutputCount(3)
-                            .setShape("I I", "I#I", "I I")
-                            .addMaterial('#', source)
-                            .addMaterial('I', Items.STICK)
-                            .setGroup("nether" + "_ladders")
-                            .setCategory(RecipeCategory.DECORATIONS)
-                            .build();
-            FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
-        }
-
-        return block;
-    }
 
     public static Block registerTaburet(String name, Block source) {
         Block block = new BNTaburet(source);

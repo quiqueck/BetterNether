@@ -61,8 +61,8 @@ public class StructureCityBuilding extends NetherStructureNBT {
         int i = 0;
         BlockPos center = new BlockPos(size.getX() >> 1, size.getY(), size.getZ() >> 1);
         for (StructureBlockInfo info : map) {
-            ends[i] = info.pos;
-            dirs[i++] = getDir(info.pos.offset(-center.getX(), 0, -center.getZ()));
+            ends[i] = info.pos();
+            dirs[i++] = getDir(info.pos().offset(-center.getX(), 0, -center.getZ()));
         }
         rotationOffset = new BlockPos(0, 0, 0);
         rotation = Rotation.NONE;

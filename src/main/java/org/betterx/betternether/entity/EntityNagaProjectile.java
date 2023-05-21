@@ -48,13 +48,13 @@ public class EntityNagaProjectile extends FlyingMob {
     @Override
     public void tick() {
         super.tick();
-        level.addParticle(ParticleTypes.LARGE_SMOKE,
+        level().addParticle(ParticleTypes.LARGE_SMOKE,
                 getX() + random.nextGaussian() * 0.2,
                 getY() + random.nextGaussian() * 0.2,
                 getZ() + random.nextGaussian() * 0.2,
                 0, 0, 0
         );
-        level.addParticle(ParticleTypes.SMOKE,
+        level().addParticle(ParticleTypes.SMOKE,
                 getX() + random.nextGaussian() * 0.2,
                 getY() + random.nextGaussian() * 0.2,
                 getZ() + random.nextGaussian() * 0.2,
@@ -84,7 +84,7 @@ public class EntityNagaProjectile extends FlyingMob {
         HitResult.Type type = hitResult.getType();
         if (type == HitResult.Type.BLOCK) {
             for (int i = 0; i < 10; i++) {
-                level.addParticle(
+                level().addParticle(
                         ParticleTypes.LARGE_SMOKE,
                         getX() + random.nextGaussian() * 0.5,
                         getY() + random.nextGaussian() * 0.5,
@@ -110,7 +110,7 @@ public class EntityNagaProjectile extends FlyingMob {
 
     private void effectKill() {
         for (int i = 0; i < 10; i++) {
-            level.addParticle(ParticleTypes.ENTITY_EFFECT,
+            level().addParticle(ParticleTypes.ENTITY_EFFECT,
                     getX() + random.nextGaussian() * 0.5,
                     getY() + random.nextGaussian() * 0.5,
                     getZ() + random.nextGaussian() * 0.5,

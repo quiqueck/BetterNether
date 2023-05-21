@@ -210,9 +210,9 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
     @Override
     protected void tickDeath() {
-        if (!level.isClientSide && this.isWarted() && level.getServer()
-                                                           .getGameRules()
-                                                           .getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+        if (!level().isClientSide && this.isWarted() && level().getServer()
+                                                               .getGameRules()
+                                                               .getBoolean(GameRules.RULE_DOENTITYDROPS)) {
             this.spawnAtLocation(new ItemStack(Items.NETHER_WART, MHelper.randRange(1, 3, random)));
         }
         super.tickDeath();
@@ -230,7 +230,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
     @Override
     public boolean isFlying() {
-        return !this.onGround;
+        return !this.onGround();
     }
 
     class WanderAroundGoal extends Goal {
@@ -247,7 +247,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
         }
 
         public void start() {
-            if (EntityFlyingPig.this.level.getFluidState(EntityFlyingPig.this.blockPosition()).isEmpty()) {
+            if (EntityFlyingPig.this.level().getFluidState(EntityFlyingPig.this.blockPosition()).isEmpty()) {
                 BlockPos pos = this.getRandomLocation();
                 Path path = EntityFlyingPig.this.navigation.createPath(pos, 1);
                 if (path != null)
@@ -280,11 +280,11 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
             bpos.set(airTarget.x(), airTarget.y(), airTarget.z());
             BlockPos down = bpos.below();
-            if (EntityFlyingPig.this.level.getBlockState(down)
-                                          .isCollisionShapeFullBlock(EntityFlyingPig.this.level, down))
+            if (EntityFlyingPig.this.level().getBlockState(down)
+                                    .isCollisionShapeFullBlock(EntityFlyingPig.this.level(), down))
                 bpos.move(Direction.UP);
 
-            while (!EntityFlyingPig.this.level.getFluidState(bpos).isEmpty())
+            while (!EntityFlyingPig.this.level().getFluidState(bpos).isEmpty())
                 bpos.move(Direction.UP);
 
             return bpos;
@@ -343,7 +343,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
         private BlockPos getRoostingLocation() {
             BlockPos pos = EntityFlyingPig.this.blockPosition();
-            Level world = EntityFlyingPig.this.level;
+            Level world = EntityFlyingPig.this.level();
             int up = BlocksHelper.upRay(world, pos, 16);
             pos = pos.relative(Direction.UP, up);
             if (world.getBlockState(pos.above()).getBlock() == Blocks.NETHER_WART_BLOCK)
@@ -443,7 +443,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
                     }
                 }
 
-                EntityFlyingPig.this.eat(level, stack);
+                EntityFlyingPig.this.eat(level(), stack);
                 target.kill();
                 EntityFlyingPig.this.heal(stack.getCount());
                 EntityFlyingPig.this.setDeltaMovement(0, 0.2F, 0);
@@ -459,7 +459,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
         private boolean hasNearFood() {
             AABB box = new AABB(EntityFlyingPig.this.blockPosition()).inflate(16);
-            foods = EntityFlyingPig.this.level.getEntitiesOfClass(ItemEntity.class, box, (entity) -> {
+            foods = EntityFlyingPig.this.level().getEntitiesOfClass(ItemEntity.class, box, (entity) -> {
                 return entity.getItem().isEdible();
             });
             return !foods.isEmpty();
@@ -468,7 +468,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mate) {
-        EntityFlyingPig pig = NetherEntities.FLYING_PIG.type().create(this.level);
+        EntityFlyingPig pig = NetherEntities.FLYING_PIG.type().create(this.level());
         pig.setWarted(pig.isWarted());
         return pig;
     }

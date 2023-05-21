@@ -41,11 +41,11 @@ public class BrewingRegistry {
         }
 
         public boolean isValid(ItemStack source, ItemStack bottle) {
-            return ItemStack.isSame(this.source, source) && ItemStack.isSame(this.bottle, bottle);
+            return ItemStack.isSameItem(this.source, source) && ItemStack.isSameItem(this.bottle, bottle);
         }
 
         public boolean isValid(ItemStack source) {
-            return ItemStack.isSame(this.source, source);
+            return ItemStack.isSameItem(this.source, source);
         }
 
         public ItemStack getResult() {

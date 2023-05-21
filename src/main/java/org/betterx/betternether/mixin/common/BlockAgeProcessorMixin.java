@@ -32,15 +32,15 @@ public class BlockAgeProcessorMixin {
     ) {
         final boolean makeBlue = (blockPos.getX() + blockPos.getZ()) % 3 == 0;
 
-        if (makeBlue && structureBlockInfo2.state.is(Blocks.OBSIDIAN)) {
-            final BlockPos structurePos = structureBlockInfo2.pos;
+        if (makeBlue && structureBlockInfo2.state().is(Blocks.OBSIDIAN)) {
+            final BlockPos structurePos = structureBlockInfo2.pos();
             final RandomSource random = structurePlaceSettings.getRandom(structurePos);
 
             Block block = random.nextFloat() < 0.15F ? NetherBlocks.BLUE_CRYING_OBSIDIAN : NetherBlocks.BLUE_OBSIDIAN;
             cir.setReturnValue(new StructureTemplate.StructureBlockInfo(
                     structurePos,
                     block.defaultBlockState(),
-                    structureBlockInfo2.nbt
+                    structureBlockInfo2.nbt()
             ));
             cir.cancel();
             return;

@@ -308,7 +308,7 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
         }
 
         // long time = System.currentTimeMillis();
-        double speed = (entity.isOnGround() && (entity.getDeltaMovement().x != 0 || entity.getDeltaMovement().z != 0) && !entity.isPassenger())
+        double speed = (entity.onGround() && (entity.getDeltaMovement().x != 0 || entity.getDeltaMovement().z != 0) && !entity.isPassenger())
                 ? 6
                 : 0.5;
         maxAngle = this.lerpAngle(maxAngle, speed > 1 ? 0.1F : 0.5F, 0.03F);

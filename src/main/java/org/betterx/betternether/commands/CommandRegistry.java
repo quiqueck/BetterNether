@@ -164,14 +164,15 @@ public class CommandRegistry {
             boolean didWrap = false;
             do {
                 target = new BlockPos(biomePosition.getX(), (int) yPos, biomePosition.getZ());
-                state = player.level.getBlockState(target);
+                state = player.level().getBlockState(target);
                 yPos--;
-                if (yPos <= player.level.getMinBuildHeight() + 1) {
+                if (yPos <= player.level().getMinBuildHeight() + 1) {
                     if (didWrap) break;
                     yPos = 127;
                     didWrap = true;
                 }
-            } while (!state.isAir() && yPos > player.level.getMinBuildHeight() && yPos < player.level.getMaxBuildHeight());
+            } while (!state.isAir() && yPos > player.level().getMinBuildHeight() && yPos < player.level()
+                                                                                                 .getMaxBuildHeight());
             Vector3d targetPlayerPos = new Vector3d(target.getX() + 0.5, target.getY() - 1, target.getZ() + 0.5);
 
             player.connection.teleport(
@@ -449,10 +450,10 @@ public class CommandRegistry {
         if (bl instanceof LadderBlock) {
 
         }
-        BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos, state);
+        BlocksHelper.setWithoutUpdate(player.level(), blockPos, state);
         if (bl instanceof DoorBlock) {
             BlocksHelper.setWithoutUpdate(
-                    player.getLevel(),
+                    player.level(),
                     blockPos.above(),
                     state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER)
             );

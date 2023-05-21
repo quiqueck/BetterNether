@@ -69,7 +69,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
 
     @Override
     public boolean isFlying() {
-        return !this.onGround;
+        return !this.onGround();
     }
 
     class SkullLookControl extends LookControl {
@@ -122,19 +122,19 @@ public class EntitySkull extends Monster implements FlyingAnimal {
         super.tick();
         if (random.nextInt(3) == 0) {
             updateParticlePos();
-            this.level.addParticle(ParticleTypes.SMOKE, particleX, particleY, particleZ, 0, 0, 0);
+            this.level().addParticle(ParticleTypes.SMOKE, particleX, particleY, particleZ, 0, 0, 0);
         }
         if (random.nextInt(3) == 0) {
             updateParticlePos();
-            this.level.addParticle(ParticleTypes.DRIPPING_LAVA, particleX, particleY, particleZ, 0, 0, 0);
+            this.level().addParticle(ParticleTypes.DRIPPING_LAVA, particleX, particleY, particleZ, 0, 0, 0);
         }
         if (random.nextInt(3) == 0) {
             updateParticlePos();
-            this.level.addParticle(ParticleTypes.FLAME, particleX, particleY, particleZ, 0, 0, 0);
+            this.level().addParticle(ParticleTypes.FLAME, particleX, particleY, particleZ, 0, 0, 0);
         }
 
         if (attackTick > 40 && this.isAlive()) {
-            Player target = EntitySkull.this.level.getNearestPlayer(getX(), getY(), getZ(), 20, true);
+            Player target = EntitySkull.this.level().getNearestPlayer(getX(), getY(), getZ(), 20, true);
             if (target != null && this.hasLineOfSight(target)) {
                 attackTick = 0;
                 Vec3 velocity = target

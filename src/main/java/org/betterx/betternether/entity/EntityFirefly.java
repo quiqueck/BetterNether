@@ -264,7 +264,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         }
 
         private BlockPos getRandomLocation() {
-            Level w = EntityFirefly.this.level;
+            Level w = EntityFirefly.this.level();
             MutableBlockPos bpos = new MutableBlockPos();
             bpos.set(EntityFirefly.this.getX(), EntityFirefly.this.getY(), EntityFirefly.this.getZ());
 
@@ -339,7 +339,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         }
 
         private BlockPos getFlowerLocation() {
-            Level w = EntityFirefly.this.level;
+            Level w = EntityFirefly.this.level();
             MutableBlockPos bpos = new MutableBlockPos();
 
             for (Vec3i offset : SEARCH) {
@@ -392,7 +392,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                         (int) EntityFirefly.this.getY(),
                         (int) EntityFirefly.this.getZ()
                 );
-                BlockState state = EntityFirefly.this.level.getBlockState(pos.below());
+                BlockState state = EntityFirefly.this.level().getBlockState(pos.below());
                 return !state.isAir() && !state.liquid();
             }
             return false;

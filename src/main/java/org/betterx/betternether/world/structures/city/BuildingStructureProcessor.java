@@ -25,7 +25,7 @@ public class BuildingStructureProcessor extends StructureProcessor {
     }
 
     private StructureBlockInfo setState(BlockState state, StructureBlockInfo info) {
-        return new StructureBlockInfo(info.pos, state, info.nbt);
+        return new StructureBlockInfo(info.pos(), state, info.nbt());
     }
 
     @Override
@@ -37,7 +37,7 @@ public class BuildingStructureProcessor extends StructureProcessor {
             StructureBlockInfo structureBlockInfo2,
             StructurePlaceSettings structurePlacementData
     ) {
-        BlockState state = structureBlockInfo.state;
+        BlockState state = structureBlockInfo.state();
 
         if (state.isAir())
             return structureBlockInfo2;
@@ -111,7 +111,7 @@ public class BuildingStructureProcessor extends StructureProcessor {
             return setState(Blocks.AIR.defaultBlockState(), structureBlockInfo2);
         } else if (!name.contains("nether") && !name.contains("mycelium") && state.isCollisionShapeFullBlock(
                 worldView,
-                structureBlockInfo.pos
+                structureBlockInfo.pos()
         ) && state.canOcclude() && !(state.getBlock() instanceof BaseEntityBlock)) {
             if (state.getLightEmission() > 0)
                 return setState(palette.getGlowingBlock(state), structureBlockInfo2);

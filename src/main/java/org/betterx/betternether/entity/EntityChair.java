@@ -37,7 +37,7 @@ public class EntityChair extends Entity {
 
     @Override
     public void tick() {
-        if (this.level.getBlockState(this.blockPosition()).getBlock() instanceof BNChair)
+        if (this.level().getBlockState(this.blockPosition()).getBlock() instanceof BNChair)
             localTick();
         else {
             BCLib.LOGGER.info("Chair Block was deleted -> ejecting");
@@ -48,14 +48,14 @@ public class EntityChair extends Entity {
 
     protected void localTick() {
         super.tick();
-        List<Entity> pushableEntities = this.level.getEntities(
+        List<Entity> pushableEntities = this.level().getEntities(
                 this,
                 this.getBoundingBox().inflate(0.7f, -0.01f, 0.7f),
                 EntitySelector.pushableBy(this)
         );
 
         if (!pushableEntities.isEmpty()) {
-            boolean free = !this.level.isClientSide && !(this.getControllingPassenger() instanceof Player);
+            boolean free = !this.level().isClientSide && !(this.getControllingPassenger() instanceof Player);
             for (int j = 0; j < pushableEntities.size(); ++j) {
                 Entity entity = pushableEntities.get(j);
                 if (entity.hasPassenger(this)) continue;
@@ -130,7 +130,7 @@ public class EntityChair extends Entity {
             return InteractionResult.PASS;
         }
 
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
         }
         return InteractionResult.SUCCESS;

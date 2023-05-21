@@ -139,10 +139,10 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
 
             BlockPos bp = blockPosition();
             double vy = random.nextDouble() * this.getFlyingSpeed() * 0.75;
-            if (level.getBlockState(bp).isAir() &&
-                    level.getBlockState(bp.below(2)).isAir() &&
-                    level.getBlockState(bp.below(3)).isAir() &&
-                    level.getBlockState(bp.below(4)).isAir()) {
+            if (level().getBlockState(bp).isAir() &&
+                    level().getBlockState(bp.below(2)).isAir() &&
+                    level().getBlockState(bp.below(3)).isAir() &&
+                    level().getBlockState(bp.below(4)).isAir()) {
                 vy = -vy;
             }
 
@@ -178,18 +178,18 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     @Override
     public void die(DamageSource source) {
         super.die(source);
-        if (level.isClientSide) {
+        if (level().isClientSide) {
             float scale = getScale() * 3;
             for (int i = 0; i < 20; i++)
-                this.level.addParticle(ParticleTypes.EXPLOSION,
+                this.level().addParticle(ParticleTypes.EXPLOSION,
                         getX() + random.nextGaussian() * scale,
                         getEyeY() + random.nextGaussian() * scale,
                         getZ() + random.nextGaussian() * scale,
                         0, 0, 0
                 );
         } else {
-            if (source != level.damageSources().outOfWorld()) {
-                this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), Level.ExplosionInteraction.MOB);
+            if (source != level().damageSources().fellOutOfWorld()) {
+                this.level().explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), Level.ExplosionInteraction.MOB);
             }
         }
     }
@@ -255,6 +255,6 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
 
     @Override
     public boolean isFlying() {
-        return !this.onGround;
+        return !this.onGround();
     }
 }

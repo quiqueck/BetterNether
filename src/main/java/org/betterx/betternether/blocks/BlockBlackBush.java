@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.behaviours.BehaviourCompostable;
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 
@@ -20,7 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherGround {
+public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherGround, AddMineableHoe, BehaviourCompostable {
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
 
     public BlockBlackBush() {

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -15,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockEyeBase extends BlockBase {
+public class BlockEyeBase extends BlockBase implements AddMineableHoe {
     public BlockEyeBase(Properties settings) {
         super(settings);
         setDropItself(false);

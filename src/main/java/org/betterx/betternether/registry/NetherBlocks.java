@@ -459,18 +459,16 @@ public class NetherBlocks extends BlockRegistry {
     // Vines //
     public static final Block BLACK_VINE = registerBlock(
             "black_vine",
-            new BlockBlackVine(),
-            BlockTags.CLIMBABLE
+            new BlockBlackVine()
+
     );
     public static final Block BLOOMING_VINE = registerBlock(
             "blooming_vine",
-            new BlockBlackVine(),
-            BlockTags.CLIMBABLE
+            new BlockBlackVine()
     );
     public static final Block GOLDEN_VINE = registerBlock(
             "golden_vine",
-            new BlockGoldenVine(),
-            BlockTags.CLIMBABLE
+            new BlockGoldenVine()
     );
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine());
@@ -695,8 +693,7 @@ public class NetherBlocks extends BlockRegistry {
     );
     public static final Block ANCHOR_TREE_VINE = registerBlockNI(
             "anchor_tree_vine",
-            new BlockAnchorTreeVine(),
-            BlockTags.CLIMBABLE
+            new BlockAnchorTreeVine()
     );
     // Nether Sakura
     public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
@@ -723,8 +720,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
     public static final Block EYE_VINE = registerBlockNI(
             "eye_vine",
-            new BlockEyeVine(),
-            BlockTags.CLIMBABLE
+            new BlockEyeVine()
     );
 
     public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());

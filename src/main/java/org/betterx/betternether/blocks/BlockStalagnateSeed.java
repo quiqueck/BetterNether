@@ -2,6 +2,8 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
+import org.betterx.bclib.interfaces.behaviours.BehaviourCompostable;
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
@@ -21,7 +23,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack {
+public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack, AddMineableHoe, BehaviourCompostable {
     public static final int MAX_SEARCH_LENGTH = 25; // 27
     public static final int MIN_LENGTH = 3; // 5
 

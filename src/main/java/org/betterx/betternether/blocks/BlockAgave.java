@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.complexmaterials.BehaviourBuilders;
+import org.betterx.bclib.interfaces.behaviours.BehaviourCompostable;
 import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
@@ -30,7 +31,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockAgave extends BlockCommonPlant implements AddMineableShears, AddMineableHoe, SurvivesOnGravel {
+public class BlockAgave extends BlockCommonPlant implements AddMineableShears, AddMineableHoe, BehaviourCompostable, SurvivesOnGravel {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 14, 14);
     private static final RandomSource RANDOM = new LegacyRandomSource(030620222201l);
 

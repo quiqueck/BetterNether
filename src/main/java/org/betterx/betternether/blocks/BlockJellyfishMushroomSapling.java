@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.behaviours.BehaviourCompostable;
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNylium;
@@ -20,7 +22,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNylium {
+public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNylium, AddMineableHoe, BehaviourCompostable {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 6, 12);
 
     public BlockJellyfishMushroomSapling() {

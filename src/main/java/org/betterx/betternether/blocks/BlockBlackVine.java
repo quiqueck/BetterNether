@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.blocks.BlockProperties;
+import org.betterx.bclib.interfaces.behaviours.BehaviourClimableVine;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -36,7 +37,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBlock, BehaviourClimableVine {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 16, 14);
     private static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 

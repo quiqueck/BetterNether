@@ -4,6 +4,10 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -14,16 +18,36 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import java.util.List;
 
 public class CreativeTabs {
-    public static final CreativeModeTab BN_TAB;
+    public static final CreativeModeTab TAB_BLOCKS;
     public static final CreativeModeTab TAB_ITEMS;
 
-    public static void ensureStaicallyLoaded() {
-        // NO-OP
+
+    public static final ResourceKey<CreativeModeTab> TAB_ITEMS_KEY = ResourceKey.create(
+            Registries.CREATIVE_MODE_TAB,
+            BetterNether.makeID("item_tab")
+    );
+    public static final ResourceKey<CreativeModeTab> TAB_BLOCKS_KEY = ResourceKey.create(
+            Registries.CREATIVE_MODE_TAB,
+            BetterNether.makeID("block_tab")
+    );
+
+    public static void register() {
+        Registry.register(
+                BuiltInRegistries.CREATIVE_MODE_TAB,
+                TAB_ITEMS_KEY,
+                TAB_ITEMS
+        );
+
+        Registry.register(
+                BuiltInRegistries.CREATIVE_MODE_TAB,
+                TAB_BLOCKS_KEY,
+                TAB_BLOCKS
+        );
     }
 
     static {
-        BN_TAB = FabricItemGroup
-                .builder(BetterNether.makeID("blocks"))
+        TAB_BLOCKS = FabricItemGroup
+                .builder()
                 .icon(() -> new ItemStack(NetherBlocks.NETHER_GRASS))
                 .displayItems((featureFlagSet, output) -> {
                     List<ItemStack> stacks = NetherBlocks
@@ -36,7 +60,7 @@ public class CreativeTabs {
                 }).build();
 
         TAB_ITEMS = FabricItemGroup
-                .builder(BetterNether.makeID("items"))
+                .builder()
                 .icon(() -> new ItemStack(NetherItems.BLACK_APPLE))
                 .displayItems((featureFlagSet, output) -> {
                     List<ItemStack> saplings = NetherBlocks

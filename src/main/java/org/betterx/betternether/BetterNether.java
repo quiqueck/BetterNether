@@ -62,7 +62,7 @@ public class BetterNether implements ModInitializer {
         WorldConfig.registerModCache(MOD_ID);
         DataExchangeAPI.registerMod(BetterNether.MOD_ID);
         Patcher.register();
-        CreativeTabs.ensureStaicallyLoaded();
+        CreativeTabs.register();
 
         if (BCLib.isDatagen()) {
             onDatagen();

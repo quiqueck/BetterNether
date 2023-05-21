@@ -3,7 +3,7 @@ package org.betterx.betternether.advancements;
 import org.betterx.betternether.BetterNether;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.PlayerTrigger;
 
 public class BNCriterion {
@@ -23,12 +23,12 @@ public class BNCriterion {
 
         USED_FORGE_ANY_TRIGGER = new PlayerTrigger.TriggerInstance(
                 BNCriterion.USED_FORGE.getId(),
-                EntityPredicate.Composite.ANY
+                ContextAwarePredicate.ANY
         );
 
         BREW_BLUE_TRIGGER = new PlayerTrigger.TriggerInstance(
                 BNCriterion.BREW_BLUE.getId(),
-                EntityPredicate.Composite.ANY
+                ContextAwarePredicate.ANY
         );
     }
 }

@@ -19,7 +19,7 @@ public class ConvertByLightningTrigger extends SimpleCriterionTrigger<ConvertByL
 
     public ConvertByLightningTrigger.TriggerInstance createInstance(
             JsonObject jsonObject,
-            EntityPredicate.Composite composite,
+            ContextAwarePredicate composite,
             DeserializationContext deserializationContext
     ) {
         return new ConvertByLightningTrigger.TriggerInstance(composite, ItemPredicate.fromJson(jsonObject.get("item")));
@@ -32,13 +32,13 @@ public class ConvertByLightningTrigger extends SimpleCriterionTrigger<ConvertByL
     }
 
     public TriggerInstance match(ItemLike item) {
-        return new TriggerInstance(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(item).build());
+        return new TriggerInstance(ContextAwarePredicate.ANY, ItemPredicate.Builder.item().of(item).build());
     }
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
         private final ItemPredicate item;
 
-        public TriggerInstance(EntityPredicate.Composite composite, ItemPredicate itemPredicate) {
+        public TriggerInstance(ContextAwarePredicate composite, ItemPredicate itemPredicate) {
             super(ConvertByLightningTrigger.ID, composite);
             this.item = itemPredicate;
         }

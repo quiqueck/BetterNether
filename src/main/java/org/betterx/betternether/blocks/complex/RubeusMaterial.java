@@ -17,14 +17,14 @@ import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
     public RubeusMaterial() {
-        super("rubeus", MaterialColor.COLOR_MAGENTA, MaterialColor.COLOR_MAGENTA);
+        super("rubeus", MapColor.COLOR_MAGENTA, MapColor.COLOR_MAGENTA);
     }
 
     @Override

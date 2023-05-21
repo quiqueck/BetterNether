@@ -9,10 +9,10 @@ import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class WartMaterial extends RoofMaterial<WartMaterial> {
-    public WartMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
+    public WartMaterial(String name, MapColor woodColor, MapColor planksColor) {
         super(name, woodColor, planksColor);
     }
 

@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class BlockRubeusLeaves extends BNLeaves {
     public BlockRubeusLeaves(Block sapling) {
-        super(sapling, MaterialColor.COLOR_LIGHT_BLUE);
+        super(sapling, MapColor.COLOR_LIGHT_BLUE);
     }
 }

@@ -10,13 +10,13 @@ import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 
 public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends WoodenComplexMaterial {
-    public NetherWoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
+    public NetherWoodenMaterial(String name, MapColor woodColor, MapColor planksColor) {
         super(BetterNether.MOD_ID, name, "nether", woodColor, planksColor);
     }
 

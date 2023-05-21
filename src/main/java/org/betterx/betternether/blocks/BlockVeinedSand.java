@@ -14,22 +14,23 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.List;
 
 public class BlockVeinedSand extends BlockBase implements TagProvider {
     public BlockVeinedSand() {
-        super(FabricBlockSettings.of(Material.SAND)
-                                 .mapColor(MaterialColor.COLOR_BROWN)
-                                 .sounds(SoundType.SAND)
-                                 .strength(0.5F, 0.5F));
+        super(BlockBehaviour.Properties
+                .copy(Blocks.SAND)
+                .mapColor(MapColor.COLOR_BROWN)
+                .sound(SoundType.SAND)
+                .strength(0.5F, 0.5F)
+        );
         this.setDropItself(false);
     }
 

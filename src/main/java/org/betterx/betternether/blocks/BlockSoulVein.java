@@ -17,15 +17,12 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,13 +31,9 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 1, 16);
 
     public BlockSoulVein() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_PURPLE)
-                                 .sounds(SoundType.CROP)
-                                 .noOcclusion()
-                                 .noCollission()
-                                 .instabreak()
-                                 .randomTicks());
+        super(Materials.NETHER_PLANT
+                .mapColor(MapColor.COLOR_PURPLE)
+                .randomTicks());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

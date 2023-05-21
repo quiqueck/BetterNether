@@ -10,24 +10,22 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockEyeballSmall extends BlockEyeBase {
     protected static final VoxelShape SHAPE = Block.box(4, 8, 4, 12, 16, 12);
 
     public BlockEyeballSmall() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_BROWN)
-                                 .sounds(SoundType.SLIME_BLOCK)
-                                 .hardness(0.5F)
-                                 .resistance(0.5F)
-                                 .noOcclusion());
+        super(Materials.NETHER_PLANT
+                .mapColor(MapColor.COLOR_BROWN)
+                .sound(SoundType.SLIME_BLOCK)
+                .strength(0.5F, 0.5F)
+        );
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {

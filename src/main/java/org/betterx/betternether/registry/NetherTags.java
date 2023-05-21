@@ -5,7 +5,6 @@ import org.betterx.bclib.blocks.SimpleLeavesBlock;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
-import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import org.betterx.worlds.together.tag.v3.MineableTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
@@ -18,7 +17,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 
 public class NetherTags {
 //	public static final Tag<Block> SOUL_GROUND_BLOCK = TagAPI.makeCommonBlockTag( "soul_ground");
@@ -44,7 +42,6 @@ public class NetherTags {
 
         NetherBlocks.getModBlocks().forEach(block -> {
             BlockBehaviour.Properties properties = ((BlockBehaviourAccessor) block).getProperties();
-            Material material = ((BlockBehaviourPropertiesAccessor) properties).getMaterial();
             Item item = block.asItem();
 
             if (material.equals(Material.STONE) || material.equals(Material.METAL)) {

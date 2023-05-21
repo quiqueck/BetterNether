@@ -20,7 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -45,7 +45,7 @@ class ReedBookshelfBlock extends BaseBookshelfBlock {
 
 public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
     public NetherReedMaterial() {
-        super("nether_reed", MaterialColor.COLOR_CYAN, MaterialColor.COLOR_CYAN);
+        super("nether_reed", MapColor.COLOR_CYAN, MapColor.COLOR_CYAN);
     }
 
     @Override

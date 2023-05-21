@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -24,7 +24,7 @@ public class BlockStalagnate extends BlockBaseNotFull {
     public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockStalagnate() {
-        super(Materials.makeWood(MaterialColor.TERRACOTTA_LIGHT_GREEN).noOcclusion());
+        super(Materials.makeNetherWood(MapColor.TERRACOTTA_LIGHT_GREEN).noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, BlockProperties.TripleShape.MIDDLE));
         this.setDropItself(false);

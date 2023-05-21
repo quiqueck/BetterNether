@@ -14,33 +14,19 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import java.util.function.Function;
+import net.minecraft.world.level.material.MapColor;
 
 public abstract class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockProperties.AGE;
 
-    public BlockCommonPlant(MaterialColor color) {
-        this(color, p -> p);
-    }
-
-    public BlockCommonPlant(MaterialColor color, Function<Properties, Properties> adaptProperties) {
-        super(adaptProperties.apply(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                                       .mapColor(color)
-                                                       .sounds(SoundType.CROP)
-                                                       .noOcclusion()
-                                                       .noCollission()
-                                                       .instabreak()
-                                                       .randomTicks()));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
-        this.setDropItself(false);
+    public BlockCommonPlant(MapColor color) {
+        this(Materials.NETHER_PLANT
+                .mapColor(color)
+                .randomTicks()
+        );
     }
 
     public BlockCommonPlant(Properties settings) {

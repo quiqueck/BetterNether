@@ -16,19 +16,17 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
 
@@ -43,13 +41,9 @@ public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlo
     private Block seed;
 
     public BlockLumabusVine() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_CYAN)
-                                 .sounds(SoundType.CROP)
-                                 .noCollission()
-                                 .instabreak()
-                                 .noOcclusion()
-                                 .lightLevel(getLuminance()));
+        super(Materials.NETHER_PLANT
+                .mapColor(MapColor.COLOR_CYAN)
+                .lightLevel(getLuminance()));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));

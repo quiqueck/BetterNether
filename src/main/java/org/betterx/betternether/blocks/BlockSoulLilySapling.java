@@ -6,11 +6,11 @@ import org.betterx.betternether.registry.NetherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class BlockSoulLilySapling extends BaseBlockCommonSapling implements SurvivesOnSoulGroundOrFarmLand {
     public BlockSoulLilySapling() {
-        super(NetherBlocks.SOUL_LILY, MaterialColor.COLOR_ORANGE);
+        super(NetherBlocks.SOUL_LILY, MapColor.COLOR_ORANGE);
     }
 
     @Override

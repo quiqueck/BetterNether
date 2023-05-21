@@ -13,19 +13,21 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBoneBlocks {
     private static final VoxelShape SHAPE_NORTH = box(1, 1, 8, 15, 15, 16);
@@ -37,13 +39,10 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
     public static final IntegerProperty AGE = BlockProperties.AGE_THREE;
 
     public BlockBoneMushroom() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_LIGHT_GREEN)
-                                 .sounds(SoundType.CROP)
-                                 .noOcclusion()
-                                 .noCollission()
-                                 .instabreak()
-                                 .randomTicks());
+        super(Materials.NETHER_PLANT
+                .mapColor(MapColor.COLOR_LIGHT_GREEN)
+                .randomTicks()
+        );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(AGE, 0).setValue(FACING, Direction.UP));

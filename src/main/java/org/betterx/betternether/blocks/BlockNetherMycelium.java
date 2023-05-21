@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
@@ -33,7 +33,7 @@ public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike
     private BCLConfigureFeature<? extends Feature<?>, ?> vegetationFeature;
 
     public BlockNetherMycelium() {
-        super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).mapColor(MaterialColor.COLOR_GRAY).requiresTool());
+        super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).mapColor(MapColor.COLOR_GRAY).requiresTool());
         this.registerDefaultState(getStateDefinition().any().setValue(IS_BLUE, false));
         this.setDropItself(false);
     }

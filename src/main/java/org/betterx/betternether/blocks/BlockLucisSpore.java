@@ -18,11 +18,9 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -39,14 +37,9 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockLucisSpore() {
-        super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
-                                 .mapColor(MaterialColor.COLOR_LIGHT_GREEN)
-                                 .luminance(7)
-                                 .sounds(SoundType.CROP)
-                                 .instabreak()
-                                 .noOcclusion()
-                                 .noCollission()
-                                 .randomTicks()
+        super(Materials.NETHER_SAPLING
+                .mapColor(MapColor.COLOR_LIGHT_GREEN)
+                .lightLevel((bs) -> 7)
         );
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.complexmaterials.BehaviourBuilders;
 import org.betterx.betternether.MHelper;
 
 import net.minecraft.core.BlockPos;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -21,9 +22,13 @@ public class BlockNetherSakuraLeaves extends BNLeaves {
     private static final int COLOR = MHelper.color(251, 113, 143);
 
     public BlockNetherSakuraLeaves(Block sapling) {
-        super(sapling, MaterialColor.COLOR_PINK, (settings) -> settings.lightLevel((state) -> {
-            return 13;
-        }));
+        super(
+                sapling,
+                BehaviourBuilders
+                        .createLeaves(MapColor.COLOR_PINK, false)
+                        .noOcclusion()
+                        .lightLevel((state) -> 13)
+        );
     }
 
     @Environment(EnvType.CLIENT)

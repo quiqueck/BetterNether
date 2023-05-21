@@ -14,25 +14,17 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherGround {
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
 
     public BlockBlackBush() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_BLACK)
-                                 .sounds(SoundType.CROP)
-                                 .noOcclusion()
-                                 .noCollission()
-                                 .instabreak());
+        super(Materials.NETHER_PLANT.mapColor(MapColor.COLOR_BLACK));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

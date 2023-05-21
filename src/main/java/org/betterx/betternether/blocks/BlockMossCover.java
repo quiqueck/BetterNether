@@ -6,7 +6,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -14,7 +14,7 @@ public class BlockMossCover extends BaseBlockMold {
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 4, 16);
 
     public BlockMossCover() {
-        super(MaterialColor.COLOR_GREEN, p -> p.offsetType(Block.OffsetType.NONE));
+        super(MapColor.COLOR_GREEN, p -> p.offsetType(Block.OffsetType.NONE));
     }
 
 

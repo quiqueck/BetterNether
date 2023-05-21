@@ -16,13 +16,13 @@ import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import org.jetbrains.annotations.Nullable;
 
 public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
     public StalagnateMaterial() {
-        super("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN);
+        super("stalagnate", MapColor.TERRACOTTA_LIGHT_GREEN, MapColor.TERRACOTTA_LIGHT_GREEN);
     }
 
     @Override

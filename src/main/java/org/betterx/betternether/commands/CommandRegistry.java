@@ -3,8 +3,6 @@ package org.betterx.betternether.commands;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
-import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeBuilder;
@@ -37,6 +35,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.biome.Biome;
@@ -44,7 +43,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
@@ -53,7 +51,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConf
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -393,16 +390,15 @@ public class CommandRegistry {
                                        .stream()
                                        .sorted(CommandRegistry::compareBlockNames)
                                        .collect(Collectors.toList())) {
-            BlockBehaviour.Properties properties = ((BlockBehaviourAccessor) block).getProperties();
-            Material material = ((BlockBehaviourPropertiesAccessor) properties).getMaterial();
+            final BlockState state = block.defaultBlockState();
 
-            if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
+            if (state.is(BlockTags.MINEABLE_WITH_PICKAXE)) {
                 pickaxes.add(block);
-            } else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
+            } else if (state.is(BlockTags.MINEABLE_WITH_AXE)) {
                 axes.add(block);
-            } else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Material.WATER_PLANT)) {
+            } else if (state.is(BlockTags.MINEABLE_WITH_HOE)) {
                 hoes.add(block);
-            } else if (material.equals(Material.SAND)) {
+            } else if (state.is(BlockTags.MINEABLE_WITH_SHOVEL)) {
                 shovels.add(block);
             } else {
                 other.add(block);

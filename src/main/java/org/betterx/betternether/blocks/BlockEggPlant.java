@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -45,7 +45,7 @@ public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherG
     private boolean enablePlayerDamage = true;
 
     public BlockEggPlant() {
-        super(MaterialColor.TERRACOTTA_WHITE);
+        super(MapColor.TERRACOTTA_WHITE);
         enableModDamage = Configs.MAIN.getBoolean("egg_plant", "mob_damage", true);
         enablePlayerDamage = Configs.MAIN.getBoolean("egg_plant", "player_damage", true);
         this.registerDefaultState(getStateDefinition().any().setValue(DESTRUCTED, false));

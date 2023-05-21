@@ -15,26 +15,19 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherMycelium {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
 
     public BlockGiantMoldSapling() {
-        super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
-                                 .mapColor(MaterialColor.COLOR_LIGHT_GREEN)
-                                 .sounds(SoundType.CROP)
-                                 .noOcclusion()
-                                 .noLootTable()
-                                 .instabreak()
-                                 .noCollission()
-                                 .randomTicks());
+        super(Materials.NETHER_SAPLING
+                .mapColor(MapColor.COLOR_LIGHT_GREEN)
+                .noLootTable()
+        );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

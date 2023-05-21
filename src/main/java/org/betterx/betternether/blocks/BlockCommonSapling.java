@@ -15,20 +15,17 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import org.jetbrains.annotations.NotNull;
 
 public class BlockCommonSapling extends BaseBlockCommonSapling implements SurvivesOnNetherGround {
 
 
-    public BlockCommonSapling(@NotNull Block plant, MaterialColor color) {
+    public BlockCommonSapling(@NotNull Block plant, MapColor color) {
         super(plant, color);
     }
 
@@ -42,15 +39,11 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
     private final Block plant;
 
-    public BaseBlockCommonSapling(@NotNull Block plant, MaterialColor color) {
-        super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
-                                 .mapColor(color)
-                                 .sounds(SoundType.CROP)
-                                 .noOcclusion()
-                                 .noLootTable()
-                                 .instabreak()
-                                 .noCollission()
-                                 .randomTicks());
+    public BaseBlockCommonSapling(@NotNull Block plant, MapColor color) {
+        super(Materials.NETHER_SAPLING
+                .mapColor(color)
+                .noLootTable()
+        );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.plant = plant;
     }

@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.blocks.BaseOreBlock;
+import org.betterx.bclib.complexmaterials.BehaviourBuilders;
 import org.betterx.bclib.interfaces.BlockModelProvider;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
@@ -17,11 +18,8 @@ import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -31,14 +29,12 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
     private final int maxCount;
 
     public RedstoneOreBlock() {
-        super(
-                FabricBlockSettings.of(Material.STONE, MaterialColor.COLOR_RED)
-                                   .hardness(3F)
-                                   .resistance(5F)
-                                   .requiresTool()
-                                   .sounds(SoundType.NETHERRACK)
-                                   .randomTicks()
-                                   .lightLevel(litBlockEmission(9)));
+        super(BehaviourBuilders.createStone(MapColor.COLOR_RED)
+                               .strength(3, 5)
+                               .requiresCorrectToolForDrops()
+                               .sound(SoundType.NETHERRACK)
+                               .randomTicks()
+                               .lightLevel(litBlockEmission(9)));
 
         this.minCount = 1;
         this.maxCount = 3;

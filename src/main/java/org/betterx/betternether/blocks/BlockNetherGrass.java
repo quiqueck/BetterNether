@@ -14,7 +14,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
@@ -44,7 +44,7 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock {
     private static final VoxelShape SHAPE = box(4, 0, 4, 14, 12, 14);
 
     public BaseBlockNetherGrass() {
-        super(Materials.makeGrass(MaterialColor.TERRACOTTA_GRAY).offsetType(Block.OffsetType.XZ));
+        super(Materials.makeNetherGrass(MapColor.TERRACOTTA_GRAY).offsetType(Block.OffsetType.XZ));
     }
 
     @Environment(EnvType.CLIENT)

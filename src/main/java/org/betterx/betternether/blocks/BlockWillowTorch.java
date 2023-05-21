@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -32,7 +32,7 @@ public class BlockWillowTorch extends BlockBaseNotFull {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
     public BlockWillowTorch() {
-        super(Materials.makeWood(MaterialColor.COLOR_LIGHT_BLUE).luminance(15).noCollission().noOcclusion());
+        super(Materials.makeNetherWood(MapColor.COLOR_LIGHT_BLUE).lightLevel(s -> 15).noCollission().noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

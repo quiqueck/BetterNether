@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -20,7 +20,7 @@ public class BlockWillowTrunk extends BlockBaseNotFull {
     private static final VoxelShape SHAPE_TOP = box(4, 0, 4, 12, 12, 12);
 
     public BlockWillowTrunk() {
-        super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).noOcclusion());
+        super(Materials.makeNetherWood(MapColor.TERRACOTTA_RED).noOcclusion());
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
     }

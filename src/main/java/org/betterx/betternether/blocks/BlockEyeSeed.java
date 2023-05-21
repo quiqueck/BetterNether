@@ -14,25 +14,16 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack {
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
 
     public BlockEyeSeed() {
-        super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
-                                 .mapColor(MaterialColor.COLOR_RED)
-                                 .sounds(SoundType.CROP)
-                                 .noOcclusion()
-                                 .instabreak()
-                                 .noCollission()
-                                 .randomTicks());
+        super(Materials.NETHER_SAPLING.mapColor(MapColor.COLOR_RED));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

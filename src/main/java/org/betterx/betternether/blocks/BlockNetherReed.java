@@ -13,27 +13,21 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockNetherReed extends BlockBase {
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherReed() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_CYAN)
-                                 .sounds(SoundType.CROP)
-                                 .noCollission()
-                                 .instabreak()
-                                 .noOcclusion()
-                                 .randomTicks());
+        super(Materials.NETHER_PLANT
+                .mapColor(MapColor.COLOR_CYAN)
+                .randomTicks());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }

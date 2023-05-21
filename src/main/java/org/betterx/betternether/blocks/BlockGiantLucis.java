@@ -12,11 +12,9 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
 
@@ -24,13 +22,13 @@ import java.util.List;
 
 public class BlockGiantLucis extends HugeMushroomBlock implements AddMineableAxe {
     public BlockGiantLucis() {
-        super(FabricBlockSettings.of(Materials.NETHER_GRASS)
-                                 .mapColor(MaterialColor.COLOR_YELLOW)
-                                 .requiresTool()
-                                 .luminance(15)
-                                 .sounds(SoundType.WOOD)
-                                 .hardness(1F)
-                                 .noOcclusion());
+        super(Materials.NETHER_GRASS
+                .mapColor(MapColor.COLOR_YELLOW)
+                .requiresCorrectToolForDrops()
+                .lightLevel((bs) -> 15)
+                .sound(SoundType.WOOD)
+                .strength(1F)
+                .noOcclusion());
     }
 
     @Override

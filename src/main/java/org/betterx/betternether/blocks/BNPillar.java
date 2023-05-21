@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -23,8 +23,8 @@ public class BNPillar extends RotatedPillarBlock {
         super(FabricBlockSettings.copyOf(block));
     }
 
-    public BNPillar(MaterialColor color) {
-        super(Materials.makeWood(color));
+    public BNPillar(MapColor color) {
+        super(Materials.makeNetherWood(color));
     }
 
     @Override

@@ -32,7 +32,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -59,8 +59,8 @@ public class NetherBlocks extends BlockRegistry {
     // Wart //
     public static final WartMaterial MAT_WART = new WartMaterial(
             "wart",
-            MaterialColor.COLOR_RED,
-            MaterialColor.COLOR_RED
+            MapColor.COLOR_RED,
+            MapColor.COLOR_RED
     ).init();
     // Cincinnasite //
     public static final Block CINCINNASITE_ORE = registerBlock(
@@ -518,18 +518,18 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BARREL_CACTUS = registerBlock("barrel_cactus", new BlockBarrelCactus());
     public static final Block NETHER_CACTUS = registerBlock("nether_cactus", new BlockNetherCactus());
     // Wall plants
-    public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MaterialColor.COLOR_RED));
+    public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MapColor.COLOR_RED));
     public static final Block WALL_MUSHROOM_BROWN = registerBlock(
             "wall_mushroom_brown",
-            new BlockPlantWall(MaterialColor.COLOR_BROWN)
+            new BlockPlantWall(MapColor.COLOR_BROWN)
     );
     public static final Block WALL_MUSHROOM_RED = registerBlock(
             "wall_mushroom_red",
-            new BlockPlantWall(MaterialColor.COLOR_RED)
+            new BlockPlantWall(MapColor.COLOR_RED)
     );
     public static final Block JUNGLE_MOSS = registerBlock(
             "jungle_moss",
-            new BlockPlantWall(MaterialColor.COLOR_LIGHT_GREEN)
+            new BlockPlantWall(MapColor.COLOR_LIGHT_GREEN)
     );
     // Decorations //
     public static final Block PIG_STATUE_RESPAWNER = registerBlock("pig_statue_respawner", new BlockStatueRespawner());
@@ -739,7 +739,7 @@ public class NetherBlocks extends BlockRegistry {
             "anchor_tree_leaves",
             new BNLeaves(
                     MAT_ANCHOR_TREE.getSapling(),
-                    MaterialColor.COLOR_GREEN
+                    MapColor.COLOR_GREEN
             )
     );
     public static final Block ANCHOR_TREE_VINE = registerBlockNI(

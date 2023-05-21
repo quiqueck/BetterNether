@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -19,7 +19,7 @@ public class BlockBlackApple extends BlockCommonPlant implements SurvivesOnNethe
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 16, 12);
 
     public BlockBlackApple() {
-        super(MaterialColor.TERRACOTTA_ORANGE);
+        super(MapColor.TERRACOTTA_ORANGE);
     }
 
     @Override

@@ -15,26 +15,18 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNylium {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 6, 12);
 
     public BlockJellyfishMushroomSapling() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_CYAN)
-                                 .luminance(9)
-                                 .sounds(SoundType.CROP)
-                                 .noOcclusion()
-                                 .instabreak()
-                                 .noCollission()
-                                 .randomTicks()
+        super(Materials.NETHER_SAPLING
+                .mapColor(MapColor.COLOR_CYAN)
+                .lightLevel((bs) -> 9)
         );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

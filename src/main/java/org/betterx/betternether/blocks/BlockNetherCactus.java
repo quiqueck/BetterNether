@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.blocks.BlockProperties;
+import org.betterx.bclib.complexmaterials.BehaviourBuilders;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnGravel;
 
@@ -15,16 +16,12 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGravel {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
@@ -32,11 +29,7 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherCactus() {
-        super(FabricBlockSettings.of(Material.CACTUS)
-                                 .mapColor(MaterialColor.TERRACOTTA_ORANGE)
-                                 .sounds(SoundType.WOOL)
-                                 .noOcclusion()
-                                 .randomTicks());
+        super(BehaviourBuilders.createCactus(MapColor.TERRACOTTA_ORANGE, false));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }

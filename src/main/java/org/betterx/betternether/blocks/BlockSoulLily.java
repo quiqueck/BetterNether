@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -60,7 +60,7 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGro
     };
 
     public BlockSoulLily() {
-        super(Materials.makeWood(MaterialColor.COLOR_ORANGE).noOcclusion().randomTicks());
+        super(Materials.makeNetherWood(MapColor.COLOR_ORANGE).noOcclusion().randomTicks());
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, SoulLilyShape.SMALL));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

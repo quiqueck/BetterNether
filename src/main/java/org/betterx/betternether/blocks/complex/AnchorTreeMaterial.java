@@ -7,12 +7,12 @@ import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class AnchorTreeMaterial extends NetherWoodenMaterial<AnchorTreeMaterial> {
 
     public AnchorTreeMaterial() {
-        super("anchor_tree", MaterialColor.COLOR_BLUE, MaterialColor.COLOR_GREEN);
+        super("anchor_tree", MapColor.COLOR_BLUE, MapColor.COLOR_GREEN);
     }
 
 

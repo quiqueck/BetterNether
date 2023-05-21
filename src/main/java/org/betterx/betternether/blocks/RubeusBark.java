@@ -7,10 +7,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class RubeusBark extends StripableBarkBlock {
-    public RubeusBark(MaterialColor color, Block striped) {
+    public RubeusBark(MapColor color, Block striped) {
         super(color, striped);
         this.registerDefaultState(this.defaultBlockState()
                                       .setValue(AXIS, Direction.Axis.Y)

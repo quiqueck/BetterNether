@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -32,7 +32,10 @@ public class BlockWillowBranch extends BlockBaseNotFull {
     public static final EnumProperty<WillowBranchShape> SHAPE = BNBlockProperties.WILLOW_SHAPE;
 
     public BlockWillowBranch() {
-        super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).noOcclusion().noCollission().lightLevel(getLuminance()));
+        super(Materials.makeNetherWood(MapColor.TERRACOTTA_RED)
+                       .noOcclusion()
+                       .noCollission()
+                       .lightLevel(getLuminance()));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, WillowBranchShape.MIDDLE));

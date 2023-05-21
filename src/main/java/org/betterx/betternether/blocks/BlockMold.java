@@ -16,7 +16,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium {
-    public BlockMold(MaterialColor color) {
+    public BlockMold(MapColor color) {
         super(color);
     }
 
@@ -39,12 +39,12 @@ public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium
 }
 
 class BaseBlockMold extends BlockBaseNotFull {
-    public BaseBlockMold(MaterialColor color) {
+    public BaseBlockMold(MapColor color) {
         this(color, p -> p);
     }
 
-    public BaseBlockMold(MaterialColor color, Function<Properties, Properties> adaptProperties) {
-        super(adaptProperties.apply(Materials.makeGrass(color)
+    public BaseBlockMold(MapColor color, Function<Properties, Properties> adaptProperties) {
+        super(adaptProperties.apply(Materials.makeNetherGrass(color)
                                              .sound(SoundType.CROP))
         );
         this.setRenderLayer(BNRenderLayer.CUTOUT);

@@ -10,11 +10,11 @@ import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMaterial> {
     public MushroomFirMaterial() {
-        super("mushroom_fir", MaterialColor.COLOR_BLUE, MaterialColor.COLOR_BLUE);
+        super("mushroom_fir", MapColor.COLOR_BLUE, MapColor.COLOR_BLUE);
     }
 
     @Override

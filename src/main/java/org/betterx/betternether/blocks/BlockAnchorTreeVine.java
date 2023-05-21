@@ -12,19 +12,17 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.function.ToIntFunction;
 
@@ -33,14 +31,10 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockAnchorTreeVine() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_GREEN)
-                                 .sounds(SoundType.CROP)
-                                 .noCollission()
-                                 .noLootTable()
-                                 .instabreak()
-                                 .noOcclusion()
-                                 .lightLevel(getLuminance()));
+        super(Materials.NETHER_PLANT
+                .mapColor(MapColor.COLOR_GREEN)
+                .noLootTable()
+                .lightLevel(getLuminance()));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         setDropItself(false);
     }

@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -31,7 +31,7 @@ public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGro
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockSmoker() {
-        super(Materials.makeWood(MaterialColor.COLOR_BROWN));
+        super(Materials.makeNetherWood(MapColor.COLOR_BROWN));
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
     }
 

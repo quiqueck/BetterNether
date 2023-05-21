@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -44,10 +44,10 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
     public static final EnumProperty<JellyShape> VISUAL = BNBlockProperties.JELLY_MUSHROOM_VISUAL;
 
     public BlockJellyfishMushroom() {
-        super(Materials.makeWood(MaterialColor.COLOR_CYAN)
-                       .luminance(13)
-                       .hardness(0.1F)
-                       .sounds(SoundType.FUNGUS)
+        super(Materials.makeNetherWood(MapColor.COLOR_CYAN)
+                       .lightLevel(s -> 13)
+                       .destroyTime(0.1F)
+                       .sound(SoundType.FUNGUS)
                        .noOcclusion());
         boolean sodium = FabricLoader.getInstance().isModLoaded("sodium");
         this.setRenderLayer(sodium ? BNRenderLayer.CUTOUT : BNRenderLayer.TRANSLUCENT);

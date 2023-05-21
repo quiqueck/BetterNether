@@ -14,14 +14,14 @@ import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class WillowMaterial extends RoofMaterial<WillowMaterial> {
     public final static String BLOCK_TORCH = "torch";
 
 
     public WillowMaterial() {
-        super("willow", MaterialColor.TERRACOTTA_RED, MaterialColor.TERRACOTTA_RED);
+        super("willow", MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED);
     }
 
     @Override

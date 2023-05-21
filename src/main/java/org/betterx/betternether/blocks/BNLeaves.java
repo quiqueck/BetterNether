@@ -1,38 +1,24 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.blocks.BaseLeavesBlock;
-import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
+import org.betterx.bclib.complexmaterials.BehaviourBuilders;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricMaterialBuilder;
-
-import java.util.function.Consumer;
+import net.minecraft.world.level.material.MapColor;
 
 public class BNLeaves extends BaseLeavesBlock {
-    public final static Material NETHER_LEAVES = new FabricMaterialBuilder(MaterialColor.PLANT).lightPassesThrough()
-                                                                                               .destroyedByPiston()
-                                                                                               .build();
-
-    public BNLeaves(Block sapling, MaterialColor color) {
-        super(sapling, color, (settings) -> {
-            BlockBehaviourPropertiesAccessor accessor = (BlockBehaviourPropertiesAccessor) settings;
-            accessor.setMaterial(NETHER_LEAVES);
-        });
+    public BNLeaves(Block sapling, MapColor color) {
+        this(sapling, BehaviourBuilders.createLeaves(color, false).noOcclusion());
     }
 
-    public BNLeaves(Block sapling, MaterialColor color, Consumer<Block.Properties> customizeProperties) {
-        super(sapling, color, (settings) -> {
-            customizeProperties.accept(settings);
-            BlockBehaviourPropertiesAccessor accessor = (BlockBehaviourPropertiesAccessor) settings;
-            accessor.setMaterial(NETHER_LEAVES);
-        });
+
+    public BNLeaves(Block sapling, BlockBehaviour.Properties properties) {
+        super(sapling, properties);
     }
 
     @Override

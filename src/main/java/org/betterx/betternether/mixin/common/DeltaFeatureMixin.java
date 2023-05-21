@@ -24,15 +24,16 @@ public class DeltaFeatureMixin {
             CallbackInfoReturnable<Boolean> info
     ) {
         BlockState blockState = worldAccess.getBlockState(blockPos);
-        if (!isValidBlock(blockState)) {
+        if (!bn_isValidBlock(blockState)) {
             info.setReturnValue(false);
             info.cancel();
         }
     }
 
-    private static boolean isValidBlock(BlockState state) {
-        return !(state.getBlock() instanceof BlockRubeusLeaves) && !(state.getBlock() instanceof BlockWillowLeaves) && !(state.getFluidState()
-                                                                                                                              .isEmpty() && state.getMaterial()
-                                                                                                                                                 .isReplaceable());
+    private static boolean bn_isValidBlock(BlockState state) {
+        return !(state.getBlock() instanceof BlockRubeusLeaves)
+                && !(state.getBlock() instanceof BlockWillowLeaves)
+                && !(state.getFluidState().isEmpty()
+                && state.canBeReplaced());
     }
 }

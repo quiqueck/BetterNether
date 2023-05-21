@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -28,7 +28,7 @@ public class BlockWillowLeaves extends BNLeaves {
     public static final BooleanProperty NATURAL = BooleanProperty.create("natural");
 
     public BlockWillowLeaves(Block sapling) {
-        super(sapling, MaterialColor.TERRACOTTA_RED);
+        super(sapling, MapColor.TERRACOTTA_RED);
 
         //this.setDropItself(false);
         this.registerDefaultState(getStateDefinition()

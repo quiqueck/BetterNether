@@ -11,13 +11,13 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class BlockWhisperingGourdLantern extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockWhisperingGourdLantern() {
-        super(Materials.makeWood(MaterialColor.COLOR_BLUE).luminance(15));
+        super(Materials.makeNetherWood(MapColor.COLOR_BLUE).lightLevel(s -> 15));
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

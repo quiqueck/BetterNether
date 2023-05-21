@@ -17,14 +17,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
 
@@ -36,13 +35,13 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
     public static final EnumProperty<EnumLucisShape> SHAPE = BNBlockProperties.LUCIS_SHAPE;
 
     public BlockLucisMushroom() {
-        super(FabricBlockSettings.of(Materials.NETHER_GRASS)
-                                 .mapColor(MaterialColor.COLOR_YELLOW)
-                                 .luminance(15)
-                                 .requiresTool()
-                                 .sounds(SoundType.WOOD)
-                                 .hardness(1F)
-                                 .noOcclusion());
+        super(Materials.NETHER_GRASS
+                .mapColor(MapColor.COLOR_YELLOW)
+                .lightLevel((bs) -> 15)
+                .requiresCorrectToolForDrops()
+                .sound(SoundType.WOOD)
+                .strength(1F)
+                .noOcclusion());
         this.registerDefaultState(getStateDefinition().any()
                                                       .setValue(FACING, Direction.NORTH)
                                                       .setValue(SHAPE, EnumLucisShape.CORNER));

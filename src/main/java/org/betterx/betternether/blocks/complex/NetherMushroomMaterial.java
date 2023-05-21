@@ -11,13 +11,13 @@ import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import org.jetbrains.annotations.Nullable;
 
 public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomMaterial> {
     public NetherMushroomMaterial() {
-        super("nether_mushroom", MaterialColor.TERRACOTTA_WHITE, MaterialColor.COLOR_LIGHT_GRAY);
+        super("nether_mushroom", MapColor.TERRACOTTA_WHITE, MapColor.COLOR_LIGHT_GRAY);
     }
 
     @Override

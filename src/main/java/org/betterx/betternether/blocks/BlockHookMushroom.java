@@ -7,11 +7,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class BlockHookMushroom extends BaseBlockMold implements SurvivesOnNetherrack {
     public BlockHookMushroom() {
-        super(Materials.makeGrass(MaterialColor.COLOR_PINK)
+        super(Materials.makeNetherGrass(MapColor.COLOR_PINK)
                        .lightLevel(s -> 13)
                        .sound(SoundType.CROP)
         );

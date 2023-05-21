@@ -20,11 +20,10 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -32,7 +31,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
 
@@ -43,13 +41,9 @@ public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlo
     public static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 
     public BlockGoldenVine() {
-        super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-                                 .mapColor(MaterialColor.COLOR_RED)
-                                 .luminance(15)
-                                 .sounds(SoundType.CROP)
-                                 .noCollission()
-                                 .instabreak()
-                                 .noOcclusion()
+        super(Materials.NETHER_PLANT
+                .mapColor(MapColor.COLOR_RED)
+                .lightLevel((bs) -> 15)
         );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);

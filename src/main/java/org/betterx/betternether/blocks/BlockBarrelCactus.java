@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.complexmaterials.BehaviourBuilders;
 import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
@@ -15,16 +16,12 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
 
@@ -40,15 +37,10 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
     };
 
     public BlockBarrelCactus() {
-        super(FabricBlockSettings.of(Material.CACTUS)
-                                 .mapColor(MaterialColor.TERRACOTTA_BLUE)
-                                 .requiresTool()
-                                 .sounds(SoundType.WOOL)
-                                 .noOcclusion()
-                                 .destroyTime(0.4F)
-                                 .instabreak()
-                                 .dynamicShape()
-                                 .offsetType(Block.OffsetType.XZ)
+        super(BehaviourBuilders
+                .createCactus(MapColor.TERRACOTTA_ORANGE, false)
+                .dynamicShape()
+                .offsetType(Block.OffsetType.XZ)
         );
     }
 

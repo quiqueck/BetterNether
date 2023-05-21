@@ -1,35 +1,32 @@
 package org.betterx.betternether.blocks.materials;
 
-import org.betterx.bclib.blocks.BasePlantBlock;
+import org.betterx.bclib.complexmaterials.BehaviourBuilders;
 
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricMaterialBuilder;
+import net.minecraft.world.level.material.MapColor;
 
 public class Materials {
-    public static final Material NETHER_GRASS = new FabricMaterialBuilder(MaterialColor.GRASS).build();
-    public static final Material NETHER_SAPLING = new FabricMaterialBuilder(MaterialColor.PLANT).destroyedByPiston()
-                                                                                                .noCollider()
-                                                                                                .build();
-    public static final Material NETHER_PLANT = Material.PLANT;
+    public static final BlockBehaviour.Properties NETHER_GRASS = BehaviourBuilders.createGrass(MapColor.GRASS, false);
+    public static final BlockBehaviour.Properties NETHER_SAPLING = BehaviourBuilders
+            .createTickingPlant()
+            .sound(SoundType.CROP)
+            .noOcclusion();
+    
+    public static final BlockBehaviour.Properties NETHER_PLANT = BehaviourBuilders
+            .createPlant()
+            .sound(SoundType.CROP)
+            .noOcclusion();
 
-    public static FabricBlockSettings makeWood(MaterialColor color) {
-        return FabricBlockSettings.of(Material.NETHER_WOOD)
-                                  .requiresTool()
-                                  .mapColor(color)
-                                  .sounds(SoundType.WOOD)
-                                  .hardness(1);
+    public static BlockBehaviour.Properties makeNetherWood(MapColor color) {
+        return BehaviourBuilders.createWood(color, false)
+                                .requiresCorrectToolForDrops()
+                                .strength(1);
     }
 
-    public static BlockBehaviour.Properties makeGrass(MaterialColor color) {
-        return BasePlantBlock.basePlantSettings(NETHER_GRASS, 0)
-                             .isValidSpawn((state, world, pos, type) -> true)
-                             .color(color)
-                             .noOcclusion()
-                             .instabreak();
+    public static BlockBehaviour.Properties makeNetherGrass(MapColor color) {
+        return BehaviourBuilders
+                .applyBasePlantSettings(BehaviourBuilders.createGrass(color, false), 0)
+                .isValidSpawn((state, world, pos, type) -> true);
     }
 }

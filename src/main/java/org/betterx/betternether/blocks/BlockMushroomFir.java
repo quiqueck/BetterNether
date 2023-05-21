@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -36,7 +36,7 @@ public class BlockMushroomFir extends BlockBaseNotFull {
     private static final VoxelShape END_SHAPE = box(0.01, 0, 0.01, 15.99, 15.99, 15.99);
 
     public BlockMushroomFir() {
-        super(Materials.makeWood(MaterialColor.COLOR_CYAN).noOcclusion());
+        super(Materials.makeNetherWood(MapColor.COLOR_CYAN).noOcclusion());
         this.setDropItself(false);
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

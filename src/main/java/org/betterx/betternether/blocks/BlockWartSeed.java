@@ -19,12 +19,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Maps;
 
@@ -44,12 +42,11 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
     }
 
     public BlockWartSeed() {
-        super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
-                                 .mapColor(MaterialColor.TERRACOTTA_RED)
-                                 .sounds(SoundType.WART_BLOCK)
-                                 .hardness(1F)
-                                 .noOcclusion()
-                                 .noCollission());
+        super(Materials.NETHER_SAPLING
+                .mapColor(MapColor.TERRACOTTA_RED)
+                .sound(SoundType.WART_BLOCK)
+                .strength(1F)
+        );
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.UP));
     }
 

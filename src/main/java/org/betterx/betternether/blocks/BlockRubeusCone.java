@@ -9,7 +9,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -17,7 +17,7 @@ public class BlockRubeusCone extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(3, 3, 3, 13, 16, 13);
 
     public BlockRubeusCone() {
-        super(Materials.makeWood(MaterialColor.COLOR_CYAN).luminance(15).noOcclusion());
+        super(Materials.makeNetherWood(MapColor.COLOR_CYAN).lightLevel(s -> 15).noOcclusion());
     }
 
     @Override

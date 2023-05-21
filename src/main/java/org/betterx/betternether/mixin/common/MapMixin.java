@@ -13,8 +13,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.world.level.material.MaterialColor.Brightness;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.MapColor.Brightness;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 import com.google.common.collect.Iterables;
@@ -70,7 +70,7 @@ public abstract class MapMixin extends ComplexItem {
                     boolean bl2 = dx * dx + dy * dy > (stepWidth - 2) * (stepWidth - 2);
                     int x = (sx / scale + xx - 64) * scale;
                     int z = (sz / scale + yy - 64) * scale;
-                    LinkedHashMultiset<MaterialColor> multiset = LinkedHashMultiset.create();
+                    LinkedHashMultiset<MapColor> multiset = LinkedHashMultiset.create();
                     LevelChunk levelChunk = level.getChunk(
                             SectionPos.blockToSectionCoord(x),
                             SectionPos.blockToSectionCoord(z)
@@ -100,13 +100,13 @@ public abstract class MapMixin extends ComplexItem {
                                 } while (blockState.is(Blocks.BEDROCK) || blockState.getMapColor(
                                         level,
                                         POS
-                                ) != MaterialColor.NONE && testY > level.getMinBuildHeight());
+                                ) != MapColor.NONE && testY > level.getMinBuildHeight());
 
                                 do {
                                     POS.setY(--testY);
                                     blockState = levelChunk.getBlockState(POS);
                                 } while (
-                                        blockState.getMapColor(level, POS) == MaterialColor.NONE
+                                        blockState.getMapColor(level, POS) == MapColor.NONE
                                                 && testY > level.getMinBuildHeight()
                                 );
                                 if (testY > level.getMinBuildHeight() && !blockState.getFluidState()
@@ -132,18 +132,18 @@ public abstract class MapMixin extends ComplexItem {
                     }
 
 
-                    MaterialColor mc = Iterables.getFirst(
+                    MapColor mc = Iterables.getFirst(
                             Multisets.copyHighestCountFirst(multiset),
-                            MaterialColor.NONE
+                            MapColor.NONE
                     );
                     w /= scale * scale;
-                    Brightness br = mc == MaterialColor.WATER
+                    Brightness br = mc == MapColor.WATER
                             ? ((y = (double) w * 0.1 + (double) (xx + yy & 1) * 0.2) < 0.5
-                            ? MaterialColor.Brightness.HIGH
-                            : (y > 0.9 ? MaterialColor.Brightness.LOW : MaterialColor.Brightness.NORMAL))
+                            ? MapColor.Brightness.HIGH
+                            : (y > 0.9 ? MapColor.Brightness.LOW : MapColor.Brightness.NORMAL))
                             : ((y = (height - d) * 4.0 / (double) (scale + 4) + ((double) (xx + yy & 1) - 0.5) * 0.4) > 0.6
-                                    ? MaterialColor.Brightness.HIGH
-                                    : (y < -0.6 ? MaterialColor.Brightness.LOW : MaterialColor.Brightness.NORMAL));
+                                    ? MapColor.Brightness.HIGH
+                                    : (y < -0.6 ? MapColor.Brightness.LOW : MapColor.Brightness.NORMAL));
                     d = height;
                     if (yy < 0 || dx * dx + dy * dy >= stepWidth * stepWidth || bl2 && (xx + yy & 1) == 0) continue;
                     bl |= state.updateColor(xx, yy, mc.getPackedId(br));

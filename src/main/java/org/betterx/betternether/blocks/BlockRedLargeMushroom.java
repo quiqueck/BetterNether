@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -29,7 +29,7 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull {
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockRedLargeMushroom() {
-        super(Materials.makeWood(MaterialColor.COLOR_RED).noOcclusion());
+        super(Materials.makeNetherWood(MapColor.COLOR_RED).noOcclusion());
         this.setDropItself(false);
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

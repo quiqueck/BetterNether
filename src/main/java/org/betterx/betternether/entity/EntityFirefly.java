@@ -41,7 +41,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
@@ -103,9 +102,9 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                 boolean valid = !state.isAir() && state.getMaterial() != Material.LAVA;
                 if (valid) {
                     state = this.level.getBlockState(pos);
-                    valid = state.isAir() || !state.getMaterial().blocksMotion();
+                    valid = state.isAir() || !state.blocksMotion();
                     valid = valid && state.getBlock() != NetherBlocks.EGG_PLANT;
-                    valid = valid && !state.getMaterial().blocksMotion();
+                    valid = valid && !state.blocksMotion();
                 }
                 return valid;
             }
@@ -394,7 +393,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                         (int) EntityFirefly.this.getZ()
                 );
                 BlockState state = EntityFirefly.this.level.getBlockState(pos.below());
-                return !state.isAir() && !state.getMaterial().isLiquid();
+                return !state.isAir() && !state.liquid();
             }
             return false;
         }

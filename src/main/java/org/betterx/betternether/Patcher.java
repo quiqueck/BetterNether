@@ -20,7 +20,7 @@ public class Patcher {
 
 class Patcher_002 extends Patch {
     public Patcher_002() {
-        super(BetterNether.MOD_ID, "8.0.0");
+        super(BetterNether.MOD_ID, "8.2.2");
     }
 
     @Override

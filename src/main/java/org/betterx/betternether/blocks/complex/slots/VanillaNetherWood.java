@@ -31,7 +31,7 @@ public class VanillaNetherWood extends VanillaFallback<VanillaNetherWood> {
                             WoodenComplexMaterial parentMaterial,
                             BlockBehaviour.Properties settings
                     ) {
-                        return new BaseBookshelfBlock.WithVanillaWood(parentMaterial.getBlock(WoodSlots.PLANKS));
+                        return new BaseBookshelfBlock.VanillaWood(parentMaterial.getBlock(WoodSlots.PLANKS));
                     }
                 },
                 WoodSlots.COMPOSTER,

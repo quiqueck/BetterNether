@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.MHelper;
@@ -35,7 +36,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlock {
+public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlock, BehaviourClimableVine {
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
     private static final VoxelShape BOTTOM_SHAPE = box(2, 4, 2, 14, 16, 14);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
@@ -121,4 +122,5 @@ public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlo
     public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
         return new ItemStack(seed);
     }
+
 }

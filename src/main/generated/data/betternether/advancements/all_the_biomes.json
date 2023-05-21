@@ -404,34 +404,25 @@
   },
   "requirements": [
     [
-      "betternether:nether_swampland_terraces"
+      "betternether:old_warped_woods"
     ],
     [
       "betternether:old_fungiwoods"
     ],
     [
-      "betternether:bone_reef"
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:wart_forest"
     ],
     [
       "betternether:sulfuric_bone_reef"
     ],
     [
-      "betternether:nether_jungle"
+      "betternether:upside_down_forest"
     ],
     [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:soul_plain"
-    ],
-    [
-      "betternether:nether_mushroom_forest"
-    ],
-    [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:old_warped_woods"
+      "betternether:nether_mushroom_forest_edge"
     ],
     [
       "betternether:wart_forest_edge"
@@ -440,40 +431,49 @@
       "betternether:nether_grasslands"
     ],
     [
-      "betternether:wart_forest"
+      "betternether:flooded_deltas"
     ],
     [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:nether_swampland"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
-      "bclib:the_orange"
-    ],
-    [
-      "bclib:the_purple"
-    ],
-    [
-      "betternether:gravel_desert"
+      "betternether:old_swampland"
     ],
     [
       "betternether:upside_down_forest_cleared"
     ],
     [
-      "betternether:flooded_deltas"
+      "betternether:nether_swampland_terraces"
     ],
     [
-      "betternether:old_swampland"
+      "betternether:nether_mushroom_forest"
+    ],
+    [
+      "bclib:the_purple"
+    ],
+    [
+      "betternether:soul_plain"
+    ],
+    [
+      "betternether:magma_land"
+    ],
+    [
+      "betternether:nether_jungle"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:gravel_desert"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "bclib:the_orange"
+    ],
+    [
+      "betternether:nether_swampland"
     ]
   ],
   "rewards": {

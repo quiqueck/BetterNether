@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
 
@@ -15,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockOrangeMushroom extends BlockCommonPlant implements SurvivesOnNetherMycelium {
+public class BlockOrangeMushroom extends BlockCommonPlant implements SurvivesOnNetherMycelium, AddMineableHoe, BehaviourCompostable {
     private static final VoxelShape[] SHAPES = new VoxelShape[]{
             Shapes.box(0.25, 0.0, 0.25, 0.75, 0.375, 0.75),
             Shapes.box(0.125, 0.0, 0.125, 0.875, 0.625, 0.875),

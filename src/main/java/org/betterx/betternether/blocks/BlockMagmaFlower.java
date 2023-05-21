@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.interfaces.SurvivesOnMagmaBlockOrSand;
 
 import net.minecraft.core.BlockPos;
@@ -10,7 +11,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockMagmaFlower extends BlockCommonPlant implements SurvivesOnMagmaBlockOrSand {
+public class BlockMagmaFlower extends BlockCommonPlant implements SurvivesOnMagmaBlockOrSand, AddMineableHoe {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 12, 15);
 
     public BlockMagmaFlower() {

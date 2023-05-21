@@ -1,6 +1,10 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
+import org.betterx.bclib.blocks.BaseButtonBlock;
+import org.betterx.bclib.blocks.BasePressurePlateBlock;
+import org.betterx.bclib.blocks.BaseSlabBlock;
+import org.betterx.bclib.blocks.BaseStairsBlock;
 import org.betterx.bclib.registry.BlockRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
@@ -21,7 +25,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MaterialColor;
@@ -80,12 +83,11 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
     public static final Block CINCINNASITE_BUTTON = registerBlock(
             "cincinnasite_button",
-            new org.betterx.bclib.blocks.BaseWoodenButtonBlock(CINCINNASITE_FORGED, BlockSetType.GOLD)
+            new BaseButtonBlock.Metal(CINCINNASITE_FORGED, BlockSetType.GOLD)
     );
     public static final Block CINCINNASITE_PLATE = registerPlate(
             "cincinnasite_plate",
             CINCINNASITE_FORGED,
-            Sensitivity.MOBS,
             BlockSetType.GOLD
     );
     public static final Block CINCINNASITE_LANTERN = registerBlock(
@@ -459,18 +461,16 @@ public class NetherBlocks extends BlockRegistry {
     // Vines //
     public static final Block BLACK_VINE = registerBlock(
             "black_vine",
-            new BlockBlackVine(),
-            BlockTags.CLIMBABLE
+            new BlockBlackVine()
+
     );
     public static final Block BLOOMING_VINE = registerBlock(
             "blooming_vine",
-            new BlockBlackVine(),
-            BlockTags.CLIMBABLE
+            new BlockBlackVine()
     );
     public static final Block GOLDEN_VINE = registerBlock(
             "golden_vine",
-            new BlockGoldenVine(),
-            BlockTags.CLIMBABLE
+            new BlockGoldenVine()
     );
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine());
@@ -695,8 +695,7 @@ public class NetherBlocks extends BlockRegistry {
     );
     public static final Block ANCHOR_TREE_VINE = registerBlockNI(
             "anchor_tree_vine",
-            new BlockAnchorTreeVine(),
-            BlockTags.CLIMBABLE
+            new BlockAnchorTreeVine()
     );
     // Nether Sakura
     public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
@@ -723,8 +722,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
     public static final Block EYE_VINE = registerBlockNI(
             "eye_vine",
-            new BlockEyeVine(),
-            BlockTags.CLIMBABLE
+            new BlockEyeVine()
     );
 
     public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
@@ -812,7 +810,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static Block registerStairs(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
-        Block stairs = new org.betterx.bclib.blocks.BaseStairsBlock(source, fireproof);
+        Block stairs = new BaseStairsBlock.Wood(source, fireproof);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, stairs);
             addFuel(source, stairs);
@@ -825,7 +823,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static Block registerSlab(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
-        Block slab = new org.betterx.bclib.blocks.BaseSlabBlock(source, fireproof);
+        Block slab = new BaseSlabBlock.Wood(source, fireproof);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, slab);
             addFuel(source, slab);
@@ -848,7 +846,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static Block registerButton(String name, Block source, BlockSetType type) {
-        Block button = new org.betterx.bclib.blocks.BaseWoodenButtonBlock(source, type);
+        Block button = BaseButtonBlock.from(source, type);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, button);
             addFuel(source, button);
@@ -858,17 +856,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static Block registerPlate(String name, Block source, BlockSetType type) {
-        Block plate = new org.betterx.bclib.blocks.BasePressurePlateBlock(Sensitivity.EVERYTHING, source, type);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, plate);
-            addFuel(source, plate);
-            RecipesHelper.makePlateRecipe(source, plate);
-        }
-        return plate;
-    }
-
-    private static Block registerPlate(String name, Block source, Sensitivity rule, BlockSetType type) {
-        Block plate = new org.betterx.bclib.blocks.BasePressurePlateBlock(rule, source, type);
+        Block plate = BasePressurePlateBlock.from(source, type);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, plate);
             addFuel(source, plate);

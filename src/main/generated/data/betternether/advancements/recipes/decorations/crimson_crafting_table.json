@@ -30,6 +30,5 @@
     "recipes": [
       "betternether:crimson_crafting_table"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -28,7 +29,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.function.ToIntFunction;
 
-public class BlockAnchorTreeVine extends BlockBaseNotFull {
+public class BlockAnchorTreeVine extends BlockBaseNotFull implements BehaviourClimableVine {
     protected static final VoxelShape SHAPE_SELECTION = Block.box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 

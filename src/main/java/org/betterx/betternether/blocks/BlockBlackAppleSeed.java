@@ -1,10 +1,12 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.world.level.material.MaterialColor;
 
-public class BlockBlackAppleSeed extends BlockCommonSapling {
+public class BlockBlackAppleSeed extends BlockCommonSapling implements AddMineableHoe, BehaviourCompostable {
     public BlockBlackAppleSeed() {
         super(NetherBlocks.BLACK_APPLE, MaterialColor.COLOR_ORANGE);
     }

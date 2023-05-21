@@ -1,6 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
 import org.betterx.bclib.blocks.FeatureHangingSaplingBlock;
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 
@@ -9,7 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack {
+public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack, AddMineableHoe, BehaviourCompostable {
     public BlockAnchorTreeSapling() {
         super((BlockState state) -> NetherTrees.ANCHOR_TREE_BRANCH);
     }

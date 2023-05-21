@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourVine;
 import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
@@ -45,7 +45,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, AddMineableShears {
+public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, BehaviourVine {
     private static final VoxelShape SELECTION = box(2, 0, 2, 14, 16, 14);
     public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 

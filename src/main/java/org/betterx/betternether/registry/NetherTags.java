@@ -1,7 +1,6 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v2.ComposterAPI;
-import org.betterx.bclib.blocks.SimpleLeavesBlock;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
@@ -15,7 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
@@ -59,10 +57,10 @@ public class NetherTags {
                 TagManager.BLOCKS.add(MineableTags.SHOVEL, block);
             }
 
-            if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
-                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
-                ComposterAPI.allowCompost(0.3f, item);
-            }
+//            if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
+//                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
+//                ComposterAPI.allowCompost(0.3f, item);
+//            }
 			/*else if (block instanceof BlockCincinnasitePedestal) {
 				TagHelper.addTag(PEDESTALS, block);
 			}*/

@@ -26,7 +26,7 @@ public class RoofSlab extends SimpleMaterialSlot<WoodenComplexMaterial> {
     protected @NotNull Block createBlock(
             WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
     ) {
-        return new BaseSlabBlock(parentMaterial.getBlock(NetherSlots.ROOF), false);
+        return new BaseSlabBlock.Wood(parentMaterial.getBlock(NetherSlots.ROOF), false);
     }
 
     @Override

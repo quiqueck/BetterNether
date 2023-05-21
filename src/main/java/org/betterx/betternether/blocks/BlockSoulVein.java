@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherSand;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -30,7 +31,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherSand {
+public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherSand, BehaviourClimableVine {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 1, 16);
 
     public BlockSoulVein() {
@@ -96,4 +97,5 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
         else
             return super.getDrops(state, builder);
     }
+
 }

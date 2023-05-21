@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -13,7 +15,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockInkBush extends BlockCommonPlant implements SurvivesOnNetherGround {
+public class BlockInkBush extends BlockCommonPlant implements SurvivesOnNetherGround, AddMineableHoe, BehaviourCompostable {
     public BlockInkBush() {
         super(MaterialColor.COLOR_BLACK);
     }

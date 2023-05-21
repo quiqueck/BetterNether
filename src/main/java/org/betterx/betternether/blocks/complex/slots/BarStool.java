@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
@@ -9,6 +10,7 @@ import org.betterx.betternether.blocks.BNBarStool;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -36,6 +38,11 @@ public class BarStool extends SimpleMaterialSlot<WoodenComplexMaterial> {
             WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
     ) {
         return new BNBarStool(parentMaterial.getBlock(WoodSlots.SLAB));
+    }
+
+    @Override
+    protected void modifyBlockEntry(WoodenComplexMaterial parentMaterial, @NotNull BlockEntry entry) {
+        entry.setBlockTags(BlockTags.MINEABLE_WITH_AXE);
     }
 
     @Override

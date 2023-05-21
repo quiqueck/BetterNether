@@ -826,7 +826,7 @@ public class NetherBlocks extends BlockRegistry {
                         .setGroup("nether" + "_bookshelf")
                         .setCategory(RecipeCategory.BUILDING_BLOCKS)
                         .build();
-
+        TagManager.BLOCKS.add(shelf, BlockTags.MINEABLE_WITH_AXE, CommonBlockTags.BOOKSHELVES);
         return shelf;
     }
 
@@ -840,6 +840,8 @@ public class NetherBlocks extends BlockRegistry {
                         .setGroup("nether" + "_composter")
                         .setCategory(RecipeCategory.DECORATIONS)
                         .build();
+
+        TagManager.BLOCKS.add(composter, BlockTags.MINEABLE_WITH_AXE);
         return composter;
     }
 
@@ -1009,7 +1011,11 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new org.betterx.bclib.blocks.BaseCraftingTableBlock(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            TagManager.BLOCKS.add(block, org.betterx.worlds.together.tag.v3.CommonBlockTags.WORKBENCHES);
+            TagManager.BLOCKS.add(
+                    block,
+                    BlockTags.MINEABLE_WITH_AXE,
+                    org.betterx.worlds.together.tag.v3.CommonBlockTags.WORKBENCHES
+            );
             TagManager.ITEMS.add(block.asItem(), org.betterx.worlds.together.tag.v3.CommonItemTags.WORKBENCHES);
 
             BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
@@ -1029,7 +1035,7 @@ public class NetherBlocks extends BlockRegistry {
         Block chest = new org.betterx.bclib.blocks.BaseChestBlock(planks);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, chest);
-            TagManager.BLOCKS.add(chest, CommonBlockTags.CHEST);
+            TagManager.BLOCKS.add(chest, BlockTags.MINEABLE_WITH_AXE, CommonBlockTags.CHEST);
             TagManager.ITEMS.add(chest, CommonItemTags.CHEST);
             addFuel(planks, chest);
             //RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
@@ -1061,7 +1067,12 @@ public class NetherBlocks extends BlockRegistry {
                             .build();
 
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
-            TagManager.BLOCKS.add(block, CommonBlockTags.WOODEN_BARREL, CommonBlockTags.BARREL);
+            TagManager.BLOCKS.add(
+                    block,
+                    BlockTags.MINEABLE_WITH_AXE,
+                    CommonBlockTags.WOODEN_BARREL,
+                    CommonBlockTags.BARREL
+            );
         }
 
         return block;
@@ -1071,7 +1082,7 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new BaseLadderBlock(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            TagManager.BLOCKS.add(block, BlockTags.CLIMBABLE);
+            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_AXE, BlockTags.CLIMBABLE);
 
             addFuel(source, block);
             //RecipesHelper.makeLadderRecipe(source, block);
@@ -1100,6 +1111,8 @@ public class NetherBlocks extends BlockRegistry {
                     block,
                     source
             );
+
+            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_AXE);
         }
 
         return block;
@@ -1115,6 +1128,7 @@ public class NetherBlocks extends BlockRegistry {
                     block,
                     source
             );
+            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_AXE);
         }
 
         return block;
@@ -1130,6 +1144,7 @@ public class NetherBlocks extends BlockRegistry {
                     block,
                     source
             );
+            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_AXE);
         }
 
         return block;

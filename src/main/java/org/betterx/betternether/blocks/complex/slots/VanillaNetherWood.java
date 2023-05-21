@@ -8,15 +8,15 @@ import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.MaterialColor;
 
 import org.jetbrains.annotations.NotNull;
 
 public class VanillaNetherWood extends VanillaFallback<VanillaNetherWood> {
     public VanillaNetherWood(
             String name,
-            MapColor woodColor,
-            MapColor planksColor
+            MaterialColor woodColor,
+            MaterialColor planksColor
     ) {
         super(name, woodColor, planksColor);
     }

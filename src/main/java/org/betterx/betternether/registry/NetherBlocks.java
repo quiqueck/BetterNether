@@ -653,14 +653,14 @@ public class NetherBlocks extends BlockRegistry {
 
     public static final VanillaNetherWood WARPED_WOOD = new VanillaNetherWood(
             "warped",
-            Blocks.WARPED_PLANKS.defaultMapColor(),
-            MapColor.WARPED_STEM
+            Blocks.WARPED_PLANKS.defaultMaterialColor(),
+            MaterialColor.WARPED_STEM
     ).init();
 
     public static final VanillaNetherWood CRIMSON_WOOD = new VanillaNetherWood(
             "crimson",
-            Blocks.CRIMSON_PLANKS.defaultMapColor(),
-            MapColor.CRIMSON_STEM
+            Blocks.CRIMSON_PLANKS.defaultMaterialColor(),
+            MaterialColor.CRIMSON_STEM
     ).init();
 
     public static final VanillaWood OAK_WOOD = VanillaWood.create("oak");

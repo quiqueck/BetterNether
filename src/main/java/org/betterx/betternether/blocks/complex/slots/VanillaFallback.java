@@ -7,15 +7,15 @@ import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.MaterialColor;
 
 import org.jetbrains.annotations.Nullable;
 
 public class VanillaFallback<T extends NetherWoodenMaterial<T>> extends NetherWoodenMaterial<T> {
     public VanillaFallback(
             String name,
-            MapColor woodColor,
-            MapColor planksColor
+            MaterialColor woodColor,
+            MaterialColor planksColor
     ) {
         super(name, woodColor, planksColor);
     }

@@ -5,13 +5,13 @@ import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.MaterialColor;
 
 public class VanillaWood extends VanillaFallback<VanillaWood> {
     public VanillaWood(
             String name,
-            MapColor woodColor,
-            MapColor planksColor
+            MaterialColor woodColor,
+            MaterialColor planksColor
     ) {
         super(name, woodColor, planksColor);
     }
@@ -27,7 +27,7 @@ public class VanillaWood extends VanillaFallback<VanillaWood> {
 
     public static VanillaWood create(String baseName) {
         Block plank = getVanillaBlock(baseName, WoodSlots.PLANKS.suffix);
-        return new VanillaWood(baseName, plank.defaultMapColor(), plank.defaultMapColor()).init();
+        return new VanillaWood(baseName, plank.defaultMaterialColor(), plank.defaultMaterialColor()).init();
     }
 }
 

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockRubeusCone extends BlockBaseNotFull {
+public class BlockRubeusCone extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape SHAPE = box(3, 3, 3, 13, 16, 13);
 
     public BlockRubeusCone() {

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -21,7 +22,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockWillowTorch extends BlockBaseNotFull {
+public class BlockWillowTorch extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape SHAPE_NORTH = Block.box(5, 0, 8, 11, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = Block.box(5, 0, 0, 11, 16, 8);
     private static final VoxelShape SHAPE_WEST = Block.box(8, 0, 5, 16, 16, 11);

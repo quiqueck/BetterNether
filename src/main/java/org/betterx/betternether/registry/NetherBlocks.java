@@ -609,8 +609,7 @@ public class NetherBlocks extends BlockRegistry {
     );
     public static final Block FARMLAND = registerBlock(
             "farmland",
-            new BlockFarmland(),
-            NetherTags.NETHER_FARMLAND
+            new BlockFarmland()
     );
     public static final BlockTerrain CEILING_MUSHROOMS = registerBlock(
             "ceiling_mushrooms",
@@ -941,7 +940,7 @@ public class NetherBlocks extends BlockRegistry {
                     source
             );
 
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_AXE);
+            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
         }
 
         return block;
@@ -957,7 +956,7 @@ public class NetherBlocks extends BlockRegistry {
                     block,
                     source
             );
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_AXE);
+            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
         }
 
         return block;
@@ -973,7 +972,7 @@ public class NetherBlocks extends BlockRegistry {
                     block,
                     source
             );
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_AXE);
+            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
         }
 
         return block;

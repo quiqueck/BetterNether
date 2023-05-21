@@ -9,6 +9,7 @@ import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.bclib.complexmaterials.set.wood.Bookshelf;
 import org.betterx.bclib.complexmaterials.set.wood.Planks;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
+import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockReedsBlock;
 import org.betterx.betternether.client.block.Patterns;
@@ -29,7 +30,7 @@ import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-class ReedBookshelfBlock extends BaseBookshelfBlock {
+class ReedBookshelfBlock extends BaseBookshelfBlock implements AddMineableAxe {
 
     public ReedBookshelfBlock(Block source) {
         super(source);

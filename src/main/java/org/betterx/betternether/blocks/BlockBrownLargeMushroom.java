@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.BNBlockProperties.BrownMushroomShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -24,7 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockBrownLargeMushroom extends BlockBaseNotFull {
+public class BlockBrownLargeMushroom extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape TOP_CENTER_SHAPE = box(0, 0.1, 0, 16, 16, 16);
     private static final VoxelShape TOP_EDGE_SHAPE = box(0, 8, 0, 16, 16, 16);
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);

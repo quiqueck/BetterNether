@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
+import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BNBlockProperties.JellyShape;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -37,7 +38,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockJellyfishMushroom extends BlockBaseNotFull {
+public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape TOP_SHAPE = box(1, 0, 1, 15, 16, 15);
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;

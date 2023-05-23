@@ -49,7 +49,7 @@ public class NetherTreesPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(6)
-            .onceEvery(5)
+            .onceEvery(7)
             .isEmptyAndOnNetherGround()
             .build();
 
@@ -111,7 +111,7 @@ public class NetherTreesPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(14)
-            .onceEvery(2)
+            .onceEvery(3)
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
             .build();
 
@@ -120,7 +120,7 @@ public class NetherTreesPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(14)
-            .onceEvery(2)
+            .onceEvery(3)
             .isEmptyAndOnNetherGround()
             .build();
 
@@ -129,7 +129,7 @@ public class NetherTreesPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(14)
-            .onceEvery(4)
+            .onceEvery(20)
             .isEmptyAndOnNetherGround()
             .build();
 
@@ -160,7 +160,7 @@ public class NetherTreesPlaced {
             .randomHeight4FromFloorCeil()
             .findSolidCeil(5)
             .isEmptyAndUnderNetherGround()
-            .onceEvery(3)
+            .onceEvery(5)
             .build();
 
     public static BCLFeature ANCHOR_TREE_BRANCH = NetherTrees
@@ -177,7 +177,7 @@ public class NetherTreesPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherCeiling(2)
-            .onceEvery(10)
+            .onceEvery(40)
             .isEmptyAndUnderNetherGround()
             .build();
 

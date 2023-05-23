@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
+import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
-import org.betterx.bclib.interfaces.behaviours.BehaviourCompostable;
 import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;

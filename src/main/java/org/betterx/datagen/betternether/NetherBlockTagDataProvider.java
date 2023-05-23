@@ -18,6 +18,6 @@ public class NetherBlockTagDataProvider extends TagDataProvider<Block> {
             FabricDataOutput output,
             CompletableFuture<HolderLookup.Provider> registriesFuture
     ) {
-        super(TagManager.BLOCKS, List.of("minecraft", "", BetterNether.MOD_ID, "c"), output, registriesFuture);
+        super(TagManager.BLOCKS, List.of("minecraft", BetterNether.MOD_ID, "c"), output, registriesFuture);
     }
 }

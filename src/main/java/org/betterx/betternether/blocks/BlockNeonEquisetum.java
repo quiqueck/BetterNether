@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
-import org.betterx.bclib.interfaces.behaviours.BehaviourCompostable;
 import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;

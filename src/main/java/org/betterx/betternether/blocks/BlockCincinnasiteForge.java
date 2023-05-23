@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.blockentities.BlockEntityForge;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -27,7 +28,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.function.ToIntFunction;
 
-public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
+public class BlockCincinnasiteForge extends AbstractFurnaceBlock implements BehaviourMetal {
     public BlockCincinnasiteForge() {
         super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK)
                                  .requiresCorrectToolForDrops()

@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks.materials;
 
-import org.betterx.bclib.complexmaterials.BehaviourBuilders;
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -12,7 +12,7 @@ public class Materials {
             .createTickingPlant()
             .sound(SoundType.CROP)
             .noOcclusion();
-    
+
     public static final BlockBehaviour.Properties NETHER_PLANT = BehaviourBuilders
             .createPlant()
             .sound(SoundType.CROP)

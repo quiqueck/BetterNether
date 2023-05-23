@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.blocks.BlockProperties;
 
 import net.minecraft.core.BlockPos;
@@ -22,7 +23,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import javax.annotation.Nullable;
 
-public class BlockStalactite extends BlockBaseNotFull {
+public class BlockStalactite extends BlockBaseNotFull implements BehaviourStone {
 
     public static final IntegerProperty SIZE = BlockProperties.SIZE;
     private static final VoxelShape[] SHAPES;

@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -28,7 +29,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike {
+public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike, BehaviourStone {
     public static final BooleanProperty IS_BLUE = BooleanProperty.create("blue");
     private BCLConfigureFeature<? extends Feature<?>, ?> vegetationFeature;
 

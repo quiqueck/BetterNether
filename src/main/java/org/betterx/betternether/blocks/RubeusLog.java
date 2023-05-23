@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 
-public class RubeusLog extends BaseStripableLogBlock implements AddMineableAxe {
+public class RubeusLog extends BaseStripableLogBlock.Wood implements AddMineableAxe {
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public RubeusLog(MapColor color, Block striped) {
-        super(color, striped);
+        super(color, striped, false);
         this.registerDefaultState(this.defaultBlockState()
                                       .setValue(AXIS, Direction.Axis.Y)
                                       .setValue(SHAPE, TripleShape.BOTTOM));

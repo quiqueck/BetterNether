@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourObsidian;
+import org.betterx.bclib.behaviours.interfaces.BehaviourObsidianPortalFrame;
 import org.betterx.bclib.blocks.BaseBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.advancements.BNCriterion;
@@ -17,18 +19,18 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.Iterator;
 
-public class BNObsidian extends BaseBlock {
+class BNObsidianBase extends BaseBlock implements BehaviourObsidian {
     final Block transformsTo;
 
-    public BNObsidian() {
+    public BNObsidianBase() {
         this(null);
     }
 
-    public BNObsidian(Block transformsTo) {
+    public BNObsidianBase(Block transformsTo) {
         this(FabricBlockSettings.copyOf(Blocks.OBSIDIAN), transformsTo);
     }
 
-    protected BNObsidian(Properties settings, Block transformsTo) {
+    protected BNObsidianBase(Properties settings, Block transformsTo) {
         super(settings);
         this.transformsTo = transformsTo;
 
@@ -51,6 +53,20 @@ public class BNObsidian extends BaseBlock {
                 }
             }
         }
+    }
+}
+
+public class BNObsidian extends BNObsidianBase implements BehaviourObsidianPortalFrame {
+    public BNObsidian() {
+        super(null);
+    }
+
+    public BNObsidian(Block transformsTo) {
+        super(transformsTo);
+    }
+
+    protected BNObsidian(Properties settings, Block transformsTo) {
+        super(settings, transformsTo);
     }
 
     public static void onLightningUpdate(Level level, BlockPos blockPos, Block transformsTo) {

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.betternether.blockentities.BlockEntityFurnace;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
@@ -31,7 +32,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class BlockNetherFurnace extends AbstractFurnaceBlock {
+public class BlockNetherFurnace extends AbstractFurnaceBlock implements BehaviourStone {
     public BlockNetherFurnace(Block source) {
         super(FabricBlockSettings.copyOf(source).requiresTool().lightLevel(getLuminance()));
     }

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -10,7 +11,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockCincinnasitePedestal extends BlockBaseNotFull {
+public class BlockCincinnasitePedestal extends BlockBaseNotFull implements BehaviourMetal {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 16, 14);
 
     public BlockCincinnasitePedestal() {

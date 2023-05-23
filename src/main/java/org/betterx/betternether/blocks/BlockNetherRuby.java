@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.interfaces.CustomItemProvider;
 
 import net.minecraft.resources.ResourceLocation;
@@ -9,7 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockNetherRuby extends BlockBase implements CustomItemProvider {
+public class BlockNetherRuby extends BlockBase implements CustomItemProvider, BehaviourStone {
     public BlockNetherRuby() {
         super(FabricBlockSettings.copyOf(Blocks.DIAMOND_BLOCK));
     }

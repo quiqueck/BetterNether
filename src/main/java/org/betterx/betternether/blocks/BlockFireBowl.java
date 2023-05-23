@@ -1,5 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourHelper;
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
+import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -29,11 +34,11 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.function.ToIntFunction;
 
-public class BlockFireBowl extends BlockBaseNotFull {
+public abstract class BlockFireBowl extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 12, 16);
     public static final BooleanProperty FIRE = BNBlockProperties.FIRE;
 
-    public BlockFireBowl(Block source) {
+    protected BlockFireBowl(Block source) {
         super(FabricBlockSettings.copyOf(source).noOcclusion().lightLevel(getLuminance()));
         this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
@@ -126,5 +131,30 @@ public class BlockFireBowl extends BlockBaseNotFull {
                         0.0D
                 );
         }
+    }
+
+    public static class Wood extends BlockFireBowl implements BehaviourWood {
+        public Wood(Block source) {
+            super(source);
+        }
+    }
+
+    public static class Stone extends BlockFireBowl implements BehaviourStone {
+        public Stone(Block source) {
+            super(source);
+        }
+    }
+
+    public static class Metal extends BlockFireBowl implements BehaviourMetal {
+        public Metal(Block source) {
+            super(source);
+        }
+    }
+
+
+    public static BlockFireBowl from(Block source) {
+        return BehaviourHelper.from(source,
+                Wood::new, Stone::new, Metal::new
+        );
     }
 }

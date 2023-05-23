@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourVine;
 import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.bclib.interfaces.behaviours.BehaviourVine;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;

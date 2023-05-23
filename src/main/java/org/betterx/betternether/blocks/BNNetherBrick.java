@@ -4,7 +4,7 @@ import net.minecraft.world.level.block.Blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BNNetherBrick extends BlockBase {
+public class BNNetherBrick extends BlockBase.Stone {
     public BNNetherBrick() {
         super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS));
     }

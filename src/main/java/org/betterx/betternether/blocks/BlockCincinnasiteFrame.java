@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -11,7 +12,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockCincinnasiteFrame extends BlockBaseNotFull {
+public class BlockCincinnasiteFrame extends BlockBaseNotFull implements BehaviourMetal {
     public BlockCincinnasiteFrame() {
         super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);

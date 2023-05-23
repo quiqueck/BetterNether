@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.betternether.blockentities.BNBrewingStandBlockEntity;
 import org.betterx.betternether.client.IRenderTypeable;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
@@ -23,7 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable {
+public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable, BehaviourStone {
     public BNBrewingStand() {
         super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
                                  .strength(0.5F, 0.5F)

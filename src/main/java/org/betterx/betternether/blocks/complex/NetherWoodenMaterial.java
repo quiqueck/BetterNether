@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.bclib.complexmaterials.BCLWoodTypeWrapper;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
 import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
@@ -25,6 +26,11 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
                 NetherBlocks.getBlockRegistry(),
                 NetherItems.getItemRegistry()
         );
+    }
+
+    @Override
+    protected BCLWoodTypeWrapper.Builder createWoodTypeBuilder() {
+        return super.createWoodTypeBuilder().setFlammable(false);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourSand;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
@@ -23,7 +24,7 @@ import net.fabricmc.api.Environment;
 
 import java.util.List;
 
-public class BlockVeinedSand extends BlockBase implements TagProvider {
+public class BlockVeinedSand extends BlockBase implements TagProvider, BehaviourSand {
     public BlockVeinedSand() {
         super(BlockBehaviour.Properties
                 .copy(Blocks.SAND)

@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.blocks.BaseLeavesBlock;
-import org.betterx.bclib.complexmaterials.BehaviourBuilders;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

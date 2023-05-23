@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
@@ -24,7 +25,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockGeyser extends BlockBaseNotFull {
+public class BlockGeyser extends BlockBaseNotFull implements BehaviourStone {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 4, 15);
 
     public BlockGeyser() {

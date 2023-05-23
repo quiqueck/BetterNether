@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
@@ -19,7 +20,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.List;
 
-public class BlockSoulSandstone extends BlockBase implements TagProvider {
+public class BlockSoulSandstone extends BlockBase implements TagProvider, BehaviourStone {
     public static final BooleanProperty UP = BooleanProperty.create("up");
 
     public BlockSoulSandstone() {

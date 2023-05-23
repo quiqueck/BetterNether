@@ -1,7 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
-import org.betterx.bclib.complexmaterials.BehaviourBuilders;
 import org.betterx.bclib.interfaces.CustomItemProvider;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
 
-public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemProvider {
+public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemProvider, BehaviourOre {
     public final boolean fireproof;
 
     public BlockOre(Item drop, int minCount, int maxCount, int experience, int miningLevel, boolean fireproof) {

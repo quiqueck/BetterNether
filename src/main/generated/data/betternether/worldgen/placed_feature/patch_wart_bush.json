@@ -2,6 +2,18 @@
   "feature": "betternether:patch_wart_bush",
   "placement": [
     {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 4
+        },
+        "min_inclusive": {
+          "above_bottom": 4
+        }
+      }
+    },
+    {
       "type": "minecraft:biome"
     },
     {

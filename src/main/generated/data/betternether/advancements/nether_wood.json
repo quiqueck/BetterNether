@@ -34,9 +34,9 @@
         "items": [
           {
             "items": [
+              "betternether:mushroom_fir_log",
               "betternether:mushroom_fir_bark",
-              "betternether:mushroom_fir_planks",
-              "betternether:mushroom_fir_log"
+              "betternether:mushroom_fir_planks"
             ]
           }
         ]
@@ -61,8 +61,8 @@
         "items": [
           {
             "items": [
-              "betternether:nether_reed_stem",
-              "betternether:nether_reed_planks"
+              "betternether:nether_reed_planks",
+              "betternether:nether_reed_stem"
             ]
           }
         ]
@@ -89,8 +89,8 @@
           {
             "items": [
               "betternether:rubeus_bark",
-              "betternether:rubeus_log",
-              "betternether:rubeus_planks"
+              "betternether:rubeus_planks",
+              "betternether:rubeus_log"
             ]
           }
         ]
@@ -130,8 +130,8 @@
         "items": [
           {
             "items": [
-              "betternether:wart_log",
               "betternether:wart_bark",
+              "betternether:wart_log",
               "betternether:wart_planks"
             ]
           }
@@ -144,9 +144,9 @@
         "items": [
           {
             "items": [
+              "betternether:willow_bark",
               "betternether:willow_planks",
-              "betternether:willow_log",
-              "betternether:willow_bark"
+              "betternether:willow_log"
             ]
           }
         ]

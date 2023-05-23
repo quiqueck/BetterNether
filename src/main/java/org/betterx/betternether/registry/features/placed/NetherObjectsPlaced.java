@@ -24,7 +24,6 @@ public class NetherObjectsPlaced {
             .BONES
             .place()
             .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .onlyInBiome()
             .vanillaNetherGround(3)
             .onceEvery(2)
             .build();
@@ -33,7 +32,6 @@ public class NetherObjectsPlaced {
             .JUNGLE_BONES
             .place()
             .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .onlyInBiome()
             .vanillaNetherGround(1)
             .onceEvery(4)
             .build();
@@ -41,7 +39,6 @@ public class NetherObjectsPlaced {
     public static final BCLFeature<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = NetherObjects
             .OBSIDIAN_CRYSTAL
             .place()
-            .onlyInBiome()
             .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
             .vanillaNetherGround(1)
             .onceEvery(2)

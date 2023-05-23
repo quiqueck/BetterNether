@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -22,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockSmallLantern extends BlockBaseNotFull {
+public abstract class BlockSmallLantern extends BlockBaseNotFull {
     private static final VoxelShape SHAPE_NORTH = box(5, 0, 8, 11, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = box(5, 0, 0, 11, 16, 8);
     private static final VoxelShape SHAPE_WEST = box(8, 0, 5, 16, 16, 11);
@@ -32,7 +33,7 @@ public class BlockSmallLantern extends BlockBaseNotFull {
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-    public BlockSmallLantern() {
+    protected BlockSmallLantern() {
         super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_LANTERN).noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
@@ -111,5 +112,9 @@ public class BlockSmallLantern extends BlockBaseNotFull {
             }
         }
         return null;
+    }
+
+    public static class Metal extends BlockSmallLantern implements BehaviourMetal {
+
     }
 }

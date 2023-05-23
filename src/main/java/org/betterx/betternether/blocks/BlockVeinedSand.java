@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourSand;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
@@ -24,7 +25,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.List;
 
-public class BlockVeinedSand extends BlockBase implements TagProvider {
+public class BlockVeinedSand extends BlockBase implements TagProvider, BehaviourSand {
     public BlockVeinedSand() {
         super(FabricBlockSettings.of(Material.SAND)
                                  .mapColor(MaterialColor.COLOR_BROWN)

@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.bclib.interfaces.BlockModelProvider;
 import org.betterx.bclib.interfaces.TagProvider;
@@ -26,7 +28,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProvider, TagProvider {
+public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProvider, TagProvider, BehaviourOre {
     private final int minCount;
     private final int maxCount;
 
@@ -72,6 +74,6 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
     @Override
     public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
         blockTags.add(CommonBlockTags.NETHERRACK);
-        blockTags.add(CommonBlockTags.ORES);
+        blockTags.add(CommonBlockTags.NETHER_ORES);
     }
 }

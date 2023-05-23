@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
 import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;

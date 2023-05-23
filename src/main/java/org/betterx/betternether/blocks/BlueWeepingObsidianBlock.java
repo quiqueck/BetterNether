@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlueWeepingObsidianBlock extends BNObsidian {
+public class BlueWeepingObsidianBlock extends BNObsidianBase {
     public BlueWeepingObsidianBlock() {
         super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN).luminance(14), null);
     }

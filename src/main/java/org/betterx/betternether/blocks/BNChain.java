@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.client.IRenderTypeable;
 
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +14,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import java.util.Collections;
 import java.util.List;
 
-public class BNChain extends ChainBlock implements IRenderTypeable {
+public class BNChain extends ChainBlock implements IRenderTypeable, BehaviourMetal {
     public BNChain() {
         super(FabricBlockSettings.copyOf(Blocks.CHAIN));
     }

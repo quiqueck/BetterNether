@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
@@ -26,7 +27,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyliumLike {
+public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyliumLike, BehaviourStone {
     protected BCLConfigureFeature<? extends Feature<?>, ?> vegetationFeature;
     public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
             SoundEvents.NETHERRACK_BREAK,

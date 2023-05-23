@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineablePickaxe;
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.blocks.BNBlockProperties.PottedPlantShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class BlockPottedPlant extends BlockBaseNotFull implements AddMineablePickaxe {
+public class BlockPottedPlant extends BlockBaseNotFull implements AddMineableHoe {
     public static final EnumProperty<PottedPlantShape> PLANT = BNBlockProperties.PLANT;
 
     public BlockPottedPlant() {

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.blocks.BNBlockProperties.CincinnasitPillarShape;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -13,7 +14,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockCincinnasitPillar extends BlockBase {
+public class BlockCincinnasitPillar extends BlockBase implements BehaviourMetal {
     public static final EnumProperty<CincinnasitPillarShape> SHAPE = BNBlockProperties.PILLAR_SHAPE;
 
     public BlockCincinnasitPillar() {

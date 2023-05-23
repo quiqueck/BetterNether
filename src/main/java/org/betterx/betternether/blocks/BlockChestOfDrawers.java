@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
-public class BlockChestOfDrawers extends BaseEntityBlock {
+public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMetal {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, Block.box(0, 0, 8, 16, 16, 16),
             Direction.SOUTH, Block.box(0, 0, 0, 16, 16, 8),

@@ -10,11 +10,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MaterialColor;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-public class RubeusBark extends BaseStripableBarkBlock implements AddMineableAxe {
+public class RubeusBark extends BaseStripableBarkBlock.Wood implements AddMineableAxe {
     public RubeusBark(MaterialColor color, Block striped) {
-        super(striped, FabricBlockSettings.copy(striped).color(color));
+        super(color, striped, false);
         this.registerDefaultState(this.defaultBlockState()
                                       .setValue(AXIS, Direction.Axis.Y)
                                       .setValue(RubeusLog.SHAPE, TripleShape.BOTTOM));

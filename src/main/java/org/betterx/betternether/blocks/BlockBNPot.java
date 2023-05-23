@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourHelper;
+import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
+import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
+import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
 import org.betterx.betternether.BlocksHelper;
 
 import net.minecraft.core.BlockPos;
@@ -19,10 +23,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockBNPot extends BlockBaseNotFull {
+public abstract class BlockBNPot extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(3, 0, 3, 13, 8, 13);
 
-    public BlockBNPot(Block material) {
+    protected BlockBNPot(Block material) {
         super(FabricBlockSettings.copy(material).noOcclusion());
     }
 
@@ -66,5 +70,29 @@ public class BlockBNPot extends BlockBaseNotFull {
             }
         }
         return InteractionResult.FAIL;
+    }
+
+    public static class Wood extends BlockBNPot implements BehaviourWood {
+        public Wood(Block material) {
+            super(material);
+        }
+    }
+
+    public static class Stone extends BlockBNPot implements BehaviourStone {
+        public Stone(Block material) {
+            super(material);
+        }
+    }
+
+    public static class Metal extends BlockBNPot implements BehaviourMetal {
+        public Metal(Block material) {
+            super(material);
+        }
+    }
+
+    public static BlockBNPot from(Block source) {
+        return BehaviourHelper.from(source,
+                Wood::new, Stone::new, Metal::new
+        );
     }
 }

@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.bclib.interfaces.CustomItemProvider;
 import org.betterx.bclib.interfaces.TagProvider;
@@ -18,7 +20,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.List;
 
-public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemProvider {
+public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemProvider, BehaviourOre {
     public final boolean fireproof;
 
     public BlockOre(Item drop, int minCount, int maxCount, int experience, int miningLevel, boolean fireproof) {

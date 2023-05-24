@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "taburet",
+  "key": {
+    "#": {
+      "item": "minecraft:bamboo_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "##",
+    "II"
+  ],
+  "result": {
+    "item": "betternether:bamboo_taburet"
+  },
+  "show_notification": true
+}

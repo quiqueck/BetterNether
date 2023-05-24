@@ -372,40 +372,22 @@
   },
   "requirements": [
     [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
       "betternether:old_warped_woods"
     ],
     [
-      "betternether:crimson_pinewood"
+      "betternether:nether_mushroom_forest"
     ],
     [
       "betternether:sulfuric_bone_reef"
     ],
     [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:old_fungiwoods"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:nether_swampland_terraces"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
+      "betternether:wart_forest_edge"
     ],
     [
       "betternether:nether_swampland"
@@ -414,28 +396,46 @@
       "betternether:bone_reef"
     ],
     [
-      "betternether:wart_forest_edge"
+      "betternether:poor_nether_grasslands"
     ],
     [
-      "betternether:old_swampland"
+      "betternether:crimson_glowing_woods"
     ],
     [
-      "betternether:upside_down_forest_cleared"
+      "betternether:old_fungiwoods"
     ],
     [
-      "betternether:nether_mushroom_forest_edge"
+      "betternether:flooded_deltas"
     ],
     [
-      "betternether:gravel_desert"
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:nether_swampland_terraces"
     ],
     [
       "betternether:soul_plain"
     ],
     [
-      "betternether:nether_mushroom_forest"
+      "betternether:gravel_desert"
     ],
     [
-      "betternether:wart_forest"
+      "betternether:magma_land"
+    ],
+    [
+      "betternether:old_swampland"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:nether_jungle"
     ]
   ],
   "rewards": {

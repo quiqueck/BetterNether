@@ -2,9 +2,6 @@
   "feature": "betternether:lava_pit",
   "placement": [
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "bclib:on_every_layer"
     },
     {

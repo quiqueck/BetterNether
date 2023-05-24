@@ -69,5 +69,6 @@
     "recipes": [
       "betternether:farmland"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

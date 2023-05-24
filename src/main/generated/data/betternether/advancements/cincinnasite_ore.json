@@ -33,5 +33,6 @@
     [
       "cincinnasite_ore"
     ]
-  ]
+  ],
+  "sends_telemetry_event": false
 }

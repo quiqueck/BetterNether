@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:rubeus_bar_stool"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

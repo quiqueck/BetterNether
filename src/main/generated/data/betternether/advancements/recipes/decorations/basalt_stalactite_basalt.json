@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:basalt_stalactite_basalt"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

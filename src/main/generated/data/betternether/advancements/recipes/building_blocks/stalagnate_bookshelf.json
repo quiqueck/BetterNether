@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:stalagnate_bookshelf"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

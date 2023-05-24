@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:basalt_bricks_basalt_bricks_stairs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

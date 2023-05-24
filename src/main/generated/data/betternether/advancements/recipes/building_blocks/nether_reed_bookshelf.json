@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:nether_reed_bookshelf"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

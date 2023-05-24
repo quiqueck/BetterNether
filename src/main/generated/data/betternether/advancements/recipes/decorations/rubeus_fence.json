@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:rubeus_fence"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

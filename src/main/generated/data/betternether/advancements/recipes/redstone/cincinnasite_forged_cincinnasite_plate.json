@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:cincinnasite_forged_cincinnasite_plate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

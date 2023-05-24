@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:black_apple_seed"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

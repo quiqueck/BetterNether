@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:soul_sandstone_smooth_soul_sandstone_chiseled"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

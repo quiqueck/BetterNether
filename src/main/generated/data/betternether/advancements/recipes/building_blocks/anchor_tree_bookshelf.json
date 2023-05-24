@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:anchor_tree_bookshelf"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

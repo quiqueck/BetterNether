@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:crimson_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

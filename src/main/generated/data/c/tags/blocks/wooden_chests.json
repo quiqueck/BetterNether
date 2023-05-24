@@ -2,12 +2,14 @@
   "replace": false,
   "values": [
     "betternether:anchor_tree_chest",
+    "betternether:crimson_chest",
     "betternether:mushroom_fir_chest",
     "betternether:nether_mushroom_chest",
     "betternether:nether_reed_chest",
     "betternether:nether_sakura_chest",
     "betternether:rubeus_chest",
     "betternether:stalagnate_chest",
+    "betternether:warped_chest",
     "betternether:wart_chest",
     "betternether:willow_chest"
   ]

@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:cincinnasite_axe"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

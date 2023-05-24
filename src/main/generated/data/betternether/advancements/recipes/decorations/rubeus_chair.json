@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:rubeus_chair"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

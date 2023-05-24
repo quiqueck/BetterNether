@@ -25,5 +25,6 @@
     [
       "brew_blue"
     ]
-  ]
+  ],
+  "sends_telemetry_event": false
 }

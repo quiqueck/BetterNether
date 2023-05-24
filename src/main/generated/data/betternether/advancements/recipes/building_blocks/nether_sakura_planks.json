@@ -45,5 +45,6 @@
     "recipes": [
       "betternether:nether_sakura_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

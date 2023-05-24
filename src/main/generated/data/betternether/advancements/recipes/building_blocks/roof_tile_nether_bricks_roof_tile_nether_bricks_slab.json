@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:roof_tile_nether_bricks_roof_tile_nether_bricks_slab"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

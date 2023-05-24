@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:blue_obsidian_tile_small_blue_obsidian_tile_stairs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

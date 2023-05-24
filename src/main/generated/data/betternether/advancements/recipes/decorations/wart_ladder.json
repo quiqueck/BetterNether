@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:wart_ladder"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

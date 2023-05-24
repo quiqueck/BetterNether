@@ -45,5 +45,6 @@
     "recipes": [
       "betternether:mushroom_fir_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

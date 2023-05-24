@@ -67,5 +67,6 @@
     "recipes": [
       "betternether:piston"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

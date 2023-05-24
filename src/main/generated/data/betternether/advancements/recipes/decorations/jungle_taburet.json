@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:jungle_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

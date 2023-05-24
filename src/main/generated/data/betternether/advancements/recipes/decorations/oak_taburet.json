@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:oak_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

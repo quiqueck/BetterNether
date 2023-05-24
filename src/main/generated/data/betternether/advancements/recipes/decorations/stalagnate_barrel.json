@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:stalagnate_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

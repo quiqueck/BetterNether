@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:acacia_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

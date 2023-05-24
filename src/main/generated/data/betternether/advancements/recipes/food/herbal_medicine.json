@@ -82,5 +82,6 @@
     "recipes": [
       "betternether:herbal_medicine"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

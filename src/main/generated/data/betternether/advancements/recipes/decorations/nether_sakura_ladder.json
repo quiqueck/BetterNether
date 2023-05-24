@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:nether_sakura_ladder"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

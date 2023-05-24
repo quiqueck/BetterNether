@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:chest_of_drawers"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

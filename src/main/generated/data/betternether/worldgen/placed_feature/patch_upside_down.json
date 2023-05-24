@@ -2,9 +2,6 @@
   "feature": "betternether:patch_upside_down",
   "placement": [
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:count",
       "count": 50
     },

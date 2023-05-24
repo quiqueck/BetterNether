@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:agave_medicine"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

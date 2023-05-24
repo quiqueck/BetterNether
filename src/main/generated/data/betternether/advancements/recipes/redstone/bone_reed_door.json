@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:bone_reed_door"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

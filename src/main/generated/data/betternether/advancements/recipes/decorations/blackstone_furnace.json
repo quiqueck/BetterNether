@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:blackstone_furnace"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:rubeus_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:black_dye_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

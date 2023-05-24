@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:stalagnate_boat"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

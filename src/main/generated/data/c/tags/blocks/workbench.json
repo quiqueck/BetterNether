@@ -2,14 +2,14 @@
   "replace": false,
   "values": [
     "betternether:anchor_tree_crafting_table",
-    "betternether:crafting_table_crimson",
-    "betternether:crafting_table_warped",
+    "betternether:crimson_crafting_table",
     "betternether:mushroom_fir_crafting_table",
     "betternether:nether_mushroom_crafting_table",
     "betternether:nether_reed_crafting_table",
     "betternether:nether_sakura_crafting_table",
     "betternether:rubeus_crafting_table",
     "betternether:stalagnate_crafting_table",
+    "betternether:warped_crafting_table",
     "betternether:wart_crafting_table",
     "betternether:willow_crafting_table"
   ]

@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:blackstone_stalactite_blackstone"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

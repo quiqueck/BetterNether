@@ -56,5 +56,6 @@
     "recipes": [
       "betternether:nether_brewing_stand"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

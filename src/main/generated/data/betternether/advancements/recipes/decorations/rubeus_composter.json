@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:rubeus_composter"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

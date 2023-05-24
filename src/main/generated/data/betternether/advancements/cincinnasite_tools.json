@@ -86,5 +86,6 @@
       "cincinnasite_sword",
       "cincinnasite_hoe"
     ]
-  ]
+  ],
+  "sends_telemetry_event": false
 }

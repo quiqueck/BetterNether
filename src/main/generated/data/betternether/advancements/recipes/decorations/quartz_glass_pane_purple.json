@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:quartz_glass_pane_purple"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

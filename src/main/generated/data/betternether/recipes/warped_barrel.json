@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "nether_barrels",
+  "group": "barrel",
   "key": {
     "#": {
       "item": "minecraft:warped_planks"

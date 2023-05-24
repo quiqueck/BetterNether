@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:crimson_chest"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -56,5 +56,6 @@
     "recipes": [
       "betternether:stalagnate_bowl_mushroom"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

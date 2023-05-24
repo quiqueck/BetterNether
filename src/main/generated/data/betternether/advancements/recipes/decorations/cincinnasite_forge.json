@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:cincinnasite_forge"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

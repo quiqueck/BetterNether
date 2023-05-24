@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:brick_pot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

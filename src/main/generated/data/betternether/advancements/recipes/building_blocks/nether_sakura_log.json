@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:nether_sakura_log"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

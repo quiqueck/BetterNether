@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:glowstone_stalactite_glowstone"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

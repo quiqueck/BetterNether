@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:cincinnasite_bricks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

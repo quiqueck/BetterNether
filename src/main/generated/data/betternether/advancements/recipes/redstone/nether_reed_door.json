@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:nether_reed_door"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

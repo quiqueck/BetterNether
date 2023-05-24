@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:spruce_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

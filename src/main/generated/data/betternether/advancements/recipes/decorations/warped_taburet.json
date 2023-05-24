@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:warped_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

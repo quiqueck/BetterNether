@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:hook_mushroom_cooked_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

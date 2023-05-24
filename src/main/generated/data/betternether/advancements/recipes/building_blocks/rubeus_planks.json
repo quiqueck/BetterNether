@@ -45,5 +45,6 @@
     "recipes": [
       "betternether:rubeus_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

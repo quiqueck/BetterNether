@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:quartz_glass_framed_brown"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

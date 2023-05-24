@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:quartz_glass_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

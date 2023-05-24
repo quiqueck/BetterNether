@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:willow_roof"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

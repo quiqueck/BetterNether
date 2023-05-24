@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:cincinnasite_pickaxe"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

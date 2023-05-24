@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:stalagnate_bowl_apple"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

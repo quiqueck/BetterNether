@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:willow_gate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

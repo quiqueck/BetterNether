@@ -41,5 +41,6 @@
     "recipes": [
       "betternether:willow_chest_boat"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

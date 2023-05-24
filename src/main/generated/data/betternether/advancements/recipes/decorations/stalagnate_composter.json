@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:stalagnate_composter"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:bn_glowstone_dust"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

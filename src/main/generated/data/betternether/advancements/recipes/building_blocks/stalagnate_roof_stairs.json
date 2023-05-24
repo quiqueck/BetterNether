@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:stalagnate_roof_stairs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

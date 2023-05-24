@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:basalt_furnace"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

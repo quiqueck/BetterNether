@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:acacia_bar_stool"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

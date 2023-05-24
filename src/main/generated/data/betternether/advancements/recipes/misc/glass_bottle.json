@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:glass_bottle"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

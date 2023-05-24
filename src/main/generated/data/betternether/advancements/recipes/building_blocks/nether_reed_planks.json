@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:nether_reed_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

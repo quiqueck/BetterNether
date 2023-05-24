@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:gray_dye"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

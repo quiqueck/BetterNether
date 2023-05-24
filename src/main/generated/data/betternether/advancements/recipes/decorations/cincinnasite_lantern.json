@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:cincinnasite_lantern"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

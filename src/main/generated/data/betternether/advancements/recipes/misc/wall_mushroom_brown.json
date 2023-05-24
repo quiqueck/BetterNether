@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:wall_mushroom_brown"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

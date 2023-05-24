@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:nether_sakura_crafting_table"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:nether_reed_chair"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

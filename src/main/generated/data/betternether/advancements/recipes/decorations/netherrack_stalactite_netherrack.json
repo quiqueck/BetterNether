@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:netherrack_stalactite_netherrack"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

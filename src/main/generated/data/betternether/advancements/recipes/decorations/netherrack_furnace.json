@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:netherrack_furnace"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

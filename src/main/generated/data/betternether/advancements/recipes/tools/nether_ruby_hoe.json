@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:nether_ruby_hoe"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

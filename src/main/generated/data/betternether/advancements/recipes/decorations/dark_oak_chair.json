@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:dark_oak_chair"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

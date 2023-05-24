@@ -25,5 +25,6 @@
     [
       "use_forge"
     ]
-  ]
+  ],
+  "sends_telemetry_event": false
 }

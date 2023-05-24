@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:mushroom_fir_crafting_table"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

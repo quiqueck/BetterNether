@@ -41,5 +41,6 @@
     "recipes": [
       "betternether:anchor_tree_chest_boat"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

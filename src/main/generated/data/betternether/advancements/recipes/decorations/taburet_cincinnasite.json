@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:taburet_cincinnasite"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

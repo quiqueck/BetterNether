@@ -79,5 +79,6 @@
     [
       "nether_ruby_boots"
     ]
-  ]
+  ],
+  "sends_telemetry_event": false
 }

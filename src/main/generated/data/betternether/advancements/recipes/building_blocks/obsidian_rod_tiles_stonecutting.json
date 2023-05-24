@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:obsidian_rod_tiles_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

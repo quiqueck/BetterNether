@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:nether_brick_tile_small_nether_brick_tile_slab"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

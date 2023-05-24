@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:lapis_pile_to_lapis"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

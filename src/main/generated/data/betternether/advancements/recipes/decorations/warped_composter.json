@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:warped_composter"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

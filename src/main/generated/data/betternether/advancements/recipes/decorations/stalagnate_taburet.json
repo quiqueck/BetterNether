@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:stalagnate_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -138,5 +138,6 @@
     [
       "made_blue_rods"
     ]
-  ]
+  ],
+  "sends_telemetry_event": false
 }

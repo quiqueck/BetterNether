@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:willow_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

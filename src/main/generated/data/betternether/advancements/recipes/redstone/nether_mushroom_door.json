@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:nether_mushroom_door"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:rubeus_bark"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

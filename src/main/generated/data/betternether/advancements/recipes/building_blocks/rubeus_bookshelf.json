@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:rubeus_bookshelf"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

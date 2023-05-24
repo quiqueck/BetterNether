@@ -1,38 +1,6 @@
 {
   "parent": "betternether:city",
   "criteria": {
-    "bclib:the_orange": {
-      "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "location": {
-                "biome": "bclib:the_orange"
-              }
-            }
-          }
-        ]
-      },
-      "trigger": "minecraft:location"
-    },
-    "bclib:the_purple": {
-      "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "location": {
-                "biome": "bclib:the_purple"
-              }
-            }
-          }
-        ]
-      },
-      "trigger": "minecraft:location"
-    },
     "betternether:bone_reef": {
       "conditions": {
         "player": [
@@ -404,22 +372,61 @@
   },
   "requirements": [
     [
-      "betternether:nether_swampland_terraces"
+      "betternether:old_warped_woods"
     ],
     [
-      "betternether:old_fungiwoods"
-    ],
-    [
-      "betternether:bone_reef"
+      "betternether:crimson_pinewood"
     ],
     [
       "betternether:sulfuric_bone_reef"
     ],
     [
+      "betternether:magma_land"
+    ],
+    [
+      "betternether:old_fungiwoods"
+    ],
+    [
       "betternether:nether_jungle"
     ],
     [
-      "betternether:crimson_pinewood"
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:nether_swampland_terraces"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:nether_swampland"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:old_swampland"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:gravel_desert"
     ],
     [
       "betternether:soul_plain"
@@ -428,55 +435,11 @@
       "betternether:nether_mushroom_forest"
     ],
     [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:old_warped_woods"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
       "betternether:wart_forest"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:nether_swampland"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
-      "bclib:the_orange"
-    ],
-    [
-      "bclib:the_purple"
-    ],
-    [
-      "betternether:gravel_desert"
-    ],
-    [
-      "betternether:upside_down_forest_cleared"
-    ],
-    [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:old_swampland"
     ]
   ],
   "rewards": {
     "experience": 500
-  }
+  },
+  "sends_telemetry_event": false
 }

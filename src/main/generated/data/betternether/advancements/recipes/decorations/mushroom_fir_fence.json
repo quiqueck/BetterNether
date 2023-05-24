@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:mushroom_fir_fence"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:willow_bark"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

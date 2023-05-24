@@ -41,5 +41,6 @@
     "recipes": [
       "betternether:shield"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

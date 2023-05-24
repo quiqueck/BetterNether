@@ -2,7 +2,16 @@
   "feature": "betternether:anchor_tree",
   "placement": [
     {
-      "type": "minecraft:biome"
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 4
+        },
+        "min_inclusive": {
+          "above_bottom": 4
+        }
+      }
     },
     {
       "type": "minecraft:count",
@@ -10,6 +19,9 @@
     },
     {
       "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:biome"
     },
     {
       "type": "bclib:under_every_layer",

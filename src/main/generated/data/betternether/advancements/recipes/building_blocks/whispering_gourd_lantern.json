@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:whispering_gourd_lantern"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

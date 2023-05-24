@@ -56,5 +56,6 @@
     "recipes": [
       "betternether:cincinnasite_fire_bowl_soul"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

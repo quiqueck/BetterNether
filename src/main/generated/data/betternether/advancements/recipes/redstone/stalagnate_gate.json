@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:stalagnate_gate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

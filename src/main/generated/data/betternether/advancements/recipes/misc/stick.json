@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:stick"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

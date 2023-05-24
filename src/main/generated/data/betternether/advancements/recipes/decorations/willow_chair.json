@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:willow_chair"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

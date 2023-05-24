@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:cincinnasite_wall"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

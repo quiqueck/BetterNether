@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:cincinnasite_shovel_diamond"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

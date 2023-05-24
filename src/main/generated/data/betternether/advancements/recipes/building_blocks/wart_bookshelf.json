@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:wart_bookshelf"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

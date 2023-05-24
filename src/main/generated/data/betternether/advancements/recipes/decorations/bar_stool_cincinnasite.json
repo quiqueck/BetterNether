@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:bar_stool_cincinnasite"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

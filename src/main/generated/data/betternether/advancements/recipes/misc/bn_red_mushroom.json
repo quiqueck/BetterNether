@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:bn_red_mushroom"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:rail"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

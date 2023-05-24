@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:wart_taburet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -86,5 +86,6 @@
       "nether_ruby_sword",
       "nether_ruby_hoe"
     ]
-  ]
+  ],
+  "sends_telemetry_event": false
 }

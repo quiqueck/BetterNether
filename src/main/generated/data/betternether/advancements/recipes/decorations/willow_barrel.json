@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:willow_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

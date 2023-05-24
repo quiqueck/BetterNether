@@ -43,5 +43,6 @@
     "recipes": [
       "betternether:crimson_bookshelf"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

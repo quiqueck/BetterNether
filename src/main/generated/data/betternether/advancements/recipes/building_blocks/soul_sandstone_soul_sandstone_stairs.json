@@ -30,5 +30,6 @@
     "recipes": [
       "betternether:soul_sandstone_soul_sandstone_stairs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

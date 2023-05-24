@@ -625,7 +625,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final VanillaWood JUNGLE_WOOD = VanillaWood.create("jungle");
     public static final VanillaWood ACACIA_WOOD = VanillaWood.create("acacia");
     public static final VanillaWood DARK_OAK_WOOD = VanillaWood.create("dark_oak");
-
+    public static final VanillaWood MANGROVE_WOOD = VanillaWood.create("mangrove");
     // Storage
     public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
 

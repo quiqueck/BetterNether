@@ -57,6 +57,7 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
                 WoodSlots.DOOR,
                 WoodSlots.LADDER,
                 WoodSlots.SIGN,
+                WoodSlots.HANGING_SIGN,
                 WoodSlots.CHEST,
                 WoodSlots.BARREL,
                 WoodSlots.CRAFTING_TABLE,

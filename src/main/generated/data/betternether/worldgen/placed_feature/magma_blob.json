@@ -2,9 +2,6 @@
   "feature": "betternether:magma_block",
   "placement": [
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:count",
       "count": {
         "type": "minecraft:uniform",

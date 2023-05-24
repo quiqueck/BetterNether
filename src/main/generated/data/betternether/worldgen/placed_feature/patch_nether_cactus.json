@@ -21,9 +21,6 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "bclib:on_every_layer",
       "min": 4
     },

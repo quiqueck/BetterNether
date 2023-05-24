@@ -5,7 +5,6 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
-import org.betterx.worlds.together.tag.v3.MineableTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.tags.BlockTags;
@@ -44,18 +43,18 @@ public class NetherTags {
             Material material = ((BlockBehaviourPropertiesAccessor) properties).getMaterial();
             Item item = block.asItem();
 
-            if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
-                TagManager.BLOCKS.add(MineableTags.PICKAXE, block);
-            } else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
-                TagManager.BLOCKS.add(MineableTags.AXE, block);
-            } else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || material.equals(
-                    Material.WATER_PLANT)) {
-                TagManager.BLOCKS.add(MineableTags.HOE, block);
-                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
-                ComposterAPI.allowCompost(0.3f, item);
-            } else if (material.equals(Material.SAND)) {
-                TagManager.BLOCKS.add(MineableTags.SHOVEL, block);
-            }
+//            if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
+//                TagManager.BLOCKS.add(MineableTags.PICKAXE, block);
+//            } else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
+//                TagManager.BLOCKS.add(MineableTags.AXE, block);
+//            } else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || material.equals(
+//                    Material.WATER_PLANT)) {
+//                TagManager.BLOCKS.add(MineableTags.HOE, block);
+//                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
+//                ComposterAPI.allowCompost(0.3f, item);
+//            } else if (material.equals(Material.SAND)) {
+//                TagManager.BLOCKS.add(MineableTags.SHOVEL, block);
+//            }
 
 //            if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
 //                TagManager.BLOCKS.add(BlockTags.LEAVES, block);

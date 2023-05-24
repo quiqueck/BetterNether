@@ -20,7 +20,6 @@ public class NetherTerrainPlaced {
             .MAGMA_BLOBS
             .place(BN.id("magma_blob"))
             .decoration(GenerationStep.Decoration.LAKES)
-            .onlyInBiome()
             .countRange(1, 2)
             .spreadHorizontal(ClampedNormalInt.of(0, 2, -4, -4))
             .stencil()
@@ -35,7 +34,6 @@ public class NetherTerrainPlaced {
             .LAVA_PITS
             .place(BN.id("lava_pits_sparse"))
             .decoration(GenerationStep.Decoration.LAKES)
-            .onlyInBiome()
             .onEveryLayer()
             .stencil()
             .findSolidFloor(3)
@@ -49,7 +47,6 @@ public class NetherTerrainPlaced {
             .LAVA_PITS
             .place(BN.id("lava_pits_dense"))
             .decoration(GenerationStep.Decoration.LAKES)
-            .onlyInBiome()
             .onEveryLayer()
             .stencil()
             .findSolidFloor(3)
@@ -63,7 +60,6 @@ public class NetherTerrainPlaced {
             .FLOODED_LAVA_PIT
             .place()
             .decoration(GenerationStep.Decoration.LAKES)
-            .onlyInBiome()
             .all()
             .onEveryLayer()
             .offset(Direction.DOWN)
@@ -74,7 +70,6 @@ public class NetherTerrainPlaced {
             .SOUL_SAND
             .place(BN.id("replace_soul_sandstone"))
             .decoration(GenerationStep.Decoration.RAW_GENERATION)
-            .onlyInBiome()
             .all()
             .onEveryLayerMin4()
             .onlyInBiome()
@@ -86,7 +81,6 @@ public class NetherTerrainPlaced {
             .LAVA_PITS
             .place(BN.id("lava_swamp"))
             .decoration(GenerationStep.Decoration.LAKES)
-            .onlyInBiome()
             .all()
             .onEveryLayer()
             .offset(Direction.DOWN)
@@ -98,7 +92,6 @@ public class NetherTerrainPlaced {
             .LAVA_PITS
             .place(BN.id("lava_terrace"))
             .decoration(GenerationStep.Decoration.LAKES)
-            .onlyInBiome()
             .all()
             .onEveryLayer()
             .onlyInBiome()

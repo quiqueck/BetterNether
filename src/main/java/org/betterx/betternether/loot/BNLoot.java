@@ -3,6 +3,7 @@ package org.betterx.betternether.loot;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherTemplates;
 
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.Deserializers;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -36,6 +38,11 @@ public class BNLoot {
                                                     ))))
                                        .add(EmptyLootItem.emptyItem()
                                                          .setWeight(9)));
+                table.withPool(LootPool.lootPool()
+                                       .setRolls(ConstantValue.exactly(1.0f))
+                                       .add(EmptyLootItem.emptyItem().setWeight(9))
+                                       .add(LootItem.lootTableItem(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
+                                                    .setWeight(1)));
             } else if (BuiltInLootTables.BASTION_BRIDGE.equals(id) || BuiltInLootTables.BASTION_HOGLIN_STABLE.equals(id) || BuiltInLootTables.BASTION_TREASURE.equals(
                     id)) {
                 table.withPool(LootPool.lootPool()
@@ -61,6 +68,11 @@ public class BNLoot {
                                                     ))))
                                        .add(EmptyLootItem.emptyItem()
                                                          .setWeight(50)));
+                table.withPool(LootPool.lootPool()
+                                       .setRolls(ConstantValue.exactly(1.0f))
+                                       .add(EmptyLootItem.emptyItem().setWeight(9))
+                                       .add(LootItem.lootTableItem(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
+                                                    .setWeight(1)));
             } else if (BuiltInLootTables.BASTION_OTHER.equals(id)) {
                 table.withPool(LootPool.lootPool()
                                        .setRolls(UniformGenerator.between(1, 2))
@@ -91,6 +103,11 @@ public class BNLoot {
                                                     ))))
                                        .add(EmptyLootItem.emptyItem()
                                                          .setWeight(50)));
+                table.withPool(LootPool.lootPool()
+                                       .setRolls(ConstantValue.exactly(1.0f))
+                                       .add(EmptyLootItem.emptyItem().setWeight(9))
+                                       .add(LootItem.lootTableItem(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
+                                                    .setWeight(1)));
             } else if (BuiltInLootTables.PIGLIN_BARTERING.equals(id)) {
                 ArrayList<LootPoolEntryContainer> list = Lists.newArrayList();
                 list.add(LootItem

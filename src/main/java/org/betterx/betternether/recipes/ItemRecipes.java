@@ -5,6 +5,7 @@ import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.registry.NetherTemplates;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -179,6 +180,12 @@ public class ItemRecipes {
 
         registerShapeLess();
         registerSmelting();
+
+        BCLRecipeBuilder.copySmithingTemplate(
+                BetterNether.makeID("copy_bowl_upgrade"),
+                NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE,
+                NetherBlocks.CINCINNASITE_BLOCK
+        ).build();
     }
 
     private static void registerShapeLess() {

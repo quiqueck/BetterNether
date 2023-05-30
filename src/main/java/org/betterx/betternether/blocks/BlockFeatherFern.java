@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
+import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 
@@ -15,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockFeatherFern extends BlockCommonPlant implements SurvivesOnNetherGround, AddMineableHoe, BehaviourCompostable {
+public class BlockFeatherFern extends BlockCommonPlant implements SurvivesOnNetherGround, BehaviourPlant {
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
     public BlockFeatherFern() {

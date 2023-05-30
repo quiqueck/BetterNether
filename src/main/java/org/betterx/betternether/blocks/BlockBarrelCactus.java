@@ -1,8 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.BehaviourBuilders;
-import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
+import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.interfaces.SurvivesOnGravel;
@@ -28,7 +27,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableShears, AddMineableHoe, BehaviourCompostable, SurvivesOnGravel {
+public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableShears, BehaviourPlant, SurvivesOnGravel {
     private static final VoxelShape EMPTY = Block.box(0, 0, 0, 0, 0, 0);
     private static final VoxelShape[] SHAPES = new VoxelShape[]{
             Block.box(5, 0, 5, 11, 5, 11),

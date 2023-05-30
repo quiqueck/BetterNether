@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
+import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockMushroomFir extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockMushroomFir extends BlockBaseNotFull implements BehaviourWood {
     public static final EnumProperty<MushroomFirShape> SHAPE = EnumProperty.create("shape", MushroomFirShape.class);
 
     private static final VoxelShape BOTTOM_SHAPE = box(4, 0, 4, 12, 16, 12);

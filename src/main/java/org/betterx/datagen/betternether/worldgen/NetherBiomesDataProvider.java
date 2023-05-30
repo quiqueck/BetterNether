@@ -140,7 +140,7 @@ public class NetherBiomesDataProvider extends TagDataProvider<Biome> {
     public static void bootstrap(BootstapContext<Biome> ctx) {
         BCLBiomeBuilder.registerUnbound(ctx);
         NetherRegistrySupplier.INSTANCE.MAIN_LOCK.release();
-        BetterNether.LOGGER.info("Registered BCLBiomes:" + BCLBiomeRegistry.BUILTIN_BCL_BIOMES.size());
+        BetterNether.LOGGER.info("Registered BCLBiomes: " + BCLBiomeRegistry.BUILTIN_BCL_BIOMES.size() + ", " + BCLBiomeRegistry.registryOrNull());
     }
 
     public static void ensureStaticallyLoaded() {

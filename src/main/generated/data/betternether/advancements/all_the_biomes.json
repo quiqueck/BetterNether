@@ -375,67 +375,67 @@
       "betternether:nether_swampland_terraces"
     ],
     [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:nether_swampland"
-    ],
-    [
-      "betternether:wart_forest"
-    ],
-    [
       "betternether:sulfuric_bone_reef"
-    ],
-    [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:gravel_desert"
-    ],
-    [
-      "betternether:bone_reef"
     ],
     [
       "betternether:nether_mushroom_forest"
     ],
     [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:upside_down_forest_cleared"
+      "betternether:gravel_desert"
     ],
     [
       "betternether:old_fungiwoods"
     ],
     [
-      "betternether:old_warped_woods"
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
     ],
     [
       "betternether:old_swampland"
     ],
     [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:nether_swampland"
+    ],
+    [
+      "betternether:old_warped_woods"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
       "betternether:soul_plain"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:nether_jungle"
+    ],
+    [
+      "betternether:magma_land"
     ]
   ],
   "rewards": {

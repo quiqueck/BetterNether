@@ -2,6 +2,7 @@ package org.betterx.datagen.betternether.worldgen;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.api.v3.datagen.TagDataProvider;
 import org.betterx.betternether.BetterNether;
@@ -9,6 +10,7 @@ import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.*;
+import org.betterx.datagen.betternether.NetherRegistrySupplier;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.core.HolderLookup;
@@ -137,8 +139,18 @@ public class NetherBiomesDataProvider extends TagDataProvider<Biome> {
 
     public static void bootstrap(BootstapContext<Biome> ctx) {
         BCLBiomeBuilder.registerUnbound(ctx);
+        NetherRegistrySupplier.INSTANCE.MAIN_LOCK.release();
+        BetterNether.LOGGER.info("Registered BCLBiomes:" + BCLBiomeRegistry.BUILTIN_BCL_BIOMES.size());
     }
 
     public static void ensureStaticallyLoaded() {
+    }
+
+    static {
+        try {
+            NetherRegistrySupplier.INSTANCE.MAIN_LOCK.acquire();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

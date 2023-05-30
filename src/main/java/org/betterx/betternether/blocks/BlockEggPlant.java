@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
+import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.NetherEntities;
@@ -39,7 +38,7 @@ import net.fabricmc.api.Environment;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherGround, AddMineableHoe, BehaviourCompostable {
+public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherGround, BehaviourPlant {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 8, 16);
     public static final BooleanProperty DESTRUCTED = BNBlockProperties.DESTRUCTED;
 

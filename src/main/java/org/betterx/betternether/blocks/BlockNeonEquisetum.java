@@ -1,9 +1,8 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
+import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -45,7 +44,7 @@ import com.google.common.collect.Lists;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack, AddMineableHoe, BehaviourCompostable {
+public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack, BehaviourPlant {
     protected static final VoxelShape SHAPE_SELECTION = box(2, 0, 2, 14, 16, 14);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 

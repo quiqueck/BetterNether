@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 
@@ -9,7 +10,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 
-public class BlockHookMushroom extends BaseBlockMold implements SurvivesOnNetherrack {
+public class BlockHookMushroom extends BaseBlockMold implements SurvivesOnNetherrack, BehaviourPlant {
     public BlockHookMushroom() {
         super(Materials.makeGrass(MaterialColor.COLOR_PINK)
                        .lightLevel(s -> 13)

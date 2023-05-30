@@ -1,8 +1,7 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
+import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
@@ -17,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 
-public class BlockWillowSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherGround, AddMineableHoe, BehaviourCompostable {
+public class BlockWillowSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherGround, BehaviourSapling {
     public BlockWillowSapling() {
 //        super((BlockState state) -> MHelper.RANDOM.nextInt(32) == 0
 //                ? NetherTrees.OLD_WILLOW_TREE

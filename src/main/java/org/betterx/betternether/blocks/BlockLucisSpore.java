@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourSeed;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -29,7 +30,7 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlock, BehaviourSeed {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, box(4, 4, 8, 12, 12, 16),
             Direction.SOUTH, box(4, 4, 0, 12, 12, 8),

@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
+import org.betterx.bclib.behaviours.interfaces.BehaviourSeed;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.world.features.DeferedSeedBlock;
 
@@ -22,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBlock, BehaviourSeed {
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
     private final BCLConfigureFeature feature;
 

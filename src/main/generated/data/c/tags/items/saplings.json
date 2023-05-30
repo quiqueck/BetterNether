@@ -2,10 +2,14 @@
   "replace": false,
   "values": [
     "betternether:anchor_tree_sapling",
+    "betternether:giant_mold_sapling",
+    "betternether:jellyfish_mushroom_sapling",
     "betternether:mushroom_fir_sapling",
     "betternether:nether_sakura_sapling",
     "betternether:rubeus_sapling",
+    "betternether:soul_lily_sapling",
     "betternether:stalagnate_seed",
+    "betternether:wart_seed",
     "betternether:willow_sapling"
   ]
 }

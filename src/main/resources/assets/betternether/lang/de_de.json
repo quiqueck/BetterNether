@@ -691,5 +691,10 @@
   "advancements.betternether.cincinnasite_diamond_tools.title": "Bling",
   "advancements.betternether.cincinnasite_diamond_tools.description": "Überziehe alle deine Cincinnasit-Werkzeuge mit Diamanten",
   "advancements.betternether.cincinnasite_forge.title": "Verschmiedet Nochmal",
-  "advancements.betternether.cincinnasite_forge.description": "Benutze eine Schmiede, um etwas zu schmelzen"
+  "advancements.betternether.cincinnasite_forge.description": "Benutze eine Schmiede, um etwas zu schmelzen",
+  "item.betternether.smithing_template.bowl_upgrade.applies_to": "Cincinnasit Feuerschale",
+  "item.betternether.smithing_template.bowl_upgrade.ingredients": "Netheritbarren",
+  "item.betternether.smithing_template.bowl_upgrade.base_slot_description": "Verwende eine Cincinnasit Feuerschale",
+  "item.betternether.smithing_template.bowl_upgrade.additions_slot_description": "Verwende einen Netheritbarren",
+  "upgrade.betternether.bowl_upgrade": "Netherit Feuerschalen-Upgrade"
 }

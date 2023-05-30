@@ -4,6 +4,7 @@ import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.registry.NetherTemplates;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.Items;
@@ -393,6 +394,7 @@ public class BlockRecipes {
                 .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FIRE_BOWL)
                 .setAddition(Items.NETHERITE_INGOT)
                 .setCategory(RecipeCategory.DECORATIONS)
+                .setTemplate(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
                 .build();
 
         BCLRecipeBuilder
@@ -400,6 +402,7 @@ public class BlockRecipes {
                 .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FIRE_BOWL_SOUL)
                 .setAddition(Items.NETHERITE_INGOT)
                 .setCategory(RecipeCategory.DECORATIONS)
+                .setTemplate(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
                 .build();
     }
 

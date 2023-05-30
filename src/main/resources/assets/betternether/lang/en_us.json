@@ -691,5 +691,10 @@
   "advancements.betternether.cincinnasite_diamond_tools.title": "Bling",
   "advancements.betternether.cincinnasite_diamond_tools.description": "Cover all your cincinnasite tools in Diamonds",
   "advancements.betternether.cincinnasite_forge.title": "Forgified",
-  "advancements.betternether.cincinnasite_forge.description": "Use a forge to smelt something"
+  "advancements.betternether.cincinnasite_forge.description": "Use a forge to smelt something",
+  "item.betternether.smithing_template.bowl_upgrade.applies_to": "Cincinnasite Fire Bowls",
+  "item.betternether.smithing_template.bowl_upgrade.ingredients": "Netherite Ingots",
+  "item.betternether.smithing_template.bowl_upgrade.base_slot_description": "Add Cincinnasite Fire Bowl",
+  "item.betternether.smithing_template.bowl_upgrade.additions_slot_description": "Add Netherite Ingot",
+  "upgrade.betternether.bowl_upgrade": "Netherite Fire Bowl Upgrade"
 }

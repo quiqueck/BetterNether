@@ -41,6 +41,7 @@ public class BetterNether implements ModInitializer {
         NetherBlocks.register();
         BlockEntitiesRegistry.register();
         NetherItems.register();
+        NetherTemplates.ensureStaticallyLoaded();
         NetherEntities.register();
         BNWorldGenerator.onModInit();
         NetherPoiTypes.register();

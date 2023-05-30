@@ -696,5 +696,14 @@
   "item.betternether.smithing_template.bowl_upgrade.ingredients": "Netherite Ingots",
   "item.betternether.smithing_template.bowl_upgrade.base_slot_description": "Add Cincinnasite Fire Bowl",
   "item.betternether.smithing_template.bowl_upgrade.additions_slot_description": "Add Netherite Ingot",
-  "upgrade.betternether.bowl_upgrade": "Netherite Fire Bowl Upgrade"
+  "upgrade.betternether.bowl_upgrade": "Netherite Fire Bowl Upgrade",
+  "block.betternether.nether_reed_hanging_sign": "Nether Reed Hanging Sign",
+  "block.betternether.stalagnate_hanging_sign": "Stalagnate Hanging Sign",
+  "block.betternether.willow_hanging_sign": "Willow Hanging Sign",
+  "block.betternether.wart_hanging_sign": "Wart Hanging Sign",
+  "block.betternether.rubeus_hanging_sign": "Rubeus Hanging Sign",
+  "block.betternether.mushroom_fir_hanging_sign": "Mushroom Fir Hanging Sign",
+  "block.betternether.nether_mushroom_hanging_sign": "Mushroom Hanging Sign",
+  "block.betternether.anchor_tree_hanging_sign": "Anchor Tree Hanging Sign",
+  "block.betternether.nether_sakura_hanging_sign": "Nether Sakura Hanging Sign"
 }

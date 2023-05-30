@@ -372,52 +372,16 @@
   },
   "requirements": [
     [
-      "betternether:upside_down_forest"
+      "betternether:wart_forest_edge"
     ],
     [
       "betternether:old_fungiwoods"
     ],
     [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:wart_forest"
-    ],
-    [
-      "betternether:upside_down_forest_cleared"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
       "betternether:old_warped_woods"
     ],
     [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:old_swampland"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:nether_swampland"
-    ],
-    [
-      "betternether:gravel_desert"
-    ],
-    [
-      "betternether:bone_reef"
+      "betternether:crimson_glowing_woods"
     ],
     [
       "betternether:soul_plain"
@@ -426,16 +390,52 @@
       "betternether:nether_mushroom_forest"
     ],
     [
+      "betternether:nether_jungle"
+    ],
+    [
+      "betternether:nether_swampland"
+    ],
+    [
       "betternether:nether_swampland_terraces"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:magma_land"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:gravel_desert"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:old_swampland"
     ],
     [
       "betternether:sulfuric_bone_reef"
     ],
     [
-      "betternether:crimson_glowing_woods"
+      "betternether:bone_reef"
     ],
     [
-      "betternether:nether_grasslands"
+      "betternether:crimson_pinewood"
     ]
   ],
   "rewards": {

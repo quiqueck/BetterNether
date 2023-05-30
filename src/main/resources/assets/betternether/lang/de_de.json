@@ -692,5 +692,19 @@
   "advancements.betternether.cincinnasite_diamond_tools.title": "Bling",
   "advancements.betternether.cincinnasite_diamond_tools.description": "Überziehe alle deine Cincinnasit-Werkzeuge mit Diamanten",
   "advancements.betternether.cincinnasite_forge.title": "Verschmiedet Nochmal",
-  "advancements.betternether.cincinnasite_forge.description": "Benutze eine Schmiede, um etwas zu schmelzen"
+  "advancements.betternether.cincinnasite_forge.description": "Benutze eine Schmiede, um etwas zu schmelzen",
+  "item.betternether.smithing_template.bowl_upgrade.applies_to": "Cincinnasit Feuerschale",
+  "item.betternether.smithing_template.bowl_upgrade.ingredients": "Netheritbarren",
+  "item.betternether.smithing_template.bowl_upgrade.base_slot_description": "Verwende eine Cincinnasit Feuerschale",
+  "item.betternether.smithing_template.bowl_upgrade.additions_slot_description": "Verwende einen Netheritbarren",
+  "upgrade.betternether.bowl_upgrade": "Netherit Feuerschalen-Upgrade",
+  "block.betternether.nether_reed_hanging_sign": "Hängendes Schilfschild",
+  "block.betternether.stalagnate_hanging_sign": "Hängendes Stalagnatschild",
+  "block.betternether.willow_hanging_sign": "Hängendes Weidenschild",
+  "block.betternether.wart_hanging_sign": "Hängendes Warzenschild",
+  "block.betternether.rubeus_hanging_sign": "Hängendes Rubeusschild",
+  "block.betternether.mushroom_fir_hanging_sign": "Hängendes Pilztannenschild",
+  "block.betternether.nether_mushroom_hanging_sign": "Hängendes Pilzschild",
+  "block.betternether.anchor_tree_hanging_sign": "Hängendes Ankerbaumschild",
+  "block.betternether.nether_sakura_hanging_sign": "Hängendes Nether Sakuraschild"
 }

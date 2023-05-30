@@ -12,6 +12,7 @@ import org.betterx.datagen.betternether.worldgen.StructureDataProvider;
 import org.betterx.worlds.together.surfaceRules.AssignedSurfaceRule;
 import org.betterx.worlds.together.surfaceRules.SurfaceRuleRegistry;
 
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -71,5 +72,11 @@ public class NetherRegistrySupplier extends RegistrySupplier {
                         FlatLevelPresetsDataProvider::bootstrap
                 )
         );
+    }
+
+
+    @Override
+    public void bootstrapRegistries(RegistrySetBuilder registryBuilder) {
+        super.bootstrapRegistries(registryBuilder);
     }
 }

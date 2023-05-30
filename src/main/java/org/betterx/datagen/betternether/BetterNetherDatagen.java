@@ -18,21 +18,19 @@ public class BetterNetherDatagen implements DataGeneratorEntrypoint {
         NetherRecipeDataProvider.buildRecipes();
 
         final FabricDataGenerator.Pack pack = dataGenerator.createPack();
-        NetherRegistrySupplier.INSTANCE.addProviderWithLock(pack, NetherBiomesDataProvider::new);
-        NetherRegistrySupplier.INSTANCE.addProviderWithLock(pack, NetherRegistriesDataProvider::new);
-        NetherRegistrySupplier.INSTANCE.addProviderWithLock(pack, NetherRecipeDataProvider::new);
-        NetherRegistrySupplier.INSTANCE.addProviderWithLock(pack, NetherAdvancementDataProvider::new);
-        NetherRegistrySupplier.INSTANCE.addProviderWithLock(pack, NetherBlockTagDataProvider::new);
-        NetherRegistrySupplier.INSTANCE.addProviderWithLock(pack, NetherItemTagDataProvider::new);
+        pack.addProvider(NetherBiomesDataProvider::new);
+        pack.addProvider(NetherRegistriesDataProvider::new);
+        pack.addProvider(NetherRecipeDataProvider::new);
+        pack.addProvider(NetherAdvancementDataProvider::new);
+        pack.addProvider(NetherBlockTagDataProvider::new);
+        pack.addProvider(NetherItemTagDataProvider::new);
     }
 
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
+        NetherBiomesDataProvider.ensureStaticallyLoaded();
+        registryBuilder.add(Registries.BIOME, NetherBiomesDataProvider::bootstrap);
         NetherRegistrySupplier.INSTANCE.bootstrapRegistries(registryBuilder);
-        NetherRegistrySupplier.INSTANCE.addWithLock(
-                registryBuilder,
-                Registries.BIOME,
-                NetherBiomesDataProvider::bootstrap
-        );
     }
+
 }

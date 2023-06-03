@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.minecraft.sculk_catalyst": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:sculk_catalyst"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:flaming_ruby_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_block.minecraft.sculk_catalyst",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:flaming_ruby_boots"
+    ]
+  },
+  "sends_telemetry_event": false
+}

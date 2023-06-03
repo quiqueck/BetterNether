@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:sculk_catalyst"
+  },
+  "base": {
+    "item": "betternether:nether_ruby_leggings"
+  },
+  "result": {
+    "item": "betternether:flaming_ruby_leggings"
+  },
+  "template": {
+    "item": "betternether:flaming_ruby_upgrade_smithing_template"
+  }
+}

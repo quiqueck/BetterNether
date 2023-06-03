@@ -2,6 +2,7 @@ package org.betterx.betternether.items.complex;
 
 import org.betterx.bclib.items.complex.EquipmentDescription;
 import org.betterx.bclib.items.complex.EquipmentSet;
+import org.betterx.bclib.items.complex.EquipmentSlot;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.items.*;
 import org.betterx.betternether.items.materials.BNToolMaterial;
@@ -20,6 +21,7 @@ public class DiamondSet extends EquipmentSet {
                 BetterNether.MOD_ID,
                 set.baseName,
                 NetherBlocks.NETHER_REED_STEM,
+                set,
                 BNToolMaterial.CINCINNASITE_DIAMOND.attackDamages,
                 BNToolMaterial.CINCINNASITE_DIAMOND.attackSpeeds
         );
@@ -33,8 +35,8 @@ public class DiamondSet extends EquipmentSet {
     }
 
     @Override
-    protected @NotNull ResourceLocation buildID(Map.Entry<String, EquipmentDescription<?>> desc) {
-        return new ResourceLocation(modID, baseName + "_" + desc.getKey() + "_diamond");
+    protected @NotNull ResourceLocation buildID(Map.Entry<EquipmentSlot, EquipmentDescription<?>> desc) {
+        return new ResourceLocation(modID, baseName + "_" + desc.getKey().name() + "_diamond");
     }
 
     public DiamondSet init() {

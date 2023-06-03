@@ -186,6 +186,18 @@ public class ItemRecipes {
                 NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE,
                 NetherBlocks.CINCINNASITE_BLOCK
         ).build();
+
+        BCLRecipeBuilder.copySmithingTemplate(
+                BetterNether.makeID("copy_flaming_ruby_upgrade"),
+                NetherTemplates.FLAMING_RUBY_TEMPLATE,
+                NetherItems.NETHER_RUBY
+        ).build();
+
+        BCLRecipeBuilder.copySmithingTemplate(
+                BetterNether.makeID("copy_cincinnasite_diamond_upgrade"),
+                NetherTemplates.CINCINNASITE_DIAMOND_TEMPLATE,
+                NetherItems.CINCINNASITE_INGOT
+        ).build();
     }
 
     private static void registerShapeLess() {

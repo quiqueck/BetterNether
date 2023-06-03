@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class NetherArmor extends BaseArmorItem implements InitialStackStateProvider {
@@ -19,17 +18,11 @@ public class NetherArmor extends BaseArmorItem implements InitialStackStateProvi
         super(material, type, NetherItems.defaultSettings().fireResistant());
     }
 
-    static final Map<Enchantment, Integer> DEFAULT_RUBY_ENCHANTS;
-
     @Override
-    public void initializeState(ItemStack stack) {
-        if (material == BNArmorMaterial.NETHER_RUBY) {
-            EnchantmentHelper.setEnchantments(DEFAULT_RUBY_ENCHANTS, stack);
+    public void putEnchantments(ItemStack stack, Map<Enchantment, Integer> defaultEnchants) {
+        if (material == BNArmorMaterial.FLAMING_RUBY) {
+            defaultEnchants.put(NetherEnchantments.RUBY_FIRE, 1);
+            EnchantmentHelper.setEnchantments(defaultEnchants, stack);
         }
-    }
-
-    static {
-        DEFAULT_RUBY_ENCHANTS = new HashMap<>();
-        DEFAULT_RUBY_ENCHANTS.put(NetherEnchantments.RUBY_FIRE, 1);
     }
 }

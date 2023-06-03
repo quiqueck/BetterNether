@@ -27,6 +27,7 @@ public class BNLoot {
     private static final Gson GSON = Deserializers.createLootTableSerializer().create();
 
     public static void register() {
+
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
             if (BuiltInLootTables.RUINED_PORTAL.equals(id) || BuiltInLootTables.NETHER_BRIDGE.equals(id)) {
                 table.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0, 4))
@@ -70,7 +71,7 @@ public class BNLoot {
                                                          .setWeight(50)));
                 table.withPool(LootPool.lootPool()
                                        .setRolls(ConstantValue.exactly(1.0f))
-                                       .add(EmptyLootItem.emptyItem().setWeight(9))
+                                       .add(EmptyLootItem.emptyItem().setWeight(99))
                                        .add(LootItem.lootTableItem(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
                                                     .setWeight(1)));
             } else if (BuiltInLootTables.BASTION_OTHER.equals(id)) {

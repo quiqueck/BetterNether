@@ -76,7 +76,6 @@ public class NetherItems extends ItemRegistry {
             BNArmorMaterial.CINCINNASITE,
             true
     ).init();
-    public static final DiamondSet CINCINNASITE_DIAMOND_SET = new DiamondSet(CINCINNASITE_SET).init();
 
 
     public static final NetherSet NETHER_RUBY_SET = new NetherSet(
@@ -86,6 +85,15 @@ public class NetherItems extends ItemRegistry {
             false
     ).init();
 
+    public static final DiamondSet CINCINNASITE_DIAMOND_SET = new DiamondSet(CINCINNASITE_SET).init();
+
+    public static final NetherSet FLAMING_RUBY_SET = new NetherSet(
+            "flaming_ruby",
+            NETHER_RUBY_SET,
+            BNToolMaterial.FLAMING_RUBY,
+            BNArmorMaterial.FLAMING_RUBY,
+            false
+    ).init();
     public static final Item CINCINNASITE_HAMMER = registerItem(
             "cincinnasite_hammer",
             VanillaHammersIntegration.makeHammer(

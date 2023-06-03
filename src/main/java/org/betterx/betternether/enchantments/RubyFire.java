@@ -53,7 +53,7 @@ public class RubyFire extends Enchantment {
         final Item i = itemStack.getItem();
 
         if (i instanceof TieredItem t) {
-            return t.getTier() == BNToolMaterial.NETHER_RUBY;
+            return t.getTier() == BNToolMaterial.FLAMING_RUBY;
         }
 
         return i instanceof NetherArmor;

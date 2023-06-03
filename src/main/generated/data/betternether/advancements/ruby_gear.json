@@ -1,7 +1,7 @@
 {
   "parent": "betternether:ruby_tools",
   "criteria": {
-    "nether_ruby_boots": {
+    "nether_ruby_EquipmentSlot[name=boots, category=COMBAT]": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_ruby_chestplate": {
+    "nether_ruby_EquipmentSlot[name=chestplate, category=COMBAT]": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_ruby_helmet": {
+    "nether_ruby_EquipmentSlot[name=helmet, category=COMBAT]": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_ruby_leggings": {
+    "nether_ruby_EquipmentSlot[name=leggings, category=COMBAT]": {
       "conditions": {
         "items": [
           {
@@ -59,7 +59,7 @@
     "hidden": false,
     "icon": {
       "item": "betternether:nether_ruby_chestplate",
-      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:ruby_fire\",lvl:1s}]}"
+      "nbt": "{Damage:0}"
     },
     "show_toast": true,
     "title": {
@@ -68,16 +68,16 @@
   },
   "requirements": [
     [
-      "nether_ruby_helmet"
+      "nether_ruby_EquipmentSlot[name=helmet, category=COMBAT]"
     ],
     [
-      "nether_ruby_chestplate"
+      "nether_ruby_EquipmentSlot[name=chestplate, category=COMBAT]"
     ],
     [
-      "nether_ruby_leggings"
+      "nether_ruby_EquipmentSlot[name=leggings, category=COMBAT]"
     ],
     [
-      "nether_ruby_boots"
+      "nether_ruby_EquipmentSlot[name=boots, category=COMBAT]"
     ]
   ],
   "sends_telemetry_event": false

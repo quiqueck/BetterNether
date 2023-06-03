@@ -1,19 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cincinnasite_shovel": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "betternether:cincinnasite_shovel"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_diamond": {
+    "has_item.minecraft.diamond": {
       "conditions": {
         "items": [
           {
@@ -34,8 +22,7 @@
   },
   "requirements": [
     [
-      "has_cincinnasite_shovel",
-      "has_diamond",
+      "has_item.minecraft.diamond",
       "has_the_recipe"
     ]
   ],

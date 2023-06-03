@@ -1,21 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "group": "cincinnasite_sword_diamond",
-  "key": {
-    "#": {
-      "item": "minecraft:diamond"
-    },
-    "P": {
-      "item": "betternether:cincinnasite_sword"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:diamond"
   },
-  "pattern": [
-    " #",
-    "#P"
-  ],
+  "base": {
+    "item": "betternether:cincinnasite_sword"
+  },
   "result": {
     "item": "betternether:cincinnasite_sword_diamond"
   },
-  "show_notification": true
+  "template": {
+    "item": "betternether:cincinnasite_diamond_upgrade_smithing_template"
+  }
 }

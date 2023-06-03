@@ -20,11 +20,22 @@ public class NetherSet extends EquipmentSet {
             ArmorMaterial armor,
             boolean withShears
     ) {
+        this(prefix, null, material, armor, withShears);
+    }
+
+    public NetherSet(
+            String prefix,
+            EquipmentSet sourceSet,
+            BNToolMaterial material,
+            ArmorMaterial armor,
+            boolean withShears
+    ) {
         super(
                 material,
                 BetterNether.MOD_ID,
                 prefix,
                 NetherBlocks.NETHER_REED_STEM,
+                sourceSet,
                 material.attackDamages,
                 material.attackSpeeds
         );
@@ -35,15 +46,24 @@ public class NetherSet extends EquipmentSet {
         add(HOE_SLOT, EquipmentDescription::new, NetherHoe::new);
         add(SWORD_SLOT, EquipmentDescription::new, NetherSword::new);
 
-        add(HELMET_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, ArmorItem.Type.HELMET)));
-        add(CHESTPLATE_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, ArmorItem.Type.CHESTPLATE)));
-        add(LEGGINGS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, ArmorItem.Type.LEGGINGS)));
-        add(BOOTS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, ArmorItem.Type.BOOTS)));
+        add(
+                HELMET_SLOT,
+                new EquipmentDescription<>(HELMET_SLOT, tier -> new NetherArmor(armor, ArmorItem.Type.HELMET))
+        );
+        add(
+                CHESTPLATE_SLOT,
+                new EquipmentDescription<>(CHESTPLATE_SLOT, tier -> new NetherArmor(armor, ArmorItem.Type.CHESTPLATE))
+        );
+        add(
+                LEGGINGS_SLOT,
+                new EquipmentDescription<>(LEGGINGS_SLOT, tier -> new NetherArmor(armor, ArmorItem.Type.LEGGINGS))
+        );
+        add(BOOTS_SLOT, new EquipmentDescription<>(BOOTS_SLOT, tier -> new NetherArmor(armor, ArmorItem.Type.BOOTS)));
 
         if (withShears) {
             add(
                     SHEARS_SLOT,
-                    new EquipmentDescription<>(tier -> new BaseShearsItem(
+                    new EquipmentDescription<>(SHEARS_SLOT, tier -> new BaseShearsItem(
                             NetherItems
                                     .defaultSettings()
                                     .durability((int) (material.getUses() * 0.75))

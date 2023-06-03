@@ -1,27 +1,36 @@
 package org.betterx.betternether.items.materials;
 
 import org.betterx.bclib.items.complex.EquipmentSet;
+import org.betterx.bclib.items.complex.SmithingSet;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.registry.NetherTemplates;
 
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
-public enum BNToolMaterial implements Tier {
+public enum BNToolMaterial implements Tier, SmithingSet {
     CINCINNASITE(2, 512, 6.2F, 2.5F, 16, NetherItems.CINCINNASITE_INGOT,
             EquipmentSet.AttackDamage.IRON_LEVEL,
             EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.IRON_LEVEL, 0.2f)
     ),
-    CINCINNASITE_DIAMOND(3, 2061, 8.2F, 3.7F, 14, Items.DIAMOND,
+    CINCINNASITE_DIAMOND(3, 2061, 8.2F, 3.7F, 14, Items.DIAMOND, NetherTemplates.CINCINNASITE_DIAMOND_TEMPLATE,
             EquipmentSet.AttackDamage.DIAMOND_LEVEL,
             EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.DIAMOND_LEVEL, 0.3f)
     ),
 
-    NETHER_RUBY(4, 2561, 9.2F, 5.0F, 22, NetherItems.NETHER_RUBY,
+    NETHER_RUBY(3, 2561, 7.1F, 3.1F, 18, NetherItems.NETHER_RUBY,
+            EquipmentSet.AttackDamage.DIAMOND_LEVEL,
+            EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.DIAMOND_LEVEL, 0.2f)
+    ),
+
+    FLAMING_RUBY(4, 2861, 10.4F, 6.0F, 32, Items.SCULK_CATALYST, NetherTemplates.FLAMING_RUBY_TEMPLATE,
             EquipmentSet.AttackDamage.NETHERITE_LEVEL,
             EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.NETHERITE_LEVEL, 0.4f)
     );
+
 
     /* Vanilla Settings
     WOOD(0, 59, 2.0f, 0.0f, 15, () -> Ingredient.of(ItemTags.PLANKS)),
@@ -37,6 +46,7 @@ public enum BNToolMaterial implements Tier {
     private final int enchantibility;
     private final float damage;
     private final ItemLike reapair;
+    private final SmithingTemplateItem smithingTemplateItem;
 
     public final EquipmentSet.SetValues attackDamages;
     public final EquipmentSet.SetValues attackSpeeds;
@@ -51,12 +61,27 @@ public enum BNToolMaterial implements Tier {
             EquipmentSet.SetValues attackDamages,
             EquipmentSet.SetValues attackSpeeds
     ) {
+        this(level, uses, speed, damage, enchantibility, reapair, null, attackDamages, attackSpeeds);
+    }
+
+    BNToolMaterial(
+            int level,
+            int uses,
+            float speed,
+            float damage,
+            int enchantibility,
+            ItemLike reapair,
+            SmithingTemplateItem smithingTemplateItem,
+            EquipmentSet.SetValues attackDamages,
+            EquipmentSet.SetValues attackSpeeds
+    ) {
         this.uses = uses;
         this.speed = speed;
         this.level = level;
         this.enchantibility = enchantibility;
         this.damage = damage;
         this.reapair = reapair;
+        this.smithingTemplateItem = smithingTemplateItem;
         this.attackDamages = attackDamages;
         this.attackSpeeds = attackSpeeds;
     }
@@ -89,5 +114,10 @@ public enum BNToolMaterial implements Tier {
     @Override
     public Ingredient getRepairIngredient() {
         return Ingredient.of(reapair);
+    }
+
+    @Override
+    public SmithingTemplateItem getSmithingTemplateItem() {
+        return this.smithingTemplateItem;
     }
 }

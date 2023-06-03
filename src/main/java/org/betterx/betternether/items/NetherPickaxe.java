@@ -10,8 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class NetherPickaxe extends BasePickaxeItem implements InitialStackStateProvider {
@@ -20,14 +20,15 @@ public class NetherPickaxe extends BasePickaxeItem implements InitialStackStateP
     }
 
     @Override
-    public void initializeState(ItemStack stack) {
-        Map<Enchantment, Integer> defaultEnchants = new HashMap<>();
-
+    public void putEnchantments(ItemStack stack, Map<Enchantment, Integer> defaultEnchants) {
         int obsidianLevel = 0;
-        if (this.getTier() == BNToolMaterial.CINCINNASITE_DIAMOND) obsidianLevel = 3;
+        if (this.getTier() == BNToolMaterial.CINCINNASITE_DIAMOND) obsidianLevel = 2;
         else if (this.getTier() == BNToolMaterial.NETHER_RUBY) {
-            obsidianLevel = 2;
+            obsidianLevel = 1;
+        } else if (this.getTier() == BNToolMaterial.FLAMING_RUBY) {
+            obsidianLevel = 3;
             defaultEnchants.put(NetherEnchantments.RUBY_FIRE, 1);
+            defaultEnchants.put(Enchantments.MENDING, 1);
         }
 
         if (obsidianLevel > 0) {

@@ -1,15 +1,19 @@
 package org.betterx.betternether.items.materials;
 
+import org.betterx.bclib.items.complex.SmithingSet;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.registry.NetherTemplates;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 
-public enum BNArmorMaterial implements ArmorMaterial {
+public enum BNArmorMaterial implements ArmorMaterial, SmithingSet {
     CINCINNASITE(
             "cincinnasite",
             12,
@@ -22,13 +26,24 @@ public enum BNArmorMaterial implements ArmorMaterial {
     ),
     NETHER_RUBY(
             "nether_ruby",
-            30,
-            new int[]{3, 6, 8, 3},
+            18,
+            new int[]{3, 5, 7, 3},
             25,
-            SoundEvents.ARMOR_EQUIP_NETHERITE,
-            2.4F,
+            SoundEvents.ARMOR_EQUIP_GOLD,
+            1.4F,
             0.2f,
             NetherItems.NETHER_RUBY
+    ),
+    FLAMING_RUBY(
+            "flaming_ruby",
+            30,
+            new int[]{3, 6, 8, 3},
+            30,
+            SoundEvents.ARMOR_EQUIP_NETHERITE,
+            2.6F,
+            0.3f,
+            Blocks.SCULK_CATALYST,
+            NetherTemplates.FLAMING_RUBY_TEMPLATE
     );
 	
 	/* Vanilla Settings
@@ -51,6 +66,9 @@ public enum BNArmorMaterial implements ArmorMaterial {
     private final float knockbackResistance;
     private final int[] protection;
 
+    private final SmithingTemplateItem smithingTemplateItem;
+
+
     BNArmorMaterial(
             String name,
             int durabilityMultiplier,
@@ -61,6 +79,30 @@ public enum BNArmorMaterial implements ArmorMaterial {
             float knockback,
             ItemLike repairItem
     ) {
+        this(
+                name,
+                durabilityMultiplier,
+                protection,
+                enchantLevel,
+                equipSound,
+                toughness,
+                knockback,
+                repairItem,
+                null
+        );
+    }
+
+    BNArmorMaterial(
+            String name,
+            int durabilityMultiplier,
+            int[] protection,
+            int enchantLevel,
+            SoundEvent equipSound,
+            float toughness,
+            float knockback,
+            ItemLike repairItem,
+            SmithingTemplateItem smithingTemplateItem
+    ) {
         this.name = name;
         this.multiplier = durabilityMultiplier;
         this.enchantLevel = enchantLevel;
@@ -69,6 +111,7 @@ public enum BNArmorMaterial implements ArmorMaterial {
         this.toughness = toughness;
         this.protection = protection;
         this.knockbackResistance = knockback;
+        this.smithingTemplateItem = smithingTemplateItem;
     }
 
 
@@ -110,5 +153,10 @@ public enum BNArmorMaterial implements ArmorMaterial {
     @Override
     public float getKnockbackResistance() {
         return knockbackResistance;
+    }
+
+    @Override
+    public SmithingTemplateItem getSmithingTemplateItem() {
+        return smithingTemplateItem;
     }
 }

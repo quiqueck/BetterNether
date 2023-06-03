@@ -26,7 +26,8 @@
     "PlayerEntityMixin",
     "PortalShapeMixin",
     "RecipeManagerAccessor",
-    "RecipeManagerMixin"
+    "RecipeManagerMixin",
+    "SmithingTransformRecipeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

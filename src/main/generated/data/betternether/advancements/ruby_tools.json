@@ -1,7 +1,7 @@
 {
   "parent": "betternether:ruby_ore",
   "criteria": {
-    "nether_ruby_axe": {
+    "nether_ruby_EquipmentSlot[name=axe, category=TOOLS]": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_ruby_hoe": {
+    "nether_ruby_EquipmentSlot[name=hoe, category=TOOLS]": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_ruby_pickaxe": {
+    "nether_ruby_EquipmentSlot[name=pickaxe, category=TOOLS]": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_ruby_shovel": {
+    "nether_ruby_EquipmentSlot[name=shovel, category=TOOLS]": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "nether_ruby_sword": {
+    "nether_ruby_EquipmentSlot[name=sword, category=COMBAT]": {
       "conditions": {
         "items": [
           {
@@ -71,7 +71,7 @@
     "hidden": false,
     "icon": {
       "item": "betternether:nether_ruby_pickaxe",
-      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:ruby_fire\",lvl:1s},{id:\"betternether:obsidian_breaker\",lvl:2s}]}"
+      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:obsidian_breaker\",lvl:1s}]}"
     },
     "show_toast": true,
     "title": {
@@ -80,11 +80,11 @@
   },
   "requirements": [
     [
-      "nether_ruby_pickaxe",
-      "nether_ruby_axe",
-      "nether_ruby_shovel",
-      "nether_ruby_sword",
-      "nether_ruby_hoe"
+      "nether_ruby_EquipmentSlot[name=pickaxe, category=TOOLS]",
+      "nether_ruby_EquipmentSlot[name=axe, category=TOOLS]",
+      "nether_ruby_EquipmentSlot[name=shovel, category=TOOLS]",
+      "nether_ruby_EquipmentSlot[name=sword, category=COMBAT]",
+      "nether_ruby_EquipmentSlot[name=hoe, category=TOOLS]"
     ]
   ],
   "sends_telemetry_event": false

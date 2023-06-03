@@ -1,7 +1,7 @@
 {
   "parent": "betternether:cincinnasite_ore",
   "criteria": {
-    "cincinnasite_axe": {
+    "cincinnasite_EquipmentSlot[name=axe, category=TOOLS]": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "cincinnasite_hoe": {
+    "cincinnasite_EquipmentSlot[name=hoe, category=TOOLS]": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "cincinnasite_pickaxe": {
+    "cincinnasite_EquipmentSlot[name=pickaxe, category=TOOLS]": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "cincinnasite_shovel": {
+    "cincinnasite_EquipmentSlot[name=shovel, category=TOOLS]": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "cincinnasite_sword": {
+    "cincinnasite_EquipmentSlot[name=sword, category=COMBAT]": {
       "conditions": {
         "items": [
           {
@@ -80,11 +80,11 @@
   },
   "requirements": [
     [
-      "cincinnasite_pickaxe",
-      "cincinnasite_axe",
-      "cincinnasite_shovel",
-      "cincinnasite_sword",
-      "cincinnasite_hoe"
+      "cincinnasite_EquipmentSlot[name=pickaxe, category=TOOLS]",
+      "cincinnasite_EquipmentSlot[name=axe, category=TOOLS]",
+      "cincinnasite_EquipmentSlot[name=shovel, category=TOOLS]",
+      "cincinnasite_EquipmentSlot[name=sword, category=COMBAT]",
+      "cincinnasite_EquipmentSlot[name=hoe, category=TOOLS]"
     ]
   ],
   "sends_telemetry_event": false

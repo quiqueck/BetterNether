@@ -1,10 +1,8 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
-import org.betterx.bclib.blocks.BaseButtonBlock;
-import org.betterx.bclib.blocks.BasePressurePlateBlock;
-import org.betterx.bclib.blocks.BaseSlabBlock;
-import org.betterx.bclib.blocks.BaseStairsBlock;
+import org.betterx.bclib.blocks.*;
+import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.registry.BlockRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
@@ -640,6 +638,10 @@ public class NetherBlocks extends BlockRegistry {
     );
     // Mushroom Fir //
     public static final MushroomFirMaterial MAT_MUSHROOM_FIR = new MushroomFirMaterial().init();
+    public static final Block TRIMMED_MUSHROOM_FIR_CHEST = registerBlock(
+            "mushroom_fir_trimmed_chest",
+            new BaseChestBlock.Wood(MAT_MUSHROOM_FIR.getBlock(WoodSlots.PLANKS))
+    );
     // Mushroom //
     public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
     // Anchor Tree

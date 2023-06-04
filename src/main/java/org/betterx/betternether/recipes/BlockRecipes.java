@@ -1,5 +1,6 @@
 package org.betterx.betternether.recipes;
 
+import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -12,6 +13,18 @@ import net.minecraft.world.level.block.Blocks;
 
 public class BlockRecipes {
     public static void register() {
+        BCLRecipeBuilder.crafting(
+                                BetterNether.makeID("mushroom_fir_trimmed_chest"),
+                                NetherBlocks.TRIMMED_MUSHROOM_FIR_CHEST
+                        )
+                        .shapeless()
+                        .addMaterial('#', NetherBlocks.MAT_MUSHROOM_FIR.getBlock(WoodSlots.CHEST))
+                        .addMaterial('S', NetherBlocks.MAT_MUSHROOM_FIR.getBlock(WoodSlots.STRIPPED_LOG))
+                        .setGroup("chest")
+                        .setOutputCount(1)
+                        .setCategory(RecipeCategory.DECORATIONS)
+                        .build();
+
         BCLRecipeBuilder.crafting(BetterNether.makeID("activator_rail"), Items.ACTIVATOR_RAIL)
                         .setShape("XSX", "X#X", "XSX")
                         .addMaterial('#', Items.REDSTONE_TORCH)

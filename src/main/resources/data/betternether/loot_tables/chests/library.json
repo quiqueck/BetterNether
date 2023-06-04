@@ -47,6 +47,11 @@
         {
           "type": "minecraft:item",
           "weight": 2,
+          "name": "betternether:bowl_upgrade_smithing_template"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
           "name": "minecraft:netherite_upgrade_smithing_template"
         },
         {

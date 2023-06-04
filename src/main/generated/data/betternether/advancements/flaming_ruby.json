@@ -1,0 +1,38 @@
+{
+  "parent": "betternether:ruby_ore",
+  "criteria": {
+    "flaming_ruby": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:flaming_ruby_upgrade_smithing_template"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.betternether.flaming_ruby.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:flaming_ruby_upgrade_smithing_template"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.betternether.flaming_ruby.title"
+    }
+  },
+  "requirements": [
+    [
+      "flaming_ruby"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

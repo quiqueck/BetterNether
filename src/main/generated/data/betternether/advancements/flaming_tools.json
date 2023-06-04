@@ -1,0 +1,99 @@
+{
+  "parent": "betternether:flaming_ruby",
+  "criteria": {
+    "flaming_ruby_EquipmentSlot[name=axe, category=TOOLS]": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:flaming_ruby_axe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_EquipmentSlot[name=hoe, category=TOOLS]": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:flaming_ruby_hoe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_EquipmentSlot[name=pickaxe, category=TOOLS]": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:flaming_ruby_pickaxe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_EquipmentSlot[name=shovel, category=TOOLS]": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:flaming_ruby_shovel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_EquipmentSlot[name=sword, category=COMBAT]": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "betternether:flaming_ruby_sword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.betternether.flaming_tools.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "betternether:flaming_ruby_pickaxe",
+      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:obsidian_breaker\",lvl:3s},{id:\"betternether:ruby_fire\",lvl:1s},{id:\"minecraft:mending\",lvl:1s}]}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.betternether.flaming_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "flaming_ruby_EquipmentSlot[name=pickaxe, category=TOOLS]"
+    ],
+    [
+      "flaming_ruby_EquipmentSlot[name=axe, category=TOOLS]"
+    ],
+    [
+      "flaming_ruby_EquipmentSlot[name=shovel, category=TOOLS]"
+    ],
+    [
+      "flaming_ruby_EquipmentSlot[name=sword, category=COMBAT]"
+    ],
+    [
+      "flaming_ruby_EquipmentSlot[name=hoe, category=TOOLS]"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

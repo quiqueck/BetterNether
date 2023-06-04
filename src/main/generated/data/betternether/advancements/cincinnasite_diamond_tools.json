@@ -1,5 +1,5 @@
 {
-  "parent": "betternether:cincinnasite_tools",
+  "parent": "betternether:cincinnasite_diamond",
   "criteria": {
     "cincinnasite_EquipmentSlot[name=axe, category=TOOLS]": {
       "conditions": {

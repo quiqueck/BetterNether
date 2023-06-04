@@ -9,7 +9,7 @@ import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.bclib.complexmaterials.set.wood.Bookshelf;
 import org.betterx.bclib.complexmaterials.set.wood.Planks;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
+import org.betterx.bclib.items.boat.BoatTypeOverride;
 import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockReedsBlock;
 import org.betterx.betternether.client.block.Patterns;
@@ -30,7 +30,7 @@ import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-class ReedBookshelfBlock extends BaseBookshelfBlock implements AddMineableAxe {
+class ReedBookshelfBlock extends BaseBookshelfBlock.Wood {
 
     public ReedBookshelfBlock(Block source) {
         super(source);
@@ -87,5 +87,15 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
 
     public Block getStem() {
         return NetherBlocks.NETHER_REED_STEM;
+    }
+
+    @Override
+    public BoatTypeOverride supplyBoatType() {
+        return BoatTypeOverride.create(
+                getModID(),
+                getBaseName(),
+                getBlock(WoodSlots.PLANKS),
+                true
+        );
     }
 }

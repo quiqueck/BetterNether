@@ -1,85 +1,31 @@
 package org.betterx.betternether.tab;
 
+import org.betterx.bclib.creativetab.BCLCreativeTab;
+import org.betterx.bclib.creativetab.BCLCreativeTabManager;
+import org.betterx.bclib.items.complex.EquipmentSet;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.complex.WillowMaterial;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.SaplingBlock;
-
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-
-import java.util.List;
-
 public class CreativeTabs {
-    public static final CreativeModeTab TAB_BLOCKS;
-    public static final CreativeModeTab TAB_ITEMS;
-
-
-    public static final ResourceKey<CreativeModeTab> TAB_ITEMS_KEY = ResourceKey.create(
-            Registries.CREATIVE_MODE_TAB,
-            BetterNether.makeID("item_tab")
-    );
-    public static final ResourceKey<CreativeModeTab> TAB_BLOCKS_KEY = ResourceKey.create(
-            Registries.CREATIVE_MODE_TAB,
-            BetterNether.makeID("block_tab")
-    );
-
     public static void register() {
-        Registry.register(
-                BuiltInRegistries.CREATIVE_MODE_TAB,
-                TAB_ITEMS_KEY,
-                TAB_ITEMS
-        );
-
-        Registry.register(
-                BuiltInRegistries.CREATIVE_MODE_TAB,
-                TAB_BLOCKS_KEY,
-                TAB_BLOCKS
-        );
-    }
-
-    static {
-        TAB_BLOCKS = FabricItemGroup
-                .builder()
-                .icon(() -> new ItemStack(NetherBlocks.NETHER_GRASS))
-                .title(Component.translatable("itemGroup.betternether.blocks"))
-                .displayItems((featureFlagSet, output) -> {
-                    List<ItemStack> stacks = NetherBlocks
-                            .getModBlockItems()
-                            .stream()
-                            .filter(itm -> !(itm instanceof BlockItem bi && bi.getBlock() instanceof SaplingBlock))
-                            .map(ItemStack::new)
-                            .toList();
-                    output.acceptAll(stacks);
-                }).build();
-
-        TAB_ITEMS = FabricItemGroup
-                .builder()
-                .icon(() -> new ItemStack(NetherItems.BLACK_APPLE))
-                .title(Component.translatable("itemGroup.betternether.items"))
-                .displayItems((featureFlagSet, output) -> {
-                    List<ItemStack> saplings = NetherBlocks
-                            .getModBlockItems()
-                            .stream()
-                            .filter(itm -> (itm instanceof BlockItem bi && bi.getBlock() instanceof SaplingBlock))
-                            .map(ItemStack::new)
-                            .toList();
-                    List<ItemStack> stacks = NetherItems
-                            .getModItems()
-                            .stream()
-                            .map(ItemStack::new)
-                            .toList();
-
-                    output.acceptAll(saplings);
-                    output.acceptAll(stacks);
-                }).build();
+        BCLCreativeTabManager.create(BetterNether.MOD_ID)
+                             .createTab("nature")
+                             .setPredicate(item -> BCLCreativeTab.NATURE.contains(item)
+                                     || item == NetherItems.AGAVE_LEAF
+                                     || item == NetherItems.BLACK_APPLE
+                                     || item == NetherBlocks.MAGMA_FLOWER.asItem()
+                                     || item == NetherBlocks.MAT_RUBEUS.getBlockItem(NetherSlots.CONE)
+                                     || item == NetherBlocks.MAT_WILLOW.getBlockItem(WillowMaterial.BLOCK_TORCH))
+                             .setIcon(NetherItems.BLACK_APPLE)
+                             .build()
+                             .createBlockTab(NetherBlocks.JUNGLE_GRASS)
+                             .build()
+                             .createItemsTab(NetherItems.FLAMING_RUBY_SET.getSlot(EquipmentSet.PICKAXE_SLOT))
+                             .build()
+                             .processBCLRegistry()
+                             .register();
     }
 }

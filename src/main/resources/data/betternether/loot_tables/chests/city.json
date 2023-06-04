@@ -76,12 +76,20 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:netherite_upgrade_smithing_template"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "betternether:bowl_upgrade_smithing_template"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "betternether:cincinnasite_diamond_upgrade_smithing_template"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 0.1
+          "chance": 0.2
         }
       ]
     },

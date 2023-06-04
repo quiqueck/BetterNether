@@ -42,8 +42,13 @@
       ]
     },
     {
-      "rolls": 1,
+      "rolls": 2,
       "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "betternether:flaming_ruby_upgrade_smithing_template"
+        },
         {
           "type": "minecraft:item",
           "weight": 2,
@@ -51,7 +56,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
+          "weight": 3,
           "name": "minecraft:netherite_upgrade_smithing_template"
         },
         {

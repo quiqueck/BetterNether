@@ -33,8 +33,9 @@ public class BlockPottedPlant extends BlockBaseNotFull implements AddMineableHoe
     public BlockPottedPlant() {
         super(Materials.NETHER_PLANT
                 .mapColor(MapColor.COLOR_BLACK)
-                .lightLevel(getLuminance()));
+                .lightLevel(getLuminance()).offsetType(OffsetType.NONE));
         this.setDropItself(false);
+        
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(PLANT, PottedPlantShape.AGAVE));
     }

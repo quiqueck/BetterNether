@@ -33,7 +33,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
     protected void bootstrap() {
         ResourceLocation root = AdvancementManager.Builder
                 .create(BetterNether.makeID("root"))
-                .startDisplay(NetherBlocks.NETHER_GRASS)
+                .startDisplay(NetherBlocks.CINCINNASITE_LANTERN)
                 .frame(FrameType.TASK)
                 .hideFromChat()
                 .background(new ResourceLocation("textures/gui/advancements/backgrounds/nether.png"))

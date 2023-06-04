@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -10,7 +12,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockMossCover extends BaseBlockMold {
+public class BlockMossCover extends BaseBlockMold implements BehaviourPlant {
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 4, 16);
 
     public BlockMossCover() {

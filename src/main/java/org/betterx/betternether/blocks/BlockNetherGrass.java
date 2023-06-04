@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.blocks.BasePlantBlock;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
@@ -40,7 +41,7 @@ public class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOn
     }
 }
 
-abstract class BaseBlockNetherGrass extends BasePlantBlock {
+abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourPlant {
     private static final VoxelShape SHAPE = box(4, 0, 4, 14, 12, 14);
 
     public BaseBlockNetherGrass() {

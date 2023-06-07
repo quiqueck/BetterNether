@@ -274,10 +274,10 @@ public class NetherVegetationPlaced {
     public static final BCLFeature<WartCapFeature, NoneFeatureConfiguration> WART_CAP = NetherVegetation
             .WART_CAP
             .place()
-            .onlyInBiome()
             .count(32)
             .squarePlacement()
             .randomHeight10FromFloorCeil()
+            .onlyInBiome()
             .findSolidSurface(PlaceFacingBlockConfig.HORIZONTAL, 12, false)
             .build();
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> SCULK_VEGETATION = NetherVegetation

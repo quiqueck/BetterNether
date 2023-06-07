@@ -16,7 +16,6 @@ public class NetherTreesPlaced {
             .CRIMSON_GLOWING_TREE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(12)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
@@ -25,7 +24,6 @@ public class NetherTreesPlaced {
             .CRIMSON_PINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(12)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
@@ -34,7 +32,6 @@ public class NetherTreesPlaced {
             .RUBEUS_TREE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(12)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
@@ -43,7 +40,6 @@ public class NetherTreesPlaced {
             .MUSHROOM_FIR
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(14)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
@@ -52,7 +48,6 @@ public class NetherTreesPlaced {
             .PATCH_STALAGNATE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(6)
             .onceEvery(5)
             .isEmptyAndOnNetherGround()
@@ -62,7 +57,6 @@ public class NetherTreesPlaced {
             .PATCH_GIANT_MOLD
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(6)
             .onceEvery(5)
             .isEmptyAndOnNetherGround()
@@ -72,7 +66,6 @@ public class NetherTreesPlaced {
             .PATCH_BIG_RED_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(6)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
@@ -82,7 +75,6 @@ public class NetherTreesPlaced {
             .PATCH_BIG_BROWN_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(6)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
@@ -92,7 +84,6 @@ public class NetherTreesPlaced {
             .OLD_RED_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(5)
             .onceEvery(3)
             .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
@@ -102,7 +93,6 @@ public class NetherTreesPlaced {
             .OLD_BROWN_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(4)
             .onceEvery(3)
             .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
@@ -112,7 +102,6 @@ public class NetherTreesPlaced {
             .PATCH_SOUL_LILY
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(6)
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
             .buildAndRegister();
@@ -121,7 +110,6 @@ public class NetherTreesPlaced {
             .WART_TREE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(14)
             .onceEvery(2)
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
@@ -131,7 +119,6 @@ public class NetherTreesPlaced {
             .WILLOW_TREE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(14)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
@@ -141,7 +128,6 @@ public class NetherTreesPlaced {
             .OLD_WILLOW_TREE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(14)
             .onceEvery(4)
             .isEmptyAndOnNetherGround()
@@ -151,7 +137,6 @@ public class NetherTreesPlaced {
             .SAKURA_TREE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .betterNetherCeiling(5)
             .onceEvery(6)
             .isEmptyAndUnderNetherGround()
@@ -161,7 +146,6 @@ public class NetherTreesPlaced {
             .ANCHOR_TREE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .betterNetherCeiling(5)
             .isEmptyAndUnderNetherGround()
             .onceEvery(15)
@@ -171,7 +155,6 @@ public class NetherTreesPlaced {
             .ANCHOR_TREE
             .place(BN.id("anchor_tree_sparse"))
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .count(1)
             .randomHeight4FromFloorCeil()
             .findSolidCeil(5)
@@ -183,7 +166,6 @@ public class NetherTreesPlaced {
             .ANCHOR_TREE_BRANCH
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .betterNetherCeiling(3)
             .isEmptyAndUnderNetherGround()
             .onceEvery(8)
@@ -193,7 +175,6 @@ public class NetherTreesPlaced {
             .ANCHOR_TREE_ROOT
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .betterNetherCeiling(3)
             .onceEvery(6)
             .isEmptyAndUnderNetherGround()
@@ -203,7 +184,6 @@ public class NetherTreesPlaced {
             .BIG_WARPED_TREE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
             .vanillaNetherGround(6)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()

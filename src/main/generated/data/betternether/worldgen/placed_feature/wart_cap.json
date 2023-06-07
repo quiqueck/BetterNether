@@ -2,9 +2,6 @@
   "feature": "betternether:wart_cap",
   "placement": [
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:count",
       "count": 32
     },
@@ -22,6 +19,9 @@
           "above_bottom": 10
         }
       }
+    },
+    {
+      "type": "minecraft:biome"
     },
     {
       "type": "bclib:solid_in_dir",

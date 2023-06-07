@@ -51,7 +51,7 @@ public abstract class MapStateMixin extends SavedData {
             LevelAccessor level,
             String key,
             double x,
-            double z,
+            double y,
             double rotation,
             Component text,
             CallbackInfo info
@@ -59,62 +59,71 @@ public abstract class MapStateMixin extends SavedData {
         if (level != null && level.dimensionType().hasCeiling()) {
             //TODO: Check for new Version
             //Code derived and adapted from Vanilla Minecraft Code in net.minecraft.world.item.MapItemSaveData.addDecoration
-            MapDecoration mapDecoration;
-
-            byte displayRotation;
             int scale = 1 << this.scale;
             float px = (float) (x - (double) this.centerX) / (float) scale;
-            float pz = (float) (z - (double) this.centerZ) / (float) scale;
-            byte mapX = (byte) ((double) (px * 2.0f) + 0.5);
-            byte mapZ = (byte) ((double) (pz * 2.0f) + 0.5);
-            final int VALID_REGION = 63;
-            if (px >= -VALID_REGION && pz >= -VALID_REGION && px <= VALID_REGION && pz <= VALID_REGION) {
+            float pz = (float) (y - (double) this.centerZ) / (float) scale;
+            byte mapX = (byte) ((int) ((double) (px * 2.0F) + 0.5));
+            byte mapZ = (byte) ((int) ((double) (pz * 2.0F) + 0.5));
+
+            byte displayRotation;
+            if (px >= -63.0F && pz >= -63.0F && px <= 63.0F && pz <= 63.0F) {
                 rotation += rotation < 0.0 ? -8.0 : 8.0;
                 displayRotation = (byte) ((int) (rotation * 16.0 / 360.0));
                 //We do want the actual rotation of the player here
-//				if (this.dimension == Level.NETHER && level != null) {
-//					int time = (int) (level.getLevelData().getDayTime() / 10L);
-//					displayRotation = (byte) (time * time * 34187121 + time * 121 >> 15 & 0xF);
-//				}
-            } else if (type == MapDecoration.Type.PLAYER) {
-                final int MAX = 320;
-                if (Math.abs(px) < MAX && Math.abs(pz) < MAX) {
-                    type = MapDecoration.Type.PLAYER_OFF_MAP;
-                } else if (this.unlimitedTracking) {
-                    type = MapDecoration.Type.PLAYER_OFF_LIMITS;
-                } else {
+//                if (this.dimension == Level.NETHER && levelAccessor != null) {
+//                    int l = (int)(levelAccessor.getLevelData().getDayTime() / 10L);
+//                    k = (byte)(l * l * 34187121 + l * 121 >> 15 & 15);
+//                }
+            } else {
+                if (type != MapDecoration.Type.PLAYER) {
                     this.removeDecoration(key);
-                    info.cancel();
                     return;
                 }
+
+                if (Math.abs(px) < 320.0F && Math.abs(pz) < 320.0F) {
+                    type = MapDecoration.Type.PLAYER_OFF_MAP;
+                } else {
+                    if (!this.unlimitedTracking) {
+                        this.removeDecoration(key);
+                        return;
+                    }
+
+                    type = MapDecoration.Type.PLAYER_OFF_LIMITS;
+                }
+
                 displayRotation = 0;
-                if (px <= -VALID_REGION) {
+                if (px <= -63.0F) {
                     mapX = -128;
                 }
-                if (pz <= -VALID_REGION) {
+
+                if (pz <= -63.0F) {
                     mapZ = -128;
                 }
-                if (px >= VALID_REGION) {
+
+                if (px >= 63.0F) {
                     mapX = 127;
                 }
-                if (pz >= 63.0f) {
+
+                if (pz >= 63.0F) {
                     mapZ = 127;
                 }
-            } else {
-                this.removeDecoration(key);
-                info.cancel();
-                return;
             }
-            MapDecoration tempDecoration = new MapDecoration(type, mapX, mapZ, displayRotation, text);
-            if (!tempDecoration.equals(mapDecoration = this.decorations.put(key, tempDecoration))) {
-                if (mapDecoration != null && mapDecoration.getType().shouldTrackCount()) {
+
+            MapDecoration mapDecoration = new MapDecoration(type, mapX, mapZ, displayRotation, text);
+            MapDecoration mapDecoration2 = this.decorations.put(key, mapDecoration);
+            if (!mapDecoration.equals(mapDecoration2)) {
+                if (mapDecoration2 != null && mapDecoration2.getType().shouldTrackCount()) {
                     --this.trackedDecorationCount;
                 }
+
                 if (type.shouldTrackCount()) {
                     ++this.trackedDecorationCount;
                 }
+
                 this.setDecorationsDirty();
             }
+
+
             info.cancel();
         }
     }

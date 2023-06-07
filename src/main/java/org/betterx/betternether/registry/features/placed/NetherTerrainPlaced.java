@@ -23,7 +23,6 @@ public class NetherTerrainPlaced {
             .countRange(1, 2)
             .spreadHorizontal(ClampedNormalInt.of(0, 2, -4, -4))
             .stencil()
-            .onlyInBiome()
             .onEveryLayer()
             .onlyInBiome()
             .offset(Direction.DOWN)
@@ -36,13 +35,12 @@ public class NetherTerrainPlaced {
             .place(BN.id("lava_pits_sparse"))
             .decoration(GenerationStep.Decoration.LAKES)
             .onEveryLayer()
-            .onlyInBiome()
             .stencil()
             .findSolidFloor(3)
+            .onlyInBiome()
             .offset(Direction.DOWN)
             .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
             .onceEvery(6)
-            .onlyInBiome()
             .buildAndRegister();
 
     public static BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_PITS_DENSE = NetherTerrain
@@ -50,13 +48,12 @@ public class NetherTerrainPlaced {
             .place(BN.id("lava_pits_dense"))
             .decoration(GenerationStep.Decoration.LAKES)
             .onEveryLayer()
-            .onlyInBiome()
             .stencil()
             .findSolidFloor(3)
+            .onlyInBiome()
             .offset(Direction.DOWN)
             .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
             .onceEvery(2)
-            .onlyInBiome()
             .buildAndRegister();
 
     public static BCLFeature<Feature<SequenceFeatureConfig>, SequenceFeatureConfig> FLOODED_LAVA_PIT = NetherTerrain
@@ -65,7 +62,6 @@ public class NetherTerrainPlaced {
             .decoration(GenerationStep.Decoration.LAKES)
             .all()
             .onEveryLayer()
-            .onlyInBiome()
             .offset(Direction.DOWN)
             .onlyInBiome()
             .buildAndRegister();
@@ -87,8 +83,8 @@ public class NetherTerrainPlaced {
             .decoration(GenerationStep.Decoration.LAKES)
             .all()
             .onEveryLayer()
-            .onlyInBiome()
             .offset(Direction.DOWN)
+            .onlyInBiome()
             .noiseAbove(0.1f, 20, 10)
             .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
             .buildAndRegister();

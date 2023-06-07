@@ -4,12 +4,12 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blockentities.BlockEntityForge;
 
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 
-import dev.emi.emi.EmiPort;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
@@ -75,12 +75,10 @@ public class EMIForgeRecipe implements EmiRecipe {
         widgets.addFillingArrow(24, 5, 50 * this.recipe.getCookingTime())
                .tooltip((mx, my) -> List.of(
                                ClientTooltipComponent.create(
-                                       EmiPort.ordered(
-                                               EmiPort.translatable(
+                                               Component.translatable(
                                                        "emi.cooking.time",
                                                        (this.recipe.getCookingTime() / speedup) / 20.0F
-                                               )
-                                       )
+                                               ).getVisualOrderText()
                                )
                        )
                );
@@ -90,10 +88,10 @@ public class EMIForgeRecipe implements EmiRecipe {
 
 
         widgets.addText(
-                EmiPort.ordered(EmiPort.translatable("emi.cooking.experience", this.recipe.getExperience())),
+                Component.translatable("emi.cooking.experience", this.recipe.getExperience()).getVisualOrderText(),
                 26, 28, -1, true
         );
         widgets.addSlot(this.input, 0, 4);
-        widgets.addSlot(this.output, 56, 0).output(true).recipeContext(this);
+        widgets.addSlot(this.output, 56, 0).large(true).recipeContext(this);
     }
 }

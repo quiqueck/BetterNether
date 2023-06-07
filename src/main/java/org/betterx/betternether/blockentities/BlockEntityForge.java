@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockEntityForge extends AbstractFurnaceBlockEntity implements ChangebleCookTime {
-    public static final int SPEEDUP = 2;
+    public static final int SPEEDUP = 3;
 
     public BlockEntityForge(BlockPos pos, BlockState state) {
         super(BlockEntitiesRegistry.CINCINNASITE_FORGE, pos, state, RecipeType.SMELTING);

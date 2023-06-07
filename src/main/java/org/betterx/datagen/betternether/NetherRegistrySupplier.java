@@ -36,7 +36,8 @@ public class NetherRegistrySupplier extends RegistrySupplier {
         return List.of(
                 new RegistryInfo<>(
                         BCLBiomeRegistry.BCL_BIOMES_REGISTRY,
-                        BiomeData.CODEC
+                        BiomeData.CODEC,
+                        NetherBiomesDataProvider::bootstrapBCL
                 ),
                 new RegistryInfo<>(
                         SurfaceRuleRegistry.SURFACE_RULES_REGISTRY,

@@ -20,10 +20,14 @@ import net.minecraft.world.level.biome.Biome;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class NetherBiomesDataProvider extends TagDataProvider<Biome> {
+    private static Set<BCLBiome> BIOMES = new HashSet<>();
+
     /**
      * Constructs a new {@link FabricTagProvider} with the default computed path.
      *
@@ -123,24 +127,37 @@ public class NetherBiomesDataProvider extends TagDataProvider<Biome> {
     private static final BCLBiome OLD_SWAMPLAND = registerSubBiome(Config.OLD_SWAMPLAND, NETHER_SWAMPLAND);
 
     private static NetherBiome registerNetherBiome(NetherBiomeConfig config) {
-        return NetherBiomeBuilder.create(config);
+        final NetherBiome biome = NetherBiomeBuilder.create(config);
+        BIOMES.add(biome);
+        return biome;
     }
 
     private static NetherBiome registerNetherBiome(NetherBiomeConfig config, NetherBiomeConfig edgeConfig) {
         final NetherBiome edge = NetherBiomeBuilder.create(edgeConfig);
         final NetherBiome biome = NetherBiomeBuilder.create(config, edge);
-
+        BIOMES.add(biome);
+        BIOMES.add(edge);
         return biome;
     }
 
     private static NetherBiome registerSubBiome(NetherBiomeConfig config, BCLBiome mainBiome) {
-        return NetherBiomeBuilder.createSubBiome(config, mainBiome);
+        final NetherBiome biome = NetherBiomeBuilder.createSubBiome(config, mainBiome);
+        BIOMES.add(biome);
+        return biome;
     }
 
     public static void bootstrap(BootstapContext<Biome> ctx) {
         BCLBiomeBuilder.registerUnbound(ctx);
         NetherRegistrySupplier.INSTANCE.MAIN_LOCK.release();
-        BetterNether.LOGGER.info("Registered BCLBiomes: " + BCLBiomeRegistry.BUILTIN_BCL_BIOMES.size() + ", " + BCLBiomeRegistry.registryOrNull());
+        BetterNether.LOGGER.info("Registered Biomes");
+    }
+
+    public static void bootstrapBCL(BootstapContext<BCLBiome> ctx) {
+        for (var biome : BIOMES) {
+            ctx.register(biome.getBCLBiomeKey(), biome);
+
+        }
+        BetterNether.LOGGER.info("Registered BCLBiomes: " + BCLBiomeRegistry.BUILTIN_BCL_BIOMES.size());
     }
 
     public static void ensureStaticallyLoaded() {

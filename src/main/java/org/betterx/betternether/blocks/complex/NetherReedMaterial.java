@@ -5,6 +5,7 @@ import org.betterx.bclib.client.models.ModelsHelper;
 import org.betterx.bclib.client.models.PatternsHelper;
 import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.MaterialSlot;
 import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.bclib.complexmaterials.set.wood.Bookshelf;
 import org.betterx.bclib.complexmaterials.set.wood.Planks;
@@ -56,6 +57,7 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                     .remove(WoodSlots.BARK)
                     .remove(WoodSlots.STRIPPED_LOG)
                     .remove(WoodSlots.STRIPPED_BARK)
+
                     .replace(new Planks() {
                         @Override
                         protected @NotNull Block createBlock(
@@ -83,6 +85,13 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                             return new ReedBookshelfBlock(parentMaterial.getBlock(WoodSlots.PLANKS));
                         }
                     });
+    }
+
+    @Override
+    public @Nullable <M extends ComplexMaterial> Block getBlock(MaterialSlot<M> key) {
+        if (key.suffix.equals(WoodSlots.STRIPPED_LOG.suffix))
+            return getStem();
+        return super.getBlock(key);
     }
 
     public Block getStem() {

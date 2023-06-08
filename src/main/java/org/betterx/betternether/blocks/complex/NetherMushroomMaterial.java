@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks.complex;
 
 import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.bclib.complexmaterials.entry.MaterialSlot;
 import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.bclib.complexmaterials.set.wood.Planks;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
@@ -46,6 +47,13 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomM
                         }
                     })
                 ;
+    }
+
+    @Override
+    public @Nullable <M extends ComplexMaterial> Block getBlock(MaterialSlot<M> key) {
+        if (key.suffix.equals(WoodSlots.STRIPPED_LOG.suffix))
+            return getStem();
+        return super.getBlock(key);
     }
 
     public Block getStem() {

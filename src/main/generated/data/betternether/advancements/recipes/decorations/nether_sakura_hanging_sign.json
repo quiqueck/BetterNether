@@ -1,24 +1,24 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_nether_sakura_planks": {
+    "has_chain": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:nether_sakura_planks"
+              "minecraft:chain"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_stick": {
+    "has_nether_sakura_stripped_log": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stick"
+              "betternether:nether_sakura_stripped_log"
             ]
           }
         ]
@@ -34,8 +34,8 @@
   },
   "requirements": [
     [
-      "has_nether_sakura_planks",
-      "has_stick",
+      "has_nether_sakura_stripped_log",
+      "has_chain",
       "has_the_recipe"
     ]
   ],

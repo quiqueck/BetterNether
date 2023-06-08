@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stick": {
+    "has_chain": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stick"
+              "minecraft:chain"
             ]
           }
         ]
@@ -19,12 +19,12 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_willow_planks": {
+    "has_willow_stripped_log": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:willow_planks"
+              "betternether:willow_stripped_log"
             ]
           }
         ]
@@ -34,8 +34,8 @@
   },
   "requirements": [
     [
-      "has_willow_planks",
-      "has_stick",
+      "has_chain",
+      "has_willow_stripped_log",
       "has_the_recipe"
     ]
   ],

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stick": {
+    "has_chain": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stick"
+              "minecraft:chain"
             ]
           }
         ]
@@ -19,12 +19,12 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_wart_planks": {
+    "has_wart_stripped_log": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:wart_planks"
+              "betternether:wart_stripped_log"
             ]
           }
         ]
@@ -34,8 +34,8 @@
   },
   "requirements": [
     [
-      "has_wart_planks",
-      "has_stick",
+      "has_wart_stripped_log",
+      "has_chain",
       "has_the_recipe"
     ]
   ],

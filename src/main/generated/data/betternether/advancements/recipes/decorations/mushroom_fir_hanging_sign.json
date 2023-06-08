@@ -1,24 +1,24 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mushroom_fir_planks": {
+    "has_chain": {
       "conditions": {
         "items": [
           {
             "items": [
-              "betternether:mushroom_fir_planks"
+              "minecraft:chain"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_stick": {
+    "has_mushroom_fir_stripped_log": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stick"
+              "betternether:mushroom_fir_stripped_log"
             ]
           }
         ]
@@ -34,8 +34,8 @@
   },
   "requirements": [
     [
-      "has_stick",
-      "has_mushroom_fir_planks",
+      "has_chain",
+      "has_mushroom_fir_stripped_log",
       "has_the_recipe"
     ]
   ],

@@ -4,16 +4,16 @@
   "group": "sign",
   "key": {
     "#": {
-      "item": "betternether:anchor_tree_planks"
+      "item": "betternether:anchor_tree_stripped_log"
     },
     "I": {
-      "item": "minecraft:stick"
+      "item": "minecraft:chain"
     }
   },
   "pattern": [
+    "I I",
     "###",
-    "###",
-    " I "
+    "###"
   ],
   "result": {
     "count": 3,

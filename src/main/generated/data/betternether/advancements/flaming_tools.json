@@ -71,7 +71,7 @@
     "hidden": false,
     "icon": {
       "item": "betternether:flaming_ruby_pickaxe",
-      "nbt": "{Damage:0,Enchantments:[{id:\"betternether:obsidian_breaker\",lvl:3s},{id:\"minecraft:mending\",lvl:1s},{id:\"betternether:ruby_fire\",lvl:1s}]}"
+      "nbt": "{Damage:0,Enchantments:[{id:\"minecraft:mending\",lvl:1s},{id:\"betternether:obsidian_breaker\",lvl:3s},{id:\"betternether:ruby_fire\",lvl:1s}]}"
     },
     "show_toast": true,
     "title": {

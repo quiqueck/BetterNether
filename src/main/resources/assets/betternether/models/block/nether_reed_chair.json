@@ -1,6 +1,6 @@
 {
-    "parent": "betternether:block/bn_chair",
-    "textures": {
-        "texture": "betternether:block/nether_reed_planks_side"
-    }
+  "parent": "bclib:block/chair",
+  "textures": {
+    "texture": "betternether:block/nether_reed_planks_side"
+  }
 }

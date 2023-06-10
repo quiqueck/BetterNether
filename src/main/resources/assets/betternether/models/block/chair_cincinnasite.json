@@ -1,5 +1,5 @@
 {
-    "parent": "betternether:block/bn_chair",
+    "parent": "bclib:block/chair",
     "textures": {
         "texture": "betternether:block/cincinnasite_forged"
     }

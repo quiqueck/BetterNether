@@ -1,5 +1,5 @@
 {
-    "parent": "betternether:block/bn_bar_stool",
+    "parent": "bclib:block/bar_stool",
     "textures": {
         "texture": "block/warped_planks",
         "cloth": "block/red_wool"

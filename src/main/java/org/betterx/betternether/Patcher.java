@@ -15,6 +15,20 @@ public class Patcher {
     public static void register() {
         DataFixerAPI.registerPatch(Patcher_001::new);
         DataFixerAPI.registerPatch(Patcher_002::new);
+        DataFixerAPI.registerPatch(Patcher_003::new);
+    }
+}
+
+class Patcher_003 extends Patch {
+    public Patcher_003() {
+        super(BetterNether.MOD_ID, "9.0.1");
+    }
+
+    @Override
+    public Map<String, String> getIDReplacements() {
+        return Map.ofEntries(
+                Map.entry("betternether:chair", "bclib:chair")
+        );
     }
 }
 

@@ -8,10 +8,6 @@ public class NetherSlots {
     public static final MaterialSlot<WoodenComplexMaterial> STRIPPED_BARK = new NetherStrippedBark();
     public static final MaterialSlot<WoodenComplexMaterial> LOG = new NetherLog();
     public static final MaterialSlot<WoodenComplexMaterial> BARK = new NetherBark();
-
-    public static final MaterialSlot<WoodenComplexMaterial> TABURET = new Taburet();
-    public static final MaterialSlot<WoodenComplexMaterial> CHAIR = new Chair();
-    public static final MaterialSlot<WoodenComplexMaterial> BAR_STOOL = new BarStool();
     public static final MaterialSlot<WoodenComplexMaterial> STEM = new Stem();
     public static final MaterialSlot<WoodenComplexMaterial> ROOF = new Roof();
     public static final MaterialSlot<WoodenComplexMaterial> ROOF_STAIRS = new RoofStairs();

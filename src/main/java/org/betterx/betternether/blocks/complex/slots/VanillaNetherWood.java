@@ -40,9 +40,9 @@ public class VanillaNetherWood extends VanillaFallback<VanillaNetherWood> {
                 WoodSlots.LADDER,
                 WoodSlots.BOAT,
                 WoodSlots.CHEST_BOAT,
-                NetherSlots.TABURET,
-                NetherSlots.BAR_STOOL,
-                NetherSlots.CHAIR
+                WoodSlots.TABURET,
+                WoodSlots.BAR_STOOL,
+                WoodSlots.CHAIR
         );
     }
 }

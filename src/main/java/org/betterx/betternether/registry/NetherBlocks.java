@@ -3,13 +3,20 @@ package org.betterx.betternether.registry;
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
 import org.betterx.bclib.blocks.BaseButtonBlock;
 import org.betterx.bclib.blocks.BasePressurePlateBlock;
+import org.betterx.bclib.complexmaterials.set.wood.BarStool;
+import org.betterx.bclib.complexmaterials.set.wood.Chair;
+import org.betterx.bclib.complexmaterials.set.wood.Taburet;
 import org.betterx.bclib.blocks.BaseSlabBlock;
 import org.betterx.bclib.blocks.BaseStairsBlock;
+import org.betterx.bclib.furniture.block.BaseBarStool;
+import org.betterx.bclib.furniture.block.BaseChair;
+import org.betterx.bclib.furniture.block.BaseTaburet;
 import org.betterx.bclib.registry.BlockRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
-import org.betterx.betternether.blocks.complex.slots.*;
+import org.betterx.betternether.blocks.complex.slots.VanillaNetherWood;
+import org.betterx.betternether.blocks.complex.slots.VanillaWood;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
@@ -874,7 +881,7 @@ public class NetherBlocks extends BlockRegistry {
 
 
     public static Block registerTaburet(String name, Block source) {
-        Block block = new BNTaburet(source);
+        Block block = new BaseTaburet(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);
@@ -891,7 +898,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static Block registerChair(String name, Block source) {
-        Block block = new BNNormalChair(source);
+        Block block = new BaseChair(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);
@@ -907,7 +914,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static Block registerBarStool(String name, Block source) {
-        Block block = new BNBarStool(source);
+        Block block = new BaseBarStool(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);

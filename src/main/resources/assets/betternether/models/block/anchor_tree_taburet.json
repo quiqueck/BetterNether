@@ -1,8 +1,6 @@
 {
-	"parent": "betternether:block/oak_taburet",
-	"textures": {
-		"particle": "betternether:block/anchor_tree_planks",
-		"texture": "betternether:block/anchor_tree_planks",
-		"top": "betternether:block/anchor_tree_planks"
-	}
+  "parent": "bclib:block/taburet",
+  "textures": {
+    "texture": "betternether:block/anchor_tree_planks"
+  }
 }

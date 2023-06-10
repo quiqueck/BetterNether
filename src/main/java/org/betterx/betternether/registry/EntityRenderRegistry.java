@@ -1,11 +1,11 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.bclib.registry.BaseBlockEntityRenders;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.entity.model.*;
 import org.betterx.betternether.entity.render.*;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -34,10 +34,9 @@ public class EntityRenderRegistry {
 
     public static void register() {
         registerRenderMob(NetherEntities.FIREFLY.type(), RenderFirefly.class);
-        registerRenderAny(NetherEntities.CHAIR, RenderChair.class);
         registerRenderMob(NetherEntities.HYDROGEN_JELLYFISH.type(), RenderHydrogenJellyfish.class);
         registerRenderMob(NetherEntities.NAGA.type(), RenderNaga.class);
-        registerRenderAny(NetherEntities.NAGA_PROJECTILE, RenderNagaProjectile.class);
+        BaseBlockEntityRenders.registerRender(NetherEntities.NAGA_PROJECTILE, RenderNagaProjectile.class);
         registerRenderMob(NetherEntities.FLYING_PIG.type(), RenderFlyingPig.class);
         registerRenderMob(NetherEntities.JUNGLE_SKELETON.type(), RenderJungleSkeleton.class);
         registerRenderMob(NetherEntities.SKULL.type(), RenderSkull.class);
@@ -57,19 +56,6 @@ public class EntityRenderRegistry {
     private static void registerRenderMob(EntityType<?> entity, Class<? extends MobRenderer<?, ?>> renderer) {
         EntityRendererRegistry.register(entity, (context) -> {
             MobRenderer render = null;
-            try {
-                render = renderer.getConstructor(context.getClass())
-                                 .newInstance(context);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return render;
-        });
-    }
-
-    private static void registerRenderAny(EntityType<?> entity, Class<? extends EntityRenderer<?>> renderer) {
-        EntityRendererRegistry.register(entity, (context) -> {
-            EntityRenderer render = null;
             try {
                 render = renderer.getConstructor(context.getClass())
                                  .newInstance(context);

@@ -119,17 +119,7 @@ public class NetherEntities {
     public static final Map<EntityType<? extends Entity>, AttributeSupplier> ATTRIBUTES = Maps.newHashMap();
     private static final List<BCLEntityWrapper<?>> NETHER_ENTITIES = Lists.newArrayList();
 
-    public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(
-                                                                                       MobCategory.MISC,
-                                                                                       EntityChair::new
-                                                                               )
-                                                                               .dimensions(EntityDimensions.fixed(
-                                                                                       0.5F,
-                                                                                       0.8F
-                                                                               ))
-                                                                               .fireImmune()
-                                                                               .disableSummon()
-                                                                               .build();
+
     public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder
             .create(
                     MobCategory.MISC,
@@ -279,7 +269,6 @@ public class NetherEntities {
 
 
     public static void register() {
-        registerEntity("chair", CHAIR, EntityChair.getAttributeContainer());
         registerEntity("naga_projectile", NAGA_PROJECTILE);
 
         SpawnRuleBuilder

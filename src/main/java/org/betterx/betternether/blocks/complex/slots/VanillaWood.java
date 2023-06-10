@@ -19,9 +19,9 @@ public class VanillaWood extends VanillaFallback<VanillaWood> {
     @Override
     protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
         return SlotMap.of(
-                NetherSlots.TABURET,
-                NetherSlots.BAR_STOOL,
-                NetherSlots.CHAIR
+                WoodSlots.TABURET,
+                WoodSlots.BAR_STOOL,
+                WoodSlots.CHAIR
         );
     }
 

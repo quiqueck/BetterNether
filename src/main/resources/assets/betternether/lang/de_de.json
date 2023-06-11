@@ -730,7 +730,7 @@
   "itemGroup.betternether.items": "BetterNether: Gegenstände",
   "itemGroup.betternether.nature": "BetterNether: Natur",
   "message.spawn_help": "§c§lDu musst §r %s §c§lhalten um deinen Spawn-Punkt hier zu setzen.",
-  "message.spawn_set": "§2§lDein Span-Punkt wurde hier gesetzt.",
+  "message.spawn_set": "§2§lDein Spawn-Punkt wurde hier gesetzt.",
   "tag.betternether.anchor_tree_logs": "Ankerbaumstämme",
   "tag.betternether.mushroom_fir_logs": "Pilztannenstämme",
   "tag.betternether.nether_mushroom_logs": "Pilzstämme",

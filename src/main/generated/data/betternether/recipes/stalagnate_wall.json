@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall",
+  "key": {
+    "*": {
+      "item": "betternether:stalagnate_planks"
+    },
+    "|": {
+      "item": "betternether:stalagnate_fence"
+    }
+  },
+  "pattern": [
+    "* *",
+    "|||"
+  ],
+  "result": {
+    "count": 6,
+    "item": "betternether:stalagnate_wall"
+  },
+  "show_notification": true
+}

@@ -20,27 +20,28 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootParams;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.ToIntFunction;
 
 public class BlockNetherFurnace extends AbstractFurnaceBlock implements BehaviourStone {
     public BlockNetherFurnace(Block source) {
-        super(FabricBlockSettings.copyOf(source).requiresTool().lightLevel(getLuminance()));
+        super(BlockBehaviour.Properties
+                .copy(source)
+                .requiresCorrectToolForDrops()
+                .lightLevel(BlockNetherFurnace::getLuminance)
+        );
     }
 
-    private static ToIntFunction<BlockState> getLuminance() {
-        return (blockState) -> {
-            return (Boolean) blockState.getValue(BlockStateProperties.LIT) ? 13 : 0;
-        };
+    private static int getLuminance(BlockState blockState) {
+        return blockState.getOptionalValue(BlockStateProperties.LIT).orElse(false) ? 13 : 0;
     }
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

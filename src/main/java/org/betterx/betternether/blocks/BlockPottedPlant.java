@@ -25,7 +25,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.ToIntFunction;
 
 public class BlockPottedPlant extends BlockBaseNotFull implements AddMineableHoe {
     public static final EnumProperty<PottedPlantShape> PLANT = BNBlockProperties.PLANT;
@@ -33,22 +32,25 @@ public class BlockPottedPlant extends BlockBaseNotFull implements AddMineableHoe
     public BlockPottedPlant() {
         super(Materials.NETHER_PLANT
                 .mapColor(MapColor.COLOR_BLACK)
-                .lightLevel(getLuminance()).offsetType(OffsetType.NONE));
+                .lightLevel(BlockPottedPlant::getLuminance)
+                .offsetType(OffsetType.NONE)
+        );
         this.setDropItself(false);
-        
+
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(PLANT, PottedPlantShape.AGAVE));
     }
 
-    private static ToIntFunction<BlockState> getLuminance() {
-        return (blockState) -> {
-            if (blockState.getValue(PLANT) == PottedPlantShape.WILLOW)
-                return 12;
-            else if (blockState.getValue(PLANT) == PottedPlantShape.JELLYFISH_MUSHROOM)
-                return 13;
-            else
-                return 0;
-        };
+    private static int getLuminance(BlockState blockState) {
+        if (!blockState.hasProperty(PLANT)) return 0;
+
+        if (blockState.getValue(PLANT) == PottedPlantShape.WILLOW)
+            return 12;
+        else if (blockState.getValue(PLANT) == PottedPlantShape.JELLYFISH_MUSHROOM)
+            return 13;
+        else
+            return 0;
+
     }
 
     @Override

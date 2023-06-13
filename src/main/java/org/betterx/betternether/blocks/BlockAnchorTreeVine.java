@@ -25,8 +25,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import java.util.function.ToIntFunction;
-
 public class BlockAnchorTreeVine extends BlockBaseNotFull implements BehaviourClimableVine {
     protected static final VoxelShape SHAPE_SELECTION = Block.box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
@@ -35,15 +33,13 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull implements BehaviourCl
         super(Materials.NETHER_PLANT
                 .mapColor(MapColor.COLOR_GREEN)
                 .noLootTable()
-                .lightLevel(getLuminance()));
+                .lightLevel(BlockAnchorTreeVine::getLuminance));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         setDropItself(false);
     }
 
-    protected static ToIntFunction<BlockState> getLuminance() {
-        return (blockState) -> blockState.getOptionalValue(SHAPE).orElse(TripleShape.TOP) == TripleShape.BOTTOM
-                ? 15
-                : 0;
+    protected static int getLuminance(BlockState blockState) {
+        return blockState.getOptionalValue(SHAPE).map(s -> s == TripleShape.BOTTOM ? 15 : 0).orElse(0);
     }
 
     public BlockBehaviour.OffsetType getOffsetType() {

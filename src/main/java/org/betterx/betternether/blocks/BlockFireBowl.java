@@ -32,22 +32,18 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import java.util.function.ToIntFunction;
-
 public abstract class BlockFireBowl extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 12, 16);
     public static final BooleanProperty FIRE = BNBlockProperties.FIRE;
 
     protected BlockFireBowl(Block source) {
-        super(FabricBlockSettings.copyOf(source).noOcclusion().lightLevel(getLuminance()));
+        super(FabricBlockSettings.copyOf(source).noOcclusion().lightLevel(BlockFireBowl::getLuminance));
         this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
-    protected static ToIntFunction<BlockState> getLuminance() {
-        return (state) -> {
-            return state.getValue(FIRE) ? 15 : 0;
-        };
+    protected static int getLuminance(BlockState state) {
+        return state.getOptionalValue(FIRE).orElse(false) ? 15 : 0;
     }
 
     @Override

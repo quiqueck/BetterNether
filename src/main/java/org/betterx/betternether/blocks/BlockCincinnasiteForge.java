@@ -26,19 +26,15 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import java.util.function.ToIntFunction;
-
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock implements BehaviourMetal {
     public BlockCincinnasiteForge() {
         super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK)
                                  .requiresCorrectToolForDrops()
-                                 .lightLevel(getLuminance()));
+                                 .lightLevel(BlockCincinnasiteForge::getLuminance));
     }
 
-    private static ToIntFunction<BlockState> getLuminance() {
-        return (blockState) -> {
-            return (Boolean) blockState.getValue(BlockStateProperties.LIT) ? 13 : 0;
-        };
+    private static int getLuminance(BlockState blockState) {
+        return blockState.getOptionalValue(BlockStateProperties.LIT).orElse(false) ? 13 : 0;
     }
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

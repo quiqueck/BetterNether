@@ -26,7 +26,6 @@ import net.fabricmc.api.Environment;
 import com.google.common.collect.Lists;
 
 import java.util.List;
-import java.util.function.ToIntFunction;
 
 public class BlockWillowBranch extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape V_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
@@ -36,16 +35,14 @@ public class BlockWillowBranch extends BlockBaseNotFull implements AddMineableAx
         super(Materials.makeNetherWood(MapColor.TERRACOTTA_RED)
                        .noOcclusion()
                        .noCollission()
-                       .lightLevel(getLuminance()));
+                       .lightLevel(BlockWillowBranch::getLuminance));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, WillowBranchShape.MIDDLE));
     }
 
-    protected static ToIntFunction<BlockState> getLuminance() {
-        return (state) -> {
-            return state.getValue(SHAPE) == WillowBranchShape.END ? 15 : 0;
-        };
+    protected static int getLuminance(BlockState state) {
+        return state.getOptionalValue(SHAPE).map(s -> s == WillowBranchShape.END ? 15 : 0).orElse(0);
     }
 
     @Environment(EnvType.CLIENT)

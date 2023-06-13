@@ -5,8 +5,8 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTemplates;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.Deserializers;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -18,13 +18,22 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 
 import com.google.common.collect.Lists;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 
 public class BNLoot {
-    private static final Gson GSON = Deserializers.createLootTableSerializer().create();
+    public static final ResourceLocation CITY_LOOT = BetterNether.makeID("chests/city");
+    public static final ResourceLocation LIBRARY_LOOT = BetterNether.makeID("chests/library");
+    public static final ResourceLocation WITHER_TOWER_LOOT = BetterNether.makeID("chests/wither_tower");
+    public static final ResourceLocation WITHER_TOWER_BONUS_LOOT = BetterNether.makeID("chests/wither_tower_bonus");
+    public static final ResourceLocation GHAST_HIVE = BetterNether.makeID("chests/ghast_hive");
+
+    public static final ResourceLocation FIREFLY = BetterNether.makeID("entities/firefly");
+    public static final ResourceLocation FLYING_PIG = BetterNether.makeID("entities/flying_pig");
+    public static final ResourceLocation JUNGLE_SKELETON = BetterNether.makeID("entities/jungle_skeleton");
+    public static final ResourceLocation NAGA = BetterNether.makeID("entities/naga");
+    public static final ResourceLocation SKULL = BetterNether.makeID("entities/skull");
 
     public static void register() {
 

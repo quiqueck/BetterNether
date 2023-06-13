@@ -1,5 +1,5 @@
 {
-    "textures": {
-        "particle": "betternether:block/nether_reed_planks_side"
-    }
+  "textures": {
+    "particle": "betternether:block/nether_reed_planks"
+  }
 }

@@ -42,12 +42,13 @@
     "fabricloader": ">=0.14.21",
     "fabric": ">=0.83.0",
     "minecraft": [
-      "1.20"
+      "1.20",
+      "1.20.1"
     ],
     "bclib": "3.0.x"
   },
   "breaks": {
-    "bclib": "<3.0.3"
+    "bclib": "<3.0.5"
   },
   "custom": {
     "bclib": {

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
@@ -20,7 +21,7 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockStem extends BlockBaseNotFull {
+public class BlockStem extends BlockBaseNotFull implements BehaviourWood {
     public static final EnumProperty<Axis> AXIS = BlockStateProperties.AXIS;
     private static final EnumMap<Axis, VoxelShape> OUTLINES = Maps.newEnumMap(Axis.class);
 

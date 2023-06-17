@@ -888,7 +888,7 @@ public class NetherBlocks extends BlockRegistry {
 
 
     public static Block registerTaburet(String name, Block source) {
-        Block block = new BaseTaburet(source);
+        Block block = BaseTaburet.from(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);
@@ -905,7 +905,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static Block registerChair(String name, Block source) {
-        Block block = new BaseChair(source);
+        Block block = BaseChair.from(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);
@@ -921,7 +921,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static Block registerBarStool(String name, Block source) {
-        Block block = new BaseBarStool(source);
+        Block block = BaseBarStool.from(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             addFuel(source, block);

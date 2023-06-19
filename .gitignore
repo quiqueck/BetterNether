@@ -33,3 +33,5 @@ run-client/
 CurseForge/
 /run-server/
 /src/main/generated/.cache/
+/CHANGES.md
+/modrinth.json

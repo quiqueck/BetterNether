@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "betternether:bar_stool_cincinnasite",
-    "betternether:bar_stool_cincinnasite",
     "betternether:basalt_bricks",
     "betternether:basalt_bricks_slab",
     "betternether:basalt_bricks_stairs",
@@ -35,7 +34,6 @@
     "betternether:bricks_fire_bowl",
     "betternether:bricks_fire_bowl_soul",
     "betternether:ceiling_mushrooms",
-    "betternether:chair_cincinnasite",
     "betternether:chair_cincinnasite",
     "betternether:chest_of_drawers",
     "betternether:cincinnasite_anvil",
@@ -184,7 +182,6 @@
     "betternether:soul_sandstone_stairs",
     "betternether:soul_sandstone_wall",
     "betternether:swampland_grass",
-    "betternether:taburet_cincinnasite",
     "betternether:taburet_cincinnasite",
     "betternether:weeping_obsidian"
   ]

@@ -130,8 +130,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:feather_falling",
                 "minecraft:mending",
+                "minecraft:feather_falling",
                 "minecraft:fire_protection"
               ],
               "function": "minecraft:enchant_randomly"
@@ -203,8 +203,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:feather_falling",
                 "minecraft:mending",
+                "minecraft:feather_falling",
                 "minecraft:fire_protection"
               ],
               "function": "minecraft:enchant_randomly"

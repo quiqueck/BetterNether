@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "betternether:black_apple",
+    "betternether:ink_bush",
+    "betternether:ink_bush_seed",
+    "betternether:magma_flower",
+    "betternether:nether_grass",
+    "betternether:nether_reed_stem",
+    "betternether:potted_plant",
+    "betternether:soul_grass",
+    "betternether:soul_vein",
+    "betternether:swamp_grass",
+    "minecraft:nether_wart"
+  ]
+}

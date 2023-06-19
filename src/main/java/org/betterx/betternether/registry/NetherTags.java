@@ -1,7 +1,6 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.tags.BlockTags;
@@ -10,14 +9,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class NetherTags {
-//	public static final Tag<Block> SOUL_GROUND_BLOCK = TagAPI.makeCommonBlockTag( "soul_ground");
-//	public static final Tag<Block> NETHERRACK = TagAPI.makeCommonBlockTag("netherrack");
-//	public static final Tag<Block> MYCELIUM = TagAPI.makeCommonBlockTag("nether_mycelium");
-    //public static final TagAPI.TagKey<Block> NYLIUM = TagAPI.BLOCK_NYLIUM;
-
     public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagManager.BIOMES.makeStructureTag(
             BetterNether.MOD_ID,
             "nether_decorations"
@@ -31,40 +24,28 @@ public class NetherTags {
     public static final TagKey<Block> NETHER_SAND = TagManager.BLOCKS.makeCommonTag("nether_sand");
     public static final TagKey<Biome> BETTER_NETHER = TagManager.BIOMES.makeTag(BetterNether.MOD_ID, "biome");
 
+    public static final TagKey<Block> FIREFLY_FLOWERS = TagManager.BLOCKS.makeTag(
+            BetterNether.MOD_ID,
+            "firefly_flowers"
+    );
+
     public static void register() {
         TagManager.BLOCKS.add(NETHER_SAND, Blocks.SOUL_SAND);
-
-        NetherBlocks.getModBlocks().forEach(block -> {
-            BlockBehaviour.Properties properties = ((BlockBehaviourAccessor) block).getProperties();
-            Item item = block.asItem();
-
-//            if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
-//                TagManager.BLOCKS.add(MineableTags.PICKAXE, block);
-//            } else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
-//                TagManager.BLOCKS.add(MineableTags.AXE, block);
-//            } else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || material.equals(
-//                    Material.WATER_PLANT)) {
-//                TagManager.BLOCKS.add(MineableTags.HOE, block);
-//                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
-//                ComposterAPI.allowCompost(0.3f, item);
-//            } else if (material.equals(Material.SAND)) {
-//                TagManager.BLOCKS.add(MineableTags.SHOVEL, block);
-//            }
-
-//            if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
-//                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
-//                ComposterAPI.allowCompost(0.3f, item);
-//            }
-			/*else if (block instanceof BlockCincinnasitePedestal) {
-				TagHelper.addTag(PEDESTALS, block);
-			}*/
-
-//            Material mat = block.defaultBlockState().getMaterial();
-//            if (mat.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || mat.equals(Material.REPLACEABLE_PLANT)) {
-//                ComposterAPI.allowCompost(0.1f, item);
-//            }
-        });
-
         TagManager.BLOCKS.add(BlockTags.BEACON_BASE_BLOCKS, NetherBlocks.NETHER_RUBY_BLOCK);
+
+        TagManager.BLOCKS.add(
+                FIREFLY_FLOWERS,
+                NetherBlocks.NETHER_GRASS,
+                NetherBlocks.SOUL_GRASS,
+                NetherBlocks.SWAMP_GRASS,
+                NetherBlocks.BLACK_APPLE,
+                NetherBlocks.MAGMA_FLOWER,
+                NetherBlocks.SOUL_VEIN,
+                NetherBlocks.MAT_REED.getStem(),
+                NetherBlocks.INK_BUSH,
+                NetherBlocks.INK_BUSH_SEED,
+                NetherBlocks.POTTED_PLANT,
+                Blocks.NETHER_WART
+        );
     }
 }

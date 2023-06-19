@@ -5,6 +5,7 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
+import org.betterx.betternether.registry.NetherTags;
 import org.betterx.betternether.registry.SoundsRegistry;
 
 import net.minecraft.core.BlockPos;
@@ -38,8 +39,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -49,10 +48,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumSet;
-import java.util.HashSet;
 
 public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
-    private static final HashSet<Block> FLOWERS;
     private static final Vec3i[] SEARCH;
 
     private static final EntityDataAccessor<Float> COLOR_RED = SynchedEntityData.defineId(
@@ -358,8 +355,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         }
 
         private boolean isFlower(BlockState state) {
-            Block b = state.getBlock();
-            return FLOWERS.contains(b);
+            return state.is(NetherTags.FIREFLY_FLOWERS);
         }
 
         @Override
@@ -545,19 +541,6 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
             }
         });
         SEARCH = points.toArray(new Vec3i[]{});
-
-        FLOWERS = new HashSet<Block>();
-        FLOWERS.add(NetherBlocks.NETHER_GRASS);
-        FLOWERS.add(NetherBlocks.SOUL_GRASS);
-        FLOWERS.add(NetherBlocks.SWAMP_GRASS);
-        FLOWERS.add(NetherBlocks.BLACK_APPLE);
-        FLOWERS.add(NetherBlocks.MAGMA_FLOWER);
-        FLOWERS.add(NetherBlocks.SOUL_VEIN);
-        FLOWERS.add(NetherBlocks.MAT_REED.getStem());
-        FLOWERS.add(NetherBlocks.INK_BUSH);
-        FLOWERS.add(NetherBlocks.INK_BUSH_SEED);
-        FLOWERS.add(NetherBlocks.POTTED_PLANT);
-        FLOWERS.add(Blocks.NETHER_WART);
     }
 
     public static boolean canSpawn(

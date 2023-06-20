@@ -48,7 +48,7 @@
     "bclib": "3.0.x"
   },
   "breaks": {
-    "bclib": "<3.0.6"
+    "bclib": "<3.0.9"
   },
   "custom": {
     "bclib": {

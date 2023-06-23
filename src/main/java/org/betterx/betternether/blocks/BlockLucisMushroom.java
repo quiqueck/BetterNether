@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BNBlockProperties.EnumLucisShape;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
@@ -35,13 +35,13 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
     public static final EnumProperty<EnumLucisShape> SHAPE = BNBlockProperties.LUCIS_SHAPE;
 
     public BlockLucisMushroom() {
-        super(Materials.NETHER_GRASS
-                .mapColor(MapColor.COLOR_YELLOW)
+        super(BehaviourBuilders
+                .createWalkablePlant(MapColor.COLOR_YELLOW)
                 .lightLevel((bs) -> 15)
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.WOOD)
                 .strength(1F)
-                .noOcclusion());
+        );
         this.registerDefaultState(getStateDefinition().any()
                                                       .setValue(FACING, Direction.NORTH)
                                                       .setValue(SHAPE, EnumLucisShape.CORNER));

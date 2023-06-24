@@ -35,3 +35,4 @@ CurseForge/
 /src/main/generated/.cache/
 /CHANGES.md
 /modrinth.json
+/tools/node_modules/

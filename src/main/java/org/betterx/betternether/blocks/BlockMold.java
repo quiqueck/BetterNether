@@ -45,7 +45,8 @@ class BaseBlockMold extends BlockBaseNotFull {
 
     public BaseBlockMold(MapColor color, Function<Properties, Properties> adaptProperties) {
         super(adaptProperties.apply(Materials.makeNetherGrass(color)
-                                             .sound(SoundType.CROP))
+                                             .sound(SoundType.CROP)
+                                             .randomTicks())
         );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);

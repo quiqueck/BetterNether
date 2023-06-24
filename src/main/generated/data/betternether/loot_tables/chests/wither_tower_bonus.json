@@ -11,6 +11,22 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
+                "max": 12.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:netherrack",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
                 "max": 8.0,
                 "min": 2.0
               },
@@ -24,9 +40,25 @@
           "type": "minecraft:item",
           "name": "minecraft:flint_and_steel",
           "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 12.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:quartz",
+          "weight": 8
         }
       ],
-      "rolls": 1.0
+      "rolls": 2.0
     },
     {
       "bonus_rolls": 0.0,
@@ -42,9 +74,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:mending",
+                "minecraft:sharpness",
                 "minecraft:looting",
-                "minecraft:sharpness"
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -131,8 +163,8 @@
             {
               "enchantments": [
                 "minecraft:fire_protection",
-                "minecraft:mending",
-                "minecraft:feather_falling"
+                "minecraft:feather_falling",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -204,8 +236,8 @@
             {
               "enchantments": [
                 "minecraft:fire_protection",
-                "minecraft:mending",
-                "minecraft:feather_falling"
+                "minecraft:feather_falling",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }

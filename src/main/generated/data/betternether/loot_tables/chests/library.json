@@ -131,9 +131,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:efficiency",
+                "minecraft:silk_touch",
                 "minecraft:unbreaking",
-                "minecraft:silk_touch"
+                "minecraft:efficiency"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -145,10 +145,10 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:efficiency",
                 "minecraft:mending",
+                "minecraft:silk_touch",
                 "minecraft:unbreaking",
-                "minecraft:silk_touch"
+                "minecraft:efficiency"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -161,10 +161,10 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:efficiency",
                 "minecraft:mending",
+                "minecraft:silk_touch",
                 "minecraft:unbreaking",
-                "minecraft:silk_touch"
+                "minecraft:efficiency"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -177,10 +177,10 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:efficiency",
                 "minecraft:mending",
+                "minecraft:silk_touch",
                 "minecraft:unbreaking",
-                "minecraft:silk_touch"
+                "minecraft:efficiency"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -294,6 +294,22 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
+                "max": 12.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:netherrack",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
                 "max": 8.0,
                 "min": 2.0
               },
@@ -307,9 +323,25 @@
           "type": "minecraft:item",
           "name": "minecraft:flint_and_steel",
           "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 12.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:quartz",
+          "weight": 8
         }
       ],
-      "rolls": 1.0
+      "rolls": 2.0
     }
   ]
 }

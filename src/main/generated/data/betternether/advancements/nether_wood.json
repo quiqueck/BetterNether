@@ -20,8 +20,8 @@
         "items": [
           {
             "items": [
-              "minecraft:crimson_planks",
               "minecraft:crimson_stem",
+              "minecraft:crimson_planks",
               "minecraft:crimson_hyphae"
             ]
           }
@@ -61,8 +61,8 @@
         "items": [
           {
             "items": [
-              "betternether:nether_reed_planks",
-              "betternether:nether_reed_stem"
+              "betternether:nether_reed_stem",
+              "betternether:nether_reed_planks"
             ]
           }
         ]
@@ -74,9 +74,9 @@
         "items": [
           {
             "items": [
-              "betternether:nether_sakura_planks",
               "betternether:nether_sakura_bark",
-              "betternether:nether_sakura_log"
+              "betternether:nether_sakura_log",
+              "betternether:nether_sakura_planks"
             ]
           }
         ]
@@ -103,8 +103,8 @@
           {
             "items": [
               "betternether:stalagnate_planks",
-              "betternether:stalagnate_log",
-              "betternether:stalagnate_bark"
+              "betternether:stalagnate_bark",
+              "betternether:stalagnate_log"
             ]
           }
         ]
@@ -117,8 +117,8 @@
           {
             "items": [
               "minecraft:warped_planks",
-              "minecraft:warped_stem",
-              "minecraft:warped_hyphae"
+              "minecraft:warped_hyphae",
+              "minecraft:warped_stem"
             ]
           }
         ]
@@ -130,8 +130,8 @@
         "items": [
           {
             "items": [
-              "betternether:wart_log",
               "betternether:wart_bark",
+              "betternether:wart_log",
               "betternether:wart_planks"
             ]
           }
@@ -145,8 +145,8 @@
           {
             "items": [
               "betternether:willow_bark",
-              "betternether:willow_log",
-              "betternether:willow_planks"
+              "betternether:willow_planks",
+              "betternether:willow_log"
             ]
           }
         ]

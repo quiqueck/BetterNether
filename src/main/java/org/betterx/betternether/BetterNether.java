@@ -34,7 +34,7 @@ public class BetterNether implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("=^..^=    BetterNether for 1.19    =^..^=");
+        LOGGER.info("=^..^=    BetterNether for 1.20    =^..^=");
         //MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures/lava"));
         initOptions();
         SoundsRegistry.ensureStaticallyLoaded();

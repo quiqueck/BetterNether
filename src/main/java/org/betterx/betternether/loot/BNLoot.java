@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 public class BNLoot {
     public static final ResourceLocation CITY_LOOT = BetterNether.makeID("chests/city");
+    public static final ResourceLocation CITY_LOOT_COMMON = BetterNether.makeID("chests/city_common");
+    public static final ResourceLocation CITY_LOOT_SURPRISE = BetterNether.makeID("chests/city_surprise");
     public static final ResourceLocation LIBRARY_LOOT = BetterNether.makeID("chests/library");
     public static final ResourceLocation WITHER_TOWER_LOOT = BetterNether.makeID("chests/wither_tower");
     public static final ResourceLocation WITHER_TOWER_BONUS_LOOT = BetterNether.makeID("chests/wither_tower_bonus");

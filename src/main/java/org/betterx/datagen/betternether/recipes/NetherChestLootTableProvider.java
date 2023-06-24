@@ -41,8 +41,28 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                 LootTable.lootTable()
                          .withPool(simpleCityLoot())
                          .withPool(simpleOreLoot())
-                         .withPool(simpleTemplates(1))
+                         .withPool(simpleTemplates(1, 0.2f))
                          .withPool(netherFiller())
+        );
+
+        biConsumer.accept(
+                BNLoot.CITY_LOOT_COMMON,
+                LootTable.lootTable()
+                         .withPool(simpleCityLoot())
+                         .withPool(netherFiller())
+                         .withPool(netherObsidian())
+                         .withPool(simpleOreLoot().when(LootItemRandomChanceCondition.randomChance(0.4f)))
+                         .withPool(simpleTemplates(1, 0.1f))
+        );
+
+        biConsumer.accept(
+                BNLoot.CITY_LOOT_SURPRISE,
+                LootTable.lootTable()
+                         .withPool(simpleCityLoot())
+                         .withPool(netherFiller())
+                         .withPool(netherObsidian())
+                         .withPool(simpleOreLoot().when(LootItemRandomChanceCondition.randomChance(0.4f)))
+                         .withPool(surpriseItem())
         );
 
         biConsumer.accept(
@@ -60,7 +80,7 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                 BNLoot.WITHER_TOWER_LOOT,
                 LootTable.lootTable()
                          .withPool(netherFiller())
-                         .withPool(simpleTemplates(3))
+                         .withPool(simpleTemplates(3, 0.3f))
                          .withPool(bonusOreLoot())
                          .withPool(simpleSwords())
                          .withPool(hoes())
@@ -86,6 +106,29 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                 LootTable.lootTable()
                          .withPool(ghastHive())
         );
+    }
+
+    private LootPool.Builder surpriseItem() {
+        return LootPool
+                .lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .add(LootItem
+                        .lootTableItem(NetherBlocks.NETHER_RUBY_BLOCK)
+                        .setWeight(15)
+                )
+                .add(LootItem
+                        .lootTableItem(NetherBlocks.NETHER_RUBY_BLOCK)
+                        .setWeight(15)
+                )
+                .add(LootItem
+                        .lootTableItem(Blocks.NETHERITE_BLOCK)
+                        .setWeight(3)
+                )
+                .add(LootItem
+                        .lootTableItem(NetherItems.FLAMING_RUBY_SET.getSlot(EquipmentSet.CHESTPLATE_SLOT))
+                        .setWeight(1)
+                )
+                .when(LootItemRandomChanceCondition.randomChance(0.1f));
     }
 
     private LootPool.Builder ghastHive() {
@@ -207,7 +250,7 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
     }
 
 
-    private LootPool.Builder simpleTemplates(int max) {
+    private LootPool.Builder simpleTemplates(int max, float chance) {
         return LootPool
                 .lootPool()
                 .setRolls(ConstantValue.exactly(1))
@@ -225,7 +268,7 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                         .setWeight(2)
 
                 )
-                .when(LootItemRandomChanceCondition.randomChance(0.2F));
+                .when(LootItemRandomChanceCondition.randomChance(chance));
     }
 
     private LootPool.Builder flamingTemplate(int max, float chance) {
@@ -349,17 +392,56 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
 
     }
 
+    private LootPool.Builder netherObsidian() {
+        return LootPool
+                .lootPool()
+                .setRolls(ConstantValue.exactly(3))
+                .add(LootItem
+                        .lootTableItem(Blocks.OBSIDIAN)
+                        .setWeight(9)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 8)))
+                ).add(LootItem
+                        .lootTableItem(NetherBlocks.BLUE_OBSIDIAN)
+                        .setWeight(9)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 8)))
+                ).add(LootItem
+                        .lootTableItem(Blocks.CRYING_OBSIDIAN)
+                        .setWeight(3)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                ).add(LootItem
+                        .lootTableItem(NetherBlocks.BLUE_CRYING_OBSIDIAN)
+                        .setWeight(3)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                ).add(LootItem
+                        .lootTableItem(NetherBlocks.WEEPING_OBSIDIAN)
+                        .setWeight(1)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                ).add(LootItem
+                        .lootTableItem(NetherBlocks.BLUE_WEEPING_OBSIDIAN)
+                        .setWeight(1)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                );
+    }
+
     private LootPool.Builder netherFiller() {
         return LootPool
                 .lootPool()
-                .setRolls(ConstantValue.exactly(1))
+                .setRolls(ConstantValue.exactly(2))
                 .add(LootItem
+                        .lootTableItem(Blocks.NETHERRACK)
+                        .setWeight(12)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 12)))
+                ).add(LootItem
                         .lootTableItem(Items.NETHER_WART)
                         .setWeight(3)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 8)))
                 ).add(LootItem
                         .lootTableItem(Items.FLINT_AND_STEEL)
                         .setWeight(5)
+                ).add(LootItem
+                        .lootTableItem(Items.QUARTZ)
+                        .setWeight(8)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 12)))
                 );
     }
 

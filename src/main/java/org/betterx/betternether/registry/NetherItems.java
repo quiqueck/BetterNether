@@ -1,5 +1,7 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.bclib.BCLib;
+import org.betterx.bclib.items.DebugDataItem;
 import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
@@ -12,6 +14,7 @@ import org.betterx.betternether.items.complex.DiamondSet;
 import org.betterx.betternether.items.complex.NetherSet;
 import org.betterx.betternether.items.materials.BNArmorMaterial;
 import org.betterx.betternether.items.materials.BNToolMaterial;
+import org.betterx.betternether.loot.BNLoot;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.core.BlockSource;
@@ -281,6 +284,29 @@ public class NetherItems extends ItemRegistry {
             return egg;
         } else {
             return Items.AIR;
+        }
+    }
+
+    public static Item registerNetherItem(String name, Item item) {
+        return getItemRegistry().register(BetterNether.makeID(name), item);
+    }
+
+    static {
+        if (BCLib.isDevEnvironment()) {
+            BetterNether.LOGGER.warning("Generating Debug Helpers");
+
+            registerNetherItem(
+                    "debug/city_loot",
+                    DebugDataItem.forLootTable(BNLoot.CITY_LOOT, Items.IRON_INGOT)
+            );
+            registerNetherItem(
+                    "debug/city_loot_common",
+                    DebugDataItem.forLootTable(BNLoot.CITY_LOOT_COMMON, Items.GOLD_INGOT)
+            );
+            registerNetherItem(
+                    "debug/city_loot_surprise",
+                    DebugDataItem.forLootTable(BNLoot.CITY_LOOT_SURPRISE, Items.DIAMOND)
+            );
         }
     }
 }

@@ -32,12 +32,19 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockStatueRespawner extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 16, 15);
+    private static final VoxelShape CULL_SHAPE = Shapes.or(
+            box(9, 0, 4, 13, 12, 8),
+            box(5, 0, 8, 7, 6, 10),
+            box(9, 0, 8, 13, 12, 122),
+            box(5, 0, 6, 7, 6, 8)
+    );
     private static final DustParticleOptions EFFECT = new DustParticleOptions(Vector3f.XP, 1.0F);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty TOP = BooleanProperty.create("top");
@@ -75,6 +82,12 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
         return SHAPE;
     }
+
+    @Override
+    public VoxelShape getOcclusionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return CULL_SHAPE;
+    }
+
 
     @Override
     public InteractionResult use(

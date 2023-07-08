@@ -65,7 +65,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block CINCINNASITE_ORE = registerBlock(
             "cincinnasite_ore",
             new BlockOre(
-                    NetherItems.CINCINNASITE,
+                    () -> NetherItems.CINCINNASITE,
                     1,
                     3,
                     0,
@@ -131,7 +131,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block NETHER_RUBY_ORE = registerBlock(
             "nether_ruby_ore",
             new BlockOre(
-                    NetherItems.NETHER_RUBY,
+                    () -> NetherItems.NETHER_RUBY,
                     1,
                     2,
                     5,
@@ -146,7 +146,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block NETHER_LAPIS_ORE = registerBlock(
             "nether_lapis_ore",
             new BlockOre(
-                    NetherItems.LAPIS_PILE,
+                    () -> NetherItems.LAPIS_PILE,
                     3,
                     6,
                     3,

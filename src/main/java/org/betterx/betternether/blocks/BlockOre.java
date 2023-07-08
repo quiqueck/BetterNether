@@ -16,18 +16,26 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemProvider, BehaviourOre {
     public final boolean fireproof;
 
-    public BlockOre(Item drop, int minCount, int maxCount, int experience, int miningLevel, boolean fireproof) {
+    public BlockOre(
+            Supplier<Item> drop,
+            int minCount,
+            int maxCount,
+            int experience,
+            int miningLevel,
+            boolean fireproof
+    ) {
         super(
                 BehaviourBuilders
                         .createStone(MapColor.COLOR_RED)
                         .strength(3, 5)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.NETHERRACK),
-                () -> drop,
+                drop,
                 minCount,
                 maxCount,
                 experience,

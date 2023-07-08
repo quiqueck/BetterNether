@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "group": "nether_rock_slab",
+  "ingredient": {
+    "item": "betternether:nether_ruby_block"
+  },
+  "result": "betternether:nether_ruby_slab"
+}

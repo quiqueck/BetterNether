@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "group": "nether_wall",
+  "ingredient": {
+    "item": "betternether:bone_block"
+  },
+  "result": "betternether:bone_wall"
+}

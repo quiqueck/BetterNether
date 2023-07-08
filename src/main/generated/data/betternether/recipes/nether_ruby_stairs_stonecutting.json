@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "group": "nether_rock_stairs",
+  "ingredient": {
+    "item": "betternether:nether_ruby_block"
+  },
+  "result": "betternether:nether_ruby_stairs"
+}

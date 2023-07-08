@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "group": "cincinnasite",
+  "ingredient": {
+    "item": "betternether:cincinnasite_forged"
+  },
+  "result": "betternether:cincinnasite_tile_large"
+}

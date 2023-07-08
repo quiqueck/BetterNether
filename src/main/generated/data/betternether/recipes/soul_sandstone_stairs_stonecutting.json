@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "group": "nether_rock_stairs",
+  "ingredient": {
+    "item": "betternether:soul_sandstone"
+  },
+  "result": "betternether:soul_sandstone_stairs"
+}

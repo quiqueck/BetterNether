@@ -50,19 +50,37 @@ public class RecipesHelper {
     public static void makeStairsRecipe(Block source, Block stairs) {
         //String group = BuiltInRegistries.BLOCK.getKey(stairs).getPath().contains("roof_tile") ? "roof_tile_stairs" : stairs.getSoundType(stairs.defaultBlockState()) == SoundType.WOOD ? "nether_wooden_stairs" : "nether_rock_stairs";
         //woods are now registered through different means
+        String name = BuiltInRegistries.BLOCK.getKey(stairs)
+                                             .getPath();
+
         String group = BuiltInRegistries.BLOCK.getKey(stairs).getPath().contains("roof_tile")
                 ? "roof_tile_stairs"
                 : "nether_rock_stairs";
         makeSingleRecipe(group, source, stairs, SHAPE_STAIR, 4, RecipeCategory.BUILDING_BLOCKS);
+        BCLRecipeBuilder.stonecutting(BN.id(name + "_stonecutting"), stairs)
+                        .setOutputCount(1)
+                        .setPrimaryInputAndUnlock(source)
+                        .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                        .setGroup(group)
+                        .build();
     }
+
 
     public static void makeSlabRecipe(Block source, Block slab) {
         //String group = BuiltInRegistries.BLOCK.getKey(slab).getPath().contains("roof_tile") ? "roof_tile_slab" : slab.getSoundType(slab.defaultBlockState()) == SoundType.WOOD ? "nether_wooden_slab" : "nether_rock_slab";
         //woods are now registered through different means
+        String name = BuiltInRegistries.BLOCK.getKey(slab)
+                                             .getPath();
         String group = BuiltInRegistries.BLOCK.getKey(slab).getPath().contains("roof_tile")
                 ? "roof_tile_slab"
                 : "nether_rock_slab";
         makeSingleRecipe(group, source, slab, SHAPE_SLAB, 6, RecipeCategory.BUILDING_BLOCKS);
+        BCLRecipeBuilder.stonecutting(BN.id(name + "_stonecutting"), slab)
+                        .setOutputCount(2)
+                        .setPrimaryInputAndUnlock(source)
+                        .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                        .setGroup(group)
+                        .build();
     }
 
     public static void makeButtonRecipe(Block source, Block button) {
@@ -93,6 +111,13 @@ public class RecipesHelper {
                     .setCategory(RecipeCategory.DECORATIONS)
                     .addMaterial('#', source)
                     .build();
+
+            BCLRecipeBuilder.stonecutting(BN.id(name + "_stonecutting"), wall)
+                            .setOutputCount(1)
+                            .setPrimaryInputAndUnlock(source)
+                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                            .setGroup("nether_wall")
+                            .build();
         }
     }
 

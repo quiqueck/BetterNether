@@ -728,5 +728,287 @@ public class BlockRecipes {
                 .setCategory(RecipeCategory.BUILDING_BLOCKS)
                 .build();
 
+        BCLRecipeBuilder
+                .stonecutting(BetterNether.makeID("cincinnasite_pillar_stonecutting"), NetherBlocks.CINCINNASITE_PILLAR)
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FORGED)
+                .setOutputCount(1)
+                .setGroup("cincinnasite")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("cincinnasite_tile_large_stonecutting"),
+                        NetherBlocks.CINCINNASITE_TILE_LARGE
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FORGED)
+                .setOutputCount(1)
+                .setGroup("cincinnasite")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(BetterNether.makeID("cincinnasite_carved_stonecutting"), NetherBlocks.CINCINNASITE_CARVED)
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FORGED)
+                .setOutputCount(1)
+                .setGroup("cincinnasite")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("cincinnasite_tile_small_stonecutting"),
+                        NetherBlocks.CINCINNASITE_TILE_SMALL
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FORGED)
+                .setOutputCount(1)
+                .setGroup("cincinnasite")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("cincinnasite_tile_small_from_large_stonecutting"),
+                        NetherBlocks.CINCINNASITE_TILE_SMALL
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_TILE_LARGE)
+                .setOutputCount(1)
+                .setGroup("cincinnasite")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("cincinnasite_roof_tile_stonecutting"),
+                        NetherBlocks.ROOF_TILE_CINCINNASITE
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_FORGED)
+                .setOutputCount(1)
+                .setGroup("cincinnasite")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("basalt_brick_from_smooth_stonecutting"),
+                        NetherBlocks.BASALT_BRICKS
+                )
+                .setPrimaryInputAndUnlock(Blocks.SMOOTH_BASALT)
+                .setOutputCount(1)
+                .setGroup("basalt")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("basalt_brick_stonecutting"),
+                        NetherBlocks.BASALT_BRICKS
+                )
+                .setPrimaryInputAndUnlock(Blocks.BASALT)
+                .setOutputCount(1)
+                .setGroup("basalt")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("basalt_brick_stairs_from_smooth_stonecutting"),
+                        NetherBlocks.BASALT_BRICKS_STAIRS
+                )
+                .setPrimaryInputAndUnlock(Blocks.SMOOTH_BASALT)
+                .setOutputCount(1)
+                .setGroup("basalt")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("basalt_brick_stairs_stonecutting"),
+                        NetherBlocks.BASALT_BRICKS_STAIRS
+                )
+                .setPrimaryInputAndUnlock(Blocks.BASALT)
+                .setOutputCount(1)
+                .setGroup("basalt")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("basalt_brick_slabs_from_smooth_stonecutting"),
+                        NetherBlocks.BASALT_BRICKS_SLAB
+                )
+                .setPrimaryInputAndUnlock(Blocks.SMOOTH_BASALT)
+                .setOutputCount(2)
+                .setGroup("basalt")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("basalt_brick_slabs_stonecutting"),
+                        NetherBlocks.BASALT_BRICKS_SLAB
+                )
+                .setPrimaryInputAndUnlock(Blocks.BASALT)
+                .setOutputCount(2)
+                .setGroup("basalt")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("basalt_brick_wall_from_smooth_stonecutting"),
+                        NetherBlocks.BASALT_BRICKS_WALL
+                )
+                .setPrimaryInputAndUnlock(Blocks.SMOOTH_BASALT)
+                .setOutputCount(1)
+                .setGroup("basalt")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("basalt_brick_wall_stonecutting"),
+                        NetherBlocks.BASALT_BRICKS_WALL
+                )
+                .setPrimaryInputAndUnlock(Blocks.BASALT)
+                .setOutputCount(1)
+                .setGroup("basalt")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("soul_sandstone_cut_stonecutting"),
+                        NetherBlocks.SOUL_SANDSTONE_CUT
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.SOUL_SANDSTONE)
+                .setOutputCount(1)
+                .setGroup("soul_sandstone")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("soul_sandstone_chiseled_stonecutting"),
+                        NetherBlocks.SOUL_SANDSTONE_CHISELED
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.SOUL_SANDSTONE_SMOOTH)
+                .setOutputCount(1)
+                .setGroup("soul_sandstone")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("roof_tile_nether_brick_stonecutting"),
+                        NetherBlocks.ROOF_TILE_NETHER_BRICKS
+                )
+                .setPrimaryInputAndUnlock(Blocks.NETHER_BRICKS)
+                .setOutputCount(1)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_tile_large_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_TILE_LARGE
+                )
+                .setPrimaryInputAndUnlock(Blocks.NETHER_BRICKS)
+                .setOutputCount(1)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_tile_small_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_TILE_SMALL
+                )
+                .setPrimaryInputAndUnlock(Blocks.NETHER_BRICKS)
+                .setOutputCount(1)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_tile_small_from_large_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_TILE_SMALL
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.NETHER_BRICK_TILE_LARGE)
+                .setOutputCount(1)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_wall_from_brick_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_WALL
+                )
+                .setPrimaryInputAndUnlock(Blocks.NETHER_BRICKS)
+                .setOutputCount(1)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_wall_from_large_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_WALL
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.NETHER_BRICK_TILE_LARGE)
+                .setOutputCount(1)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_tile_slab_from_brick_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_TILE_SLAB
+                )
+                .setPrimaryInputAndUnlock(Blocks.NETHER_BRICKS)
+                .setOutputCount(2)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_tile_slab_from_large_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_TILE_SLAB
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.NETHER_BRICK_TILE_LARGE)
+                .setOutputCount(2)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_tile_stairs_from_brick_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_TILE_STAIRS
+                )
+                .setPrimaryInputAndUnlock(Blocks.NETHER_BRICKS)
+                .setOutputCount(1)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
+
+        BCLRecipeBuilder
+                .stonecutting(
+                        BetterNether.makeID("nether_brick_tile_stairs_from_large_stonecutting"),
+                        NetherBlocks.NETHER_BRICK_TILE_STAIRS
+                )
+                .setPrimaryInputAndUnlock(NetherBlocks.NETHER_BRICK_TILE_LARGE)
+                .setOutputCount(1)
+                .setGroup("nether_brick")
+                .setCategory(RecipeCategory.BUILDING_BLOCKS)
+                .build();
     }
 }

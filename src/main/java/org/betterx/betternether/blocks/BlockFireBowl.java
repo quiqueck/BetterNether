@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
@@ -34,6 +35,14 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public abstract class BlockFireBowl extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 12, 16);
+
+    private static final VoxelShape CULL_SHAPE = Shapes.or(
+            box(0, 9, 0, 16, 12, 16),
+            box(1, 0, 1, 4, 2, 4),
+            box(1, 0, 12, 4, 2, 15),
+            box(12, 0, 1, 15, 2, 4),
+            box(12, 0, 12, 15, 2, 15)
+    );
     public static final BooleanProperty FIRE = BNBlockProperties.FIRE;
 
     protected BlockFireBowl(Block source) {
@@ -54,6 +63,11 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
         return SHAPE;
+    }
+
+    @Override
+    public VoxelShape getOcclusionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return CULL_SHAPE;
     }
 
     @Override

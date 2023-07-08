@@ -1,6 +1,7 @@
 package org.betterx.datagen.betternether;
 
 import org.betterx.datagen.betternether.advancements.NetherAdvancementDataProvider;
+import org.betterx.datagen.betternether.recipes.NetherBlockLootTableProvider;
 import org.betterx.datagen.betternether.recipes.NetherChestLootTableProvider;
 import org.betterx.datagen.betternether.recipes.NetherEntityLootTableProvider;
 import org.betterx.datagen.betternether.recipes.NetherRecipeDataProvider;
@@ -28,6 +29,7 @@ public class BetterNetherDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(NetherItemTagDataProvider::new);
         pack.addProvider(NetherChestLootTableProvider::new);
         pack.addProvider(NetherEntityLootTableProvider::new);
+        pack.addProvider(NetherBlockLootTableProvider::new);
     }
 
     @Override

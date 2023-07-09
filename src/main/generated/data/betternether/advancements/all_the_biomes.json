@@ -372,46 +372,10 @@
   },
   "requirements": [
     [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:sulfuric_bone_reef"
-    ],
-    [
-      "betternether:nether_mushroom_forest"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
-      "betternether:wart_forest"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
       "betternether:bone_reef"
     ],
     [
-      "betternether:nether_swampland_terraces"
-    ],
-    [
-      "betternether:gravel_desert"
+      "betternether:wart_forest"
     ],
     [
       "betternether:nether_jungle"
@@ -420,22 +384,58 @@
       "betternether:flooded_deltas"
     ],
     [
-      "betternether:nether_swampland"
+      "betternether:nether_swampland_terraces"
     ],
     [
       "betternether:old_warped_woods"
     ],
     [
-      "betternether:soul_plain"
+      "betternether:magma_land"
     ],
     [
-      "betternether:old_swampland"
+      "betternether:old_fungiwoods"
+    ],
+    [
+      "betternether:soul_plain"
     ],
     [
       "betternether:upside_down_forest_cleared"
     ],
     [
-      "betternether:old_fungiwoods"
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:sulfuric_bone_reef"
+    ],
+    [
+      "betternether:nether_swampland"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:gravel_desert"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:nether_mushroom_forest"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:old_swampland"
     ]
   ],
   "rewards": {

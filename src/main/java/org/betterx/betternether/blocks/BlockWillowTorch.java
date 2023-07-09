@@ -1,8 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +23,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockWillowTorch extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockWillowTorch extends BlockBaseNotFull implements AddMineableAxe, BehaviourCompostable {
     private static final VoxelShape SHAPE_NORTH = Block.box(5, 0, 8, 11, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = Block.box(5, 0, 0, 11, 16, 8);
     private static final VoxelShape SHAPE_WEST = Block.box(8, 0, 5, 16, 16, 11);
@@ -33,7 +34,11 @@ public class BlockWillowTorch extends BlockBaseNotFull implements AddMineableAxe
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
     public BlockWillowTorch() {
-        super(Materials.makeNetherWood(MapColor.COLOR_LIGHT_BLUE).lightLevel(s -> 15).noCollission().noOcclusion());
+        super(BehaviourBuilders.createWood(MapColor.COLOR_LIGHT_BLUE, false)
+                               .lightLevel(s -> 15)
+                               .strength(0.3f)
+                               .noCollission()
+                               .noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

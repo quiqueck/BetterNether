@@ -26,7 +26,7 @@ public class BlockStem extends BlockBaseNotFull implements BehaviourWood {
     private static final EnumMap<Axis, VoxelShape> OUTLINES = Maps.newEnumMap(Axis.class);
 
     public BlockStem(MapColor color) {
-        super(Materials.makeNetherWood(color).noOcclusion());
+        super(Materials.makeNetherWood(color).strength(0.5f).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Axis.Y));
     }
 

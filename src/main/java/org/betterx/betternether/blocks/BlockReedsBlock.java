@@ -13,7 +13,7 @@ import java.util.List;
 
 public class BlockReedsBlock extends BNPillar.Wood implements TagProvider {
     public BlockReedsBlock() {
-        super(Materials.makeNetherWood(MapColor.COLOR_CYAN));
+        super(Materials.makeNetherWood(MapColor.COLOR_CYAN).strength(1));
     }
 
     @Override

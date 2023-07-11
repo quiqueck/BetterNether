@@ -21,8 +21,7 @@ public class Materials {
 
     public static BlockBehaviour.Properties makeNetherWood(MapColor color) {
         return BehaviourBuilders.createWood(color, false)
-                                .requiresCorrectToolForDrops()
-                                .strength(1);
+                                .requiresCorrectToolForDrops();
     }
 
     public static BlockBehaviour.Properties makeNetherGrass(MapColor color) {

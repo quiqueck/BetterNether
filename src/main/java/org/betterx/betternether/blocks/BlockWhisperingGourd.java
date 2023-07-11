@@ -7,6 +7,6 @@ import net.minecraft.world.level.material.MapColor;
 
 public class BlockWhisperingGourd extends BlockBase implements AddMineableAxe {
     public BlockWhisperingGourd() {
-        super(Materials.makeNetherWood(MapColor.COLOR_BLUE));
+        super(Materials.makeNetherWood(MapColor.COLOR_BLUE).strength(0.5f));
     }
 }

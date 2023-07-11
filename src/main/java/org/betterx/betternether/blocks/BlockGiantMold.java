@@ -29,7 +29,7 @@ public class BlockGiantMold extends BlockBaseNotFull implements AddMineableAxe {
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockGiantMold() {
-        super(Materials.makeNetherWood(MapColor.COLOR_GRAY).noOcclusion());
+        super(Materials.makeNetherWood(MapColor.COLOR_GRAY).noOcclusion().strength(1));
         this.setDropItself(false);
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

@@ -18,7 +18,7 @@ public class BlockRubeusCone extends BlockBaseNotFull implements AddMineableAxe 
     private static final VoxelShape SHAPE = box(3, 3, 3, 13, 16, 13);
 
     public BlockRubeusCone() {
-        super(Materials.makeNetherWood(MapColor.COLOR_CYAN).lightLevel(s -> 15).noOcclusion());
+        super(Materials.makeNetherWood(MapColor.COLOR_CYAN).strength(0.5f).lightLevel(s -> 15).noOcclusion());
     }
 
     @Override

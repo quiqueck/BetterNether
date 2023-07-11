@@ -49,6 +49,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMinea
                        .lightLevel(s -> 13)
                        .destroyTime(0.1F)
                        .sound(SoundType.FUNGUS)
+                       .strength(1)
                        .noOcclusion());
         boolean sodium = FabricLoader.getInstance().isModLoaded("sodium");
         this.setRenderLayer(sodium ? BNRenderLayer.CUTOUT : BNRenderLayer.TRANSLUCENT);

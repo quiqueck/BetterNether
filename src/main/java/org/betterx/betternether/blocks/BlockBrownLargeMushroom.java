@@ -46,7 +46,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull implements AddMine
     };
 
     public BlockBrownLargeMushroom() {
-        super(Materials.makeNetherWood(MapColor.COLOR_BROWN).noOcclusion());
+        super(Materials.makeNetherWood(MapColor.COLOR_BROWN).strength(1).noOcclusion());
         this.setDropItself(false);
     }
 

@@ -61,7 +61,7 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGro
     };
 
     public BlockSoulLily() {
-        super(Materials.makeNetherWood(MapColor.COLOR_ORANGE).noOcclusion().randomTicks());
+        super(Materials.makeNetherWood(MapColor.COLOR_ORANGE).strength(1).noOcclusion().randomTicks());
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, SoulLilyShape.SMALL));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

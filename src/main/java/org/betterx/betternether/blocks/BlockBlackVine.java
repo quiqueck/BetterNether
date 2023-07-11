@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -42,7 +42,7 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
     private static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 
     public BlockBlackVine() {
-        super(Materials.NETHER_PLANT.mapColor(MapColor.COLOR_RED));
+        super(BehaviourBuilders.createStaticVine(MapColor.COLOR_BLACK));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(BOTTOM, true));

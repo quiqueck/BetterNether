@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -23,8 +24,8 @@ public class BlockEyeVine extends BlockBaseNotFull implements BehaviourClimableV
     protected static final VoxelShape SHAPE = box(4, 0, 4, 12, 16, 12);
 
     public BlockEyeVine() {
-        super(Materials.NETHER_PLANT
-                .mapColor(MapColor.COLOR_RED)
+        super(BehaviourBuilders
+                .createStaticVine(MapColor.COLOR_RED)
                 .noLootTable()
         );
         this.setRenderLayer(BNRenderLayer.CUTOUT);

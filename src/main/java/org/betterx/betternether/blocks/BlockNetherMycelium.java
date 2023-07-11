@@ -3,6 +3,7 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
+import org.betterx.bclib.util.LootUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -62,7 +63,7 @@ public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (tool.isCorrectToolForDrops(state)) {
+        if (LootUtil.isCorrectTool(this, state, tool)) {
             if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0)
                 return Collections.singletonList(new ItemStack(this.asItem()));
             else

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
@@ -9,7 +10,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -112,7 +112,8 @@ class BaseBlockMold extends BlockBaseNotFull {
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        if (builder.getParameter(LootContextParams.TOOL).getItem() instanceof ShearsItem)
+        ItemStack tool = builder.getParameter(LootContextParams.TOOL);
+        if (LootUtil.isCorrectTool(this, state, tool))
             return Collections.singletonList(new ItemStack(this.asItem()));
         else
             return super.getDrops(state, builder);

@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
+import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.NetherEntities;
@@ -17,7 +18,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -115,7 +115,8 @@ public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherG
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        if (builder.getParameter(LootContextParams.TOOL).getItem() instanceof ShearsItem)
+        ItemStack tool = builder.getParameter(LootContextParams.TOOL);
+        if (LootUtil.isCorrectTool(this, state, tool))
             return Collections.singletonList(new ItemStack(this.asItem()));
         else
             return super.getDrops(state, builder);

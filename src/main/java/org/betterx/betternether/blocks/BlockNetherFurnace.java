@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v3.datagen.DropSelfLootProvider;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.betternether.blockentities.BlockEntityFurnace;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
@@ -13,7 +14,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
@@ -23,15 +23,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.storage.loot.LootParams;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
-public class BlockNetherFurnace extends AbstractFurnaceBlock implements BehaviourStone {
+public class BlockNetherFurnace extends AbstractFurnaceBlock implements BehaviourStone, DropSelfLootProvider<BlockNetherFurnace> {
     public BlockNetherFurnace(Block source) {
         super(BlockBehaviour.Properties
                 .copy(source)
@@ -84,12 +82,5 @@ public class BlockNetherFurnace extends AbstractFurnaceBlock implements Behaviou
             world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
             world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
         }
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        List<ItemStack> drop = super.getDrops(state, builder);
-        drop.add(new ItemStack(this.asItem()));
-        return drop;
     }
 }

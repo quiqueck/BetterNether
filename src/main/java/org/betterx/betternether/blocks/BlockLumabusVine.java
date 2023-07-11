@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.world.features.DeferedSeedBlock;
 
@@ -42,8 +42,8 @@ public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlo
     private Block seed;
 
     public BlockLumabusVine() {
-        super(Materials.NETHER_PLANT
-                .mapColor(MapColor.COLOR_CYAN)
+        super(BehaviourBuilders
+                .createStaticVine(MapColor.COLOR_CYAN)
                 .lightLevel(getLuminance()));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);

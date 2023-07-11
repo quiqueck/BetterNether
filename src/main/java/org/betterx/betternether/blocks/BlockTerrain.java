@@ -4,6 +4,7 @@ import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.interfaces.TagProvider;
+import org.betterx.bclib.util.LootUtil;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
@@ -49,7 +50,7 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (tool.isCorrectToolForDrops(state)) {
+        if (LootUtil.isCorrectTool(this, state, tool)) {
             if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0)
                 return Collections.singletonList(new ItemStack(this.asItem()));
             else

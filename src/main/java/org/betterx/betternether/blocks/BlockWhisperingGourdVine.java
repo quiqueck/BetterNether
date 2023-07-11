@@ -1,11 +1,12 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourVine;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.items.tool.BaseShearsItem;
+import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -48,8 +49,8 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
     public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockWhisperingGourdVine() {
-        super(Materials.NETHER_PLANT
-                .mapColor(MapColor.COLOR_RED)
+        super(BehaviourBuilders
+                .createStaticVine(MapColor.COLOR_RED)
                 .requiresCorrectToolForDrops()
                 .randomTicks()
         );
@@ -124,10 +125,10 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (tool != null && (BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(
+        if (LootUtil.isCorrectTool(this, state, tool) || EnchantmentHelper.getItemEnchantmentLevel(
                 Enchantments.SILK_TOUCH,
                 tool
-        ) > 0))
+        ) > 0)
             return Lists.newArrayList(new ItemStack(this.asItem()));
         else if (state.getValue(SHAPE) == BlockProperties.TripleShape.BOTTOM || MHelper.RANDOM.nextBoolean())
             return Lists.newArrayList(new ItemStack(this.asItem()));

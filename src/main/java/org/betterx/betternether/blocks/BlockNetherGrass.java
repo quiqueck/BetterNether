@@ -2,13 +2,13 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.blocks.BasePlantBlock;
+import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -77,7 +77,8 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        if (builder.getParameter(LootContextParams.TOOL).getItem() instanceof ShearsItem)
+        ItemStack tool = builder.getParameter(LootContextParams.TOOL);
+        if (LootUtil.isCorrectTool(this, state, tool))
             return Collections.singletonList(new ItemStack(this.asItem()));
         else
             return super.getDrops(state, builder);

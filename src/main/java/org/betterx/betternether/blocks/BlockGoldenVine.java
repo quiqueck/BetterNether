@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.bclib.items.tool.BaseShearsItem;
+import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -42,8 +42,8 @@ public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlo
     public static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 
     public BlockGoldenVine() {
-        super(Materials.NETHER_PLANT
-                .mapColor(MapColor.COLOR_RED)
+        super(BehaviourBuilders
+                .createStaticVine(MapColor.COLOR_RED)
                 .lightLevel((bs) -> 15)
         );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
@@ -125,7 +125,7 @@ public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlo
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (tool != null && BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(
+        if (LootUtil.isCorrectTool(this, state, tool) || EnchantmentHelper.getItemEnchantmentLevel(
                 Enchantments.SILK_TOUCH,
                 tool
         ) > 0) {

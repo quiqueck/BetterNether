@@ -2,6 +2,7 @@ package org.betterx.betternether.registry;
 
 import org.betterx.bclib.BCLib;
 import org.betterx.bclib.items.DebugDataItem;
+import org.betterx.bclib.items.complex.EquipmentSet;
 import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
@@ -20,6 +21,11 @@ import org.betterx.worlds.together.tag.v3.TagManager;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.FloatTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -32,6 +38,9 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 
@@ -307,6 +316,107 @@ public class NetherItems extends ItemRegistry {
                     "debug/city_loot_surprise",
                     DebugDataItem.forLootTable(BNLoot.CITY_LOOT_SURPRISE, Items.DIAMOND)
             );
+
+            CompoundTag root = buildCitySpawnerData();
+
+
+            registerNetherItem(
+                    "debug/city_spawner",
+                    DebugDataItem.forSpawner(root, Items.SPECTRAL_ARROW)
+            );
         }
+    }
+
+    private static CompoundTag buildItem(int count, Item item, Enchantment... enchantments) {
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+        CompoundTag tag = new CompoundTag();
+        tag.putString("id", id.toString());
+        tag.putByte("Count", (byte) count);
+
+        if (enchantments.length > 0) {
+            ListTag chants = new ListTag();
+            tag.put("Enchantments", chants);
+            for (Enchantment e : enchantments) {
+                ResourceLocation eID = BuiltInRegistries.ENCHANTMENT.getKey(e);
+                chants.add(EnchantmentHelper.storeEnchantment(eID, e.getMaxLevel()));
+            }
+        }
+        return tag;
+    }
+
+    @NotNull
+    private static CompoundTag buildCitySpawnerData() {
+        ListTag handItems = new ListTag();
+        handItems.add(buildItem(1, CINCINNASITE_DIAMOND_SET.getSlot(EquipmentSet.SWORD_SLOT)));
+        handItems.add(buildItem(1, Items.SHIELD));
+
+        ListTag armorItems = new ListTag();
+        armorItems.add(buildItem(
+                1,
+                CINCINNASITE_SET.getSlot(EquipmentSet.BOOTS_SLOT),
+                Enchantments.ALL_DAMAGE_PROTECTION
+        ));
+        armorItems.add(buildItem(
+                1,
+                CINCINNASITE_SET.getSlot(EquipmentSet.LEGGINGS_SLOT),
+                Enchantments.ALL_DAMAGE_PROTECTION
+        ));
+        armorItems.add(buildItem(
+                1,
+                CINCINNASITE_SET.getSlot(EquipmentSet.CHESTPLATE_SLOT),
+                Enchantments.ALL_DAMAGE_PROTECTION,
+                Enchantments.THORNS
+        ));
+        armorItems.add(buildItem(
+                1,
+                CINCINNASITE_SET.getSlot(EquipmentSet.HELMET_SLOT),
+                Enchantments.ALL_DAMAGE_PROTECTION
+        ));
+
+        ListTag handDropChance = new ListTag();
+        handDropChance.add(FloatTag.valueOf(0));
+        handDropChance.add(FloatTag.valueOf(0));
+
+        ListTag armorDropChance = new ListTag();
+        armorDropChance.add(FloatTag.valueOf(0));
+        armorDropChance.add(FloatTag.valueOf(0));
+        armorDropChance.add(FloatTag.valueOf(0));
+        armorDropChance.add(FloatTag.valueOf(0));
+
+
+        CompoundTag entity = new CompoundTag();
+        entity.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.WITHER_SKELETON).toString());
+        entity.putBoolean("PersistenceRequired", true);
+        entity.put("HandItems", handItems);
+        entity.put("ArmorItems", armorItems);
+        entity.put("HandDropChances", handDropChance);
+        entity.put("ArmorDropChances", armorDropChance);
+
+        CompoundTag skyLightLimit = new CompoundTag();
+        skyLightLimit.putByte("max_inclusive", (byte) 13);
+
+        CompoundTag blockLightLimit = new CompoundTag();
+        skyLightLimit.putByte("max_inclusive", (byte) 13);
+
+        CompoundTag customSpawnRules = new CompoundTag();
+        customSpawnRules.put("sky_light_limit", skyLightLimit);
+        customSpawnRules.put("block_light_limit", blockLightLimit);
+
+        CompoundTag spawnData = new CompoundTag();
+        spawnData.put("entity", entity);
+        spawnData.put("custom_spawn_rules", customSpawnRules);
+
+        CompoundTag root = new CompoundTag();
+        root.putShort("SpawnRange", (short) 4);
+        root.putShort("SpawnCount", (short) 8);
+        root.putShort("MaxNearbyEntities", (short) 18);
+        root.putShort("Delay", (short) 499);
+        root.putShort("MinSpawnDelay", (short) 300);
+        root.putShort("MaxSpawnDelay", (short) 1600);
+        root.putShort("RequiredPlayerRange", (short) 20);
+        root.put("SpawnData", spawnData);
+
+
+        return root;
     }
 }

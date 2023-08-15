@@ -4,10 +4,13 @@ import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.blocks.BasePlantBlock;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.interfaces.SurvivesOnGrassSoil;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -84,20 +87,19 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
             return super.getDrops(state, builder);
     }
 
-    public static class OnEverything extends BaseBlockNetherGrass {
+    public static class OnEverything extends BaseBlockNetherGrass implements SurvivesOnGrassSoil {
         public OnEverything() {
             super();
         }
 
         @Override
         public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-            BlockState down = level.getBlockState(pos.below());
-            return isTerrain(down) && down.isCollisionShapeFullBlock(level, pos.below());
+            return canSurviveOnTop(level, pos);
         }
 
         @Override
         public boolean isTerrain(BlockState state) {
-            return true;
+            return SurvivesOnGrassSoil.super.isTerrain(state);
         }
     }
 }

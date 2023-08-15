@@ -142,10 +142,6 @@
     "betternether:willow_trunk",
     "betternether:willow_wall",
     "betternether:willow_wall_hanging_sign",
-    "betternether:willow_wall_sign",
-    "#c:wooden_barrels",
-    "#c:wooden_chests",
-    "#c:wooden_composter",
-    "#c:workbench"
+    "betternether:willow_wall_sign"
   ]
 }

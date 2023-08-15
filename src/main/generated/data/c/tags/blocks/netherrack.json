@@ -11,11 +11,6 @@
     "betternether:nether_ruby_ore",
     "betternether:netherrack_moss",
     "betternether:sepia_mushroom_grass",
-    "betternether:swampland_grass",
-    "minecraft:crimson_nylium",
-    "minecraft:nether_gold_ore",
-    "minecraft:nether_quartz_ore",
-    "minecraft:netherrack",
-    "minecraft:warped_nylium"
+    "betternether:swampland_grass"
   ]
 }

@@ -20,8 +20,6 @@
     "betternether:obsidian_tile_slab",
     "betternether:obsidian_tile_small",
     "betternether:obsidian_tile_stairs",
-    "betternether:weeping_obsidian",
-    "minecraft:crying_obsidian",
-    "minecraft:obsidian"
+    "betternether:weeping_obsidian"
   ]
 }

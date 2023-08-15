@@ -2,17 +2,6 @@
   "replace": false,
   "values": [
     "betternether:soul_sandstone",
-    "betternether:soul_sandstone_cut",
-    "minecraft:blackstone",
-    "minecraft:bone_block",
-    "minecraft:glowstone",
-    "minecraft:gravel",
-    "minecraft:magma_block",
-    "minecraft:red_sand",
-    "#c:nether_mycelium",
-    "#c:nether_ores",
-    "#c:netherrack",
-    "#c:soul_ground",
-    "#minecraft:nylium"
+    "betternether:soul_sandstone_cut"
   ]
 }

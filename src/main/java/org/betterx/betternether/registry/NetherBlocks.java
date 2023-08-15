@@ -414,8 +414,8 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block SWAMP_GRASS = registerBlock("swamp_grass", new BlockNetherGrass());
     public static final Block SOUL_GRASS = registerBlock("soul_grass", new BlockSoulGrass());
     public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", new BlockNetherGrass());
-    public static final Block BONE_GRASS = registerBlock("bone_grass", new BlockNetherGrass());
-    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass());
+    public static final Block BONE_GRASS = registerBlock("bone_grass", new BlockNetherGrass.OnEverything());
+    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass.OnEverything());
     // Vines //
     public static final Block BLACK_VINE = registerBlock(
             "black_vine",

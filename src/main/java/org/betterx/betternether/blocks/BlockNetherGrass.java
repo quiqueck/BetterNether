@@ -83,4 +83,21 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
         else
             return super.getDrops(state, builder);
     }
+
+    public static class OnEverything extends BaseBlockNetherGrass {
+        public OnEverything() {
+            super();
+        }
+
+        @Override
+        public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+            BlockState down = level.getBlockState(pos.below());
+            return isTerrain(down) && down.isCollisionShapeFullBlock(level, pos.below());
+        }
+
+        @Override
+        public boolean isTerrain(BlockState state) {
+            return true;
+        }
+    }
 }

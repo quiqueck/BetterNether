@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.interfaces.SurvivesOnSoulGroundAndSculk;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -12,12 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSoulGroundAndSculk {
-    @Override
-    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return canSurviveOnTop(level, pos);
-    }
-
+public class BlockSoulGrass extends BaseBlockNetherGrass.OnEverything  {
     @Environment(EnvType.CLIENT)
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (random.nextInt(4) == 0) {
@@ -31,10 +27,5 @@ public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSo
                     random.nextDouble() * 0.05
             );
         }
-    }
-
-    @Override
-    public boolean isTerrain(BlockState state) {
-        return SurvivesOnSoulGroundAndSculk.super.isTerrain(state);
     }
 }

@@ -18,14 +18,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class BlockNetherSakuraLeaves extends BNLeaves {
-    private static final RandomSource RANDOM = new LegacyRandomSource(130520220101l);
     private static final int COLOR = MHelper.color(251, 113, 143);
 
     public BlockNetherSakuraLeaves(Block sapling) {
         super(
                 sapling,
                 BehaviourBuilders
-                        .createLeaves(MapColor.COLOR_PINK, false)
+                        .createStaticLeaves(MapColor.COLOR_PINK, false)
                         .noOcclusion()
                         .lightLevel((state) -> 13)
         );

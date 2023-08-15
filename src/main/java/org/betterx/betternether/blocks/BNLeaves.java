@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class BNLeaves extends BaseLeavesBlock {
     public BNLeaves(Block sapling, MapColor color) {
-        this(sapling, BehaviourBuilders.createLeaves(color, false).noOcclusion());
+        this(sapling, BehaviourBuilders.createStaticLeaves(color, false).noOcclusion());
     }
 
 

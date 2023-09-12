@@ -13,6 +13,7 @@ version = project.mod_version
 group = project.maven_group
 def local_bclib = findProject(':BCLib') != null
 def local_wunderlib = findProject(':WunderLib') != null
+def local_wover = findProject(':WorldWeaver') != null
 
 loom {
     accessWidenerPath = file("src/main/resources/betternether.accesswidener")
@@ -29,6 +30,10 @@ loom {
             runDir "build/datagen"
         }
     }
+
+    if (local_wover || local_wunderlib) {
+        enableTransitiveAccessWideners = true
+    }
 }
 
 sourceSets {
@@ -38,6 +43,19 @@ sourceSets {
             srcDirs += [
                     'src/main/generated'
             ]
+        }
+    }
+}
+
+subprojects { subproject ->
+    subproject.tasks.withType(Javadoc) { javadocTask ->
+        javadocTask.failOnError false
+        javadocTask.enabled = false
+    }
+
+    subproject.tasks.withType(Jar) { jarTask ->
+        if (jarTask.name == 'javadocJar') {
+            jarTask.enabled = false
         }
     }
 }
@@ -72,11 +90,21 @@ dependencies {
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 
+    println "Using local WunderLib: ${local_wunderlib}"
     if (local_wunderlib) {
-        println "Using local WunderLib"
         implementation project(path: ":WunderLib", configuration: 'dev')
     }
+
+    println "Using local WorldWeaver: ${local_wover}"
+    if (local_wover) {
+        implementation project(path: ":WorldWeaver", configuration: 'dev')
+
+        gradle.knownWoverModules.each {
+            implementation project(path: ":WorldWeaver:$it", configuration: 'dev')
+        }
+    }
 }
+
 
 repositories {
     mavenCentral()
@@ -120,7 +148,7 @@ tasks.withType(JavaCompile) {
 // if it is present.
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
+    archiveClassifier = "sources"
     from sourceSets.main.allSource
 }
 

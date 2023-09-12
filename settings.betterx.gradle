@@ -1,0 +1,63 @@
+// #### Custom Settings ####
+
+//Change the next line to disable local library loading
+def allowLocalLibUse = true
+
+//When true, the local libraries is also used in commandline builds
+def allowLocalLibInConsoleMode = false
+
+//The path were to look for the local libraries
+def BCLibPath = '../BCLib'
+def WoverPath = '../WorldWeaver'
+def WunderLibPath = '../WorldWeaver/WunderLib'
+
+
+// #### Logic ####
+def isIDE = properties.containsKey('android.injected.invoked.from.ide')
+        || (System.getenv("XPC_SERVICE_NAME") ?: "").contains("intellij")
+        || (System.getenv("XPC_SERVICE_NAME") ?: "").contains(".idea")
+        || System.getenv("IDEA_INITIAL_DIRECTORY") != null
+
+println "IntelliJ: ${isIDE}"
+
+def BCLibFolder = new File(BCLibPath)
+def WunderLibFolder = new File(WunderLibPath)
+def WoverFolder = new File(WoverPath)
+
+if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && BCLibFolder.exists()) {
+    println "!! Using local BCLib from '${BCLibFolder}'"
+
+    include ':BCLib'
+    project(":BCLib").projectDir = BCLibFolder
+    project(':BCLib').buildFileName = './bclib-composit.gradle'
+}
+
+if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && WunderLibFolder.exists()) {
+    println "!! Using local WunderLib from '${WunderLibFolder}'"
+
+    include ':WunderLib'
+    project(":WunderLib").projectDir = WunderLibFolder
+    project(':WunderLib').buildFileName = './wunderlib-composit.gradle'
+}
+
+if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && WoverFolder.exists()) {
+    println "!! Using local WorldWeaver from '${WoverFolder}'"
+
+    include ':WorldWeaver'
+    project(":WorldWeaver").projectDir = WoverFolder
+    project(':WorldWeaver').buildFileName = './build.composit.gradle'
+
+    def WoverModuleFile = WoverFolder.toPath().resolve("module-include.gradle").toFile()
+    apply from : WoverModuleFile
+    gradle.ext.set("knownWoverModules", ext.knownWoverModules)
+    ext.knownWoverModules.each { module->
+        def fullName = ":WorldWeaver:${module}";
+        def path = WoverFolder.toPath().resolve(module).toFile();
+
+        include fullName
+        project(fullName).name = module
+
+        print(project(fullName).parent)
+        println "Including module ${module} from ${path}"
+    }
+}

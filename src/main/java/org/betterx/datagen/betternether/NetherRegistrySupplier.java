@@ -2,7 +2,6 @@ package org.betterx.datagen.betternether;
 
 import org.betterx.bclib.api.v3.datagen.RegistrySupplier;
 import org.betterx.betternether.BetterNether;
-import org.betterx.datagen.betternether.presets.FlatLevelPresetsDataProvider;
 import org.betterx.datagen.betternether.worldgen.ConfiguredFeatureDataProvider;
 import org.betterx.datagen.betternether.worldgen.PlacedFeatureDataProvider;
 import org.betterx.datagen.betternether.worldgen.StructureDataProvider;
@@ -10,7 +9,6 @@ import org.betterx.datagen.betternether.worldgen.StructureDataProvider;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorPreset;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
@@ -46,11 +44,6 @@ public class NetherRegistrySupplier extends RegistrySupplier {
                         Registries.PLACED_FEATURE,
                         PlacedFeature.DIRECT_CODEC,
                         PlacedFeatureDataProvider::bootstrap
-                ),
-                new RegistryInfo<>(
-                        Registries.FLAT_LEVEL_GENERATOR_PRESET,
-                        FlatLevelGeneratorPreset.DIRECT_CODEC,
-                        FlatLevelPresetsDataProvider::bootstrap
                 )
         );
     }

@@ -25,7 +25,8 @@ public class BetterNether implements ModInitializer {
     public static final String MOD_ID = "betternether";
     public static final ModCore C = ModCore.create(MOD_ID);
     public static final Logger LOGGER = C.log;
-    public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER = new org.betterx.worlds.together.util.Logger(MOD_ID);
+    public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER = new org.betterx.worlds.together.util.Logger(
+            MOD_ID);
     private static boolean thinArmor = true;
     private static boolean lavafallParticles = true;
     private static float fogStart = 0.05F;
@@ -107,7 +108,7 @@ public class BetterNether implements ModInitializer {
     }
 
     public static ResourceLocation makeID(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return C.id(path);
     }
 }
 

@@ -17,8 +17,8 @@ public class BNCriterion {
 
 
     public static void register() {
-        BREW_BLUE = CriteriaTriggers.register(new PlayerTrigger(BetterNether.makeID("brew_blue")));
-        USED_FORGE = CriteriaTriggers.register(new PlayerTrigger(BetterNether.makeID("used_forge")));
+        BREW_BLUE = CriteriaTriggers.register(new PlayerTrigger(BetterNether.C.id("brew_blue")));
+        USED_FORGE = CriteriaTriggers.register(new PlayerTrigger(BetterNether.C.id("used_forge")));
         CONVERT_BY_LIGHTNING = CriteriaTriggers.register(new ConvertByLightningTrigger());
 
         USED_FORGE_ANY_TRIGGER = new PlayerTrigger.TriggerInstance(

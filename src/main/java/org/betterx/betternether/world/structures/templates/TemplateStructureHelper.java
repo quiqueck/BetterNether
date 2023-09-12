@@ -25,6 +25,6 @@ abstract class TemplateStructureHelper extends TemplateStructure {
     }
 
     public static TemplateStructure.Config cfg(String name, int offsetY, StructurePlacementType type, float chance) {
-        return new TemplateStructure.Config(BetterNether.makeID(name), offsetY, type, chance);
+        return new TemplateStructure.Config(BetterNether.C.id(name), offsetY, type, chance);
     }
 }

@@ -168,10 +168,10 @@ public class NetherObjects {
             .build();
     public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> WART_DEADWOOD = BCLFeatureBuilder
             .startWithTemplates(BN.id("war_deadwood"))
-            .add(BetterNether.makeID("trees/wart_root_01"), -0, StructurePlacementType.FLOOR, 1.0f)
-            .add(BetterNether.makeID("trees/wart_root_02"), -0, StructurePlacementType.FLOOR, 1.0f)
-            .add(BetterNether.makeID("trees/wart_root_03"), -1, StructurePlacementType.FLOOR, 1.0f)
-            .add(BetterNether.makeID("trees/wart_fallen_log"), 0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BetterNether.C.id("trees/wart_root_01"), -0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BetterNether.C.id("trees/wart_root_02"), -0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BetterNether.C.id("trees/wart_root_03"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BetterNether.C.id("trees/wart_fallen_log"), 0, StructurePlacementType.FLOOR, 1.0f)
             .build();
 
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> SCULK_HIDDEN = BCLFeatureBuilder

@@ -22,51 +22,50 @@ public class NetherParticles {
 
     public static void register() {
         BLUE_DRIPPING_OBSIDIAN_TEAR = BCLParticleType.register(
-                BetterNether.makeID("blue_dripping_obsidian_tear"),
+                BetterNether.C.id("blue_dripping_obsidian_tear"),
                 BNParticleProvider.ObsidianTearHangProvider::new
         );
 
         BLUE_FALLING_OBSIDIAN_TEAR = BCLParticleType.register(
-                BetterNether.makeID("blue_falling_obsidian_tear"),
+                BetterNether.C.id("blue_falling_obsidian_tear"),
                 BNParticleProvider.ObsidianTearFallProvider::new
         );
 
         BLUE_LANDING_OBSIDIAN_TEAR = BCLParticleType.register(
-                BetterNether.makeID("blue_landing_obsidian_tear"),
+                BetterNether.C.id("blue_landing_obsidian_tear"),
                 BNParticleProvider.ObsidianTearLandProvider::new
         );
 
 
         if (Configs.MAIN.getBoolean("particles", "weeping", true)) {
             BLUE_DRIPPING_OBSIDIAN_WEEP = BCLParticleType.register(
-                    BetterNether.makeID(
-                            "blue_dripping_obsidian_weep"),
+                    BetterNether.C.id("blue_dripping_obsidian_weep"),
                     BNParticleProvider.ObsidianWeepHangProvider::new
             );
 
             BLUE_FALLING_OBSIDIAN_WEEP = BCLParticleType.register(
-                    BetterNether.makeID("blue_falling_obsidian_weep"),
+                    BetterNether.C.id("blue_falling_obsidian_weep"),
                     BNParticleProvider.ObsidianWeepFallProvider::new
             );
 
             BLUE_LANDING_OBSIDIAN_WEEP = BCLParticleType.register(
-                    BetterNether.makeID("blue_landing_obsidian_weep"),
+                    BetterNether.C.id("blue_landing_obsidian_weep"),
                     BNParticleProvider.ObsidianWeepLandProvider::new
             );
 
 
             DRIPPING_OBSIDIAN_WEEP = BCLParticleType.register(
-                    BetterNether.makeID("dripping_obsidian_weep"),
+                    BetterNether.C.id("dripping_obsidian_weep"),
                     BNParticleProvider.ObsidianVanillaWeepHangProvider::new
             );
 
             FALLING_OBSIDIAN_WEEP = BCLParticleType.register(
-                    BetterNether.makeID("falling_obsidian_weep"),
+                    BetterNether.C.id("falling_obsidian_weep"),
                     BNParticleProvider.ObsidianVanillaWeepFallProvider::new
             );
 
             LANDING_OBSIDIAN_WEEP = BCLParticleType.register(
-                    BetterNether.makeID("landing_obsidian_weep"),
+                    BetterNether.C.id("landing_obsidian_weep"),
                     BNParticleProvider.ObsidianVanillaWeepLandProvider::new
             );
         } else {

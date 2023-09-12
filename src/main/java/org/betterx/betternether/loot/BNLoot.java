@@ -23,19 +23,19 @@ import java.util.ArrayList;
 
 
 public class BNLoot {
-    public static final ResourceLocation CITY_LOOT = BetterNether.makeID("chests/city");
-    public static final ResourceLocation CITY_LOOT_COMMON = BetterNether.makeID("chests/city_common");
-    public static final ResourceLocation CITY_LOOT_SURPRISE = BetterNether.makeID("chests/city_surprise");
-    public static final ResourceLocation LIBRARY_LOOT = BetterNether.makeID("chests/library");
-    public static final ResourceLocation WITHER_TOWER_LOOT = BetterNether.makeID("chests/wither_tower");
-    public static final ResourceLocation WITHER_TOWER_BONUS_LOOT = BetterNether.makeID("chests/wither_tower_bonus");
-    public static final ResourceLocation GHAST_HIVE = BetterNether.makeID("chests/ghast_hive");
+    public static final ResourceLocation CITY_LOOT = BetterNether.C.id("chests/city");
+    public static final ResourceLocation CITY_LOOT_COMMON = BetterNether.C.id("chests/city_common");
+    public static final ResourceLocation CITY_LOOT_SURPRISE = BetterNether.C.id("chests/city_surprise");
+    public static final ResourceLocation LIBRARY_LOOT = BetterNether.C.id("chests/library");
+    public static final ResourceLocation WITHER_TOWER_LOOT = BetterNether.C.id("chests/wither_tower");
+    public static final ResourceLocation WITHER_TOWER_BONUS_LOOT = BetterNether.C.id("chests/wither_tower_bonus");
+    public static final ResourceLocation GHAST_HIVE = BetterNether.C.id("chests/ghast_hive");
 
-    public static final ResourceLocation FIREFLY = BetterNether.makeID("entities/firefly");
-    public static final ResourceLocation FLYING_PIG = BetterNether.makeID("entities/flying_pig");
-    public static final ResourceLocation JUNGLE_SKELETON = BetterNether.makeID("entities/jungle_skeleton");
-    public static final ResourceLocation NAGA = BetterNether.makeID("entities/naga");
-    public static final ResourceLocation SKULL = BetterNether.makeID("entities/skull");
+    public static final ResourceLocation FIREFLY = BetterNether.C.id("entities/firefly");
+    public static final ResourceLocation FLYING_PIG = BetterNether.C.id("entities/flying_pig");
+    public static final ResourceLocation JUNGLE_SKELETON = BetterNether.C.id("entities/jungle_skeleton");
+    public static final ResourceLocation NAGA = BetterNether.C.id("entities/naga");
+    public static final ResourceLocation SKULL = BetterNether.C.id("entities/skull");
 
     public static void register() {
 

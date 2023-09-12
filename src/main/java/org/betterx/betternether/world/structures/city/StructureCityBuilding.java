@@ -31,12 +31,12 @@ public class StructureCityBuilding extends NetherStructureNBT {
     private int offsetY;
 
     public StructureCityBuilding(String structure) {
-        super(BetterNether.makeID(structure));
+        super(BetterNether.C.id(structure));
         init();
     }
 
     public StructureCityBuilding(String structure, int offsetY) {
-        super(BetterNether.makeID(structure));
+        super(BetterNether.C.id(structure));
         this.offsetY = offsetY;
         init();
     }

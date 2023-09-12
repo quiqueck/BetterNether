@@ -19,7 +19,7 @@ public class EMIPlugin implements EmiPlugin {
     public static final EmiIngredient CINCINNASITE_FORGE_WORKSTATION = EmiStack.of(NetherBlocks.CINCINNASITE_FORGE);
 
     public static final EmiRecipeCategory FORGE = new EmiRecipeCategory(
-            BetterNether.makeID("forge"),
+            BetterNether.C.id("forge"),
             CINCINNASITE_FORGE_WORKSTATION,
             org.betterx.bclib.integration.emi.EMIPlugin.getSprite(16, 16)
     );

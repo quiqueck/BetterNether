@@ -21,7 +21,7 @@ import java.util.List;
 
 public class NetherTerrain {
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> MAGMA_BLOBS = BCLFeatureBuilder
-            .start(BetterNether.makeID("magma_block"), Blocks.MAGMA_BLOCK)
+            .start(BetterNether.C.id("magma_block"), Blocks.MAGMA_BLOCK)
             .build();
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_PITS = BCLFeatureBuilder
             .start(BN.id("lava_pit"), Blocks.LAVA)

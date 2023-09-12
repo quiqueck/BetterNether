@@ -19,20 +19,20 @@ public class NetherStructures {
     public static final int CITY_SPACING = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
     // Nether City
     public static final BCLStructure<CityStructure> CITY_STRUCTURE = BCLStructureBuilder
-            .start(BetterNether.makeID("nether_city"), CityStructure::new)
+            .start(BetterNether.C.id("nether_city"), CityStructure::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(CITY_SPACING, CITY_SPACING >> 1)
             .build();
 
     public static final BCLStructure<Pyramids> PYRAMIDS = BCLStructureBuilder
-            .start(BetterNether.makeID("pyramid"), Pyramids::new)
+            .start(BetterNether.C.id("pyramid"), Pyramids::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(32, 8)
             .codec(Pyramids.CODEC)
             .build();
 
     public static final BCLStructure<GhastHive> GHAST_HIVE = BCLStructureBuilder
-            .start(BetterNether.makeID("ghast_hive"), GhastHive::new)
+            .start(BetterNether.C.id("ghast_hive"), GhastHive::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(80, 32)
             .codec(GhastHive.CODEC)
@@ -40,7 +40,7 @@ public class NetherStructures {
 
 
     public static final BCLStructure<SpawnAltarLadder> SPAWN_ALTAR_LADDER = BCLStructureBuilder
-            .start(BetterNether.makeID("spawn_altar_ladder"), SpawnAltarLadder::new)
+            .start(BetterNether.C.id("spawn_altar_ladder"), SpawnAltarLadder::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(40, 20)
             .codec(SpawnAltarLadder.CODEC)
@@ -48,7 +48,7 @@ public class NetherStructures {
             .build();
 
     public static final BCLStructure<RespawnPoints> RESPAWN_POINTS = BCLStructureBuilder
-            .start(BetterNether.makeID("respawn_points"), RespawnPoints::new)
+            .start(BetterNether.C.id("respawn_points"), RespawnPoints::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(32, 24)
             .codec(RespawnPoints.CODEC)
@@ -57,7 +57,7 @@ public class NetherStructures {
 
 
     public static final BCLStructure<Pillars> PILLARS = BCLStructureBuilder
-            .start(BetterNether.makeID("pillars"), Pillars::new)
+            .start(BetterNether.C.id("pillars"), Pillars::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(20, 8)
             .codec(Pillars.CODEC)
@@ -66,7 +66,7 @@ public class NetherStructures {
 
 
     public static final BCLStructure<Gardens> GARDENS = BCLStructureBuilder
-            .start(BetterNether.makeID("gardens"), Gardens::new)
+            .start(BetterNether.C.id("gardens"), Gardens::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(50, 16)
             .codec(Gardens.CODEC)
@@ -74,7 +74,7 @@ public class NetherStructures {
             .build();
 
     public static final BCLStructure<Portals> PORTALS = BCLStructureBuilder
-            .start(BetterNether.makeID("portals"), Portals::new)
+            .start(BetterNether.C.id("portals"), Portals::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(40, 15)
             .codec(Portals.CODEC)
@@ -82,7 +82,7 @@ public class NetherStructures {
             .build();
 
     public static final BCLStructure<Altars> ALTARS = BCLStructureBuilder
-            .start(BetterNether.makeID("altars"), Altars::new)
+            .start(BetterNether.C.id("altars"), Altars::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(40, 16)
             .codec(Altars.CODEC)
@@ -90,7 +90,7 @@ public class NetherStructures {
             .build();
 
     public static final BCLStructure<JungleTemples> JUNGLE_TEMPLES = BCLStructureBuilder
-            .start(BetterNether.makeID("jungle_temples"), JungleTemples::new)
+            .start(BetterNether.C.id("jungle_temples"), JungleTemples::new)
             .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(32, 8)
             .codec(JungleTemples.CODEC)

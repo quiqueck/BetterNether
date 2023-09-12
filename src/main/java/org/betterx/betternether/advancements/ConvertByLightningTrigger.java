@@ -11,7 +11,7 @@ import net.minecraft.world.level.ItemLike;
 import com.google.gson.JsonObject;
 
 public class ConvertByLightningTrigger extends SimpleCriterionTrigger<ConvertByLightningTrigger.TriggerInstance> {
-    static final ResourceLocation ID = BetterNether.makeID("convert_by_lightning");
+    static final ResourceLocation ID = BetterNether.C.id("convert_by_lightning");
 
     public ResourceLocation getId() {
         return ID;

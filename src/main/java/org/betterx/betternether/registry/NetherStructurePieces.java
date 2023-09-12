@@ -16,7 +16,7 @@ public class NetherStructurePieces {
     public static final StructurePieceType ANCHOR_TREE_PIECE = register("anchor_tree", DestructionPiece::new);
 
     private static StructurePieceType register(String id, StructurePieceType pieceType) {
-        return Registry.register(BuiltInRegistries.STRUCTURE_PIECE, BetterNether.makeID(id), pieceType);
+        return Registry.register(BuiltInRegistries.STRUCTURE_PIECE, BetterNether.C.id(id), pieceType);
     }
 
     public static void ensureStaticLoad() {

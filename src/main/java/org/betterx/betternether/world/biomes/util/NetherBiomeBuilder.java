@@ -60,18 +60,18 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
 
     public static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
 
-    public static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM =
-            new SurfaceRules.VerticalGradientConditionSource(
-                    BetterNether.makeID("bedrock_floor"),
-                    VerticalAnchor.bottom(),
-                    VerticalAnchor.aboveBottom(5)
-            );
-    public static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP =
-            new SurfaceRules.VerticalGradientConditionSource(
-                    BetterNether.makeID("bedrock_roof"),
-                    VerticalAnchor.belowTop(5),
-                    VerticalAnchor.top()
-            );
+    public static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM
+            = new SurfaceRules.VerticalGradientConditionSource(
+            BetterNether.C.id("bedrock_floor"),
+            VerticalAnchor.bottom(),
+            VerticalAnchor.aboveBottom(5)
+    );
+    public static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP
+            = new SurfaceRules.VerticalGradientConditionSource(
+            BetterNether.C.id("bedrock_roof"),
+            VerticalAnchor.belowTop(5),
+            VerticalAnchor.top()
+    );
 
     private void addVanillaStructures() {
         this.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE)

@@ -99,13 +99,13 @@ public class NetherBiomes {
     private static void registerNumericProviders() {
         Registry.register(
                 NumericProviderRegistry.NUMERIC_PROVIDER,
-                BetterNether.makeID("nether_grasslands"),
+                BetterNether.C.id("nether_grasslands"),
                 NetherGrasslandsNumericProvider.CODEC
         );
 
         Registry.register(
                 NumericProviderRegistry.NUMERIC_PROVIDER,
-                BetterNether.makeID("nether_mushroom_forrest_edge"),
+                BetterNether.C.id("nether_mushroom_forrest_edge"),
                 NetherMushroomForestEdgeNumericProvider.CODEC
         );
     }

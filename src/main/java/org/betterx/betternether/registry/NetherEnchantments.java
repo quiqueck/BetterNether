@@ -13,6 +13,6 @@ public class NetherEnchantments {
     public static RubyFire RUBY_FIRE = register("ruby_fire", new RubyFire());
 
     private static <T extends Enchantment> T register(String name, T enchantment) {
-        return Registry.register(BuiltInRegistries.ENCHANTMENT, BetterNether.makeID(name), enchantment);
+        return Registry.register(BuiltInRegistries.ENCHANTMENT, BetterNether.C.id(name), enchantment);
     }
 }

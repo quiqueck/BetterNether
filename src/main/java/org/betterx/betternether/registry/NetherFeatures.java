@@ -184,7 +184,7 @@ public class NetherFeatures {
     ) {
         int veins1 = Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_count", veins);
         BCLPlacedFeatureBuilder<OreFeature, OreConfiguration> builder = org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder
-                .startOre(BetterNether.makeID(name + "_ore"))
+                .startOre(BetterNether.C.id(name + "_ore"))
                 .add(baseBlock, blockOre)
                 .veinSize(Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_size", veinSize))
                 .discardChanceOnAirExposure(Configs.GENERATOR.getFloat(

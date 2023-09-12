@@ -77,14 +77,14 @@ public class ItemRecipes {
                 .build();
 
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("cincinnasite_ingot"), NetherItems.CINCINNASITE_INGOT)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("cincinnasite_ingot"), NetherItems.CINCINNASITE_INGOT)
                         .shapeless()
                         .addMaterial('#', NetherBlocks.CINCINNASITE_FORGED)
                         .setGroup("nether_cincinnasite_ingot")
                         .setOutputCount(4)
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("detector_rail"), Items.DETECTOR_RAIL)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("detector_rail"), Items.DETECTOR_RAIL)
                         .setShape("X X", "X#X", "XRX")
                         .addMaterial('R', Items.REDSTONE)
                         .addMaterial('#', Items.STONE_PRESSURE_PLATE)
@@ -94,31 +94,31 @@ public class ItemRecipes {
                         .setCategory(RecipeCategory.TRANSPORTATION)
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("glass_bottle"), Items.GLASS_BOTTLE)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("glass_bottle"), Items.GLASS_BOTTLE)
                         .setShape("# #", " # ")
                         .addMaterial('#', NetherBlocks.QUARTZ_GLASS)
                         .setGroup("nether_glass_bottle")
                         .setOutputCount(3)
                         .build();
-        BCLRecipeBuilder.crafting(BetterNether.makeID("gray_dye"), Items.GRAY_DYE)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("gray_dye"), Items.GRAY_DYE)
                         .shapeless()
                         .addMaterial('#', NetherBlocks.GRAY_MOLD)
                         .setGroup("nether_gray_dye")
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("nether_ruby_from_block"), NetherItems.NETHER_RUBY)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("nether_ruby_from_block"), NetherItems.NETHER_RUBY)
                         .shapeless()
                         .addMaterial('#', NetherBlocks.NETHER_RUBY_BLOCK)
                         .setGroup("nether_nether_ruby_from_block")
                         .setOutputCount(9)
                         .build();
-        BCLRecipeBuilder.crafting(BetterNether.makeID("paper"), Items.PAPER)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("paper"), Items.PAPER)
                         .setShape("###")
                         .addMaterial('#', NetherBlocks.NETHER_REED_STEM)
                         .setGroup("nether_paper")
                         .setOutputCount(3)
                         .build();
-        BCLRecipeBuilder.crafting(BetterNether.makeID("rail"), Items.RAIL)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("rail"), Items.RAIL)
                         .setShape("X X", "X#X", "X X")
                         .addMaterial('#', Items.STICK)
                         .addMaterial('X', NetherItems.CINCINNASITE_INGOT)
@@ -126,33 +126,33 @@ public class ItemRecipes {
                         .setOutputCount(16)
                         .setCategory(RecipeCategory.TRANSPORTATION)
                         .build();
-        BCLRecipeBuilder.crafting(BetterNether.makeID("red_dye"), Items.RED_DYE)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("red_dye"), Items.RED_DYE)
                         .shapeless()
                         .addMaterial('#', NetherBlocks.RED_MOLD)
                         .setGroup("nether_red_dye")
                         .setOutputCount(2)
                         .build();
-        BCLRecipeBuilder.crafting(BetterNether.makeID("stalagnate_bowl_apple"), NetherItems.STALAGNATE_BOWL_APPLE)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("stalagnate_bowl_apple"), NetherItems.STALAGNATE_BOWL_APPLE)
                         .setShape("W", "#")
                         .addMaterial('#', NetherItems.STALAGNATE_BOWL)
                         .addMaterial('W', NetherItems.BLACK_APPLE)
                         .setGroup("nether_stalagnate_bowl_apple")
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("stick"), Items.STICK)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("stick"), Items.STICK)
                         .setShape("#", "#")
                         .addMaterial('#', NetherBlocks.NETHER_REED_STEM)
                         .setGroup("nether_stick")
                         .setOutputCount(2)
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("sugar"), Items.SUGAR)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("sugar"), Items.SUGAR)
                         .shapeless()
                         .addMaterial('#', NetherBlocks.NETHER_REED_STEM)
                         .setGroup("nether_sugar")
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("shield"), Items.SHIELD)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("shield"), Items.SHIELD)
                         .setShape("WoW", "WWW", " W ")
                         .addMaterial('W', ItemTags.PLANKS)
                         .addMaterial('o', NetherItems.CINCINNASITE_INGOT)
@@ -160,7 +160,7 @@ public class ItemRecipes {
                         .setCategory(RecipeCategory.COMBAT)
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("piston"), Items.PISTON)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("piston"), Items.PISTON)
                         .setShape("TTT", "#X#", "#R#")
                         .addMaterial('R', Items.REDSTONE)
                         .addMaterial('#', Items.COBBLESTONE)
@@ -170,7 +170,7 @@ public class ItemRecipes {
                         .setCategory(RecipeCategory.REDSTONE)
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("stalagnate_bowl"), NetherItems.STALAGNATE_BOWL)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("stalagnate_bowl"), NetherItems.STALAGNATE_BOWL)
                         .setShape("# #", " # ")
                         .addMaterial('#', NetherBlocks.MAT_STALAGNATE.getStem())
                         .setGroup("nether_stalagnate_bowl")
@@ -182,26 +182,26 @@ public class ItemRecipes {
         registerSmelting();
 
         BCLRecipeBuilder.copySmithingTemplate(
-                BetterNether.makeID("copy_bowl_upgrade"),
+                BetterNether.C.id("copy_bowl_upgrade"),
                 NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE,
                 NetherBlocks.CINCINNASITE_BLOCK
         ).build();
 
         BCLRecipeBuilder.copySmithingTemplate(
-                BetterNether.makeID("copy_flaming_ruby_upgrade"),
+                BetterNether.C.id("copy_flaming_ruby_upgrade"),
                 NetherTemplates.FLAMING_RUBY_TEMPLATE,
                 NetherItems.NETHER_RUBY
         ).build();
 
         BCLRecipeBuilder.copySmithingTemplate(
-                BetterNether.makeID("copy_cincinnasite_diamond_upgrade"),
+                BetterNether.C.id("copy_cincinnasite_diamond_upgrade"),
                 NetherTemplates.CINCINNASITE_DIAMOND_TEMPLATE,
                 NetherItems.CINCINNASITE_INGOT
         ).build();
     }
 
     private static void registerShapeLess() {
-        BCLRecipeBuilder.crafting(BetterNether.makeID("agave_medicine"), NetherItems.AGAVE_MEDICINE)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("agave_medicine"), NetherItems.AGAVE_MEDICINE)
                         .addMaterial('#', NetherItems.STALAGNATE_BOWL)
                         .addMaterial('A', NetherItems.AGAVE_LEAF)
                         .addMaterial('B', NetherItems.AGAVE_LEAF)
@@ -210,7 +210,7 @@ public class ItemRecipes {
                         .setGroup("nether_agave_medicine")
                         .setCategory(RecipeCategory.FOOD)
                         .build();
-        BCLRecipeBuilder.crafting(BetterNether.makeID("herbal_medicine"), NetherItems.HERBAL_MEDICINE)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("herbal_medicine"), NetherItems.HERBAL_MEDICINE)
                         .addMaterial('#', NetherItems.STALAGNATE_BOWL)
                         .addMaterial('A', NetherItems.AGAVE_LEAF)
                         .addMaterial('B', NetherItems.BLACK_APPLE)
@@ -220,7 +220,7 @@ public class ItemRecipes {
                         .setGroup("nether_herbal_medicine")
                         .setCategory(RecipeCategory.FOOD)
                         .build();
-        BCLRecipeBuilder.crafting(BetterNether.makeID("stalagnate_bowl_mushroom"), NetherItems.STALAGNATE_BOWL_MUSHROOM)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("stalagnate_bowl_mushroom"), NetherItems.STALAGNATE_BOWL_MUSHROOM)
                         .addMaterial('#', Items.BROWN_MUSHROOM)
                         .addMaterial('A', Items.RED_MUSHROOM)
                         .addMaterial('B', NetherItems.STALAGNATE_BOWL)
@@ -229,7 +229,7 @@ public class ItemRecipes {
                         .setCategory(RecipeCategory.FOOD)
                         .build();
 
-        BCLRecipeBuilder.crafting(BetterNether.makeID("stalagnate_bowl_wart"), NetherItems.STALAGNATE_BOWL_WART)
+        BCLRecipeBuilder.crafting(BetterNether.C.id("stalagnate_bowl_wart"), NetherItems.STALAGNATE_BOWL_WART)
                         .addMaterial('#', NetherItems.STALAGNATE_BOWL)
                         .addMaterial('A', Items.NETHER_WART)
                         .addMaterial('B', Items.NETHER_WART)
@@ -241,24 +241,24 @@ public class ItemRecipes {
     }
 
     private static void registerSmelting() {
-        BCLRecipeBuilder.smelting(BetterNether.makeID("black_dye"), Items.BLACK_DYE)
+        BCLRecipeBuilder.smelting(BetterNether.C.id("black_dye"), Items.BLACK_DYE)
                         .setPrimaryInputAndUnlock(NetherBlocks.INK_BUSH_SEED)
                         .setCookingTime(200)
                         .build();
 
-        BCLRecipeBuilder.smelting(BetterNether.makeID("hook_mushroom_cooked"), NetherItems.HOOK_MUSHROOM_COOKED)
+        BCLRecipeBuilder.smelting(BetterNether.C.id("hook_mushroom_cooked"), NetherItems.HOOK_MUSHROOM_COOKED)
                         .setPrimaryInputAndUnlock(NetherBlocks.HOOK_MUSHROOM)
                         .setCookingTime(200)
                         .setExperience(0.1f)
                         .build();
 
-        BCLRecipeBuilder.smelting(BetterNether.makeID("cincinnasite_ingot_from_shard"), NetherItems.CINCINNASITE_INGOT)
+        BCLRecipeBuilder.smelting(BetterNether.C.id("cincinnasite_ingot_from_shard"), NetherItems.CINCINNASITE_INGOT)
                         .setPrimaryInputAndUnlock(NetherItems.CINCINNASITE)
                         .setCookingTime(200)
                         .setExperience(0.5f)
                         .buildWithBlasting();
 
-        BCLRecipeBuilder.smelting(BetterNether.makeID("cincinnasite_ingot_from_ore"), NetherItems.CINCINNASITE_INGOT)
+        BCLRecipeBuilder.smelting(BetterNether.C.id("cincinnasite_ingot_from_ore"), NetherItems.CINCINNASITE_INGOT)
                         .setPrimaryInputAndUnlock(NetherBlocks.CINCINNASITE_ORE)
                         .setCookingTime(200)
                         .setExperience(0.5f)

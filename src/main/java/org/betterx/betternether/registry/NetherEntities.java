@@ -206,7 +206,7 @@ public class NetherEntities {
             int eggColor,
             int dotsColor
     ) {
-        ResourceLocation id = BetterNether.makeID(name);
+        ResourceLocation id = BetterNether.C.id(name);
         EntityType<T> type = FabricEntityTypeBuilder.create(group, entity)
                                                     .dimensions(fixedSize
                                                             ? EntityDimensions.fixed(width, height)

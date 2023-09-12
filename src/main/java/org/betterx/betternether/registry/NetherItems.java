@@ -184,7 +184,7 @@ public class NetherItems extends ItemRegistry {
 
     public static Item registerShears(String name, Item item) {
         if (item != Items.AIR) {
-            return getItemRegistry().registerTool(BetterNether.makeID(name), item);
+            return getItemRegistry().registerTool(BetterNether.C.id(name), item);
         }
 
         return item;
@@ -192,7 +192,7 @@ public class NetherItems extends ItemRegistry {
 
     public static Item registerTool(String name, Item item, TagKey<Item>... tags) {
         if (item != Items.AIR) {
-            getItemRegistry().registerTool(BetterNether.makeID(name), item);
+            getItemRegistry().registerTool(BetterNether.C.id(name), item);
             if (tags.length > 0)
                 TagManager.ITEMS.add(item, tags);
 
@@ -205,7 +205,7 @@ public class NetherItems extends ItemRegistry {
 
     public static Item registerItem(String name, Item item, TagKey<Item>... tags) {
         if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
-            getItemRegistry().register(BetterNether.makeID(name), item);
+            getItemRegistry().register(BetterNether.C.id(name), item);
             //item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
             if (tags.length > 0)
                 TagManager.ITEMS.add(item, tags);
@@ -297,7 +297,7 @@ public class NetherItems extends ItemRegistry {
     }
 
     public static Item registerNetherItem(String name, Item item) {
-        return getItemRegistry().register(BetterNether.makeID(name), item);
+        return getItemRegistry().register(BetterNether.C.id(name), item);
     }
 
     static {

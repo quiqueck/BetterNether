@@ -17,8 +17,6 @@ import org.betterx.worlds.together.world.WorldConfig;
 import org.betterx.wover.core.api.Logger;
 import org.betterx.wover.core.api.ModCore;
 
-import net.minecraft.resources.ResourceLocation;
-
 import net.fabricmc.api.ModInitializer;
 
 public class BetterNether implements ModInitializer {
@@ -107,8 +105,5 @@ public class BetterNether implements ModInitializer {
         return fogEnd;
     }
 
-    public static ResourceLocation makeID(String path) {
-        return C.id(path);
-    }
 }
 

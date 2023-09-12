@@ -32,7 +32,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
     @Override
     protected void bootstrap() {
         ResourceLocation root = AdvancementManager.Builder
-                .create(BetterNether.makeID("root"))
+                .create(BetterNether.C.id("root"))
                 .startDisplay(NetherBlocks.CINCINNASITE_LANTERN)
                 .frame(FrameType.TASK)
                 .hideFromChat()
@@ -46,7 +46,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation enterNether = AdvancementManager.Builder
-                .create(BetterNether.makeID("enter_nether"))
+                .create(BetterNether.C.id("enter_nether"))
                 .parent(root)
                 .startDisplay(NetherBlocks.JUNGLE_MOSS)
                 .endDisplay()
@@ -60,7 +60,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation blueObsidian = AdvancementManager.Builder
-                .create(BetterNether.makeID("blue_obsidian"))
+                .create(BetterNether.C.id("blue_obsidian"))
                 .parent(root)
                 .startDisplay(NetherBlocks.BLUE_OBSIDIAN)
                 .endDisplay()
@@ -69,7 +69,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation obsidianBlocks = AdvancementManager.Builder
-                .create(BetterNether.makeID("obsidian_blocks"))
+                .create(BetterNether.C.id("obsidian_blocks"))
                 .parent(blueObsidian)
                 .startDisplay(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
                 .endDisplay()
@@ -85,7 +85,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation makeCrying = AdvancementManager.Builder
-                .create(BetterNether.makeID("make_crying"))
+                .create(BetterNether.C.id("make_crying"))
                 .parent(blueObsidian)
                 .startDisplay(NetherBlocks.BLUE_WEEPING_OBSIDIAN)
                 .frame(FrameType.CHALLENGE)
@@ -111,7 +111,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation city = AdvancementManager.Builder
-                .create(BetterNether.makeID("city"))
+                .create(BetterNether.C.id("city"))
                 .parent(enterNether)
                 .startDisplay(NetherBlocks.CINCINNASITE_CARVED)
                 .endDisplay()
@@ -121,7 +121,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
 
 
         ResourceLocation rubyOre = AdvancementManager.Builder
-                .create(BetterNether.makeID("ruby_ore"))
+                .create(BetterNether.C.id("ruby_ore"))
                 .parent(enterNether)
                 .startDisplay(NetherItems.NETHER_RUBY)
                 .endDisplay()
@@ -131,7 +131,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
 
 
         ResourceLocation flames = AdvancementManager.Builder
-                .create(BetterNether.makeID("flaming_ruby"))
+                .create(BetterNether.C.id("flaming_ruby"))
                 .parent(rubyOre)
                 .startDisplay(NetherTemplates.FLAMING_RUBY_TEMPLATE)
                 .frame(FrameType.GOAL)
@@ -141,7 +141,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation flamingTools = AdvancementManager.Builder
-                .create(BetterNether.makeID("flaming_tools"))
+                .create(BetterNether.C.id("flaming_tools"))
                 .parent(flames)
                 .startDisplay(NetherItems.FLAMING_RUBY_SET.getSlot(EquipmentSet.PICKAXE_SLOT))
                 .frame(FrameType.GOAL)
@@ -151,7 +151,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation flamingArmor = AdvancementManager.Builder
-                .create(BetterNether.makeID("flaming_armor"))
+                .create(BetterNether.C.id("flaming_armor"))
                 .parent(flames)
                 .startDisplay(NetherItems.FLAMING_RUBY_SET.getSlot(EquipmentSet.CHESTPLATE_SLOT))
                 .frame(FrameType.GOAL)
@@ -161,7 +161,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation rubyTools = AdvancementManager.Builder
-                .create(BetterNether.makeID("ruby_tools"))
+                .create(BetterNether.C.id("ruby_tools"))
                 .parent(rubyOre)
                 .startDisplay(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.PICKAXE_SLOT))
                 .endDisplay()
@@ -170,7 +170,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation rubyGear = AdvancementManager.Builder
-                .create(BetterNether.makeID("ruby_gear"))
+                .create(BetterNether.C.id("ruby_gear"))
                 .parent(rubyTools)
                 .startDisplay(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.CHESTPLATE_SLOT))
                 .endDisplay()
@@ -179,7 +179,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation cincinnasiteOre = AdvancementManager.Builder
-                .create(BetterNether.makeID("cincinnasite_ore"))
+                .create(BetterNether.C.id("cincinnasite_ore"))
                 .parent(enterNether)
                 .startDisplay(NetherItems.CINCINNASITE_INGOT)
                 .endDisplay()
@@ -188,7 +188,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation cincinnasiteTools = AdvancementManager.Builder
-                .create(BetterNether.makeID("cincinnasite_tools"))
+                .create(BetterNether.C.id("cincinnasite_tools"))
                 .parent(cincinnasiteOre)
                 .startDisplay(NetherItems.CINCINNASITE_SET.getSlot(EquipmentSet.PICKAXE_SLOT))
                 .endDisplay()
@@ -197,7 +197,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation cincinnasiteGear = AdvancementManager.Builder
-                .create(BetterNether.makeID("cincinnasite_gear"))
+                .create(BetterNether.C.id("cincinnasite_gear"))
                 .parent(cincinnasiteTools)
                 .startDisplay(NetherItems.CINCINNASITE_SET.getSlot(EquipmentSet.CHESTPLATE_SLOT))
                 .endDisplay()
@@ -206,7 +206,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation cincinnasiteDiamond = AdvancementManager.Builder
-                .create(BetterNether.makeID("cincinnasite_diamond"))
+                .create(BetterNether.C.id("cincinnasite_diamond"))
                 .parent(cincinnasiteTools)
                 .startDisplay(NetherTemplates.CINCINNASITE_DIAMOND_TEMPLATE)
                 .frame(FrameType.GOAL)
@@ -216,7 +216,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation cincinnasiteDiamondTools = AdvancementManager.Builder
-                .create(BetterNether.makeID("cincinnasite_diamond_tools"))
+                .create(BetterNether.C.id("cincinnasite_diamond_tools"))
                 .parent(cincinnasiteDiamond)
                 .startDisplay(NetherItems.CINCINNASITE_DIAMOND_SET.getSlot(EquipmentSet.PICKAXE_SLOT))
                 .frame(FrameType.GOAL)
@@ -226,7 +226,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation forge = AdvancementManager.Builder
-                .create(BetterNether.makeID("cincinnasite_forge"))
+                .create(BetterNether.C.id("cincinnasite_forge"))
                 .parent(cincinnasiteOre)
                 .startDisplay(NetherBlocks.CINCINNASITE_FORGE)
                 .frame(FrameType.GOAL)
@@ -236,7 +236,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
         ResourceLocation netherWood = AdvancementManager.Builder
-                .create(BetterNether.makeID("nether_wood"))
+                .create(BetterNether.C.id("nether_wood"))
                 .parent(enterNether)
                 .startDisplay(NetherBlocks.MAT_WILLOW.getLog())
                 .endDisplay()
@@ -274,7 +274,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
 
 
         ResourceLocation allTheBiomes = AdvancementManager.Builder
-                .create(BetterNether.makeID("all_the_biomes"))
+                .create(BetterNether.C.id("all_the_biomes"))
                 .parent(city)
                 .startDisplay(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.BOOTS_SLOT))
                 .frame(FrameType.CHALLENGE)

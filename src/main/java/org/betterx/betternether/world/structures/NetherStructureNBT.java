@@ -41,7 +41,7 @@ public class NetherStructureNBT extends StructureNBT {
     private static final Map<String, NetherStructureNBT> STRUCTURE_CACHE = Maps.newHashMap();
 
     public static NetherStructureNBT create(String location) {
-        return STRUCTURE_CACHE.computeIfAbsent(location, r -> new NetherStructureNBT(BetterNether.makeID(r)));
+        return STRUCTURE_CACHE.computeIfAbsent(location, r -> new NetherStructureNBT(BetterNether.C.id(r)));
     }
 
 

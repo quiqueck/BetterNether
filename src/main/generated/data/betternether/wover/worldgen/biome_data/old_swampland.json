@@ -1,0 +1,16 @@
+{
+  "type": "betternether:biome",
+  "parent": "betternether:nether_swampland",
+  "biome": "betternether:old_swampland",
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": 0.75,
+      "offset": 0.1,
+      "temperature": 0.1,
+      "weirdness": 0.0
+    }
+  ]
+}

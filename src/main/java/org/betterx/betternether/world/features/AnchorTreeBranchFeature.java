@@ -6,7 +6,7 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.NetherBiomeBuilder;
+import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 import net.minecraft.core.BlockPos;
@@ -362,7 +362,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
         final int HEIGHT_15;
         final int HEIGHT_17;
 
-        if (NetherBiomeBuilder.useLegacyGeneration) {
+        if (LegacyNetherBiomeBuilder.useLegacyGeneration) {
             HEIGHT_10 = (int) (10 * scale_factor);
             HEIGHT_15 = (int) (15 * scale_factor);
             HEIGHT_17 = (int) (17 * scale_factor);

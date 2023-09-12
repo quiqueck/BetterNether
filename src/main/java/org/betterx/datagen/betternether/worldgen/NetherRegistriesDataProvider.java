@@ -15,6 +15,6 @@ public class NetherRegistriesDataProvider extends RegistriesDataProvider {
             FabricDataOutput output,
             CompletableFuture<HolderLookup.Provider> registriesFuture
     ) {
-        super(BetterNether.LOGGER, NetherRegistrySupplier.INSTANCE, output, registriesFuture);
+        super(BetterNether.LEGACY_LOGGER, NetherRegistrySupplier.INSTANCE, output, registriesFuture);
     }
 }

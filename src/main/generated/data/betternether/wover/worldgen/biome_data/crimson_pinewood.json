@@ -1,0 +1,17 @@
+{
+  "type": "betternether:biome",
+  "parent": "minecraft:crimson_forest",
+  "biome": "betternether:crimson_pinewood",
+  "genChance": 0.3,
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": 0.1,
+      "offset": 0.0,
+      "temperature": 0.35,
+      "weirdness": 0.0
+    }
+  ]
+}

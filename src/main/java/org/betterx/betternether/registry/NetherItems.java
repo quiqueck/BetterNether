@@ -302,7 +302,7 @@ public class NetherItems extends ItemRegistry {
 
     static {
         if (BCLib.isDevEnvironment()) {
-            BetterNether.LOGGER.warning("Generating Debug Helpers");
+            BetterNether.LOGGER.warn("Generating Debug Helpers");
 
             registerNetherItem(
                     "debug/city_loot",

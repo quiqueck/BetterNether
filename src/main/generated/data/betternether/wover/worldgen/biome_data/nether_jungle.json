@@ -1,0 +1,15 @@
+{
+  "type": "betternether:biome",
+  "biome": "betternether:nether_jungle",
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": 0.8,
+      "offset": 0.0,
+      "temperature": 0.5,
+      "weirdness": 0.0
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
 import org.betterx.bclib.entity.BCLEntityWrapper;
@@ -9,6 +8,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.entity.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
+import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.ui.ColorUtil;
 
 import net.minecraft.core.BlockPos;
@@ -61,38 +61,21 @@ public class NetherEntities {
             return wrapper == null;
         }
 
-        public void addSpawn(BCLBiomeBuilder builder, NetherBiomeConfig data) {
-            final String category = data.configGroup() + ".spawn." + this.type.getCategory()
-                                                                              .getName() + "." + this.type
-                    .getDescriptionId()
-                    .replace(
-                            "entity.",
-                            ""
-                    );
-            int weight = Configs.BIOMES.getInt(category, "weight", data.spawnWeight(this));
-            int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
-            int max = Configs.BIOMES.getInt(category, "maxGroupSize", maxGroupSize);
-
+        public void addSpawn(NetherBiomeBuilder builder, NetherBiomeConfig data) {
+            final int weight = data.spawnWeight(this);
+            if (weight <= 0 || maxGroupSize <= 0) return;
             if (wrapper == null) {
-                builder.spawn(this.type, weight, min, max);
+                builder.spawn(this.type, weight, minGroupSize, maxGroupSize);
             } else {
-                builder.spawn(this.wrapper, weight, min, max);
+                if (this.wrapper.canSpawn())
+                    builder.spawn(this.wrapper.type(), weight, minGroupSize, maxGroupSize);
             }
         }
 
         public void addSpawn(ResourceLocation ID, Holder<Biome> biome, float multiplier) {
-            final String category = ID.getNamespace() + "." + ID.getPath() + ".spawn." + this.type.getCategory()
-                                                                                                  .getName() + "." + this.type
-                    .getDescriptionId()
-                    .replace(
-                            "entity.",
-                            ""
-                    );
-            int dweight = Configs.BIOMES.getInt(category, "weight", (int) (weight * multiplier));
-            int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
-            int max = Configs.BIOMES.getInt(category, "maxGroupSize", maxGroupSize);
-
-            BiomeAPI.addBiomeMobSpawn(biome, this.type, dweight, min, max);
+            final int weight = (int) (this.weight * multiplier);
+            if (weight <= 0 || maxGroupSize <= 0) return;
+            BiomeAPI.addBiomeMobSpawn(biome, this.type, weight, minGroupSize, maxGroupSize);
         }
 
         public void addSpawn(ResourceLocation ID, Holder<Biome> biome) {

@@ -43,7 +43,7 @@ public class EMIForgeRecipe implements EmiRecipe {
 
     static void addAllRecipes(EmiRegistry emiRegistry, RecipeManager manager) {
         org.betterx.bclib.integration.emi.EMIPlugin.addAllRecipes(
-                emiRegistry, manager, BetterNether.LOGGER,
+                emiRegistry, manager, BetterNether.LEGACY_LOGGER,
                 RecipeType.SMELTING, (recipe) -> new EMIForgeRecipe(recipe, BlockEntityForge.SPEEDUP)
         );
     }

@@ -5,7 +5,7 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
-import org.betterx.betternether.world.NetherBiomeBuilder;
+import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.worlds.together.world.event.WorldBootstrap;
 
 import com.mojang.brigadier.Command;
@@ -126,7 +126,7 @@ public class CommandRegistry {
 
     private static int teleportToNextBiome(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
-        List<BCLBiome> biomes = NetherBiomeBuilder.getAllBnBiomes();
+        List<BCLBiome> biomes = LegacyNetherBiomeBuilder.getAllBnBiomes();
 
         if (biomeIndex < 0 || biomeIndex >= biomes.size()) {
             source.sendFailure(Component.literal("Failed to find the next Biome...")

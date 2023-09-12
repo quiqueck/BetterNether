@@ -13,8 +13,9 @@ import org.betterx.betternether.registry.*;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.tab.CreativeTabs;
 import org.betterx.betternether.world.BNWorldGenerator;
-import org.betterx.worlds.together.util.Logger;
 import org.betterx.worlds.together.world.WorldConfig;
+import org.betterx.wover.core.api.Logger;
+import org.betterx.wover.core.api.ModCore;
 
 import net.minecraft.resources.ResourceLocation;
 
@@ -22,7 +23,9 @@ import net.fabricmc.api.ModInitializer;
 
 public class BetterNether implements ModInitializer {
     public static final String MOD_ID = "betternether";
-    public static final Logger LOGGER = new Logger(MOD_ID);
+    public static final ModCore C = ModCore.create(MOD_ID);
+    public static final Logger LOGGER = C.log;
+    public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER = new org.betterx.worlds.together.util.Logger(MOD_ID);
     private static boolean thinArmor = true;
     private static boolean lavafallParticles = true;
     private static float fogStart = 0.05F;
@@ -34,8 +37,9 @@ public class BetterNether implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("=^..^=    BetterNether for 1.20    =^..^=");
+        C.log.info("=^..^=    BetterNether for 1.20    =^..^=");
         //MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures/lava"));
+
         initOptions();
         SoundsRegistry.ensureStaticallyLoaded();
         NetherBlocks.register();

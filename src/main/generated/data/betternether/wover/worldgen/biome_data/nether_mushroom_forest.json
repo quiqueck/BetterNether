@@ -1,0 +1,17 @@
+{
+  "type": "betternether:biome",
+  "biome": "betternether:nether_mushroom_forest",
+  "edge": "betternether:nether_mushroom_forest_edge",
+  "edgeSize": 6,
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": 0.7,
+      "offset": 0.0,
+      "temperature": 0.0,
+      "weirdness": 0.0
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 package org.betterx.betternether.world;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
-import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
-import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEntities.KnownSpawnTypes;
+import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
+import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import org.betterx.wover.surface.impl.BaseSurfaceRuleBuilder;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
@@ -22,25 +22,16 @@ public abstract class NetherBiomeConfig {
             NetherBiomeBuilder.BEDROCK
     );
 
-
-    public final ResourceLocation ID;
-
-    protected NetherBiomeConfig(String name) {
-        this.ID = BetterNether.makeID(name.replace(' ', '_')
-                                          .toLowerCase());
+    protected NetherBiomeConfig() {
     }
 
-    /**
-     * Returns the group used in the config Files for this biome
-     * <p>
-     * Example: {@code Configs.BIOMES_CONFIG.getFloat(configGroup(), "generation_chance", 1.0);}
-     *
-     * @return The group name
-     */
-    public String configGroup() {
-        return ID.getNamespace() + "." + ID.getPath();
+    public ResourceKey<Biome> subBiomeOf() {
+        return null;
     }
 
+    public ResourceKey<Biome> withEdgeBiome() {
+        return null;
+    }
 
     public boolean hasVanillaFeatures() {
         return true;
@@ -83,15 +74,11 @@ public abstract class NetherBiomeConfig {
         return res;
     }
 
-    protected abstract void addCustomBuildData(BCLBiomeBuilder builder);
+    public abstract void addCustomBuildData(NetherBiomeBuilder builder);
 
-    public abstract BiomeSupplier<NetherBiome> getSupplier();
-
-    public SurfaceRuleBuilder surface() {
-        return SurfaceRuleBuilder
-                .start()
-                .rule(0, BEDROCK_TOP)
-                .rule(0, BEDROCK_BOTTOM)
-                .rule(10, NETHERRACK);
+    public void surface(BiomeSurfaceRuleBuilder<NetherBiomeBuilder> builder) {
+        builder.rule(BEDROCK_TOP, BaseSurfaceRuleBuilder.STEEP_SURFACE_PRIORITY + 2)
+               .rule(BEDROCK_BOTTOM, BaseSurfaceRuleBuilder.STEEP_SURFACE_PRIORITY + 1)
+               .rule(NETHERRACK, BaseSurfaceRuleBuilder.FILLER_PRIORITY - 1);
     }
 }

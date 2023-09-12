@@ -5,7 +5,7 @@ import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockPlantWall;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.NetherBiomeBuilder;
+import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import org.betterx.betternether.world.structures.plants.LegacyStructureAnchorTree;
 
@@ -54,7 +54,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             StructureGeneratorThreadContext context
     ) {
         pos = new BlockPos(toMiddle(pos.getX()), pos.getY(), toMiddle(pos.getZ()));
-        if (NetherBiomeBuilder.useLegacyGeneration) {
+        if (LegacyNetherBiomeBuilder.useLegacyGeneration) {
             legacyStructure.generate(world, pos, random, MAX_HEIGHT, context);
             return true;
         }
@@ -84,7 +84,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         final int HEIGHT_45;
         final int HEIGHT_90;
         final int SEGMENT_LENGTH;
-        if (NetherBiomeBuilder.useLegacyGeneration) {
+        if (LegacyNetherBiomeBuilder.useLegacyGeneration) {
             HEIGHT_64 = MAX_HEIGHT / 2;
             HEIGHT_45 = (int) (MAX_HEIGHT * 0.36);
             HEIGHT_90 = (int) (MAX_HEIGHT * 0.7);

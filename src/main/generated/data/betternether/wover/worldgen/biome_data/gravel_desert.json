@@ -1,0 +1,15 @@
+{
+  "type": "betternether:biome",
+  "biome": "betternether:gravel_desert",
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": -0.7,
+      "offset": 0.0,
+      "temperature": 0.5,
+      "weirdness": 0.0
+    }
+  ]
+}

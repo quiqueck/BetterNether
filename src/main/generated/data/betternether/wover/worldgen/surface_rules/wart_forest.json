@@ -1,0 +1,174 @@
+{
+  "biome": "betternether:wart_forest",
+  "priority": 1000,
+  "ruleSource": {
+    "type": "minecraft:sequence",
+    "sequence": [
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:not",
+          "invert": {
+            "type": "minecraft:vertical_gradient",
+            "false_at_and_above": {
+              "below_top": 0
+            },
+            "random_name": "betternether:bedrock_roof",
+            "true_at_and_below": {
+              "below_top": 5
+            }
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "minecraft:bedrock"
+          }
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "above_bottom": 5
+          },
+          "random_name": "betternether:bedrock_floor",
+          "true_at_and_below": {
+            "above_bottom": 0
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "minecraft:bedrock"
+          }
+        }
+      },
+      {
+        "type": "minecraft:sequence",
+        "sequence": [
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": false,
+              "offset": 0,
+              "secondary_depth_range": 0,
+              "surface_type": "floor"
+            },
+            "then_run": {
+              "type": "wover:switch_rule",
+              "collection": [
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "minecraft:soul_soil"
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "minecraft:soul_sand"
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "betternether:netherrack_moss"
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "minecraft:soul_sand"
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "minecraft:netherrack"
+                  }
+                }
+              ],
+              "selector": {
+                "type": "wover:nether_noise",
+                "nether_noise": 0
+              }
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": true,
+              "offset": 4,
+              "secondary_depth_range": 1,
+              "surface_type": "floor"
+            },
+            "then_run": {
+              "type": "wover:switch_rule",
+              "collection": [
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "betternether:soul_sandstone",
+                    "Properties": {
+                      "up": "true"
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "betternether:soul_sandstone",
+                    "Properties": {
+                      "up": "false"
+                    }
+                  }
+                }
+              ],
+              "selector": {
+                "type": "wover:nether_noise",
+                "nether_noise": 0
+              }
+            }
+          },
+          {
+            "type": "wover:switch_rule",
+            "collection": [
+              {
+                "type": "minecraft:block",
+                "result_state": {
+                  "Name": "minecraft:soul_soil"
+                }
+              },
+              {
+                "type": "minecraft:block",
+                "result_state": {
+                  "Name": "minecraft:soul_sand"
+                }
+              },
+              {
+                "type": "minecraft:block",
+                "result_state": {
+                  "Name": "minecraft:netherrack"
+                }
+              }
+            ],
+            "selector": {
+              "type": "wover:nether_noise",
+              "nether_noise": 0
+            }
+          }
+        ]
+      },
+      {
+        "type": "minecraft:block",
+        "result_state": {
+          "Name": "minecraft:netherrack"
+        }
+      }
+    ]
+  }
+}

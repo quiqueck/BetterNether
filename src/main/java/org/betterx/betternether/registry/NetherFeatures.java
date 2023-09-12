@@ -1,7 +1,6 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v2.LifeCycleAPI;
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
@@ -13,6 +12,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.features.configured.*;
 import org.betterx.betternether.registry.features.placed.*;
+import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityStructure;
 
@@ -239,17 +239,17 @@ public class NetherFeatures {
     }
 
 
-    public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
+    public static NetherBiomeBuilder addDefaultFeatures(NetherBiomeBuilder builder) {
         return builder;
     }
 
-    public static void addDefaultBNFeatures(BCLBiomeBuilder builder) {
-        for (BCLFeature f : defaultFeatures) {
+    public static void addDefaultBNFeatures(NetherBiomeBuilder builder) {
+        for (BCLFeature<?, ?> f : defaultFeatures) {
             builder.feature(f);
         }
     }
 
-    public static BCLBiomeBuilder addDefaultOres(BCLBiomeBuilder builder) {
+    public static NetherBiomeBuilder addDefaultOres(NetherBiomeBuilder builder) {
         return builder
                 .feature(CINCINNASITE_ORE)
                 .feature(NETHER_RUBY_ORE_RARE)

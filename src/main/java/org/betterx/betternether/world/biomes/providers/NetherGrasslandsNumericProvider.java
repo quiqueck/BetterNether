@@ -1,8 +1,9 @@
 package org.betterx.betternether.world.biomes.providers;
 
-import org.betterx.bclib.interfaces.NumericProvider;
-import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
+
 import org.betterx.betternether.MHelper;
+import org.betterx.wover.surface.api.conditions.SurfaceRulesContext;
+import org.betterx.wover.surface.api.noise.NumericProvider;
 
 import com.mojang.serialization.Codec;
 
@@ -16,7 +17,7 @@ public class NetherGrasslandsNumericProvider implements NumericProvider {
                                                                                  .codec();
 
     @Override
-    public int getNumber(SurfaceRulesContextAccessor ctx) {
+    public int getNumber(SurfaceRulesContext ctx) {
         final int depth = ctx.getStoneDepthAbove();
         if (depth <= 1) return MHelper.RANDOM.nextInt(3);
         if (depth <= MHelper.RANDOM.nextInt(3) + 1) return 0;

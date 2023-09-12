@@ -9,7 +9,6 @@
     "betternether:nether_grasslands",
     "betternether:nether_jungle",
     "betternether:nether_mushroom_forest",
-    "betternether:nether_mushroom_forest_edge",
     "betternether:nether_swampland",
     "betternether:nether_swampland_terraces",
     "betternether:old_fungiwoods",
@@ -20,8 +19,6 @@
     "betternether:sulfuric_bone_reef",
     "betternether:upside_down_forest",
     "betternether:upside_down_forest_cleared",
-    "betternether:wart_forest",
-    "betternether:wart_forest_edge",
-    "minecraft:nether_wastes"
+    "betternether:wart_forest"
   ]
 }

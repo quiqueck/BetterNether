@@ -1,0 +1,17 @@
+{
+  "type": "betternether:biome",
+  "parent": "betternether:nether_grasslands",
+  "biome": "betternether:poor_nether_grasslands",
+  "genChance": 0.3,
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": 0.3,
+      "offset": 0.0,
+      "temperature": 0.0,
+      "weirdness": 0.0
+    }
+  ]
+}

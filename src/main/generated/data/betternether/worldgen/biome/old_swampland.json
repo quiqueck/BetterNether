@@ -1,6 +1,6 @@
 {
   "carvers": {
-    "air": [],
+    "air": "minecraft:nether_cave",
     "liquid": []
   },
   "downfall": 0.0,
@@ -95,12 +95,6 @@
         "maxCount": 6,
         "minCount": 2,
         "weight": 5
-      },
-      {
-        "type": "betternether:flying_pig",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 0
       }
     ],
     "axolotls": [],
@@ -115,18 +109,6 @@
     "misc": [],
     "monster": [
       {
-        "type": "minecraft:ghast",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 0
-      },
-      {
-        "type": "minecraft:zombified_piglin",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 0
-      },
-      {
         "type": "minecraft:magma_cube",
         "maxCount": 4,
         "minCount": 4,
@@ -139,40 +121,10 @@
         "weight": 2
       },
       {
-        "type": "minecraft:enderman",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 0
-      },
-      {
-        "type": "minecraft:piglin",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 0
-      },
-      {
-        "type": "minecraft:hoglin",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 0
-      },
-      {
         "type": "betternether:naga",
         "maxCount": 5,
         "minCount": 3,
         "weight": 8
-      },
-      {
-        "type": "betternether:jungle_skeleton",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 0
-      },
-      {
-        "type": "minecraft:piglin_brute",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 0
       }
     ],
     "underground_water_creature": [],

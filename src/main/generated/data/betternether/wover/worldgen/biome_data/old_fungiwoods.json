@@ -1,0 +1,17 @@
+{
+  "type": "betternether:biome",
+  "parent": "betternether:nether_mushroom_forest",
+  "biome": "betternether:old_fungiwoods",
+  "genChance": 0.3,
+  "parameter_points": [
+    {
+      "continentalness": 0.0,
+      "depth": 0.0,
+      "erosion": 0.0,
+      "humidity": 0.65,
+      "offset": 0.0,
+      "temperature": 0.0,
+      "weirdness": 0.0
+    }
+  ]
+}

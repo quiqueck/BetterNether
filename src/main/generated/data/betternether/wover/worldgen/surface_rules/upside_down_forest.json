@@ -1,0 +1,143 @@
+{
+  "biome": "betternether:upside_down_forest",
+  "priority": 1000,
+  "ruleSource": {
+    "type": "minecraft:sequence",
+    "sequence": [
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:not",
+          "invert": {
+            "type": "minecraft:vertical_gradient",
+            "false_at_and_above": {
+              "below_top": 0
+            },
+            "random_name": "betternether:bedrock_roof",
+            "true_at_and_below": {
+              "below_top": 5
+            }
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "minecraft:bedrock"
+          }
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "above_bottom": 5
+          },
+          "random_name": "betternether:bedrock_floor",
+          "true_at_and_below": {
+            "above_bottom": 0
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "minecraft:bedrock"
+          }
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:stone_depth",
+          "add_surface_depth": false,
+          "offset": 0,
+          "secondary_depth_range": 0,
+          "surface_type": "ceiling"
+        },
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "wover:threshold_condition",
+                "roughness": {
+                  "type": "minecraft:uniform",
+                  "value": {
+                    "max_exclusive": 0.0,
+                    "min_inclusive": -0.2
+                  }
+                },
+                "scale_x": 0.1,
+                "scale_z": 0.1,
+                "seed": 614,
+                "threshold": 0.0
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": {
+                  "Name": "betternether:ceiling_mushrooms"
+                }
+              }
+            },
+            {
+              "type": "minecraft:block",
+              "result_state": {
+                "Name": "minecraft:netherrack"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:stone_depth",
+          "add_surface_depth": false,
+          "offset": 0,
+          "secondary_depth_range": 0,
+          "surface_type": "floor"
+        },
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "wover:rough_noise_condition",
+                "max_threshold": 1.7976931348623157E308,
+                "min_threshold": 0.021,
+                "noise": "minecraft:netherrack",
+                "roughness": {
+                  "type": "minecraft:uniform",
+                  "value": {
+                    "max_exclusive": 0.4,
+                    "min_inclusive": -0.2
+                  }
+                }
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": {
+                  "Name": "betternether:netherrack_moss"
+                }
+              }
+            },
+            {
+              "type": "minecraft:block",
+              "result_state": {
+                "Name": "betternether:mushroom_grass"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:block",
+        "result_state": {
+          "Name": "minecraft:netherrack"
+        }
+      }
+    ]
+  }
+}

@@ -9,7 +9,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.registry.NetherTemplates;
-import org.betterx.betternether.world.NetherBiomeBuilder;
+import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
@@ -279,10 +279,10 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .startDisplay(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.BOOTS_SLOT))
                 .frame(FrameType.CHALLENGE)
                 .endDisplay()
-                .addVisitBiomesCriterion(NetherBiomeBuilder.getAllBnBiomes()
-                                                           .stream()
-                                                           .map(b -> b.getBiomeKey())
-                                                           .toList())
+                .addVisitBiomesCriterion(LegacyNetherBiomeBuilder.getAllBnBiomes()
+                                                                 .stream()
+                                                                 .map(b -> b.getBiomeKey())
+                                                                 .toList())
                 .requirements(RequirementsStrategy.AND)
                 .rewardXP(1500)
                 .build();

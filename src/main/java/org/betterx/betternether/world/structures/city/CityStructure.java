@@ -91,7 +91,7 @@ public class CityStructure extends Structure {
         }
         buildings.forEach(b -> structurePiecesBuilder.addPiece(b));
 
-        BetterNether.LOGGER.info("BBox:" + structurePiecesBuilder.getBoundingBox().toString());
+        BetterNether.C.log.info("BBox:" + structurePiecesBuilder.getBoundingBox().toString());
     }
 
     @NotNull

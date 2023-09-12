@@ -153,7 +153,7 @@ public class RubyFire extends Enchantment {
                     }
                 }
             } catch (Exception e) {
-                BetterNether.LOGGER.error("Unable to get Drops for " + breakingItem, e);
+                BetterNether.C.log.error("Unable to get Drops for " + breakingItem, e);
             }
 
             if (didConvert) {

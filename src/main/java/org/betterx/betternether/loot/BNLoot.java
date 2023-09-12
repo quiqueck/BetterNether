@@ -151,7 +151,7 @@ public class BNLoot {
                                 ))).build());
 
                 if (!LootUtil.addToPool(table, 0, list)) {
-                    BetterNether.LOGGER.error("Unable to building bartering table");
+                    BetterNether.C.log.error("Unable to building bartering table");
                 }
             }
         });

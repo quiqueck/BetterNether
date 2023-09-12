@@ -15,7 +15,7 @@ public class MappedRegistryMixin {
     @Inject(method = "freeze", at = @At("HEAD"))
     void bn_debug(CallbackInfoReturnable<Registry<?>> cir) {
         if (this.toString().contains("worlds_together:worldgen/betterx/surface_rules")) {
-            BetterNether.LOGGER.info("Freeze " + this.toString());
+            BetterNether.C.log.info("Freeze " + this.toString());
         }
     }
 }

@@ -16,7 +16,7 @@ public class WailaPlugin implements IWailaPlugin {
 
     @Override
     public void register(IRegistrar registrar) {
-        BetterNether.LOGGER.info("Registering Waila-/Wthit-Plugin.");
+        BetterNether.C.log.info("Registering Waila-/Wthit-Plugin.");
 
         registrar.addComponent(NetherPlantProvider.INSTANCE, TooltipPosition.BODY, BlockCommonPlant.class);
     }

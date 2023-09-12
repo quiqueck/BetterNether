@@ -14,7 +14,6 @@ import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.tab.CreativeTabs;
 import org.betterx.betternether.world.BNWorldGenerator;
 import org.betterx.worlds.together.world.WorldConfig;
-import org.betterx.wover.core.api.Logger;
 import org.betterx.wover.core.api.ModCore;
 
 import net.fabricmc.api.ModInitializer;
@@ -22,7 +21,6 @@ import net.fabricmc.api.ModInitializer;
 public class BetterNether implements ModInitializer {
     public static final String MOD_ID = "betternether";
     public static final ModCore C = ModCore.create(MOD_ID);
-    public static final Logger LOGGER = C.log;
     public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER = new org.betterx.worlds.together.util.Logger(
             MOD_ID);
     private static boolean thinArmor = true;

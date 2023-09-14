@@ -27,6 +27,6 @@ public class Pyramids extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.PYRAMIDS.structureType;
+        return NetherStructures.PYRAMIDS.type();
     }
 }

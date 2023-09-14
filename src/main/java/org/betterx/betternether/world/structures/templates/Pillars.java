@@ -29,6 +29,6 @@ public class Pillars extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.PILLARS.structureType;
+        return NetherStructures.PILLARS.type();
     }
 }

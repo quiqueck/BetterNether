@@ -25,6 +25,6 @@ public class Gardens extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.GARDENS.structureType;
+        return NetherStructures.GARDENS.type();
     }
 }

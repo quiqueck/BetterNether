@@ -113,6 +113,6 @@ public class CityStructure extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.CITY_STRUCTURE.structureType;
+        return NetherStructures.CITY_STRUCTURE.type();
     }
 }

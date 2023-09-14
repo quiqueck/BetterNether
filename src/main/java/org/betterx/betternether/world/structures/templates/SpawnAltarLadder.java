@@ -24,6 +24,6 @@ public class SpawnAltarLadder extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.SPAWN_ALTAR_LADDER.structureType;
+        return NetherStructures.SPAWN_ALTAR_LADDER.type();
     }
 }

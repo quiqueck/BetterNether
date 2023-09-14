@@ -26,6 +26,6 @@ public class JungleTemples extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.JUNGLE_TEMPLES.structureType;
+        return NetherStructures.JUNGLE_TEMPLES.type();
     }
 }

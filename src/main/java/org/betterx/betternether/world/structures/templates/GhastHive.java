@@ -24,6 +24,6 @@ public class GhastHive extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.GHAST_HIVE.structureType;
+        return NetherStructures.GHAST_HIVE.type();
     }
 }

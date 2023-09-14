@@ -115,7 +115,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .parent(enterNether)
                 .startDisplay(NetherBlocks.CINCINNASITE_CARVED)
                 .endDisplay()
-                .addAtStructureCriterion("ncity", NetherStructures.CITY_STRUCTURE)
+                .addAtStructureCriterion("ncity", NetherStructures.CITY_STRUCTURE.key())
                 .requirements(RequirementsStrategy.OR)
                 .build();
 

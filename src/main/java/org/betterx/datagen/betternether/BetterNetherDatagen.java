@@ -7,8 +7,10 @@ import org.betterx.datagen.betternether.recipes.NetherBlockLootTableProvider;
 import org.betterx.datagen.betternether.recipes.NetherChestLootTableProvider;
 import org.betterx.datagen.betternether.recipes.NetherEntityLootTableProvider;
 import org.betterx.datagen.betternether.recipes.NetherRecipeDataProvider;
+import org.betterx.datagen.betternether.worldgen.NetherBiomeModificationProvider;
 import org.betterx.datagen.betternether.worldgen.NetherBiomesProvider;
 import org.betterx.datagen.betternether.worldgen.NetherRegistriesDataProvider;
+import org.betterx.datagen.betternether.worldgen.StructureDataProvider;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.PackBuilder;
 import org.betterx.wover.datagen.api.WoverDataGenEntryPoint;
@@ -21,6 +23,8 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         NetherRecipeDataProvider.buildRecipes();
 
         globalPack.addMultiProvider(NetherBiomesProvider::new);
+        globalPack.addMultiProvider(StructureDataProvider::new);
+        globalPack.addRegistryProvider(NetherBiomeModificationProvider::new);
         globalPack.addRegistryProvider(FlatLevelPresetsDataProvider::new);
 
         globalPack.callOnInitializeDatapack((generator, pack, location) -> {

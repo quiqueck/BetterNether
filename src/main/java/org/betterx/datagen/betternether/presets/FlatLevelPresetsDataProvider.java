@@ -42,6 +42,5 @@ public class FlatLevelPresetsDataProvider extends WoverRegistryContentProvider<F
                         new FlatLayerInfo(63, Blocks.NETHERRACK),
                         new FlatLayerInfo(1, Blocks.BEDROCK)
                 );
-        //needs to get called in order for the static variables to be initialized
     }
 }

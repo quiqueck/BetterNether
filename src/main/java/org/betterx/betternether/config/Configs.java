@@ -12,6 +12,8 @@ public class Configs {
     public static final PathConfig MOBS = new PathConfig(BetterNether.C.modId, "mobs");
     public static final PathConfig RECIPES = new PathConfig(BetterNether.C.modId, "recipes");
 
+    public static final WorldConfig WORLD = org.betterx.wover.config.api.Configs.register(WorldConfig::new);
+
     public static void saveConfigs() {
         MAIN.saveChanges();
         GENERATOR.saveChanges();
@@ -20,5 +22,7 @@ public class Configs {
         MOBS.saveChanges();
         RECIPES.saveChanges();
         BIOMES.saveChanges();
+
+        org.betterx.wover.config.api.Configs.saveConfigs();
     }
 }

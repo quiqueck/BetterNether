@@ -31,6 +31,6 @@ public class Altars extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.ALTARS.structureType;
+        return NetherStructures.ALTARS.type();
     }
 }

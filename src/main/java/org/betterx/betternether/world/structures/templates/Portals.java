@@ -25,6 +25,6 @@ public class Portals extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.PORTALS.structureType;
+        return NetherStructures.PORTALS.type();
     }
 }

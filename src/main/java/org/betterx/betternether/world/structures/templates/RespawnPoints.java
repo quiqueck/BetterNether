@@ -27,6 +27,6 @@ public class RespawnPoints extends TemplateStructureHelper {
 
     @Override
     public StructureType<?> type() {
-        return NetherStructures.RESPAWN_POINTS.structureType;
+        return NetherStructures.RESPAWN_POINTS.type();
     }
 }

@@ -5,10 +5,12 @@ import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.wover.biome.api.modification.BiomeModification;
 import org.betterx.wover.biome.api.modification.BiomeModificationRegistry;
+import org.betterx.wover.biome.api.modification.predicates.BiomePredicate;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.WoverRegistryContentProvider;
 
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.world.level.dimension.LevelStem;
 
 public class NetherBiomeModificationProvider extends WoverRegistryContentProvider<BiomeModification> {
     /**
@@ -26,7 +28,10 @@ public class NetherBiomeModificationProvider extends WoverRegistryContentProvide
     protected void bootstrap(BootstapContext<BiomeModification> context) {
         BiomeModification
                 .build(context, BetterNether.C.id("overworld_nether_city"))
-                .hasConfig(Configs.WORLD.addNetherCityToOverworld, true)
+                .allOf(
+                        BiomePredicate.hasConfig(Configs.WORLD.addNetherCityToOverworld, true),
+                        BiomePredicate.inDimension(LevelStem.OVERWORLD)
+                )
                 .addStructureSet(NetherStructures.CITY_STRUCTURE)
                 .register();
     }

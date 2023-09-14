@@ -1,0 +1,21 @@
+{
+  "biome_tags": [
+    "betternether:has_structure/nether_city"
+  ],
+  "predicate": {
+    "type": "wover:and",
+    "predicates": [
+      {
+        "type": "wover:config_is",
+        "config_file": "betternether:world",
+        "key": "city_in_overworld",
+        "path": "structure",
+        "value": "true"
+      },
+      {
+        "type": "wover:in_dimension",
+        "dimension_key": "minecraft:overworld"
+      }
+    ]
+  }
+}

@@ -18,6 +18,6 @@ public class NetherBlockTagDataProvider extends TagDataProvider<Block> {
             FabricDataOutput output,
             CompletableFuture<HolderLookup.Provider> registriesFuture
     ) {
-        super(TagManager.BLOCKS, List.of(BetterNether.MOD_ID), output, registriesFuture);
+        super(TagManager.BLOCKS, List.of(BetterNether.C.modId), output, registriesFuture);
     }
 }

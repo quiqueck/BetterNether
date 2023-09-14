@@ -11,6 +11,6 @@ public class NetherBlockLootTableProvider extends BlockLootTableProvider {
     public NetherBlockLootTableProvider(
             FabricDataOutput output
     ) {
-        super(output, List.of(BetterNether.MOD_ID));
+        super(output, List.of(BetterNether.C.modId));
     }
 }

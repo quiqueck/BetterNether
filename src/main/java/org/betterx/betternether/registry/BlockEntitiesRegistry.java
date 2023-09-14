@@ -45,7 +45,7 @@ public class BlockEntitiesRegistry {
     }
 
     public static void RegisterBlockEntity(String name, BlockEntityType<? extends BlockEntity> type) {
-        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), type);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(BetterNether.C.modId, name), type);
     }
 
     private static Block[] getChests() {

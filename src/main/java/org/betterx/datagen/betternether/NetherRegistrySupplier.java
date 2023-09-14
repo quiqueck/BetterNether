@@ -20,7 +20,7 @@ public class NetherRegistrySupplier extends RegistrySupplier {
     public static final NetherRegistrySupplier INSTANCE = new NetherRegistrySupplier();
 
     protected NetherRegistrySupplier() {
-        super(List.of(BetterNether.MOD_ID));
+        super(List.of(BetterNether.C.modId));
     }
 
     @Override

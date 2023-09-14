@@ -178,7 +178,7 @@ public class NetherItems extends ItemRegistry {
     }
 
     public static List<Item> getModItems() {
-        return getModItems(BetterNether.MOD_ID);
+        return getModItems(BetterNether.C.modId);
     }
 
 

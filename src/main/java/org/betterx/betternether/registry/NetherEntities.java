@@ -299,7 +299,7 @@ public class NetherEntities {
     }
 
     public static void registerEntity(String name, EntityType<? extends Entity> entity, AttributeSupplier container) {
-        Registry.register(BuiltInRegistries.ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), entity);
+        Registry.register(BuiltInRegistries.ENTITY_TYPE, new ResourceLocation(BetterNether.C.modId, name), entity);
         ATTRIBUTES.put(entity, container);
     }
 

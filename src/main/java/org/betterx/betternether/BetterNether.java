@@ -19,10 +19,11 @@ import org.betterx.wover.core.api.ModCore;
 import net.fabricmc.api.ModInitializer;
 
 public class BetterNether implements ModInitializer {
-    public static final String MOD_ID = "betternether";
-    public static final ModCore C = ModCore.create(MOD_ID);
-    public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER = new org.betterx.worlds.together.util.Logger(
-            MOD_ID);
+    public static final ModCore C = ModCore.create("betternether");
+    
+    @Deprecated(forRemoval = true)
+    public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER
+            = new org.betterx.worlds.together.util.Logger(C.modId);
     private static boolean thinArmor = true;
     private static boolean lavafallParticles = true;
     private static float fogStart = 0.05F;
@@ -61,8 +62,8 @@ public class BetterNether implements ModInitializer {
         NetherVegetation.setupBonemealFeatures();
 
         Configs.saveConfigs();
-        WorldConfig.registerModCache(MOD_ID);
-        DataExchangeAPI.registerMod(BetterNether.MOD_ID);
+        WorldConfig.registerModCache(C.modId);
+        DataExchangeAPI.registerMod(C.modId);
         Patcher.register();
         CreativeTabs.register();
 

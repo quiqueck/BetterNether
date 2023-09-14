@@ -18,7 +18,7 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 
 public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends WoodenComplexMaterial {
     public NetherWoodenMaterial(String name, MapColor woodColor, MapColor planksColor) {
-        super(BetterNether.MOD_ID, name, "nether", woodColor, planksColor);
+        super(BetterNether.C.modId, name, "nether", woodColor, planksColor);
     }
 
     public T init() {

@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RenderHydrogenJellyfish extends MobRenderer<EntityHydrogenJellyfish, AgeableListModel<EntityHydrogenJellyfish>> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(
-            BetterNether.MOD_ID,
+            BetterNether.C.modId,
             "textures/entity/jellyfish.png"
     );
 

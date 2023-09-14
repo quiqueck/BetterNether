@@ -20,7 +20,7 @@ public class BetterNetherClient implements ClientModInitializer {
         EntityRenderRegistry.register();
 
         NetherParticles.register();
-        ModMenu.addModMenuScreen(BetterNether.MOD_ID, ConfigScreen::new);
+        ModMenu.addModMenuScreen(BetterNether.C.modId, ConfigScreen::new);
     }
 
     private void registerRenderLayers() {

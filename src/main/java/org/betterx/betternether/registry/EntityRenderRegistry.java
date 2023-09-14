@@ -28,7 +28,7 @@ public class EntityRenderRegistry {
 
     public static ModelLayerLocation registerMain(String id) {
         //System.out.println("Register Entity: " + id);
-        return new ModelLayerLocation(new ResourceLocation(BetterNether.MOD_ID, id), DEFAULT_LAYER);
+        return new ModelLayerLocation(new ResourceLocation(BetterNether.C.modId, id), DEFAULT_LAYER);
         //return EntityModelLayersMixin.callRegisterMain(key);
     }
 

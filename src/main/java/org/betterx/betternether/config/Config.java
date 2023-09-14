@@ -74,11 +74,11 @@ public final class Config {
     }
 
     private File getFile() {
-        return new File(String.format("./config/%s/%s.json", BetterNether.MOD_ID, name));
+        return new File(String.format("./config/%s/%s.json", BetterNether.C.modId, name));
     }
 
     private File getFolder() {
-        return new File("./config/" + BetterNether.MOD_ID + "/");
+        return new File("./config/" + BetterNether.C.modId + "/");
     }
 
     public boolean getBoolean(String groups, String name, boolean def) {

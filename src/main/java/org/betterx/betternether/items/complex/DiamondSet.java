@@ -18,7 +18,7 @@ public class DiamondSet extends EquipmentSet {
     public DiamondSet(EquipmentSet set) {
         super(
                 BNToolMaterial.CINCINNASITE_DIAMOND,
-                BetterNether.MOD_ID,
+                BetterNether.C.modId,
                 set.baseName,
                 NetherBlocks.NETHER_REED_STEM,
                 set,

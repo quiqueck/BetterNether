@@ -11,7 +11,7 @@ import org.betterx.betternether.registry.NetherItems;
 
 public class CreativeTabs {
     public static void register() {
-        BCLCreativeTabManager.create(BetterNether.MOD_ID)
+        BCLCreativeTabManager.create(BetterNether.C.modId)
                              .createTab("nature")
                              .setPredicate(item -> BCLCreativeTab.NATURE.contains(item)
                                      || item == NetherItems.AGAVE_LEAF

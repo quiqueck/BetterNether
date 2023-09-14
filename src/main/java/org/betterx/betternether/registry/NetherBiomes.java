@@ -83,13 +83,13 @@ public class NetherBiomes {
         BiomeCodecRegistry.register(BetterNether.C.id("biome"), NetherBiome.KEY_CODEC);
 
         BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> {
-            if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
+            if (!biomeID.getNamespace().equals(BetterNether.C.modId)) {
                 NetherEntities.modifyNonBNBiome(biomeID, biome);
                 NetherFeatures.modifyNonBNBiome(biomeID, biome);
             }
         });
         BiomeAPI.onFinishingNetherBiomeTags((biomeID, biome) -> {
-            if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
+            if (!biomeID.getNamespace().equals(BetterNether.C.modId)) {
                 NetherStructures.addNonBNBiomeTags(biomeID, biome);
             }
         });

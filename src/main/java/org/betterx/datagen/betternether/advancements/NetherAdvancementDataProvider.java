@@ -26,7 +26,7 @@ import java.util.List;
 
 public class NetherAdvancementDataProvider extends AdvancementDataProvider {
     public NetherAdvancementDataProvider(FabricDataOutput output) {
-        super(List.of(BetterNether.MOD_ID), output);
+        super(List.of(BetterNether.C.modId), output);
     }
 
     @Override

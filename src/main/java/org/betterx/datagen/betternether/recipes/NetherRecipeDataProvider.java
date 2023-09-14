@@ -11,7 +11,7 @@ import java.util.List;
 
 public class NetherRecipeDataProvider extends RecipeDataProvider {
     public NetherRecipeDataProvider(FabricDataOutput output) {
-        super(List.of(BetterNether.MOD_ID), output);
+        super(List.of(BetterNether.C.modId), output);
     }
 
     public static void buildRecipes() {

@@ -724,11 +724,11 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     public static List<Block> getModBlocks() {
-        return BlockRegistry.getModBlocks(BetterNether.MOD_ID);
+        return BlockRegistry.getModBlocks(BetterNether.C.modId);
     }
 
     public static List<Item> getModBlockItems() {
-        return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
+        return BlockRegistry.getModBlockItems(BetterNether.C.modId);
     }
 
     @SafeVarargs
@@ -758,7 +758,7 @@ public class NetherBlocks extends BlockRegistry {
     @SafeVarargs
     private static <B extends Block> B registerBlock(String name, B block, boolean hasItem, TagKey<Block>... tags) {
         final BlockRegistry blockRegistry = getBlockRegistry();
-        final ResourceLocation location = new ResourceLocation(BetterNether.MOD_ID, name);
+        final ResourceLocation location = new ResourceLocation(BetterNether.C.modId, name);
         if (hasItem) {
             blockRegistry.register(location, block);
         } else {
@@ -893,7 +893,7 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             Taburet.makeTaburetRecipe(
-                    new ResourceLocation(BetterNether.MOD_ID, name),
+                    new ResourceLocation(BetterNether.C.modId, name),
                     block,
                     source
             );
@@ -910,7 +910,7 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             Chair.makeChairRecipe(
-                    new ResourceLocation(BetterNether.MOD_ID, name),
+                    new ResourceLocation(BetterNether.C.modId, name),
                     block,
                     source
             );
@@ -926,7 +926,7 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             BarStool.makeBarStoolRecipe(
-                    new ResourceLocation(BetterNether.MOD_ID, name),
+                    new ResourceLocation(BetterNether.C.modId, name),
                     block,
                     source
             );

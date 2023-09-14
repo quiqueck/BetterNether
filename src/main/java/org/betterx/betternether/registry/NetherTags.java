@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 
 public class NetherTags {
     public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagManager.BIOMES.makeStructureTag(
-            BetterNether.MOD_ID,
+            BetterNether.C.modId,
             "nether_decorations"
     );
 
@@ -22,10 +22,10 @@ public class NetherTags {
 
 
     public static final TagKey<Block> NETHER_SAND = TagManager.BLOCKS.makeCommonTag("nether_sand");
-    public static final TagKey<Biome> BETTER_NETHER = TagManager.BIOMES.makeTag(BetterNether.MOD_ID, "biome");
+    public static final TagKey<Biome> BETTER_NETHER = TagManager.BIOMES.makeTag(BetterNether.C.modId, "biome");
 
     public static final TagKey<Block> FIREFLY_FLOWERS = TagManager.BLOCKS.makeTag(
-            BetterNether.MOD_ID,
+            BetterNether.C.modId,
             "firefly_flowers"
     );
 

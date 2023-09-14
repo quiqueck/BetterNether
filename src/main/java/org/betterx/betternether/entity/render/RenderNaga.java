@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RenderNaga extends MobRenderer<EntityNaga, AgeableListModel<EntityNaga>> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(
-            BetterNether.MOD_ID,
+            BetterNether.C.modId,
             "textures/entity/naga.png"
     );
 

@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class RenderSkull extends MobRenderer<EntitySkull, AgeableListModel<EntitySkull>> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(
-            BetterNether.MOD_ID,
+            BetterNether.C.modId,
             "textures/entity/skull.png"
     );
 
@@ -33,7 +33,7 @@ public class RenderSkull extends MobRenderer<EntitySkull, AgeableListModel<Entit
 
     static class GlowFeatureRenderer extends EyesLayer<EntitySkull, AgeableListModel<EntitySkull>> {
         private static final RenderType SKIN = RenderType.entityTranslucent(new ResourceLocation(
-                BetterNether.MOD_ID,
+                BetterNether.C.modId,
                 "textures/entity/skull_glow.png"
         ));
 

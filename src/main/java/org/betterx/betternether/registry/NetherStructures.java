@@ -104,7 +104,7 @@ public class NetherStructures {
         TagManager.BIOMES.add(CITY_STRUCTURE.biomeTag, BiomeAPI.NETHER_WASTES_BIOME.getBiomeKey());
         if (Configs.GENERATOR.getBoolean("generator.world.cities", "overworld", false)) {
             BiomeAPI.registerOverworldBiomeModification((biomeID, biome) -> {
-                if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
+                if (!biomeID.getNamespace().equals(BetterNether.C.modId)) {
                     addNonBNBiomeTags(biomeID, biome);
                 }
             });

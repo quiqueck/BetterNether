@@ -32,7 +32,7 @@ public class NetherSet extends EquipmentSet {
     ) {
         super(
                 material,
-                BetterNether.MOD_ID,
+                BetterNether.C.modId,
                 prefix,
                 NetherBlocks.NETHER_REED_STEM,
                 sourceSet,

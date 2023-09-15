@@ -1,32 +1,41 @@
 package org.betterx.betternether.world.structures.templates;
 
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherStructures;
+import org.betterx.wover.structure.api.structures.StructurePlacement;
+import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
+import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
+import org.betterx.wover.util.RandomizedWeightedList;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class RespawnPoints extends TemplateStructureHelper {
-    public static final Codec<RespawnPoints> CODEC = simpleTemplateCodec(RespawnPoints::new);
+public class RespawnPoints extends RandomNbtStructure {
+    public static final Codec<RespawnPoints> CODEC = RandomNbtStructure.simpleRandomCodec(RespawnPoints::new);
 
-    protected RespawnPoints(StructureSettings structureSettings, List<Config> configs) {
-        super(structureSettings, configs);
+    protected RespawnPoints(
+            StructureSettings structureSettings,
+            StructurePlacement placement,
+            boolean keepAir,
+            @NotNull RandomizedWeightedList<RandomNbtStructureElement> elements
+    ) {
+        super(structureSettings, placement, keepAir, elements);
     }
 
     public RespawnPoints(StructureSettings structureSettings) {
-        super(structureSettings, List.of(
-                        cfg("respawn_point_01", -3, StructurePlacementType.FLOOR, 1.0f),
-                        cfg("respawn_point_02", -2, StructurePlacementType.FLOOR, 1.0f),
-                        cfg("respawn_point_03", -3, StructurePlacementType.FLOOR, 0.6f),
-                        cfg("respawn_point_04", -2, StructurePlacementType.FLOOR, 0.3f)
+        super(structureSettings, StructurePlacement.NETHER_SURFACE, false, RandomizedWeightedList.of(
+                        new RandomNbtStructureElement(BetterNether.C.id("respawn_point_01"), -3), 1.0,
+                        new RandomNbtStructureElement(BetterNether.C.id("respawn_point_02"), -2), 1.0,
+                        new RandomNbtStructureElement(BetterNether.C.id("respawn_point_03"), -3), 0.6,
+                        new RandomNbtStructureElement(BetterNether.C.id("respawn_point_04"), -2), 0.3
                 )
         );
     }
 
     @Override
-    public StructureType<?> type() {
+    public @NotNull StructureType<?> type() {
         return NetherStructures.RESPAWN_POINTS.type();
     }
 }

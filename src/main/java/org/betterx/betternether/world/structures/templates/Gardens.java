@@ -1,30 +1,39 @@
 package org.betterx.betternether.world.structures.templates;
 
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherStructures;
+import org.betterx.wover.structure.api.structures.StructurePlacement;
+import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
+import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
+import org.betterx.wover.util.RandomizedWeightedList;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class Gardens extends TemplateStructureHelper {
-    public static final Codec<Gardens> CODEC = simpleTemplateCodec(Gardens::new);
+public class Gardens extends RandomNbtStructure {
+    public static final Codec<Gardens> CODEC = RandomNbtStructure.simpleRandomCodec(Gardens::new);
 
-    protected Gardens(StructureSettings structureSettings, List<Config> configs) {
-        super(structureSettings, configs);
+    protected Gardens(
+            StructureSettings structureSettings,
+            StructurePlacement placement,
+            boolean keepAir,
+            @NotNull RandomizedWeightedList<RandomNbtStructureElement> elements
+    ) {
+        super(structureSettings, placement, keepAir, elements);
     }
 
     public Gardens(StructureSettings structureSettings) {
-        super(structureSettings, List.of(
-                        cfg("garden_01", -3, StructurePlacementType.FLOOR, 1.0f),
-                        cfg("garden_02", -2, StructurePlacementType.FLOOR, 1.0f)
+        super(structureSettings, StructurePlacement.NETHER_SURFACE_FLAT_2, true, RandomizedWeightedList.of(
+                        new RandomNbtStructureElement(BetterNether.C.id("garden_01"), -3), 1.0,
+                        new RandomNbtStructureElement(BetterNether.C.id("garden_02"), -2), 1.0
                 )
         );
     }
 
     @Override
-    public StructureType<?> type() {
+    public @NotNull StructureType<?> type() {
         return NetherStructures.GARDENS.type();
     }
 }

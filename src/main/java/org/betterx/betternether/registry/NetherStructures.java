@@ -61,8 +61,7 @@ public class NetherStructures {
 
     public static final StructureKey.Simple<JungleTemples> JUNGLE_TEMPLES = StructureManager
             .structure(BetterNether.C.id("jungle_temples"), JungleTemples::new, JungleTemples.CODEC)
-            .step(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .biomeTag(NetherTags.BETTER_NETHER_DECORATIONS);
+            .step(GenerationStep.Decoration.SURFACE_STRUCTURES);
 
 
     public static void register() {

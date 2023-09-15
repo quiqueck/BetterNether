@@ -1,32 +1,39 @@
 {
   "type": "betternether:respawn_points",
   "biomes": "#betternether:has_structure/nether_decorations",
-  "configs": [
-    {
-      "chance": 1.0,
-      "location": "betternether:respawn_point_01",
-      "offset_y": -3,
-      "placement": "floor"
-    },
-    {
-      "chance": 1.0,
-      "location": "betternether:respawn_point_02",
-      "offset_y": -2,
-      "placement": "floor"
-    },
-    {
-      "chance": 0.6,
-      "location": "betternether:respawn_point_03",
-      "offset_y": -3,
-      "placement": "floor"
-    },
-    {
-      "chance": 0.3,
-      "location": "betternether:respawn_point_04",
-      "offset_y": -2,
-      "placement": "floor"
-    }
-  ],
+  "configs": {
+    "items": [
+      {
+        "value": {
+          "location": "betternether:respawn_point_01",
+          "offset_y": -3
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:respawn_point_02",
+          "offset_y": -2
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:respawn_point_03",
+          "offset_y": -3
+        },
+        "weight": 0.6
+      },
+      {
+        "value": {
+          "location": "betternether:respawn_point_04",
+          "offset_y": -2
+        },
+        "weight": 0.3
+      }
+    ]
+  },
+  "placement": "nether_surface",
   "spawn_overrides": {},
   "step": "surface_structures"
 }

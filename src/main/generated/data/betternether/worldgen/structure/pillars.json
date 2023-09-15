@@ -1,44 +1,53 @@
 {
   "type": "betternether:pillars",
   "biomes": "#betternether:has_structure/nether_decorations",
-  "configs": [
-    {
-      "chance": 1.0,
-      "location": "betternether:pillar_01",
-      "offset_y": -1,
-      "placement": "floor"
-    },
-    {
-      "chance": 1.0,
-      "location": "betternether:pillar_02",
-      "offset_y": -1,
-      "placement": "floor"
-    },
-    {
-      "chance": 1.0,
-      "location": "betternether:pillar_03",
-      "offset_y": -1,
-      "placement": "floor"
-    },
-    {
-      "chance": 1.0,
-      "location": "betternether:pillar_04",
-      "offset_y": -1,
-      "placement": "floor"
-    },
-    {
-      "chance": 1.0,
-      "location": "betternether:pillar_05",
-      "offset_y": -1,
-      "placement": "floor"
-    },
-    {
-      "chance": 1.0,
-      "location": "betternether:pillar_06",
-      "offset_y": -1,
-      "placement": "floor"
-    }
-  ],
+  "configs": {
+    "items": [
+      {
+        "value": {
+          "location": "betternether:pillar_01",
+          "offset_y": -1
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:pillar_02",
+          "offset_y": -1
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:pillar_03",
+          "offset_y": -1
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:pillar_04",
+          "offset_y": -1
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:pillar_05",
+          "offset_y": -1
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:pillar_06",
+          "offset_y": -1
+        },
+        "weight": 1.0
+      }
+    ]
+  },
+  "placement": "nether_surface",
   "spawn_overrides": {},
   "step": "surface_structures"
 }

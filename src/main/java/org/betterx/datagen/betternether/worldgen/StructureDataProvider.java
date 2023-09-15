@@ -52,6 +52,7 @@ public class StructureDataProvider extends WoverStructureProvider {
                 .randomPlacement(32, 8)
                 .register();
 
+
         StructureSetManager
                 .bootstrap(NetherStructures.GHAST_HIVE, context)
                 .randomPlacement(80, 32)

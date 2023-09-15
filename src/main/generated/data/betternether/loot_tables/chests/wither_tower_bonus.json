@@ -74,9 +74,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:mending",
                 "minecraft:looting",
-                "minecraft:sharpness"
+                "minecraft:sharpness",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -120,8 +120,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:mending",
-                "minecraft:fire_protection"
+                "minecraft:fire_protection",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -134,8 +134,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:mending",
-                "minecraft:fire_protection"
+                "minecraft:fire_protection",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -148,8 +148,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:mending",
-                "minecraft:fire_protection"
+                "minecraft:fire_protection",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -163,8 +163,8 @@
             {
               "enchantments": [
                 "minecraft:feather_falling",
-                "minecraft:mending",
-                "minecraft:fire_protection"
+                "minecraft:fire_protection",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -193,8 +193,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:mending",
-                "minecraft:fire_protection"
+                "minecraft:fire_protection",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -207,8 +207,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:mending",
-                "minecraft:fire_protection"
+                "minecraft:fire_protection",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -221,8 +221,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:mending",
-                "minecraft:fire_protection"
+                "minecraft:fire_protection",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -236,8 +236,8 @@
             {
               "enchantments": [
                 "minecraft:feather_falling",
-                "minecraft:mending",
-                "minecraft:fire_protection"
+                "minecraft:fire_protection",
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }

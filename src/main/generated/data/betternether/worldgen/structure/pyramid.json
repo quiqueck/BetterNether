@@ -1,32 +1,40 @@
 {
   "type": "betternether:pyramid",
   "biomes": "#betternether:has_structure/pyramid",
-  "configs": [
-    {
-      "chance": 1.0,
-      "location": "betternether:lava/pyramid_1",
-      "offset_y": -1,
-      "placement": "lava"
-    },
-    {
-      "chance": 1.0,
-      "location": "betternether:lava/pyramid_2",
-      "offset_y": -1,
-      "placement": "lava"
-    },
-    {
-      "chance": 0.6,
-      "location": "betternether:lava/pyramid_3",
-      "offset_y": -1,
-      "placement": "lava"
-    },
-    {
-      "chance": 0.3,
-      "location": "betternether:lava/pyramid_4",
-      "offset_y": -1,
-      "placement": "lava"
-    }
-  ],
+  "configs": {
+    "items": [
+      {
+        "value": {
+          "location": "betternether:lava/pyramid_1",
+          "offset_y": 0
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:lava/pyramid_2",
+          "offset_y": 0
+        },
+        "weight": 1.0
+      },
+      {
+        "value": {
+          "location": "betternether:lava/pyramid_3",
+          "offset_y": 0
+        },
+        "weight": 0.6
+      },
+      {
+        "value": {
+          "location": "betternether:lava/pyramid_4",
+          "offset_y": 0
+        },
+        "weight": 0.3
+      }
+    ]
+  },
+  "keep_air": true,
+  "placement": "lava",
   "spawn_overrides": {},
   "step": "surface_structures"
 }

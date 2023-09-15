@@ -1,29 +1,38 @@
 package org.betterx.betternether.world.structures.templates;
 
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherStructures;
+import org.betterx.wover.structure.api.structures.StructurePlacement;
+import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
+import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
+import org.betterx.wover.util.RandomizedWeightedList;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class GhastHive extends TemplateStructureHelper {
-    public static final Codec<GhastHive> CODEC = simpleTemplateCodec(GhastHive::new);
+public class GhastHive extends RandomNbtStructure {
+    public static final Codec<GhastHive> CODEC = RandomNbtStructure.simpleRandomCodec(GhastHive::new);
 
-    protected GhastHive(StructureSettings structureSettings, List<Config> configs) {
-        super(structureSettings, configs);
+    protected GhastHive(
+            StructureSettings structureSettings,
+            StructurePlacement placement,
+            boolean keepAir,
+            @NotNull RandomizedWeightedList<RandomNbtStructureElement> elements
+    ) {
+        super(structureSettings, placement, keepAir, elements);
     }
 
     public GhastHive(StructureSettings structureSettings) {
-        super(structureSettings, List.of(
-                        cfg("ghast_hive", 0, StructurePlacementType.CEIL, 1.0f)
+        super(structureSettings, StructurePlacement.NETHER_CEIL, false, RandomizedWeightedList.of(
+                        new RandomNbtStructureElement(BetterNether.C.id("ghast_hive"), 0)
                 )
         );
     }
 
     @Override
-    public StructureType<?> type() {
+    public @NotNull StructureType<?> type() {
         return NetherStructures.GHAST_HIVE.type();
     }
 }

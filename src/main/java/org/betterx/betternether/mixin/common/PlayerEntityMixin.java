@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -31,12 +32,13 @@ public abstract class PlayerEntityMixin {
         BlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
         if (block instanceof BlockStatueRespawner) {
-            info.setReturnValue(findRespawnPosition(world, pos, blockState));
+            info.setReturnValue(bn_findRespawnPosition(world, pos, blockState));
             info.cancel();
         }
     }
 
-    private static Optional<Vec3> findRespawnPosition(ServerLevel world, BlockPos pos, BlockState state) {
+    @Unique
+    private static Optional<Vec3> bn_findRespawnPosition(ServerLevel world, BlockPos pos, BlockState state) {
         if (state.getValue(BlockStatueRespawner.TOP))
             pos = pos.below();
         pos = pos.relative(state.getValue(BlockStatueRespawner.FACING));

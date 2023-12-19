@@ -19,8 +19,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Iterator;
-
 @Environment(EnvType.CLIENT)
 @Mixin(ArmorStandRenderer.class)
 public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, ArmorStandArmorModel> {
@@ -32,9 +30,7 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, A
     @Inject(method = "<init>*", at = @At(value = "RETURN"))
     private void onInit(EntityRendererProvider.Context ctx, CallbackInfo info) {
         if (BetterNether.hasThinArmor()) {
-            Iterator<RenderLayer<ArmorStand, ArmorStandArmorModel>> iterator = this.layers.iterator();
-            while (iterator.hasNext()) {
-                RenderLayer<ArmorStand, ArmorStandArmorModel> feature = iterator.next();
+            for (RenderLayer<ArmorStand, ArmorStandArmorModel> feature : this.layers) {
                 if (feature instanceof HumanoidArmorLayer) {
                     this.layers.remove(feature);
                     break;

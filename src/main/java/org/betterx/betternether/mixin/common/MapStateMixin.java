@@ -23,8 +23,10 @@ public abstract class MapStateMixin extends SavedData {
         super();
     }
 
+    @Final
     @Shadow
-    public boolean unlimitedTracking;
+    private boolean unlimitedTracking;
+    @Final
     @Shadow
     public byte scale;
     @Shadow
@@ -35,7 +37,7 @@ public abstract class MapStateMixin extends SavedData {
     public int centerZ;
     @Shadow
     @Final
-    private Map<String, MapDecoration> decorations;
+    Map<String, MapDecoration> decorations;
 
     @Shadow
     protected abstract void removeDecoration(String string);

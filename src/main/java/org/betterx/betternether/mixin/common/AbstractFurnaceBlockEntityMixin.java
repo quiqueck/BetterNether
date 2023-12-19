@@ -19,8 +19,7 @@ public abstract class AbstractFurnaceBlockEntityMixin {
             AbstractFurnaceBlockEntity inventory,
             CallbackInfoReturnable<Integer> cir
     ) {
-        if (inventory instanceof ChangebleCookTime) {
-            ChangebleCookTime cct = (ChangebleCookTime) inventory;
+        if (inventory instanceof ChangebleCookTime cct) {
             int val = cir.getReturnValue();
             cir.setReturnValue(cct.changeCookTime(val));
         }

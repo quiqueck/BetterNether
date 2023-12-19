@@ -2,56 +2,73 @@ package org.betterx.betternether.advancements;
 
 import org.betterx.betternether.BetterNether;
 
-import net.minecraft.advancements.critereon.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.CriterionValidator;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
-import com.google.gson.JsonObject;
+import java.util.Optional;
 
-public class ConvertByLightningTrigger extends SimpleCriterionTrigger<ConvertByLightningTrigger.TriggerInstance> {
-    static final ResourceLocation ID = BetterNether.makeID("convert_by_lightning");
+public class ConvertByLightningTrigger
+        extends SimpleCriterionTrigger<ConvertByLightningTrigger.TriggerInstance>
+        implements BNCriterion.TriggerWithID<ConvertByLightningTrigger.TriggerInstance> {
+    public static final ResourceLocation ID = BetterNether.makeID("convert_by_lightning");
 
+    @Override
     public ResourceLocation getId() {
         return ID;
     }
 
-    public ConvertByLightningTrigger.TriggerInstance createInstance(
-            JsonObject jsonObject,
-            ContextAwarePredicate composite,
-            DeserializationContext deserializationContext
-    ) {
-        return new ConvertByLightningTrigger.TriggerInstance(composite, ItemPredicate.fromJson(jsonObject.get("item")));
-    }
-
     public void trigger(ServerPlayer serverPlayer, ItemLike item) {
-        this.trigger(serverPlayer, (triggerInstance) -> {
-            return triggerInstance.matches(new ItemStack(item));
-        });
+        this.trigger(serverPlayer, (triggerInstance) -> triggerInstance.matches(new ItemStack(item)));
     }
 
-    public TriggerInstance match(ItemLike item) {
-        return new TriggerInstance(ContextAwarePredicate.ANY, ItemPredicate.Builder.item().of(item).build());
+    public Criterion<TriggerInstance> match(ItemLike item) {
+        return BNCriterion
+                .CONVERT_BY_LIGHTNING
+                .createCriterion(
+                        new TriggerInstance(ItemPredicate.Builder.item().of(item).build())
+                );
     }
 
-    public static class TriggerInstance extends AbstractCriterionTriggerInstance {
+    @Override
+    public Codec<TriggerInstance> codec() {
+        return TriggerInstance.CODEC;
+    }
+
+    public static class TriggerInstance implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create((instance) -> instance
+                .group(
+                        ItemPredicate
+                                .CODEC
+                                .fieldOf("item")
+                                .forGetter((triggerInstance) -> triggerInstance.item))
+                .apply(instance, TriggerInstance::new));
         private final ItemPredicate item;
 
-        public TriggerInstance(ContextAwarePredicate composite, ItemPredicate itemPredicate) {
-            super(ConvertByLightningTrigger.ID, composite);
+        public TriggerInstance(ItemPredicate itemPredicate) {
             this.item = itemPredicate;
         }
-
 
         public boolean matches(ItemStack itemStack) {
             return this.item.matches(itemStack);
         }
 
-        public JsonObject serializeToJson(SerializationContext serializationContext) {
-            JsonObject jsonObject = super.serializeToJson(serializationContext);
-            jsonObject.add("item", this.item.serializeToJson());
-            return jsonObject;
+        @Override
+        public void validate(CriterionValidator criterionValidator) {
+            SimpleInstance.super.validate(criterionValidator);
+        }
+
+        @Override
+        public Optional<ContextAwarePredicate> player() {
+            return Optional.empty();
         }
     }
 }

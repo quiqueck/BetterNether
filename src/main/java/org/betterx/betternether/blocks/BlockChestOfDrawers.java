@@ -5,6 +5,7 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
 import org.betterx.betternether.registry.NetherBlocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -35,6 +36,17 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMetal {
+    public static final MapCodec<BlockChestOfDrawers> CODEC = simpleCodec(BlockChestOfDrawers::new);
+
+    private BlockChestOfDrawers(Properties settings) {
+        super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockChestOfDrawers> codec() {
+        return CODEC;
+    }
+
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, Block.box(0, 0, 8, 16, 16, 16),
             Direction.SOUTH, Block.box(0, 0, 0, 16, 16, 8),

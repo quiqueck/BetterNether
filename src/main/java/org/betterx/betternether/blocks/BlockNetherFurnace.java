@@ -5,6 +5,7 @@ import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.betternether.blockentities.BlockEntityFurnace;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -30,6 +31,17 @@ import net.fabricmc.api.Environment;
 import javax.annotation.Nullable;
 
 public class BlockNetherFurnace extends AbstractFurnaceBlock implements BehaviourStone, DropSelfLootProvider<BlockNetherFurnace> {
+    public static final MapCodec<BlockNetherFurnace> CODEC = simpleCodec(BlockNetherFurnace::new);
+
+    private BlockNetherFurnace(Properties settings) {
+        super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends AbstractFurnaceBlock> codec() {
+        return CODEC;
+    }
+
     public BlockNetherFurnace(Block source) {
         super(BlockBehaviour.Properties
                 .ofFullCopy(source)

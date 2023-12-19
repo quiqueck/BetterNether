@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.cincinnasite_tile_large",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.cincinnasite_tile_large"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_tile_small_from_large_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

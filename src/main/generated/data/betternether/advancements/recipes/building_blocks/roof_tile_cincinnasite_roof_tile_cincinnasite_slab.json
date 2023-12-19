@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_roof_tile_cincinnasite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_roof_tile_cincinnasite"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:roof_tile_cincinnasite_roof_tile_cincinnasite_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

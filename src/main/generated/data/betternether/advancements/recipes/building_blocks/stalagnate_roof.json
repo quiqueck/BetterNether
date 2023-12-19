@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_stalagnate_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stalagnate_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_roof"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

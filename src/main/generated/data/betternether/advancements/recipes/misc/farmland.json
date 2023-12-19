@@ -58,17 +58,16 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_soul_sand",
       "has_stalagnate_planks",
       "has_netherrack",
-      "has_stalagnate_slab",
-      "has_the_recipe"
+      "has_stalagnate_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:farmland"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

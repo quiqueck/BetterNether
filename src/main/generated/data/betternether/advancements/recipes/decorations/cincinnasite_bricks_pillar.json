@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cincinnasite_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cincinnasite_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_bricks_pillar"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

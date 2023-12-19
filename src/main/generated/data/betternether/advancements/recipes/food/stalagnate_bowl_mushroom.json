@@ -46,16 +46,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_brown_mushroom",
       "has_red_mushroom",
-      "has_stalagnate_bowl",
-      "has_the_recipe"
+      "has_stalagnate_bowl"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_bowl_mushroom"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

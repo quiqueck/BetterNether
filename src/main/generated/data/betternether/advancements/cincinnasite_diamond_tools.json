@@ -63,17 +63,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.cincinnasite_diamond_tools.description"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "betternether:cincinnasite_pickaxe_diamond",
       "nbt": "{Damage:0,Enchantments:[{id:\"betternether:obsidian_breaker\",lvl:2s}]}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.cincinnasite_diamond_tools.title"
     }
@@ -94,6 +91,5 @@
     [
       "cincinnasite_EquipmentSlot[name=hoe, category=TOOLS]"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

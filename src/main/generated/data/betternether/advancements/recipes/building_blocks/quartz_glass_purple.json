@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_quartz_glass",
-      "has_purple_dye",
-      "has_the_recipe"
+      "has_purple_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:quartz_glass_purple"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

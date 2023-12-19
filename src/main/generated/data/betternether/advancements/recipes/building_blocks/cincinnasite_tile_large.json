@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cincinnasite_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cincinnasite_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_tile_large"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

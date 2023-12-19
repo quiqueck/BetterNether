@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.basalt_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.basalt_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:basalt_bricks_slab_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

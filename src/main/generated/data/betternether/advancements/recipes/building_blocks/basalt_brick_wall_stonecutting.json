@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.minecraft.basalt",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.minecraft.basalt"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:basalt_brick_wall_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

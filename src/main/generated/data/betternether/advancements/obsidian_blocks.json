@@ -99,16 +99,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.obsidian_blocks.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:blue_obsidian_bricks"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.obsidian_blocks.title"
     }
@@ -138,6 +134,5 @@
     [
       "made_blue_rods"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

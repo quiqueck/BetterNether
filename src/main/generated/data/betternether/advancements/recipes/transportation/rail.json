@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_cincinnasite_ingot",
-      "has_the_recipe"
+      "has_cincinnasite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:rail"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -46,16 +46,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_cincinnasite_diamond_upgrade_smithing_",
       "has_cincinnasite_ingot",
-      "has_diamond",
-      "has_the_recipe"
+      "has_diamond"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:copy_cincinnasite_diamond_upgrade"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

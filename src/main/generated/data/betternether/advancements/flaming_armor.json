@@ -51,17 +51,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.flaming_armor.description"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "betternether:flaming_ruby_chestplate",
       "nbt": "{Damage:0,Enchantments:[{id:\"betternether:ruby_fire\",lvl:1s}]}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.flaming_armor.title"
     }
@@ -79,6 +76,5 @@
     [
       "flaming_ruby_EquipmentSlot[name=boots, category=COMBAT]"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_mushroom_fir_stripped_log",
-      "has_mushroom_fir_chest",
-      "has_the_recipe"
+      "has_mushroom_fir_chest"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:mushroom_fir_trimmed_chest"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

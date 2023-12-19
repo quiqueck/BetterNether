@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_soul_sandstone_smooth",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_soul_sandstone_smooth"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:soul_sandstone_smooth_soul_sandstone_chiseled"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

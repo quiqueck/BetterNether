@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_crimson_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_crimson_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:crimson_chest"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_anchor_tree_stripped_bark",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_anchor_tree_stripped_bark"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:anchor_tree_stripped_log"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

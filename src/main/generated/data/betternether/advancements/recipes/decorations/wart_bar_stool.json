@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_wart_slab",
-      "has_the_recipe"
+      "has_wart_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wart_bar_stool"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

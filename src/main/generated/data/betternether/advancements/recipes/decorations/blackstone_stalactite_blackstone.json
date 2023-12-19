@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_blackstone_stalactite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_blackstone_stalactite"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:blackstone_stalactite_blackstone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

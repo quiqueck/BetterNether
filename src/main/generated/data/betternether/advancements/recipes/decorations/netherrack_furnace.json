@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_netherrack",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_netherrack"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:netherrack_furnace"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

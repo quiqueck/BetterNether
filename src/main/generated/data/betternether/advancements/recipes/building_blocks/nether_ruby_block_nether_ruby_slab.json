@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_nether_ruby_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nether_ruby_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_ruby_block_nether_ruby_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

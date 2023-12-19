@@ -15,16 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.cincinnasite_ore.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:cincinnasite_ingot"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.cincinnasite_ore.title"
     }
@@ -33,6 +29,5 @@
     [
       "cincinnasite_ore"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

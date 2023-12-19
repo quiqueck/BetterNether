@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_nether_brick_tile_large",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nether_brick_tile_large"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_brick_wall"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_chain",
-      "has_mushroom_fir_stripped_log",
-      "has_the_recipe"
+      "has_mushroom_fir_stripped_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:mushroom_fir_hanging_sign"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

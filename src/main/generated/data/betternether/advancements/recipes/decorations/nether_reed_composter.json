@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_nether_reed_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nether_reed_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_reed_composter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

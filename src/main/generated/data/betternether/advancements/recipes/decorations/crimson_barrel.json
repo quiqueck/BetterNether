@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_crimson_slab",
-      "has_crimson_planks",
-      "has_the_recipe"
+      "has_crimson_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:crimson_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

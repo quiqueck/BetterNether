@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_mushroom_fir_slab",
-      "has_mushroom_fir_planks",
-      "has_the_recipe"
+      "has_mushroom_fir_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:mushroom_fir_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

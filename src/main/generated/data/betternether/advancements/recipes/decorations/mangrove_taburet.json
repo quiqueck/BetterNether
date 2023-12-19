@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_mangrove_slab",
-      "has_the_recipe"
+      "has_mangrove_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:mangrove_taburet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

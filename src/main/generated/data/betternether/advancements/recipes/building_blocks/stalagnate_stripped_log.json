@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_stalagnate_stripped_bark",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stalagnate_stripped_bark"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_stripped_log"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

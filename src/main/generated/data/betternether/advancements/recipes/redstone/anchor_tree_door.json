@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_anchor_tree_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_anchor_tree_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:anchor_tree_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

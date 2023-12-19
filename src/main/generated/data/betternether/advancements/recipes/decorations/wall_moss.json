@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_nether_grass",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nether_grass"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wall_moss"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

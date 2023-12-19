@@ -355,91 +355,87 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.all_the_biomes.description"
     },
     "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "betternether:nether_ruby_boots",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.all_the_biomes.title"
     }
   },
   "requirements": [
     [
-      "betternether:wart_forest"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
-      "betternether:nether_mushroom_forest"
+      "betternether:soul_plain"
     ],
     [
       "betternether:old_fungiwoods"
     ],
     [
-      "betternether:nether_swampland_terraces"
-    ],
-    [
-      "betternether:nether_swampland"
-    ],
-    [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:old_swampland"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
       "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:soul_plain"
-    ],
-    [
-      "betternether:sulfuric_bone_reef"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:bone_reef"
-    ],
-    [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:old_warped_woods"
     ],
     [
       "betternether:upside_down_forest_cleared"
     ],
     [
-      "betternether:magma_land"
+      "betternether:sulfuric_bone_reef"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:wart_forest_edge"
     ],
     [
       "betternether:gravel_desert"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:nether_mushroom_forest"
+    ],
+    [
+      "betternether:nether_jungle"
+    ],
+    [
+      "betternether:nether_swampland"
+    ],
+    [
+      "betternether:old_warped_woods"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:nether_swampland_terraces"
+    ],
+    [
+      "betternether:old_swampland"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:magma_land"
     ]
   ],
   "rewards": {
     "experience": 500
-  },
-  "sends_telemetry_event": false
+  }
 }

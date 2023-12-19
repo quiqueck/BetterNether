@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.bone_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.bone_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:bone_wall_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

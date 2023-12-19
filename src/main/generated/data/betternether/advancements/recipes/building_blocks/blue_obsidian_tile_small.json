@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_blue_obsidian_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_blue_obsidian_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:blue_obsidian_tile_small"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

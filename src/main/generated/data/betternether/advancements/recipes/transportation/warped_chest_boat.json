@@ -32,15 +32,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_tag_c_chest",
-      "has_warped_boat",
-      "has_the_recipe"
+      "has_warped_boat"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:warped_chest_boat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

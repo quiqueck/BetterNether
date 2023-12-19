@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.soul_sandstone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.soul_sandstone"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:soul_sandstone_stairs_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

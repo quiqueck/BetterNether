@@ -32,15 +32,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_tag_minecraft_planks",
-      "has_cincinnasite_ingot",
-      "has_the_recipe"
+      "has_cincinnasite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:shield"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

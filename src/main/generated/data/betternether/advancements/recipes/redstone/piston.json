@@ -56,17 +56,16 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_cobblestone",
       "has_redstone",
       "has_tag_minecraft_planks",
-      "has_cincinnasite_ingot",
-      "has_the_recipe"
+      "has_cincinnasite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:piston"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

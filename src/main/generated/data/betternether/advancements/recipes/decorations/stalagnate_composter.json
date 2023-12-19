@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_stalagnate_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stalagnate_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_composter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

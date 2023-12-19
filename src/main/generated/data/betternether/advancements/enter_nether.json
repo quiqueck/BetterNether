@@ -9,16 +9,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.enter_nether.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:jungle_moss"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.enter_nether.title"
     }
@@ -27,6 +23,5 @@
     [
       "entered_nether"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

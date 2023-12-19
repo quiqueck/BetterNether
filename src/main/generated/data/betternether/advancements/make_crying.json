@@ -43,16 +43,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.make_crying.description"
     },
     "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "betternether:blue_weeping_obsidian"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.make_crying.title"
     }
@@ -73,6 +70,5 @@
   ],
   "rewards": {
     "experience": 500
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_sakura_planks",
-      "has_stick",
-      "has_the_recipe"
+      "has_stick"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_sakura_sign"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

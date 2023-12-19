@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_cincinnasite_ingot",
-      "has_glowstone",
-      "has_the_recipe"
+      "has_glowstone"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_lantern"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

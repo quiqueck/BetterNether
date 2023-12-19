@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_bone_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_bone_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:bone_tile"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_bricks",
-      "has_cincinnasite_forged",
-      "has_the_recipe"
+      "has_cincinnasite_forged"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_forge"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

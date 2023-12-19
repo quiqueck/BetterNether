@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_willow_bark",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_willow_bark"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:willow_log"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

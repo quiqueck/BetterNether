@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_book",
-      "has_wart_planks",
-      "has_the_recipe"
+      "has_wart_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wart_bookshelf"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

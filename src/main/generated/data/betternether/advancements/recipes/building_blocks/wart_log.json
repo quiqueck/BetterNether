@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_wart_bark",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_wart_bark"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wart_log"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

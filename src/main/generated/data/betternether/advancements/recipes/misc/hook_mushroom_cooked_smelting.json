@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.hook_mushroom",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.hook_mushroom"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:hook_mushroom_cooked_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

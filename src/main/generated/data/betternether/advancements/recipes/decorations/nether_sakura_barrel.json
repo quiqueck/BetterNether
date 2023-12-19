@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_sakura_planks",
-      "has_nether_sakura_slab",
-      "has_the_recipe"
+      "has_nether_sakura_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_sakura_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

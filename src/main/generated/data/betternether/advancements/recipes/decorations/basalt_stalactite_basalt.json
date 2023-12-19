@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_basalt_stalactite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_basalt_stalactite"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:basalt_stalactite_basalt"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

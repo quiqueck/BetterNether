@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_reed_fence",
-      "has_nether_reed_planks",
-      "has_the_recipe"
+      "has_nether_reed_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_reed_wall"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_bone_block",
-      "has_nether_reed_planks",
-      "has_the_recipe"
+      "has_nether_reed_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:bone_reed_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_stalagnate_stem",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stalagnate_stem"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_log"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

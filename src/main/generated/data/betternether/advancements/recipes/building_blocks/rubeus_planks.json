@@ -37,14 +37,13 @@
   },
   "requirements": [
     [
-      "has_rubeus_log_rubeus_bark_rubeus_stripped",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rubeus_log_rubeus_bark_rubeus_stripped"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:rubeus_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

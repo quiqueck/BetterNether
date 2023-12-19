@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_book",
-      "has_stalagnate_planks",
-      "has_the_recipe"
+      "has_stalagnate_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_bookshelf"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

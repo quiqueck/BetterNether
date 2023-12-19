@@ -37,14 +37,13 @@
   },
   "requirements": [
     [
-      "has_mushroom_fir_log_mushroom_fir_bark_mus",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mushroom_fir_log_mushroom_fir_bark_mus"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:mushroom_fir_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

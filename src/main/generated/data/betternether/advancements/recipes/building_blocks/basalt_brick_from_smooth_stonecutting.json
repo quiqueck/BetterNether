@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.minecraft.smooth_basalt",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.minecraft.smooth_basalt"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:basalt_brick_from_smooth_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

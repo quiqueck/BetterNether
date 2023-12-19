@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_quartz_glass_framed",
-      "has_pink_dye",
-      "has_the_recipe"
+      "has_pink_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:quartz_glass_framed_pink"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

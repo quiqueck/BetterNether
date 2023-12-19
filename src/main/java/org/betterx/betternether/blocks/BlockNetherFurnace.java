@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 public class BlockNetherFurnace extends AbstractFurnaceBlock implements BehaviourStone, DropSelfLootProvider<BlockNetherFurnace> {
     public BlockNetherFurnace(Block source) {
         super(BlockBehaviour.Properties
-                .copy(source)
+                .ofFullCopy(source)
                 .requiresCorrectToolForDrops()
                 .lightLevel(BlockNetherFurnace::getLuminance)
         );

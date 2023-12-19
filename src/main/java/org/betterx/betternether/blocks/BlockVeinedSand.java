@@ -27,7 +27,7 @@ import java.util.List;
 public class BlockVeinedSand extends BlockBase implements TagProvider, BehaviourSand {
     public BlockVeinedSand() {
         super(BlockBehaviour.Properties
-                .copy(Blocks.SAND)
+                .ofFullCopy(Blocks.SAND)
                 .mapColor(MapColor.COLOR_BROWN)
                 .sound(SoundType.SAND)
                 .strength(0.5F, 0.5F)

@@ -24,13 +24,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock implements BehaviourMetal {
     public BlockCincinnasiteForge() {
-        super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK)
-                                 .requiresCorrectToolForDrops()
-                                 .lightLevel(BlockCincinnasiteForge::getLuminance));
+        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK)
+                        .requiresCorrectToolForDrops()
+                        .lightLevel(BlockCincinnasiteForge::getLuminance));
     }
 
     private static int getLuminance(BlockState blockState) {

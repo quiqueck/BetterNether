@@ -10,11 +10,10 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockCincinnasiteFrame extends BlockBaseNotFull implements BehaviourMetal {
     public BlockCincinnasiteFrame() {
-        super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
+        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

@@ -6,11 +6,9 @@ import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnGrassSoil;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
-import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;

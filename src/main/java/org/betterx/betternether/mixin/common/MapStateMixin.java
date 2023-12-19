@@ -112,7 +112,7 @@ public abstract class MapStateMixin extends SavedData {
             MapDecoration mapDecoration = new MapDecoration(type, mapX, mapZ, displayRotation, text);
             MapDecoration mapDecoration2 = this.decorations.put(key, mapDecoration);
             if (!mapDecoration.equals(mapDecoration2)) {
-                if (mapDecoration2 != null && mapDecoration2.getType().shouldTrackCount()) {
+                if (mapDecoration2 != null && mapDecoration2.type().shouldTrackCount()) {
                     --this.trackedDecorationCount;
                 }
 

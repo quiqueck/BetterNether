@@ -12,7 +12,6 @@ import net.minecraft.world.item.crafting.ShapelessRecipe;
 public class BNRecipeManager extends BCLRecipeManager {
     public static ShapelessRecipe makeEmptyRecipe(ResourceLocation id) {
         ShapelessRecipe recipe = new ShapelessRecipe(
-                id,
                 "empty",
                 CraftingBookCategory.MISC,
                 new ItemStack(Items.AIR),

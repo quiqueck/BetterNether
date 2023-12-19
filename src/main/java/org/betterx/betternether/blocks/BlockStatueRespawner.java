@@ -164,10 +164,10 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
     }
 
     @Override
-    public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+    public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (player.isCreative() && state.getValue(TOP) && world.getBlockState(pos.below()).getBlock() == this) {
             world.setBlockAndUpdate(pos.below(), Blocks.AIR.defaultBlockState());
         }
-        super.playerWillDestroy(world, pos, state, player);
+        return super.playerWillDestroy(world, pos, state, player);
     }
 }

@@ -10,8 +10,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -52,7 +52,7 @@ public class BlockVeinedSand extends BlockBase implements TagProvider, Behaviour
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         return new ItemStack(Blocks.SOUL_SAND);
     }
 

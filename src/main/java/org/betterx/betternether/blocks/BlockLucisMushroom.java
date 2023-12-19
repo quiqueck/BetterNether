@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -91,7 +92,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         return new ItemStack(NetherBlocks.LUCIS_SPORE);
     }
 }

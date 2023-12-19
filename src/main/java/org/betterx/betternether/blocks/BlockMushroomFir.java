@@ -99,7 +99,7 @@ public class BlockMushroomFir extends BlockBaseNotFull implements BehaviourWood 
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         MushroomFirShape shape = state.getValue(SHAPE);
         return shape == MushroomFirShape.BOTTOM || shape == MushroomFirShape.MIDDLE
                 ? new ItemStack(NetherBlocks.MAT_MUSHROOM_FIR.getStem())

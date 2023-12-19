@@ -30,7 +30,7 @@ public class BlockBlackApple extends BlockCommonPlant implements SurvivesOnNethe
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         return new ItemStack(NetherBlocks.BLACK_APPLE_SEED);
     }
 

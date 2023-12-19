@@ -86,7 +86,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         return direction == Direction.UP && BlocksHelper.isSoulSand(world.getBlockState(pos.below()));
     }

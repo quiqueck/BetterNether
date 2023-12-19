@@ -133,7 +133,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
         MutableBlockPos blockPos = new MutableBlockPos().set(pos);
         for (int y = pos.getY() - 1; y > 1; y--) {
             blockPos.setY(y);

@@ -184,7 +184,7 @@ public class ConfigScreen extends Screen {
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        this.renderBackground(guiGraphics);
+        this.renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
 
         guiGraphics.drawCenteredString(this.font, header, this.width / 2, 14, 16777215);

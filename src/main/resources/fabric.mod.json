@@ -28,9 +28,6 @@
     ],
     "fabric-datagen": [
       "org.betterx.datagen.betternether.BetterNetherDatagen"
-    ],
-    "emi": [
-      "org.betterx.betternether.integrations.emi.EMIPlugin"
     ]
   },
   "accessWidener": "betternether.accesswidener",

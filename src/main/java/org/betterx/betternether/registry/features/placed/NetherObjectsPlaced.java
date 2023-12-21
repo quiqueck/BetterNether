@@ -1,172 +1,55 @@
 package org.betterx.betternether.registry.features.placed;
 
-import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v3.levelgen.features.config.SequenceFeatureConfig;
-import org.betterx.bclib.api.v3.levelgen.features.config.TemplateFeatureConfig;
-import org.betterx.bclib.api.v3.levelgen.features.features.SequenceFeature;
-import org.betterx.bclib.api.v3.levelgen.features.features.TemplateFeature;
-import org.betterx.betternether.BN;
-import org.betterx.betternether.registry.features.configured.NetherObjects;
+import org.betterx.betternether.BetterNether;
+import org.betterx.wover.core.api.ModCore;
+import org.betterx.wover.feature.api.placed.PlacedFeatureKey;
+import org.betterx.wover.feature.api.placed.PlacedFeatureManager;
 
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
-import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.SURFACE_STRUCTURES;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;
 
 public class NetherObjectsPlaced {
-    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> BONES = NetherObjects
-            .BONES
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(3)
-            .onceEvery(2)
-            .build();
-
-    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> JUNGLE_BONES = NetherObjects
-            .JUNGLE_BONES
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(1)
-            .onceEvery(4)
-            .build();
-
-    public static final BCLFeature<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = NetherObjects
-            .OBSIDIAN_CRYSTAL
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(1)
-            .onceEvery(2)
-            .build();
-
-    public static final BCLFeature<SequenceFeature, SequenceFeatureConfig> BONE_STALAGMITE = NetherObjects
-            .PATCH_BONE_STALAGMITE_ON_GROUND
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(1)
-            .onceEvery(2)
-            .build();
-
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> STALACTITE = NetherObjects
-            .PATCH_STALACTITE
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .betterNetherCeiling(1)
-            .onceEvery(2)
-            .build();
-
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> STALAGMITE = NetherObjects
-            .PATCH_STALAGMITE
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(1)
-            .onceEvery(2)
-            .build();
-
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BASALT_STALACTITE = NetherObjects
-            .PATCH_BASALT_STALACTITE
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .betterNetherCeiling(8)
-            .build();
-
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BASALT_STALACTITE_SPARSE = NetherObjects
-            .PATCH_BASALT_STALACTITE
-            .place(BN.id("patch_basalt_stalactite_sparse"))
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .betterNetherCeiling(1)
-            .onceEvery(5)
-            .build();
-
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BASALT_STALAGMITE = NetherObjects
-            .PATCH_BASALT_STALAGMITE
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(1)
-            .onceEvery(1)
-            .build();
-
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BASALT_STALAGMITE_SPARSE = NetherObjects
-            .PATCH_BASALT_STALAGMITE
-            .place(BN.id("patch_basalt_stalagmite_sparse"))
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(1)
-            .onceEvery(5)
-            .build();
-
-    public static final BCLFeature<SequenceFeature, SequenceFeatureConfig> BLACKSTONE_STALACTITE = NetherObjects
-            .PATCH_BLACKSTONE_STALACTITE_ON_CEIL
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .betterNetherCeiling(4)
-            .build();
-
-    public static final BCLFeature<SequenceFeature, SequenceFeatureConfig> BLACKSTONE_STALAGMITE = NetherObjects
-            .PATCH_BLACKSTONE_STALAGMITE_ON_GROUND
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(1)
-            .onceEvery(2)
-            .build();
-
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> SMOKER = NetherObjects
-            .PATCH_SMOKER
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(3)
-            .onceEvery(2)
-            .build();
-
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> SMOKER_SPARSE = NetherObjects
-            .PATCH_SMOKER
-            .place(BN.id("patch_smoker_sparse"))
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(3)
-            .onceEvery(4)
-            .build();
-    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> WART_DEADWOOD = NetherObjects
-            .WART_DEADWOOD
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(8)
-            .onceEvery(2)
-            .isEmptyAndOnNetherGround()
-            .build();
-
-    public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> SCULK_HIDDEN = NetherObjects
-            .SCULK_HIDDEN
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(8)
-            .onceEvery(4)
-            .isEmptyAndOn(BlockPredicate.matchesBlocks(Blocks.SCULK))
-            .offset(Direction.DOWN)
-            .build();
-
-    public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> SCULK_TOP = NetherObjects
-            .SCULK_TOP
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(8)
-            .onceEvery(5)
-            .isEmptyAndOn(BlockPredicate.matchesBlocks(Blocks.SCULK))
-            .build();
-
-    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> FOREST_LITTER = NetherObjects
-            .FOREST_LITTER
-            .place()
-            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(4)
-            .onceEvery(2)
-            .build();
-
-
-    public static void ensureStaticInitialization() {
-
-    }
+    private static final ModCore C = BetterNether.C;
+    public static final PlacedFeatureKey PATCH_TERRACOTTA_CLUMP
+            = PlacedFeatureManager.createKey(C.id("terracotta_clump"));
+    public static final PlacedFeatureKey BONES
+            = PlacedFeatureManager.createKey(C.id("bones")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey JUNGLE_BONES
+            = PlacedFeatureManager.createKey(C.id("jungle_bones")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey OBSIDIAN_CRYSTAL
+            = PlacedFeatureManager.createKey(C.id("obsidian_crystal")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey BONE_STALAGMITE
+            = PlacedFeatureManager.createKey(C.id("patch_bone_stalagmite_on_ground")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey STALACTITE
+            = PlacedFeatureManager.createKey(C.id("patch_stalactite")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey STALAGMITE
+            = PlacedFeatureManager.createKey(C.id("patch_stalagmite")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey BASALT_STALACTITE_2
+            = PlacedFeatureManager.createKey(C.id("patch_basalt_stalactite")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey BASALT_STALACTITE
+            = PlacedFeatureManager.createKey(C.id("patch_basalt_stalactite")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey BASALT_STALACTITE_SPARSE
+            = PlacedFeatureManager.createKey(C.id("patch_basalt_stalactite_sparse")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey BASALT_STALAGMITE
+            = PlacedFeatureManager.createKey(C.id("patch_basalt_stalagmite")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey BASALT_STALAGMITE_SPARSE
+            = PlacedFeatureManager.createKey(C.id("patch_basalt_stalagmite_sparse")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey BLACKSTONE_STALACTITE
+            = PlacedFeatureManager.createKey(C.id("patch_blackstone_stalactite_on_ceil"))
+                                  .setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey BLACKSTONE_STALAGMITE
+            = PlacedFeatureManager.createKey(C.id("patch_blackstone_stalagmite_on_ground"))
+                                  .setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey SMOKER
+            = PlacedFeatureManager.createKey(C.id("patch_smoker")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey SMOKER_SPARSE
+            = PlacedFeatureManager.createKey(C.id("patch_smoker_sparse")).setDecoration(SURFACE_STRUCTURES);
+    public static final PlacedFeatureKey WART_DEADWOOD
+            = PlacedFeatureManager.createKey(C.id("war_deadwood")).setDecoration(VEGETAL_DECORATION);
+    public static final PlacedFeatureKey SCULK_HIDDEN
+            = PlacedFeatureManager.createKey(C.id("sculk_hidden")).setDecoration(VEGETAL_DECORATION);
+    public static final PlacedFeatureKey SCULK_TOP
+            = PlacedFeatureManager.createKey(C.id("sculk_top")).setDecoration(VEGETAL_DECORATION);
+    public static final PlacedFeatureKey FOREST_LITTER
+            = PlacedFeatureManager.createKey(C.id("forest_litter")).setDecoration(SURFACE_STRUCTURES);
 }

@@ -1,5 +1,34 @@
 {
-  "feature": "betternether:sculk_hidden",
+  "feature": {
+    "type": "minecraft:simple_block",
+    "config": {
+      "to_place": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "data": {
+              "Name": "minecraft:sculk_catalyst",
+              "Properties": {
+                "bloom": "false"
+              }
+            },
+            "weight": 30
+          },
+          {
+            "data": {
+              "Name": "minecraft:sculk_shrieker",
+              "Properties": {
+                "can_summon": "true",
+                "shrieking": "false",
+                "waterlogged": "false"
+              }
+            },
+            "weight": 10
+          }
+        ]
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -35,7 +64,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,
@@ -47,7 +76,7 @@
       }
     },
     {
-      "type": "bclib:offset",
+      "type": "wover:offset",
       "blocks": [
         0,
         -1,

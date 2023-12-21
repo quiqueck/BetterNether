@@ -1,5 +1,8 @@
 {
-  "feature": "betternether:obsidian_crystal",
+  "feature": {
+    "type": "betternether:obsidian_crystal",
+    "config": {}
+  },
   "placement": [
     {
       "type": "minecraft:height_range",

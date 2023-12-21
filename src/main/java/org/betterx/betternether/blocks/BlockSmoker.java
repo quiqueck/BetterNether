@@ -1,10 +1,9 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
+import org.betterx.wover.block.api.BlockProperties;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,11 +28,13 @@ import net.fabricmc.api.Environment;
 public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGround, AddMineableAxe {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<BlockProperties.TripleShape> SHAPE = org.betterx.wover.block.api.BlockProperties.TRIPLE_SHAPE;
 
     public BlockSmoker() {
         super(Materials.makeNetherWood(MapColor.COLOR_BROWN));
-        this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
+        this.registerDefaultState(getStateDefinition().any()
+                                                      .setValue(SHAPE, BlockProperties.TripleShape.TOP)
+        );
     }
 
     @Override
@@ -49,7 +50,7 @@ public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGro
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
-        return state.getValue(SHAPE) == TripleShape.TOP ? TOP_SHAPE : MIDDLE_SHAPE;
+        return state.getValue(SHAPE) == BlockProperties.TripleShape.TOP ? TOP_SHAPE : MIDDLE_SHAPE;
     }
 
     @Override
@@ -66,12 +67,12 @@ public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGro
         }
         Block side = world.getBlockState(pos.above()).getBlock();
         if (side != this)
-            return state.setValue(SHAPE, TripleShape.TOP);
+            return state.setValue(SHAPE, BlockProperties.TripleShape.TOP);
         side = world.getBlockState(pos.below()).getBlock();
         if (side == this)
-            return state.setValue(SHAPE, TripleShape.MIDDLE);
+            return state.setValue(SHAPE, BlockProperties.TripleShape.MIDDLE);
         else
-            return state.setValue(SHAPE, TripleShape.BOTTOM);
+            return state.setValue(SHAPE, BlockProperties.TripleShape.BOTTOM);
     }
 
     @Override

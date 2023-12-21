@@ -1,5 +1,20 @@
 {
-  "feature": "betternether:sculk_top",
+  "feature": {
+    "type": "minecraft:simple_block",
+    "config": {
+      "to_place": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:sculk_sensor",
+          "Properties": {
+            "power": "0",
+            "sculk_sensor_phase": "inactive",
+            "waterlogged": "false"
+          }
+        }
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -35,7 +50,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

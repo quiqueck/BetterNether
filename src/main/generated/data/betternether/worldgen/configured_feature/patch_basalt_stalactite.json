@@ -3,7 +3,7 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "bclib:pillar",
+        "type": "wover:pillar",
         "config": {
           "allowed_placement": {
             "type": "minecraft:matching_blocks",
@@ -39,7 +39,7 @@
           }
         },
         {
-          "type": "bclib:is",
+          "type": "wover:is",
           "offset": [
             0,
             1,

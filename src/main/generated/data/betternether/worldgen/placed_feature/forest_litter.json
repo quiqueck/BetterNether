@@ -1,5 +1,48 @@
 {
-  "feature": "betternether:forest_litter",
+  "feature": {
+    "type": "wover:template",
+    "config": {
+      "structures": {
+        "items": [
+          {
+            "value": {
+              "location": "betternether:upside_down_forest/tree_fallen",
+              "offset_y": 1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:upside_down_forest/tree_needle",
+              "offset_y": 1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:upside_down_forest/tree_root",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:upside_down_forest/tree_stump",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:upside_down_forest/tree_small_branch",
+              "offset_y": 1
+            },
+            "weight": 1.0
+          }
+        ]
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",

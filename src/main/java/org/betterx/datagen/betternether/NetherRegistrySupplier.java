@@ -2,8 +2,8 @@ package org.betterx.datagen.betternether;
 
 import org.betterx.bclib.api.v3.datagen.RegistrySupplier;
 import org.betterx.betternether.BetterNether;
-import org.betterx.datagen.betternether.worldgen.ConfiguredFeatureDataProvider;
-import org.betterx.datagen.betternether.worldgen.PlacedFeatureDataProvider;
+import org.betterx.datagen.betternether.worldgen.features.ConfiguredTerrainFeatureDataProvider;
+import org.betterx.datagen.betternether.worldgen.features.PlacedTerrainFeatureDataProvider;
 
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -26,12 +26,12 @@ public class NetherRegistrySupplier extends RegistrySupplier {
                 new RegistryInfo<>(
                         Registries.CONFIGURED_FEATURE,
                         ConfiguredFeature.DIRECT_CODEC,
-                        ConfiguredFeatureDataProvider::bootstrap
+                        ConfiguredTerrainFeatureDataProvider::bootstrapLegacy
                 ),
                 new RegistryInfo<>(
                         Registries.PLACED_FEATURE,
                         PlacedFeature.DIRECT_CODEC,
-                        PlacedFeatureDataProvider::bootstrap
+                        PlacedTerrainFeatureDataProvider::bootstrapLegacy
                 )
         );
     }

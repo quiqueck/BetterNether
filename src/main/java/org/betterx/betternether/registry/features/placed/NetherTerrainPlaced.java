@@ -1,104 +1,61 @@
 package org.betterx.betternether.registry.features.placed;
 
-import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
-import org.betterx.bclib.api.v3.levelgen.features.config.SequenceFeatureConfig;
-import org.betterx.betternether.BN;
-import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.features.configured.NetherTerrain;
+import org.betterx.wover.core.api.ModCore;
+import org.betterx.wover.feature.api.placed.PlacedConfiguredFeatureKey;
+import org.betterx.wover.feature.api.placed.PlacedFeatureKey;
+import org.betterx.wover.feature.api.placed.PlacedFeatureManager;
 
-import net.minecraft.core.Direction;
-import net.minecraft.util.valueproviders.ClampedNormalInt;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.LAKES;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.RAW_GENERATION;
 
 public class NetherTerrainPlaced {
-    public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> MAGMA_BLOBS = NetherTerrain
-            .MAGMA_BLOBS
-            .place(BN.id("magma_blob"))
-            .decoration(GenerationStep.Decoration.LAKES)
-            .countRange(1, 2)
-            .spreadHorizontal(ClampedNormalInt.of(0, 2, -4, -4))
-            .stencil()
-            .onEveryLayer()
-            .onlyInBiome()
-            .offset(Direction.DOWN)
-            .is(BlockPredicates.ONLY_GROUND)
-            .extendDown(0, 3)
-            .build();
+    private static final ModCore C = BetterNether.C;
 
-    public static BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_PITS_SPARSE = NetherTerrain
-            .LAVA_PITS
-            .place(BN.id("lava_pits_sparse"))
-            .decoration(GenerationStep.Decoration.LAKES)
-            .onEveryLayer()
-            .stencil()
-            .findSolidFloor(3)
-            .onlyInBiome()
-            .offset(Direction.DOWN)
-            .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
-            .onceEvery(6)
-            .build();
 
-    public static BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_PITS_DENSE = NetherTerrain
-            .LAVA_PITS
-            .place(BN.id("lava_pits_dense"))
-            .decoration(GenerationStep.Decoration.LAKES)
-            .onEveryLayer()
-            .stencil()
-            .findSolidFloor(3)
-            .onlyInBiome()
-            .offset(Direction.DOWN)
-            .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
-            .onceEvery(2)
-            .build();
+    public static final PlacedFeatureKey MAGMA_BLOBS = PlacedFeatureManager
+            .createKey(C.id("magma_blob"))
+            .setDecoration(LAKES);
 
-    public static BCLFeature<Feature<SequenceFeatureConfig>, SequenceFeatureConfig> FLOODED_LAVA_PIT = NetherTerrain
-            .FLOODED_LAVA_PIT
-            .place()
-            .decoration(GenerationStep.Decoration.LAKES)
-            .all()
-            .onEveryLayer()
-            .offset(Direction.DOWN)
-            .onlyInBiome()
-            .build();
+    public static final PlacedConfiguredFeatureKey LAVA_PIT = PlacedFeatureManager.createKey(
+            NetherTerrain.LAVA_PITS.key.location(),
+            NetherTerrain.LAVA_PITS
+    ).setDecoration(LAKES);
 
-    public static BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> REPLACE_SOUL_SANDSTONE = NetherTerrain
-            .SOUL_SAND
-            .place(BN.id("replace_soul_sandstone"))
-            .decoration(GenerationStep.Decoration.RAW_GENERATION)
-            .all()
-            .onEveryLayerMin4()
-            .onlyInBiome()
-            .offset(Direction.DOWN)
-            .is(BlockPredicate.matchesBlocks(NetherBlocks.SOUL_SANDSTONE))
-            .build();
+    public static final PlacedFeatureKey BASALT_OR_AIR = PlacedFeatureManager
+            .createKey(C.id("basalt_or_air"))
+            .setDecoration(LAKES);
+    public static final PlacedFeatureKey MARK = PlacedFeatureManager
+            .createKey(C.id("mark"))
+            .setDecoration(Decoration.RAW_GENERATION);
 
-    public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_SWAMP = NetherTerrain
-            .LAVA_PITS
-            .place(BN.id("lava_swamp"))
-            .decoration(GenerationStep.Decoration.LAKES)
-            .all()
-            .onEveryLayer()
-            .offset(Direction.DOWN)
-            .onlyInBiome()
-            .noiseAbove(0.1f, 20, 10)
-            .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
-            .build();
-    public static final BCLFeature<SimpleBlockFeature, SimpleBlockConfiguration> LAVA_TERRACE = NetherTerrain
-            .LAVA_PITS
-            .place(BN.id("lava_terrace"))
-            .decoration(GenerationStep.Decoration.LAKES)
-            .all()
-            .onEveryLayer()
-            .onlyInBiome()
-            .offset(Direction.DOWN)
-            .inBasinOf(BlockPredicates.ONLY_GROUND_OR_LAVA)
-            .build();
+    public static final PlacedFeatureKey EXTEND_BASALT = PlacedFeatureManager
+            .createKey(C.id("extend_basalt"))
+            .setDecoration(LAKES);
+    public static final PlacedConfiguredFeatureKey LAVA_PITS_SPARSE = PlacedFeatureManager.createKey(C.id(
+            "lava_pits_sparse"), NetherTerrain.LAVA_PITS).setDecoration(LAKES);
+    public static final PlacedConfiguredFeatureKey LAVA_PITS_DENSE = PlacedFeatureManager.createKey(C.id(
+            "lava_pits_dense"), NetherTerrain.LAVA_PITS).setDecoration(LAKES);
+    public static final PlacedConfiguredFeatureKey LAVA_SWAMP = PlacedFeatureManager.createKey(
+            C.id("lava_swamp"),
+            NetherTerrain.LAVA_PITS
+    ).setDecoration(LAKES);
+    public static final PlacedConfiguredFeatureKey LAVA_TERRACE = PlacedFeatureManager.createKey(
+            C.id("lava_terrace"),
+            NetherTerrain.LAVA_PITS
+    ).setDecoration(LAKES);
 
-    public static void ensureStaticInitialization() {
-    }
+    public static final PlacedFeatureKey FLOODED_LAVA_PIT_SURFACE = PlacedFeatureManager
+            .createKey(C.id("flooded_lava_pit_surface"))
+            .setDecoration(LAKES);
+
+    public static final PlacedFeatureKey FLOODED_LAVA_PIT = PlacedFeatureManager
+            .createKey(C.id("flooded_lava_pit"))
+            .setDecoration(LAKES);
+    public static final PlacedFeatureKey REPLACE_SOUL_SANDSTONE = PlacedFeatureManager
+            .createKey(C.id("replace_soul_sandstone"))
+            .setDecoration(RAW_GENERATION);
 }

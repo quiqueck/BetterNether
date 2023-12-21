@@ -271,18 +271,20 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .build();
 
 
-        ResourceLocation allTheBiomes = AdvancementManager.Builder
-                .create(BetterNether.C.id("all_the_biomes"))
-                .parent(city)
-                .startDisplay(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.BOOTS_SLOT))
-                .challenge()
-                .endDisplay()
-                .addVisitBiomesCriterion(LegacyNetherBiomeBuilder.getAllBnBiomes()
-                                                                 .stream()
-                                                                 .map(b -> b.getBiomeKey())
-                                                                 .toList())
-                .requireAll()
-                .rewardXP(1500)
-                .build();
+        if (!LegacyNetherBiomeBuilder.getAllBnBiomes().isEmpty()) {
+            ResourceLocation allTheBiomes = AdvancementManager.Builder
+                    .create(BetterNether.C.id("all_the_biomes"))
+                    .parent(city)
+                    .startDisplay(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.BOOTS_SLOT))
+                    .challenge()
+                    .endDisplay()
+                    .addVisitBiomesCriterion(LegacyNetherBiomeBuilder.getAllBnBiomes()
+                                                                     .stream()
+                                                                     .map(b -> b.getBiomeKey())
+                                                                     .toList())
+                    .requireAll()
+                    .rewardXP(1500)
+                    .build();
+        }
     }
 }

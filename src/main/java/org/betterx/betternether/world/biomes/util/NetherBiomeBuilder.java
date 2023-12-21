@@ -136,12 +136,12 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
                                                           .toLowerCase()));
     }
 
-    //@Deprecated(forRemoval = true)
+    @Deprecated(forRemoval = true)
     public NetherBiomeBuilder structure(BCLStructure<?> structure) {
         return this.structure(structure.biomeTag);
     }
 
-    //@Deprecated(forRemoval = true)
+    @Deprecated(forRemoval = true)
     public NetherBiomeBuilder feature(BCLFeature<?, ?> feature) {
         return feature(feature.decoration, feature.placedFeature);
     }

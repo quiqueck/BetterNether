@@ -1,4 +1,25 @@
 {
-  "feature": "betternether:flooded_lava_pit_surface",
+  "feature": {
+    "type": "wover:condition",
+    "config": {
+      "filter": {
+        "type": "wover:is_basin",
+        "predicate": {
+          "type": "minecraft:any_of",
+          "predicates": [
+            {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:lava"
+            },
+            {
+              "type": "wover:full_shape"
+            }
+          ]
+        }
+      },
+      "filter_fail": "betternether:basalt_or_air",
+      "filter_pass": "betternether:lava_pit"
+    }
+  },
   "placement": []
 }

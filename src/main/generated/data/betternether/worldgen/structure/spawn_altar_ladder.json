@@ -12,8 +12,7 @@
       }
     ]
   },
-  "keep_air": true,
-  "placement": "nether_surface",
+  "placement": "nether_surface_flat_2",
   "spawn_overrides": {},
   "step": "surface_structures"
 }

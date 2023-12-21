@@ -1,8 +1,21 @@
 {
-  "feature": "betternether:extend_basalt",
+  "feature": {
+    "type": "minecraft:simple_block",
+    "config": {
+      "to_place": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:basalt",
+          "Properties": {
+            "axis": "y"
+          }
+        }
+      }
+    }
+  },
   "placement": [
     {
-      "type": "bclib:offset",
+      "type": "wover:offset",
       "blocks": [
         0,
         -1,
@@ -10,7 +23,7 @@
       ]
     },
     {
-      "type": "bclib:extend",
+      "type": "wover:extend",
       "direction": "down",
       "length": {
         "type": "minecraft:uniform",

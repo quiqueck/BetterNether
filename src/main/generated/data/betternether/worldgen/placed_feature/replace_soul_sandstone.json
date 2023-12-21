@@ -1,18 +1,28 @@
 {
-  "feature": "betternether:soul_sand",
+  "feature": {
+    "type": "minecraft:simple_block",
+    "config": {
+      "to_place": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:soul_sand"
+        }
+      }
+    }
+  },
   "placement": [
     {
-      "type": "bclib:all"
+      "type": "wover:all"
     },
     {
-      "type": "bclib:on_every_layer",
+      "type": "wover:every_layer",
       "min": 4
     },
     {
       "type": "minecraft:biome"
     },
     {
-      "type": "bclib:offset",
+      "type": "wover:offset",
       "blocks": [
         0,
         -1,

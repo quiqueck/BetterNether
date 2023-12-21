@@ -2,13 +2,13 @@
   "feature": "betternether:lava_pit",
   "placement": [
     {
-      "type": "bclib:all"
+      "type": "wover:all"
     },
     {
-      "type": "bclib:on_every_layer"
+      "type": "wover:every_layer"
     },
     {
-      "type": "bclib:offset",
+      "type": "wover:offset",
       "blocks": [
         0,
         -1,
@@ -19,15 +19,14 @@
       "type": "minecraft:biome"
     },
     {
-      "type": "bclib:noise_filter",
-      "max_noise_level": 1.7976931348623157E308,
+      "type": "wover:noise_filter",
       "min_noise_level": 0.10000000149011612,
       "noise": "minecraft:gravel",
       "scale_xz": 20.0,
       "scale_y": 10.0
     },
     {
-      "type": "bclib:is_basin",
+      "type": "wover:is_basin",
       "predicate": {
         "type": "minecraft:any_of",
         "predicates": [

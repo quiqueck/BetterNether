@@ -1,14 +1,23 @@
 {
-  "feature": "betternether:flooded_lava_pit",
+  "feature": {
+    "type": "wover:sequence",
+    "config": {
+      "features": [
+        "betternether:extend_basalt",
+        "betternether:flooded_lava_pit_surface",
+        "betternether:mark"
+      ]
+    }
+  },
   "placement": [
     {
-      "type": "bclib:all"
+      "type": "wover:all"
     },
     {
-      "type": "bclib:on_every_layer"
+      "type": "wover:every_layer"
     },
     {
-      "type": "bclib:offset",
+      "type": "wover:offset",
       "blocks": [
         0,
         -1,

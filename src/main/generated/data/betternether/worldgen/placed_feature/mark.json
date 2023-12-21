@@ -1,5 +1,8 @@
 {
-  "feature": "betternether:mark",
+  "feature": {
+    "type": "wover:mark_postprocessing",
+    "config": {}
+  },
   "placement": [
     {
       "type": "minecraft:block_predicate_filter",

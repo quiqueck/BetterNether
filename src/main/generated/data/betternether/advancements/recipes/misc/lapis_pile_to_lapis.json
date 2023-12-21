@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_lapis_pile",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_lapis_pile"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:lapis_pile_to_lapis"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

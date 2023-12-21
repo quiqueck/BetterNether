@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_blackstone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_blackstone"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:blackstone_furnace"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_nether_sakura_stripped_log",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nether_sakura_stripped_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_sakura_stripped_bark"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

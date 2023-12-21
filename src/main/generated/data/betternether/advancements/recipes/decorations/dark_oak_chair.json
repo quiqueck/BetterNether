@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_dark_oak_slab",
-      "has_the_recipe"
+      "has_dark_oak_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:dark_oak_chair"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

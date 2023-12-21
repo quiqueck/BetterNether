@@ -22,8 +22,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.Iterator;
-
 @Mixin(LiquidBlock.class)
 public abstract class LiquidBlockMixin {
     // A: Original Redirect Code
@@ -76,18 +74,15 @@ public abstract class LiquidBlockMixin {
                 final int x = blockPos.getX();
                 final int y = blockPos.getY();
                 final int z = blockPos.getZ();
-                Iterator nearbyPlayer = level.getEntitiesOfClass(
-                                                     ServerPlayer.class,
-                                                     (new AABB(x, y, z, x, y - 4, z)).inflate(
-                                                             10.0D,
-                                                             5.0D,
-                                                             10.0D
-                                                     )
-                                             )
-                                             .iterator();
 
-                while (nearbyPlayer.hasNext()) {
-                    final ServerPlayer serverPlayer = (ServerPlayer) nearbyPlayer.next();
+                for (ServerPlayer serverPlayer : level.getEntitiesOfClass(
+                        ServerPlayer.class,
+                        (new AABB(x, y, z, x, y - 4, z)).inflate(
+                                10.0D,
+                                5.0D,
+                                10.0D
+                        )
+                )) {
                     BNCriterion.BREW_BLUE.trigger(serverPlayer);
                 }
 

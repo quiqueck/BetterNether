@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_acacia_slab",
-      "has_stick",
-      "has_the_recipe"
+      "has_stick"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:acacia_chair"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

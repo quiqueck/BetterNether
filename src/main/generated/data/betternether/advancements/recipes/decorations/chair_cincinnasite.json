@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_cincinnasite_slab",
-      "has_the_recipe"
+      "has_cincinnasite_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:chair_cincinnasite"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

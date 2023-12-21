@@ -11,6 +11,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.LavaFluid;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -40,6 +41,7 @@ public class LavaFluidMixin {
         }
     }
 
+    @Unique
     private void spawnParticle(ParticleOptions effect, Level world, RandomSource random, BlockPos pos) {
         double angle = random.nextDouble() * Math.PI * 2;
         world.addParticle(ParticleTypes.LARGE_SMOKE,

@@ -23,8 +23,10 @@ public abstract class MapStateMixin extends SavedData {
         super();
     }
 
+    @Final
     @Shadow
-    public boolean unlimitedTracking;
+    private boolean unlimitedTracking;
+    @Final
     @Shadow
     public byte scale;
     @Shadow
@@ -35,7 +37,7 @@ public abstract class MapStateMixin extends SavedData {
     public int centerZ;
     @Shadow
     @Final
-    private Map<String, MapDecoration> decorations;
+    Map<String, MapDecoration> decorations;
 
     @Shadow
     protected abstract void removeDecoration(String string);
@@ -112,7 +114,7 @@ public abstract class MapStateMixin extends SavedData {
             MapDecoration mapDecoration = new MapDecoration(type, mapX, mapZ, displayRotation, text);
             MapDecoration mapDecoration2 = this.decorations.put(key, mapDecoration);
             if (!mapDecoration.equals(mapDecoration2)) {
-                if (mapDecoration2 != null && mapDecoration2.getType().shouldTrackCount()) {
+                if (mapDecoration2 != null && mapDecoration2.type().shouldTrackCount()) {
                     --this.trackedDecorationCount;
                 }
 

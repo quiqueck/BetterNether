@@ -19,16 +19,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.city.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:cincinnasite_carved"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.city.title"
     }
@@ -37,6 +33,5 @@
     [
       "ncity"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

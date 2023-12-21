@@ -15,16 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.ruby_ore.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:nether_ruby"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.ruby_ore.title"
     }
@@ -33,6 +29,5 @@
     [
       "ruby_ore"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_warped_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_warped_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:warped_boat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

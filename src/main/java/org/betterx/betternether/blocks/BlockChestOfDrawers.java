@@ -5,6 +5,7 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
 import org.betterx.betternether.registry.NetherBlocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -27,8 +28,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
@@ -37,6 +36,17 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMetal {
+    public static final MapCodec<BlockChestOfDrawers> CODEC = simpleCodec(BlockChestOfDrawers::new);
+
+    private BlockChestOfDrawers(Properties settings) {
+        super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockChestOfDrawers> codec() {
+        return CODEC;
+    }
+
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, Block.box(0, 0, 8, 16, 16, 16),
             Direction.SOUTH, Block.box(0, 0, 0, 16, 16, 8),
@@ -47,7 +57,7 @@ public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMet
     public static final BooleanProperty OPEN = BNBlockProperties.OPEN;
 
     public BlockChestOfDrawers() {
-        super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
+        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(OPEN, false));
     }
 

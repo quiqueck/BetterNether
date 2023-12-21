@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.blue_obsidian",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.blue_obsidian"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:blue_obsidian_bricks_stairs_stonecutter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

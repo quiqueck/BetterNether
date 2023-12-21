@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_item.betternether.cincinnasite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_item.betternether.cincinnasite"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_ingot_from_shard_blasting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

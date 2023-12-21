@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_rubeus_stripped_log",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rubeus_stripped_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:rubeus_stripped_bark"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

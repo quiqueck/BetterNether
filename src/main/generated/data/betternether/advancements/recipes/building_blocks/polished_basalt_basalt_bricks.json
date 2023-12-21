@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_basalt",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_basalt"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:polished_basalt_basalt_bricks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

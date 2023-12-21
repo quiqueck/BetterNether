@@ -43,7 +43,6 @@ public class BlockAgeProcessorMixin {
                     structureBlockInfo2.nbt()
             ));
             cir.cancel();
-            return;
         }
     }
 }

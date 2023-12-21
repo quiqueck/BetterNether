@@ -10,6 +10,7 @@ import net.minecraft.world.level.levelgen.feature.DeltaFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -30,6 +31,7 @@ public class DeltaFeatureMixin {
         }
     }
 
+    @Unique
     private static boolean bn_isValidBlock(BlockState state) {
         return !(state.getBlock() instanceof BlockRubeusLeaves)
                 && !(state.getBlock() instanceof BlockWillowLeaves)

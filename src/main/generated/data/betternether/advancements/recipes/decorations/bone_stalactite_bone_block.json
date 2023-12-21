@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_bone_stalactite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_bone_stalactite"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:bone_stalactite_bone_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

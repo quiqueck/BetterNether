@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_rubeus_planks",
-      "has_rubeus_fence",
-      "has_the_recipe"
+      "has_rubeus_fence"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:rubeus_wall"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

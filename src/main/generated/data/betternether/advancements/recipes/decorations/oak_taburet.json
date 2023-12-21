@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_oak_slab",
-      "has_the_recipe"
+      "has_oak_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:oak_taburet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

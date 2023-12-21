@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_sakura_stripped_log",
-      "has_chain",
-      "has_the_recipe"
+      "has_chain"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_sakura_hanging_sign"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

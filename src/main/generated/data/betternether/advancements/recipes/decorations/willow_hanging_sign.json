@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_chain",
-      "has_willow_stripped_log",
-      "has_the_recipe"
+      "has_willow_stripped_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:willow_hanging_sign"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

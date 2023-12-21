@@ -63,17 +63,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.ruby_tools.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:nether_ruby_pickaxe",
       "nbt": "{Damage:0,Enchantments:[{id:\"betternether:obsidian_breaker\",lvl:1s}]}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.ruby_tools.title"
     }
@@ -86,6 +82,5 @@
       "nether_ruby_EquipmentSlot[name=sword, category=COMBAT]",
       "nether_ruby_EquipmentSlot[name=hoe, category=TOOLS]"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

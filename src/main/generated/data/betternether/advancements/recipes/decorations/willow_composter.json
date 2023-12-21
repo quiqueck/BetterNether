@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_willow_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_willow_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:willow_composter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

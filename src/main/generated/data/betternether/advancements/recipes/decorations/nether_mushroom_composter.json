@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_nether_mushroom_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nether_mushroom_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_mushroom_composter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

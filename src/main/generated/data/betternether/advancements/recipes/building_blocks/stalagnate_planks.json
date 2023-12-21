@@ -37,14 +37,13 @@
   },
   "requirements": [
     [
-      "has_stalagnate_log_stalagnate_bark_stalagn",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stalagnate_log_stalagnate_bark_stalagn"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

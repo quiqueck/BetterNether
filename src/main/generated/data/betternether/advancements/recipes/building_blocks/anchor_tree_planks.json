@@ -37,14 +37,13 @@
   },
   "requirements": [
     [
-      "has_anchor_tree_log_anchor_tree_bark_ancho",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_anchor_tree_log_anchor_tree_bark_ancho"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:anchor_tree_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

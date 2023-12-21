@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_rubeus_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rubeus_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:rubeus_composter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

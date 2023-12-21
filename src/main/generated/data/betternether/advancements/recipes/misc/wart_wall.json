@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_wart_planks",
-      "has_wart_fence",
-      "has_the_recipe"
+      "has_wart_fence"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wart_wall"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

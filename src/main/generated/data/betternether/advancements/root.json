@@ -6,7 +6,9 @@
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
-            "predicate": {}
+            "predicate": {
+              "location": {}
+            }
           }
         ]
       },
@@ -19,12 +21,9 @@
     "description": {
       "translate": "advancements.betternether.root.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:cincinnasite_lantern"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.root.title"
     }
@@ -33,6 +32,5 @@
     [
       "welcome"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

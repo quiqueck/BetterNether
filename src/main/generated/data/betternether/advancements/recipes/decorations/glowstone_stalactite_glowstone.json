@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_glowstone_stalactite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glowstone_stalactite"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:glowstone_stalactite_glowstone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

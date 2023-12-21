@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_agave_leaf",
-      "has_stalagnate_bowl",
-      "has_the_recipe"
+      "has_stalagnate_bowl"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:agave_medicine"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

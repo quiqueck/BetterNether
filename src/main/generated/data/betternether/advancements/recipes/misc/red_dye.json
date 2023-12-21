@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_red_mold",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_red_mold"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:red_dye"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

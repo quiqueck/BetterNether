@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_basalt_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_basalt_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:basalt_bricks_basalt_bricks_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

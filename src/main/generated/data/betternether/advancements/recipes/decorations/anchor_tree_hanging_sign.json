@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_chain",
-      "has_anchor_tree_stripped_log",
-      "has_the_recipe"
+      "has_anchor_tree_stripped_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:anchor_tree_hanging_sign"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

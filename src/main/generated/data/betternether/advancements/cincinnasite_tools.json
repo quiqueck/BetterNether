@@ -63,17 +63,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.cincinnasite_tools.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:cincinnasite_pickaxe",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.cincinnasite_tools.title"
     }
@@ -86,6 +82,5 @@
       "cincinnasite_EquipmentSlot[name=sword, category=COMBAT]",
       "cincinnasite_EquipmentSlot[name=hoe, category=TOOLS]"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

@@ -12,13 +12,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
 public class BlockCincinnasitPillar extends BlockBase implements BehaviourMetal {
     public static final EnumProperty<CincinnasitPillarShape> SHAPE = BNBlockProperties.PILLAR_SHAPE;
 
     public BlockCincinnasitPillar() {
-        super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK));
+        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK));
     }
 
     @Override

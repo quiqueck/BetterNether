@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.cincinnasite_fire_bowl_soul",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.cincinnasite_fire_bowl_soul"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:netherite_fire_bowl_soul"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

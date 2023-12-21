@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.nether_ruby_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.nether_ruby_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_ruby_slab_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

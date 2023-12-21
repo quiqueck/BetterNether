@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_quartz_glass",
-      "has_cincinnasite_ingot",
-      "has_the_recipe"
+      "has_cincinnasite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:quartz_glass_framed"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

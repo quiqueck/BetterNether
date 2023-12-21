@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_rubeus_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rubeus_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:rubeus_button"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

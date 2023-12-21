@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_quartz_glass_pane",
-      "has_blue_dye",
-      "has_the_recipe"
+      "has_blue_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:quartz_glass_pane_blue"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

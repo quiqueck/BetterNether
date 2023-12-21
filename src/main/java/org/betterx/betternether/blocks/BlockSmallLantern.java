@@ -21,8 +21,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
 public abstract class BlockSmallLantern extends BlockBaseNotFull {
     private static final VoxelShape SHAPE_NORTH = box(5, 0, 8, 11, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = box(5, 0, 0, 11, 16, 8);
@@ -34,7 +32,7 @@ public abstract class BlockSmallLantern extends BlockBaseNotFull {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
     protected BlockSmallLantern() {
-        super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_LANTERN).noOcclusion());
+        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_LANTERN).noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

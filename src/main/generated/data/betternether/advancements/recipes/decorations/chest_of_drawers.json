@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_reed_planks",
-      "has_cincinnasite_forged",
-      "has_the_recipe"
+      "has_cincinnasite_forged"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:chest_of_drawers"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stalagnate_fence",
-      "has_stalagnate_planks",
-      "has_the_recipe"
+      "has_stalagnate_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_wall"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_quartz_glass",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_quartz_glass"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:glass_bottle"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

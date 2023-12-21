@@ -32,15 +32,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_tag_c_chest",
-      "has_stalagnate_boat",
-      "has_the_recipe"
+      "has_stalagnate_boat"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_chest_boat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

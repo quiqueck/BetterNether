@@ -19,8 +19,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
 import javax.annotation.Nullable;
 
 public class BlockStalactite extends BlockBaseNotFull implements BehaviourStone {
@@ -29,7 +27,7 @@ public class BlockStalactite extends BlockBaseNotFull implements BehaviourStone 
     private static final VoxelShape[] SHAPES;
 
     public BlockStalactite(Block source) {
-        super(FabricBlockSettings.copy(source).noOcclusion());
+        super(Properties.ofFullCopy(source).noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(SIZE, 0));
     }
 

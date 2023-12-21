@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_ruby",
-      "has_nether_reed_stem",
-      "has_the_recipe"
+      "has_nether_reed_stem"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_ruby_hoe"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_whispering_gourd",
-      "has_torch",
-      "has_the_recipe"
+      "has_torch"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:whispering_gourd_lantern"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

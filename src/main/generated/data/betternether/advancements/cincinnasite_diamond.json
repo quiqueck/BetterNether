@@ -15,16 +15,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.cincinnasite_diamond.description"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "betternether:cincinnasite_diamond_upgrade_smithing_template"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.cincinnasite_diamond.title"
     }
@@ -33,6 +30,5 @@
     [
       "cincinnasite_diamond"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

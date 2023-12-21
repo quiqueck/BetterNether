@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.minecraft.obsidian",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.minecraft.obsidian"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:obsidian_rod_tiles_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

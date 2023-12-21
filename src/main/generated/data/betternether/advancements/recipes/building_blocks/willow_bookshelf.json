@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_book",
-      "has_willow_planks",
-      "has_the_recipe"
+      "has_willow_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:willow_bookshelf"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

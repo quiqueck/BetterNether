@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.ink_bush_seed",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.ink_bush_seed"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:black_dye_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

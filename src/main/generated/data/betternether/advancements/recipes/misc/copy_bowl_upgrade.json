@@ -46,16 +46,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_cincinnasite_block",
       "has_bowl_upgrade_smithing_template",
-      "has_diamond",
-      "has_the_recipe"
+      "has_diamond"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:copy_bowl_upgrade"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_willow_roof",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_willow_roof"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:willow_roof_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

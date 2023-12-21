@@ -6,9 +6,9 @@
         "items": [
           {
             "items": [
-              "betternether:anchor_tree_planks",
               "betternether:anchor_tree_log",
-              "betternether:anchor_tree_bark"
+              "betternether:anchor_tree_bark",
+              "betternether:anchor_tree_planks"
             ]
           }
         ]
@@ -48,8 +48,8 @@
         "items": [
           {
             "items": [
-              "betternether:nether_mushroom_planks",
-              "betternether:nether_mushroom_stem"
+              "betternether:nether_mushroom_stem",
+              "betternether:nether_mushroom_planks"
             ]
           }
         ]
@@ -75,8 +75,8 @@
           {
             "items": [
               "betternether:nether_sakura_log",
-              "betternether:nether_sakura_planks",
-              "betternether:nether_sakura_bark"
+              "betternether:nether_sakura_bark",
+              "betternether:nether_sakura_planks"
             ]
           }
         ]
@@ -88,9 +88,9 @@
         "items": [
           {
             "items": [
-              "betternether:rubeus_planks",
+              "betternether:rubeus_log",
               "betternether:rubeus_bark",
-              "betternether:rubeus_log"
+              "betternether:rubeus_planks"
             ]
           }
         ]
@@ -102,8 +102,8 @@
         "items": [
           {
             "items": [
-              "betternether:stalagnate_bark",
               "betternether:stalagnate_log",
+              "betternether:stalagnate_bark",
               "betternether:stalagnate_planks"
             ]
           }
@@ -116,9 +116,9 @@
         "items": [
           {
             "items": [
+              "minecraft:warped_stem",
               "minecraft:warped_hyphae",
-              "minecraft:warped_planks",
-              "minecraft:warped_stem"
+              "minecraft:warped_planks"
             ]
           }
         ]
@@ -130,9 +130,9 @@
         "items": [
           {
             "items": [
-              "betternether:wart_planks",
               "betternether:wart_log",
-              "betternether:wart_bark"
+              "betternether:wart_bark",
+              "betternether:wart_planks"
             ]
           }
         ]
@@ -144,8 +144,8 @@
         "items": [
           {
             "items": [
-              "betternether:willow_bark",
               "betternether:willow_log",
+              "betternether:willow_bark",
               "betternether:willow_planks"
             ]
           }
@@ -155,16 +155,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.betternether.nether_wood.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "betternether:willow_log"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.betternether.nether_wood.title"
     }
@@ -203,6 +199,5 @@
     [
       "got_warped"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

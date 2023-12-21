@@ -37,7 +37,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
         return true;
     }
 

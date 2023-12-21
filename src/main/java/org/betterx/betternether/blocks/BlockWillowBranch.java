@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -77,7 +78,7 @@ public class BlockWillowBranch extends BlockBaseNotFull implements AddMineableAx
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         return new ItemStack(state.getValue(SHAPE) == WillowBranchShape.END
                 ? NetherBlocks.MAT_WILLOW.getTorch()
                 : NetherBlocks.WILLOW_LEAVES);

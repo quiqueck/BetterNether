@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.cincinnasite_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.cincinnasite_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_forged_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_soul_sandstone_cut",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_soul_sandstone_cut"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:soul_sandstone_cut_soul_sandstone_cut_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

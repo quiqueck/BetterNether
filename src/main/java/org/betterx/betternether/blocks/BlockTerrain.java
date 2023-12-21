@@ -69,14 +69,12 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
     public boolean isValidBonemealTarget(
             LevelReader blockGetter,
             BlockPos blockPos,
-            BlockState blockState,
-            boolean bl
+            BlockState blockState
     ) {
         return vegetationFeature != null && BonemealNyliumLike.super.isValidBonemealTarget(
                 blockGetter,
                 blockPos,
-                blockState,
-                bl
+                blockState
         );
     }
 

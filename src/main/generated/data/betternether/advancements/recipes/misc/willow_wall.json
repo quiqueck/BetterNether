@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_willow_fence",
-      "has_willow_planks",
-      "has_the_recipe"
+      "has_willow_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:willow_wall"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

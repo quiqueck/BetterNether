@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_birch_slab",
-      "has_the_recipe"
+      "has_birch_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:birch_chair"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

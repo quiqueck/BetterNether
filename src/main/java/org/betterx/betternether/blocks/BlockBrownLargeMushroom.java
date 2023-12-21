@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
@@ -52,7 +53,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull implements AddMine
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         BrownMushroomShape shape = state.getValue(SHAPE);
         return shape == BrownMushroomShape.BOTTOM || shape == BrownMushroomShape.MIDDLE
                 ? new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem())

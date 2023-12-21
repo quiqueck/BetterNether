@@ -46,16 +46,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_netherrack",
       "has_cincinnasite_ingot",
-      "has_cincinnasite_forged",
-      "has_the_recipe"
+      "has_cincinnasite_forged"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_fire_bowl"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

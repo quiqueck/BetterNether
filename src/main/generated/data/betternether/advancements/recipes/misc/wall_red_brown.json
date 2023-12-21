@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_red_mushroom",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_red_mushroom"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wall_red_brown"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_gray_mold",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_gray_mold"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:gray_dye"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

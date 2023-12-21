@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_nether_reed_stem",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nether_reed_stem"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:sugar"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

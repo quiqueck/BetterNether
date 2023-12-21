@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.betternether.cincinnasite_ore",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.betternether.cincinnasite_ore"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_ingot_from_ore_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

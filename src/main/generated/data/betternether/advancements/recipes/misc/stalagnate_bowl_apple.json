@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_black_apple",
-      "has_stalagnate_bowl",
-      "has_the_recipe"
+      "has_stalagnate_bowl"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:stalagnate_bowl_apple"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_warped_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_warped_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:warped_composter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

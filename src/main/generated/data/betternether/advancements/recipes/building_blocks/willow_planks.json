@@ -37,14 +37,13 @@
   },
   "requirements": [
     [
-      "has_willow_log_willow_bark_willow_stripped",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_willow_log_willow_bark_willow_stripped"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:willow_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

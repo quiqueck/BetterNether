@@ -5,6 +5,7 @@ import org.betterx.betternether.blockentities.BlockEntityForge;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 import org.betterx.betternether.registry.NetherBlocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,13 +25,23 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock implements BehaviourMetal {
+    public static final MapCodec<BlockCincinnasiteForge> CODEC = simpleCodec(BlockCincinnasiteForge::new);
+
+    private BlockCincinnasiteForge(Properties settings) {
+        super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends AbstractFurnaceBlock> codec() {
+        return CODEC;
+    }
+
     public BlockCincinnasiteForge() {
-        super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK)
-                                 .requiresCorrectToolForDrops()
-                                 .lightLevel(BlockCincinnasiteForge::getLuminance));
+        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK)
+                        .requiresCorrectToolForDrops()
+                        .lightLevel(BlockCincinnasiteForge::getLuminance));
     }
 
     private static int getLuminance(BlockState blockState) {

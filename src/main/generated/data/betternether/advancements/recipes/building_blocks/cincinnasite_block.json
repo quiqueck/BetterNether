@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cincinnasite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cincinnasite"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:cincinnasite_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

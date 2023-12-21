@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
@@ -117,7 +118,7 @@ public class RubyFire extends Enchantment {
     }
 
 
-    private static final Map<Item, BlastingRecipe> FIRE_CONVERSIONS = new HashMap<>();
+    private static final Map<Item, RecipeHolder<BlastingRecipe>> FIRE_CONVERSIONS = new HashMap<>();
     public static final ThreadLocal<List<ItemStack>> convertedDrops = ThreadLocal.withInitial(ArrayList::new);
 
     public static boolean getDrops(
@@ -138,7 +139,8 @@ public class RubyFire extends Enchantment {
                 convertedDrops.get().clear();
 
                 for (ItemStack stack : drops) {
-                    BlastingRecipe result = FIRE_CONVERSIONS.get(stack.getItem());
+                    RecipeHolder<BlastingRecipe> resultHolder = FIRE_CONVERSIONS.get(stack.getItem());
+                    BlastingRecipe result = resultHolder != null ? resultHolder.value() : null;
                     if (result != null) {
                         didConvert = true;
                         final ItemStack resultStack = result.getResultItem(level.registryAccess());
@@ -178,10 +180,10 @@ public class RubyFire extends Enchantment {
     }
 
     private static void buildConversionTable(ServerLevel level) {
-        final List<BlastingRecipe> recipes = level.getRecipeManager()
-                                                  .getAllRecipesFor(RecipeType.BLASTING);
-        for (BlastingRecipe r : recipes) {
-            for (Ingredient ingredient : r.getIngredients()) {
+        final List<RecipeHolder<BlastingRecipe>> recipes = level.getRecipeManager()
+                                                                .getAllRecipesFor(RecipeType.BLASTING);
+        for (RecipeHolder<BlastingRecipe> r : recipes) {
+            for (Ingredient ingredient : r.value().getIngredients()) {
                 for (ItemStack stack : ingredient.getItems()) {
                     if (stack.getItem() instanceof BlockItem blitem) {
                         if (blitem.getBlock().defaultBlockState().is(CommonBlockTags.IS_OBSIDIAN)) {

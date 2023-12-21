@@ -46,16 +46,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_redstone_torch",
       "has_stick",
-      "has_cincinnasite_ingot",
-      "has_the_recipe"
+      "has_cincinnasite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:activator_rail"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

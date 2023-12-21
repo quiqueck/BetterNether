@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_mushroom_slab",
-      "has_nether_mushroom_planks",
-      "has_the_recipe"
+      "has_nether_mushroom_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_mushroom_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_item.minecraft.quartz",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_item.minecraft.quartz"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:quartz_glass_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

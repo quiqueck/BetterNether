@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_wart_stripped_log",
-      "has_chain",
-      "has_the_recipe"
+      "has_chain"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wart_hanging_sign"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

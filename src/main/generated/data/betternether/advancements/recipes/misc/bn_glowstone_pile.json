@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_golden_vine",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_golden_vine"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:bn_glowstone_pile"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

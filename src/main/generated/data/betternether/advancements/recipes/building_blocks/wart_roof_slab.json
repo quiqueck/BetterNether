@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_wart_roof",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_wart_roof"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wart_roof_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

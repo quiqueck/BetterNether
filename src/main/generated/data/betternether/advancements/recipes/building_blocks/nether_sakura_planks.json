@@ -37,14 +37,13 @@
   },
   "requirements": [
     [
-      "has_nether_sakura_log_nether_sakura_bark_n",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nether_sakura_log_nether_sakura_bark_n"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:nether_sakura_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_block.minecraft.nether_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_block.minecraft.nether_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:roof_tile_nether_brick_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

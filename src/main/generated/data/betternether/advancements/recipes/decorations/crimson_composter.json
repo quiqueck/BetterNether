@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_crimson_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_crimson_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:crimson_composter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

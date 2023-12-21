@@ -46,16 +46,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_nether_brick",
       "has_nether_brick_tile_large",
-      "has_netherrack",
-      "has_the_recipe"
+      "has_netherrack"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:bricks_fire_bowl"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

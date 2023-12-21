@@ -113,7 +113,7 @@ public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlo
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         return new ItemStack(seed);
     }
 

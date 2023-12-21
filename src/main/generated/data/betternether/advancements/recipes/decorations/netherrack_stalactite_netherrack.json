@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_netherrack_stalactite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_netherrack_stalactite"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:netherrack_stalactite_netherrack"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

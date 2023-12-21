@@ -37,14 +37,13 @@
   },
   "requirements": [
     [
-      "has_wart_log_wart_bark_wart_stripped_log_w",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_wart_log_wart_bark_wart_stripped_log_w"
     ]
   ],
   "rewards": {
     "recipes": [
       "betternether:wart_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

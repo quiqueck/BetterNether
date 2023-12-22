@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.block.api.BlockProperties;
+import org.betterx.wover.block.api.BlockProperties.TripleShape;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

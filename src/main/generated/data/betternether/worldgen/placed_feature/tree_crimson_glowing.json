@@ -1,5 +1,41 @@
 {
-  "feature": "betternether:tree_crimson_glowing",
+  "feature": {
+    "type": "wover:template",
+    "config": {
+      "structures": {
+        "items": [
+          {
+            "value": {
+              "location": "betternether:trees/crimson_glow_tree_01",
+              "offset_y": 0
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/crimson_glow_tree_02",
+              "offset_y": 0
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/crimson_glow_tree_03",
+              "offset_y": 0
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/crimson_glow_tree_04",
+              "offset_y": 0
+            },
+            "weight": 1.0
+          }
+        ]
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -31,7 +67,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

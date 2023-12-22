@@ -1,5 +1,5 @@
 {
-  "type": "bclib:pillar",
+  "type": "wover:pillar",
   "config": {
     "allowed_placement": {
       "type": "minecraft:matching_blocks",

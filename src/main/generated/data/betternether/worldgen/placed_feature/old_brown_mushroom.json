@@ -1,5 +1,41 @@
 {
-  "feature": "betternether:old_brown_mushroom",
+  "feature": {
+    "type": "wover:template",
+    "config": {
+      "structures": {
+        "items": [
+          {
+            "value": {
+              "location": "betternether:trees/brown_mushroom_02",
+              "offset_y": -3
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/brown_mushroom_03",
+              "offset_y": -2
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/brown_mushroom_01",
+              "offset_y": -2
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/brown_mushroom_04",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          }
+        ]
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -35,7 +71,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

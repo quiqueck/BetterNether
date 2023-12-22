@@ -11,10 +11,7 @@ import org.betterx.datagen.betternether.worldgen.NetherBiomeModificationProvider
 import org.betterx.datagen.betternether.worldgen.NetherBiomesProvider;
 import org.betterx.datagen.betternether.worldgen.NetherRegistriesDataProvider;
 import org.betterx.datagen.betternether.worldgen.StructureDataProvider;
-import org.betterx.datagen.betternether.worldgen.features.ConfiguredObjectFeatureDataProvider;
-import org.betterx.datagen.betternether.worldgen.features.ConfiguredTerrainFeatureDataProvider;
-import org.betterx.datagen.betternether.worldgen.features.PlacedObjectFeatureDataProvider;
-import org.betterx.datagen.betternether.worldgen.features.PlacedTerrainFeatureDataProvider;
+import org.betterx.datagen.betternether.worldgen.features.*;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.PackBuilder;
 import org.betterx.wover.datagen.api.WoverDataGenEntryPoint;
@@ -29,8 +26,10 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.addMultiProvider(NetherBiomesProvider::new);
         globalPack.addRegistryProvider(ConfiguredObjectFeatureDataProvider::new);
         globalPack.addRegistryProvider(ConfiguredTerrainFeatureDataProvider::new);
-        globalPack.addRegistryProvider(PlacedTerrainFeatureDataProvider::new);
+        globalPack.addRegistryProvider(ConfiguredTreeFeatureDataProvider::new);
         globalPack.addRegistryProvider(PlacedObjectFeatureDataProvider::new);
+        globalPack.addRegistryProvider(PlacedTerrainFeatureDataProvider::new);
+        globalPack.addRegistryProvider(PlacedTreeFeatureDataProvider::new);
         globalPack.addMultiProvider(StructureDataProvider::new);
         globalPack.addRegistryProvider(NetherBiomeModificationProvider::new);
         globalPack.addRegistryProvider(FlatLevelPresetsDataProvider::new);

@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
-import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.block.api.BlockProperties;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;

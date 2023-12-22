@@ -5,6 +5,7 @@ import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
+import org.betterx.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -17,7 +18,9 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherMycelium, BehaviourSapling {
 
     public BlockMushroomFirSapling() {
-        super((BlockState state) -> NetherTrees.MUSHROOM_FIR);
+        super((level, pos, state, rnd) -> NetherTrees.MUSHROOM_FIR
+                .placeInWorld(WorldState.registryAccess(), level, pos, rnd)
+        );
     }
 
     @Override

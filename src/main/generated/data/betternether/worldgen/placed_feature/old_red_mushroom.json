@@ -1,5 +1,62 @@
 {
-  "feature": "betternether:old_red_mushroom",
+  "feature": {
+    "type": "wover:template",
+    "config": {
+      "structures": {
+        "items": [
+          {
+            "value": {
+              "location": "betternether:trees/red_mushroom_01",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/red_mushroom_02",
+              "offset_y": 0
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/red_mushroom_03",
+              "offset_y": 0
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/red_mushroom_04",
+              "offset_y": -3
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/red_mushroom_05",
+              "offset_y": -3
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/red_mushroom_06",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/red_mushroom_07",
+              "offset_y": -4
+            },
+            "weight": 1.0
+          }
+        ]
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -35,7 +92,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

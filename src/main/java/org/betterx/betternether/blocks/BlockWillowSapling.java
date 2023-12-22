@@ -5,6 +5,7 @@ import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
+import org.betterx.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -18,10 +19,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class BlockWillowSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherGround, BehaviourSapling {
     public BlockWillowSapling() {
-//        super((BlockState state) -> MHelper.RANDOM.nextInt(32) == 0
-//                ? NetherTrees.OLD_WILLOW_TREE
-//                : NetherTrees.WILLOW_TREE);
-        super((BlockState state) -> NetherTrees.WILLOW_TREE);
+        super((level, pos, state, rnd) -> NetherTrees.WILLOW_TREE
+                .placeInWorld(WorldState.registryAccess(), level, pos, rnd)
+        );
     }
 
     @Override

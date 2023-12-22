@@ -1,195 +1,94 @@
 package org.betterx.betternether.registry.features.placed;
 
-import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
-import org.betterx.bclib.api.v3.levelgen.features.config.TemplateFeatureConfig;
-import org.betterx.bclib.api.v3.levelgen.features.features.TemplateFeature;
-import org.betterx.betternether.BN;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
+import org.betterx.wover.core.api.ModCore;
+import org.betterx.wover.feature.api.placed.PlacedConfiguredFeatureKey;
+import org.betterx.wover.feature.api.placed.PlacedFeatureKey;
+import org.betterx.wover.feature.api.placed.PlacedFeatureManager;
 
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;
 
 public class NetherTreesPlaced {
-    public static BCLFeature CRIMSON_GLOWING_TREE = NetherTrees
-            .CRIMSON_GLOWING_TREE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(12)
-            .isEmptyAndOnNetherGround()
-            .build();
+    private static ModCore C = BetterNether.C;
 
-    public static BCLFeature CRIMSON_PINE = NetherTrees
-            .CRIMSON_PINE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(12)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedFeatureKey CRIMSON_GLOWING_TREE = PlacedFeatureManager
+            .createKey(C.id("tree_crimson_glowing"))
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature RUBEUS_TREE = NetherTrees
-            .RUBEUS_TREE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(12)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedFeatureKey CRIMSON_PINE = PlacedFeatureManager
+            .createKey(C.id("tree_crimson_pine"))
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature MUSHROOM_FIR = NetherTrees
-            .MUSHROOM_FIR
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(14)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedConfiguredFeatureKey RUBEUS_TREE = PlacedFeatureManager
+            .createKey(NetherTrees.RUBEUS_TREE)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> STALAGNATE = NetherTrees
-            .PATCH_STALAGNATE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(6)
-            .onceEvery(7)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedConfiguredFeatureKey MUSHROOM_FIR = PlacedFeatureManager
+            .createKey(NetherTrees.MUSHROOM_FIR)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> GIANT_MOLD = NetherTrees
-            .PATCH_GIANT_MOLD
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(6)
-            .onceEvery(5)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedFeatureKey STALAGNATE = PlacedFeatureManager
+            .createKey(C.id("patch_stalagnate"))
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BIG_RED_MUSHROOM = NetherTrees
-            .PATCH_BIG_RED_MUSHROOM
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(6)
-            .onceEvery(2)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedFeatureKey GIANT_MOLD = PlacedFeatureManager
+            .createKey(C.id("patch_giant_mold"))
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BIG_BROWN_MUSHROOM = NetherTrees
-            .PATCH_BIG_BROWN_MUSHROOM
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(6)
-            .onceEvery(2)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedConfiguredFeatureKey BIG_RED_MUSHROOM = PlacedFeatureManager
+            .createKey(NetherTrees.PATCH_BIG_RED_MUSHROOM)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> OLD_RED_MUSHROOM = NetherTrees
-            .OLD_RED_MUSHROOM
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(5)
-            .onceEvery(3)
-            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
-            .build();
+    public static PlacedConfiguredFeatureKey BIG_BROWN_MUSHROOM = PlacedFeatureManager
+            .createKey(NetherTrees.PATCH_BIG_BROWN_MUSHROOM)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> OLD_BROWN_MUSHROOM = NetherTrees
-            .OLD_BROWN_MUSHROOM
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(4)
-            .onceEvery(3)
-            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
-            .build();
+    public static PlacedFeatureKey OLD_RED_MUSHROOM = PlacedFeatureManager
+            .createKey(C.id("old_red_mushroom"))
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> SOUL_LILY = NetherTrees
-            .PATCH_SOUL_LILY
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(6)
-            .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
-            .build();
+    public static PlacedFeatureKey OLD_BROWN_MUSHROOM = PlacedFeatureManager
+            .createKey(C.id("old_brown_mushroom"))
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature WART_TREE = NetherTrees
-            .WART_TREE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(14)
-            .onceEvery(3)
-            .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
-            .build();
+    public static PlacedFeatureKey SOUL_LILY = PlacedFeatureManager
+            .createKey(C.id("patch_soul_lily"))
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature WILLOW_TREE = NetherTrees
-            .WILLOW_TREE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(14)
-            .onceEvery(3)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedConfiguredFeatureKey WART_TREE = PlacedFeatureManager
+            .createKey(NetherTrees.WART_TREE)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature OLD_WILLOW_TREE = NetherTrees
-            .OLD_WILLOW_TREE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(14)
-            .onceEvery(16)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedConfiguredFeatureKey WILLOW_TREE = PlacedFeatureManager
+            .createKey(NetherTrees.WILLOW_TREE)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature SAKURA_TREE = NetherTrees
-            .SAKURA_TREE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherCeiling(5)
-            .onceEvery(6)
-            .isEmptyAndUnderNetherGround()
-            .build();
+    public static PlacedFeatureKey OLD_WILLOW_TREE = PlacedFeatureManager
+            .createKey(C.id("tree_old_willow"))
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature ANCHOR_TREE = NetherTrees
-            .ANCHOR_TREE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherCeiling(5)
-            .isEmptyAndUnderNetherGround()
-            .onceEvery(15)
-            .build();
+    public static PlacedConfiguredFeatureKey SAKURA_TREE = PlacedFeatureManager
+            .createKey(NetherTrees.SAKURA_TREE)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature ANCHOR_TREE_SPARSE = NetherTrees
-            .ANCHOR_TREE
-            .place(BN.id("anchor_tree_sparse"))
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .onlyInBiome()
-            .count(1)
-            .randomHeight4FromFloorCeil()
-            .findSolidCeil(5)
-            .isEmptyAndUnderNetherGround()
-            .onceEvery(7)
-            .build();
+    public static PlacedConfiguredFeatureKey ANCHOR_TREE = PlacedFeatureManager
+            .createKey(NetherTrees.ANCHOR_TREE)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature ANCHOR_TREE_BRANCH = NetherTrees
-            .ANCHOR_TREE_BRANCH
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherCeiling(3)
-            .isEmptyAndUnderNetherGround()
-            .onceEvery(11)
-            .build();
+    public static PlacedConfiguredFeatureKey ANCHOR_TREE_SPARSE = PlacedFeatureManager
+            .createKey(C.id("anchor_tree_sparse"), NetherTrees.ANCHOR_TREE)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static BCLFeature ANCHOR_TREE_ROOT = NetherTrees
-            .ANCHOR_TREE_ROOT
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherCeiling(2)
-            .onceEvery(5)
-            .isEmptyAndUnderNetherGround()
-            .build();
+    public static PlacedConfiguredFeatureKey ANCHOR_TREE_BRANCH = PlacedFeatureManager
+            .createKey(NetherTrees.ANCHOR_TREE_BRANCH)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> BIG_WARPED_TREE = NetherTrees
-            .BIG_WARPED_TREE
-            .place()
-            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(6)
-            .onceEvery(2)
-            .isEmptyAndOnNetherGround()
-            .build();
+    public static PlacedConfiguredFeatureKey ANCHOR_TREE_ROOT = PlacedFeatureManager
+            .createKey(NetherTrees.ANCHOR_TREE_ROOT)
+            .setDecoration(VEGETAL_DECORATION);
 
-    public static void ensureStaticInitialization() {
-    }
+    public static PlacedFeatureKey BIG_WARPED_TREE = PlacedFeatureManager
+            .createKey(C.id("big_warped_tree"))
+            .setDecoration(VEGETAL_DECORATION);
 }

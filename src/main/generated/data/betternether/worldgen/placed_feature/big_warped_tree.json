@@ -1,5 +1,48 @@
 {
-  "feature": "betternether:big_warped_tree",
+  "feature": {
+    "type": "wover:template",
+    "config": {
+      "structures": {
+        "items": [
+          {
+            "value": {
+              "location": "betternether:trees/warped_tree_01",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/warped_tree_02",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/warped_tree_03",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/warped_tree_04",
+              "offset_y": -1
+            },
+            "weight": 1.0
+          },
+          {
+            "value": {
+              "location": "betternether:trees/warped_tree_05",
+              "offset_y": -3
+            },
+            "weight": 1.0
+          }
+        ]
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -35,7 +78,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

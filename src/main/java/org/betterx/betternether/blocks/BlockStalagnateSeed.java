@@ -1,14 +1,16 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
+import org.betterx.wover.feature.api.configured.ConfiguredFeatureKey;
+import org.betterx.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -22,6 +24,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import org.jetbrains.annotations.NotNull;
+
 public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack, BehaviourSapling {
     public static final int MAX_SEARCH_LENGTH = 25; // 27
     public static final int MIN_LENGTH = 3; // 5
@@ -32,9 +36,9 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     public static final BooleanProperty TOP = BooleanProperty.create("top");
 
     public BlockStalagnateSeed() {
-        super((BlockState state) -> growsDownward(state)
-                ? NetherTrees.STALAGNATE_DOWN
-                : NetherTrees.STALAGNATE);
+        super((level, pos, state, rnd) -> growsDownward(state)
+                ? NetherTrees.STALAGNATE_DOWN.placeInWorld(WorldState.registryAccess(), level, pos, rnd)
+                : NetherTrees.STALAGNATE.placeInWorld(WorldState.registryAccess(), level, pos, rnd));
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }
 
@@ -95,11 +99,19 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     }
 
     @Override
-    protected BCLConfigureFeature getConfiguredFeature(BlockState state) {
+    protected boolean growFeature(
+            @NotNull ServerLevel world,
+            @NotNull BlockPos pos,
+            @NotNull BlockState state,
+            @NotNull RandomSource random
+    ) {
+        if (WorldState.registryAccess() == null) return false;
+        final ConfiguredFeatureKey<?> featureHolder;
         if (growsDownward(state)) {
-            return NetherTrees.STALAGNATE_DOWN;
+            featureHolder = NetherTrees.STALAGNATE_DOWN;
         } else {
-            return NetherTrees.STALAGNATE;
+            featureHolder = NetherTrees.STALAGNATE;
         }
+        return featureHolder.placeInWorld(WorldState.registryAccess(), world, pos, random);
     }
 }

@@ -21,12 +21,11 @@
       }
     },
     {
-      "type": "bclib:solid_in_dir",
+      "type": "wover:solid_in_dir",
       "dir": [
         "up"
       ],
       "dist": 5,
-      "offset_in_dir": 0,
       "random_select": false
     },
     {
@@ -37,7 +36,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         1,

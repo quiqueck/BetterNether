@@ -140,10 +140,6 @@ public class NetherVegetation {
     public static final ConfiguredFeatureKey<ForSimpleBlock> MOSS_COVER =
             ConfiguredFeatureManager.simple(C.id("patch_moss_cover"));
 
-    public static void ensureStaticInitialization() {
-
-    }
-
     public static void setupBonemealFeatures() {
         NetherBlocks.NETHERRACK_MOSS.setVegetationFeature(BONEMEAL_NETHERRACK_MOSS);
         NetherBlocks.NETHER_MYCELIUM.setVegetationFeature(BONEMEAL_NETHER_MYCELIUM);

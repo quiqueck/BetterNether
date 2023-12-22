@@ -45,7 +45,7 @@ public class UpsideDownForest extends NetherBiomeConfig {
                .feature(NetherVegetationPlaced.SAKURA_BUSH)
                .feature(NetherVegetationPlaced.MOSS_COVER)
                .feature(NetherVinesPlaced.NEON_EQUISETUM)
-               .feature(NetherVinesPlaced.WHISPERING_GOURD_VINE)
+               .feature(NetherVinesPlaced.PATCH_WHISPERING_GOURD_VINE)
                .feature(NetherVegetationPlaced.HOOK_MUSHROOM)
                .feature(NetherObjectsPlaced.STALACTITE)
                .feature(NetherVegetationPlaced.WALL_LUCIS)

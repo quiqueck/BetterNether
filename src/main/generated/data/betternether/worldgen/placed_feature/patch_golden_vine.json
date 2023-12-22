@@ -24,8 +24,9 @@
       "type": "minecraft:biome"
     },
     {
-      "type": "bclib:under_every_layer",
-      "min": 4
+      "type": "wover:every_layer",
+      "min": 4,
+      "top": false
     },
     {
       "type": "minecraft:biome"

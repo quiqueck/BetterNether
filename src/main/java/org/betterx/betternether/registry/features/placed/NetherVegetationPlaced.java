@@ -135,7 +135,4 @@ public class NetherVegetationPlaced {
     public static final PlacedFeatureKey MOSS_COVER = PlacedFeatureManager
             .createKey(C.id("patch_moss_cover"))
             .setDecoration(VEGETAL_DECORATION);
-
-    public static void ensureStaticInitialization() {
-    }
 }

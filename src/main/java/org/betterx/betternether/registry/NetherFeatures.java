@@ -10,10 +10,6 @@ import org.betterx.bclib.api.v3.levelgen.features.config.TemplateFeatureConfig;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.registry.features.configured.NetherVegetation;
-import org.betterx.betternether.registry.features.configured.NetherVines;
-import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
-import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityStructure;
@@ -275,10 +271,6 @@ public class NetherFeatures {
     }
 
     public static void register() {
-        NetherVegetation.ensureStaticInitialization();
-        NetherVegetationPlaced.ensureStaticInitialization();
-        NetherVines.ensureStaticInitialization();
-        NetherVinesPlaced.ensureStaticInitialization();
         LifeCycleAPI.onLevelLoad(NetherFeatures::onWorldLoad);
     }
 

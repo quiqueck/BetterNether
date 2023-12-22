@@ -4,6 +4,7 @@ import org.betterx.bclib.behaviours.interfaces.BehaviourSeed;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 import org.betterx.betternether.registry.features.configured.NetherVines;
+import org.betterx.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,7 +46,7 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock,
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        NetherVines.EYE_VINE.placeInWorld(level, pos, random);
+        NetherVines.EYE_VINE.placeInWorld(WorldState.registryAccess(), level, pos, random);
     }
 
     @Override

@@ -20,6 +20,7 @@ import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
+import org.betterx.wover.state.api.WorldState;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
@@ -703,12 +704,12 @@ public class NetherBlocks extends BlockRegistry {
     // DEFERED BLOCKS //
     public static final Block LUMABUS_SEED = registerBlock(
             "lumabus_seed",
-            new BlockLumabusSeed(LUMABUS_VINE, NetherVines.LUMABUS_VINE)
+            new BlockLumabusSeed(LUMABUS_VINE, () -> NetherVines.LUMABUS_VINE.getHolder(WorldState.registryAccess()))
     );
 
     public static final Block GOLDEN_LUMABUS_SEED = registerBlock(
             "golden_lumabus_seed",
-            new BlockLumabusSeed(GOLDEN_LUMABUS_VINE, NetherVines.GOLDEN_LUMABUS_VINE)
+            new BlockLumabusSeed(GOLDEN_LUMABUS_VINE, () -> NetherVines.GOLDEN_LUMABUS_VINE.getHolder(WorldState.registryAccess()))
     );
 
     protected NetherBlocks() {

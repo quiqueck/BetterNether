@@ -25,8 +25,8 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
         super(modCore, modCore.id("vine"));
     }
 
-    @Overrideprotected
-    void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+    @Override
+    protected void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
         NetherVines.LUMABUS_VINE
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)

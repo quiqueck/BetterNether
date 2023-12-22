@@ -326,6 +326,56 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .tries(120)
                 .spreadXZ(8)
                 .register();
+
+        NetherVegetation.BONEMEAL_NETHERRACK_MOSS
+                .bootstrap(ctx)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
+                .addAllStatesFor(BlockInkBush.AGE, NetherBlocks.INK_BUSH, 80)
+                .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 40)
+                .add(NetherBlocks.NETHER_GRASS, 200)
+                .addAllStatesFor(BlockBlackApple.AGE, NetherBlocks.BLACK_APPLE, 50)
+                .add(NetherBlocks.MAT_WART.getSeed(), 60)
+                .register();
+        NetherVegetation.BONEMEAL_NETHER_MYCELIUM
+                .bootstrap(ctx)
+                .add(NetherBlocks.GRAY_MOLD, 200)
+                .add(NetherBlocks.RED_MOLD, 180)
+                .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 40)
+                .add(Blocks.RED_MUSHROOM, 60)
+                .add(Blocks.BROWN_MUSHROOM, 60)
+                .add(Blocks.CRIMSON_FUNGUS, 80)
+                .add(Blocks.WARPED_FUNGUS, 80)
+                .add(NetherBlocks.SEPIA_BONE_GRASS, 30)
+                .add(NetherBlocks.BONE_GRASS, 30)
+                .add(NetherBlocks.JUNGLE_PLANT, 30)
+                .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
+                .register();
+        NetherVegetation.BONEMEAL_JUNGLE_GRASS
+                .bootstrap(ctx)
+                .addAllStatesFor(BlockEggPlant.AGE, NetherBlocks.EGG_PLANT, 80)
+                .add(NetherBlocks.JUNGLE_PLANT, 80)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
+                .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
+                .register();
+        NetherVegetation.BONEMEAL_MUSHROOM_GRASS
+                .bootstrap(ctx)
+                .add(NetherBlocks.BONE_GRASS, 180)
+                .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
+                .register();
+        NetherVegetation.BONEMEAL_SEPIA_MUSHROOM_GRASS
+                .bootstrap(ctx)
+                .add(NetherBlocks.SEPIA_BONE_GRASS, 180)
+                .register();
+        NetherVegetation.BONEMEAL_SWAMPLAND_GRASS
+                .bootstrap(ctx)
+                .add(NetherBlocks.SOUL_VEIN, 80)
+                .add(NetherBlocks.SWAMP_GRASS, 200)
+                .add(NetherBlocks.FEATHER_FERN, 80)
+                .register();
+        NetherVegetation.BONEMEAL_CEILING_MUSHROOMS
+                .bootstrap(ctx)
+                .add(NetherBlocks.NETHER_GRASS, 80)
+                .register();
     }
 
     @Override

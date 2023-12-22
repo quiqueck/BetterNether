@@ -36,3 +36,7 @@ CurseForge/
 /CHANGES.md
 /modrinth.json
 /tools/node_modules/
+/tools/Configuration.java
+/tools/ConfigurationDataProvider.java
+/tools/DataProvider.java
+/tools/Placements.java

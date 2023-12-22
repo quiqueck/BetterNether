@@ -1,12 +1,7 @@
 package org.betterx.betternether.registry.features.configured;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
-import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
-import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
-import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.NetherSakuraBushFeature;
@@ -18,65 +13,25 @@ import org.betterx.wover.feature.api.configured.configurators.*;
 import org.betterx.wover.state.api.WorldState;
 
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.NetherForestVegetationFeature;
-import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.NetherForestVegetationConfig;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
 public class NetherVegetation {
     private static final ModCore C = BetterNether.C;
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_NETHERRACK_MOSS = BCLFeatureBuilder
-            .startBonemealPatch(BN.id("bonemeal_netherrack_moss"))
-            .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
-            .addAllStatesFor(BlockInkBush.AGE, NetherBlocks.INK_BUSH, 80)
-            .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 40)
-            .add(NetherBlocks.NETHER_GRASS, 200)
-            .addAllStatesFor(BlockBlackApple.AGE, NetherBlocks.BLACK_APPLE, 50)
-            .add(NetherBlocks.MAT_WART.getSeed(), 60)
-            .build();
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_NETHER_MYCELIUM = BCLFeatureBuilder
-            .startBonemealPatch(BN.id("temp_bonemeal_nether_mycelium"))
-            .add(NetherBlocks.GRAY_MOLD, 200)
-            .add(NetherBlocks.RED_MOLD, 180)
-            .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 40)
-            .add(Blocks.RED_MUSHROOM, 60)
-            .add(Blocks.BROWN_MUSHROOM, 60)
-            .add(Blocks.CRIMSON_FUNGUS, 80)
-            .add(Blocks.WARPED_FUNGUS, 80)
-            .add(NetherBlocks.SEPIA_BONE_GRASS, 30)
-            .add(NetherBlocks.BONE_GRASS, 30)
-            .add(NetherBlocks.JUNGLE_PLANT, 30)
-            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
-            .build();
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_JUNGLE_GRASS = BCLFeatureBuilder
-            .startBonemealPatch(BN.id("bonemeal_jungle_grass"))
-            .addAllStatesFor(BlockEggPlant.AGE, NetherBlocks.EGG_PLANT, 80)
-            .add(NetherBlocks.JUNGLE_PLANT, 80)
-            .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
-            .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
-            .build();
-    public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> BONEMEAL_MUSHROOM_GRASS = BCLFeatureBuilder
-            .startBonemealNetherVegetation(BN.id("bonemeal_mushroom_grass"))
-            .add(NetherBlocks.BONE_GRASS, 180)
-            .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
-            .build();
-    public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> BONEMEAL_SEPIA_MUSHROOM_GRASS = BCLFeatureBuilder
-            .startBonemealNetherVegetation(BN.id("bonemeal_sepia_mushroom_grass"))
-            .add(NetherBlocks.SEPIA_BONE_GRASS, 180)
-            .build();
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_SWAMPLAND_GRASS = BCLFeatureBuilder
-            .startBonemealPatch(BN.id("bonemeal_swampland_grass"))
-            .add(NetherBlocks.SOUL_VEIN, 80)
-            .add(NetherBlocks.SWAMP_GRASS, 200)
-            .add(NetherBlocks.FEATHER_FERN, 80)
-            .build();
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_CEILING_MUSHROOMS = BCLFeatureBuilder
-            .startBonemealPatch(BN.id("bonemeal_ceiling_mushrooms"))
-            .add(NetherBlocks.NETHER_GRASS, 80)
-            .build();
+    public static final ConfiguredFeatureKey<WeightedBlockPatch> BONEMEAL_NETHERRACK_MOSS =
+            ConfiguredFeatureManager.bonemeal(C.id("bonemeal_netherrack_moss"));
+    public static final ConfiguredFeatureKey<WeightedBlockPatch> BONEMEAL_NETHER_MYCELIUM =
+            ConfiguredFeatureManager.bonemeal(C.id("bonemeal_nether_mycelium"));
+    public static final ConfiguredFeatureKey<WeightedBlockPatch> BONEMEAL_JUNGLE_GRASS =
+            ConfiguredFeatureManager.bonemeal(C.id("bonemeal_jungle_grass"));
+    public static final ConfiguredFeatureKey<NetherForrestVegetation> BONEMEAL_MUSHROOM_GRASS =
+            ConfiguredFeatureManager.bonemealNetherForrest(C.id("bonemeal_mushroom_grass"));
+    public static final ConfiguredFeatureKey<NetherForrestVegetation> BONEMEAL_SEPIA_MUSHROOM_GRASS =
+            ConfiguredFeatureManager.bonemealNetherForrest(C.id("bonemeal_sepia_mushroom_grass"));
+    public static final ConfiguredFeatureKey<WeightedBlockPatch> BONEMEAL_SWAMPLAND_GRASS =
+            ConfiguredFeatureManager.bonemeal(C.id("bonemeal_swampland_grass"));
+    public static final ConfiguredFeatureKey<WeightedBlockPatch> BONEMEAL_CEILING_MUSHROOMS =
+            ConfiguredFeatureManager.bonemeal(C.id("bonemeal_ceiling_mushrooms"));
     public static final ConfiguredFeatureKey<AsMultiPlaceRandomSelect> VEGETATION_MUSHROOM_FORREST =
             ConfiguredFeatureManager.multiPlaceRandomFeature(C.id("vegetation_mushroom_forrest"));
     public static final ConfiguredFeatureKey<WithConfiguration<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration>> JELLYFISH_MUSHROOM =
@@ -88,7 +43,7 @@ public class NetherVegetation {
     public static final ConfiguredFeatureKey<WithConfiguration<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration>> WALL_LUCIS =
             ConfiguredFeatureManager.configuration(C.id("patch_lucis"), NetherFeatures.LUCIS);
     public static final ConfiguredFeatureKey<WeightedBlockPatch> BONEMEAL_SOUL_SOIL =
-            ConfiguredFeatureManager.bonemealPatch(C.id("bonemeal_soul_soil"));
+            ConfiguredFeatureManager.bonemeal(C.id("bonemeal_soul_soil"));
     public static final ConfiguredFeatureKey<WeightedBlock> VEGETATION_MAGMA_LAND =
             ConfiguredFeatureManager.randomBlock(C.id("vegetation_magma_land"));
     public static final ConfiguredFeatureKey<WeightedBlock> VEGETATION_GRASSLANDS =
@@ -141,13 +96,13 @@ public class NetherVegetation {
             ConfiguredFeatureManager.simple(C.id("patch_moss_cover"));
 
     public static void setupBonemealFeatures() {
-        NetherBlocks.NETHERRACK_MOSS.setVegetationFeature(BONEMEAL_NETHERRACK_MOSS);
-        NetherBlocks.NETHER_MYCELIUM.setVegetationFeature(BONEMEAL_NETHER_MYCELIUM);
-        NetherBlocks.JUNGLE_GRASS.setVegetationFeature(BONEMEAL_JUNGLE_GRASS);
-        NetherBlocks.MUSHROOM_GRASS.setVegetationFeature(BONEMEAL_MUSHROOM_GRASS);
-        NetherBlocks.SEPIA_MUSHROOM_GRASS.setVegetationFeature(BONEMEAL_SEPIA_MUSHROOM_GRASS);
-        NetherBlocks.SWAMPLAND_GRASS.setVegetationFeature(BONEMEAL_SWAMPLAND_GRASS);
-        NetherBlocks.CEILING_MUSHROOMS.setVegetationFeature(BONEMEAL_CEILING_MUSHROOMS);
+        NetherBlocks.NETHERRACK_MOSS.setVegetationFeature(() -> BONEMEAL_NETHERRACK_MOSS.getHolder(WorldState.registryAccess()));
+        NetherBlocks.NETHER_MYCELIUM.setVegetationFeature(() -> BONEMEAL_NETHER_MYCELIUM.getHolder(WorldState.registryAccess()));
+        NetherBlocks.JUNGLE_GRASS.setVegetationFeature(() -> BONEMEAL_JUNGLE_GRASS.getHolder(WorldState.registryAccess()));
+        NetherBlocks.MUSHROOM_GRASS.setVegetationFeature(() -> BONEMEAL_MUSHROOM_GRASS.getHolder(WorldState.registryAccess()));
+        NetherBlocks.SEPIA_MUSHROOM_GRASS.setVegetationFeature(() -> BONEMEAL_SEPIA_MUSHROOM_GRASS.getHolder(WorldState.registryAccess()));
+        NetherBlocks.SWAMPLAND_GRASS.setVegetationFeature(() -> BONEMEAL_SWAMPLAND_GRASS.getHolder(WorldState.registryAccess()));
+        NetherBlocks.CEILING_MUSHROOMS.setVegetationFeature(() -> BONEMEAL_CEILING_MUSHROOMS.getHolder(WorldState.registryAccess()));
 
         BonemealAPI.INSTANCE.addSpreadableFeatures(Blocks.SOUL_SOIL, () -> BONEMEAL_SOUL_SOIL.getHolder(WorldState.registryAccess()));
         BonemealAPI.INSTANCE.addSpreadableFeatures(Blocks.SOUL_SAND, () -> BONEMEAL_SOUL_SOIL.getHolder(WorldState.registryAccess()));

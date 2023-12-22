@@ -2,9 +2,9 @@ package org.betterx.betternether.world.biomes;
 
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherOresPlaced;
 import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -28,7 +28,7 @@ public class OldFungiwoods extends NetherBiomeConfig {
                .particles(ParticleTypes.MYCELIUM, 0.1F)
                .structure(BiomeTags.HAS_BASTION_REMNANT)
                .structure(BiomeTags.HAS_NETHER_FORTRESS)
-               .feature(NetherFeatures.NETHER_RUBY_ORE)
+               .feature(NetherOresPlaced.NETHER_RUBY_ORE)
                .feature(NetherTreesPlaced.OLD_RED_MUSHROOM)
                .feature(NetherTreesPlaced.OLD_BROWN_MUSHROOM)
                .feature(NetherTreesPlaced.BIG_RED_MUSHROOM)

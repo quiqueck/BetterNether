@@ -2,8 +2,8 @@ package org.betterx.betternether.world.biomes;
 
 
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherOresPlaced;
 import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -42,7 +42,7 @@ public class SoulPlain extends NetherBiomeConfig {
                .particles(ParticleTypes.PORTAL, 0.02F)
                .structure(BiomeTags.HAS_NETHER_FOSSIL)
                .feature(NetherTerrainPlaced.REPLACE_SOUL_SANDSTONE)
-               .feature(NetherFeatures.NETHER_RUBY_ORE_SOUL)
+               .feature(NetherOresPlaced.NETHER_RUBY_ORE_SOUL)
                .feature(NetherObjectsPlaced.BASALT_STALAGMITE_SPARSE)
                .feature(NetherVegetationPlaced.BLACK_BUSH)
                .feature(NetherVegetationPlaced.VEGETATION_SOUL_PLAIN)

@@ -2,8 +2,8 @@ package org.betterx.betternether.world.biomes;
 
 
 import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherOresPlaced;
 import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -28,7 +28,7 @@ public class WartForestEdge extends NetherBiomeConfig {
                .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
                .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-               .feature(NetherFeatures.NETHER_RUBY_ORE)
+               .feature(NetherOresPlaced.NETHER_RUBY_ORE)
                .feature(NetherTerrainPlaced.REPLACE_SOUL_SANDSTONE)
                .feature(NetherObjectsPlaced.BASALT_STALAGMITE)
                .feature(NetherVegetationPlaced.BLACK_BUSH)

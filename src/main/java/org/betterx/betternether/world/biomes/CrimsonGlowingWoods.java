@@ -1,11 +1,7 @@
 package org.betterx.betternether.world.biomes;
 
 import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
-import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
-import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
-import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
+import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
@@ -33,7 +29,7 @@ public final class CrimsonGlowingWoods extends NetherBiomeConfig {
                .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
-               .feature(NetherFeatures.NETHER_RUBY_ORE)
+               .feature(NetherOresPlaced.NETHER_RUBY_ORE)
                .feature(NetherTreesPlaced.CRIMSON_GLOWING_TREE)
                .feature(NetherObjectsPlaced.STALAGMITE)
                .feature(NetherVegetationPlaced.WART_BUSH)

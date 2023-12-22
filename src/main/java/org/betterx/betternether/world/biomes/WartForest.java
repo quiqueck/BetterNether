@@ -5,11 +5,7 @@ import org.betterx.betternether.blocks.BlockSoulSandstone;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
-import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
-import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
-import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
@@ -38,7 +34,7 @@ public class WartForest extends NetherBiomeConfig {
                .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                .particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
-               .feature(NetherFeatures.NETHER_RUBY_ORE)
+               .feature(NetherOresPlaced.NETHER_RUBY_ORE)
                .feature(NetherTerrainPlaced.REPLACE_SOUL_SANDSTONE)
                .feature(NetherObjectsPlaced.WART_DEADWOOD)
                .feature(NetherTreesPlaced.SOUL_LILY)

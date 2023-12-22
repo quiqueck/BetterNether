@@ -1,0 +1,27 @@
+{
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "betternether:nether_ruby_ore"
+    ]
+  ],
+  "predicate": {
+    "type": "wover:or",
+    "predicates": [
+      {
+        "type": "wover:is_biome",
+        "biome_key": "minecraft:crimson_forest"
+      },
+      {
+        "type": "wover:is_biome",
+        "biome_key": "minecraft:warped_forest"
+      }
+    ]
+  }
+}

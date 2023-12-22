@@ -1,0 +1,23 @@
+{
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "betternether:nether_ruby_large_ore"
+    ]
+  ],
+  "predicate": {
+    "type": "wover:or",
+    "predicates": [
+      {
+        "type": "wover:is_biome",
+        "biome_key": "minecraft:soul_sand_valley"
+      }
+    ]
+  }
+}

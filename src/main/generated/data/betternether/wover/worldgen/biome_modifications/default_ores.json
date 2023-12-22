@@ -1,0 +1,33 @@
+{
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "betternether:cincinnasite_ore",
+      "betternether:nether_ruby_rare_ore",
+      "betternether:nether_lapis_ore",
+      "betternether:nether_redstone_ore"
+    ]
+  ],
+  "predicate": {
+    "type": "wover:and",
+    "predicates": [
+      {
+        "type": "wover:in_dimension",
+        "dimension_key": "minecraft:the_nether"
+      },
+      {
+        "type": "wover:not",
+        "predicate": {
+          "type": "wover:is_namespace",
+          "namespace": "betternether"
+        }
+      }
+    ]
+  }
+}

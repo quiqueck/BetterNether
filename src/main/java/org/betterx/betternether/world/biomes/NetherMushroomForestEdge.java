@@ -2,8 +2,8 @@ package org.betterx.betternether.world.biomes;
 
 
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherOresPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.providers.NetherMushroomForestEdgeNumericProvider;
@@ -25,7 +25,7 @@ public class NetherMushroomForestEdge extends NetherBiomeConfig {
                .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
                .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-               .feature(NetherFeatures.NETHER_RUBY_ORE)
+               .feature(NetherOresPlaced.NETHER_RUBY_ORE)
                .feature(NetherObjectsPlaced.STALAGMITE)
                .feature(NetherVegetationPlaced.VEGETATION_MUSHROOM_FORREST_EDGE)
                .addNetherClimate(0.0f, 0.7f, 0.1f)

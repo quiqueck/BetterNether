@@ -1,5 +1,5 @@
 {
-  "feature": "betternether:vegetation_nether_jungle",
+  "feature": "betternether:vegetation_jungle",
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -31,7 +31,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

@@ -14,7 +14,7 @@ import org.betterx.wover.feature.api.configured.configurators.WithConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public class NetherTrees {
-    private static ModCore C = BetterNether.C;
+    private static final ModCore C = BetterNether.C;
 
     public static final ConfiguredFeatureKey<WithConfiguration<RubeusTreeFeature, NaturalTreeConfiguration>> RUBEUS_TREE
             = ConfiguredFeatureManager.configuration(C.id("tree_rubeus"), NetherFeatures.RUBEUS_TREE);
@@ -35,10 +35,7 @@ public class NetherTrees {
             = ConfiguredFeatureManager.blockColumn(C.id("patch_big_red_mushroom"));
 
     public static final ConfiguredFeatureKey<WithConfiguration<BigBrownMushroomFeature, NoneFeatureConfiguration>> PATCH_BIG_BROWN_MUSHROOM
-            = ConfiguredFeatureManager.configuration(
-            C.id("patch_big_brown_mushroom"),
-            NetherFeatures.BIG_BROWN_MUSHROOM
-    );
+            = ConfiguredFeatureManager.configuration(C.id("patch_big_brown_mushroom"), NetherFeatures.BIG_BROWN_MUSHROOM);
 
     public static final ConfiguredFeatureKey<WithConfiguration<WartTreeFeature, NaturalTreeConfiguration>> WART_TREE
             = ConfiguredFeatureManager.configuration(C.id("tree_wart"), NetherFeatures.WART_TREE);

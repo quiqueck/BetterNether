@@ -42,7 +42,7 @@
           }
         },
         {
-          "type": "bclib:is",
+          "type": "wover:is",
           "offset": [
             0,
             -1,

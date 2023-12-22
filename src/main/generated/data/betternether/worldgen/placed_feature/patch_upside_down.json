@@ -24,7 +24,7 @@
       "type": "minecraft:biome"
     },
     {
-      "type": "bclib:solid_in_dir",
+      "type": "wover:solid_in_dir",
       "dir": [
         "north",
         "east",

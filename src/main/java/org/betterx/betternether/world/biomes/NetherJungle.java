@@ -33,7 +33,7 @@ public class NetherJungle extends NetherBiomeConfig {
                .feature(NetherObjectsPlaced.STALAGMITE)
                .feature(NetherVegetationPlaced.RUBEUS_BUSH)
                .feature(NetherVegetationPlaced.VEGETATION_JUNGLE)
-               .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
+               .feature(NetherVegetationPlaced.PATCH_JELLYFISH_MUSHROOM)
                .feature(NetherVinesPlaced.BLACK_VINE)
                .feature(NetherVinesPlaced.BLOOMING_VINE)
                .feature(NetherVinesPlaced.EYE_VINE)

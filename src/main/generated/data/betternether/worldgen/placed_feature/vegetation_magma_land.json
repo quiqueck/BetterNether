@@ -21,10 +21,7 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:biome"
-    },
-    {
-      "type": "bclib:on_every_layer",
+      "type": "wover:every_layer",
       "min": 4
     },
     {
@@ -38,7 +35,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

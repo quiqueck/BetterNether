@@ -8,6 +8,7 @@
     "BlockBehaviourAccessor",
     "BlockBehaviourMixin",
     "BrewingRecipeRegistryMixin",
+    "ChunkGeneratorDebugMixin",
     "CraftingScreenHandlerMixin",
     "DefaultAttributeRegistryMixin",
     "DeltaFeatureMixin",

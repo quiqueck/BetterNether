@@ -1,5 +1,22 @@
 {
-  "feature": "betternether:vegetation_sulfuric_bone_reef",
+  "feature": {
+    "type": "minecraft:nether_forest_vegetation",
+    "config": {
+      "spread_height": 4,
+      "spread_width": 8,
+      "state_provider": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "data": {
+              "Name": "betternether:sepia_bone_grass"
+            },
+            "weight": 180
+          }
+        ]
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",

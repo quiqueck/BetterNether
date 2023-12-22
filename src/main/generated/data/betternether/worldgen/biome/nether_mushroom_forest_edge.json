@@ -65,7 +65,7 @@
       "minecraft:spring_lava",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
-      "betternether:vegetation_mushroom_forrest"
+      "betternether:vegetation_mushroom_forrest_edge"
     ]
   ],
   "has_precipitation": false,

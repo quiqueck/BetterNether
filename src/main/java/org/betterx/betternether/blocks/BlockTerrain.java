@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
@@ -8,6 +9,7 @@ import org.betterx.bclib.util.LootUtil;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -27,9 +30,10 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.Collections;
 import java.util.List;
+import org.jetbrains.annotations.Nullable;
 
 public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyliumLike, BehaviourStone {
-    protected BCLConfigureFeature<? extends Feature<?>, ?> vegetationFeature;
+    protected BonemealAPI.FeatureProvider vegetationFeature;
     public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
             SoundEvents.NETHERRACK_BREAK,
             SoundEvents.WART_BLOCK_STEP,
@@ -44,6 +48,10 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
     }
 
     public void setVegetationFeature(BCLConfigureFeature<? extends Feature<?>, ?> vegetationFeature) {
+        this.vegetationFeature = () -> vegetationFeature.configuredFeature;
+    }
+
+    public void setVegetationFeature(BonemealAPI.FeatureProvider vegetationFeature) {
         this.vegetationFeature = vegetationFeature;
     }
 
@@ -84,7 +92,7 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
     }
 
     @Override
-    public BCLConfigureFeature<? extends Feature<?>, ?> getCoverFeature() {
-        return vegetationFeature;
+    public @Nullable Holder<? extends ConfiguredFeature<?, ?>> getCoverFeature() {
+        return vegetationFeature.getFeature();
     }
 }

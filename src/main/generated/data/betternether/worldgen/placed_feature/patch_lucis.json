@@ -1,5 +1,24 @@
 {
-  "feature": "betternether:patch_lucis",
+  "feature": {
+    "type": "minecraft:random_patch",
+    "config": {
+      "feature": {
+        "feature": "betternether:patch_lucis",
+        "placement": [
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:air"
+            }
+          }
+        ]
+      },
+      "tries": 120,
+      "xz_spread": 12,
+      "y_spread": 10
+    }
+  },
   "placement": [
     {
       "type": "minecraft:count",
@@ -24,7 +43,7 @@
       "type": "minecraft:biome"
     },
     {
-      "type": "bclib:solid_in_dir",
+      "type": "wover:solid_in_dir",
       "dir": [
         "north",
         "east",
@@ -32,7 +51,6 @@
         "south"
       ],
       "dist": 16,
-      "offset_in_dir": 0,
       "random_select": false
     },
     {

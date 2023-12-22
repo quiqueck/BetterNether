@@ -32,7 +32,7 @@ public class NetherSwampland extends NetherBiomeConfig {
                .feature(NetherVegetationPlaced.BLACK_BUSH_SPARSE)
                .feature(NetherObjectsPlaced.STALAGMITE)
                .feature(NetherVegetationPlaced.VEGETATION_SWAMPLAND)
-               .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
+               .feature(NetherVegetationPlaced.PATCH_JELLYFISH_MUSHROOM)
                .feature(NetherObjectsPlaced.SMOKER)
                .feature(NetherVinesPlaced.BLACK_VINE)
                .feature(NetherVinesPlaced.BLOOMING_VINE)

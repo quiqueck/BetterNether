@@ -14,17 +14,12 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.RAW_G
 
 public class NetherTerrainPlaced {
     private static final ModCore C = BetterNether.C;
-
-
+    public static final PlacedConfiguredFeatureKey LAVA_PIT = PlacedFeatureManager
+            .createKey(NetherTerrain.LAVA_PITS.key.location(), NetherTerrain.LAVA_PITS)
+            .setDecoration(LAKES);
     public static final PlacedFeatureKey MAGMA_BLOBS = PlacedFeatureManager
             .createKey(C.id("magma_blob"))
             .setDecoration(LAKES);
-
-    public static final PlacedConfiguredFeatureKey LAVA_PIT = PlacedFeatureManager.createKey(
-            NetherTerrain.LAVA_PITS.key.location(),
-            NetherTerrain.LAVA_PITS
-    ).setDecoration(LAKES);
-
     public static final PlacedFeatureKey BASALT_OR_AIR = PlacedFeatureManager
             .createKey(C.id("basalt_or_air"))
             .setDecoration(LAKES);
@@ -35,18 +30,18 @@ public class NetherTerrainPlaced {
     public static final PlacedFeatureKey EXTEND_BASALT = PlacedFeatureManager
             .createKey(C.id("extend_basalt"))
             .setDecoration(LAKES);
-    public static final PlacedConfiguredFeatureKey LAVA_PITS_SPARSE = PlacedFeatureManager.createKey(C.id(
-            "lava_pits_sparse"), NetherTerrain.LAVA_PITS).setDecoration(LAKES);
-    public static final PlacedConfiguredFeatureKey LAVA_PITS_DENSE = PlacedFeatureManager.createKey(C.id(
-            "lava_pits_dense"), NetherTerrain.LAVA_PITS).setDecoration(LAKES);
-    public static final PlacedConfiguredFeatureKey LAVA_SWAMP = PlacedFeatureManager.createKey(
-            C.id("lava_swamp"),
-            NetherTerrain.LAVA_PITS
-    ).setDecoration(LAKES);
-    public static final PlacedConfiguredFeatureKey LAVA_TERRACE = PlacedFeatureManager.createKey(
-            C.id("lava_terrace"),
-            NetherTerrain.LAVA_PITS
-    ).setDecoration(LAKES);
+    public static final PlacedConfiguredFeatureKey LAVA_PITS_SPARSE = PlacedFeatureManager
+            .createKey(C.id("lava_pits_sparse"), NetherTerrain.LAVA_PITS)
+            .setDecoration(LAKES);
+    public static final PlacedConfiguredFeatureKey LAVA_PITS_DENSE = PlacedFeatureManager
+            .createKey(C.id("lava_pits_dense"), NetherTerrain.LAVA_PITS)
+            .setDecoration(LAKES);
+    public static final PlacedConfiguredFeatureKey LAVA_SWAMP = PlacedFeatureManager
+            .createKey(C.id("lava_swamp"), NetherTerrain.LAVA_PITS)
+            .setDecoration(LAKES);
+    public static final PlacedConfiguredFeatureKey LAVA_TERRACE = PlacedFeatureManager
+            .createKey(C.id("lava_terrace"), NetherTerrain.LAVA_PITS)
+            .setDecoration(LAKES);
 
     public static final PlacedFeatureKey FLOODED_LAVA_PIT_SURFACE = PlacedFeatureManager
             .createKey(C.id("flooded_lava_pit_surface"))

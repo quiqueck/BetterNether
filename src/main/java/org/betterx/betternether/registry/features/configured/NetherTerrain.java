@@ -9,6 +9,5 @@ import org.betterx.wover.feature.api.configured.configurators.ForSimpleBlock;
 public class NetherTerrain {
     private static final ModCore C = BetterNether.C;
 
-    public static final ConfiguredFeatureKey<ForSimpleBlock> LAVA_PITS
-            = ConfiguredFeatureManager.simple(C.id("lava_pit"));
+    public static final ConfiguredFeatureKey<ForSimpleBlock> LAVA_PITS = ConfiguredFeatureManager.simple(C.id("lava_pit"));
 }

@@ -1,12 +1,12 @@
 package org.betterx.betternether.commands;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
-import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.worlds.together.world.event.WorldBootstrap;
+import org.betterx.wover.state.api.WorldState;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
@@ -46,8 +46,6 @@ import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
-import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
@@ -333,14 +331,11 @@ public class CommandRegistry {
         System.out.println("Noise: " + min + " - " + max);
 
 
-        BCLFeature<RandomPatchFeature, RandomPatchConfiguration> feature = NetherVegetationPlaced.VEGETATION_GRASSLANDS;
-        PlacedFeature pFeature = level
-                .registryAccess()
-                .registryOrThrow(Registries.PLACED_FEATURE)
-                .getHolder(feature.getPlacedFeature().unwrapKey().get())
-                .get()
-                .value();
-        var placements = pFeature.placement();
+        Holder<PlacedFeature> pHolder = NetherVegetationPlaced.VEGETATION_GRASSLANDS
+                .getHolder(WorldState.registryAccess());
+        if (pHolder == null) return -1;
+        PlacedFeature pFeature = pHolder.value();
+        List<PlacementModifier> placements = pFeature.placement();
         PlacementContext pctx = new PlacementContext(
                 level,
                 level.getChunkSource().getGenerator(),

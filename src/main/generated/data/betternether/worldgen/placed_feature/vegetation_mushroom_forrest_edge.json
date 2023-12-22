@@ -18,10 +18,14 @@
     },
     {
       "type": "minecraft:count_on_every_layer",
-      "count": 12
+      "count": 8
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 2
     },
     {
       "type": "minecraft:block_predicate_filter",
@@ -31,7 +35,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

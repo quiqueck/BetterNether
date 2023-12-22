@@ -3,7 +3,7 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "bclib:place_block",
+        "type": "wover:place_block",
         "config": {
           "dir": [
             "north",

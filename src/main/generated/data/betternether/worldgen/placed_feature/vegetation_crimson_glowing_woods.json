@@ -1,5 +1,37 @@
 {
-  "feature": "betternether:vegetation_crimson_glowing_woods",
+  "feature": {
+    "type": "minecraft:nether_forest_vegetation",
+    "config": {
+      "spread_height": 4,
+      "spread_width": 8,
+      "state_provider": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "data": {
+              "Name": "minecraft:crimson_roots"
+            },
+            "weight": 120
+          },
+          {
+            "data": {
+              "Name": "minecraft:crimson_fungus"
+            },
+            "weight": 80
+          },
+          {
+            "data": {
+              "Name": "betternether:wart_seed",
+              "Properties": {
+                "facing": "up"
+              }
+            },
+            "weight": 80
+          }
+        ]
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -21,10 +53,7 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:biome"
-    },
-    {
-      "type": "bclib:on_every_layer",
+      "type": "wover:every_layer",
       "min": 4
     },
     {
@@ -38,7 +67,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

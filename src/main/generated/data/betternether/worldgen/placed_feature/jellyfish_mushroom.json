@@ -2,12 +2,8 @@
   "feature": "betternether:jellyfish_mushroom",
   "placement": [
     {
-      "type": "bclib:solid_in_dir",
-      "dir": [
-        "down"
-      ],
+      "type": "wover:solid_in_dir",
       "dist": 4,
-      "offset_in_dir": 0,
       "random_select": false
     },
     {
@@ -18,7 +14,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

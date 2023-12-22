@@ -1,5 +1,5 @@
 {
-  "feature": "betternether:vegetation_nether_poor_grassland",
+  "feature": "betternether:vegetation_nether_poor_grasslands",
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -35,7 +35,7 @@
       }
     },
     {
-      "type": "bclib:is",
+      "type": "wover:is",
       "offset": [
         0,
         -1,

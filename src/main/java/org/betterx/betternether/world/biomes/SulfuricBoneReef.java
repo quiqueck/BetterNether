@@ -28,7 +28,7 @@ public class SulfuricBoneReef extends NetherBiomeConfig {
                .feature(NetherObjectsPlaced.BONES)
                .feature(NetherObjectsPlaced.BONE_STALAGMITE)
                .feature(NetherVegetationPlaced.VEGETATION_SULFURIC_BONE_REEF)
-               .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
+               .feature(NetherVegetationPlaced.PATCH_JELLYFISH_MUSHROOM)
                .feature(NetherVinesPlaced.GOLDEN_LUMABUS_VINE)
                .feature(NetherObjectsPlaced.STALACTITE)
                .addNetherClimate(0.0f, 0.6f, 0.370f)

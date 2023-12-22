@@ -8,13 +8,12 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.configured.NetherObjects;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.WoverRegistryContentProvider;
+import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
 import org.betterx.wover.feature.api.configured.ConfiguredFeatureManager;
 import org.betterx.wover.feature.api.features.config.PillarFeatureConfig;
 import org.betterx.wover.feature.api.placed.modifiers.ExtendXYZ;
 
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ConstantFloat;
@@ -23,17 +22,54 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkShriekerBlock;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-public class PlacedObjectFeatureDataProvider extends WoverRegistryContentProvider<PlacedFeature> {
-    public PlacedObjectFeatureDataProvider(
-            ModCore modCore
-    ) {
-        super(modCore, "Placed Object Features", Registries.PLACED_FEATURE);
+public class ObjectFeatureDataProvider extends WoverFeatureProvider {
+    public ObjectFeatureDataProvider(ModCore modCore) {
+        super(modCore, modCore.id("objects"));
     }
 
     @Override
-    protected void bootstrap(BootstapContext<PlacedFeature> ctx) {
+    protected void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+        NetherObjects.PATCH_BASALT_STALACTITE
+                .bootstrap(ctx)
+                .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                .direction(Direction.DOWN)
+                .blockState(NetherBlocks.BASALT_STALACTITE)
+                .maxHeight(BiasedToBottomInt.of(4, 11))
+                .inlinePlace()
+                .isEmptyAndUnder(org.betterx.wover.block.api.predicate.BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
+                .inRandomPatch()
+                .register();
+
+        NetherObjects.PATCH_BASALT_STALAGMITE
+                .bootstrap(ctx)
+                .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                .direction(Direction.UP)
+                .blockState(NetherBlocks.BASALT_STALACTITE)
+                .maxHeight(BiasedToBottomInt.of(3, 9))
+                .inlinePlace()
+                .isEmptyAndOn(org.betterx.wover.block.api.predicate.BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
+                .inRandomPatch()
+                .register();
+
+        NetherObjects.PATCH_SMOKER
+                .bootstrap(ctx)
+                .direction(Direction.UP)
+                .addTripleShape(NetherBlocks.SMOKER.defaultBlockState(), BiasedToBottomInt.of(0, 4))
+                .prioritizeTip()
+                .inlinePlace()
+                .isEmptyAndOnNetherGround()
+                .inRandomPatch()
+                .tries(18)
+                .spreadXZ(4)
+                .spreadY(3)
+                .register();
+    }
+
+    @Override
+    protected void bootstrapPlaced(BootstapContext<PlacedFeature> ctx) {
         NetherObjectsPlaced.PATCH_TERRACOTTA_CLUMP
                 .inlineConfiguration(ctx)
                 .simple()

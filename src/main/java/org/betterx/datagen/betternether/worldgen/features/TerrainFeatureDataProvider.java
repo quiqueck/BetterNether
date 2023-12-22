@@ -1,33 +1,41 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
+import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.BCLPlacedFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.features.configured.NetherTerrain;
 import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.wover.block.api.predicate.IsFullShape;
 import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.WoverRegistryContentProvider;
+import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
 import org.betterx.wover.feature.api.Features;
 import org.betterx.wover.feature.api.features.config.ConditionFeatureConfig;
 import org.betterx.wover.feature.api.placed.modifiers.IsBasin;
 
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-public class PlacedTerrainFeatureDataProvider extends WoverRegistryContentProvider<PlacedFeature> {
-    public PlacedTerrainFeatureDataProvider(
-            ModCore modCore
-    ) {
-        super(modCore, "Placed Terrain Features", Registries.PLACED_FEATURE);
+public class TerrainFeatureDataProvider extends WoverFeatureProvider {
+    public TerrainFeatureDataProvider(ModCore modCore) {
+        super(modCore, modCore.id("terrain"));
     }
 
     @Override
-    protected void bootstrap(BootstapContext<PlacedFeature> ctx) {
+    protected void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+        NetherTerrain.LAVA_PITS
+                .bootstrap(ctx)
+                .block(Blocks.LAVA)
+                .register();
+    }
+
+    @Override
+    protected void bootstrapPlaced(BootstapContext<PlacedFeature> ctx) {
         NetherTerrainPlaced.MAGMA_BLOBS
                 .inlineConfiguration(ctx)
                 .simple()
@@ -156,5 +164,9 @@ public class PlacedTerrainFeatureDataProvider extends WoverRegistryContentProvid
 
     public static void bootstrapLegacy(BootstapContext<PlacedFeature> ctx) {
         BCLPlacedFeatureBuilder.registerUnbound(ctx);
+    }
+
+    public static void bootstrapLegacyConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+        BCLFeatureBuilder.registerUnbound(ctx);
     }
 }

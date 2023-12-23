@@ -1,11 +1,9 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
-import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.v3.levelgen.features.BCLPlacedFeatureBuilder;
-import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.configured.NetherTerrain;
 import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
+import org.betterx.wover.block.api.predicate.BlockPredicates;
 import org.betterx.wover.block.api.predicate.IsFullShape;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
@@ -160,13 +158,5 @@ public class TerrainFeatureDataProvider extends WoverFeatureProvider {
                 .offset(Direction.DOWN)
                 .is(BlockPredicate.matchesBlocks(NetherBlocks.SOUL_SANDSTONE))
                 .register();
-    }
-
-    public static void bootstrapLegacy(BootstapContext<PlacedFeature> ctx) {
-        BCLPlacedFeatureBuilder.registerUnbound(ctx);
-    }
-
-    public static void bootstrapLegacyConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
-        BCLFeatureBuilder.registerUnbound(ctx);
     }
 }

@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
-import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.util.LootUtil;
 
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -42,10 +40,6 @@ public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike
         super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).mapColor(MapColor.COLOR_GRAY).requiresTool());
         this.registerDefaultState(getStateDefinition().any().setValue(IS_BLUE, false));
         this.setDropItself(false);
-    }
-
-    public void setVegetationFeature(BCLConfigureFeature<? extends Feature<?>, ?> vegetationFeature) {
-        this.vegetationFeature = () -> vegetationFeature.configuredFeature;
     }
 
     public void setVegetationFeature(BonemealAPI.FeatureProvider vegetationFeature) {

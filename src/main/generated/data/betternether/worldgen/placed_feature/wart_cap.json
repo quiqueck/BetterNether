@@ -31,8 +31,8 @@
       "dir": [
         "north",
         "east",
-        "west",
-        "south"
+        "south",
+        "west"
       ],
       "random_select": false
     }

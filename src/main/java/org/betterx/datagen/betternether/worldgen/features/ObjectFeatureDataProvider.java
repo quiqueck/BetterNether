@@ -1,12 +1,12 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
-import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.configured.NetherObjects;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.wover.block.api.predicate.BlockPredicates;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
 import org.betterx.wover.feature.api.configured.ConfiguredFeatureManager;

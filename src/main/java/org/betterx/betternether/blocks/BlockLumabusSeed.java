@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
-import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.behaviours.interfaces.BehaviourSeed;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.world.features.DeferedSeedBlock;
+import org.betterx.wover.feature.api.FeatureUtils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,7 +49,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        BCLConfigureFeature.placeInWorld(feature.getFeature(), level, pos, random);
+        FeatureUtils.placeInWorld(feature.getFeature().value(), level, pos, random, false);
     }
 
     @Override

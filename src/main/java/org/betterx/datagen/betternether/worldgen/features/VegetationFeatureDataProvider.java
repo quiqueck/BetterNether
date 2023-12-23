@@ -1,12 +1,11 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
-import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
-import org.betterx.bclib.api.v3.levelgen.features.config.PlaceFacingBlockConfig;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.wover.block.api.predicate.BlockPredicates;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
 
@@ -579,7 +578,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .squarePlacement()
                 .randomHeight10FromFloorCeil()
                 .onlyInBiome()
-                .findSolidSurface(PlaceFacingBlockConfig.HORIZONTAL, 12, false)
+                .findSolidSurface(Direction.Plane.HORIZONTAL.stream().toList(), 12, false)
                 .register();
         NetherVegetationPlaced.SCULK_VEGETATION
                 .place(ctx, NetherVegetation.SCULK_VEGETATION)

@@ -8,6 +8,7 @@ import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
 
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -101,6 +102,6 @@ public class StructureDataProvider extends WoverStructureProvider {
 
     @Override
     protected void prepareBiomeTags(TagBootstrapContext<Biome> context) {
-
+        context.add(NetherStructures.CITY_STRUCTURE.biomeTag(), Biomes.NETHER_WASTES);
     }
 }

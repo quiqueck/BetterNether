@@ -1,0 +1,45 @@
+{
+  "predicate": {
+    "type": "wover:and",
+    "predicates": [
+      {
+        "type": "wover:in_dimension",
+        "dimension_key": "minecraft:the_nether"
+      },
+      {
+        "type": "wover:not",
+        "predicate": {
+          "type": "wover:is_namespace",
+          "namespace": "betternether"
+        }
+      },
+      {
+        "type": "wover:not",
+        "predicate": {
+          "type": "wover:is_biome",
+          "biome_key": "minecraft:crimson_forest"
+        }
+      }
+    ]
+  },
+  "spawns": [
+    {
+      "type": "betternether:firefly",
+      "maxCount": 3,
+      "minCount": 1,
+      "weight": 5
+    },
+    {
+      "type": "betternether:hydrogen_jellyfish",
+      "maxCount": 6,
+      "minCount": 2,
+      "weight": 5
+    },
+    {
+      "type": "betternether:naga",
+      "maxCount": 5,
+      "minCount": 3,
+      "weight": 8
+    }
+  ]
+}

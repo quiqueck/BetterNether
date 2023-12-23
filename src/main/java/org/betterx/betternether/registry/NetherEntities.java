@@ -22,7 +22,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -305,17 +304,5 @@ public class NetherEntities {
 
     public static boolean isNetherEntity(Entity entity) {
         return NETHER_ENTITIES.contains(entity.getType());
-    }
-
-    static void modifyNonBNBiome(ResourceLocation biomeID, Holder<Biome> biome) {
-        final boolean isCrimson = biomeID.equals(Biomes.CRIMSON_FOREST.location());
-
-        KnownSpawnTypes.FIREFLY.addSpawn(biomeID, biome, isCrimson ? 3 : 1);
-        KnownSpawnTypes.HYDROGEN_JELLYFISH.addSpawn(biomeID, biome);
-        KnownSpawnTypes.NAGA.addSpawn(biomeID, biome, isCrimson ? 0 : 1);
-
-        synchronized (Configs.BIOMES) {
-            Configs.BIOMES.saveChanges();
-        }
     }
 }

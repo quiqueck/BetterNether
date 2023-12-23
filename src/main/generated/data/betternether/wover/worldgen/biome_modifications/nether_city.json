@@ -1,0 +1,28 @@
+{
+  "biome_tags": [
+    "betternether:has_structure/nether_city"
+  ],
+  "predicate": {
+    "type": "wover:and",
+    "predicates": [
+      {
+        "type": "wover:in_dimension",
+        "dimension_key": "minecraft:the_nether"
+      },
+      {
+        "type": "wover:not",
+        "predicate": {
+          "type": "wover:is_namespace",
+          "namespace": "betternether"
+        }
+      },
+      {
+        "type": "wover:not",
+        "predicate": {
+          "type": "wover:is_biome",
+          "biome_key": "minecraft:basalt_deltas"
+        }
+      }
+    ]
+  }
+}

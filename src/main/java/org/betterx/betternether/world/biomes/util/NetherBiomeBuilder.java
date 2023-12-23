@@ -1,7 +1,5 @@
 package org.betterx.betternether.world.biomes.util;
 
-import org.betterx.bclib.api.v2.levelgen.structures.BCLStructure;
-import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
@@ -134,16 +132,6 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
     public static <C extends NetherBiomeConfig> NetherBiomeKey<C> createKey(@NotNull String name) {
         return new NetherBiomeKey<>(BetterNether.C.id(name.replace(' ', '_')
                                                           .toLowerCase()));
-    }
-
-    @Deprecated(forRemoval = true)
-    public NetherBiomeBuilder structure(BCLStructure<?> structure) {
-        return this.structure(structure.biomeTag);
-    }
-
-    @Deprecated(forRemoval = true)
-    public NetherBiomeBuilder feature(BCLFeature<?, ?> feature) {
-        return feature(feature.decoration, feature.placedFeature);
     }
 
     @Override

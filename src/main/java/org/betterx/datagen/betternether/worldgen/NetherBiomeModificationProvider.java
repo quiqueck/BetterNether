@@ -14,6 +14,8 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.LevelStem;
 
+import static org.betterx.betternether.registry.NetherEntities.KnownSpawnTypes.*;
+
 public class NetherBiomeModificationProvider extends WoverRegistryContentProvider<BiomeModification> {
     /**
      * Creates a new instance of {@link WoverRegistryContentProvider}.
@@ -33,6 +35,16 @@ public class NetherBiomeModificationProvider extends WoverRegistryContentProvide
                 .allOf(
                         BiomePredicate.hasConfig(Configs.WORLD.addNetherCityToOverworld, true),
                         BiomePredicate.inDimension(LevelStem.OVERWORLD)
+                )
+                .addStructureSet(NetherStructures.CITY_STRUCTURE)
+                .register();
+
+        BiomeModification
+                .build(context, BetterNether.C.id("nether_city"))
+                .allOf(
+                        BiomePredicate.inDimension(LevelStem.NETHER),
+                        BiomePredicate.not(BiomePredicate.inNamespace(BetterNether.C)),
+                        BiomePredicate.not(BiomePredicate.isBiome(Biomes.BASALT_DELTAS))
                 )
                 .addStructureSet(NetherStructures.CITY_STRUCTURE)
                 .register();
@@ -59,6 +71,25 @@ public class NetherBiomeModificationProvider extends WoverRegistryContentProvide
                 .build(context, BetterNether.C.id("ruby_ore"))
                 .inBiomes(Biomes.CRIMSON_FOREST, Biomes.WARPED_FOREST)
                 .addFeature(NetherOresPlaced.NETHER_RUBY_ORE)
+                .register();
+
+        BiomeModification
+                .build(context, BetterNether.C.id("crimson_forest_entities"))
+                .isBiome(Biomes.CRIMSON_FOREST)
+                .addSpawn(FIREFLY.type, 3 * FIREFLY.weight, FIREFLY.minGroupSize, FIREFLY.maxGroupSize)
+                .addSpawn(HYDROGEN_JELLYFISH.type, HYDROGEN_JELLYFISH.weight, HYDROGEN_JELLYFISH.minGroupSize, HYDROGEN_JELLYFISH.maxGroupSize)
+                .register();
+
+        BiomeModification
+                .build(context, BetterNether.C.id("entities"))
+                .allOf(
+                        BiomePredicate.inDimension(LevelStem.NETHER),
+                        BiomePredicate.not(BiomePredicate.inNamespace(BetterNether.C)),
+                        BiomePredicate.not(BiomePredicate.isBiome(Biomes.CRIMSON_FOREST))
+                )
+                .addSpawn(FIREFLY.type, FIREFLY.weight, FIREFLY.minGroupSize, FIREFLY.maxGroupSize)
+                .addSpawn(HYDROGEN_JELLYFISH.type, HYDROGEN_JELLYFISH.weight, HYDROGEN_JELLYFISH.minGroupSize, HYDROGEN_JELLYFISH.maxGroupSize)
+                .addSpawn(NAGA.type, NAGA.weight, NAGA.minGroupSize, NAGA.maxGroupSize)
                 .register();
     }
 }

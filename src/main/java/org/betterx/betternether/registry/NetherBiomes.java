@@ -1,6 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.biomes.*;
@@ -81,18 +80,6 @@ public class NetherBiomes {
 
     public static void register() {
         BiomeCodecRegistry.register(BetterNether.C.id("biome"), NetherBiome.KEY_CODEC);
-
-        BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> {
-            if (!biomeID.getNamespace().equals(BetterNether.C.modId)) {
-                NetherEntities.modifyNonBNBiome(biomeID, biome);
-                NetherFeatures.modifyNonBNBiome(biomeID, biome);
-            }
-        });
-        BiomeAPI.onFinishingNetherBiomeTags((biomeID, biome) -> {
-            if (!biomeID.getNamespace().equals(BetterNether.C.modId)) {
-                NetherStructures.addNonBNBiomeTags(biomeID, biome);
-            }
-        });
         registerNumericProviders();
     }
 

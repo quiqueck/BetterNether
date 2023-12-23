@@ -18,6 +18,7 @@ public class NetherBiomesProvider extends WoverBiomeProvider {
         super(modCore);
     }
 
+
     @Override
     protected void bootstrap(BiomeBootstrapContext context) {
         register(context, NetherBiomes.BONE_REEF, new BoneReef());
@@ -42,6 +43,7 @@ public class NetherBiomesProvider extends WoverBiomeProvider {
         register(context, NetherBiomes.UPSIDE_DOWN_FOREST_CLEARED, new UpsideDownForestCleared());
         register(context, NetherBiomes.WART_FOREST, new WartForest());
         register(context, NetherBiomes.WART_FOREST_EDGE, new WartForestEdge());
+
     }
 
     private <C extends NetherBiomeConfig> void register(BiomeBootstrapContext context, NetherBiomeKey<C> key, C cfg) {

@@ -1,18 +1,11 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.structures.city.CityStructure;
 import org.betterx.betternether.world.structures.templates.*;
-import org.betterx.worlds.together.tag.v3.TagManager;
 import org.betterx.wover.structure.api.StructureKey;
 import org.betterx.wover.structure.api.StructureManager;
 
-import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 
 public class NetherStructures {
@@ -66,22 +59,5 @@ public class NetherStructures {
 
     public static void register() {
         NetherStructurePieces.ensureStaticLoad();
-
-        TagManager.BIOMES.add(CITY_STRUCTURE.biomeTag(), BiomeAPI.NETHER_WASTES_BIOME.getBiomeKey());
-        if (Configs.GENERATOR.getBoolean("generator.world.cities", "overworld", false)) {
-            BiomeAPI.registerOverworldBiomeModification((biomeID, biome) -> {
-                if (!biomeID.getNamespace().equals(BetterNether.C.modId)) {
-                    addNonBNBiomeTags(biomeID, biome);
-                }
-            });
-        }
     }
-
-    public static void addNonBNBiomeTags(ResourceLocation biomeID, Holder<Biome> biome) {
-        if (biomeID != null && !biomeID.equals(BiomeAPI.BASALT_DELTAS_BIOME.getID()) && !biomeID.equals(Biomes.THE_VOID.location())) {
-            TagManager.BIOMES.add(CITY_STRUCTURE.biomeTag(), biome.value());
-        }
-    }
-
-
 }

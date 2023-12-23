@@ -1,6 +1,5 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.bclib.api.v3.levelgen.features.UserGrowableFeature;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
@@ -9,6 +8,7 @@ import org.betterx.betternether.blocks.BlockWillowLeaves;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
+public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> implements GrowableFeature<NoneFeatureConfiguration> {
     private static final Direction[] HOR = HorizontalDirectionalBlock
             .FACING
             .getPossibleValues()

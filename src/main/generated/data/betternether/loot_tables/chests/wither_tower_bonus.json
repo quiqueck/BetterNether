@@ -74,8 +74,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:looting",
                 "minecraft:sharpness",
+                "minecraft:looting",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -162,8 +162,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:feather_falling",
                 "minecraft:fire_protection",
+                "minecraft:feather_falling",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -235,8 +235,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:feather_falling",
                 "minecraft:fire_protection",
+                "minecraft:feather_falling",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"

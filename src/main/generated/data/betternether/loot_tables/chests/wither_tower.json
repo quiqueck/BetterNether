@@ -170,8 +170,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:looting",
                 "minecraft:sharpness",
+                "minecraft:looting",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -184,8 +184,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:looting",
                 "minecraft:sharpness",
+                "minecraft:looting",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -210,9 +210,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:unbreaking",
+                "minecraft:efficiency",
                 "minecraft:silk_touch",
-                "minecraft:efficiency"
+                "minecraft:unbreaking"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -224,9 +224,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:unbreaking",
+                "minecraft:efficiency",
                 "minecraft:silk_touch",
-                "minecraft:efficiency"
+                "minecraft:unbreaking"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -312,8 +312,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:feather_falling",
                 "minecraft:fire_protection",
+                "minecraft:feather_falling",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -385,8 +385,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:feather_falling",
                 "minecraft:fire_protection",
+                "minecraft:feather_falling",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"

@@ -1,13 +1,12 @@
 package org.betterx.betternether.world.structures.city;
 
-import org.betterx.bclib.api.v2.levelgen.structures.BCLStructure;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.betternether.world.structures.city.palette.Palettes;
 import org.betterx.betternether.world.structures.piece.CavePiece;
 import org.betterx.betternether.world.structures.piece.CityPiece;
+import org.betterx.wover.structure.api.StructureUtils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
@@ -41,8 +40,7 @@ public class CityStructure extends Structure {
 
     @Override
     public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-        if (Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)
-                && BCLStructure.isValidBiome(context, DEFAULT_HEIGHT)) {
+        if (StructureUtils.isValidBiome(context, DEFAULT_HEIGHT)) {
             final ChunkPos cPos = context.chunkPos();
             final ChunkGenerator chunkGenerator = context.chunkGenerator();
             final LevelHeightAccessor heightAccessor = context.heightAccessor();

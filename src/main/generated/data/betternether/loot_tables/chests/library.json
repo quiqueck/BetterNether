@@ -131,9 +131,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:unbreaking",
+                "minecraft:efficiency",
                 "minecraft:silk_touch",
-                "minecraft:efficiency"
+                "minecraft:unbreaking"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -145,9 +145,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:unbreaking",
-                "minecraft:silk_touch",
                 "minecraft:efficiency",
+                "minecraft:silk_touch",
+                "minecraft:unbreaking",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -161,9 +161,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:unbreaking",
-                "minecraft:silk_touch",
                 "minecraft:efficiency",
+                "minecraft:silk_touch",
+                "minecraft:unbreaking",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -177,9 +177,9 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:unbreaking",
-                "minecraft:silk_touch",
                 "minecraft:efficiency",
+                "minecraft:silk_touch",
+                "minecraft:unbreaking",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"

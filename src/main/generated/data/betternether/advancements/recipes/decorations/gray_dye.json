@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_451_gray_mold": {
+    "has_445_gray_mold": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_451_gray_mold",
+      "has_445_gray_mold",
       "has_the_recipe"
     ]
   ],

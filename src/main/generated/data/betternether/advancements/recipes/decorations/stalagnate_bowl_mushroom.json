@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_475_brown_mushroom": {
+    "has_469_brown_mushroom": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_476_red_mushroom": {
+    "has_470_red_mushroom": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_477_stalagnate_bowl": {
+    "has_471_stalagnate_bowl": {
       "conditions": {
         "items": [
           {
@@ -61,9 +61,9 @@
   },
   "requirements": [
     [
-      "has_475_brown_mushroom",
-      "has_476_red_mushroom",
-      "has_477_stalagnate_bowl",
+      "has_469_brown_mushroom",
+      "has_470_red_mushroom",
+      "has_471_stalagnate_bowl",
       "has_the_recipe"
     ]
   ],

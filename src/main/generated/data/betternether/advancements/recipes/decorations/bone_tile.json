@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_489_bone_slab": {
+    "has_483_bone_slab": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_489_bone_slab",
+      "has_483_bone_slab",
       "has_the_recipe"
     ]
   ],

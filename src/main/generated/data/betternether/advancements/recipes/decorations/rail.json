@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_454_stick": {
+    "has_448_stick": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_455_cincinnasite_ingot": {
+    "has_449_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -49,8 +49,8 @@
   },
   "requirements": [
     [
-      "has_454_stick",
-      "has_455_cincinnasite_ingot",
+      "has_448_stick",
+      "has_449_cincinnasite_ingot",
       "has_the_recipe"
     ]
   ],

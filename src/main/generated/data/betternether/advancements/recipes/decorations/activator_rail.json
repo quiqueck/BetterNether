@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_482_redstone_torch": {
+    "has_476_redstone_torch": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_483_stick": {
+    "has_477_stick": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_484_cincinnasite_ingot": {
+    "has_478_cincinnasite_ingot": {
       "conditions": {
         "items": [
           {
@@ -61,9 +61,9 @@
   },
   "requirements": [
     [
-      "has_482_redstone_torch",
-      "has_483_stick",
-      "has_484_cincinnasite_ingot",
+      "has_476_redstone_torch",
+      "has_477_stick",
+      "has_478_cincinnasite_ingot",
       "has_the_recipe"
     ]
   ],

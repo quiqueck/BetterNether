@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_546_cincinnasite_forged": {
+    "has_540_cincinnasite_forged": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_547_nether_reed_planks": {
+    "has_541_nether_reed_planks": {
       "conditions": {
         "items": [
           {
@@ -49,8 +49,8 @@
   },
   "requirements": [
     [
-      "has_546_cincinnasite_forged",
-      "has_547_nether_reed_planks",
+      "has_540_cincinnasite_forged",
+      "has_541_nether_reed_planks",
       "has_the_recipe"
     ]
   ],

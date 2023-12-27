@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_478_stalagnate_bowl": {
+    "has_472_stalagnate_bowl": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_479_nether_wart": {
+    "has_473_nether_wart": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_480_nether_wart": {
+    "has_474_nether_wart": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_481_nether_wart": {
+    "has_475_nether_wart": {
       "conditions": {
         "items": [
           {
@@ -73,10 +73,10 @@
   },
   "requirements": [
     [
-      "has_478_stalagnate_bowl",
-      "has_479_nether_wart",
-      "has_480_nether_wart",
-      "has_481_nether_wart",
+      "has_472_stalagnate_bowl",
+      "has_473_nether_wart",
+      "has_474_nether_wart",
+      "has_475_nether_wart",
       "has_the_recipe"
     ]
   ],

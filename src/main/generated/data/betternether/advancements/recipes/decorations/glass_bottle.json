@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_450_quartz_glass": {
+    "has_444_quartz_glass": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_450_quartz_glass",
+      "has_444_quartz_glass",
       "has_the_recipe"
     ]
   ],

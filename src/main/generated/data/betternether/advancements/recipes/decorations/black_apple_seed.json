@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_485_black_apple": {
+    "has_479_black_apple": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
   },
   "requirements": [
     [
-      "has_485_black_apple",
+      "has_479_black_apple",
       "has_the_recipe"
     ]
   ],

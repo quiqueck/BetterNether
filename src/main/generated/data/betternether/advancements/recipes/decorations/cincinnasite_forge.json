@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_501_cincinnasite_forged": {
+    "has_495_cincinnasite_forged": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_502_nether_bricks": {
+    "has_496_nether_bricks": {
       "conditions": {
         "items": [
           {
@@ -49,8 +49,8 @@
   },
   "requirements": [
     [
-      "has_501_cincinnasite_forged",
-      "has_502_nether_bricks",
+      "has_495_cincinnasite_forged",
+      "has_496_nether_bricks",
       "has_the_recipe"
     ]
   ],

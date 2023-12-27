@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_526_whispering_gourd": {
+    "has_520_whispering_gourd": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_527_torch": {
+    "has_521_torch": {
       "conditions": {
         "items": [
           {
@@ -49,8 +49,8 @@
   },
   "requirements": [
     [
-      "has_526_whispering_gourd",
-      "has_527_torch",
+      "has_520_whispering_gourd",
+      "has_521_torch",
       "has_the_recipe"
     ]
   ],

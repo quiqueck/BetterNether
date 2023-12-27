@@ -65,7 +65,8 @@ dependencies {
         modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
     }
 
-    modCompileOnly "dev.emi:emi:${emi_version}"
+    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+    modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 }
 
 repositories {
@@ -284,6 +285,44 @@ curseforge {
         }
         afterEvaluate {
             mainArtifact(remapJar.outputs)
+        }
+    }
+
+    task nextVersion() {
+        doLast {
+            def inputFile = new File('modrinth.json')
+            def gameVersions = java.net.URLEncoder.encode(project.modrinth_versions, "UTF-8")
+            new URL("https://api.modrinth.com/v2/project/${project.modrinth_id}/version?&game_versions=${gameVersions}").withInputStream { i -> inputFile.withOutputStream { it << i } }
+
+            def json = new groovy.json.JsonSlurper().parseText(inputFile.text)
+            def version = json[0].version_number
+
+            //increment patch version
+            def indexedVersionList = version.split(/\./).toList().withIndex()
+            println "AAAA" + version
+            indexedVersionList = indexedVersionList.collect { num, idx -> num.toInteger() }
+            indexedVersionList[2] = indexedVersionList[2].value + 1
+            def updatedVersion = indexedVersionList.join(".")
+
+            println "\n\n"
+            println "------------- CURRENT VERSION -------------"
+            println "Last Published Version: " + version
+            println "         Game Versions: " + json[0].game_versions
+            println "                Status: " + json[0].status
+            println "              Featured: " + json[0].featured
+            println "            Downloaded: " + json[0].downloads
+            println "\n"
+            println "-------------- NEXT VERSION ---------------"
+            println "Next Version: " + updatedVersion
+            println "\n\n"
+
+            def propertiesFile = new File("gradle.properties")
+            def newContents = propertiesFile.text.replaceFirst("mod_version=\\d+.\\d+.\\d+", "mod_version=${updatedVersion}")
+            propertiesFile.text = newContents
+
+            def fabricFile = new File("src/main/resources/fabric.mod.json")
+            newContents = fabricFile.text.replaceFirst('"version": ".+"', "\"version\": \"${updatedVersion}\"")
+            fabricFile.text = newContents
         }
     }
 

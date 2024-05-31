@@ -12,7 +12,7 @@ import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
 import org.betterx.wover.feature.api.features.config.PillarFeatureConfig;
 
 import net.minecraft.core.Direction;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -23,7 +23,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
         NetherTrees.RUBEUS_TREE
                 .bootstrap(ctx)
                 .configuration(NaturalTreeConfiguration.natural())
@@ -90,7 +90,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapPlaced(BootstapContext<PlacedFeature> ctx) {
+    protected void bootstrapPlaced(BootstrapContext<PlacedFeature> ctx) {
         NetherTreesPlaced.CRIMSON_GLOWING_TREE
                 .inlineConfiguration(ctx)
                 .templates()

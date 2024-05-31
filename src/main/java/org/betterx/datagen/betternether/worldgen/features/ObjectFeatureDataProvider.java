@@ -14,7 +14,7 @@ import org.betterx.wover.feature.api.features.config.PillarFeatureConfig;
 import org.betterx.wover.feature.api.placed.modifiers.ExtendXYZ;
 
 import net.minecraft.core.Direction;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.UniformFloat;
@@ -31,7 +31,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
         NetherObjects.PATCH_BASALT_STALACTITE
                 .bootstrap(ctx)
                 .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
@@ -69,7 +69,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapPlaced(BootstapContext<PlacedFeature> ctx) {
+    protected void bootstrapPlaced(BootstrapContext<PlacedFeature> ctx) {
         NetherObjectsPlaced.PATCH_TERRACOTTA_CLUMP
                 .inlineConfiguration(ctx)
                 .simple()

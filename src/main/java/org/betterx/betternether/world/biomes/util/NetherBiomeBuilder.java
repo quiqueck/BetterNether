@@ -15,7 +15,7 @@ import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
 import org.betterx.wover.biome.api.data.BiomeData;
 import org.betterx.wover.generator.api.biomesource.WoverBiomeBuilder;
 
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
@@ -135,7 +135,7 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
     }
 
     @Override
-    public void registerBiomeData(BootstapContext<BiomeData> dataContext) {
+    public void registerBiomeData(BootstrapContext<BiomeData> dataContext) {
         dataContext.register(
                 key.dataKey,
                 new NetherBiome(

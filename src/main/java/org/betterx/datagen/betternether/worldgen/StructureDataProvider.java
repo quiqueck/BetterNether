@@ -6,7 +6,7 @@ import org.betterx.wover.datagen.api.provider.multi.WoverStructureProvider;
 import org.betterx.wover.structure.api.sets.StructureSetManager;
 import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
 
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -27,7 +27,7 @@ public class StructureDataProvider extends WoverStructureProvider {
     }
 
     @Override
-    protected void bootstrapSturctures(BootstapContext<Structure> context) {
+    protected void bootstrapSturctures(BootstrapContext<Structure> context) {
         NetherStructures.CITY_STRUCTURE.bootstrap(context).register();
         NetherStructures.PYRAMIDS.bootstrap(context).register();
         NetherStructures.GHAST_HIVE.bootstrap(context).register();
@@ -41,7 +41,7 @@ public class StructureDataProvider extends WoverStructureProvider {
     }
 
     @Override
-    protected void bootstrapSets(BootstapContext<StructureSet> context) {
+    protected void bootstrapSets(BootstrapContext<StructureSet> context) {
         StructureSetManager
                 .bootstrap(NetherStructures.CITY_STRUCTURE, context)
                 .randomPlacement(CITY_SPACING, CITY_SPACING >> 1)
@@ -91,12 +91,12 @@ public class StructureDataProvider extends WoverStructureProvider {
     }
 
     @Override
-    protected void bootstrapPools(BootstapContext<StructureTemplatePool> context) {
+    protected void bootstrapPools(BootstrapContext<StructureTemplatePool> context) {
 
     }
 
     @Override
-    protected void bootstrapProcessors(BootstapContext<StructureProcessorList> context) {
+    protected void bootstrapProcessors(BootstrapContext<StructureProcessorList> context) {
 
     }
 

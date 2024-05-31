@@ -12,7 +12,7 @@ import org.betterx.wover.feature.api.features.config.ConditionFeatureConfig;
 import org.betterx.wover.feature.api.placed.modifiers.IsBasin;
 
 import net.minecraft.core.Direction;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -25,7 +25,7 @@ public class TerrainFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
         NetherTerrain.LAVA_PITS
                 .bootstrap(ctx)
                 .block(Blocks.LAVA)
@@ -33,7 +33,7 @@ public class TerrainFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapPlaced(BootstapContext<PlacedFeature> ctx) {
+    protected void bootstrapPlaced(BootstrapContext<PlacedFeature> ctx) {
         NetherTerrainPlaced.MAGMA_BLOBS
                 .inlineConfiguration(ctx)
                 .simple()

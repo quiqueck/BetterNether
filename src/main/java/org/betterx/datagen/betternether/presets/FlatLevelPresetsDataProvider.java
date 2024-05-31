@@ -6,7 +6,7 @@ import org.betterx.wover.datagen.api.WoverRegistryContentProvider;
 import org.betterx.wover.preset.api.flat.FlatLevelPresetManager;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
@@ -31,7 +31,7 @@ public class FlatLevelPresetsDataProvider extends WoverRegistryContentProvider<F
         super(modCore, "Flat Level Presets", Registries.FLAT_LEVEL_GENERATOR_PRESET);
     }
 
-    public void bootstrap(BootstapContext<FlatLevelGeneratorPreset> ctx) {
+    public void bootstrap(BootstrapContext<FlatLevelGeneratorPreset> ctx) {
         FlatLevelPresetManager
                 .register(
                         ctx, BN_FLAT,

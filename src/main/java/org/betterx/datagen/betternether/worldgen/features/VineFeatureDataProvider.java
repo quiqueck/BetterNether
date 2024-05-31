@@ -11,7 +11,7 @@ import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
 import org.betterx.wover.feature.api.features.config.PillarFeatureConfig;
 
 import net.minecraft.core.Direction;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
@@ -26,7 +26,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
         NetherVines.LUMABUS_VINE
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
@@ -164,7 +164,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapPlaced(BootstapContext<PlacedFeature> ctx) {
+    protected void bootstrapPlaced(BootstrapContext<PlacedFeature> ctx) {
         NetherVinesPlaced.PLACED_LUMABUS_VINE.place(ctx).isEmptyAndUnderNetherGround().register();
         NetherVinesPlaced.PLACED_GOLDEN_LUMABUS_VINE.place(ctx).isEmptyAndUnderNetherGround().register();
         NetherVinesPlaced.PLACED_EYE_VINE.place(ctx).isEmptyAndUnderNetherGround().register();

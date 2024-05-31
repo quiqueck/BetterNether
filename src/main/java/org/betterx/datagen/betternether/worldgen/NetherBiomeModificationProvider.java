@@ -10,7 +10,7 @@ import org.betterx.wover.biome.api.modification.predicates.BiomePredicate;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.WoverRegistryContentProvider;
 
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.LevelStem;
 
@@ -29,7 +29,7 @@ public class NetherBiomeModificationProvider extends WoverRegistryContentProvide
     }
 
     @Override
-    protected void bootstrap(BootstapContext<BiomeModification> context) {
+    protected void bootstrap(BootstrapContext<BiomeModification> context) {
         BiomeModification
                 .build(context, BetterNether.C.id("overworld_nether_city"))
                 .allOf(

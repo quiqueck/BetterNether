@@ -10,7 +10,7 @@ import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
 
 import net.minecraft.core.Direction;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherWartBlock;
@@ -26,7 +26,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
         final int GRAY_MOLD_ID = 42;
         final int MUSHROOM_ID = 23;
 
@@ -378,7 +378,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapPlaced(BootstapContext<PlacedFeature> ctx) {
+    protected void bootstrapPlaced(BootstrapContext<PlacedFeature> ctx) {
         NetherVegetationPlaced.VEGETATION_MUSHROOM_FORREST_EDGE
                 .place(ctx)
                 .vanillaNetherGround(8)

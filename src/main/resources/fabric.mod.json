@@ -37,9 +37,9 @@
   ],
   "depends": {
     "fabricloader": ">=0.15.3",
-    "fabric": ">=0.91.0",
+    "fabric": ">=0.99.0",
     "minecraft": [
-      "1.21-beta.1"
+      "1.21-beta.3"
     ],
     "bclib": "21.0.x"
   },

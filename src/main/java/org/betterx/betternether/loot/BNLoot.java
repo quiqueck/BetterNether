@@ -5,9 +5,11 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTemplates;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
@@ -23,19 +25,19 @@ import java.util.ArrayList;
 
 
 public class BNLoot {
-    public static final ResourceLocation CITY_LOOT = BetterNether.C.id("chests/city");
-    public static final ResourceLocation CITY_LOOT_COMMON = BetterNether.C.id("chests/city_common");
-    public static final ResourceLocation CITY_LOOT_SURPRISE = BetterNether.C.id("chests/city_surprise");
-    public static final ResourceLocation LIBRARY_LOOT = BetterNether.C.id("chests/library");
-    public static final ResourceLocation WITHER_TOWER_LOOT = BetterNether.C.id("chests/wither_tower");
-    public static final ResourceLocation WITHER_TOWER_BONUS_LOOT = BetterNether.C.id("chests/wither_tower_bonus");
-    public static final ResourceLocation GHAST_HIVE = BetterNether.C.id("chests/ghast_hive");
+    public static final ResourceKey<LootTable> CITY_LOOT = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("chests/city"));
+    public static final ResourceKey<LootTable> CITY_LOOT_COMMON = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("chests/city_common"));
+    public static final ResourceKey<LootTable> CITY_LOOT_SURPRISE = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("chests/city_surprise"));
+    public static final ResourceKey<LootTable> LIBRARY_LOOT = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("chests/library"));
+    public static final ResourceKey<LootTable> WITHER_TOWER_LOOT = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("chests/wither_tower"));
+    public static final ResourceKey<LootTable> WITHER_TOWER_BONUS_LOOT = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("chests/wither_tower_bonus"));
+    public static final ResourceKey<LootTable> GHAST_HIVE = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("chests/ghast_hive"));
 
-    public static final ResourceLocation FIREFLY = BetterNether.C.id("entities/firefly");
-    public static final ResourceLocation FLYING_PIG = BetterNether.C.id("entities/flying_pig");
-    public static final ResourceLocation JUNGLE_SKELETON = BetterNether.C.id("entities/jungle_skeleton");
-    public static final ResourceLocation NAGA = BetterNether.C.id("entities/naga");
-    public static final ResourceLocation SKULL = BetterNether.C.id("entities/skull");
+    public static final ResourceKey<LootTable> FIREFLY = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("entities/firefly"));
+    public static final ResourceKey<LootTable> FLYING_PIG = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("entities/flying_pig"));
+    public static final ResourceKey<LootTable> JUNGLE_SKELETON = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("entities/jungle_skeleton"));
+    public static final ResourceKey<LootTable> NAGA = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("entities/naga"));
+    public static final ResourceKey<LootTable> SKULL = ResourceKey.create(Registries.LOOT_TABLE, BetterNether.C.id("entities/skull"));
 
     public static void register() {
 

@@ -8,10 +8,8 @@ import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-
-import java.util.Map;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 public class NetherArmor extends BaseArmorItem implements InitialStackStateProvider {
     public NetherArmor(ArmorMaterial material, Type type) {
@@ -19,10 +17,15 @@ public class NetherArmor extends BaseArmorItem implements InitialStackStateProvi
     }
 
     @Override
-    public void putEnchantments(ItemStack stack, Map<Enchantment, Integer> defaultEnchants) {
+    public ItemStack getDefaultInstance() {
+        return super.getDefaultInstance();
+    }
+
+    @Override
+    public void putEnchantments(ItemStack stack, ItemEnchantments.Mutable defaultEnchants) {
         if (material == BNArmorMaterial.FLAMING_RUBY) {
-            defaultEnchants.put(NetherEnchantments.RUBY_FIRE, 1);
-            EnchantmentHelper.setEnchantments(defaultEnchants, stack);
+            defaultEnchants.set(NetherEnchantments.RUBY_FIRE, 1);
+            EnchantmentHelper.setEnchantments(stack, defaultEnchants);
         }
     }
 }

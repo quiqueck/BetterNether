@@ -1,20 +1,18 @@
 package org.betterx.betternether.items;
 
 import org.betterx.bclib.items.tool.BaseShovelItem;
-import org.betterx.betternether.interfaces.InitialStackStateProvider;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherEnchantments;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.wover.enchantment.api.EnchantmentUtils;
+import org.betterx.wover.item.api.ItemWithCustomStack;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Map;
-
-public class NetherShovel extends BaseShovelItem implements InitialStackStateProvider {
+public class NetherShovel extends BaseShovelItem implements ItemWithCustomStack {
     public NetherShovel(Tier material, float attackDamage, float attackSpeed) {
         super(material, attackDamage, attackSpeed, NetherItems.defaultSettings().fireResistant());
     }
@@ -25,10 +23,9 @@ public class NetherShovel extends BaseShovelItem implements InitialStackStatePro
     }
 
     @Override
-    public void putEnchantments(ItemStack stack, Map<Enchantment, Integer> defaultEnchants) {
+    public void setupItemStack(ItemStack stack, HolderLookup.Provider provider) {
         if (getTier() == BNToolMaterial.FLAMING_RUBY) {
-            defaultEnchants.put(NetherEnchantments.RUBY_FIRE, 1);
-            EnchantmentHelper.setEnchantments(defaultEnchants, stack);
+            EnchantmentUtils.enchantInWorld(stack, NetherEnchantments.RUBY_FIRE_KEY, 1, provider);
         }
     }
 }

@@ -3,7 +3,6 @@ package org.betterx.betternether.registry;
 import org.betterx.bclib.BCLib;
 import org.betterx.bclib.items.DebugDataItem;
 import org.betterx.bclib.items.complex.EquipmentSet;
-import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 import org.betterx.betternether.config.Configs;
@@ -16,15 +15,13 @@ import org.betterx.betternether.items.complex.NetherSet;
 import org.betterx.betternether.items.materials.BNArmorMaterial;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.loot.BNLoot;
-import org.betterx.worlds.together.tag.v3.TagManager;
+import org.betterx.wover.item.api.ItemRegistry;
 
-import net.minecraft.core.Direction;
-import net.minecraft.core.dispenser.BlockSource;
-import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.FloatTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -32,7 +29,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
@@ -42,13 +38,13 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DispenserBlock;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 
-public class NetherItems extends ItemRegistry {
+public class NetherItems {
     private static final List<String> ITEMS = new ArrayList<String>();
     private static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
     private static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
@@ -163,8 +159,7 @@ public class NetherItems extends ItemRegistry {
     public static final Item AGAVE_MEDICINE = registerMedicine("agave_medicine", 40, 2, true);
     public static final Item HERBAL_MEDICINE = registerMedicine("herbal_medicine", 10, 5, true);
 
-    protected NetherItems() {
-        super(Configs.ITEMS);
+    private NetherItems() {
     }
 
     private static ItemRegistry ITEMS_REGISTRY;
@@ -172,19 +167,19 @@ public class NetherItems extends ItemRegistry {
     @NotNull
     public static ItemRegistry getItemRegistry() {
         if (ITEMS_REGISTRY == null) {
-            ITEMS_REGISTRY = new NetherItems();
+            ITEMS_REGISTRY = ItemRegistry.forMod(BetterNether.C);
         }
         return ITEMS_REGISTRY;
     }
 
-    public static List<Item> getModItems() {
-        return getModItems(BetterNether.C.modId);
+    public static Stream<Item> getModItems() {
+        return getItemRegistry().allItems();
     }
 
 
     public static Item registerShears(String name, Item item) {
         if (item != Items.AIR) {
-            return getItemRegistry().registerTool(BetterNether.C.id(name), item);
+            return getItemRegistry().registerAsTool(name, item);
         }
 
         return item;
@@ -192,10 +187,7 @@ public class NetherItems extends ItemRegistry {
 
     public static Item registerTool(String name, Item item, TagKey<Item>... tags) {
         if (item != Items.AIR) {
-            getItemRegistry().registerTool(BetterNether.C.id(name), item);
-            if (tags.length > 0)
-                TagManager.ITEMS.add(item, tags);
-
+            getItemRegistry().registerAsTool(name, item, tags);
             MOD_ITEMS.add(item);
         }
 
@@ -205,10 +197,7 @@ public class NetherItems extends ItemRegistry {
 
     public static Item registerItem(String name, Item item, TagKey<Item>... tags) {
         if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
-            getItemRegistry().register(BetterNether.C.id(name), item);
-            //item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
-            if (tags.length > 0)
-                TagManager.ITEMS.add(item, tags);
+            getItemRegistry().register(name, item, tags);
 
             if (item instanceof BlockItem)
                 MOD_BLOCKS.add(item);
@@ -224,7 +213,7 @@ public class NetherItems extends ItemRegistry {
         return registerItem(
                 name,
                 new Item(defaultSettings().food(new FoodProperties.Builder().nutrition(hunger)
-                                                                            .saturationMod(
+                                                                            .saturationModifier(
                                                                                     saturationMultiplier)
                                                                             .build()))
         );
@@ -271,33 +260,14 @@ public class NetherItems extends ItemRegistry {
     public static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
         if (Configs.MOBS.getBoolean("mobs", name, true)) {
             SpawnEggItem egg = new SpawnEggItem(type, background, dots, defaultSettings());
-            DefaultDispenseItemBehavior behavior = new DefaultDispenseItemBehavior() {
-                public ItemStack execute(BlockSource pointer, ItemStack stack) {
-                    Direction direction = pointer.state().getValue(DispenserBlock.FACING);
-                    EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
-                    entityType.spawn(
-                            pointer.level(),
-                            stack,
-                            null,
-                            pointer.pos().relative(direction),
-                            MobSpawnType.DISPENSER,
-                            direction != Direction.UP,
-                            false
-                    );
-                    stack.shrink(1);
-                    return stack;
-                }
-            };
-            DispenserBlock.registerBehavior(egg, behavior);
-            NetherItems.registerItem(name, egg);
-            return egg;
+            return getItemRegistry().registerEgg(name, egg);
         } else {
             return Items.AIR;
         }
     }
 
     public static Item registerNetherItem(String name, Item item) {
-        return getItemRegistry().register(BetterNether.C.id(name), item);
+        return getItemRegistry().register(name, item);
     }
 
     static {
@@ -327,7 +297,7 @@ public class NetherItems extends ItemRegistry {
         }
     }
 
-    private static CompoundTag buildItem(int count, Item item, Enchantment... enchantments) {
+    private static CompoundTag buildItem(int count, Item item, ResourceKey<Enchantment>... enchantments) {
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
         CompoundTag tag = new CompoundTag();
         tag.putString("id", id.toString());
@@ -336,7 +306,7 @@ public class NetherItems extends ItemRegistry {
         if (enchantments.length > 0) {
             ListTag chants = new ListTag();
             tag.put("Enchantments", chants);
-            for (Enchantment e : enchantments) {
+            for (ResourceKey<Enchantment> e : enchantments) {
                 ResourceLocation eID = BuiltInRegistries.ENCHANTMENT.getKey(e);
                 chants.add(EnchantmentHelper.storeEnchantment(eID, e.getMaxLevel()));
             }
@@ -354,23 +324,23 @@ public class NetherItems extends ItemRegistry {
         armorItems.add(buildItem(
                 1,
                 CINCINNASITE_SET.getSlot(EquipmentSet.BOOTS_SLOT),
-                Enchantments.ALL_DAMAGE_PROTECTION
+                Enchantments.PROTECTION
         ));
         armorItems.add(buildItem(
                 1,
                 CINCINNASITE_SET.getSlot(EquipmentSet.LEGGINGS_SLOT),
-                Enchantments.ALL_DAMAGE_PROTECTION
+                Enchantments.PROTECTION
         ));
         armorItems.add(buildItem(
                 1,
                 CINCINNASITE_SET.getSlot(EquipmentSet.CHESTPLATE_SLOT),
-                Enchantments.ALL_DAMAGE_PROTECTION,
+                Enchantments.PROTECTION,
                 Enchantments.THORNS
         ));
         armorItems.add(buildItem(
                 1,
                 CINCINNASITE_SET.getSlot(EquipmentSet.HELMET_SLOT),
-                Enchantments.ALL_DAMAGE_PROTECTION
+                Enchantments.PROTECTION
         ));
 
         ListTag handDropChance = new ListTag();

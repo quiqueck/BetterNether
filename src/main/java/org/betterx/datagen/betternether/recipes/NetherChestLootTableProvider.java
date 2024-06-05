@@ -6,7 +6,9 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.registry.NetherTemplates;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
@@ -23,19 +25,21 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider {
 
     public NetherChestLootTableProvider(
-            FabricDataOutput output
+            FabricDataOutput output,
+            CompletableFuture<HolderLookup.Provider> registryLookup
     ) {
-        super(output, LootContextParamSets.CHEST);
+        super(output, registryLookup, LootContextParamSets.CHEST);
     }
 
 
     @Override
-    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
         biConsumer.accept(
                 BNLoot.CITY_LOOT,
                 LootTable.lootTable()
@@ -224,27 +228,31 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                 .add(LootItem
                         .lootTableItem(set.getSlot(EquipmentSet.HELMET_SLOT))
                         .setWeight(3)
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.FIRE_PROTECTION)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.FIRE_PROTECTION))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                 )
                 .add(LootItem
                         .lootTableItem(set.getSlot(EquipmentSet.CHESTPLATE_SLOT))
                         .setWeight(3)
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.FIRE_PROTECTION)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.FIRE_PROTECTION))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                 )
                 .add(LootItem
                         .lootTableItem(set.getSlot(EquipmentSet.LEGGINGS_SLOT))
                         .setWeight(3)
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.FIRE_PROTECTION)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.FIRE_PROTECTION))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                 )
                 .add(LootItem
                         .lootTableItem(set.getSlot(EquipmentSet.BOOTS_SLOT))
                         .setWeight(2)
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.FIRE_PROTECTION)
-                                                                    .withEnchantment(Enchantments.FALL_PROTECTION)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.FIRE_PROTECTION))
+                                .withEnchantment(new Holder.Direct(Enchantments.FEATHER_FALLING))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                 )
                 .when(LootItemRandomChanceCondition.randomChance(chance));
     }
@@ -310,9 +318,10 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
                         .lootTableItem(NetherItems.FLAMING_RUBY_SET.getSlot(EquipmentSet.SWORD_SLOT))
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.SHARPNESS)
-                                                                    .withEnchantment(Enchantments.MOB_LOOTING)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.SHARPNESS))
+                                .withEnchantment(new Holder.Direct(Enchantments.LOOTING))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                 )
                 .when(LootItemRandomChanceCondition.randomChance(chance));
     }
@@ -323,14 +332,16 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
                         .lootTableItem(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.SWORD_SLOT))
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.SHARPNESS)
-                                                                    .withEnchantment(Enchantments.MOB_LOOTING)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.SHARPNESS))
+                                .withEnchantment(new Holder.Direct(Enchantments.LOOTING))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                 ).add(LootItem
                         .lootTableItem(NetherItems.CINCINNASITE_SET.getSlot(EquipmentSet.SWORD_SLOT))
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.SHARPNESS)
-                                                                    .withEnchantment(Enchantments.MOB_LOOTING)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.SHARPNESS))
+                                .withEnchantment(new Holder.Direct(Enchantments.LOOTING))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                 )
                 .when(LootItemRandomChanceCondition.randomChance(0.2f));
     }
@@ -341,14 +352,16 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
                         .lootTableItem(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.HOE_SLOT))
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.BLOCK_EFFICIENCY)
-                                                                    .withEnchantment(Enchantments.SILK_TOUCH)
-                                                                    .withEnchantment(Enchantments.UNBREAKING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.EFFICIENCY))
+                                .withEnchantment(new Holder.Direct(Enchantments.SILK_TOUCH))
+                                .withEnchantment(new Holder.Direct(Enchantments.UNBREAKING)))
                 ).add(LootItem
                         .lootTableItem(NetherItems.CINCINNASITE_SET.getSlot(EquipmentSet.HOE_SLOT))
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.BLOCK_EFFICIENCY)
-                                                                    .withEnchantment(Enchantments.SILK_TOUCH)
-                                                                    .withEnchantment(Enchantments.UNBREAKING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.EFFICIENCY))
+                                .withEnchantment(new Holder.Direct(Enchantments.SILK_TOUCH))
+                                .withEnchantment(new Holder.Direct(Enchantments.UNBREAKING)))
                 )
                 .when(LootItemRandomChanceCondition.randomChance(0.4f));
     }
@@ -363,30 +376,34 @@ public class NetherChestLootTableProvider extends SimpleFabricLootTableProvider 
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)))
                 ).add(LootItem
                         .lootTableItem(NetherItems.FLAMING_RUBY_SET.getSlot(EquipmentSet.PICKAXE_SLOT))
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.BLOCK_EFFICIENCY)
-                                                                    .withEnchantment(Enchantments.SILK_TOUCH)
-                                                                    .withEnchantment(Enchantments.UNBREAKING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.EFFICIENCY))
+                                .withEnchantment(new Holder.Direct(Enchantments.SILK_TOUCH))
+                                .withEnchantment(new Holder.Direct(Enchantments.UNBREAKING)))
                         .setWeight(1)
                 ).add(LootItem
                         .lootTableItem(NetherItems.NETHER_RUBY_SET.getSlot(EquipmentSet.PICKAXE_SLOT))
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.BLOCK_EFFICIENCY)
-                                                                    .withEnchantment(Enchantments.SILK_TOUCH)
-                                                                    .withEnchantment(Enchantments.UNBREAKING)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.EFFICIENCY))
+                                .withEnchantment(new Holder.Direct(Enchantments.SILK_TOUCH))
+                                .withEnchantment(new Holder.Direct(Enchantments.UNBREAKING))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                         .setWeight(4)
                 ).add(LootItem
                         .lootTableItem(Items.NETHERITE_PICKAXE)
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.BLOCK_EFFICIENCY)
-                                                                    .withEnchantment(Enchantments.SILK_TOUCH)
-                                                                    .withEnchantment(Enchantments.UNBREAKING)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.EFFICIENCY))
+                                .withEnchantment(new Holder.Direct(Enchantments.SILK_TOUCH))
+                                .withEnchantment(new Holder.Direct(Enchantments.UNBREAKING))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                         .setWeight(2)
                 ).add(LootItem
                         .lootTableItem(Items.DIAMOND_PICKAXE)
-                        .apply(new EnchantRandomlyFunction.Builder().withEnchantment(Enchantments.BLOCK_EFFICIENCY)
-                                                                    .withEnchantment(Enchantments.SILK_TOUCH)
-                                                                    .withEnchantment(Enchantments.UNBREAKING)
-                                                                    .withEnchantment(Enchantments.MENDING))
+                        .apply(new EnchantRandomlyFunction.Builder()
+                                .withEnchantment(new Holder.Direct(Enchantments.EFFICIENCY))
+                                .withEnchantment(new Holder.Direct(Enchantments.SILK_TOUCH))
+                                .withEnchantment(new Holder.Direct(Enchantments.UNBREAKING))
+                                .withEnchantment(new Holder.Direct(Enchantments.MENDING)))
                         .setWeight(8)
                 );
 

@@ -34,13 +34,12 @@ public class ItemBowlFood extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
-        if (context.getPlayer().isShiftKeyDown() && world.isEmptyBlock(pos) && NetherBlocks.MAT_STALAGNATE.getBowl()
-                                                                                                          .canSurvive(
-                                                                                                                  world.getBlockState(
-                                                                                                                          pos),
-                                                                                                                  world,
-                                                                                                                  pos
-                                                                                                          )) {
+        if (context.getPlayer().isShiftKeyDown() &&
+                world.isEmptyBlock(pos) &&
+                NetherBlocks.MAT_STALAGNATE.getBowl()
+                                           .canSurvive(
+                                                   world.getBlockState(pos), world, pos
+                                           )) {
             if (!world.isClientSide()) {
                 BlockState state = NetherBlocks.MAT_STALAGNATE.getBowl()
                                                               .defaultBlockState()

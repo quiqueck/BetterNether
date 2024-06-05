@@ -8,10 +8,8 @@ import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-
-import java.util.Map;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 public class NetherSword extends BaseSwordItem implements InitialStackStateProvider {
     public NetherSword(Tier material, float attackDamage, float attackSpeed) {
@@ -19,10 +17,10 @@ public class NetherSword extends BaseSwordItem implements InitialStackStateProvi
     }
 
     @Override
-    public void putEnchantments(ItemStack stack, Map<Enchantment, Integer> defaultEnchants) {
+    public void putEnchantments(ItemStack stack, ItemEnchantments.Mutable defaultEnchants) {
         if (getTier() == BNToolMaterial.FLAMING_RUBY) {
-            defaultEnchants.put(NetherEnchantments.RUBY_FIRE, 1);
-            EnchantmentHelper.setEnchantments(defaultEnchants, stack);
+            defaultEnchants.set(NetherEnchantments.RUBY_FIRE, 1);
+            EnchantmentHelper.setEnchantments(stack, defaultEnchants);
         }
     }
 }

@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 
 public class ItemBlackApple extends Item {
     public static final FoodProperties BLACK_APPLE = new FoodProperties.Builder().nutrition(6)
-                                                                                 .saturationMod(0.5F)
+                                                                                 .saturationModifier(0.5F)
                                                                                  .build();
 
     public ItemBlackApple() {

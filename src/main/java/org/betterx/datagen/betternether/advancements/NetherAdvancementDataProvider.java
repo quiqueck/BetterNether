@@ -14,6 +14,7 @@ import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import net.minecraft.advancements.critereon.ChangeDimensionTrigger;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -21,20 +22,25 @@ import net.minecraft.world.level.block.Blocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class NetherAdvancementDataProvider extends AdvancementDataProvider {
-    public NetherAdvancementDataProvider(FabricDataOutput output) {
-        super(List.of(BetterNether.C.modId), output);
+    public NetherAdvancementDataProvider(
+            FabricDataOutput output,
+            CompletableFuture<HolderLookup.Provider> registryLookup
+    ) {
+        super(List.of(BetterNether.C.modId), output, registryLookup);
     }
 
     @Override
-    protected void bootstrap() {
+    @SuppressWarnings("removal")
+    protected void bootstrap(HolderLookup.Provider registryLookup) {
         ResourceLocation root = AdvancementManager.Builder
                 .create(BetterNether.C.id("root"))
                 .startDisplay(NetherBlocks.CINCINNASITE_LANTERN)
                 .task()
                 .hideFromChat()
-                .background(new ResourceLocation("textures/gui/advancements/backgrounds/nether.png"))
+                .background(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/nether.png"))
                 .endDisplay()
                 .addCriterion(
                         "welcome",
@@ -42,6 +48,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 )
                 .requireOne()
                 .build();
+
 
         ResourceLocation enterNether = AdvancementManager.Builder
                 .create(BetterNether.C.id("enter_nether"))

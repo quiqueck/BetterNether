@@ -8,11 +8,9 @@ import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Map;
 
 public class NetherHoe extends BaseHoeItem implements InitialStackStateProvider {
     public NetherHoe(Tier material, float attackDamage, float attackSpeed) {
@@ -25,10 +23,10 @@ public class NetherHoe extends BaseHoeItem implements InitialStackStateProvider 
     }
 
     @Override
-    public void putEnchantments(ItemStack stack, Map<Enchantment, Integer> defaultEnchants) {
+    public void putEnchantments(ItemStack stack, ItemEnchantments.Mutable defaultEnchants) {
         if (getTier() == BNToolMaterial.FLAMING_RUBY) {
-            defaultEnchants.put(NetherEnchantments.RUBY_FIRE, 1);
-            EnchantmentHelper.setEnchantments(defaultEnchants, stack);
+            defaultEnchants.set(NetherEnchantments.RUBY_FIRE, 1);
+            EnchantmentHelper.setEnchantments(stack, defaultEnchants.toImmutable());
         }
     }
 }

@@ -11,7 +11,7 @@ import mcp.mobius.waila.api.TooltipPosition;
 
 public class WailaPlugin implements IWailaPlugin {
     static class Options {
-        public static final ResourceLocation CROP_PROGRESS = new ResourceLocation("crop_progress");
+        public static final ResourceLocation CROP_PROGRESS = ResourceLocation.withDefaultNamespace("crop_progress");
     }
 
     @Override

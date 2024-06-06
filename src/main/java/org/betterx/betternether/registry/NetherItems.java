@@ -42,6 +42,7 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 public class NetherItems {
@@ -81,7 +82,7 @@ public class NetherItems {
     public static final NetherSet CINCINNASITE_SET = new NetherSet(
             "cincinnasite",
             BNToolMaterial.CINCINNASITE,
-            BNArmorMaterial.CINCINNASITE,
+            BNArmorMaterial.CINCINNASITE.material,
             true
     ).init();
 
@@ -388,5 +389,11 @@ public class NetherItems {
 
 
         return root;
+    }
+
+
+    @ApiStatus.Internal
+    public static void register() {
+        //NO-OP
     }
 }

@@ -9,7 +9,7 @@ import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
 import org.betterx.bclib.furniture.block.BaseTaburet;
-import org.betterx.bclib.registry.BlockRegistry;
+import org.betterx.bclib.util.LegacyTiers;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
@@ -20,15 +20,15 @@ import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
+import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.state.api.WorldState;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -38,10 +38,11 @@ import net.minecraft.world.level.material.MapColor;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 
-import java.util.List;
+import java.util.stream.Stream;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-public class NetherBlocks extends BlockRegistry {
+public class NetherBlocks {
     // Reed //
     public static final Block NETHER_REED_STEM = registerBlock("nether_reed_stem", new BlockNetherReed());
     public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
@@ -70,7 +71,7 @@ public class NetherBlocks extends BlockRegistry {
                     1,
                     3,
                     0,
-                    Tiers.IRON.getLevel(),
+                    LegacyTiers.IRON.level,
                     true
             )
     );
@@ -136,7 +137,7 @@ public class NetherBlocks extends BlockRegistry {
                     1,
                     2,
                     5,
-                    Tiers.DIAMOND.getLevel(),
+                    LegacyTiers.DIAMOND.level,
                     true
             )
     );
@@ -151,7 +152,7 @@ public class NetherBlocks extends BlockRegistry {
                     3,
                     6,
                     3,
-                    Tiers.IRON.getLevel(),
+                    LegacyTiers.IRON.level,
                     false
             )
     );
@@ -712,24 +713,24 @@ public class NetherBlocks extends BlockRegistry {
             new BlockLumabusSeed(GOLDEN_LUMABUS_VINE, () -> NetherVines.GOLDEN_LUMABUS_VINE.getHolder(WorldState.registryAccess()))
     );
 
-    protected NetherBlocks() {
-        super(Configs.BLOCKS);
+    private NetherBlocks() {
+
     }
 
     @NotNull
     public static BlockRegistry getBlockRegistry() {
         if (BLOCKS_REGISTRY == null) {
-            BLOCKS_REGISTRY = new NetherBlocks();
+            BLOCKS_REGISTRY = BlockRegistry.forMod(BetterNether.C);
         }
         return BLOCKS_REGISTRY;
     }
 
-    public static List<Block> getModBlocks() {
-        return BlockRegistry.getModBlocks(BetterNether.C.modId);
+    public static Stream<Block> getModBlocks() {
+        return getBlockRegistry().allBlocks();
     }
 
-    public static List<Item> getModBlockItems() {
-        return BlockRegistry.getModBlockItems(BetterNether.C.modId);
+    public static Stream<BlockItem> getModBlockItems() {
+        return getBlockRegistry().allBlockItems();
     }
 
     @SafeVarargs
@@ -759,11 +760,10 @@ public class NetherBlocks extends BlockRegistry {
     @SafeVarargs
     private static <B extends Block> B registerBlock(String name, B block, boolean hasItem, TagKey<Block>... tags) {
         final BlockRegistry blockRegistry = getBlockRegistry();
-        final ResourceLocation location = new ResourceLocation(BetterNether.C.modId, name);
         if (hasItem) {
-            blockRegistry.register(location, block);
+            blockRegistry.register(name, block);
         } else {
-            blockRegistry.registerBlockOnly(location, block);
+            blockRegistry.registerBlockOnly(name, block);
         }
         if (tags.length > 0) {
             TagManager.BLOCKS.add(block, tags);
@@ -894,7 +894,7 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             Taburet.makeTaburetRecipe(
-                    new ResourceLocation(BetterNether.C.modId, name),
+                    BetterNether.C.mk(name),
                     block,
                     source
             );
@@ -911,7 +911,7 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             Chair.makeChairRecipe(
-                    new ResourceLocation(BetterNether.C.modId, name),
+                    BetterNether.C.mk(name),
                     block,
                     source
             );
@@ -927,7 +927,7 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             BarStool.makeBarStoolRecipe(
-                    new ResourceLocation(BetterNether.C.modId, name),
+                    BetterNether.C.mk(name),
                     block,
                     source
             );
@@ -968,5 +968,10 @@ public class NetherBlocks extends BlockRegistry {
         }
 
         return block;
+    }
+
+    @ApiStatus.Internal
+    public static void register() {
+        //NO-OP
     }
 }

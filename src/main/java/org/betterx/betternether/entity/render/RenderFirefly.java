@@ -145,8 +145,7 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
 }
 
 public class RenderFirefly extends MobRenderer<EntityFirefly, AgeableListModel<EntityFirefly>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(
-            BetterNether.C.modId,
+    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
             "textures/entity/firefly.png"
     );
 

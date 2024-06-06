@@ -6,15 +6,16 @@ import org.betterx.wover.surface.api.conditions.SurfaceRulesContext;
 import org.betterx.wover.surface.api.noise.NumericProvider;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 
 public class NetherGrasslandsNumericProvider implements NumericProvider {
     public static final NetherGrasslandsNumericProvider DEFAULT = new NetherGrasslandsNumericProvider();
-    public static final Codec<NetherGrasslandsNumericProvider> CODEC = Codec.BYTE.fieldOf("nether_grasslands")
-                                                                                 .xmap(
-                                                                                         (obj) -> DEFAULT,
-                                                                                         obj -> (byte) 0
-                                                                                 )
-                                                                                 .codec();
+    public static final MapCodec<NetherGrasslandsNumericProvider> CODEC = Codec.BYTE
+            .fieldOf("nether_grasslands")
+            .xmap(
+                    (obj) -> DEFAULT,
+                    obj -> (byte) 0
+            );
 
     @Override
     public int getNumber(SurfaceRulesContext ctx) {
@@ -25,7 +26,7 @@ public class NetherGrasslandsNumericProvider implements NumericProvider {
     }
 
     @Override
-    public Codec<? extends NumericProvider> pcodec() {
+    public MapCodec<? extends NumericProvider> pcodec() {
         return CODEC;
     }
 

@@ -7,13 +7,13 @@ import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
 import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
 import org.betterx.wover.util.RandomizedWeightedList;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
 import org.jetbrains.annotations.NotNull;
 
 public class Gardens extends RandomNbtStructure {
-    public static final Codec<Gardens> CODEC = RandomNbtStructure.simpleRandomCodec(Gardens::new);
+    public static final MapCodec<Gardens> CODEC = RandomNbtStructure.simpleRandomCodec(Gardens::new);
 
     protected Gardens(
             StructureSettings structureSettings,

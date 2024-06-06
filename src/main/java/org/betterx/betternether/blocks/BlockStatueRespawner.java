@@ -62,7 +62,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
                 "respawn_item",
                 BuiltInRegistries.ITEM.getKey(Items.GLOWSTONE).toString()
         );
-        Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(itemName));
+        Item item = BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace(itemName));
         if (item == Items.AIR)
             item = Items.GLOWSTONE;
         int count = Configs.MAIN.getInt("respawn_statue", "item_count", 4);

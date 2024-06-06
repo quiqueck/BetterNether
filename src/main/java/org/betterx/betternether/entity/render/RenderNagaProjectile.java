@@ -17,8 +17,7 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(
-            BetterNether.C.modId,
+    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
             "textures/entity/naga_projectile.png"
     );
     private static final RenderType LAYER = RenderType.entityCutoutNoCull(TEXTURE);

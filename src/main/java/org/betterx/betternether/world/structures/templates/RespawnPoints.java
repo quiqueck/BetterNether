@@ -7,13 +7,13 @@ import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
 import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
 import org.betterx.wover.util.RandomizedWeightedList;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
 import org.jetbrains.annotations.NotNull;
 
 public class RespawnPoints extends RandomNbtStructure {
-    public static final Codec<RespawnPoints> CODEC = RandomNbtStructure.simpleRandomCodec(RespawnPoints::new);
+    public static final MapCodec<RespawnPoints> CODEC = RandomNbtStructure.simpleRandomCodec(RespawnPoints::new);
 
     protected RespawnPoints(
             StructureSettings structureSettings,

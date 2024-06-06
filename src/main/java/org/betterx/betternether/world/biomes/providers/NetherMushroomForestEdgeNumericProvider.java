@@ -6,11 +6,12 @@ import org.betterx.wover.surface.api.conditions.SurfaceRulesContext;
 import org.betterx.wover.surface.api.noise.NumericProvider;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 
 public class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
     public static final NetherMushroomForestEdgeNumericProvider DEFAULT = new NetherMushroomForestEdgeNumericProvider();
-    public static final Codec<NetherMushroomForestEdgeNumericProvider> CODEC = Codec.BYTE.fieldOf(
-            "nether_mushroom_forrest_edge").xmap((obj) -> DEFAULT, obj -> (byte) 0).codec();
+    public static final MapCodec<NetherMushroomForestEdgeNumericProvider> CODEC = Codec.BYTE.fieldOf(
+            "nether_mushroom_forrest_edge").xmap((obj) -> DEFAULT, obj -> (byte) 0);
 
     @Override
     public int getNumber(SurfaceRulesContext ctx) {
@@ -18,7 +19,7 @@ public class NetherMushroomForestEdgeNumericProvider implements NumericProvider 
     }
 
     @Override
-    public Codec<? extends NumericProvider> pcodec() {
+    public MapCodec<? extends NumericProvider> pcodec() {
         return CODEC;
     }
 }

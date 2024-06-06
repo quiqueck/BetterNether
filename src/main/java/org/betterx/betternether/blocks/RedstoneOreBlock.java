@@ -5,6 +5,7 @@ import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.bclib.interfaces.BlockModelProvider;
 import org.betterx.bclib.interfaces.TagProvider;
+import org.betterx.bclib.util.LegacyTiers;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.client.renderer.block.model.BlockModel;
@@ -13,7 +14,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -55,7 +55,7 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
                 Items.REDSTONE,
                 maxCount,
                 minCount,
-                Tiers.IRON.getLevel(),
+                LegacyTiers.IRON.level(),
                 state,
                 builder
         );

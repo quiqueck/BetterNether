@@ -13,10 +13,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
 public class RenderHydrogenJellyfish extends MobRenderer<EntityHydrogenJellyfish, AgeableListModel<EntityHydrogenJellyfish>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(
-            BetterNether.C.modId,
-            "textures/entity/jellyfish.png"
-    );
+    private static final ResourceLocation TEXTURE =
+            BetterNether.C.mk("textures/entity/jellyfish.png");
 
     public RenderHydrogenJellyfish(EntityRendererProvider.Context ctx) {
         super(ctx, new ModelEntityHydrogenJellyfish(ctx.bakeLayer(EntityRenderRegistry.HYDROGEN_JELLYFISH_MODEL)), 1);

@@ -10,6 +10,7 @@ import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
@@ -17,7 +18,7 @@ public class NetherSet extends EquipmentSet {
     public NetherSet(
             String prefix,
             BNToolMaterial material,
-            ArmorMaterial armor,
+            Holder<ArmorMaterial> armor,
             boolean withShears
     ) {
         this(prefix, null, material, armor, withShears);
@@ -27,7 +28,7 @@ public class NetherSet extends EquipmentSet {
             String prefix,
             EquipmentSet sourceSet,
             BNToolMaterial material,
-            ArmorMaterial armor,
+            Holder<ArmorMaterial> armor,
             boolean withShears
     ) {
         super(

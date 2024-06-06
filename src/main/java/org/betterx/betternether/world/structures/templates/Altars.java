@@ -7,13 +7,13 @@ import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
 import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
 import org.betterx.wover.util.RandomizedWeightedList;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
 import org.jetbrains.annotations.NotNull;
 
 public class Altars extends RandomNbtStructure {
-    public static final Codec<Altars> CODEC = simpleRandomCodec(Altars::new);
+    public static final MapCodec<Altars> CODEC = simpleRandomCodec(Altars::new);
 
     protected Altars(
             StructureSettings structureSettings,

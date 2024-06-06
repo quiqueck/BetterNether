@@ -2,7 +2,7 @@ package org.betterx.datagen.betternether.recipes;
 
 import org.betterx.betternether.loot.BNLoot;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -31,7 +31,7 @@ public class NetherEntityLootTableProvider extends SimpleFabricLootTableProvider
     }
 
     @Override
-    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
         biConsumer.accept(
                 BNLoot.FIREFLY,
                 LootTable.lootTable()

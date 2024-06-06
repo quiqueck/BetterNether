@@ -1,6 +1,5 @@
 package org.betterx.betternether.entity;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 
-import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
@@ -30,15 +28,15 @@ public class EntityJungleSkeleton extends Skeleton {
         super.aiStep();
     }
 
+    @org.jetbrains.annotations.Nullable
     @Override
     public SpawnGroupData finalizeSpawn(
             ServerLevelAccessor level,
             DifficultyInstance difficulty,
             MobSpawnType spawnReason,
-            @Nullable SpawnGroupData entityData,
-            @Nullable CompoundTag entityTag
+            @org.jetbrains.annotations.Nullable SpawnGroupData entityData
     ) {
-        entityData = super.finalizeSpawn(level, difficulty, spawnReason, entityData, entityTag);
+        entityData = super.finalizeSpawn(level, difficulty, spawnReason, entityData);
         final RandomSource randomSource = level.getRandom();
         super.populateDefaultEquipmentSlots(randomSource, difficulty);
 

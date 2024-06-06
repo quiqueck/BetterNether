@@ -37,7 +37,7 @@ public class VanillaFallback<T extends NetherWoodenMaterial<T>> extends NetherWo
     }
 
     public static Block getVanillaBlock(String baseName, String key) {
-        var vanillaID = new ResourceLocation(baseName + "_" + key);
+        var vanillaID = ResourceLocation.withDefaultNamespace(baseName + "_" + key);
         return BuiltInRegistries.BLOCK.get(vanillaID);
     }
 }

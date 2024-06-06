@@ -7,13 +7,13 @@ import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
 import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
 import org.betterx.wover.util.RandomizedWeightedList;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
 import org.jetbrains.annotations.NotNull;
 
 public class Portals extends RandomNbtStructure {
-    public static final Codec<Portals> CODEC = RandomNbtStructure.simpleRandomCodec(Portals::new);
+    public static final MapCodec<Portals> CODEC = RandomNbtStructure.simpleRandomCodec(Portals::new);
 
     protected Portals(
             StructureSettings structureSettings,

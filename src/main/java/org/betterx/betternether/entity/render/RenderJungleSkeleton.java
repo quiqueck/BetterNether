@@ -18,8 +18,7 @@ import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class RenderJungleSkeleton extends MobRenderer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(
-            BetterNether.C.modId,
+    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
             "textures/entity/jungle_skeleton.png"
     );
 

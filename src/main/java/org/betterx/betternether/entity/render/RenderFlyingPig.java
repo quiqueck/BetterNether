@@ -11,12 +11,10 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class RenderFlyingPig extends MobRenderer<EntityFlyingPig, AgeableListModel<EntityFlyingPig>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(
-            BetterNether.C.modId,
+    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
             "textures/entity/flying_pig.png"
     );
-    private static final ResourceLocation TEXTURE_WARTED = new ResourceLocation(
-            BetterNether.C.modId,
+    private static final ResourceLocation TEXTURE_WARTED = BetterNether.C.mk(
             "textures/entity/flying_pig_warted.png"
     );
 

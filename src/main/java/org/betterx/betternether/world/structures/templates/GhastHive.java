@@ -7,13 +7,13 @@ import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
 import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
 import org.betterx.wover.util.RandomizedWeightedList;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
 import org.jetbrains.annotations.NotNull;
 
 public class GhastHive extends RandomNbtStructure {
-    public static final Codec<GhastHive> CODEC = RandomNbtStructure.simpleRandomCodec(GhastHive::new);
+    public static final MapCodec<GhastHive> CODEC = RandomNbtStructure.simpleRandomCodec(GhastHive::new);
 
     protected GhastHive(
             StructureSettings structureSettings,

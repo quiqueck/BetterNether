@@ -4,8 +4,8 @@ import org.betterx.bclib.items.tool.BaseShovelItem;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherEnchantments;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.wover.common.item.api.ItemWithCustomStack;
 import org.betterx.wover.enchantment.api.EnchantmentUtils;
-import org.betterx.wover.item.api.ItemWithCustomStack;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;

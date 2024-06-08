@@ -4,33 +4,33 @@ import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.interfaces.TagProvider;
-import org.betterx.bclib.util.LootUtil;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
+import org.betterx.wover.loot.api.BlockLootProvider;
+import org.betterx.wover.loot.api.LootLookupProvider;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import java.util.Collections;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyliumLike, BehaviourStone {
+public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyliumLike, BehaviourStone, BlockLootProvider {
     protected BonemealAPI.FeatureProvider vegetationFeature;
     public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
             SoundEvents.NETHERRACK_BREAK,
@@ -47,18 +47,6 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
 
     public void setVegetationFeature(BonemealAPI.FeatureProvider vegetationFeature) {
         this.vegetationFeature = vegetationFeature;
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (LootUtil.isCorrectTool(this, state, tool)) {
-            if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0)
-                return Collections.singletonList(new ItemStack(this.asItem()));
-            else
-                return Collections.singletonList(new ItemStack(Blocks.NETHERRACK));
-        } else
-            return super.getDrops(state, builder);
     }
 
     @Override
@@ -88,5 +76,14 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
     @Override
     public @Nullable Holder<? extends ConfiguredFeature<?, ?>> getCoverFeature() {
         return vegetationFeature.getFeature();
+    }
+
+    @Override
+    public @Nullable LootTable.Builder registerBlockLoot(
+            @NotNull ResourceLocation location,
+            @NotNull LootLookupProvider provider,
+            @NotNull ResourceKey<LootTable> tableKey
+    ) {
+        return provider.dropWithSilkTouch(this, Blocks.NETHERRACK, ConstantValue.exactly(1));
     }
 }

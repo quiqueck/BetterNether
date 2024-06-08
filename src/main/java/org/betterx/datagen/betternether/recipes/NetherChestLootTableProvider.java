@@ -32,23 +32,16 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
-import net.fabricmc.fabric.impl.datagen.FabricDataGenHelper;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
 
+//Based on Fabrics SimpleLootTableProvider. The generate method in that class does not provide access
+//to a HolderLookup.Provider, which is required to get enchantments from the registry.
 public class NetherChestLootTableProvider implements DataProvider {
     protected final FabricDataOutput output;
     private final CompletableFuture<HolderLookup.Provider> registryLookup;
@@ -64,8 +57,35 @@ public class NetherChestLootTableProvider implements DataProvider {
     }
 
     @Override
-    public @NotNull CompletableFuture<?> run(CachedOutput writer) {
-        return run(writer, this, lootContextType, output, registryLookup);
+    public @NotNull CompletableFuture<?> run(@NotNull CachedOutput writer) {
+        final HashMap<ResourceLocation, LootTable> builders = new HashMap<>();
+
+        return registryLookup.thenCompose(lookup -> {
+            this.boostrap(lookup, (registryKey, builder) -> {
+                if (builders.containsKey(registryKey.location()))
+                    throw new IllegalStateException("Duplicate loot table for " + registryKey.location());
+
+                builders.put(registryKey.location(), builder.setParamSet(lootContextType).build());
+            });
+
+            final RegistryOps<JsonElement> ops = lookup.createSerializationContext(JsonOps.INSTANCE);
+            return CompletableFuture.allOf(
+                    builders
+                            .entrySet()
+                            .stream()
+                            .map(entry -> DataProvider
+                                    .saveStable(
+                                            writer,
+                                            LootTable.DIRECT_CODEC
+                                                    .encodeStart(ops, entry.getValue())
+                                                    .getOrThrow(IllegalStateException::new),
+                                            output.createRegistryElementsPathProvider(Registries.LOOT_TABLE)
+                                                  .json(entry.getKey())
+                                    )
+                            )
+                            .toArray(CompletableFuture[]::new)
+            );
+        });
     }
 
     @Override
@@ -73,60 +93,9 @@ public class NetherChestLootTableProvider implements DataProvider {
         return "BetterNether Loot Table";
     }
 
-    public static CompletableFuture<?> run(
-            CachedOutput writer,
-            NetherChestLootTableProvider provider,
-            LootContextParamSet lootContextType,
-            FabricDataOutput fabricDataOutput,
-            CompletableFuture<HolderLookup.Provider> registryLookup
-    ) {
-        HashMap<ResourceLocation, LootTable> builders = Maps.newHashMap();
-        HashMap<ResourceLocation, ResourceCondition[]> conditionMap = new HashMap<>();
-
-        return registryLookup.thenCompose(lookup -> {
-            provider.generate(lookup, (registryKey, builder) -> {
-                ResourceCondition[] conditions = FabricDataGenHelper.consumeConditions(builder);
-                conditionMap.put(registryKey.location(), conditions);
-
-                if (builders.put(registryKey.location(), builder.setParamSet(lootContextType).build()) != null) {
-                    throw new IllegalStateException("Duplicate loot table " + registryKey.location());
-                }
-            });
-
-            RegistryOps<JsonElement> ops = lookup.createSerializationContext(JsonOps.INSTANCE);
-            final List<CompletableFuture<?>> futures = new ArrayList<>();
-
-            for (Map.Entry<ResourceLocation, LootTable> entry : builders.entrySet()) {
-                JsonObject tableJson = (JsonObject) LootTable.DIRECT_CODEC
-                        .encodeStart(ops, entry.getValue())
-                        .getOrThrow(IllegalStateException::new);
-                FabricDataGenHelper.addConditions(tableJson, conditionMap.remove(entry.getKey()));
-                futures.add(DataProvider.saveStable(writer, tableJson, getOutputPath(fabricDataOutput, entry.getKey())));
-            }
-
-            return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
-        });
-    }
-
-    private static Path getOutputPath(FabricDataOutput dataOutput, ResourceLocation lootTableId) {
-        return dataOutput.createRegistryElementsPathProvider(Registries.LOOT_TABLE).json(lootTableId);
-    }
-
-    private BiConsumer<ResourceKey<LootTable>, LootTable.Builder> withConditions(
-            BiConsumer<ResourceKey<LootTable>, LootTable.Builder> exporter,
-            ResourceCondition... conditions
-    ) {
-        Preconditions.checkArgument(conditions.length > 0, "Must add at least one condition.");
-        return (id, table) -> {
-            FabricDataGenHelper.addConditions(table, conditions);
-            exporter.accept(id, table);
-        };
-    }
-
-
-    public void generate(
-            HolderLookup.Provider lookup,
-            BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer
+    public void boostrap(
+            @NotNull HolderLookup.Provider lookup,
+            @NotNull BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer
     ) {
         final HolderLookup.RegistryLookup<Enchantment> enchantments = lookup.lookupOrThrow(Registries.ENCHANTMENT);
 

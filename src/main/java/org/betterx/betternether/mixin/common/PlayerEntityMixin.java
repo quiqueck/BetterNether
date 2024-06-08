@@ -4,12 +4,13 @@ import org.betterx.betternether.blocks.BlockStatueRespawner;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,23 +18,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
-@Mixin(Player.class)
+@Mixin(ServerPlayer.class)
 public abstract class PlayerEntityMixin {
 
-    @Inject(method = "findRespawnPositionAndUseSpawnBlock", at = @At(value = "HEAD"), cancellable = true)
-    private static void statueRespawn(
-            ServerLevel world,
-            BlockPos pos,
-            float f,
-            boolean bl,
-            boolean bl2,
-            CallbackInfoReturnable<Optional<Vec3>> info
+    @Shadow
+    public abstract ServerLevel serverLevel();
+
+    @Inject(method = "getRespawnPosition", at = @At(value = "HEAD"), cancellable = true)
+    private void bn_statueRespawn(
+            CallbackInfoReturnable<BlockPos> info
     ) {
-        BlockState blockState = world.getBlockState(pos);
-        Block block = blockState.getBlock();
+        final BlockPos pos = info.getReturnValue();
+        final BlockState blockState = this.serverLevel().getBlockState(pos);
+        final Block block = blockState.getBlock();
         if (block instanceof BlockStatueRespawner) {
-            info.setReturnValue(bn_findRespawnPosition(world, pos, blockState));
-            info.cancel();
+            final Optional<Vec3> op = bn_findRespawnPosition(this.serverLevel(), pos, blockState);
+            if (op.isPresent()) {
+                info.setReturnValue(new BlockPos((int) op.get().x, (int) op.get().y, (int) op.get().z));
+                info.cancel();
+            }
+
         }
     }
 

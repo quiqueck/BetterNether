@@ -1,9 +1,10 @@
 package org.betterx.betternether.registry;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class BrewingRegistry {
         RECIPES.add(new BrewingRecipe(source, bottle, result));
     }
 
-    private static ItemStack makePotion(Potion potion) {
-        return PotionUtils.setPotion(new ItemStack(Items.POTION), potion);
+    private static ItemStack makePotion(Holder<Potion> potion) {
+        return PotionContents.createItemStack(Items.POTION, potion);
     }
 
     public static class BrewingRecipe {

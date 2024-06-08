@@ -41,7 +41,7 @@ public class BNLoot {
 
     public static void register() {
 
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+        LootTableEvents.MODIFY.register((id, table, source) -> {
             if (BuiltInLootTables.RUINED_PORTAL.equals(id) || BuiltInLootTables.NETHER_BRIDGE.equals(id)) {
                 table.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0, 4))
                                        .add(LootItem.lootTableItem(NetherBlocks.BLUE_OBSIDIAN.asItem())

@@ -1,23 +1,26 @@
 package org.betterx.datagen.betternether;
 
-import org.betterx.bclib.api.v3.datagen.TagDataProvider;
-import org.betterx.betternether.BetterNether;
-import org.betterx.worlds.together.tag.v3.TagManager;
+import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.registry.NetherTags;
+import org.betterx.wover.core.api.ModCore;
+import org.betterx.wover.datagen.api.WoverTagProvider;
+import org.betterx.wover.tag.api.event.context.ItemTagBootstrapContext;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.world.item.Item;
+public class NetherItemTagDataProvider extends WoverTagProvider.ForItems {
+    public NetherItemTagDataProvider(ModCore modCore) {
+        super(modCore);
+    }
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+    @Override
+    protected void prepareTags(ItemTagBootstrapContext context) {
+        context.add(
+                NetherTags.FLAMING_RUBY_ENCHANTABLE,
+                NetherItems.FLAMING_RUBY_SET.getAll()
+        );
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
-public class NetherItemTagDataProvider extends TagDataProvider<Item> {
-
-    public NetherItemTagDataProvider(
-            FabricDataOutput output,
-            CompletableFuture<HolderLookup.Provider> registriesFuture
-    ) {
-        super(TagManager.ITEMS, List.of(BetterNether.C.modId), output, registriesFuture);
+        context.add(
+                NetherTags.OBSIDIAN_BREAKER_ENCHANTABLE,
+                NetherTags.NETHER_PICKAXES
+        );
     }
 }

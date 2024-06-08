@@ -2,15 +2,11 @@ package org.betterx.betternether.registry;
 
 import org.betterx.betternether.BetterNether;
 import org.betterx.worlds.together.tag.v3.TagManager;
-import org.betterx.wover.complex.api.tool.ArmorSlot;
-import org.betterx.wover.complex.api.tool.ToolSlot;
 
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 public class NetherTags {
     public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagManager.BIOMES.makeStructureTag(
@@ -32,37 +28,16 @@ public class NetherTags {
     );
 
     public static final TagKey<Item> FLAMING_RUBY_ENCHANTABLE = TagManager.ITEMS.makeTag(BetterNether.C.modId, "flaming_ruby_enchantable");
+    public static final TagKey<Item> FLAMING_RUBY_PRIMARY = TagManager.ITEMS.makeTag(BetterNether.C.modId, "flaming_ruby_primary");
+
+    public static final TagKey<Item> OBSIDIAN_BREAKER_ENCHANTABLE = TagManager.ITEMS.makeTag(BetterNether.C.modId, "obsidian_breaker_enchantable");
+    public static final TagKey<Item> OBSIDIAN_BREAKER_PRIMARY = TagManager.ITEMS.makeTag(BetterNether.C.modId, "obsidian_breaker_primary");
+    public static final TagKey<Block> OBSIDIAN_BREAKER_MINEABLE = TagManager.BLOCKS.makeTag(BetterNether.C.modId, "obsidian_breaker_mineable");
+
+    public static final TagKey<Item> NETHER_PICKAXES = TagManager.ITEMS.makeTag(BetterNether.C.modId, "pickaxes");
 
     public static void register() {
-        TagManager.BLOCKS.add(NETHER_SAND, Blocks.SOUL_SAND);
-        TagManager.BLOCKS.add(BlockTags.BEACON_BASE_BLOCKS, NetherBlocks.NETHER_RUBY_BLOCK);
 
-        TagManager.BLOCKS.add(
-                FIREFLY_FLOWERS,
-                NetherBlocks.NETHER_GRASS,
-                NetherBlocks.SOUL_GRASS,
-                NetherBlocks.SWAMP_GRASS,
-                NetherBlocks.BLACK_APPLE,
-                NetherBlocks.MAGMA_FLOWER,
-                NetherBlocks.SOUL_VEIN,
-                NetherBlocks.MAT_REED.getStem(),
-                NetherBlocks.INK_BUSH,
-                NetherBlocks.INK_BUSH_SEED,
-                NetherBlocks.POTTED_PLANT,
-                Blocks.NETHER_WART
-        );
 
-        TagManager.ITEMS.add(
-                FLAMING_RUBY_ENCHANTABLE,
-                NetherItems.FLAMING_RUBY_SET.get(ArmorSlot.BOOTS_SLOT),
-                NetherItems.FLAMING_RUBY_SET.get(ArmorSlot.CHESTPLATE_SLOT),
-                NetherItems.FLAMING_RUBY_SET.get(ArmorSlot.HELMET_SLOT),
-                NetherItems.FLAMING_RUBY_SET.get(ArmorSlot.LEGGINGS_SLOT),
-                NetherItems.FLAMING_RUBY_SET.get(ToolSlot.AXE_SLOT),
-                NetherItems.FLAMING_RUBY_SET.get(ToolSlot.HOE_SLOT),
-                NetherItems.FLAMING_RUBY_SET.get(ToolSlot.PICKAXE_SLOT),
-                NetherItems.FLAMING_RUBY_SET.get(ToolSlot.SHOVEL_SLOT),
-                NetherItems.FLAMING_RUBY_SET.get(ToolSlot.SWORD_SLOT)
-        );
     }
 }

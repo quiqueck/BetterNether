@@ -8,7 +8,6 @@
     "BlockBehaviourAccessor",
     "BlockBehaviourMixin",
     "BrewingRecipeRegistryMixin",
-    "ChunkGeneratorDebugMixin",
     "CraftingScreenHandlerMixin",
     "DefaultAttributeRegistryMixin",
     "DeltaFeatureMixin",
@@ -21,14 +20,13 @@
     "MapMixin",
     "MappedRegistryMixin",
     "MapStateMixin",
-    "MiningToolItemMixin",
     "MushroomMixin",
     "NetherWartMixin",
     "PlayerEntityMixin",
     "PortalShapeMixin",
-    "RecipeManagerAccessor",
     "RecipeManagerMixin",
-    "SmithingTransformRecipeMixin"
+    "SmithingTransformRecipeMixin",
+    "obsidian_breaker.PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -21,7 +21,10 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -41,8 +44,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -71,15 +74,15 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         super(type, world);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.lookControl = new FreflyLookControl(this);
-        this.setPathfindingMalus(BlockPathTypes.LAVA, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
+        this.setPathfindingMalus(PathType.LAVA, -1.0F);
+        this.setPathfindingMalus(PathType.WATER, -1.0F);
+        this.setPathfindingMalus(PathType.DANGER_FIRE, 0.0F);
         this.xpReward = 1;
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
         makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.25F, 1);
     }
 
@@ -144,10 +147,6 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         return true;
     }
 
-    @Override
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
-    }
 
     @Override
     protected void jumpInLiquid(TagKey<Fluid> fluid) {
@@ -332,7 +331,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 
         @Override
         public void stop() {
-            if (isFlower(EntityFirefly.this.getFeetBlockState()))
+            if (isFlower(EntityFirefly.this.getInBlockState()))
                 EntityFirefly.this.mustSit = true;
             super.stop();
         }
@@ -513,9 +512,10 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                 blue = (byte) (f6 * 255F + 0.5F);
                 break;
         }
-        this.entityData.define(COLOR_RED, red / 255F);
-        this.entityData.define(COLOR_GREEN, green / 255F);
-        this.entityData.define(COLOR_BLUE, blue / 255F);
+
+        this.entityData.set(COLOR_RED, red / 255F);
+        this.entityData.set(COLOR_GREEN, green / 255F);
+        this.entityData.set(COLOR_BLUE, blue / 255F);
     }
 
     @Override

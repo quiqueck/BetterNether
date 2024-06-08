@@ -14,7 +14,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -91,12 +90,11 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
 
 
     @Override
-    public InteractionResult use(
+    public InteractionResult useWithoutItem(
             BlockState state,
             Level world,
             BlockPos pos,
             Player player,
-            InteractionHand hand,
             BlockHitResult hit
     ) {
         ItemStack stack = player.getMainHandItem();

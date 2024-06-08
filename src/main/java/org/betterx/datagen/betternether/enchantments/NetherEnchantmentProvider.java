@@ -12,6 +12,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
@@ -20,6 +21,8 @@ import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.item.enchantment.effects.*;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.EnchantmentLevelProvider;
+
+import java.util.List;
 
 public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
     public NetherEnchantmentProvider(ModCore modCore) {
@@ -35,8 +38,8 @@ public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
                 .enchantment(
                         Enchantment.definition(
                                 itemGetter.getOrThrow(NetherTags.FLAMING_RUBY_ENCHANTABLE),
-                                itemGetter.getOrThrow(ItemTags.CHEST_ARMOR_ENCHANTABLE),
-                                1, 1,
+                                itemGetter.getOrThrow(NetherTags.FLAMING_RUBY_PRIMARY),
+                                10, 1,
                                 Enchantment.dynamicCost(20, 20),
                                 Enchantment.dynamicCost(120, 20),
                                 1,
@@ -65,6 +68,28 @@ public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
                 .withEffect(
                         EnchantmentEffectComponents.KNOCKBACK,
                         new AddValue(LevelBasedValue.perLevel(1.0f, 2.0f))
+                )
+        );
+
+        NetherEnchantments.OBSIDIAN_BREAKER.register(context, Enchantment
+                .enchantment(
+                        Enchantment.definition(
+                                itemGetter.getOrThrow(ItemTags.MINING_ENCHANTABLE),
+                                10, 5,
+                                Enchantment.dynamicCost(20, 20),
+                                Enchantment.dynamicCost(120, 20),
+                                1,
+                                EquipmentSlotGroup.MAINHAND
+                        )
+                )
+                .withEffect(
+                        EnchantmentEffectComponents.ATTRIBUTES,
+                        new EnchantmentAttributeEffect(
+                                NetherEnchantments.OBSIDIAN_BLOCK_BREAK_SPEED.unwrapKey().orElseThrow().location(),
+                                NetherEnchantments.OBSIDIAN_BLOCK_BREAK_SPEED,
+                                new LevelBasedValue.Lookup(List.of(6f, 12f, 18f), new LevelBasedValue.LevelsSquared(9.0F)),
+                                AttributeModifier.Operation.ADD_VALUE
+                        )
                 )
         );
     }

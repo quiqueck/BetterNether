@@ -235,7 +235,6 @@ public class CommandRegistry {
 
         List<Block> blocks = new LinkedList<>();
         for (Block block : NetherBlocks.getModBlocks()
-                                       .stream()
                                        .sorted(CommandRegistry::compareBlockNames)
                                        .collect(Collectors.toList())) {
             final String name = BuiltInRegistries.BLOCK.getKey(block).getPath();
@@ -383,7 +382,6 @@ public class CommandRegistry {
         List<Block> other = new LinkedList<>();
 
         for (Block block : NetherBlocks.getModBlocks()
-                                       .stream()
                                        .sorted(CommandRegistry::compareBlockNames)
                                        .collect(Collectors.toList())) {
             final BlockState state = block.defaultBlockState();

@@ -20,7 +20,7 @@ import net.fabricmc.api.ModInitializer;
 
 public class BetterNether implements ModInitializer {
     public static final ModCore C = ModCore.create("betternether");
-    
+
     @Deprecated(forRemoval = true)
     public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER
             = new org.betterx.worlds.together.util.Logger(C.modId);
@@ -40,6 +40,7 @@ public class BetterNether implements ModInitializer {
 
         initOptions();
         SoundsRegistry.ensureStaticallyLoaded();
+        NetherEnchantments.ensureStaticallyLoaded();
         NetherBlocks.register();
         BlockEntitiesRegistry.register();
         NetherItems.register();

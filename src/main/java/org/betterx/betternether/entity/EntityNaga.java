@@ -69,11 +69,6 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
     }
 
     @Override
-    public MobType getMobType() {
-        return MobType.UNDEAD;
-    }
-
-    @Override
     public boolean canBeAffected(MobEffectInstance effect) {
         return effect.getEffect() != MobEffects.WITHER && super.canBeAffected(effect);
     }

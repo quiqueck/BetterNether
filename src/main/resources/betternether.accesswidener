@@ -17,6 +17,7 @@ accessible    class    net/minecraft/world/level/levelgen/flat/FlatLevelGenerato
 # Methods
 accessible method net/minecraft/server/commands/LocateCommand getHolders (Lnet/minecraft/commands/arguments/ResourceOrTagKeyArgument$Result;Lnet/minecraft/core/Registry;)Ljava/util/Optional;
 accessible method net/minecraft/world/level/block/state/BlockBehaviour canSurvive (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;)Z
+extendable method net/minecraft/world/entity/Entity getEyeHeight (Lnet/minecraft/world/entity/Pose;)F
 
 # Constructors
 accessible method net/minecraft/client/particle/DripParticle$DripHangParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V

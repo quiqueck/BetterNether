@@ -8,6 +8,7 @@ import org.betterx.betternether.registry.NetherEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -39,14 +40,15 @@ import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -63,8 +65,8 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
     public EntityFlyingPig(EntityType<? extends EntityFlyingPig> type, Level world) {
         super(type, world);
         this.moveControl = new FlyingMoveControl(this, 20, true);
-        this.setPathfindingMalus(BlockPathTypes.LAVA, 0.0F);
-        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.setPathfindingMalus(PathType.LAVA, 0.0F);
+        this.setPathfindingMalus(PathType.WATER, 0.0F);
         this.xpReward = 2;
     }
 
@@ -110,9 +112,9 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_SHARED_FLAGS_ID, MHelper.setBit((byte) 0, BIT_WARTED, random.nextInt(4) == 0));
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_SHARED_FLAGS_ID, MHelper.setBit((byte) 0, BIT_WARTED, random.nextInt(4) == 0));
     }
 
     @Override
@@ -460,7 +462,8 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
         private boolean hasNearFood() {
             AABB box = new AABB(EntityFlyingPig.this.blockPosition()).inflate(16);
             foods = EntityFlyingPig.this.level().getEntitiesOfClass(ItemEntity.class, box, (entity) -> {
-                return entity.getItem().isEdible();
+                FoodProperties foodProperties = entity.getItem().get(DataComponents.FOOD);
+                return foodProperties != null;
             });
             return !foods.isEmpty();
         }

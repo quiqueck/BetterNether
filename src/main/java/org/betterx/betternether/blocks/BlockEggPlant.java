@@ -8,6 +8,7 @@ import org.betterx.betternether.registry.NetherEntities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -73,7 +74,7 @@ public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherG
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (!state.getValue(DESTRUCTED))
             world.addParticle(
-                    ParticleTypes.ENTITY_EFFECT,
+                    ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, 0xFFFFFFFF),
                     pos.getX() + random.nextDouble(),
                     pos.getY() + 0.4,
                     pos.getZ() + random.nextDouble(),

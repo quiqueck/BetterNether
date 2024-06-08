@@ -7,15 +7,12 @@ import org.betterx.betternether.registry.NetherTemplates;
 import org.betterx.wover.complex.api.tool.ArmorSlot;
 import org.betterx.wover.complex.api.tool.EquipmentSet;
 import org.betterx.wover.complex.api.tool.ToolSlot;
+import org.betterx.wover.core.api.ModCore;
+import org.betterx.wover.datagen.api.provider.WoverLootTableProvider;
 
-import com.mojang.serialization.JsonOps;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
-import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -25,72 +22,19 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-
-import com.google.gson.JsonElement;
-
-import java.util.HashMap;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
 
-//Based on Fabrics SimpleLootTableProvider. The generate method in that class does not provide access
-//to a HolderLookup.Provider, which is required to get enchantments from the registry.
-public class NetherChestLootTableProvider implements DataProvider {
-    protected final FabricDataOutput output;
-    private final CompletableFuture<HolderLookup.Provider> registryLookup;
-    protected final LootContextParamSet lootContextType;
-
+public class NetherChestLootTableProvider extends WoverLootTableProvider {
     public NetherChestLootTableProvider(
-            FabricDataOutput output,
-            CompletableFuture<HolderLookup.Provider> registryLookup
+            ModCore modCore
     ) {
-        lootContextType = LootContextParamSets.CHEST;
-        this.output = output;
-        this.registryLookup = registryLookup;
-    }
-
-    @Override
-    public @NotNull CompletableFuture<?> run(@NotNull CachedOutput writer) {
-        final HashMap<ResourceLocation, LootTable> builders = new HashMap<>();
-
-        return registryLookup.thenCompose(lookup -> {
-            this.boostrap(lookup, (registryKey, builder) -> {
-                if (builders.containsKey(registryKey.location()))
-                    throw new IllegalStateException("Duplicate loot table for " + registryKey.location());
-
-                builders.put(registryKey.location(), builder.setParamSet(lootContextType).build());
-            });
-
-            final RegistryOps<JsonElement> ops = lookup.createSerializationContext(JsonOps.INSTANCE);
-            return CompletableFuture.allOf(
-                    builders
-                            .entrySet()
-                            .stream()
-                            .map(entry -> DataProvider
-                                    .saveStable(
-                                            writer,
-                                            LootTable.DIRECT_CODEC
-                                                    .encodeStart(ops, entry.getValue())
-                                                    .getOrThrow(IllegalStateException::new),
-                                            output.createRegistryElementsPathProvider(Registries.LOOT_TABLE)
-                                                  .json(entry.getKey())
-                                    )
-                            )
-                            .toArray(CompletableFuture[]::new)
-            );
-        });
-    }
-
-    @Override
-    public @NotNull String getName() {
-        return "BetterNether Loot Table";
+        super(modCore, "BetterNether Loot Table", LootContextParamSets.CHEST);
     }
 
     public void boostrap(

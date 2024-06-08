@@ -22,7 +22,7 @@ public class SoundsRegistry {
     public static final Holder<SoundEvent> MOB_SKULL_FLIGHT = registerHolder("betternether.mob.skull_flight");
 
     public static SoundEvent register(String id) {
-        ResourceLocation loc = new ResourceLocation(BetterNether.C.modId, id);
+        ResourceLocation loc = BetterNether.C.mk(id);
         return Registry.register(
                 BuiltInRegistries.SOUND_EVENT,
                 loc,
@@ -31,7 +31,7 @@ public class SoundsRegistry {
     }
 
     public static Holder<SoundEvent> registerHolder(String id) {
-        ResourceLocation loc = new ResourceLocation(BetterNether.C.modId, id);
+        ResourceLocation loc = BetterNether.C.mk(id);
         return Registry.registerForHolder(
                 BuiltInRegistries.SOUND_EVENT,
                 loc,

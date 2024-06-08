@@ -7,7 +7,6 @@ import org.betterx.betternether.entity.render.*;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 
 import net.fabricmc.api.EnvType;
@@ -28,7 +27,7 @@ public class EntityRenderRegistry {
 
     public static ModelLayerLocation registerMain(String id) {
         //System.out.println("Register Entity: " + id);
-        return new ModelLayerLocation(new ResourceLocation(BetterNether.C.modId, id), DEFAULT_LAYER);
+        return new ModelLayerLocation(BetterNether.C.mk(id), DEFAULT_LAYER);
         //return EntityModelLayersMixin.callRegisterMain(key);
     }
 

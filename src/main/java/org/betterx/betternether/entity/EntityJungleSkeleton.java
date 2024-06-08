@@ -43,7 +43,7 @@ public class EntityJungleSkeleton extends Skeleton {
         this.setItemSlot(EquipmentSlot.MAINHAND, getHandItem());
         this.setItemSlot(EquipmentSlot.OFFHAND, getRandomOffhandItem());
 
-        this.populateDefaultEquipmentEnchantments(randomSource, difficulty);
+        this.populateDefaultEquipmentEnchantments(level, randomSource, difficulty);
         this.reassessWeaponGoal();
         this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier());
         if (this.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {

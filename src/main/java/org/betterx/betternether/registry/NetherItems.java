@@ -2,7 +2,6 @@ package org.betterx.betternether.registry;
 
 import org.betterx.bclib.BCLib;
 import org.betterx.bclib.items.DebugDataItem;
-import org.betterx.bclib.items.complex.EquipmentSet;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 import org.betterx.betternether.config.Configs;
@@ -12,9 +11,12 @@ import org.betterx.betternether.items.ItemBlackApple;
 import org.betterx.betternether.items.ItemBowlFood;
 import org.betterx.betternether.items.complex.DiamondSet;
 import org.betterx.betternether.items.complex.NetherSet;
-import org.betterx.betternether.items.materials.BNArmorMaterial;
+import org.betterx.betternether.items.materials.BNArmorTiers;
 import org.betterx.betternether.items.materials.BNToolMaterial;
+import org.betterx.betternether.items.materials.BNToolTiers;
 import org.betterx.betternether.loot.BNLoot;
+import org.betterx.wover.complex.api.tool.ArmorSlot;
+import org.betterx.wover.complex.api.tool.ToolSlot;
 import org.betterx.wover.item.api.ItemRegistry;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -81,28 +83,28 @@ public class NetherItems {
 
     public static final NetherSet CINCINNASITE_SET = new NetherSet(
             "cincinnasite",
-            BNToolMaterial.CINCINNASITE,
-            BNArmorMaterial.CINCINNASITE.material,
+            BNToolTiers.CINCINNASITE,
+            BNArmorTiers.CINCINNASITE,
             true
-    ).init();
+    );
 
 
     public static final NetherSet NETHER_RUBY_SET = new NetherSet(
             "nether_ruby",
-            BNToolMaterial.NETHER_RUBY,
-            BNArmorMaterial.NETHER_RUBY,
+            BNToolTiers.NETHER_RUBY,
+            BNArmorTiers.NETHER_RUBY,
             false
-    ).init();
+    );
 
-    public static final DiamondSet CINCINNASITE_DIAMOND_SET = new DiamondSet(CINCINNASITE_SET).init();
+    public static final DiamondSet CINCINNASITE_DIAMOND_SET = new DiamondSet(CINCINNASITE_SET);
 
     public static final NetherSet FLAMING_RUBY_SET = new NetherSet(
             "flaming_ruby",
-            NETHER_RUBY_SET,
-            BNToolMaterial.FLAMING_RUBY,
-            BNArmorMaterial.FLAMING_RUBY,
-            false
-    ).init();
+            BNToolTiers.FLAMING_RUBY,
+            BNArmorTiers.FLAMING_RUBY,
+            false,
+            NETHER_RUBY_SET
+    );
     public static final Item CINCINNASITE_HAMMER = registerItem(
             "cincinnasite_hammer",
             VanillaHammersIntegration.makeHammer(
@@ -258,6 +260,32 @@ public class NetherItems {
         return new Item.Properties();
     }
 
+    public static Properties createDefaultNetherArmorSettings(ArmorItem.Type type, int durability) {
+        return NetherItems.defaultSettings().fireResistant().durability(type.getDurability(durability));
+    }
+
+    public static Item.Properties createDefaultNetherToolSettings(
+            Tier material,
+            float attackDamage,
+            float attackSpeed
+    ) {
+        return NetherItems
+                .defaultSettings()
+                .fireResistant()
+                .attributes(DiggerItem.createAttributes(material, attackDamage, attackSpeed));
+    }
+
+    public static Item.Properties createDefaultNetherSwordSettings(
+            Tier material,
+            float attackDamage,
+            float attackSpeed
+    ) {
+        return NetherItems
+                .defaultSettings()
+                .fireResistant()
+                .attributes(SwordItem.createAttributes(material, (int) attackDamage, attackSpeed));
+    }
+
     public static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
         if (Configs.MOBS.getBoolean("mobs", name, true)) {
             SpawnEggItem egg = new SpawnEggItem(type, background, dots, defaultSettings());
@@ -308,7 +336,8 @@ public class NetherItems {
             ListTag chants = new ListTag();
             tag.put("Enchantments", chants);
             for (ResourceKey<Enchantment> e : enchantments) {
-                ResourceLocation eID = BuiltInRegistries.ENCHANTMENT.getKey(e);
+                EnchantmentHelper.
+                        ResourceLocation eID = BuiltInRegistries.ENCHANTMENT.getKey(e);
                 chants.add(EnchantmentHelper.storeEnchantment(eID, e.getMaxLevel()));
             }
         }
@@ -318,29 +347,29 @@ public class NetherItems {
     @NotNull
     private static CompoundTag buildCitySpawnerData() {
         ListTag handItems = new ListTag();
-        handItems.add(buildItem(1, CINCINNASITE_DIAMOND_SET.getSlot(EquipmentSet.SWORD_SLOT)));
+        handItems.add(buildItem(1, CINCINNASITE_DIAMOND_SET.get(ToolSlot.SWORD_SLOT)));
         handItems.add(buildItem(1, Items.SHIELD));
 
         ListTag armorItems = new ListTag();
         armorItems.add(buildItem(
                 1,
-                CINCINNASITE_SET.getSlot(EquipmentSet.BOOTS_SLOT),
+                CINCINNASITE_SET.get(ArmorSlot.BOOTS_SLOT),
                 Enchantments.PROTECTION
         ));
         armorItems.add(buildItem(
                 1,
-                CINCINNASITE_SET.getSlot(EquipmentSet.LEGGINGS_SLOT),
+                CINCINNASITE_SET.get(ArmorSlot.LEGGINGS_SLOT),
                 Enchantments.PROTECTION
         ));
         armorItems.add(buildItem(
                 1,
-                CINCINNASITE_SET.getSlot(EquipmentSet.CHESTPLATE_SLOT),
+                CINCINNASITE_SET.get(ArmorSlot.CHESTPLATE_SLOT),
                 Enchantments.PROTECTION,
                 Enchantments.THORNS
         ));
         armorItems.add(buildItem(
                 1,
-                CINCINNASITE_SET.getSlot(EquipmentSet.HELMET_SLOT),
+                CINCINNASITE_SET.get(ArmorSlot.HELMET_SLOT),
                 Enchantments.PROTECTION
         ));
 

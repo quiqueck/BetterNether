@@ -1,34 +1,33 @@
 package org.betterx.betternether.items.materials;
 
-import org.betterx.bclib.items.complex.EquipmentSet;
-import org.betterx.bclib.items.complex.SmithingSet;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.betternether.registry.NetherTemplates;
 
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 
-public enum BNToolMaterial implements Tier, SmithingSet {
-    CINCINNASITE(2, 512, 6.2F, 2.5F, 16, NetherItems.CINCINNASITE_INGOT,
-            EquipmentSet.AttackDamage.IRON_LEVEL,
-            EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.IRON_LEVEL, 0.2f)
-    ),
-    CINCINNASITE_DIAMOND(3, 2061, 8.2F, 3.7F, 14, Items.DIAMOND, NetherTemplates.CINCINNASITE_DIAMOND_TEMPLATE,
-            EquipmentSet.AttackDamage.DIAMOND_LEVEL,
-            EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.DIAMOND_LEVEL, 0.3f)
-    ),
+import org.jetbrains.annotations.NotNull;
 
-    NETHER_RUBY(3, 2561, 7.1F, 3.1F, 18, NetherItems.NETHER_RUBY,
-            EquipmentSet.AttackDamage.DIAMOND_LEVEL,
-            EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.DIAMOND_LEVEL, 0.2f)
+public enum BNToolMaterial implements Tier {
+    CINCINNASITE(Tiers.IRON.getIncorrectBlocksForDrops(),
+            2, 512, 6.2F, 2.5F, 16,
+            NetherItems.CINCINNASITE_INGOT
     ),
-
-    FLAMING_RUBY(4, 2861, 10.4F, 6.0F, 32, Items.SCULK_CATALYST, NetherTemplates.FLAMING_RUBY_TEMPLATE,
-            EquipmentSet.AttackDamage.NETHERITE_LEVEL,
-            EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.NETHERITE_LEVEL, 0.4f)
+    CINCINNASITE_DIAMOND(Tiers.DIAMOND.getIncorrectBlocksForDrops(),
+            3, 2061, 8.2F, 3.7F, 14,
+            Items.DIAMOND
+    ),
+    NETHER_RUBY(Tiers.DIAMOND.getIncorrectBlocksForDrops(),
+            3, 2561, 7.1F, 3.1F, 18,
+            NetherItems.NETHER_RUBY
+    ),
+    FLAMING_RUBY(Tiers.NETHERITE.getIncorrectBlocksForDrops(),
+            4, 2861, 10.4F, 6.0F, 32,
+            Items.SCULK_CATALYST
     );
 
 
@@ -46,44 +45,25 @@ public enum BNToolMaterial implements Tier, SmithingSet {
     private final int enchantibility;
     private final float damage;
     private final ItemLike reapair;
-    private final SmithingTemplateItem smithingTemplateItem;
-
-    public final EquipmentSet.SetValues attackDamages;
-    public final EquipmentSet.SetValues attackSpeeds;
+    public final TagKey<Block> incorrectBlocksForDrops;
 
     BNToolMaterial(
+            TagKey<Block> incorrectBlocksForDrops,
             int level,
             int uses,
             float speed,
             float damage,
             int enchantibility,
-            ItemLike reapair,
-            EquipmentSet.SetValues attackDamages,
-            EquipmentSet.SetValues attackSpeeds
+            ItemLike reapair
     ) {
-        this(level, uses, speed, damage, enchantibility, reapair, null, attackDamages, attackSpeeds);
-    }
 
-    BNToolMaterial(
-            int level,
-            int uses,
-            float speed,
-            float damage,
-            int enchantibility,
-            ItemLike reapair,
-            SmithingTemplateItem smithingTemplateItem,
-            EquipmentSet.SetValues attackDamages,
-            EquipmentSet.SetValues attackSpeeds
-    ) {
+        this.incorrectBlocksForDrops = incorrectBlocksForDrops;
         this.uses = uses;
         this.speed = speed;
         this.level = level;
         this.enchantibility = enchantibility;
         this.damage = damage;
         this.reapair = reapair;
-        this.smithingTemplateItem = smithingTemplateItem;
-        this.attackDamages = attackDamages;
-        this.attackSpeeds = attackSpeeds;
     }
 
     @Override
@@ -102,6 +82,11 @@ public enum BNToolMaterial implements Tier, SmithingSet {
     }
 
     @Override
+    public @NotNull TagKey<Block> getIncorrectBlocksForDrops() {
+        return this.incorrectBlocksForDrops;
+    }
+
+    @Deprecated(forRemoval = true)
     public int getLevel() {
         return level;
     }
@@ -112,12 +97,7 @@ public enum BNToolMaterial implements Tier, SmithingSet {
     }
 
     @Override
-    public Ingredient getRepairIngredient() {
+    public @NotNull Ingredient getRepairIngredient() {
         return Ingredient.of(reapair);
-    }
-
-    @Override
-    public SmithingTemplateItem getSmithingTemplateItem() {
-        return this.smithingTemplateItem;
     }
 }

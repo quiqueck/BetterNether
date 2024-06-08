@@ -3,21 +3,20 @@ package org.betterx.betternether.items;
 import org.betterx.bclib.items.tool.BasePickaxeItem;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherEnchantments;
-import org.betterx.betternether.registry.NetherItems;
 import org.betterx.wover.common.item.api.ItemWithCustomStack;
 import org.betterx.wover.enchantment.api.EnchantmentUtils;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantments;
 
 public class NetherPickaxe extends BasePickaxeItem implements ItemWithCustomStack {
-    public NetherPickaxe(Tier material, float attackDamage, float attackSpeed) {
-        super(material, (int) attackDamage, attackSpeed, NetherItems.defaultSettings().fireResistant());
+    public NetherPickaxe(Tier material, Item.Properties settings) {
+        super(material, settings);
     }
-
 
     @Override
     public void setupItemStack(ItemStack stack, HolderLookup.Provider provider) {
@@ -28,12 +27,12 @@ public class NetherPickaxe extends BasePickaxeItem implements ItemWithCustomStac
                 obsidianLevel = 1;
             } else if (this.getTier() == BNToolMaterial.FLAMING_RUBY) {
                 obsidianLevel = 3;
-                EnchantmentUtils.enchantInWorld(stack, NetherEnchantments.RUBY_FIRE_KEY, 1, lookup);
+                EnchantmentUtils.enchantInWorld(stack, NetherEnchantments.RUBY_FIRE.key(), 1, lookup);
                 EnchantmentUtils.enchantInWorld(stack, Enchantments.MENDING, 1, lookup);
             }
 
             if (obsidianLevel > 0) {
-                EnchantmentUtils.enchantInWorld(stack, NetherEnchantments.OBSIDIAN_BREAKER_KEY, obsidianLevel, lookup);
+                EnchantmentUtils.enchantInWorld(stack, NetherEnchantments.OBSIDIAN_BREAKER.key(), obsidianLevel, lookup);
             }
         });
 

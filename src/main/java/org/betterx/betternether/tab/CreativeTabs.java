@@ -1,12 +1,12 @@
 package org.betterx.betternether.tab;
 
 import org.betterx.bclib.creativetab.BCLCreativeTab;
-import org.betterx.bclib.items.complex.EquipmentSet;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.WillowMaterial;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.wover.complex.api.tool.ToolSlot;
 
 public class CreativeTabs {
     public static void register() {
@@ -23,9 +23,9 @@ public class CreativeTabs {
                 .buildAndAdd()
                 .createBlockOnlyTab(NetherBlocks.JUNGLE_GRASS)
                 .buildAndAdd()
-                .createItemOnlyTab(NetherItems.FLAMING_RUBY_SET.getSlot(EquipmentSet.PICKAXE_SLOT))
+                .createItemOnlyTab(NetherItems.FLAMING_RUBY_SET.get(ToolSlot.PICKAXE_SLOT))
                 .buildAndAdd()
                 .processRegistries()
-                .registerAll();
+                .registerAllTabs();
     }
 }

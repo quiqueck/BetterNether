@@ -51,10 +51,10 @@ public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
         Matrix4f matrix4f = entry.pose();
         Matrix3f matrix3f = entry.normal();
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
-        vertex(vertexConsumer, matrix4f, matrix3f, i, 0.0F, 0, 0, end);
-        vertex(vertexConsumer, matrix4f, matrix3f, i, 1.0F, 0, 1, end);
-        vertex(vertexConsumer, matrix4f, matrix3f, i, 1.0F, 1, 1, start);
-        vertex(vertexConsumer, matrix4f, matrix3f, i, 0.0F, 1, 0, start);
+        vertex(vertexConsumer, matrix4f, entry, i, 0.0F, 0, 0, end);
+        vertex(vertexConsumer, matrix4f, entry, i, 1.0F, 0, 1, end);
+        vertex(vertexConsumer, matrix4f, entry, i, 1.0F, 1, 1, start);
+        vertex(vertexConsumer, matrix4f, entry, i, 0.0F, 1, 0, start);
         matrixStack.popPose();
         super.render(dragonFireballEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
@@ -62,19 +62,18 @@ public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
     private static void vertex(
             VertexConsumer vertexConsumer,
             Matrix4f matrix4f,
-            Matrix3f matrix3f,
+            PoseStack.Pose pose,
             int i,
             float f,
             int j,
             float u,
             float v
     ) {
-        vertexConsumer.vertex(matrix4f, f - 0.5F, (float) j - 0.25F, 0.0F)
-                      .color(255, 255, 255, 255)
-                      .uv(u, v)
-                      .overlayCoords(OverlayTexture.NO_OVERLAY)
-                      .uv2(i)
-                      .normal(matrix3f, 0.0F, 1.0F, 0.0F)
-                      .endVertex();
+        vertexConsumer.addVertex(matrix4f, f - 0.5F, (float) j - 0.25F, 0.0F)
+                      .setColor(255, 255, 255, 255)
+                      .setUv(u, v)
+                      .setOverlay(OverlayTexture.NO_OVERLAY)
+                      .setLight(i)
+                      .setNormal(pose, 0.0F, 1.0F, 0.0F);
     }
 }

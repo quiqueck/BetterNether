@@ -8,10 +8,8 @@ import org.betterx.betternether.registry.NetherBlocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -80,16 +78,6 @@ public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMet
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
-    }
-
-    @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.has(DataComponents.CUSTOM_NAME)) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof BlockEntityChestOfDrawers) {
-                ((BlockEntityChestOfDrawers) blockEntity).setCustomName(itemStack.getHoverName());
-            }
-        }
     }
 
     @Override

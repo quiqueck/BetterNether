@@ -9,7 +9,6 @@ import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
 import org.betterx.bclib.furniture.block.BaseTaburet;
-import org.betterx.bclib.util.LegacyTiers;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
@@ -18,10 +17,10 @@ import org.betterx.betternether.blocks.complex.slots.VanillaWood;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
-import org.betterx.worlds.together.tag.v3.CommonBlockTags;
-import org.betterx.worlds.together.tag.v3.TagManager;
 import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.complex.api.tool.ToolTiers;
 import org.betterx.wover.state.api.WorldState;
+import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
@@ -71,7 +70,7 @@ public class NetherBlocks {
                     1,
                     3,
                     0,
-                    LegacyTiers.IRON.level,
+                    ToolTiers.IRON_TOOL.blockTag,
                     true
             )
     );
@@ -137,7 +136,7 @@ public class NetherBlocks {
                     1,
                     2,
                     5,
-                    LegacyTiers.DIAMOND.level,
+                    ToolTiers.DIAMOND_TOOL.blockTag,
                     true
             )
     );
@@ -152,7 +151,7 @@ public class NetherBlocks {
                     3,
                     6,
                     3,
-                    LegacyTiers.IRON.level,
+                    ToolTiers.IRON_TOOL.blockTag,
                     false
             )
     );
@@ -544,7 +543,7 @@ public class NetherBlocks {
             CommonBlockTags.MYCELIUM,
             CommonBlockTags.NETHER_MYCELIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK,
-            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_MYCELIUM
+            org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHER_MYCELIUM
     );
     public static final BlockTerrain JUNGLE_GRASS = registerBlock(
             "jungle_grass",
@@ -736,10 +735,7 @@ public class NetherBlocks {
     @SafeVarargs
     public static <T extends Block> T registerBlock(String name, T block, TagKey<Block>... tags) {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            if (tags.length > 0) {
-                TagManager.BLOCKS.add(block, tags);
-            }
+            registerBlockDirectly(name, block, tags);
         }
         return block;
     }
@@ -753,21 +749,19 @@ public class NetherBlocks {
     }
 
 
-    public static void registerBlockDirectly(String name, Block block) {
-        registerBlock(name, block, true);
+    public static void registerBlockDirectly(String name, Block block, TagKey<Block>... tags) {
+        registerBlock(name, block, true, tags);
     }
 
     @SafeVarargs
     private static <B extends Block> B registerBlock(String name, B block, boolean hasItem, TagKey<Block>... tags) {
         final BlockRegistry blockRegistry = getBlockRegistry();
         if (hasItem) {
-            blockRegistry.register(name, block);
+            blockRegistry.register(name, block, tags);
         } else {
-            blockRegistry.registerBlockOnly(name, block);
+            blockRegistry.registerBlockOnly(name, block, tags);
         }
-        if (tags.length > 0) {
-            TagManager.BLOCKS.add(block, tags);
-        }
+
         return block;
     }
 
@@ -780,13 +774,10 @@ public class NetherBlocks {
     public static Block registerStairs(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
         Block stairs = BaseStairsBlock.from(source, fireproof);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, stairs);
+            registerBlockDirectly(name, stairs, tags);
             if (stairs.defaultBlockState().ignitedByLava())
                 addFuel(source, stairs);
             RecipesHelper.makeStairsRecipe(source, stairs);
-            if (tags.length > 0) {
-                TagManager.BLOCKS.add(stairs, tags);
-            }
         }
         return stairs;
     }
@@ -794,13 +785,11 @@ public class NetherBlocks {
     public static Block registerSlab(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
         Block slab = BaseSlabBlock.from(source, fireproof);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, slab);
+            registerBlockDirectly(name, slab, tags);
             if (slab.defaultBlockState().ignitedByLava())
                 addFuel(source, slab);
             RecipesHelper.makeSlabRecipe(source, slab);
-            if (tags.length > 0) {
-                TagManager.BLOCKS.add(slab, tags);
-            }
+
         }
         return slab;
     }
@@ -850,14 +839,12 @@ public class NetherBlocks {
             Block result,
             String group,
             RecipeCategory category,
-            Block... sources
+            Block source
     ) {
-        final Block block = registerMakeable2X2(name, result, group, category, sources);
-        TagManager.BLOCKS.add(
-                block,
-                BlockTags.SOUL_FIRE_BASE_BLOCKS,
-                BlockTags.SOUL_SPEED_BLOCKS
+        final Block block = registerMakeable2X2(name, result, group, category, source,
+                BlockTags.SOUL_FIRE_BASE_BLOCKS, BlockTags.SOUL_SPEED_BLOCKS
         );
+        ;
         return block;
     }
 
@@ -866,13 +853,12 @@ public class NetherBlocks {
             Block result,
             String group,
             RecipeCategory category,
-            Block... sources
+            Block source,
+            TagKey<Block>... tags
     ) {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, result);
-            for (Block source : sources) {
-                RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
-            }
+            registerBlockDirectly(name, result, tags);
+            RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
         }
         return result;
     }
@@ -880,8 +866,7 @@ public class NetherBlocks {
     public static Block registerWall(String name, Block source) {
         Block wall = BNWall.from(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, wall);
-            TagManager.BLOCKS.add(wall, BlockTags.WALLS);
+            registerBlockDirectly(name, wall, BlockTags.WALLS);
             RecipesHelper.makeWallRecipe(source, wall);
         }
         return wall;
@@ -891,15 +876,13 @@ public class NetherBlocks {
     public static Block registerTaburet(String name, Block source) {
         Block block = BaseTaburet.from(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
+            registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
             addFuel(source, block);
             Taburet.makeTaburetRecipe(
                     BetterNether.C.mk(name),
                     block,
                     source
             );
-
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
         }
 
         return block;
@@ -908,14 +891,13 @@ public class NetherBlocks {
     public static Block registerChair(String name, Block source) {
         Block block = BaseChair.from(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
+            registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
             addFuel(source, block);
             Chair.makeChairRecipe(
                     BetterNether.C.mk(name),
                     block,
                     source
             );
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
         }
 
         return block;
@@ -924,14 +906,13 @@ public class NetherBlocks {
     public static Block registerBarStool(String name, Block source) {
         Block block = BaseBarStool.from(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
+            registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_PICKAXE);
             addFuel(source, block);
             BarStool.makeBarStoolRecipe(
                     BetterNether.C.mk(name),
                     block,
                     source
             );
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
         }
 
         return block;

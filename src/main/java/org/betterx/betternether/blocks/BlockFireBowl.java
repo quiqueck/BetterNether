@@ -8,6 +8,7 @@ import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -84,8 +85,9 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
         if (hit.getDirection() == Direction.UP) {
             if (player.getMainHandItem().getItem() == Items.FLINT_AND_STEEL && !state.getValue(FIRE)) {
                 world.setBlockAndUpdate(pos, state.setValue(FIRE, true));
-                if (!player.isCreative() && !world.isClientSide)
-                    player.getMainHandItem().hurt(1, world.random, (ServerPlayer) player);
+                if (!player.isCreative() && world instanceof ServerLevel serverLevel)
+                    player.getMainHandItem().hurtAndBreak(1, serverLevel, (ServerPlayer) player, item -> {
+                    });
                 world.playSound(
                         player,
                         pos,

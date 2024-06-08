@@ -3,14 +3,16 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourVine;
 import org.betterx.bclib.items.tool.BaseShearsItem;
-import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockProperties;
+import org.betterx.wover.loot.api.BlockLootProvider;
+import org.betterx.wover.loot.api.LootLookupProvider;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -18,8 +20,6 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -31,8 +31,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -40,11 +46,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import com.google.common.collect.Lists;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
-public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, BehaviourVine {
+public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, BehaviourVine, BlockLootProvider {
     private static final VoxelShape SELECTION = box(2, 0, 2, 14, 16, 14);
     public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
@@ -123,20 +128,6 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (LootUtil.isCorrectTool(this, state, tool) || EnchantmentHelper.getItemEnchantmentLevel(
-                Enchantments.SILK_TOUCH,
-                tool
-        ) > 0)
-            return Lists.newArrayList(new ItemStack(this.asItem()));
-        else if (state.getValue(SHAPE) == BlockProperties.TripleShape.BOTTOM || MHelper.RANDOM.nextBoolean())
-            return Lists.newArrayList(new ItemStack(this.asItem()));
-        else
-            return Lists.newArrayList();
-    }
-
-    @Override
     public boolean isRandomlyTicking(BlockState state) {
         return state.getValue(SHAPE) == BlockProperties.TripleShape.BOTTOM;
     }
@@ -194,5 +185,34 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
         } else {
             return super.useItemOn(itemStack, state, world, pos, player, hand, hit);
         }
+    }
+
+    @Override
+    public @Nullable LootTable.Builder registerBlockLoot(
+            @NotNull ResourceLocation location,
+            @NotNull LootLookupProvider provider,
+            @NotNull ResourceKey<LootTable> tableKey
+    ) {
+        var stateCondition = LootItemBlockStatePropertyCondition
+                .hasBlockStateProperties(this)
+                .setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder
+                        .properties()
+                        .hasProperty(SHAPE, BlockProperties.TripleShape.BOTTOM));
+        return LootTable.lootTable().withPool(LootPool
+                .lootPool()
+                .when(provider.silkTouchCondition())
+                .setRolls(ConstantValue.exactly(1.0F))
+                .add(LootItem.lootTableItem(this)
+                             .when(stateCondition)
+                )
+        ).withPool(LootPool
+                .lootPool()
+                .when(provider.silkTouchCondition())
+                .setRolls(ConstantValue.exactly(1.0F))
+                .add(LootItem.lootTableItem(this)
+                             .when(InvertedLootItemCondition.invert(stateCondition))
+                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))
+                )
+        );
     }
 }

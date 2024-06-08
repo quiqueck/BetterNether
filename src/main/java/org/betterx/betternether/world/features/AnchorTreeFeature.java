@@ -5,7 +5,6 @@ import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockPlantWall;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import org.betterx.betternether.world.structures.plants.LegacyStructureAnchorTree;
 
@@ -54,10 +53,6 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             StructureGeneratorThreadContext context
     ) {
         pos = new BlockPos(toMiddle(pos.getX()), pos.getY(), toMiddle(pos.getZ()));
-        if (LegacyNetherBiomeBuilder.useLegacyGeneration) {
-            legacyStructure.generate(world, pos, random, MAX_HEIGHT, context);
-            return true;
-        }
 
         BlockPos down = pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT));
         if (canGenerate(pos)) {
@@ -84,17 +79,12 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         final int HEIGHT_45;
         final int HEIGHT_90;
         final int SEGMENT_LENGTH;
-        if (LegacyNetherBiomeBuilder.useLegacyGeneration) {
-            HEIGHT_64 = MAX_HEIGHT / 2;
-            HEIGHT_45 = (int) (MAX_HEIGHT * 0.36);
-            HEIGHT_90 = (int) (MAX_HEIGHT * 0.7);
-            SEGMENT_LENGTH = (int) (15 * scale_factor);
-        } else {
-            HEIGHT_64 = (int) (MAX_HEIGHT / 4.0 + MHelper.nextFloat(random, 32));
-            HEIGHT_45 = (int) (20 + MHelper.nextFloat(random, 20 * scale_factor));
-            HEIGHT_90 = (int) (MAX_HEIGHT / 2.0 + MHelper.nextFloat(random, 15 * scale_factor));
-            SEGMENT_LENGTH = (int) ((15 + MHelper.nextFloat(random, 5 * scale_factor)) * scale_factor);
-        }
+
+        HEIGHT_64 = (int) (MAX_HEIGHT / 4.0 + MHelper.nextFloat(random, 32));
+        HEIGHT_45 = (int) (20 + MHelper.nextFloat(random, 20 * scale_factor));
+        HEIGHT_90 = (int) (MAX_HEIGHT / 2.0 + MHelper.nextFloat(random, 15 * scale_factor));
+        SEGMENT_LENGTH = (int) ((15 + MHelper.nextFloat(random, 5 * scale_factor)) * scale_factor);
+
         if (up.getY() - down.getY() < 30) return;
         int pd = BlocksHelper.downRay(level, down, MAX_HEIGHT) + 1;
         for (int i = 0; i < 5; i++) {

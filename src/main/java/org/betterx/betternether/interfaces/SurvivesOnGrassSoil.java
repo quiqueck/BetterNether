@@ -1,7 +1,7 @@
 package org.betterx.betternether.interfaces;
 
 import org.betterx.bclib.interfaces.SurvivesOnTags;
-import org.betterx.worlds.together.tag.v3.CommonBlockTags;
+import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;

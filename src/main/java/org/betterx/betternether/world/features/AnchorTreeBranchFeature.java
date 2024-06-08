@@ -5,7 +5,6 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import org.betterx.wover.feature.api.features.GrowableFeature;
 
@@ -362,16 +361,10 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
         final int HEIGHT_15;
         final int HEIGHT_17;
 
-        if (LegacyNetherBiomeBuilder.useLegacyGeneration) {
-            HEIGHT_10 = (int) (10 * scale_factor);
-            HEIGHT_15 = (int) (15 * scale_factor);
-            HEIGHT_17 = (int) (17 * scale_factor);
-        } else {
-            float rnd = MHelper.nextFloat(random, 5 * scale_factor);
-            HEIGHT_10 = (int) (10 * scale_factor + rnd);
-            HEIGHT_15 = (int) (15 * scale_factor + rnd);
-            HEIGHT_17 = (int) (17 * scale_factor + rnd);
-        }
+        float rnd = MHelper.nextFloat(random, 5 * scale_factor);
+        HEIGHT_10 = (int) (10 * scale_factor + rnd);
+        HEIGHT_15 = (int) (15 * scale_factor + rnd);
+        HEIGHT_17 = (int) (17 * scale_factor + rnd);
 
         BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
         BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();

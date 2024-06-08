@@ -6,12 +6,10 @@ import org.betterx.betternether.client.IRenderTypeable;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -69,16 +67,6 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
             }
 
             return ItemInteractionResult.SUCCESS;
-        }
-    }
-
-    @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.has(DataComponents.CUSTOM_NAME)) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof BNBrewingStandBlockEntity) {
-                ((BNBrewingStandBlockEntity) blockEntity).setCustomName(itemStack.getHoverName());
-            }
         }
     }
 

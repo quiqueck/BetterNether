@@ -58,7 +58,7 @@ public class ConvertByLightningTrigger
         }
 
         public boolean matches(ItemStack itemStack) {
-            return this.item.matches(itemStack);
+            return this.item.test(itemStack);
         }
 
         @Override

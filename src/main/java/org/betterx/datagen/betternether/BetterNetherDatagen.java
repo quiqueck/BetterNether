@@ -47,8 +47,6 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
             if (location == null) {
                 pack.addProvider(NetherRecipeDataProvider::new);
                 pack.addProvider(NetherAdvancementDataProvider::new);
-                pack.addProvider(LegacyNetherBlockTagDataProvider::new);
-                pack.addProvider(LegacyNetherItemTagDataProvider::new);
                 pack.addProvider(NetherBlockLootTableProvider::new);
             }
         });

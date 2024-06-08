@@ -79,15 +79,15 @@ public class BlocksHelper {
     }
 
     public static boolean isNetherrack(BlockState state) {
-        return state.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHERRACK);
+        return state.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHERRACK);
     }
 
     public static boolean isSoulSand(BlockState state) {
-        return state.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.SOUL_GROUND);
+        return state.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.SOUL_GROUND);
     }
 
     public static boolean isNetherGround(BlockState state) {
-        return state.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_STONES) || isSoulSand(state) || isNetherMycelium(
+        return state.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHER_STONES) || isSoulSand(state) || isNetherMycelium(
                 state) || isNylium(state);
     }
 
@@ -96,7 +96,7 @@ public class BlocksHelper {
     }
 
     public static boolean isNetherMycelium(BlockState state) {
-        return state.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_MYCELIUM);
+        return state.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHER_MYCELIUM);
     }
 
     public static void setWithUpdate(LevelAccessor world, BlockPos pos, BlockState state, BoundingBox bounds) {

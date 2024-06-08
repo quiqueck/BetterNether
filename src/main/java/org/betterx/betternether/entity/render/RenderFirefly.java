@@ -53,11 +53,9 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
             RenderType renderLayer = RenderPhaseAccessor.getFirefly(identifier);
             VertexConsumer vertexConsumer = vertices.getBuffer(renderLayer);
 
-            float red = livingEntity.getRed();
-            float green = livingEntity.getGreen();
-            float blue = livingEntity.getBlue();
+            int color = livingEntity.getColor();
 
-            addViewAlignedGlow(matrices, vertexConsumer, red, green, blue);
+            addViewAlignedGlow(matrices, vertexConsumer, color);
 
 
             ((ModelEntityFirefly) model).getGlowPart()
@@ -66,10 +64,7 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
                                                 vertexConsumer,
                                                 light,
                                                 OverlayTexture.NO_OVERLAY,
-                                                red * 2,
-                                                green * 2,
-                                                blue * 2,
-                                                1f
+                                                color
                                         );
             ((ModelEntityFirefly) model).getGlowPart()
                                         .render(
@@ -77,10 +72,7 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
                                                 vertexConsumer,
                                                 light,
                                                 OverlayTexture.NO_OVERLAY,
-                                                red * 2,
-                                                green * 2,
-                                                blue * 2,
-                                                1f
+                                                color
                                         );
 
         }
@@ -89,9 +81,7 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
     private void addViewAlignedGlow(
             PoseStack matrices,
             VertexConsumer vertexConsumer,
-            float red,
-            float green,
-            float blue
+            int color
     ) {
         matrices.pushPose();
 
@@ -113,10 +103,10 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
         Matrix4f matrix4f = entry.pose();
         Matrix3f matrix3f = entry.normal();
 
-        addVertex(matrix4f, matrix3f, vertexConsumer, -1, -1, 0F, 0.5F, red, green, blue);
-        addVertex(matrix4f, matrix3f, vertexConsumer, 1, -1, 1F, 0.5F, red, green, blue);
-        addVertex(matrix4f, matrix3f, vertexConsumer, 1, 1, 1F, 1F, red, green, blue);
-        addVertex(matrix4f, matrix3f, vertexConsumer, -1, 1, 0F, 1F, red, green, blue);
+        addVertex(matrix4f, entry, vertexConsumer, -1, -1, 0F, 0.5F, color);
+        addVertex(matrix4f, entry, vertexConsumer, 1, -1, 1F, 0.5F, color);
+        addVertex(matrix4f, entry, vertexConsumer, 1, 1, 1F, 1F, color);
+        addVertex(matrix4f, entry, vertexConsumer, -1, 1, 0F, 1F, color);
 
         //emptyModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue,  1f);
         matrices.popPose();
@@ -124,23 +114,21 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
 
     public static void addVertex(
             Matrix4f matrix4f,
-            Matrix3f matrix3f,
+            PoseStack.Pose matrix3f,
             VertexConsumer vertexConsumer,
             float posX,
             float posY,
             float u,
             float v,
-            float red,
-            float green,
-            float blue
+            int color
     ) {
         vertexConsumer
-                .vertex(matrix4f, posX, posY, 0)
-                .color(red, green, blue, 1F)
-                .uv(u, v)
-                .overlayCoords(OverlayTexture.NO_OVERLAY)
-                .uv2(LIT)
-                .normal(matrix3f, 0, 1, 0).endVertex();
+                .addVertex(matrix4f, posX, posY, 0)
+                .setColor(color)
+                .setUv(u, v)
+                .setOverlay(OverlayTexture.NO_OVERLAY)
+                .setLight(LIT)
+                .setNormal(matrix3f, 0, 1, 0);
     }
 }
 

@@ -4,10 +4,7 @@ import org.betterx.bclib.api.v2.advancement.AdvancementManager;
 import org.betterx.bclib.api.v3.datagen.AdvancementDataProvider;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.advancements.BNCriterion;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherItems;
-import org.betterx.betternether.registry.NetherStructures;
-import org.betterx.betternether.registry.NetherTemplates;
+import org.betterx.betternether.registry.*;
 import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.wover.complex.api.tool.ArmorSlot;
 import org.betterx.wover.complex.api.tool.ToolSlot;
@@ -15,14 +12,18 @@ import org.betterx.wover.complex.api.tool.ToolSlot;
 import net.minecraft.advancements.critereon.ChangeDimensionTrigger;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class NetherAdvancementDataProvider extends AdvancementDataProvider {
@@ -278,6 +279,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .requireAll()
                 .build();
 
+        final HolderLookup.RegistryLookup<Biome> biomeLookup = registryLookup.lookupOrThrow(Registries.BIOME);
 
         if (!LegacyNetherBiomeBuilder.getAllBnBiomes().isEmpty()) {
             ResourceLocation allTheBiomes = AdvancementManager.Builder
@@ -286,10 +288,13 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                     .startDisplay(NetherItems.NETHER_RUBY_SET.get(ArmorSlot.BOOTS_SLOT))
                     .challenge()
                     .endDisplay()
-                    .addVisitBiomesCriterion(LegacyNetherBiomeBuilder.getAllBnBiomes()
-                                                                     .stream()
-                                                                     .map(b -> b.getBiomeKey())
-                                                                     .toList())
+                    .addVisitBiomesCriterion(biomeLookup.get(NetherTags.BETTER_NETHER)
+                                                        .orElseThrow()
+                                                        .stream()
+                                                        .map(Holder::unwrapKey)
+                                                        .filter(Optional::isPresent)
+                                                        .map(Optional::get)
+                                                        .toList())
                     .requireAll()
                     .rewardXP(1500)
                     .build();

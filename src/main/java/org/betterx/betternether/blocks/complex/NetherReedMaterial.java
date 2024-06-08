@@ -101,7 +101,7 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
     @Override
     public BoatTypeOverride supplyBoatType() {
         return BoatTypeOverride.create(
-                getModID(),
+                C,
                 getBaseName(),
                 getBlock(WoodSlots.PLANKS),
                 true

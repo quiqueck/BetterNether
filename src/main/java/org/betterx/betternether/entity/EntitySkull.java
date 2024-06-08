@@ -5,13 +5,12 @@ import org.betterx.betternether.registry.SoundsRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -24,7 +23,7 @@ import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -85,38 +84,24 @@ public class EntitySkull extends Monster implements FlyingAnimal {
         }
     }
 
+    protected float getAttackDamage() {
+        return (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+    }
+
     @Override
     public void playerTouch(Player player) {
         collideTick++;
-        if (collideTick > 25) {
+        if (this.isAlive() && collideTick > 25) {
             collideTick = 0;
-
-            boolean shield = player.getUseItem().getItem() instanceof ShieldItem && player.isUsingItem();
-            if (shield) {
-                player.playSound(
-                        SoundEvents.SHIELD_BLOCK,
-                        MHelper.randRange(0.8F, 1.2F, random),
-                        MHelper.randRange(0.8F, 1.2F, random)
-                );
-                this.setDeltaMovement(new Vec3(0, 0, 0).subtract(getDeltaMovement()));
-            }
-            if (player instanceof ServerPlayer) {
-                if (shield) {
-                    player.getUseItem().hurt(1, random, (ServerPlayer) player);
-                    if (player.getUseItem().getDamageValue() > player.getUseItem().getMaxDamage()) {
-                        player.broadcastBreakEvent(player.getUsedItemHand());
-                        if (player.getUsedItemHand().equals(InteractionHand.MAIN_HAND))
-                            player.getInventory().items.clear();
-                        else if (player.getUsedItemHand().equals(InteractionHand.OFF_HAND))
-                            player.getInventory().offhand.clear();
-                        player.stopUsingItem();
-                    }
-                    return;
+            DamageSource damageSource = this.damageSources().mobAttack(this);
+            if (player.hurt(damageSource, this.getAttackDamage())) {
+                this.playSound(SoundEvents.SLIME_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                if (this.level() instanceof ServerLevel serverLevel) {
+                    EnchantmentHelper.doPostAttackEffects(serverLevel, player, damageSource);
                 }
-                player.hurt(player.damageSources().generic(), 1);
-                if (random.nextInt(16) == 0)
-                    player.setSecondsOnFire(3);
             }
+            if (random.nextInt(16) == 0)
+                player.igniteForSeconds(3);
         }
     }
 
@@ -239,7 +224,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
     @Override
     @Environment(EnvType.CLIENT)
     public float getEyeHeight(Pose pose) {
-        return this.getDimensions(pose).height * 0.5F;
+        return this.getDimensions(pose).height() * 0.5F;
     }
 
     @Override

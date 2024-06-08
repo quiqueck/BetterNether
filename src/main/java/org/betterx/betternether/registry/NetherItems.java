@@ -18,6 +18,7 @@ import org.betterx.betternether.loot.BNLoot;
 import org.betterx.wover.complex.api.tool.ArmorSlot;
 import org.betterx.wover.complex.api.tool.ToolSlot;
 import org.betterx.wover.item.api.ItemRegistry;
+import org.betterx.wover.tag.api.predefined.CommonItemTags;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -37,7 +38,6 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
@@ -77,7 +77,7 @@ public class NetherItems {
 
     public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
     public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()),
-            org.betterx.worlds.together.tag.v3.CommonItemTags.IRON_INGOTS
+            CommonItemTags.IRON_INGOTS
     );
     public static final Item NETHER_RUBY = registerItem("nether_ruby", new Item(defaultSettings()));
 
@@ -332,15 +332,16 @@ public class NetherItems {
         tag.putString("id", id.toString());
         tag.putByte("Count", (byte) count);
 
-        if (enchantments.length > 0) {
-            ListTag chants = new ListTag();
-            tag.put("Enchantments", chants);
-            for (ResourceKey<Enchantment> e : enchantments) {
-                EnchantmentHelper.
-                        ResourceLocation eID = BuiltInRegistries.ENCHANTMENT.getKey(e);
-                chants.add(EnchantmentHelper.storeEnchantment(eID, e.getMaxLevel()));
-            }
-        }
+        //TODO: 1.21 find a way to use enchantments here
+//        if (enchantments.length > 0) {
+//            ListTag chants = new ListTag();
+//            tag.put("Enchantments", chants);
+//            for (ResourceKey<Enchantment> e : enchantments) {
+//                EnchantmentHelper.
+//                        ResourceLocation eID = BuiltInRegistries.ENCHANTMENT.getKey(e);
+//                chants.add(EnchantmentHelper.storeEnchantment(eID, e.getMaxLevel()));
+//            }
+//        }
         return tag;
     }
 

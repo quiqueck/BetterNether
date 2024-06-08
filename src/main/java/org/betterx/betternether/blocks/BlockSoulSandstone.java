@@ -1,13 +1,13 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
-import org.betterx.bclib.interfaces.TagProvider;
-import org.betterx.worlds.together.tag.v3.CommonBlockTags;
+import org.betterx.wover.block.api.BlockTagProvider;
+import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
+import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -18,9 +18,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import java.util.List;
-
-public class BlockSoulSandstone extends BlockBase implements TagProvider, BehaviourStone {
+public class BlockSoulSandstone extends BlockBase implements BlockTagProvider, BehaviourStone {
     public static final BooleanProperty UP = BooleanProperty.create("up");
 
     public BlockSoulSandstone() {
@@ -51,7 +49,7 @@ public class BlockSoulSandstone extends BlockBase implements TagProvider, Behavi
     }
 
     @Override
-    public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
-        blockTags.add(CommonBlockTags.NETHER_TERRAIN);
+    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+        context.add(this, CommonBlockTags.NETHER_TERRAIN);
     }
 }

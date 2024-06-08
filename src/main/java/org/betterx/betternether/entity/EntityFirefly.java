@@ -7,6 +7,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherTags;
 import org.betterx.betternether.registry.SoundsRegistry;
+import org.betterx.ui.ColorUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -51,21 +52,14 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumSet;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
     private static final Vec3i[] SEARCH;
 
-    private static final EntityDataAccessor<Float> COLOR_RED = SynchedEntityData.defineId(
+    private static final EntityDataAccessor<Integer> COLOR = SynchedEntityData.defineId(
             EntityFirefly.class,
-            EntityDataSerializers.FLOAT
-    );
-    private static final EntityDataAccessor<Float> COLOR_GREEN = SynchedEntityData.defineId(
-            EntityFirefly.class,
-            EntityDataSerializers.FLOAT
-    );
-    private static final EntityDataAccessor<Float> COLOR_BLUE = SynchedEntityData.defineId(
-            EntityFirefly.class,
-            EntityDataSerializers.FLOAT
+            EntityDataSerializers.INT
     );
 
     private boolean mustSit = false;
@@ -159,7 +153,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
     }
 
     @Override
-    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean causeFallDamage(float fallDistance, float damageMultiplier, @NotNull DamageSource damageSource) {
         return false;
     }
 
@@ -167,8 +161,8 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
     protected void checkFallDamage(
             double heightDifference,
             boolean onGround,
-            BlockState landedState,
-            BlockPos landedPosition
+            @NotNull BlockState landedState,
+            @NotNull BlockPos landedPosition
     ) {
     }
 
@@ -177,42 +171,33 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         return true;
     }
 
-    public float getRed() {
-        return this.entityData.get(COLOR_RED);
-    }
-
-    public float getGreen() {
-        return this.entityData.get(COLOR_GREEN);
-    }
-
-    public float getBlue() {
-        return this.entityData.get(COLOR_BLUE);
+    public int getColor() {
+        return this.entityData.get(COLOR);
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
 
-        tag.putFloat("ColorRed", getRed());
-        tag.putFloat("ColorGreen", getGreen());
-        tag.putFloat("ColorBlue", getBlue());
+        tag.putInt("color", getColor());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
 
-        if (tag.contains("ColorRed")) {
-            this.entityData.set(COLOR_RED, tag.getFloat("ColorRed"));
+        int color = 0xFFFFFFFF;
+        if (tag.contains("color")) {
+            color = tag.getInt("color");
+        } else if (tag.contains("ColorRed") && tag.contains("ColorGreen") && tag.contains("ColorBlue")) {
+            float r = tag.getFloat("ColorRed");
+            float g = tag.getFloat("ColorGreen");
+            float b = tag.getFloat("ColorBlue");
+
+            color = ColorUtil.color((int) (r * 0xFF), (int) (g * 0xFF), (int) (g * 0xFF));
         }
 
-        if (tag.contains("ColorGreen")) {
-            this.entityData.set(COLOR_GREEN, tag.getFloat("ColorGreen"));
-        }
-
-        if (tag.contains("ColorBlue")) {
-            this.entityData.set(COLOR_BLUE, tag.getFloat("ColorBlue"));
-        }
+        this.entityData.set(COLOR, color);
     }
 
     @Override
@@ -513,9 +498,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                 break;
         }
 
-        this.entityData.set(COLOR_RED, red / 255F);
-        this.entityData.set(COLOR_GREEN, green / 255F);
-        this.entityData.set(COLOR_BLUE, blue / 255F);
+        this.entityData.set(COLOR, ColorUtil.color((int) red, (int) green, (int) blue));
     }
 
     @Override

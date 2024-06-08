@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface SurvivesOnSoulGroundOrFarmLand extends SurvivesOnTags {
     List<TagKey<Block>> TAGS = List.of(
-            org.betterx.worlds.together.tag.v3.CommonBlockTags.SOUL_GROUND,
+            org.betterx.wover.tag.api.predefined.CommonBlockTags.SOUL_GROUND,
             NetherTags.NETHER_FARMLAND
     );
 

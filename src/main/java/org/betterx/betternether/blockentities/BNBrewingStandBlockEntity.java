@@ -5,6 +5,7 @@ import org.betterx.betternether.registry.BrewingRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -76,6 +77,14 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
         };
     }
 
+    protected NonNullList<ItemStack> getItems() {
+        return this.inventory;
+    }
+
+    protected void setItems(NonNullList<ItemStack> nonNullList) {
+        this.inventory = nonNullList;
+    }
+
     protected Component getDefaultName() {
         return Component.translatable("container.brewing", new Object[0]);
     }
@@ -108,7 +117,7 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
             setChanged(world, pos, state);
         }
 
-        boolean bl = blockEntity.canCraft();
+        boolean bl = blockEntity.canCraft(world != null ? world.potionBrewing() : PotionBrewing.EMPTY);
         boolean bl2 = blockEntity.brewTime > 0;
         ItemStack itemStack2 = blockEntity.inventory.get(3);
         if (bl2) {
@@ -163,17 +172,17 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
         return bls;
     }
 
-    private boolean canCraft() {
+    private boolean canCraft(PotionBrewing potionBrewing) {
         ItemStack source = this.inventory.get(3);
         if (source.isEmpty()) {
             return false;
-        } else if (!PotionBrewing.isIngredient(source)) {
+        } else if (!potionBrewing.isIngredient(source)) {
             return false;
         } else {
             for (int i = 0; i < 3; ++i) {
                 ItemStack bottle = this.inventory.get(i);
                 if (!bottle.isEmpty()) {
-                    if (PotionBrewing.hasMix(bottle, source))
+                    if (potionBrewing.hasMix(bottle, source))
                         return true;
                     else if (BrewingRegistry.getResult(source, bottle) != null)
                         return true;
@@ -190,7 +199,7 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
 
     private void craft(Level world, BlockPos blockPos, BlockState state) {
         ItemStack source = this.inventory.get(3);
-
+        PotionBrewing potionBrewing = this.level != null ? this.level.potionBrewing() : PotionBrewing.EMPTY;
         for (int i = 0; i < 3; ++i) {
             ItemStack bottle = this.inventory.get(i);
             if (!bottle.isEmpty()) {
@@ -198,7 +207,7 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
                 if (result != null)
                     this.inventory.set(i, result.copy());
                 else
-                    this.inventory.set(i, PotionBrewing.mix(source, this.inventory.get(i)));
+                    this.inventory.set(i, potionBrewing.mix(source, this.inventory.get(i)));
             }
         }
 
@@ -218,19 +227,20 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
         this.level.levelEvent(LevelEvent.SOUND_BREWING_STAND_BREW, blockPos, 0);
     }
 
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    @Override
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, this.inventory);
+        ContainerHelper.loadAllItems(tag, this.inventory, provider);
         this.brewTime = tag.getShort("BrewTime");
         this.fuel = tag.getByte("Fuel");
     }
 
     @Override
-    public void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         tag.putShort("BrewTime", (short) this.brewTime);
-        ContainerHelper.saveAllItems(tag, this.inventory);
+        ContainerHelper.saveAllItems(tag, this.inventory, provider);
         tag.putByte("Fuel", (byte) this.fuel);
     }
 
@@ -267,7 +277,8 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
 
     public boolean canPlaceItem(int slot, ItemStack stack) {
         if (slot == 3) {
-            return PotionBrewing.isIngredient(stack);
+            PotionBrewing potionBrewing = this.level != null ? this.level.potionBrewing() : PotionBrewing.EMPTY;
+            return potionBrewing.isIngredient(stack);
         } else {
             Item item = stack.getItem();
             if (slot == 4) {
@@ -277,8 +288,10 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
                 ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
                 return id.getNamespace().equals("biomemakeover") && id.getPath().equals("soul_embers");
             } else {
-                return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION || item == Items.GLASS_BOTTLE) && this.getItem(
-                        slot).isEmpty();
+                return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION || item == Items.GLASS_BOTTLE) && this
+                        .getItem(
+                                slot)
+                        .isEmpty();
             }
         }
     }

@@ -4,8 +4,9 @@ import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.bclib.interfaces.CustomItemProvider;
-import org.betterx.bclib.interfaces.TagProvider;
-import org.betterx.worlds.together.tag.v3.CommonBlockTags;
+import org.betterx.wover.block.api.BlockTagProvider;
+import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
+import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -15,10 +16,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
-import java.util.List;
 import java.util.function.Supplier;
 
-public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemProvider, BehaviourOre {
+public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomItemProvider, BehaviourOre {
     public final boolean fireproof;
 
     public BlockOre(
@@ -26,7 +26,7 @@ public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemPro
             int minCount,
             int maxCount,
             int experience,
-            int miningLevel,
+            TagKey<Block> miningTag,
             boolean fireproof
     ) {
         super(
@@ -39,21 +39,20 @@ public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemPro
                 minCount,
                 maxCount,
                 experience,
-                miningLevel
+                miningTag
         );
         this.fireproof = fireproof;
-    }
-
-    @Override
-    public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
-        super.addTags(blockTags, itemTags);
-        blockTags.add(CommonBlockTags.NETHERRACK);
-        blockTags.add(CommonBlockTags.NETHER_ORES);
     }
 
     @Override
     public BlockItem getCustomItem(ResourceLocation blockID, Item.Properties settings) {
         if (fireproof) settings = settings.fireResistant();
         return new BlockItem(this, settings);
+    }
+
+    @Override
+    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+        super.registerItemTags(location, context);
+        context.add(this, CommonBlockTags.NETHERRACK, CommonBlockTags.NETHER_ORES);
     }
 }

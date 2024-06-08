@@ -17,11 +17,15 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -96,13 +100,18 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
         this.refreshDimensions();
     }
 
+    @Override
+    public boolean isFood(ItemStack itemStack) {
+        return false;
+    }
+
     public float getScale() {
         return this.entityData.get(SCALE);
     }
-
-    public EntityDimensions getDimensions(Pose pose) {
-        return super.getDimensions(pose).scale(this.getScale());
-    }
+//TODO: 1.21 Check if size of entity is correct
+//    public EntityDimensions getDimensions(Pose pose) {
+//        return super.getDimensions(pose).scale(this.getScale());
+//    }
 
     @Override
     public void playerTouch(Player player) {

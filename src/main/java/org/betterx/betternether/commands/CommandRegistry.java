@@ -1,10 +1,9 @@
 package org.betterx.betternether.commands;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherTags;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
-import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
 import org.betterx.worlds.together.world.event.WorldBootstrap;
 import org.betterx.wover.state.api.WorldState;
 
@@ -27,6 +26,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -46,14 +46,17 @@ import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.ImmutableList;
 import org.joml.Vector3d;
 
 import java.util.Collections;
@@ -124,14 +127,23 @@ public class CommandRegistry {
 
     private static int teleportToNextBiome(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
-        List<BCLBiome> biomes = LegacyNetherBiomeBuilder.getAllBnBiomes();
+        final HolderLookup.RegistryLookup<Biome> biomeLookup = WorldState
+                .registryAccess()
+                .lookupOrThrow(Registries.BIOME);
+        List<ResourceKey<Biome>> biomes = biomeLookup.get(NetherTags.BETTER_NETHER)
+                                                     .orElseThrow()
+                                                     .stream()
+                                                     .map(Holder::unwrapKey)
+                                                     .filter(Optional::isPresent)
+                                                     .map(Optional::get)
+                                                     .toList();
 
         if (biomeIndex < 0 || biomeIndex >= biomes.size()) {
             source.sendFailure(Component.literal("Failed to find the next Biome...")
                                         .setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
             return 0;
         }
-        final BCLBiome biome = biomes.get(biomeIndex);
+        final ResourceKey<Biome> biome = biomes.get(biomeIndex);
         source.sendSuccess(() -> Component.literal("Locating Biome " + biome)
                                           .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
         biomeIndex = (biomeIndex + 1) % biomes.size();
@@ -143,7 +155,11 @@ public class CommandRegistry {
         );
         final BlockPos biomePosition = source.getLevel()
                                              .findClosestBiome3d(
-                                                     b -> b.unwrapKey().orElseThrow().location().equals(biome.getID()),
+                                                     b -> b
+                                                             .unwrapKey()
+                                                             .orElseThrow()
+                                                             .location()
+                                                             .equals(biome.location()),
                                                      currentPosition,
                                                      MAX_SEARCH_RADIUS,
                                                      SAMPLE_RESOLUTION_HORIZONTAL,
@@ -184,7 +200,7 @@ public class CommandRegistry {
             ResourceOrTagKeyArgument.Result result = new ResourceOrTagKeyArgument.Result() {
                 @Override
                 public Either<ResourceKey, TagKey> unwrap() {
-                    return Either.left(biome.getBiomeKey());
+                    return Either.left(biome);
                 }
 
                 @Override
@@ -202,7 +218,7 @@ public class CommandRegistry {
                     return false;
                 }
             };
-            ResourceKey<Biome> a = biome.getBiomeKey();
+            ResourceKey<Biome> a = biome;
             if (WorldBootstrap.getLastRegistryAccess() != null) {
                 Stopwatch stopwatch = Stopwatch.createStarted(Util.TICKER);
                 Holder<Biome> h = WorldBootstrap.getLastRegistryAccess()
@@ -308,6 +324,8 @@ public class CommandRegistry {
         return Command.SINGLE_SUCCESS;
     }
 
+    public static final PerlinSimplexNoise BIOME_INFO_NOISE = new PerlinSimplexNoise((RandomSource) new WorldgenRandom(new LegacyRandomSource(2345L)), ImmutableList.of(Integer.valueOf(0)));
+
     private static int testPlace(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
 
         final CommandSourceStack source = ctx.getSource();
@@ -318,7 +336,7 @@ public class CommandRegistry {
         double max = Double.NEGATIVE_INFINITY;
         for (int x = -16; x <= 16; x++) {
             for (int y = -16; y <= 16; y++) {
-                double v = Biome.BIOME_INFO_NOISE.getValue(
+                double v = BIOME_INFO_NOISE.getValue(
                         (x + pos.x) / 200.0,
                         (y + pos.z) / 200.0,
                         false

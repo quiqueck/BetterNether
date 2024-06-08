@@ -3,18 +3,17 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
-import org.betterx.bclib.interfaces.TagProvider;
-import org.betterx.worlds.together.tag.v3.CommonBlockTags;
+import org.betterx.wover.block.api.BlockTagProvider;
 import org.betterx.wover.loot.api.BlockLootProvider;
 import org.betterx.wover.loot.api.LootLookupProvider;
+import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
+import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -26,11 +25,10 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyliumLike, BehaviourStone, BlockLootProvider {
+public class BlockTerrain extends BlockBase implements BlockTagProvider, BonemealNyliumLike, BehaviourStone, BlockLootProvider {
     protected BonemealAPI.FeatureProvider vegetationFeature;
     public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
             SoundEvents.NETHERRACK_BREAK,
@@ -47,12 +45,6 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
 
     public void setVegetationFeature(BonemealAPI.FeatureProvider vegetationFeature) {
         this.vegetationFeature = vegetationFeature;
-    }
-
-    @Override
-    public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
-        blockTags.add(CommonBlockTags.NETHERRACK);
-        blockTags.add(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_STONES);
     }
 
     @Override
@@ -85,5 +77,10 @@ public class BlockTerrain extends BlockBase implements TagProvider, BonemealNyli
             @NotNull ResourceKey<LootTable> tableKey
     ) {
         return provider.dropWithSilkTouch(this, Blocks.NETHERRACK, ConstantValue.exactly(1));
+    }
+
+    @Override
+    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+        context.add(this, CommonBlockTags.NETHERRACK, CommonBlockTags.NETHER_STONES);
     }
 }

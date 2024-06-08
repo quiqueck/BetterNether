@@ -4,8 +4,10 @@ import org.betterx.bclib.api.v2.advancement.AdvancementManager;
 import org.betterx.bclib.api.v3.datagen.AdvancementDataProvider;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.advancements.BNCriterion;
-import org.betterx.betternether.registry.*;
-import org.betterx.betternether.world.LegacyNetherBiomeBuilder;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.registry.NetherStructures;
+import org.betterx.betternether.registry.NetherTemplates;
 import org.betterx.wover.complex.api.tool.ArmorSlot;
 import org.betterx.wover.complex.api.tool.ToolSlot;
 
@@ -19,11 +21,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class NetherAdvancementDataProvider extends AdvancementDataProvider {
@@ -37,6 +39,8 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
     @Override
     @SuppressWarnings("removal")
     protected void bootstrap(HolderLookup.Provider registryLookup) {
+        final HolderLookup.RegistryLookup<Biome> biomeLookup = registryLookup.lookupOrThrow(Registries.BIOME);
+        final HolderLookup.RegistryLookup<Structure> structureLookup = registryLookup.lookupOrThrow(Registries.STRUCTURE);
         ResourceLocation root = AdvancementManager.Builder
                 .create(BetterNether.C.id("root"))
                 .startDisplay(NetherBlocks.CINCINNASITE_LANTERN)
@@ -122,7 +126,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .parent(enterNether)
                 .startDisplay(NetherBlocks.CINCINNASITE_CARVED)
                 .endDisplay()
-                .addAtStructureCriterion("ncity", NetherStructures.CITY_STRUCTURE.key())
+                .addAtStructureCriterion("ncity", NetherStructures.CITY_STRUCTURE.getHolder(structureLookup))
                 .requireOne()
                 .build();
 
@@ -279,22 +283,24 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .requireAll()
                 .build();
 
-        final HolderLookup.RegistryLookup<Biome> biomeLookup = registryLookup.lookupOrThrow(Registries.BIOME);
 
-        if (!LegacyNetherBiomeBuilder.getAllBnBiomes().isEmpty()) {
+        final var biomes = biomeLookup
+                .listElementIds()
+                .filter(id -> id.location().getNamespace().equals(BetterNether.C.modId))
+                .toList();
+
+        if (!biomes.isEmpty()) {
             ResourceLocation allTheBiomes = AdvancementManager.Builder
                     .create(BetterNether.C.id("all_the_biomes"))
                     .parent(city)
                     .startDisplay(NetherItems.NETHER_RUBY_SET.get(ArmorSlot.BOOTS_SLOT))
                     .challenge()
                     .endDisplay()
-                    .addVisitBiomesCriterion(biomeLookup.get(NetherTags.BETTER_NETHER)
-                                                        .orElseThrow()
-                                                        .stream()
-                                                        .map(Holder::unwrapKey)
-                                                        .filter(Optional::isPresent)
-                                                        .map(Optional::get)
-                                                        .toList())
+                    .addVisitBiomesCriterion(biomes
+                            .stream()
+                            .map(key -> (Holder<Biome>) biomeLookup.get(key).orElseThrow())
+                            .toList()
+                    )
                     .requireAll()
                     .rewardXP(1500)
                     .build();

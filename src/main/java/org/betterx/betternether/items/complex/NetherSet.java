@@ -85,7 +85,7 @@ public class NetherSet extends EquipmentSet {
 
     private AdvancementManager.Builder addEquipmentSetSlotCriterion(AdvancementManager.Builder builder, ToolSlot slot) {
         return builder.addInventoryChangedCriterion(
-                this.baseName + "_" + slot,
+                this.baseName + "_" + slot.name,
                 this.get(slot)
         );
     }
@@ -95,7 +95,7 @@ public class NetherSet extends EquipmentSet {
             ArmorSlot slot
     ) {
         return builder.addInventoryChangedCriterion(
-                this.baseName + "_" + slot,
+                this.baseName + "_" + slot.name,
                 this.get(slot)
         );
     }

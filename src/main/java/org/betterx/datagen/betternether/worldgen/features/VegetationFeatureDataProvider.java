@@ -199,6 +199,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .inRandomPatch()
                 .tries(16)
                 .register();
+
         NetherVegetation.WALL_MUSHROOM_RED_WITH_MOSS
                 .bootstrap(ctx)
                 .add(NetherBlocks.WALL_MUSHROOM_RED, 40)

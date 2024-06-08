@@ -1,6 +1,5 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockWillowBranch;
@@ -8,6 +7,7 @@ import org.betterx.betternether.blocks.BlockWillowLeaves;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.wover.block.api.BlockProperties;
 import org.betterx.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;

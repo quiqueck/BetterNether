@@ -6,7 +6,6 @@ import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
 import org.betterx.betternether.config.Config;
 import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.enchantments.ObsidianBreaker;
 import org.betterx.betternether.loot.BNLoot;
 import org.betterx.betternether.recipes.IntegrationRecipes;
 import org.betterx.betternether.registry.*;
@@ -53,7 +52,6 @@ public class BetterNether implements ModInitializer {
         NetherBiomes.register();
         BrewingRegistry.register();
         CommandRegistry.register();
-        ObsidianBreaker.register();
         Config.save();
 
         IntegrationRecipes.register();

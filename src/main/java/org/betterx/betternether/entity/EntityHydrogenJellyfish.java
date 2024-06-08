@@ -49,9 +49,9 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(SCALE, 0.5F + random.nextFloat());
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SCALE, 0.5F + random.nextFloat());
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {

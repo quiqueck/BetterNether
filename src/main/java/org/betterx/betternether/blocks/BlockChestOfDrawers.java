@@ -10,7 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -93,7 +93,8 @@ public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMet
     }
 
     @Override
-    public InteractionResult use(
+    public ItemInteractionResult useItemOn(
+            ItemStack itemStack,
             BlockState state,
             Level world,
             BlockPos pos,
@@ -102,13 +103,13 @@ public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMet
             BlockHitResult hit
     ) {
         if (world.isClientSide) {
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof BlockEntityChestOfDrawers) {
                 player.openMenu((BlockEntityChestOfDrawers) blockEntity);
             }
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
     }
 

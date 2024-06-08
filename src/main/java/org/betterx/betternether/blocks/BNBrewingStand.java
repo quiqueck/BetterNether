@@ -10,7 +10,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -50,7 +50,8 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
     }
 
     @Override
-    public InteractionResult use(
+    protected ItemInteractionResult useItemOn(
+            ItemStack itemStack,
             BlockState state,
             Level world,
             BlockPos pos,
@@ -59,7 +60,7 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
             BlockHitResult hit
     ) {
         if (world.isClientSide) {
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof BNBrewingStandBlockEntity) {
@@ -67,7 +68,7 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
                 player.awardStat(Stats.INTERACT_WITH_BREWINGSTAND);
             }
 
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
     }
 

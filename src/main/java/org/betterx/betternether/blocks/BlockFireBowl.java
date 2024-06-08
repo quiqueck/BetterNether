@@ -13,10 +13,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -71,7 +72,8 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
     }
 
     @Override
-    public InteractionResult use(
+    public ItemInteractionResult useItemOn(
+            ItemStack itemStack,
             BlockState state,
             Level world,
             BlockPos pos,
@@ -92,7 +94,7 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
                         1.0F,
                         world.random.nextFloat() * 0.4F + 0.8F
                 );
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             } else if (player.getMainHandItem().isEmpty() && state.getValue(FIRE)) {
                 world.setBlockAndUpdate(pos, state.setValue(FIRE, false));
                 world.playSound(
@@ -103,10 +105,10 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
                         1.0F,
                         world.random.nextFloat() * 0.4F + 0.8F
                 );
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
         }
-        return InteractionResult.FAIL;
+        return ItemInteractionResult.FAIL;
     }
 
     @Override

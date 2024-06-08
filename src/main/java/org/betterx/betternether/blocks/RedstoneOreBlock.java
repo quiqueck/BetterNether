@@ -55,7 +55,7 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
                 Items.REDSTONE,
                 maxCount,
                 minCount,
-                LegacyTiers.IRON.level(),
+                LegacyTiers.IRON.level,
                 state,
                 builder
         );

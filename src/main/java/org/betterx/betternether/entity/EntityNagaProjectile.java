@@ -1,5 +1,6 @@
 package org.betterx.betternether.entity;
 
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -110,7 +111,7 @@ public class EntityNagaProjectile extends FlyingMob {
 
     private void effectKill() {
         for (int i = 0; i < 10; i++) {
-            level().addParticle(ParticleTypes.ENTITY_EFFECT,
+            level().addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, 0xFFFFFFFF),
                     getX() + random.nextGaussian() * 0.5,
                     getY() + random.nextGaussian() * 0.5,
                     getZ() + random.nextGaussian() * 0.5,

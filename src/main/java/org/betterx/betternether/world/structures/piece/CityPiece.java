@@ -45,7 +45,7 @@ public class CityPiece extends CustomPiece {
         this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"))
                 .getRotated(Rotation.values()[tag.getInt("rotation")]);
         this.building.setMirror(Mirror.values()[tag.getInt("mirror")]);
-        this.pos = NbtUtils.readBlockPos(tag.getCompound("pos"));
+        this.pos = NbtUtils.readBlockPos(tag, "pos").orElse(BlockPos.ZERO);
         this.boundingBox = building.getBoundingBox(pos);
         this.palette = Palettes.getPalette(tag.getString("palette"));
         this.paletteProcessor = new BuildingStructureProcessor(palette);

@@ -113,7 +113,7 @@ public class BlockGeyser extends BlockBaseNotFull implements BehaviourStone {
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
         if (!entity.fireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
             entity.hurt(world.damageSources().inFire(), 3F);
-            entity.setSecondsOnFire(1);
+            entity.igniteForSeconds(1);
         }
 
         super.stepOn(world, pos, state, entity);

@@ -14,7 +14,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -158,7 +158,9 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
     }
 
 
-    public InteractionResult use(
+    @Override
+    public ItemInteractionResult useItemOn(
+            ItemStack itemStack,
             BlockState state,
             Level world,
             BlockPos pos,
@@ -188,9 +190,9 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
                     ));
                 }
             }
-            return InteractionResult.sidedSuccess(world.isClientSide);
+            return ItemInteractionResult.sidedSuccess(world.isClientSide);
         } else {
-            return super.use(state, world, pos, player, hand, hit);
+            return super.useItemOn(itemStack, state, world, pos, player, hand, hit);
         }
     }
 }

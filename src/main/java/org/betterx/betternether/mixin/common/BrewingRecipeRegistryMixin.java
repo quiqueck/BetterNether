@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PotionBrewing.class)
 public class BrewingRecipeRegistryMixin {
     @Inject(method = "isIngredient", at = @At("HEAD"), cancellable = true)
-    private static void betternether$isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
+    private void bn_isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
         if (BrewingRegistry.isValidIngridient(stack)) {
             info.setReturnValue(true);
             info.cancel();

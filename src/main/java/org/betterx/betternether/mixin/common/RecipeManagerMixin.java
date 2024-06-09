@@ -2,6 +2,7 @@ package org.betterx.betternether.mixin.common;
 
 import org.betterx.betternether.recipes.BNRecipeManager;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -19,7 +20,8 @@ public class RecipeManagerMixin {
     @Inject(method = "fromJson", at = @At(value = "HEAD"), cancellable = true)
     private static void be_checkMissing(
             ResourceLocation id,
-            JsonObject json,
+            JsonObject jsonObject,
+            HolderLookup.Provider provider,
             CallbackInfoReturnable<RecipeHolder<?>> info
     ) {
         if (id.getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn")) {

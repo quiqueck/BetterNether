@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "taburet",
+  "key": {
+    "#": {
+      "item": "betternether:nether_reed_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "##",
+    "II"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:nether_reed_taburet"
+  }
+}

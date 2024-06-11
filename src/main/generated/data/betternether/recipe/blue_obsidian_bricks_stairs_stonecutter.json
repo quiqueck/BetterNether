@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "nether_blue_obsidian_bricks_stairs",
+  "ingredient": {
+    "item": "betternether:blue_obsidian"
+  },
+  "result": {
+    "count": 1,
+    "id": "betternether:blue_obsidian_bricks_stairs"
+  }
+}

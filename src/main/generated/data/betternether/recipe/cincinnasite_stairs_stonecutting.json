@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "nether_rock_stairs",
+  "ingredient": {
+    "item": "betternether:cincinnasite_forged"
+  },
+  "result": {
+    "count": 1,
+    "id": "betternether:cincinnasite_stairs"
+  }
+}

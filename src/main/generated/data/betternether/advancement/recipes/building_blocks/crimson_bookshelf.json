@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_book": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:book"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:crimson_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:crimson_bookshelf"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_book",
+      "has_crimson_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:crimson_bookshelf"
+    ]
+  }
+}

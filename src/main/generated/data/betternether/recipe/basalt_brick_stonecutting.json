@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "basalt",
+  "ingredient": {
+    "item": "minecraft:basalt"
+  },
+  "result": {
+    "count": 1,
+    "id": "betternether:basalt_bricks"
+  }
+}

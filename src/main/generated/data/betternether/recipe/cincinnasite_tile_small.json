@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_cincinnasite_tile_small",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_tile_large"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:cincinnasite_tile_small"
+  }
+}

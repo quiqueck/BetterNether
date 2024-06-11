@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "button",
+  "ingredients": [
+    {
+      "item": "betternether:nether_sakura_planks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:nether_sakura_button"
+  }
+}

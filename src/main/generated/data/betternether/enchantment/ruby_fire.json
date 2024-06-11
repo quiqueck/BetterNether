@@ -1,0 +1,71 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.betternether.ruby_fire"
+  },
+  "effects": {
+    "minecraft:knockback": [
+      {
+        "effect": {
+          "type": "minecraft:add",
+          "value": {
+            "type": "minecraft:linear",
+            "base": 1.0,
+            "per_level_above_first": 2.0
+          }
+        }
+      }
+    ],
+    "minecraft:post_attack": [
+      {
+        "affected": "attacker",
+        "effect": {
+          "type": "minecraft:all_of",
+          "effects": [
+            {
+              "type": "minecraft:damage_entity",
+              "damage_type": "minecraft:indirect_magic",
+              "max_damage": 7.0,
+              "min_damage": 2.0
+            },
+            {
+              "type": "minecraft:damage_item",
+              "amount": 1.0
+            },
+            {
+              "type": "minecraft:ignite",
+              "duration": 100.0
+            }
+          ]
+        },
+        "enchanted": "victim",
+        "requirements": {
+          "chance": {
+            "type": "minecraft:enchantment_level",
+            "amount": {
+              "type": "minecraft:linear",
+              "base": 0.25,
+              "per_level_above_first": 0.25
+            }
+          },
+          "condition": "minecraft:random_chance"
+        }
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 120,
+    "per_level_above_first": 20
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 20,
+    "per_level_above_first": 20
+  },
+  "primary_items": "#betternether:flaming_ruby_primary",
+  "slots": [
+    "any"
+  ],
+  "supported_items": "#betternether:flaming_ruby_enchantable",
+  "weight": 10
+}

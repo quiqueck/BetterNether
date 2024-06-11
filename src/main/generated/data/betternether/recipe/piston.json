@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "nether_piston",
+  "key": {
+    "#": {
+      "item": "minecraft:cobblestone"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "tag": "minecraft:planks"
+    },
+    "X": {
+      "item": "betternether:cincinnasite_ingot"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "#X#",
+    "#R#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:piston"
+  }
+}

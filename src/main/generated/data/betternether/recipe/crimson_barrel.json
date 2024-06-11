@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "barrel",
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_planks"
+    },
+    "S": {
+      "item": "minecraft:crimson_slab"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:crimson_barrel"
+  }
+}

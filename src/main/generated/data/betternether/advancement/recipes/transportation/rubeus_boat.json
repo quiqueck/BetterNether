@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rubeus_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:rubeus_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:rubeus_boat"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rubeus_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:rubeus_boat"
+    ]
+  }
+}

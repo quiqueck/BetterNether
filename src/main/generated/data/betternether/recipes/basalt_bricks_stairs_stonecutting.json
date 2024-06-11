@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "group": "nether_rock_stairs",
-  "ingredient": {
-    "item": "betternether:basalt_bricks"
-  },
-  "result": "betternether:basalt_bricks_stairs"
-}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blackstone_stalactite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:blackstone_stalactite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:blackstone_stalactite_blackstone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_blackstone_stalactite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:blackstone_stalactite_blackstone"
+    ]
+  }
+}

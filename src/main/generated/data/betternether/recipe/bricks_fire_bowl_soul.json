@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fire_bowl",
+  "key": {
+    "#": {
+      "item": "betternether:nether_brick_tile_large"
+    },
+    "I": {
+      "item": "minecraft:soul_sand"
+    },
+    "L": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "pattern": [
+    "#I#",
+    " # ",
+    "L L"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:bricks_fire_bowl_soul"
+  }
+}

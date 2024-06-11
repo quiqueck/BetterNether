@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "barrel",
+  "key": {
+    "#": {
+      "item": "betternether:willow_planks"
+    },
+    "S": {
+      "item": "betternether:willow_slab"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:willow_barrel"
+  }
+}

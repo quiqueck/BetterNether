@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bar_stool",
+  "key": {
+    "#": {
+      "item": "minecraft:cherry_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "##",
+    "II",
+    "II"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:cherry_bar_stool"
+  }
+}

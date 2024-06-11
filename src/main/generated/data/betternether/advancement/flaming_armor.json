@@ -1,0 +1,72 @@
+{
+  "parent": "betternether:flaming_ruby",
+  "criteria": {
+    "flaming_ruby_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_chestplate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_chestplate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_helmet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.flaming_armor.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "betternether:flaming_ruby_chestplate"
+    },
+    "title": {
+      "translate": "advancements.betternether.flaming_armor.title"
+    }
+  },
+  "requirements": [
+    [
+      "flaming_ruby_helmet"
+    ],
+    [
+      "flaming_ruby_chestplate"
+    ],
+    [
+      "flaming_ruby_leggings"
+    ],
+    [
+      "flaming_ruby_boots"
+    ]
+  ]
+}

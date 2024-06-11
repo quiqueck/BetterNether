@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:bn_brown_mushroom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wall_mushroom_brown": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:wall_mushroom_brown"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wall_mushroom_brown"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:bn_brown_mushroom"
+    ]
+  }
+}

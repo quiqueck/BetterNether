@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_rock_stairs",
+  "key": {
+    "#": {
+      "item": "betternether:basalt_bricks"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:basalt_bricks_stairs"
+  }
+}

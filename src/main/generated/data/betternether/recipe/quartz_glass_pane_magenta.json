@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "quartz_glass_pane",
+  "key": {
+    "#": {
+      "item": "betternether:quartz_glass_pane"
+    },
+    "I": {
+      "item": "minecraft:magenta_dye"
+    }
+  },
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "betternether:quartz_glass_pane_magenta"
+  }
+}

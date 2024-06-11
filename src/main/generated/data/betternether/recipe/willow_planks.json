@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    [
+      {
+        "item": "betternether:willow_log"
+      },
+      {
+        "item": "betternether:willow_bark"
+      },
+      {
+        "item": "betternether:willow_stripped_log"
+      },
+      {
+        "item": "betternether:willow_stripped_bark"
+      }
+    ]
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:willow_planks"
+  }
+}

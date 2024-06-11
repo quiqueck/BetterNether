@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_wall",
+  "key": {
+    "#": {
+      "item": "betternether:soul_sandstone_cut"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:soul_sandstone_wall"
+  }
+}

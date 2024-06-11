@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "roof_tile",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###",
+    " # "
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:roof_tile_cincinnasite"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "betternether:cincinnasite_fire_bowl_soul"
+  },
+  "result": {
+    "count": 1,
+    "id": "betternether:netherite_fire_bowl_soul"
+  },
+  "template": {
+    "item": "betternether:bowl_upgrade_smithing_template"
+  }
+}

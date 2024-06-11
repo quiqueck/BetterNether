@@ -1,0 +1,71 @@
+{
+  "parent": "betternether:ruby_tools",
+  "criteria": {
+    "nether_ruby_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nether_ruby_chestplate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_chestplate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nether_ruby_helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_helmet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nether_ruby_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.ruby_gear.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "betternether:nether_ruby_chestplate"
+    },
+    "title": {
+      "translate": "advancements.betternether.ruby_gear.title"
+    }
+  },
+  "requirements": [
+    [
+      "nether_ruby_helmet"
+    ],
+    [
+      "nether_ruby_chestplate"
+    ],
+    [
+      "nether_ruby_leggings"
+    ],
+    [
+      "nether_ruby_boots"
+    ]
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "nether_wall",
+  "ingredient": {
+    "item": "betternether:basalt_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "betternether:basalt_bricks_wall"
+  }
+}

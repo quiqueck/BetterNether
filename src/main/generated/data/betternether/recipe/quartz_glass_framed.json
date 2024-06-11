@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_quartz_glass_framed",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+    "G": {
+      "item": "betternether:quartz_glass"
+    }
+  },
+  "pattern": [
+    "G#G",
+    "# #",
+    "G#G"
+  ],
+  "result": {
+    "count": 8,
+    "id": "betternether:quartz_glass_framed"
+  }
+}

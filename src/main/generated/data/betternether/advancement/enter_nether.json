@@ -1,0 +1,28 @@
+{
+  "parent": "betternether:root",
+  "criteria": {
+    "entered_nether": {
+      "conditions": {
+        "to": "minecraft:the_nether"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.enter_nether.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "betternether:jungle_moss"
+    },
+    "title": {
+      "translate": "advancements.betternether.enter_nether.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_nether"
+    ]
+  ]
+}

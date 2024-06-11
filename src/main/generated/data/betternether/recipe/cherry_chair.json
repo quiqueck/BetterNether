@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "chair",
+  "key": {
+    "#": {
+      "item": "minecraft:cherry_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "I ",
+    "##",
+    "II"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:cherry_chair"
+  }
+}

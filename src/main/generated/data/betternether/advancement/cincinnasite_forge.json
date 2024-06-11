@@ -1,0 +1,26 @@
+{
+  "parent": "betternether:cincinnasite_ore",
+  "criteria": {
+    "use_forge": {
+      "trigger": "betternether:used_forge"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.cincinnasite_forge.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "betternether:cincinnasite_forge"
+    },
+    "title": {
+      "translate": "advancements.betternether.cincinnasite_forge.title"
+    }
+  },
+  "requirements": [
+    [
+      "use_forge"
+    ]
+  ]
+}

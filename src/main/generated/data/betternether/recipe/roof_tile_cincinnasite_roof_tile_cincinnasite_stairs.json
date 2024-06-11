@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "roof_tile_stairs",
+  "key": {
+    "#": {
+      "item": "betternether:roof_tile_cincinnasite"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:roof_tile_cincinnasite_stairs"
+  }
+}

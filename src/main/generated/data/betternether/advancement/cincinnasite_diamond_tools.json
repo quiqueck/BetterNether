@@ -1,0 +1,85 @@
+{
+  "parent": "betternether:cincinnasite_diamond",
+  "criteria": {
+    "cincinnasite_axe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_axe_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cincinnasite_hoe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_hoe_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cincinnasite_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_pickaxe_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cincinnasite_shovel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_shovel_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cincinnasite_sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_sword_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.cincinnasite_diamond_tools.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "betternether:cincinnasite_pickaxe_diamond"
+    },
+    "title": {
+      "translate": "advancements.betternether.cincinnasite_diamond_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "cincinnasite_pickaxe"
+    ],
+    [
+      "cincinnasite_axe"
+    ],
+    [
+      "cincinnasite_shovel"
+    ],
+    [
+      "cincinnasite_sword"
+    ],
+    [
+      "cincinnasite_hoe"
+    ]
+  ]
+}

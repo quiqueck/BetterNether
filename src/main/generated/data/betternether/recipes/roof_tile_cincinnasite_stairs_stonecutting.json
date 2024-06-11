@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "group": "roof_tile_stairs",
-  "ingredient": {
-    "item": "betternether:roof_tile_cincinnasite"
-  },
-  "result": "betternether:roof_tile_cincinnasite_stairs"
-}

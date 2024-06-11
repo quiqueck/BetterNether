@@ -1,0 +1,25 @@
+{
+  "parent": "betternether:root",
+  "criteria": {
+    "brew_blue": {
+      "trigger": "betternether:brew_blue"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.blue_obsidian.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "betternether:blue_obsidian"
+    },
+    "title": {
+      "translate": "advancements.betternether.blue_obsidian.title"
+    }
+  },
+  "requirements": [
+    [
+      "brew_blue"
+    ]
+  ]
+}

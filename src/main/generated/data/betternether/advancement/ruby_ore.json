@@ -1,0 +1,32 @@
+{
+  "parent": "betternether:enter_nether",
+  "criteria": {
+    "ruby_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.ruby_ore.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "betternether:nether_ruby"
+    },
+    "title": {
+      "translate": "advancements.betternether.ruby_ore.title"
+    }
+  },
+  "requirements": [
+    [
+      "ruby_ore"
+    ]
+  ]
+}

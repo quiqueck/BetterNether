@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "ingredient": {
+    "item": "betternether:cincinnasite_ore"
+  },
+  "result": {
+    "id": "betternether:cincinnasite_ingot"
+  }
+}

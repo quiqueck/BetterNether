@@ -12,12 +12,10 @@
           "direction": "down",
           "max_height": {
             "type": "minecraft:clamped_normal",
-            "value": {
-              "deviation": 2.0,
-              "max_inclusive": 21,
-              "mean": 14.0,
-              "min_inclusive": 3
-            }
+            "deviation": 2.0,
+            "max_inclusive": 21,
+            "mean": 14.0,
+            "min_inclusive": 3
           },
           "min_height": 3,
           "state": {

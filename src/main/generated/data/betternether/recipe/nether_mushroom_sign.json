@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sign",
+  "key": {
+    "#": {
+      "item": "betternether:nether_mushroom_planks"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    " I "
+  ],
+  "result": {
+    "count": 3,
+    "id": "betternether:nether_mushroom_sign"
+  }
+}

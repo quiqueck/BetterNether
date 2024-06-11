@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.betternether.cincinnasite_fire_bowl": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_fire_bowl"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:netherite_fire_bowl"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.betternether.cincinnasite_fire_bowl"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:netherite_fire_bowl"
+    ]
+  }
+}

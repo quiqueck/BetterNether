@@ -12,10 +12,8 @@
           "direction": "down",
           "max_height": {
             "type": "minecraft:biased_to_bottom",
-            "value": {
-              "max_inclusive": 11,
-              "min_inclusive": 4
-            }
+            "max_inclusive": 11,
+            "min_inclusive": 4
           },
           "min_height": 0,
           "state": {

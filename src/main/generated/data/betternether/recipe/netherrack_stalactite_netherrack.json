@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_stalactite",
+  "key": {
+    "#": {
+      "item": "betternether:netherrack_stalactite"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherrack"
+  }
+}

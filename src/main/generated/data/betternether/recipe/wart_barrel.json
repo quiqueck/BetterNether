@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "barrel",
+  "key": {
+    "#": {
+      "item": "betternether:wart_planks"
+    },
+    "S": {
+      "item": "betternether:wart_slab"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:wart_barrel"
+  }
+}

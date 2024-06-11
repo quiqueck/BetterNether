@@ -18,26 +18,20 @@
       "type": "wover:extend_xyz",
       "border_density": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_exclusive": 0.3,
-          "min_inclusive": 0.1
-        }
+        "max_exclusive": 0.3,
+        "min_inclusive": 0.1
       },
       "center_density": 1.0,
       "height": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_exclusive": 1.5,
-          "min_inclusive": 0.8
-        }
+        "max_exclusive": 1.5,
+        "min_inclusive": 0.8
       },
       "height_propagation": "sphere_down",
       "radius": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 4,
-          "min_inclusive": 3
-        }
+        "max_inclusive": 4,
+        "min_inclusive": 3
       }
     },
     {

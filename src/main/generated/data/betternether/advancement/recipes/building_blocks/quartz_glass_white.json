@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_quartz_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:quartz_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:quartz_glass_white"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_dye": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:white_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_quartz_glass",
+      "has_white_dye"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:quartz_glass_white"
+    ]
+  }
+}

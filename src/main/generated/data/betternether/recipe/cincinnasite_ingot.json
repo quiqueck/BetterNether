@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "nether_cincinnasite_ingot",
+  "ingredients": [
+    {
+      "item": "betternether:cincinnasite_forged"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:cincinnasite_ingot"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "nether_cincinnasite_brick_plate",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    },
+    "B": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "pattern": [
+    " # ",
+    "BBB",
+    " # "
+  ],
+  "result": {
+    "count": 5,
+    "id": "betternether:cincinnasite_brick_plate"
+  }
+}

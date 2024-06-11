@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "nether_rock_slab",
+  "ingredient": {
+    "item": "betternether:soul_sandstone_smooth"
+  },
+  "result": {
+    "count": 2,
+    "id": "betternether:soul_sandstone_smooth_slab"
+  }
+}

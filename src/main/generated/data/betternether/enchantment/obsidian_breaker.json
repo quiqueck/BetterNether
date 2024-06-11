@@ -1,0 +1,41 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.betternether.obsidian_breaker"
+  },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "amount": {
+          "type": "minecraft:lookup",
+          "fallback": {
+            "type": "minecraft:levels_squared",
+            "added": 9.0
+          },
+          "values": [
+            6.0,
+            12.0,
+            18.0
+          ]
+        },
+        "attribute": "betternether:player.obsidian_block_break_speed",
+        "id": "betternether:player.obsidian_block_break_speed",
+        "operation": "add_value"
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 120,
+    "per_level_above_first": 20
+  },
+  "max_level": 5,
+  "min_cost": {
+    "base": 20,
+    "per_level_above_first": 20
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/mining",
+  "weight": 10
+}

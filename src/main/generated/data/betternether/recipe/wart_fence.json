@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fence",
+  "key": {
+    "#": {
+      "item": "betternether:wart_planks"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "#I#",
+    "#I#"
+  ],
+  "result": {
+    "count": 3,
+    "id": "betternether:wart_fence"
+  }
+}

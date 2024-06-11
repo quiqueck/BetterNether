@@ -1,0 +1,76 @@
+{
+  "parent": "betternether:ruby_ore",
+  "criteria": {
+    "nether_ruby_axe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_axe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nether_ruby_hoe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_hoe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nether_ruby_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_pickaxe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nether_ruby_shovel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_shovel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nether_ruby_sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:nether_ruby_sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.ruby_tools.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "betternether:nether_ruby_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.betternether.ruby_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "nether_ruby_pickaxe",
+      "nether_ruby_axe",
+      "nether_ruby_shovel",
+      "nether_ruby_sword",
+      "nether_ruby_hoe"
+    ]
+  ]
+}

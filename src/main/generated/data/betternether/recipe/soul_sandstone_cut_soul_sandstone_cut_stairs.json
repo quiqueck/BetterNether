@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_rock_stairs",
+  "key": {
+    "#": {
+      "item": "betternether:soul_sandstone_cut"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:soul_sandstone_cut_stairs"
+  }
+}

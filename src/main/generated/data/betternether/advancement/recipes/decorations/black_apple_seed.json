@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_black_apple": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:black_apple"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:black_apple_seed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_black_apple"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:black_apple_seed"
+    ]
+  }
+}

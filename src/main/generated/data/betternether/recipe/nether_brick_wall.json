@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_wall",
+  "key": {
+    "#": {
+      "item": "betternether:nether_brick_tile_large"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:nether_brick_wall"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "barrel",
+  "key": {
+    "#": {
+      "item": "betternether:nether_mushroom_planks"
+    },
+    "S": {
+      "item": "betternether:nether_mushroom_slab"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:nether_mushroom_barrel"
+  }
+}

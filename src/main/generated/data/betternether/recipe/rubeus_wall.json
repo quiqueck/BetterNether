@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall",
+  "key": {
+    "*": {
+      "item": "betternether:rubeus_planks"
+    },
+    "|": {
+      "item": "betternether:rubeus_fence"
+    }
+  },
+  "pattern": [
+    "* *",
+    "|||"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:rubeus_wall"
+  }
+}

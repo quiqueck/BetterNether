@@ -1,0 +1,123 @@
+{
+  "parent": "betternether:blue_obsidian",
+  "criteria": {
+    "made_blue_brick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:blue_obsidian_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "made_blue_rods": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:blue_obsidian_rod_tiles"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "made_blue_tile": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:blue_obsidian_tile"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "made_brick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:obsidian_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "made_rods": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:obsidian_rod_tiles"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "made_small_blue_tile": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:blue_obsidian_tile_small"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "made_small_tile": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:obsidian_tile_small"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "made_tile": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:obsidian_tile"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.obsidian_blocks.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "betternether:blue_obsidian_bricks"
+    },
+    "title": {
+      "translate": "advancements.betternether.obsidian_blocks.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_brick"
+    ],
+    [
+      "made_tile"
+    ],
+    [
+      "made_small_tile"
+    ],
+    [
+      "made_rods"
+    ],
+    [
+      "made_blue_brick"
+    ],
+    [
+      "made_blue_tile"
+    ],
+    [
+      "made_small_blue_tile"
+    ],
+    [
+      "made_blue_rods"
+    ]
+  ]
+}

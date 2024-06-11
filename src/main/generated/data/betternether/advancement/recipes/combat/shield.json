@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cincinnasite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tag_minecraft_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:shield"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tag_minecraft_planks",
+      "has_cincinnasite_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:shield"
+    ]
+  }
+}

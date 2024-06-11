@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    [
+      {
+        "item": "betternether:stalagnate_log"
+      },
+      {
+        "item": "betternether:stalagnate_bark"
+      },
+      {
+        "item": "betternether:stalagnate_stripped_log"
+      },
+      {
+        "item": "betternether:stalagnate_stripped_bark"
+      }
+    ]
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:stalagnate_planks"
+  }
+}

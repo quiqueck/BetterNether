@@ -1,0 +1,32 @@
+{
+  "parent": "betternether:enter_nether",
+  "criteria": {
+    "cincinnasite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.cincinnasite_ore.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "betternether:cincinnasite_ingot"
+    },
+    "title": {
+      "translate": "advancements.betternether.cincinnasite_ore.title"
+    }
+  },
+  "requirements": [
+    [
+      "cincinnasite_ore"
+    ]
+  ]
+}

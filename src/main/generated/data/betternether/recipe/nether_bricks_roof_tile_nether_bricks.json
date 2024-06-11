@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "roof_tile",
+  "key": {
+    "#": {
+      "item": "minecraft:nether_bricks"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###",
+    " # "
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:roof_tile_nether_bricks"
+  }
+}

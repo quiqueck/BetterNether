@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall",
+  "key": {
+    "*": {
+      "item": "betternether:wart_planks"
+    },
+    "|": {
+      "item": "betternether:wart_fence"
+    }
+  },
+  "pattern": [
+    "* *",
+    "|||"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:wart_wall"
+  }
+}

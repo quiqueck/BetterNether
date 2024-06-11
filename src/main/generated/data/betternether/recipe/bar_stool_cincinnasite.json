@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bar_stool",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_slab"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "##",
+    "II",
+    "II"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:bar_stool_cincinnasite"
+  }
+}

@@ -66,10 +66,8 @@
                 "noise": "minecraft:netherrack",
                 "roughness": {
                   "type": "minecraft:uniform",
-                  "value": {
-                    "max_exclusive": 0.4,
-                    "min_inclusive": -0.2
-                  }
+                  "max_exclusive": 0.4,
+                  "min_inclusive": -0.2
                 }
               },
               "then_run": {
@@ -86,10 +84,8 @@
               "type": "wover:threshold_condition",
               "roughness": {
                 "type": "minecraft:uniform",
-                "value": {
-                  "max_exclusive": -0.3,
-                  "min_inclusive": -0.4
-                }
+                "max_exclusive": -0.3,
+                "min_inclusive": -0.4
               },
               "scale_x": 0.5,
               "scale_z": 0.5,

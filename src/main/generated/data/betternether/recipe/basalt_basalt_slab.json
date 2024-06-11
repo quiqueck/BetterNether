@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_rock_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:basalt"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:basalt_slab"
+  }
+}

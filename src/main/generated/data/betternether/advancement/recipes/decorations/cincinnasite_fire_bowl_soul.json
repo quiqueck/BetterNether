@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cincinnasite_forged": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_forged"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_cincinnasite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_soul_sand": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:soul_sand"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:cincinnasite_fire_bowl_soul"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_soul_sand",
+      "has_cincinnasite_ingot",
+      "has_cincinnasite_forged"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:cincinnasite_fire_bowl_soul"
+    ]
+  }
+}

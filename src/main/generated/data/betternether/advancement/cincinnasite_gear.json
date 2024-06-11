@@ -1,0 +1,71 @@
+{
+  "parent": "betternether:cincinnasite_tools",
+  "criteria": {
+    "cincinnasite_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cincinnasite_chestplate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_chestplate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cincinnasite_helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_helmet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cincinnasite_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.cincinnasite_gear.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "betternether:cincinnasite_chestplate"
+    },
+    "title": {
+      "translate": "advancements.betternether.cincinnasite_gear.title"
+    }
+  },
+  "requirements": [
+    [
+      "cincinnasite_helmet"
+    ],
+    [
+      "cincinnasite_chestplate"
+    ],
+    [
+      "cincinnasite_leggings"
+    ],
+    [
+      "cincinnasite_boots"
+    ]
+  ]
+}

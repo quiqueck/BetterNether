@@ -1,0 +1,85 @@
+{
+  "parent": "betternether:flaming_ruby",
+  "criteria": {
+    "flaming_ruby_axe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_axe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_hoe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_hoe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_pickaxe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_shovel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_shovel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flaming_ruby_sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:flaming_ruby_sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.flaming_tools.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "betternether:flaming_ruby_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.betternether.flaming_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "flaming_ruby_pickaxe"
+    ],
+    [
+      "flaming_ruby_axe"
+    ],
+    [
+      "flaming_ruby_shovel"
+    ],
+    [
+      "flaming_ruby_sword"
+    ],
+    [
+      "flaming_ruby_hoe"
+    ]
+  ]
+}

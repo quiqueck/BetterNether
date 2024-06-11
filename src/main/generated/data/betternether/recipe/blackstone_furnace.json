@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_furnace",
+  "key": {
+    "#": {
+      "item": "minecraft:blackstone"
+    }
+  },
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:blackstone_furnace"
+  }
+}

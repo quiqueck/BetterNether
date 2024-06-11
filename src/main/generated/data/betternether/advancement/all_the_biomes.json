@@ -1,0 +1,441 @@
+{
+  "parent": "betternether:city",
+  "criteria": {
+    "betternether:bone_reef": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:bone_reef"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:crimson_glowing_woods": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:crimson_glowing_woods"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:crimson_pinewood": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:crimson_pinewood"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:flooded_deltas": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:flooded_deltas"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:gravel_desert": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:gravel_desert"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:magma_land": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:magma_land"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:nether_grasslands": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:nether_grasslands"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:nether_jungle": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:nether_jungle"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:nether_mushroom_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:nether_mushroom_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:nether_mushroom_forest_edge": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:nether_mushroom_forest_edge"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:nether_swampland": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:nether_swampland"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:nether_swampland_terraces": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:nether_swampland_terraces"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:old_fungiwoods": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:old_fungiwoods"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:old_swampland": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:old_swampland"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:old_warped_woods": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:old_warped_woods"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:poor_nether_grasslands": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:poor_nether_grasslands"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:soul_plain": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:soul_plain"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:sulfuric_bone_reef": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:sulfuric_bone_reef"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:upside_down_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:upside_down_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:upside_down_forest_cleared": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:upside_down_forest_cleared"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:wart_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:wart_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "betternether:wart_forest_edge": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:wart_forest_edge"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.all_the_biomes.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "betternether:nether_ruby_boots"
+    },
+    "title": {
+      "translate": "advancements.betternether.all_the_biomes.title"
+    }
+  },
+  "requirements": [
+    [
+      "betternether:nether_swampland"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:gravel_desert"
+    ],
+    [
+      "betternether:soul_plain"
+    ],
+    [
+      "betternether:old_warped_woods"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:old_fungiwoods"
+    ],
+    [
+      "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:nether_jungle"
+    ],
+    [
+      "betternether:magma_land"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:nether_swampland_terraces"
+    ],
+    [
+      "betternether:sulfuric_bone_reef"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:nether_mushroom_forest"
+    ],
+    [
+      "betternether:old_swampland"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  }
+}

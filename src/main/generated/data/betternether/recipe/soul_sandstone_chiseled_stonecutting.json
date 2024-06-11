@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "soul_sandstone",
+  "ingredient": {
+    "item": "betternether:soul_sandstone_smooth"
+  },
+  "result": {
+    "count": 1,
+    "id": "betternether:soul_sandstone_chiseled"
+  }
+}

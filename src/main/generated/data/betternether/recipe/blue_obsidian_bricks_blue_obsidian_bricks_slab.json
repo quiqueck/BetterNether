@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_rock_slab",
+  "key": {
+    "#": {
+      "item": "betternether:blue_obsidian_bricks"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:blue_obsidian_bricks_slab"
+  }
+}

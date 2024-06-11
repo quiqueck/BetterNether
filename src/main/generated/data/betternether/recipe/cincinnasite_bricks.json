@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_cincinnasite_bricks",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    },
+    "B": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "pattern": [
+    "#B",
+    "B#"
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:cincinnasite_bricks"
+  }
+}

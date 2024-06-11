@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "slabs",
+  "key": {
+    "#": {
+      "item": "betternether:stalagnate_roof"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:stalagnate_roof_slab"
+  }
+}

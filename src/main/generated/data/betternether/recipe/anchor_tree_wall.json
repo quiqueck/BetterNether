@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall",
+  "key": {
+    "*": {
+      "item": "betternether:anchor_tree_planks"
+    },
+    "|": {
+      "item": "betternether:anchor_tree_fence"
+    }
+  },
+  "pattern": [
+    "* *",
+    "|||"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:anchor_tree_wall"
+  }
+}

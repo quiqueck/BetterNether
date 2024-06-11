@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "nether_gray_dye",
+  "ingredients": [
+    {
+      "item": "betternether:gray_mold"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:gray_dye"
+  }
+}

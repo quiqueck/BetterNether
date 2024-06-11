@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "nether_obsidian_bricks_slab",
+  "ingredient": {
+    "item": "minecraft:obsidian"
+  },
+  "result": {
+    "count": 2,
+    "id": "betternether:obsidian_bricks_slab"
+  }
+}

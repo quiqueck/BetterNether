@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "nether_cincinnasite_button",
+  "ingredients": [
+    {
+      "item": "betternether:cincinnasite_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:cincinnasite_button"
+  }
+}

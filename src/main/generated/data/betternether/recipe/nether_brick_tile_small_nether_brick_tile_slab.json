@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_rock_slab",
+  "key": {
+    "#": {
+      "item": "betternether:nether_brick_tile_small"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "betternether:nether_brick_tile_slab"
+  }
+}

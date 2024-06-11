@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "group": "nether_rock_stairs",
-  "ingredient": {
-    "item": "betternether:nether_brick_tile_small"
-  },
-  "result": "betternether:nether_brick_tile_stairs"
-}

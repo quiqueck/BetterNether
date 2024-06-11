@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.betternether.blue_obsidian_tile": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:blue_obsidian_tile"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:blue_obsidian_tile_slab_from_tile_stonecutter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.betternether.blue_obsidian_tile"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:blue_obsidian_tile_slab_from_tile_stonecutter"
+    ]
+  }
+}

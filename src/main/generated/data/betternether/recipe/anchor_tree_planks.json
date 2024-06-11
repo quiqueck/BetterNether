@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    [
+      {
+        "item": "betternether:anchor_tree_log"
+      },
+      {
+        "item": "betternether:anchor_tree_bark"
+      },
+      {
+        "item": "betternether:anchor_tree_stripped_log"
+      },
+      {
+        "item": "betternether:anchor_tree_stripped_bark"
+      }
+    ]
+  ],
+  "result": {
+    "count": 4,
+    "id": "betternether:anchor_tree_planks"
+  }
+}

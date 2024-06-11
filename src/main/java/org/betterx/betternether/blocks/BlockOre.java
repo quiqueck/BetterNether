@@ -51,8 +51,8 @@ public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomIt
     }
 
     @Override
-    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
-        super.registerItemTags(location, context);
+    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+        super.registerBlockTags(location, context);
         context.add(this, CommonBlockTags.NETHERRACK, CommonBlockTags.NETHER_ORES);
     }
 }

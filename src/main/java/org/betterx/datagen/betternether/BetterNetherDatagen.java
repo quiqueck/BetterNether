@@ -42,6 +42,7 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.addProvider(NetherItemTagDataProvider::new);
         globalPack.addProvider(NetherEnchantmentTagProvider::new);
         globalPack.addProvider(NetherEntityTypeTagProvider::new);
+        globalPack.addProvider(NetherModelProvider::new);
 
         globalPack.callOnInitializeDatapack((generator, pack, location) -> {
             if (location == null) {

@@ -49,7 +49,7 @@ public class BlockSoulSandstone extends BlockBase implements BlockTagProvider, B
     }
 
     @Override
-    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
         context.add(this, CommonBlockTags.NETHER_TERRAIN);
     }
 }

@@ -80,7 +80,7 @@ public class BlockTerrain extends BlockBase implements BlockTagProvider, Bonemea
     }
 
     @Override
-    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
         context.add(this, CommonBlockTags.NETHERRACK, CommonBlockTags.NETHER_STONES);
     }
 }

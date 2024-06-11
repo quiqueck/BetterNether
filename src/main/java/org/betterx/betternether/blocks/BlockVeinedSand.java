@@ -55,7 +55,7 @@ public class BlockVeinedSand extends BlockBase implements BlockTagProvider, Beha
     }
 
     @Override
-    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
         context.add(this, CommonBlockTags.SOUL_GROUND);
     }
 }

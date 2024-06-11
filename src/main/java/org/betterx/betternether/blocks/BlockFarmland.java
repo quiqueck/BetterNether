@@ -17,7 +17,7 @@ public class BlockFarmland extends BlockBase implements BlockTagProvider, AddMin
     }
 
     @Override
-    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
         context.add(this, CommonBlockTags.SOUL_GROUND, CommonBlockTags.NETHERRACK, NetherTags.NETHER_FARMLAND);
     }
 }

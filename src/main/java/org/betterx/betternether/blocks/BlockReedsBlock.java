@@ -15,7 +15,7 @@ public class BlockReedsBlock extends BNPillar.Wood implements BlockTagProvider {
     }
 
     @Override
-    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
         context.add(this, BlockTags.PLANKS);
     }
 }

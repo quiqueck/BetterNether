@@ -2,7 +2,7 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
-import org.betterx.bclib.interfaces.BlockModelProvider;
+import org.betterx.bclib.interfaces.RuntimeBlockModelProvider;
 import org.betterx.wover.block.api.BlockTagProvider;
 import org.betterx.wover.loot.api.BlockLootProvider;
 import org.betterx.wover.loot.api.LootLookupProvider;
@@ -26,7 +26,7 @@ import java.util.function.ToIntFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProvider, BlockTagProvider, BehaviourOre, BlockLootProvider {
+public class RedstoneOreBlock extends RedStoneOreBlock implements RuntimeBlockModelProvider, BlockTagProvider, BehaviourOre, BlockLootProvider {
     private final int minCount;
     private final int maxCount;
 
@@ -63,7 +63,7 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
     }
 
     @Override
-    public void registerItemTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
         context.add(this, CommonBlockTags.NETHERRACK, CommonBlockTags.NETHER_ORES);
     }
 }

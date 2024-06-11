@@ -77,7 +77,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.25F, 1);
+        builder.define(COLOR, makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.25F, 1));
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -456,7 +456,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         return MHelper.randRange(0.1F, 0.3F, random);
     }
 
-    private void makeColor(float hue, float saturation, float brightness) {
+    private int makeColor(float hue, float saturation, float brightness) {
         float red = 0;
         float green = 0;
         float blue = 0;
@@ -498,7 +498,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                 break;
         }
 
-        this.entityData.set(COLOR, ColorUtil.color((int) red, (int) green, (int) blue));
+        return ColorUtil.color((int) red, (int) green, (int) blue);
     }
 
     @Override

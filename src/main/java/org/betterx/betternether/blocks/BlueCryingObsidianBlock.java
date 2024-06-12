@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherParticles;
+import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,5 +46,10 @@ public class BlueCryingObsidianBlock extends BNObsidianBase {
                 }
             }
         }
+    }
+
+    @Override
+    public void provideBlockModels(WoverBlockModelGenerators generators) {
+        generators.createObsidianVariants(generators, this);
     }
 }

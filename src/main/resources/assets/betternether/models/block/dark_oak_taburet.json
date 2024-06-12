@@ -1,6 +1,0 @@
-{
-  "parent": "bclib:block/taburet",
-  "textures": {
-    "texture": "block/dark_oak_planks"
-  }
-}

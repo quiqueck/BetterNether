@@ -391,8 +391,8 @@ public class NetherBlocks {
             RecipeCategory.BUILDING_BLOCKS,
             Blocks.POLISHED_BASALT
     );
-    public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS, false);
-    public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS, false);
+    public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS, true, true);
+    public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS, true);
     public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
     public static final Block BASALT_SLAB = registerSlab(
             "basalt_slab",
@@ -411,12 +411,12 @@ public class NetherBlocks {
     );
     public static final Block EYE_SEED = registerBlock("eye_seed", new BlockEyeSeed());
     // Grass //
-    public static final Block NETHER_GRASS = registerBlock("nether_grass", new BlockNetherGrass());
-    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", new BlockNetherGrass());
+    public static final Block NETHER_GRASS = registerBlock("nether_grass", new BlockNetherGrass.NetherGrass());
+    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", new BlockNetherGrass.SwampGrass());
     public static final Block SOUL_GRASS = registerBlock("soul_grass", new BlockSoulGrass());
-    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", new BlockNetherGrass());
-    public static final Block BONE_GRASS = registerBlock("bone_grass", new BlockNetherGrass.OnEverything());
-    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass.OnEverything());
+    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", new BlockNetherGrass.JunglePlant());
+    public static final Block BONE_GRASS = registerBlock("bone_grass", new BlockNetherGrass.BoneGrass());
+    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass.SepiaBoneGrass());
     // Vines //
     public static final Block BLACK_VINE = registerBlock(
             "black_vine",
@@ -772,7 +772,17 @@ public class NetherBlocks {
     }
 
     public static Block registerStairs(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
-        Block stairs = BaseStairsBlock.from(source, fireproof);
+        return registerStairs(name, source, fireproof, true, tags);
+    }
+
+    public static Block registerStairs(
+            String name,
+            Block source,
+            boolean fireproof,
+            boolean createModel,
+            TagKey<Block>... tags
+    ) {
+        Block stairs = BaseStairsBlock.from(source, fireproof, createModel);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, stairs, tags);
             if (stairs.defaultBlockState().ignitedByLava())

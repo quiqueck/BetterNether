@@ -2,14 +2,23 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.blocks.BasePlantBlock;
-import org.betterx.bclib.util.LootUtil;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.client.block.BNModels;
 import org.betterx.betternether.interfaces.SurvivesOnGrassSoil;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
+import org.betterx.wover.block.api.model.BlockModelProvider;
+import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
+import org.betterx.wover.loot.api.BlockLootProvider;
+import org.betterx.wover.loot.api.LootLookupProvider;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.data.models.blockstates.Variant;
+import net.minecraft.data.models.blockstates.VariantProperties;
+import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -17,8 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -26,10 +34,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import java.util.Collections;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOnNetherrackNyliumAndSculk {
+public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOnNetherrackNyliumAndSculk {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
@@ -40,9 +49,136 @@ public class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOn
     public boolean isTerrain(BlockState state) {
         return SurvivesOnNetherrackNyliumAndSculk.super.isTerrain(state);
     }
+
+    public static class JunglePlant extends BlockNetherGrass implements BlockModelProvider {
+        @Environment(EnvType.CLIENT)
+        @Override
+        public void provideBlockModels(WoverBlockModelGenerators generators) {
+            var JP1 = BetterNether.C.mk("block/jungle_plant_1");
+            var JP2 = BetterNether.C.mk("block/jungle_plant_2");
+            var JP3 = BetterNether.C.mk("block/jungle_plant_3");
+            BNModels.createComplex(
+                    generators,
+                    this,
+                    List.of(
+                            BNModels.ModelSource.of(
+                                    WoverBlockModelGenerators.CROSS,
+                                    "_1_a",
+                                    List.of((id, all) -> Variant
+                                            .variant()
+                                            .with(VariantProperties.MODEL, id)
+                                            .with(VariantProperties.WEIGHT, 10)
+                                    ),
+                                    BNModels.TextureSource.of(TextureSlot.CROSS, JP1)
+                            ),
+                            BNModels.ModelSource.of(
+                                    BNModels.CROP_BLOCK_MODEL_LOCATION,
+                                    "_1_b",
+                                    List.of((id, all) -> Variant
+                                            .variant()
+                                            .with(VariantProperties.MODEL, id)
+                                            .with(VariantProperties.WEIGHT, 10)
+                                    ),
+                                    BNModels.TextureSource.of(TextureSlot.TEXTURE, JP1)
+                            ),
+                            BNModels.ModelSource.of(
+                                    BNModels.JUNGLE_PLANT_MODEL_LOCATION,
+                                    "_2",
+                                    List.of(
+                                            (id, all) -> Variant.variant().with(VariantProperties.MODEL, id),
+                                            (id, all) -> Variant
+                                                    .variant()
+                                                    .with(VariantProperties.MODEL, id)
+                                                    .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90),
+                                            (id, all) -> Variant
+                                                    .variant()
+                                                    .with(VariantProperties.MODEL, id)
+                                                    .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180),
+                                            (id, all) -> Variant
+                                                    .variant()
+                                                    .with(VariantProperties.MODEL, id)
+                                                    .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                    ),
+                                    BNModels.TextureSource.of(TextureSlot.PARTICLE, JP2),
+                                    BNModels.TextureSource.of(TextureSlot.TEXTURE, JP3)
+                            ),
+                            BNModels.ModelSource.of(
+                                    WoverBlockModelGenerators.CROSS,
+                                    "_3",
+                                    List.of((id, all) -> Variant
+                                            .variant()
+                                            .with(VariantProperties.MODEL, id)
+                                            .with(VariantProperties.WEIGHT, 2)
+                                    ),
+                                    BNModels.TextureSource.of(TextureSlot.CROSS, JP3)
+                            )
+                    )
+            );
+        }
+    }
+
+
+    public static class SwampGrass extends BlockNetherGrass implements BlockModelProvider {
+        @Environment(EnvType.CLIENT)
+        @Override
+        public void provideBlockModels(WoverBlockModelGenerators generators) {
+            BNModels.provideGrassBlockModels(generators, this, "swamp_grass", 3);
+        }
+    }
+
+    public static class BoneGrass extends BaseBlockNetherGrass.OnEverything implements BlockModelProvider {
+        @Environment(EnvType.CLIENT)
+        @Override
+        public void provideBlockModels(WoverBlockModelGenerators generators) {
+            BNModels.provideGrassBlockModels(generators, this, "bone_grass", 3);
+        }
+    }
+
+    public static class SepiaBoneGrass extends BaseBlockNetherGrass.OnEverything implements BlockModelProvider {
+        @Environment(EnvType.CLIENT)
+        @Override
+        public void provideBlockModels(WoverBlockModelGenerators generators) {
+            BNModels.provideGrassBlockModels(generators, this, "sepia_bone_grass", 3);
+        }
+    }
+
+    public static class NetherGrass extends BlockNetherGrass implements BlockModelProvider {
+        @Environment(EnvType.CLIENT)
+        @Override
+        public void provideBlockModels(WoverBlockModelGenerators generators) {
+            final var T1 = BetterNether.C.mk("block/ngrass_1");
+            final var T2 = BetterNether.C.mk("block/ngrass_2");
+            final var T3 = BetterNether.C.mk("block/ngrass_3");
+
+            BNModels.createComplex(
+                    generators,
+                    this,
+                    List.of(
+                            BNModels.ModelSource.of(
+                                    BNModels.GRASS_FAN_MODEL_LOCATION,
+                                    "_1",
+                                    List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                                    BNModels.TextureSource.of(TextureSlot.TEXTURE, T1)
+                            ),
+                            BNModels.ModelSource.of(
+                                    WoverBlockModelGenerators.CROSS,
+                                    "_2",
+                                    List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                                    BNModels.TextureSource.of(TextureSlot.CROSS, T2)
+                            ),
+                            BNModels.ModelSource.of(
+                                    BNModels.GRASS_FAN_MODEL_LOCATION,
+                                    "_3",
+                                    List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                                    BNModels.TextureSource.of(TextureSlot.TEXTURE, T3)
+                            )
+                    )
+            );
+        }
+    }
 }
 
-abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourPlant {
+abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourPlant, BlockLootProvider {
     private static final VoxelShape SHAPE = box(4, 0, 4, 14, 12, 14);
 
     public BaseBlockNetherGrass() {
@@ -60,7 +196,6 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
         return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
     }
 
-
     @Override
     public BlockState updateShape(
             BlockState state,
@@ -77,12 +212,12 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (LootUtil.isCorrectTool(this, state, tool))
-            return Collections.singletonList(new ItemStack(this.asItem()));
-        else
-            return super.getDrops(state, builder);
+    public @Nullable LootTable.Builder registerBlockLoot(
+            @NotNull ResourceLocation location,
+            @NotNull LootLookupProvider provider,
+            @NotNull ResourceKey<LootTable> tableKey
+    ) {
+        return provider.dropWithSilkTouchOrShears(this);
     }
 
     public static class OnEverything extends BaseBlockNetherGrass implements SurvivesOnGrassSoil {

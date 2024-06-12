@@ -14,5 +14,4 @@ public class BNWoodlikeDoor extends BaseDoorBlock.Wood {
     public BNWoodlikeDoor(Properties properties, WoodType type) {
         super(properties, type.setType());
     }
-
 }

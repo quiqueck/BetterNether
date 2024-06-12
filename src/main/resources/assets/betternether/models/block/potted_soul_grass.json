@@ -1,7 +1,7 @@
 {
 	"parent": "betternether:block/potted_reeds",
 	"textures": {
-		"particle": "betternether:block/soul_grass_01",
-		"texture": "betternether:block/soul_grass_01"
+		"particle": "betternether:block/soul_grass_1",
+		"texture": "betternether:block/soul_grass_1"
 	}
 }

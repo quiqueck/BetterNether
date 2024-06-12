@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "deep-diff": "^1.0.2",
+    "diff": "^5.2.0",
     "prismarine-nbt": "^2.2.1"
   }
 }

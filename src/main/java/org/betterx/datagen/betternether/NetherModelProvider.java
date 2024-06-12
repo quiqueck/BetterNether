@@ -13,6 +13,9 @@ import org.betterx.wover.datagen.api.provider.WoverModelProvider;
 
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -23,40 +26,11 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 public class NetherModelProvider extends WoverModelProvider {
-    public NetherModelProvider(ModCore modCore) {
-        super(modCore);
-    }
 
-    protected void addFurniture(WoverBlockModelGenerators generator, ComplexMaterial mat, Block cloth) {
-        addFurniture(
-                generator,
-                mat.getBlock(WoodSlots.PLANKS),
-                cloth,
-                mat.getBlock(WoodSlots.BAR_STOOL),
-                mat.getBlock(WoodSlots.CHAIR),
-                mat.getBlock(WoodSlots.TABURET)
-        );
-    }
 
-    private static void addFurniture(
-            WoverBlockModelGenerators generator,
-            Block base,
-            Block cloth,
-            Block barStool,
-            Block chair,
-            Block taburet
-    ) {
-        BCLModels.createBarStoolBlockModel(generator, barStool, base, cloth);
-        BCLModels.createChairBlockModel(generator, chair, base, cloth);
-        BCLModels.createTaburetBlockModel(generator, taburet, base);
-    }
+    @Override
+    protected void bootstrapItemModels(ItemModelGenerators itemModelGenerator) {
 
-    private static JsonElement toArray(float... values) {
-        JsonArray array = new JsonArray(values.length);
-        for (float value : values) {
-            array.add(value);
-        }
-        return array;
     }
 
     @Override
@@ -101,6 +75,39 @@ public class NetherModelProvider extends WoverModelProvider {
         BNModels.provideSimpleMultiStateBlock(generator, NetherBlocks.BASALT_BRICKS, "", "_cracked");
 
 
+        //special Stairs
+        final Block reedPlanks = NetherBlocks.MAT_REED.getBlock(WoodSlots.PLANKS);
+
+        final ResourceLocation SOUL_SANDSTONE_BOTTOM = BetterNether.C.mk("block/soul_sandstone_bottom");
+        final ResourceLocation SOUL_SANDSTONE_TOP = BetterNether.C.mk("block/soul_sandstone_top");
+        final ResourceLocation SOUL_SANDSTONE_SLABS = BetterNether.C.mk("block/soul_sandstone_slabs");
+        final ResourceLocation SOUL_SANDSTONE_CUT_SLABS = BetterNether.C.mk("block/soul_sandstone_cut_slabs");
+        final ResourceLocation NETHER_REED_PLANKS_TOP = BetterNether.C.mk("block/nether_reed_planks_top");
+        final ResourceLocation NETHER_REED_PLANKS = TextureMapping.getBlockTexture(reedPlanks);
+
+        generator.modelFor(NetherBlocks.SOUL_SANDSTONE, new TextureMapping()
+                         .put(TextureSlot.TOP, SOUL_SANDSTONE_TOP)
+                         .put(TextureSlot.BOTTOM, SOUL_SANDSTONE_BOTTOM)
+                         .put(TextureSlot.SIDE, SOUL_SANDSTONE_SLABS))
+                 .createStairs(NetherBlocks.SOUL_SANDSTONE_STAIRS);
+
+        generator.modelFor(NetherBlocks.SOUL_SANDSTONE, new TextureMapping()
+                         .put(TextureSlot.TOP, SOUL_SANDSTONE_TOP)
+                         .put(TextureSlot.BOTTOM, SOUL_SANDSTONE_TOP)
+                         .put(TextureSlot.SIDE, SOUL_SANDSTONE_CUT_SLABS))
+                 .createStairs(NetherBlocks.SOUL_SANDSTONE_CUT_STAIRS);
+
+        generator.modelFor(NetherBlocks.SOUL_SANDSTONE, new TextureMapping()
+                         .put(TextureSlot.TOP, SOUL_SANDSTONE_TOP)
+                         .put(TextureSlot.BOTTOM, SOUL_SANDSTONE_TOP)
+                         .put(TextureSlot.SIDE, SOUL_SANDSTONE_TOP))
+                 .createStairs(NetherBlocks.SOUL_SANDSTONE_SMOOTH_STAIRS);
+
+        generator.modelFor(reedPlanks, new TextureMapping()
+                         .put(TextureSlot.TOP, NETHER_REED_PLANKS)
+                         .put(TextureSlot.BOTTOM, NETHER_REED_PLANKS_TOP)
+                         .put(TextureSlot.SIDE, NETHER_REED_PLANKS))
+                 .createStairs(NetherBlocks.MAT_REED.getBlock(WoodSlots.STAIRS));
         //Nether Reed special handling
 
     }
@@ -132,8 +139,39 @@ public class NetherModelProvider extends WoverModelProvider {
         addFurniture(generator, NetherBlocks.CINCINNASITE_FORGED, NetherBlocks.NETHER_BRICK_TILE_LARGE, NetherBlocks.BAR_STOOL_CINCINNASITE, NetherBlocks.CHAIR_CINCINNASITE, NetherBlocks.TABURET_CINCINNASITE);
     }
 
-    @Override
-    protected void bootstrapItemModels(ItemModelGenerators itemModelGenerator) {
+    public NetherModelProvider(ModCore modCore) {
+        super(modCore);
+    }
 
+    protected void addFurniture(WoverBlockModelGenerators generator, ComplexMaterial mat, Block cloth) {
+        addFurniture(
+                generator,
+                mat.getBlock(WoodSlots.PLANKS),
+                cloth,
+                mat.getBlock(WoodSlots.BAR_STOOL),
+                mat.getBlock(WoodSlots.CHAIR),
+                mat.getBlock(WoodSlots.TABURET)
+        );
+    }
+
+    private static void addFurniture(
+            WoverBlockModelGenerators generator,
+            Block base,
+            Block cloth,
+            Block barStool,
+            Block chair,
+            Block taburet
+    ) {
+        BCLModels.createBarStoolBlockModel(generator, barStool, base, cloth);
+        BCLModels.createChairBlockModel(generator, chair, base, cloth);
+        BCLModels.createTaburetBlockModel(generator, taburet, base);
+    }
+
+    private static JsonElement toArray(float... values) {
+        JsonArray array = new JsonArray(values.length);
+        for (float value : values) {
+            array.add(value);
+        }
+        return array;
     }
 }

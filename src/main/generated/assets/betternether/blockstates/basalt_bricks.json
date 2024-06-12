@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "betternether:block/basalt_bricks"
+      },
+      {
+        "model": "betternether:block/basalt_bricks_cracked"
+      }
+    ]
+  }
+}

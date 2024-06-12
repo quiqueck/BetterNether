@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "betternether:block/nether_mushroom_door_bottom",
+    "top": "betternether:block/nether_mushroom_door_top"
+  }
+}

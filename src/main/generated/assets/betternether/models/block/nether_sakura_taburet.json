@@ -1,0 +1,6 @@
+{
+  "parent": "bclib:block/taburet",
+  "textures": {
+    "texture": "betternether:block/nether_sakura_planks"
+  }
+}

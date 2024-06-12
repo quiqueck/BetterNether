@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "betternether:block/bar_stool_cincinnasite"
+    },
+    "facing=north": {
+      "model": "betternether:block/bar_stool_cincinnasite",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "betternether:block/bar_stool_cincinnasite",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "betternether:block/bar_stool_cincinnasite",
+      "y": 180
+    }
+  }
+}

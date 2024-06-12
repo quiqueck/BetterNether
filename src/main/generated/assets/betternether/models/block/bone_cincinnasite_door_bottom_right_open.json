@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right_open",
+  "textures": {
+    "bottom": "betternether:block/bone_cincinnasite_door_bottom",
+    "top": "betternether:block/bone_cincinnasite_door_top"
+  }
+}

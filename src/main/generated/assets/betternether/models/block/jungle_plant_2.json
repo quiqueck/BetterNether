@@ -1,0 +1,7 @@
+{
+  "parent": "betternether:block/jungle_plant",
+  "textures": {
+    "particle": "betternether:block/jungle_plant_2",
+    "texture": "betternether:block/jungle_plant_3"
+  }
+}

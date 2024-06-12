@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "betternether:block/stalagnate_bookshelf",
+    "side": "betternether:block/stalagnate_bookshelf"
+  }
+}

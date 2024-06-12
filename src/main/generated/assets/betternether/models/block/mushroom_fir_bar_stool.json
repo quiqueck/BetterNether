@@ -1,0 +1,7 @@
+{
+  "parent": "bclib:block/bar_stool",
+  "textures": {
+    "cloth": "betternether:block/nether_brick_tile_large",
+    "texture": "betternether:block/mushroom_fir_planks"
+  }
+}

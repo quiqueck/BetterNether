@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "betternether:block/rubeus_bookshelf",
+    "side": "betternether:block/rubeus_bookshelf"
+  }
+}

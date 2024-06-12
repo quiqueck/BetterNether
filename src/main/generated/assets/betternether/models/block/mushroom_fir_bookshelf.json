@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "betternether:block/mushroom_fir_bookshelf",
+    "side": "betternether:block/mushroom_fir_bookshelf"
+  }
+}

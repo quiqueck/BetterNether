@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "betternether:block/taburet_cincinnasite"
+    },
+    "facing=north": {
+      "model": "betternether:block/taburet_cincinnasite",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "betternether:block/taburet_cincinnasite",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "betternether:block/taburet_cincinnasite",
+      "y": 180
+    }
+  }
+}

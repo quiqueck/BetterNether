@@ -1,0 +1,6 @@
+{
+  "parent": "bclib:block/chair",
+  "textures": {
+    "texture": "minecraft:block/crimson_planks"
+  }
+}

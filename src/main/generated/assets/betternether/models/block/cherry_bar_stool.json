@@ -1,0 +1,7 @@
+{
+  "parent": "bclib:block/bar_stool",
+  "textures": {
+    "cloth": "minecraft:block/white_wool",
+    "texture": "minecraft:block/cherry_planks"
+  }
+}

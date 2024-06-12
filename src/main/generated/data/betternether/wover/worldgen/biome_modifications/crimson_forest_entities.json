@@ -15,12 +15,6 @@
       "maxCount": 6,
       "minCount": 2,
       "weight": 5
-    },
-    {
-      "type": "minecraft:cow",
-      "maxCount": 18,
-      "minCount": 6,
-      "weight": 500
     }
   ]
 }

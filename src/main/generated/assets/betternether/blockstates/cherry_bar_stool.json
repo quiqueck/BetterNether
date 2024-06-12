@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "betternether:block/cherry_bar_stool"
+    },
+    "facing=north": {
+      "model": "betternether:block/cherry_bar_stool",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "betternether:block/cherry_bar_stool",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "betternether:block/cherry_bar_stool",
+      "y": 180
+    }
+  }
+}

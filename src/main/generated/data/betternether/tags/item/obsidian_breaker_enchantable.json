@@ -1,5 +1,9 @@
 {
   "values": [
+    "betternether:cincinnasite_pickaxe",
+    "betternether:cincinnasite_pickaxe_diamond",
+    "betternether:flaming_ruby_pickaxe",
+    "betternether:nether_ruby_pickaxe",
     "#betternether:pickaxes"
   ]
 }

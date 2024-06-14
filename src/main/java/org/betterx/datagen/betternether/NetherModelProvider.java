@@ -44,7 +44,13 @@ public class NetherModelProvider extends WoverModelProvider {
                         NetherBlocks.MAT_REED.getBlock(WoodSlots.STAIRS),
                         NetherBlocks.SOUL_SANDSTONE_STAIRS,
                         NetherBlocks.SOUL_SANDSTONE_SMOOTH_STAIRS,
-                        NetherBlocks.SOUL_SANDSTONE_CUT_STAIRS
+                        NetherBlocks.SOUL_SANDSTONE_CUT_STAIRS,
+                        NetherBlocks.BONE_PLATE,
+                        NetherBlocks.BONE_BUTTON,
+                        NetherBlocks.CINCINNASITE_PLATE,
+                        NetherBlocks.CINCINNASITE_BUTTON,
+                        NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.PRESSURE_PLATE),
+                        NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.BUTTON)
                 )
         );
 
@@ -108,8 +114,31 @@ public class NetherModelProvider extends WoverModelProvider {
                          .put(TextureSlot.BOTTOM, NETHER_REED_PLANKS_TOP)
                          .put(TextureSlot.SIDE, NETHER_REED_PLANKS))
                  .createStairs(NetherBlocks.MAT_REED.getBlock(WoodSlots.STAIRS));
-        //Nether Reed special handling
 
+
+        generator.modelFor(NetherBlocks.BONE_PLATE, new TextureMapping()
+                         .put(TextureSlot.TEXTURE, BetterNether.C.mk("block/bone_block_plate")))
+                 .createPressurePlate(NetherBlocks.BONE_PLATE);
+
+        generator.modelFor(NetherBlocks.CINCINNASITE_PLATE, new TextureMapping()
+                         .put(TextureSlot.TEXTURE, BetterNether.C.mk("block/cincinnasite_plate_up")))
+                 .createPressurePlate(NetherBlocks.CINCINNASITE_PLATE);
+
+        generator.modelFor(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.PRESSURE_PLATE), new TextureMapping()
+                         .put(TextureSlot.TEXTURE, BetterNether.C.mk("block/nether_mushroom_plate")))
+                 .createPressurePlate(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.PRESSURE_PLATE));
+
+        generator.modelFor(NetherBlocks.BONE_BUTTON, new TextureMapping()
+                         .put(TextureSlot.TEXTURE, BetterNether.C.mk("block/bone_button")))
+                 .createButton(NetherBlocks.BONE_BUTTON);
+
+        generator.modelFor(NetherBlocks.CINCINNASITE_BUTTON, new TextureMapping()
+                         .put(TextureSlot.TEXTURE, BetterNether.C.mk("block/cincinnasite_button")))
+                 .createButton(NetherBlocks.CINCINNASITE_BUTTON);
+
+        generator.modelFor(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.BUTTON), new TextureMapping()
+                         .put(TextureSlot.TEXTURE, BetterNether.C.mk("block/nether_mushroom_button")))
+                 .createButton(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.BUTTON));
     }
 
     private static void addCinFurniture(WoverBlockModelGenerators generator) {

@@ -47,54 +47,58 @@ function getFileDiff(file1, file2) {
   return differences;
 }
 
-// Directories to compare
-//const base = '../src/main/{IN}/assets/betternether/models/item';
-//const base = '../src/main/{IN}/assets/betternether/models/block';
-const base = '../src/main/{IN}/assets/betternether/blockstates';
-const directoryPath1 = base.replace('{IN}','resources')
-const directoryPath2 = base.replace('{IN}','generated')
+function checkPath(base){
+    const directoryPath1 = base.replace('{IN}','resources')
+    const directoryPath2 = base.replace('{IN}','generated')
 
-const commonFiles = getCommonFiles(directoryPath1, directoryPath2);
+    const commonFiles = getCommonFiles(directoryPath1, directoryPath2);
 
-if (commonFiles.length) {
-  const same = []
-  const other = []
-  console.log('Common files in both directories:');
-  commonFiles.forEach(file => {
-        const file1Path = path.join(directoryPath1, file);
-        const file2Path = path.join(directoryPath2, file);
-        const differences = getFileDiff(file1Path, file2Path);
+    if (commonFiles.length) {
+      const same = []
+      const other = []
+      console.log('Common files in both directories:');
+      commonFiles.forEach(file => {
+            const file1Path = path.join(directoryPath1, file);
+            const file2Path = path.join(directoryPath2, file);
+            const differences = getFileDiff(file1Path, file2Path);
 
-        if (differences) {
-        other.push(file1Path)
-        console.log(`${file1Path}:`)
-          differences.forEach(diff => {
-            console.log("    ", diff);
-          });
-          console.log('')
-        } else {
-          same.push(file1Path)
-        }
-  });
-  if (other.length>0){
-    console.log('\n\nFiles are different:')
-    other.forEach(file => {
-      console.log(`    ${file}`)
-    });
-  }
-  if (same.length>0){
-    console.log('\n\nFiles are the same:')
-    same.forEach(file => {
-      console.log(`    ${file}`)
-      fs.unlink(file, (err) => {
-        if (err) {
-          console.error(err)
-          return
-        }
-      })
-    });
-  }
-} else {
-  console.log('No common files found in both directories.');
+            if (differences) {
+            other.push(file1Path)
+            console.log(`${file1Path}:`)
+              differences.forEach(diff => {
+                console.log("    ", diff);
+              });
+              console.log('')
+            } else {
+              same.push(file1Path)
+            }
+      });
+      if (other.length>0){
+        console.log('\n\nFiles are different:')
+        other.forEach(file => {
+          console.log(`    ${file}`)
+        });
+      }
+      if (same.length>0){
+        console.log('\n\nFiles are the same:')
+        same.forEach(file => {
+          console.log(`    ${file}`)
+          fs.unlink(file, (err) => {
+            if (err) {
+              console.error(err)
+              return
+            }
+          })
+        });
+      }
+    } else {
+      console.log('No common files found in both directories.');
+      return true;
+    }
+
+    return false;
 }
 
+if (!checkPath('../src/main/{IN}/assets/betternether/blockstates')) return
+if (!checkPath('../src/main/{IN}/assets/betternether/models/block')) return
+if (!checkPath('../src/main/{IN}/assets/betternether/models/item')) return

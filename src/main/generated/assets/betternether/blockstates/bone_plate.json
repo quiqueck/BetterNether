@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "betternether:block/bone_plate"
+    },
+    "powered=true": {
+      "model": "betternether:block/bone_plate_down"
+    }
+  }
+}

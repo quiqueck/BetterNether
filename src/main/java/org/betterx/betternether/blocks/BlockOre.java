@@ -3,8 +3,8 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
-import org.betterx.bclib.interfaces.CustomItemProvider;
 import org.betterx.wover.block.api.BlockTagProvider;
+import org.betterx.wover.block.api.CustomBlockItemProvider;
 import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
@@ -18,7 +18,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.Supplier;
 
-public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomItemProvider, BehaviourOre {
+public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomBlockItemProvider, BehaviourOre {
     public final boolean fireproof;
 
     public BlockOre(
@@ -45,7 +45,7 @@ public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomIt
     }
 
     @Override
-    public BlockItem getCustomItem(ResourceLocation blockID, Item.Properties settings) {
+    public BlockItem getCustomBlockItem(ResourceLocation blockID, Item.Properties settings) {
         if (fireproof) settings = settings.fireResistant();
         return new BlockItem(this, settings);
     }

@@ -1,5 +1,13 @@
 {
   "values": [
-    "betternether:nether_reed_planks"
+    "betternether:anchor_tree_planks",
+    "betternether:mushroom_fir_planks",
+    "betternether:nether_mushroom_planks",
+    "betternether:nether_reed_planks",
+    "betternether:nether_sakura_planks",
+    "betternether:rubeus_planks",
+    "betternether:stalagnate_planks",
+    "betternether:wart_planks",
+    "betternether:willow_planks"
   ]
 }

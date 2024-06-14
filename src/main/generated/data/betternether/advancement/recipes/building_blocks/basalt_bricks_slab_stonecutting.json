@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.betternether.basalt_bricks": {
+    "has_basalt_bricks": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.betternether.basalt_bricks"
+      "has_basalt_bricks"
     ]
   ],
   "rewards": {

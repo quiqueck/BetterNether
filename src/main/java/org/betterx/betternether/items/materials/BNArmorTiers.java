@@ -1,8 +1,8 @@
 package org.betterx.betternether.items.materials;
 
 import org.betterx.betternether.registry.NetherTemplates;
-import org.betterx.wover.complex.api.tool.ArmorTier;
-import org.betterx.wover.complex.api.tool.ArmorTiers;
+import org.betterx.wover.complex.api.equipment.ArmorTier;
+import org.betterx.wover.complex.api.equipment.ArmorTiers;
 
 public class BNArmorTiers {
     public static ArmorTier CINCINNASITE = ArmorTier

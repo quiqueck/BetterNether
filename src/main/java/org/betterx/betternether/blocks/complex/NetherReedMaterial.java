@@ -9,11 +9,14 @@ import org.betterx.bclib.complexmaterials.set.wood.Bookshelf;
 import org.betterx.bclib.complexmaterials.set.wood.Planks;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.items.boat.BoatTypeOverride;
-import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockReedsBlock;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.recipe.api.BaseRecipeBuilder;
+import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
+import org.betterx.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -51,14 +54,17 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                         }
 
                         @Override
-                        protected @Nullable void makeRecipe(ComplexMaterial parentMaterial, ResourceLocation id) {
-                            BCLRecipeBuilder.crafting(id, parentMaterial.getBlock(WoodSlots.PLANKS))
-                                            .setOutputCount(1)
-                                            .setShape("##", "##")
-                                            .addMaterial('#', getStem())
-                                            .setGroup("planks")
-                                            .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                                            .build();
+                        protected @Nullable void makeRecipe(
+                                RecipeOutput context, ComplexMaterial parentMaterial, ResourceLocation id
+                        ) {
+                            CraftingRecipeBuilder craftingRecipeBuilder1 = RecipeBuilder.crafting(id, parentMaterial.getBlock(WoodSlots.PLANKS));
+                            CraftingRecipeBuilder craftingRecipeBuilder2 = craftingRecipeBuilder1
+                                    .outputCount(1);
+                            CraftingRecipeBuilder craftingRecipeBuilder = craftingRecipeBuilder2.shape("##", "##")
+                                                                                                .addMaterial('#', getStem());
+                            BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder = craftingRecipeBuilder.group("planks");
+                            craftingRecipeBuilderBaseRecipeBuilder.category(RecipeCategory.BUILDING_BLOCKS)
+                                                                  .build(context);
                         }
                     })
                     .replace(new Bookshelf() {

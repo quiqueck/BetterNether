@@ -18,7 +18,8 @@ import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.wover.block.api.BlockRegistry;
-import org.betterx.wover.complex.api.tool.ToolTiers;
+import org.betterx.wover.complex.api.equipment.ToolTiers;
+import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.state.api.WorldState;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
@@ -787,7 +788,8 @@ public class NetherBlocks {
             registerBlockDirectly(name, stairs, tags);
             if (stairs.defaultBlockState().ignitedByLava())
                 addFuel(source, stairs);
-            RecipesHelper.makeStairsRecipe(source, stairs);
+            if (ModCore.isDatagen())
+                RecipesHelper.makeStairsRecipe(source, stairs);
         }
         return stairs;
     }
@@ -798,8 +800,8 @@ public class NetherBlocks {
             registerBlockDirectly(name, slab, tags);
             if (slab.defaultBlockState().ignitedByLava())
                 addFuel(source, slab);
-            RecipesHelper.makeSlabRecipe(source, slab);
-
+            if (ModCore.isDatagen())
+                RecipesHelper.makeSlabRecipe(source, slab);
         }
         return slab;
     }
@@ -809,7 +811,8 @@ public class NetherBlocks {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, roof);
             addFuel(source, roof);
-            RecipesHelper.makeRoofRecipe(source, roof);
+            if (ModCore.isDatagen())
+                RecipesHelper.makeRoofRecipe(source, roof);
         }
         return roof;
     }
@@ -819,7 +822,8 @@ public class NetherBlocks {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, button);
             addFuel(source, button);
-            RecipesHelper.makeButtonRecipe(source, button);
+            if (ModCore.isDatagen())
+                RecipesHelper.makeButtonRecipe(source, button);
         }
         return button;
     }
@@ -829,7 +833,8 @@ public class NetherBlocks {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, plate);
             addFuel(source, plate);
-            RecipesHelper.makePlateRecipe(source, plate);
+            if (ModCore.isDatagen())
+                RecipesHelper.makePlateRecipe(source, plate);
         }
         return plate;
     }
@@ -868,7 +873,8 @@ public class NetherBlocks {
     ) {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, result, tags);
-            RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
+            if (ModCore.isDatagen())
+                RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
         }
         return result;
     }
@@ -877,7 +883,8 @@ public class NetherBlocks {
         Block wall = BNWall.from(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, wall, BlockTags.WALLS);
-            RecipesHelper.makeWallRecipe(source, wall);
+            if (ModCore.isDatagen())
+                RecipesHelper.makeWallRecipe(source, wall);
         }
         return wall;
     }
@@ -888,11 +895,12 @@ public class NetherBlocks {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
             addFuel(source, block);
-            Taburet.makeTaburetRecipe(
+            RecipesHelper.addProvider(ctx -> Taburet.makeTaburetRecipe(
+                    ctx.context,
                     BetterNether.C.mk(name),
                     block,
                     source
-            );
+            ));
         }
 
         return block;
@@ -903,11 +911,12 @@ public class NetherBlocks {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
             addFuel(source, block);
-            Chair.makeChairRecipe(
+            RecipesHelper.addProvider(ctx -> Chair.makeChairRecipe(
+                    ctx.context,
                     BetterNether.C.mk(name),
                     block,
                     source
-            );
+            ));
         }
 
         return block;
@@ -918,11 +927,12 @@ public class NetherBlocks {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_PICKAXE);
             addFuel(source, block);
-            BarStool.makeBarStoolRecipe(
+            RecipesHelper.addProvider(ctx -> BarStool.makeBarStoolRecipe(
+                    ctx.context,
                     BetterNether.C.mk(name),
                     block,
                     source
-            );
+            ));
         }
 
         return block;
@@ -932,7 +942,8 @@ public class NetherBlocks {
         Block block = new BlockNetherFurnace(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
+            if (ModCore.isDatagen())
+                RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
         }
 
         return block;
@@ -942,7 +953,8 @@ public class NetherBlocks {
         Block block = new BlockStalactite(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite", RecipeCategory.DECORATIONS);
+            if (ModCore.isDatagen())
+                RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite", RecipeCategory.DECORATIONS);
         }
 
         return block;

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:sculk_catalyst"
+  },
+  "base": {
+    "item": "betternether:nether_ruby_chestplate"
+  },
+  "result": {
+    "count": 1,
+    "id": "betternether:flaming_ruby_chestplate"
+  },
+  "template": {
+    "item": "betternether:flaming_ruby_upgrade_smithing_template"
+  }
+}

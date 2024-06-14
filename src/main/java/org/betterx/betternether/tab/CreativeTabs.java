@@ -6,7 +6,7 @@ import org.betterx.betternether.blocks.complex.WillowMaterial;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.wover.complex.api.tool.ToolSlot;
+import org.betterx.wover.complex.api.equipment.ToolSlot;
 
 public class CreativeTabs {
     public static void register() {

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "I": {
+      "item": "betternether:cincinnasite_hammer"
+    }
+  },
+  "pattern": [
+    "#I#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:cincinnasite_hammer_diamond"
+  }
+}

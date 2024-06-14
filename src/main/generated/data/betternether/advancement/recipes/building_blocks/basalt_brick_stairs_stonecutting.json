@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.minecraft.basalt": {
+    "has_basalt": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.minecraft.basalt"
+      "has_basalt"
     ]
   ],
   "rewards": {

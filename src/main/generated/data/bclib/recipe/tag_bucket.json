@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "pattern": [
+    "I I",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:bucket"
+  }
+}

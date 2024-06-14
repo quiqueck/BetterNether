@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.betternether.blue_obsidian_bricks": {
+    "has_blue_obsidian_bricks": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.betternether.blue_obsidian_bricks"
+      "has_blue_obsidian_bricks"
     ]
   ],
   "rewards": {

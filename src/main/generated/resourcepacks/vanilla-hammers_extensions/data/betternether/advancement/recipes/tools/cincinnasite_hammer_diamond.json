@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cincinnasite_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:cincinnasite_hammer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:cincinnasite_hammer_diamond"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cincinnasite_hammer",
+      "has_diamond"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:cincinnasite_hammer_diamond"
+    ]
+  }
+}

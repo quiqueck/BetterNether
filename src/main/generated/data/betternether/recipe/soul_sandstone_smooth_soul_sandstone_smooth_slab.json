@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "nether_rock_slab",
+  "group": "slabs",
   "key": {
     "#": {
       "item": "betternether:soul_sandstone_smooth"

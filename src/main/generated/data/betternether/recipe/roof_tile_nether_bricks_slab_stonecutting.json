@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "roof_tile_slab",
+  "group": "slabs",
   "ingredient": {
     "item": "betternether:roof_tile_nether_bricks"
   },

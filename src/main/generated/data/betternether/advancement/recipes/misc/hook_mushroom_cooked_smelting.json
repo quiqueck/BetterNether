@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.betternether.hook_mushroom": {
+    "has_hook_mushroom": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.betternether.hook_mushroom"
+      "has_hook_mushroom"
     ]
   ],
   "rewards": {

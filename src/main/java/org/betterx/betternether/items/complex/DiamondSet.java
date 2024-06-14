@@ -1,7 +1,7 @@
 package org.betterx.betternether.items.complex;
 
 import org.betterx.betternether.items.materials.BNToolTiers;
-import org.betterx.wover.complex.api.tool.EquipmentSet;
+import org.betterx.wover.complex.api.equipment.EquipmentSet;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -5,6 +5,7 @@ import org.betterx.betternether.blocks.BNPane;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.core.api.ModCore;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.DyeItem;
@@ -94,7 +95,8 @@ public class ColoredGlassMaterial {
         String name = group + "_" + ((DyeItem) dye).getDyeColor().getSerializedName();
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             NetherBlocks.registerBlockDirectly(name, block);
-            RecipesHelper.makeColoringRecipe(base, block, dye, group, category);
+            if (ModCore.isDatagen())
+                RecipesHelper.makeColoringRecipe(base, block, dye, group, category);
         }
         return block;
     }

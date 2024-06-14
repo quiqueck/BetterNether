@@ -6,10 +6,7 @@ import org.betterx.datagen.betternether.enchantments.NetherEnchantmentProvider;
 import org.betterx.datagen.betternether.enchantments.NetherEnchantmentTagProvider;
 import org.betterx.datagen.betternether.entity.NetherEntityTypeTagProvider;
 import org.betterx.datagen.betternether.presets.FlatLevelPresetsDataProvider;
-import org.betterx.datagen.betternether.recipes.NetherBlockLootTableProvider;
-import org.betterx.datagen.betternether.recipes.NetherChestLootTableProvider;
-import org.betterx.datagen.betternether.recipes.NetherEntityLootTableProvider;
-import org.betterx.datagen.betternether.recipes.NetherRecipeDataProvider;
+import org.betterx.datagen.betternether.recipes.*;
 import org.betterx.datagen.betternether.worldgen.NetherBiomeModificationProvider;
 import org.betterx.datagen.betternether.worldgen.NetherBiomesProvider;
 import org.betterx.datagen.betternether.worldgen.StructureDataProvider;
@@ -23,8 +20,6 @@ import net.minecraft.core.RegistrySetBuilder;
 public class BetterNetherDatagen extends WoverDataGenEntryPoint {
     @Override
     protected void onInitializeProviders(PackBuilder globalPack) {
-        NetherRecipeDataProvider.buildRecipes();
-
         globalPack.addMultiProvider(NetherBiomesProvider::new);
         globalPack.addMultiProvider(ObjectFeatureDataProvider::new);
         globalPack.addMultiProvider(OreFeatureDataProvider::new);
@@ -43,15 +38,24 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.addProvider(NetherEnchantmentTagProvider::new);
         globalPack.addProvider(NetherEntityTypeTagProvider::new);
         globalPack.addProvider(NetherModelProvider::new);
+        globalPack.addProvider(NetherBlockRecipesProvider::new);
+        globalPack.addProvider(NetherItemRecipeProvider::new);
+        globalPack.addProvider(NetherCraftingRecipes::new);
 
         globalPack.callOnInitializeDatapack((generator, pack, location) -> {
             if (location == null) {
-                pack.addProvider(NetherRecipeDataProvider::new);
                 pack.addProvider(NetherAdvancementDataProvider::new);
                 pack.addProvider(NetherBlockLootTableProvider::new);
             }
         });
 
+        //Add providers for the vanilla hammers extension
+        addDatapack(BetterNether.VANILLA_HAMMERS_PACK)
+                .addProvider(VanillaHammersRecipes::new);
+
+        //Add providers for the vanilla excavators extension
+        addDatapack(BetterNether.VANILLA_EXCAVATORS_PACK)
+                .addProvider(VanillaExcavatorsRecipes::new);
     }
 
     @Override

@@ -4,9 +4,9 @@ import org.betterx.betternether.loot.BNLoot;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.registry.NetherTemplates;
-import org.betterx.wover.complex.api.tool.ArmorSlot;
-import org.betterx.wover.complex.api.tool.EquipmentSet;
-import org.betterx.wover.complex.api.tool.ToolSlot;
+import org.betterx.wover.complex.api.equipment.ArmorSlot;
+import org.betterx.wover.complex.api.equipment.EquipmentSet;
+import org.betterx.wover.complex.api.equipment.ToolSlot;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverLootTableProvider;
 

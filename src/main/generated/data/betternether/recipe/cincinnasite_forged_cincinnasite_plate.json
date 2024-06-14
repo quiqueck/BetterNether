@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
-  "group": "nether_rock_plate",
+  "group": "plates",
   "key": {
     "#": {
       "item": "betternether:cincinnasite_forged"

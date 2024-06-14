@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "flaming_ruby_sword",
+  "key": {
+    "#": {
+      "item": "minecraft:sculk_catalyst"
+    },
+    "I": {
+      "item": "betternether:nether_reed_stem"
+    }
+  },
+  "pattern": [
+    "#",
+    "#",
+    "I"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:flaming_ruby_sword"
+  }
+}

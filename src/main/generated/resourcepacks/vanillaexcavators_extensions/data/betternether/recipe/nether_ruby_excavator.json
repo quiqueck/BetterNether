@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "betternether:nether_ruby_block"
+    },
+    "I": {
+      "item": "betternether:nether_ruby"
+    },
+    "S": {
+      "item": "betternether:nether_reed_stem"
+    }
+  },
+  "pattern": [
+    " I ",
+    "#S#",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:nether_ruby_excavator"
+  }
+}

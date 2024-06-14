@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.betternether.cincinnasite_fire_bowl": {
+    "has_item.betternether.bowl_upgrade_smithing_template": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:cincinnasite_fire_bowl"
+            "items": "betternether:bowl_upgrade_smithing_template"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.betternether.cincinnasite_fire_bowl"
+      "has_item.betternether.bowl_upgrade_smithing_template"
     ]
   ],
   "rewards": {

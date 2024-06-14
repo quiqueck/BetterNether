@@ -1,12 +1,12 @@
 package org.betterx.betternether.integrations;
 
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.wover.core.api.ModCore;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
-
-import net.fabricmc.loader.api.FabricLoader;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -17,8 +17,15 @@ public class VanillaExcavatorsIntegration {
     private static Constructor<?> excavatorConstructor;
 
     public static Item makeExcavator(Tier material, int attackDamage, float attackSpeed) {
-        if (!hasExcavators)
+        if (!hasExcavators) {
+            //make sure we generate an Item during datagen. When doing datagen it does not matter what type the item is,
+            //we just need to be able to reference it.
+            if (ModCore.isDatagen()) {
+                return new Item(NetherItems.defaultSettings());
+            }
+
             return Items.AIR;
+        }
         try {
             return (Item) excavatorConstructor.newInstance(
                     material,
@@ -33,7 +40,7 @@ public class VanillaExcavatorsIntegration {
     }
 
     static {
-        hasExcavators = FabricLoader.getInstance().isModLoaded("vanillaexcavators");
+        hasExcavators = BetterNether.VANILLA_EXCAVATORS.isLoaded();
         try {
             if (hasExcavators) {
                 LogManager.getLogger().info("[BetterNether] Enabled Vanilla Excavators Integration");

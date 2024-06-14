@@ -14,6 +14,7 @@ import org.betterx.betternether.blocks.RubeusBark;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -40,7 +41,9 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
                         }
 
                         @Override
-                        protected @Nullable void makeRecipe(ComplexMaterial parentMaterial, ResourceLocation id) {
+                        protected @Nullable void makeRecipe(
+                                RecipeOutput context, ComplexMaterial parentMaterial, ResourceLocation id
+                        ) {
 
                         }
                     })

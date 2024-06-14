@@ -1,9 +1,9 @@
 package org.betterx.betternether.items.materials;
 
 import org.betterx.betternether.registry.NetherTemplates;
-import org.betterx.wover.complex.api.tool.ToolTier;
-import org.betterx.wover.complex.api.tool.ToolTier.ToolValues;
-import org.betterx.wover.complex.api.tool.ToolTiers;
+import org.betterx.wover.complex.api.equipment.ToolTier;
+import org.betterx.wover.complex.api.equipment.ToolTier.ToolValues;
+import org.betterx.wover.complex.api.equipment.ToolTiers;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.tags.BlockTags;

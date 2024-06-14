@@ -5,15 +5,18 @@ import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
 import org.betterx.bclib.complexmaterials.entry.SimpleBlockOnlyMaterialSlot;
 import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.bclib.complexmaterials.set.wood.Log;
-import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
+import org.betterx.wover.recipe.api.BaseRecipeBuilder;
+import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
+import org.betterx.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -37,15 +40,17 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                     ))
                     .replace(new Log() {
                         @Override
-                        protected @Nullable void makeRecipe(ComplexMaterial material, ResourceLocation id) {
-                            BCLRecipeBuilder
-                                    .crafting(id, material.getBlock(suffix))
-                                    .setOutputCount(1)
-                                    .setShape("##", "##")
-                                    .addMaterial('#', material.getBlock(NetherSlots.STEM))
-                                    .setGroup("logs")
-                                    .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                                    .build();
+                        protected @Nullable void makeRecipe(
+                                RecipeOutput context, ComplexMaterial material, ResourceLocation id
+                        ) {
+                            CraftingRecipeBuilder craftingRecipeBuilder1 = RecipeBuilder
+                                    .crafting(id, material.getBlock(suffix));
+                            CraftingRecipeBuilder craftingRecipeBuilder2 = craftingRecipeBuilder1.outputCount(1);
+                            CraftingRecipeBuilder craftingRecipeBuilder = craftingRecipeBuilder2.shape("##", "##")
+                                                                                                .addMaterial('#', material.getBlock(NetherSlots.STEM));
+                            BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder = craftingRecipeBuilder.group("logs");
+                            craftingRecipeBuilderBaseRecipeBuilder.category(RecipeCategory.BUILDING_BLOCKS)
+                                                                  .build(context);
                         }
                     });
     }

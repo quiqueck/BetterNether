@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tag_c_iron_ingots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:iron_ingots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "bclib:tag_cauldron"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tag_c_iron_ingots"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bclib:tag_cauldron"
+    ]
+  }
+}

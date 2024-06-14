@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "roof_tile_slab",
+  "group": "slabs",
   "key": {
     "#": {
       "item": "betternether:roof_tile_cincinnasite"

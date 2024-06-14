@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.betternether.nether_brick_tile_large": {
+    "has_nether_brick_tile_large": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.betternether.nether_brick_tile_large"
+      "has_nether_brick_tile_large"
     ]
   ],
   "rewards": {

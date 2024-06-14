@@ -15,8 +15,8 @@ import org.betterx.betternether.items.materials.BNArmorTiers;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.items.materials.BNToolTiers;
 import org.betterx.betternether.loot.BNLoot;
-import org.betterx.wover.complex.api.tool.ArmorSlot;
-import org.betterx.wover.complex.api.tool.ToolSlot;
+import org.betterx.wover.complex.api.equipment.ArmorSlot;
+import org.betterx.wover.complex.api.equipment.ToolSlot;
 import org.betterx.wover.item.api.ItemRegistry;
 import org.betterx.wover.tag.api.predefined.CommonItemTags;
 

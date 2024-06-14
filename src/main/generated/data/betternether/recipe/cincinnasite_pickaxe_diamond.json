@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "cincinnasite_pickaxe_diamond",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "I": {
+      "item": "betternether:nether_reed_stem"
+    }
+  },
+  "pattern": [
+    "###",
+    " I ",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:cincinnasite_pickaxe_diamond"
+  }
+}

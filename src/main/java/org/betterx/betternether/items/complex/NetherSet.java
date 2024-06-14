@@ -6,7 +6,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.items.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.wover.complex.api.tool.*;
+import org.betterx.wover.complex.api.equipment.*;
 
 public class NetherSet extends EquipmentSet {
     public NetherSet(

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "nether_wall",
+  "group": "walls",
   "ingredient": {
     "item": "betternether:soul_sandstone_cut"
   },

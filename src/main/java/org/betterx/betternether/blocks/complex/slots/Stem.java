@@ -6,10 +6,13 @@ import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
-import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockStem;
+import org.betterx.wover.recipe.api.BaseRecipeBuilder;
+import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
+import org.betterx.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -31,7 +34,7 @@ public class Stem extends SimpleMaterialSlot<WoodenComplexMaterial> {
     }
 
     protected @Nullable RecipeEntry getRecipeEntry(WoodenComplexMaterial parentMaterial) {
-        return new RecipeEntry(WoodSlots.LOG.suffix + "_" + suffix, this::makeRecipe);
+        return new RecipeEntry(WoodSlots.LOG.suffix + "_" + suffix, (ctx, parentMaterial1, id) -> makeRecipe(ctx, parentMaterial1, id));
     }
 
     @Override
@@ -40,14 +43,14 @@ public class Stem extends SimpleMaterialSlot<WoodenComplexMaterial> {
     }
 
     @Override
-    protected @Nullable void makeRecipe(ComplexMaterial parentMaterial, ResourceLocation id) {
-        BCLRecipeBuilder
-                .crafting(id, parentMaterial.getBlock(WoodSlots.LOG))
-                .setOutputCount(1)
-                .setShape("##", "##")
-                .addMaterial('#', parentMaterial.getBlock(suffix))
-                .setGroup("planks")
-                .setCategory(RecipeCategory.BUILDING_BLOCKS)
-                .build();
+    protected @Nullable void makeRecipe(RecipeOutput context, ComplexMaterial parentMaterial, ResourceLocation id) {
+        CraftingRecipeBuilder craftingRecipeBuilder1 = RecipeBuilder
+                .crafting(id, parentMaterial.getBlock(WoodSlots.LOG));
+        CraftingRecipeBuilder craftingRecipeBuilder2 = craftingRecipeBuilder1.outputCount(1);
+        CraftingRecipeBuilder craftingRecipeBuilder = craftingRecipeBuilder2.shape("##", "##")
+                                                                            .addMaterial('#', parentMaterial.getBlock(suffix));
+        BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder = craftingRecipeBuilder.group("planks");
+        craftingRecipeBuilderBaseRecipeBuilder.category(RecipeCategory.BUILDING_BLOCKS)
+                                              .build(context);
     }
 }

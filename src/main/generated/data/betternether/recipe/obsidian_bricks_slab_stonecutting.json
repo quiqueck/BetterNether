@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "nether_rock_slab",
+  "group": "slabs",
   "ingredient": {
     "item": "betternether:obsidian_bricks"
   },

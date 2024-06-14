@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.betternether.cincinnasite_tile_large": {
+    "has_cincinnasite_tile_large": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.betternether.cincinnasite_tile_large"
+      "has_cincinnasite_tile_large"
     ]
   ],
   "rewards": {

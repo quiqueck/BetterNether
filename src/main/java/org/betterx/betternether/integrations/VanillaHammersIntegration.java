@@ -1,12 +1,12 @@
 package org.betterx.betternether.integrations;
 
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.wover.core.api.ModCore;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
-
-import net.fabricmc.loader.api.FabricLoader;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -17,8 +17,17 @@ public class VanillaHammersIntegration {
     private static Constructor<?> hammerConstructor;
 
     public static Item makeHammer(Tier material, int attackDamage, float attackSpeed) {
-        if (!hasHammers)
+        if (!hasHammers) {
+            //make sure we generate an Item during datagen. When doing datagen it does not matter what type the item is,
+            //we just need to be able to reference it.
+            if (ModCore.isDatagen()) {
+                return new Item(NetherItems.defaultSettings());
+            }
+
             return Items.AIR;
+        }
+
+
         try {
             return (Item) hammerConstructor.newInstance(
                     material,
@@ -33,7 +42,7 @@ public class VanillaHammersIntegration {
     }
 
     static {
-        hasHammers = FabricLoader.getInstance().isModLoaded("vanilla-hammers");
+        hasHammers = BetterNether.VANILLA_HAMMERS.isLoaded();
         try {
             if (hasHammers) {
                 LogManager.getLogger().info("[BetterNether] Enabled Vanilla Hammers Integration");

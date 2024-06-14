@@ -48,9 +48,9 @@ function getFileDiff(file1, file2) {
 }
 
 // Directories to compare
-const base = '../src/main/{IN}/assets/betternether/models/item';
+//const base = '../src/main/{IN}/assets/betternether/models/item';
 //const base = '../src/main/{IN}/assets/betternether/models/block';
-//const base = '../src/main/{IN}/assets/betternether/blockstates';
+const base = '../src/main/{IN}/assets/betternether/blockstates';
 const directoryPath1 = base.replace('{IN}','resources')
 const directoryPath2 = base.replace('{IN}','generated')
 

@@ -751,5 +751,7 @@
   "tag.betternether.willow_logs": "Willow Logs",
   "upgrade.betternether.bowl_upgrade": "Netherite Fire Bowl Upgrade",
   "upgrade.betternether.cincinnasite_diamond_upgrade": "Diamond Cincinnasite Upgrade",
-  "upgrade.betternether.flaming_ruby_upgrade": "Fireruby Upgrade"
+  "upgrade.betternether.flaming_ruby_upgrade": "Fireruby Upgrade",
+  "vanilla-hammers_extension.title": "BetterNether for Vanilla Hammers",
+  "pack.betternether.vanilla-hammers_extensions.description": "Provides Hammers from Better Nether Tool Materials for the Vanilla Hammers mod"
 }

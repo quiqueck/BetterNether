@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "nether_rock_stairs",
+  "group": "stairs",
   "key": {
     "#": {
       "item": "betternether:obsidian_tile_small"

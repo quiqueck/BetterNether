@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.minecraft.quartz": {
+    "has_quartz": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_item.minecraft.quartz"
+      "has_quartz"
     ]
   ],
   "rewards": {

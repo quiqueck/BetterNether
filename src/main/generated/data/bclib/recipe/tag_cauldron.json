@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "pattern": [
+    "I I",
+    "I I",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:cauldron"
+  }
+}

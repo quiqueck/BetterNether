@@ -8,8 +8,8 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.registry.NetherTemplates;
-import org.betterx.wover.complex.api.tool.ArmorSlot;
-import org.betterx.wover.complex.api.tool.ToolSlot;
+import org.betterx.wover.complex.api.equipment.ArmorSlot;
+import org.betterx.wover.complex.api.equipment.ToolSlot;
 
 import net.minecraft.advancements.critereon.ChangeDimensionTrigger;
 import net.minecraft.advancements.critereon.LocationPredicate;

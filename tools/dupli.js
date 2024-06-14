@@ -99,6 +99,6 @@ function checkPath(base){
     return false;
 }
 
-if (!checkPath('../src/main/{IN}/assets/betternether/blockstates')) return
-if (!checkPath('../src/main/{IN}/assets/betternether/models/block')) return
-if (!checkPath('../src/main/{IN}/assets/betternether/models/item')) return
+checkPath('../src/main/{IN}/assets/betternether/blockstates')
+checkPath('../src/main/{IN}/assets/betternether/models/block')
+checkPath('../src/main/{IN}/assets/betternether/models/item')

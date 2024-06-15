@@ -277,6 +277,7 @@ modrinth {
     changelog = changes
     dependencies {
         required.project "fabric-api"
+        required.project 'worldweaver'
         required.project "bclib"
         optional.project "emi"
         optional.project "wthit"
@@ -312,9 +313,10 @@ curseforge {
             latestVersion = "[$v]"
         }
         addGameVersion 'Fabric'
-        addGameVersion 'Java 17'
+        addGameVersion 'Java 21'
         relations {
             requiredDependency 'fabric-api'
+            requiredDependency 'worldweaver'
             requiredDependency 'bclib'
             optionalDependency 'emi'
             optionalDependency 'roughly-enough-items'

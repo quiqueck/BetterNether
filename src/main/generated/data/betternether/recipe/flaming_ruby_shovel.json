@@ -1,22 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "group": "flaming_ruby_shovel",
-  "key": {
-    "#": {
-      "item": "minecraft:sculk_catalyst"
-    },
-    "I": {
-      "item": "betternether:nether_reed_stem"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:sculk_catalyst"
   },
-  "pattern": [
-    "#",
-    "I",
-    "I"
-  ],
+  "base": {
+    "item": "betternether:nether_ruby_shovel"
+  },
   "result": {
     "count": 1,
     "id": "betternether:flaming_ruby_shovel"
+  },
+  "template": {
+    "item": "betternether:flaming_ruby_upgrade_smithing_template"
   }
 }

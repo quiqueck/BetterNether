@@ -5,7 +5,6 @@ import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
 import org.betterx.bclib.entity.BCLEntityWrapper;
 import org.betterx.bclib.interfaces.SpawnRule;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.entity.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
@@ -217,13 +216,8 @@ public class NetherEntities {
         FabricDefaultAttributeRegistry.register(type, attributes);
         NetherItems.makeEgg("spawn_egg_" + name, type, eggColor, dotsColor);
 
-        if (Configs.MOBS.getBooleanRoot(id.getPath(), true)) {
-            return new BCLEntityWrapper<>(type, true);
-        }
 
-        var wrapper = new BCLEntityWrapper<>(type, false);
-        NETHER_ENTITIES.add(wrapper);
-        return wrapper;
+        return new BCLEntityWrapper<>(type, true);
     }
 
     private static boolean testSpawnAboveLava(LevelAccessor world, BlockPos pos, boolean allow) {

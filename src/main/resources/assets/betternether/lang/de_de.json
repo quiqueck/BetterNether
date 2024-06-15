@@ -750,7 +750,14 @@
   "tag.betternether.stalagnate_logs": "Stalagnatstämme",
   "tag.betternether.wart_logs": "Warzentämme",
   "tag.betternether.willow_logs": "Weidenstämme",
+  "title.config.betternether.client.cosmetic.fog_density": "Nebeldichte im Nether",
+  "title.config.betternether.client.cosmetic.thin_armor": "Model für Dünne Rüstung verwenden",
+  "title.config.betternether.client.performance.lavafall_particles": "Lavafall-Partikel anzeigen",
+  "title.config.betternether.client.performance.weeping_obsidian_particles": "Partikel für schluchzenden Obsidian anzeigen",
+  "title.config.betternether.world.structure.city_in_overworld": "Nether-Städte im Oberwelt generieren",
   "upgrade.betternether.bowl_upgrade": "Netherit Feuerschalen-Upgrade",
   "upgrade.betternether.cincinnasite_diamond_upgrade": "Cincinnasite Diamant Veredelung",
-  "upgrade.betternether.flaming_ruby_upgrade": "Feuerrubin Veredelung"
+  "upgrade.betternether.flaming_ruby_upgrade": "Feuerrubin Veredelung",
+  "bn_config": "BetterNether - Einstellungen",
+  "description.config.betternether.client.cosmetic.fog_density": "Stellt die Dichte des Nebels im Nether ein. Je höher der Wert, desto dichter der Nebel."
 }

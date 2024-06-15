@@ -14,7 +14,6 @@ import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
 import org.betterx.betternether.blocks.complex.slots.VanillaNetherWood;
 import org.betterx.betternether.blocks.complex.slots.VanillaWood;
-import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.wover.block.api.BlockRegistry;
@@ -735,21 +734,16 @@ public class NetherBlocks {
 
     @SafeVarargs
     public static <T extends Block> T registerBlock(String name, T block, TagKey<Block>... tags) {
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block, tags);
-        }
+        registerBlockDirectly(name, block, tags);
         return block;
     }
 
     @SafeVarargs
     private static <B extends Block> B registerBlockNI(String name, B block, TagKey<Block>... tags) {
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            return registerBlock(name, block, false, tags);
-        }
-        return block;
+        return registerBlock(name, block, false, tags);
     }
 
-
+    @SafeVarargs
     public static void registerBlockDirectly(String name, Block block, TagKey<Block>... tags) {
         registerBlock(name, block, true, tags);
     }
@@ -772,10 +766,12 @@ public class NetherBlocks {
         }
     }
 
+    @SafeVarargs
     public static Block registerStairs(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
         return registerStairs(name, source, fireproof, true, tags);
     }
 
+    @SafeVarargs
     public static Block registerStairs(
             String name,
             Block source,
@@ -784,58 +780,59 @@ public class NetherBlocks {
             TagKey<Block>... tags
     ) {
         Block stairs = BaseStairsBlock.from(source, fireproof, createModel);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, stairs, tags);
-            if (stairs.defaultBlockState().ignitedByLava())
-                addFuel(source, stairs);
-            if (ModCore.isDatagen())
-                RecipesHelper.makeStairsRecipe(source, stairs);
-        }
+
+        registerBlockDirectly(name, stairs, tags);
+        if (stairs.defaultBlockState().ignitedByLava())
+            addFuel(source, stairs);
+        if (ModCore.isDatagen())
+            RecipesHelper.makeStairsRecipe(source, stairs);
+
         return stairs;
     }
 
+    @SafeVarargs
     public static Block registerSlab(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
         Block slab = BaseSlabBlock.from(source, fireproof);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, slab, tags);
-            if (slab.defaultBlockState().ignitedByLava())
-                addFuel(source, slab);
-            if (ModCore.isDatagen())
-                RecipesHelper.makeSlabRecipe(source, slab);
-        }
+
+        registerBlockDirectly(name, slab, tags);
+        if (slab.defaultBlockState().ignitedByLava())
+            addFuel(source, slab);
+        if (ModCore.isDatagen())
+            RecipesHelper.makeSlabRecipe(source, slab);
+
         return slab;
     }
 
     private static Block registerRoof(String name, Block source) {
         Block roof = BlockBase.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, roof);
-            addFuel(source, roof);
-            if (ModCore.isDatagen())
-                RecipesHelper.makeRoofRecipe(source, roof);
-        }
+
+        registerBlockDirectly(name, roof);
+        addFuel(source, roof);
+        if (ModCore.isDatagen())
+            RecipesHelper.makeRoofRecipe(source, roof);
+
         return roof;
     }
 
     public static Block registerButton(String name, Block source, BlockSetType type) {
         Block button = BaseButtonBlock.from(source, type);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, button);
-            addFuel(source, button);
-            if (ModCore.isDatagen())
-                RecipesHelper.makeButtonRecipe(source, button);
-        }
+
+        registerBlockDirectly(name, button);
+        addFuel(source, button);
+        if (ModCore.isDatagen())
+            RecipesHelper.makeButtonRecipe(source, button);
+
         return button;
     }
 
     public static Block registerPlate(String name, Block source, BlockSetType type) {
         Block plate = BasePressurePlateBlock.from(source, type);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, plate);
-            addFuel(source, plate);
-            if (ModCore.isDatagen())
-                RecipesHelper.makePlateRecipe(source, plate);
-        }
+
+        registerBlockDirectly(name, plate);
+        addFuel(source, plate);
+        if (ModCore.isDatagen())
+            RecipesHelper.makePlateRecipe(source, plate);
+
         return plate;
     }
 
@@ -871,91 +868,91 @@ public class NetherBlocks {
             Block source,
             TagKey<Block>... tags
     ) {
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, result, tags);
-            if (ModCore.isDatagen())
-                RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
-        }
+
+        registerBlockDirectly(name, result, tags);
+        if (ModCore.isDatagen())
+            RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
+
         return result;
     }
 
     public static Block registerWall(String name, Block source) {
         Block wall = BNWall.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, wall, BlockTags.WALLS);
-            if (ModCore.isDatagen())
-                RecipesHelper.makeWallRecipe(source, wall);
-        }
+
+        registerBlockDirectly(name, wall, BlockTags.WALLS);
+        if (ModCore.isDatagen())
+            RecipesHelper.makeWallRecipe(source, wall);
+
         return wall;
     }
 
 
     public static Block registerTaburet(String name, Block source) {
         Block block = BaseTaburet.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
-            addFuel(source, block);
-            RecipesHelper.addProvider(ctx -> Taburet.makeTaburetRecipe(
-                    ctx.context,
-                    BetterNether.C.mk(name),
-                    block,
-                    source
-            ));
-        }
+
+        registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
+        addFuel(source, block);
+        RecipesHelper.addProvider(ctx -> Taburet.makeTaburetRecipe(
+                ctx.context,
+                BetterNether.C.mk(name),
+                block,
+                source
+        ));
+
 
         return block;
     }
 
     public static Block registerChair(String name, Block source) {
         Block block = BaseChair.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
-            addFuel(source, block);
-            RecipesHelper.addProvider(ctx -> Chair.makeChairRecipe(
-                    ctx.context,
-                    BetterNether.C.mk(name),
-                    block,
-                    source
-            ));
-        }
+
+        registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
+        addFuel(source, block);
+        RecipesHelper.addProvider(ctx -> Chair.makeChairRecipe(
+                ctx.context,
+                BetterNether.C.mk(name),
+                block,
+                source
+        ));
+
 
         return block;
     }
 
     public static Block registerBarStool(String name, Block source) {
         Block block = BaseBarStool.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_PICKAXE);
-            addFuel(source, block);
-            RecipesHelper.addProvider(ctx -> BarStool.makeBarStoolRecipe(
-                    ctx.context,
-                    BetterNether.C.mk(name),
-                    block,
-                    source
-            ));
-        }
+
+        registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_PICKAXE);
+        addFuel(source, block);
+        RecipesHelper.addProvider(ctx -> BarStool.makeBarStoolRecipe(
+                ctx.context,
+                BetterNether.C.mk(name),
+                block,
+                source
+        ));
+
 
         return block;
     }
 
     public static Block registerFurnace(String name, Block source) {
         Block block = new BlockNetherFurnace(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            if (ModCore.isDatagen())
-                RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
-        }
+
+        registerBlockDirectly(name, block);
+        if (ModCore.isDatagen())
+            RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
+
 
         return block;
     }
 
     private static Block registerStalactite(String name, Block source) {
         Block block = new BlockStalactite(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            if (ModCore.isDatagen())
-                RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite", RecipeCategory.DECORATIONS);
-        }
+
+        registerBlockDirectly(name, block);
+        if (ModCore.isDatagen())
+            RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite", RecipeCategory.DECORATIONS);
+
 
         return block;
     }
@@ -963,12 +960,12 @@ public class NetherBlocks {
     private static Block registerFireBowl(String name, Block source, Block inside, Item leg) {
         final boolean isNetherite = name.startsWith("netherite");
         Block block = isNetherite ? new BlockFireBowl.Metal(source) : BlockFireBowl.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            if (!isNetherite) {
-                RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
-            }
+
+        registerBlockDirectly(name, block);
+        if (!isNetherite) {
+            RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
         }
+
 
         return block;
     }

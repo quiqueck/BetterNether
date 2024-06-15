@@ -8,7 +8,7 @@ public class WorldConfig extends ConfigFile {
     public final BooleanValue addNetherCityToOverworld = new BooleanValue(
             MainConfig.STRUCTURE_GROUP.title(),
             "city_in_overworld",
-            true
+            false
     ).setGroup(MainConfig.STRUCTURE_GROUP);
 
     public WorldConfig() {

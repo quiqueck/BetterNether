@@ -1,6 +1,6 @@
 package org.betterx.betternether.mixin.client;
 
-import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.config.Configs;
 
 import net.minecraft.client.model.ArmorStandArmorModel;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -29,7 +29,7 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, A
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Inject(method = "<init>*", at = @At(value = "RETURN"))
     private void onInit(EntityRendererProvider.Context ctx, CallbackInfo info) {
-        if (BetterNether.hasThinArmor()) {
+        if (Configs.CLIENT.thinArmor.get()) {
             for (RenderLayer<ArmorStand, ArmorStandArmorModel> feature : this.layers) {
                 if (feature instanceof HumanoidArmorLayer) {
                     this.layers.remove(feature);

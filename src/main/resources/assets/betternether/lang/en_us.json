@@ -740,6 +740,7 @@
   "itemGroup.betternether.nature": "BetterNether: Nature",
   "message.spawn_help": "§c§lYou must hold§r %s §c§lto set your spawn point here",
   "message.spawn_set": "§2§lYour spawn point was set here",
+  "pack.betternether.vanilla-hammers_extensions.description": "Provides Hammers from Better Nether Tool Materials for the Vanilla Hammers mod",
   "tag.betternether.anchor_tree_logs": "Anchor Tree Logs",
   "tag.betternether.mushroom_fir_logs": "Mushroom Fir Logs",
   "tag.betternether.nether_mushroom_logs": "Nether Mushroom Logs",
@@ -749,9 +750,15 @@
   "tag.betternether.stalagnate_logs": "Stalagnate Logs",
   "tag.betternether.wart_logs": "Wart Logs",
   "tag.betternether.willow_logs": "Willow Logs",
+  "title.config.betternether.client.cosmetic.fog_density": "Nether Fog Density",
+  "description.config.betternether.client.cosmetic.fog_density": "BetterNether adds a fog effect to the Nether. This option allows you to change the density of the fog. Lower values will make the fog less dense, while higher values will make it denser.",
+  "title.config.betternether.client.cosmetic.thin_armor": "Use thin armor model",
+  "title.config.betternether.client.performance.lavafall_particles": "Show Particles for Lavafalls",
+  "title.config.betternether.client.performance.weeping_obsidian_particles": "Show Particles for Weeping Obsidian",
+  "title.config.betternether.world.structure.city_in_overworld": "Spawn Nether City in Overworld",
   "upgrade.betternether.bowl_upgrade": "Netherite Fire Bowl Upgrade",
   "upgrade.betternether.cincinnasite_diamond_upgrade": "Diamond Cincinnasite Upgrade",
   "upgrade.betternether.flaming_ruby_upgrade": "Fireruby Upgrade",
   "vanilla-hammers_extension.title": "BetterNether for Vanilla Hammers",
-  "pack.betternether.vanilla-hammers_extensions.description": "Provides Hammers from Better Nether Tool Materials for the Vanilla Hammers mod"
+  "bn_config": "BetterNether Configuration"
 }

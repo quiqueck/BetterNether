@@ -37,7 +37,7 @@ public class NetherParticles {
         );
 
 
-        if (Configs.MAIN.getBoolean("particles", "weeping", true)) {
+        if (Configs.CLIENT.weepingParticles.get()) {
             BLUE_DRIPPING_OBSIDIAN_WEEP = BCLParticleType.register(
                     BetterNether.C.id("blue_dripping_obsidian_weep"),
                     BNParticleProvider.ObsidianWeepHangProvider::new

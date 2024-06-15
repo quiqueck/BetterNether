@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks;
 import de.ambertation.wunderlib.math.Float3;
 import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -11,7 +10,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
@@ -56,15 +54,10 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
         this.setDropItself(false);
 
-        String itemName = Configs.MAIN.getString(
-                "respawn_statue",
-                "respawn_item",
-                BuiltInRegistries.ITEM.getKey(Items.GLOWSTONE).toString()
-        );
-        Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(itemName));
+        Item item = BuiltInRegistries.ITEM.get(BuiltInRegistries.ITEM.getKey(Items.GLOWSTONE));
         if (item == Items.AIR)
             item = Items.GLOWSTONE;
-        int count = Configs.MAIN.getInt("respawn_statue", "item_count", 4);
+        int count = 4;
         requiredItem = new ItemStack(item, count);
     }
 

@@ -1,6 +1,6 @@
 package org.betterx.betternether.mixin.client;
 
-import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.config.Configs;
 
 import net.minecraft.client.model.ArmorStandArmorModel;
 import net.minecraft.client.model.PlayerModel;
@@ -34,7 +34,7 @@ public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClie
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Inject(method = "<init>*", at = @At(value = "RETURN"))
     private void bcl_onInit(EntityRendererProvider.Context context, boolean bl, CallbackInfo info) {
-        if (BetterNether.hasThinArmor()) {
+        if (Configs.CLIENT.thinArmor.get()) {
             for (RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> feature : this.layers) {
                 if (feature instanceof HumanoidArmorLayer) {
                     this.layers.remove(feature);

@@ -48,8 +48,8 @@ public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherG
 
     public BlockEggPlant() {
         super(MapColor.TERRACOTTA_WHITE);
-        enableModDamage = Configs.MAIN.getBoolean("egg_plant", "mob_damage", true);
-        enablePlayerDamage = Configs.MAIN.getBoolean("egg_plant", "player_damage", true);
+        enableModDamage = Configs.GAME_RULES.eggPlantMobDamage.get();
+        enablePlayerDamage = Configs.GAME_RULES.eggPlantPlayerDamage.get();
         this.registerDefaultState(getStateDefinition().any().setValue(DESTRUCTED, false));
     }
 

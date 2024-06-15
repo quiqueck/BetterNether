@@ -29,7 +29,6 @@ public class BetterNether implements ModInitializer {
     @Deprecated(forRemoval = true)
     public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER
             = new org.betterx.worlds.together.util.Logger(C.modId);
-    private static boolean thinArmor = true;
     private static boolean lavafallParticles = true;
     private static float fogStart = 0.05F;
     private static float fogEnd = 0.5F;
@@ -77,18 +76,9 @@ public class BetterNether implements ModInitializer {
     }
 
     private void initOptions() {
-        thinArmor = Configs.MAIN.getBoolean("improvement", "smaller_armor_offset", true);
-        lavafallParticles = Configs.MAIN.getBoolean("improvement", "lavafall_particles", true);
-        float density = Configs.MAIN.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.75F);
+        lavafallParticles = Configs.CLIENT.lavafallParticles.get();
+        float density = Configs.CLIENT.fogDensity.get();
         changeFogDensity(density);
-    }
-
-    public static boolean hasThinArmor() {
-        return thinArmor;
-    }
-
-    public static void setThinArmor(boolean value) {
-        thinArmor = value;
     }
 
     public static boolean hasLavafallParticles() {

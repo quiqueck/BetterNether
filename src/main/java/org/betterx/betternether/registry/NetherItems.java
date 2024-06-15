@@ -4,7 +4,6 @@ import org.betterx.bclib.BCLib;
 import org.betterx.bclib.items.DebugDataItem;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
-import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.integrations.VanillaExcavatorsIntegration;
 import org.betterx.betternether.integrations.VanillaHammersIntegration;
 import org.betterx.betternether.items.ItemBlackApple;
@@ -41,17 +40,11 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 public class NetherItems {
-    private static final List<String> ITEMS = new ArrayList<String>();
-    private static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
-    private static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
-
     public static final Item BLACK_APPLE = registerItem("black_apple", new ItemBlackApple());
 
     public static final Item STALAGNATE_BOWL = registerItem("stalagnate_bowl", new ItemBowlFood(null, FoodShape.NONE));
@@ -191,24 +184,15 @@ public class NetherItems {
     public static Item registerTool(String name, Item item, TagKey<Item>... tags) {
         if (item != Items.AIR) {
             getItemRegistry().registerAsTool(name, item, tags);
-            MOD_ITEMS.add(item);
         }
 
-        ITEMS.add(name);
         return item;
     }
 
     public static Item registerItem(String name, Item item, TagKey<Item>... tags) {
-        if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
+        if (item != Items.AIR) {
             getItemRegistry().register(name, item, tags);
-
-            if (item instanceof BlockItem)
-                MOD_BLOCKS.add(item);
-            else
-                MOD_ITEMS.add(item);
         }
-        if (!(item instanceof BlockItem))
-            ITEMS.add(name);
         return item;
     }
 
@@ -287,12 +271,8 @@ public class NetherItems {
     }
 
     public static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
-        if (Configs.MOBS.getBoolean("mobs", name, true)) {
-            SpawnEggItem egg = new SpawnEggItem(type, background, dots, defaultSettings());
-            return getItemRegistry().registerEgg(name, egg);
-        } else {
-            return Items.AIR;
-        }
+        SpawnEggItem egg = new SpawnEggItem(type, background, dots, defaultSettings());
+        return getItemRegistry().registerEgg(name, egg);
     }
 
     public static Item registerNetherItem(String name, Item item) {

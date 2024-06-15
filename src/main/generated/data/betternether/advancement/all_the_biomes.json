@@ -369,70 +369,70 @@
   },
   "requirements": [
     [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:upside_down_forest_cleared"
-    ],
-    [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:nether_mushroom_forest"
-    ],
-    [
-      "betternether:wart_forest"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:bone_reef"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:nether_swampland_terraces"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:nether_swampland"
+      "betternether:gravel_desert"
     ],
     [
       "betternether:old_warped_woods"
     ],
     [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:nether_swampland"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
       "betternether:soul_plain"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:old_swampland"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
-      "betternether:old_fungiwoods"
     ],
     [
       "betternether:sulfuric_bone_reef"
     ],
     [
-      "betternether:gravel_desert"
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:nether_swampland_terraces"
+    ],
+    [
+      "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:magma_land"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:nether_jungle"
+    ],
+    [
+      "betternether:old_swampland"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:nether_mushroom_forest"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:old_fungiwoods"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:bone_reef"
     ]
   ],
   "rewards": {

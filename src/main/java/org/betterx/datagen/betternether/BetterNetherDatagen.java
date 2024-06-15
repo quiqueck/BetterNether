@@ -1,6 +1,10 @@
 package org.betterx.datagen.betternether;
 
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherItems;
+import org.betterx.datagen.bclib.worldgen.BlockTagProvider;
+import org.betterx.datagen.bclib.worldgen.ItemTagProvider;
 import org.betterx.datagen.betternether.advancements.NetherAdvancementDataProvider;
 import org.betterx.datagen.betternether.enchantments.NetherEnchantmentProvider;
 import org.betterx.datagen.betternether.enchantments.NetherEnchantmentTagProvider;
@@ -20,6 +24,9 @@ import net.minecraft.core.RegistrySetBuilder;
 public class BetterNetherDatagen extends WoverDataGenEntryPoint {
     @Override
     protected void onInitializeProviders(PackBuilder globalPack) {
+        NetherItems.register();
+        NetherBlocks.register();
+
         globalPack.addMultiProvider(NetherBiomesProvider::new);
         globalPack.addMultiProvider(ObjectFeatureDataProvider::new);
         globalPack.addMultiProvider(OreFeatureDataProvider::new);
@@ -42,6 +49,9 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.addProvider(NetherItemRecipeProvider::new);
         globalPack.addProvider(NetherCraftingRecipes::new);
 
+        globalPack.addProvider(BlockTagProvider::new);
+        globalPack.addProvider(ItemTagProvider::new);
+
         globalPack.callOnInitializeDatapack((generator, pack, location) -> {
             if (location == null) {
                 pack.addProvider(NetherAdvancementDataProvider::new);
@@ -57,6 +67,7 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         addDatapack(BetterNether.VANILLA_EXCAVATORS_PACK)
                 .addProvider(VanillaExcavatorsRecipes::new);
     }
+
 
     @Override
     protected void onBuildRegistry(RegistrySetBuilder registryBuilder) {

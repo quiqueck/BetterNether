@@ -47,8 +47,12 @@
     "bclib": "<21.0.0"
   },
   "custom": {
-    "bclib": {
-      "updater_icon": "icon_updater.png"
+    "wover": {
+      "updater_icon": "icon_updater.png",
+      "downloads": {
+        "modrinth": "https://modrinth.com/mod/betternether",
+        "curseforge": "https://legacy.curseforge.com/minecraft/mc-mods/betternether"
+      }
     },
     "extrapieces:piecepack": "extrapieces.betternether.json",
     "modupdater": {

@@ -573,7 +573,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .register();
         NetherVegetationPlaced.WART_CAP
                 .inlineConfiguration(ctx)
-                .configuration(NetherFeatures.WART_CAP)
+                .withFeature(NetherFeatures.WART_CAP)
                 .inlinePlace()
                 .count(32)
                 .squarePlacement()

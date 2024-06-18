@@ -197,7 +197,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
 
         NetherTreesPlaced.SOUL_LILY
                 .inlineConfiguration(ctx)
-                .configuration(NetherFeatures.SOUL_LILY)
+                .withFeature(NetherFeatures.SOUL_LILY)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
@@ -224,7 +224,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
 
         NetherTreesPlaced.OLD_WILLOW_TREE
                 .inlineConfiguration(ctx)
-                .configuration(NetherFeatures.OLD_WILLOW_TREE)
+                .withFeature(NetherFeatures.OLD_WILLOW_TREE)
                 .configuration(NaturalTreeConfiguration.naturalLarge())
                 .inlinePlace()
                 .vanillaNetherGround(14)

@@ -1,6 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
 import org.betterx.bclib.entity.BCLEntityWrapper;
 import org.betterx.bclib.interfaces.SpawnRule;
@@ -11,7 +10,6 @@ import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.ui.ColorUtil;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +18,6 @@ import net.minecraft.world.entity.EntityType.EntityFactory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -68,16 +65,6 @@ public class NetherEntities {
                 if (this.wrapper.canSpawn())
                     builder.spawn(this.wrapper.type(), weight, minGroupSize, maxGroupSize);
             }
-        }
-
-        public void addSpawn(ResourceLocation ID, Holder<Biome> biome, float multiplier) {
-            final int weight = (int) (this.weight * multiplier);
-            if (weight <= 0 || maxGroupSize <= 0) return;
-            BiomeAPI.addBiomeMobSpawn(biome, this.type, weight, minGroupSize, maxGroupSize);
-        }
-
-        public void addSpawn(ResourceLocation ID, Holder<Biome> biome) {
-            addSpawn(ID, biome, 1);
         }
 
         KnownSpawnTypes(int w, int min, int max, EntityType type) {

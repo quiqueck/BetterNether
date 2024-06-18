@@ -111,14 +111,14 @@ public class TerrainFeatureDataProvider extends WoverFeatureProvider {
 
         NetherTerrainPlaced.MARK
                 .inlineConfiguration(ctx)
-                .configuration(Features.MARK_POSTPROCESSING)
+                .withFeature(Features.MARK_POSTPROCESSING)
                 .inlinePlace()
                 .is(BlockPredicate.matchesBlocks(Blocks.LAVA))
                 .register();
 
         NetherTerrainPlaced.FLOODED_LAVA_PIT_SURFACE
                 .inlineConfiguration(ctx)
-                .configuration(Features.CONDITION)
+                .withFeature(Features.CONDITION)
                 .configuration(new ConditionFeatureConfig(
                         IsBasin.simple(
                                 BlockPredicate.anyOf(

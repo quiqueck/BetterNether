@@ -107,7 +107,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
 
         NetherObjectsPlaced.OBSIDIAN_CRYSTAL
                 .inlineConfiguration(ctx)
-                .configuration(NetherFeatures.OBSIDIAN_CRYSTAL)
+                .withFeature(NetherFeatures.OBSIDIAN_CRYSTAL)
                 .inlinePlace()
                 .vanillaNetherGround(1)
                 .onceEvery(2)

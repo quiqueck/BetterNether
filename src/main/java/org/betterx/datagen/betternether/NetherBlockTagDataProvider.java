@@ -54,5 +54,6 @@ public class NetherBlockTagDataProvider extends WoverTagProvider.ForBlocks {
                 BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
                 CommonBlockTags.NETHER_PORTAL_FRAME
         );
+        org.betterx.datagen.bclib.worldgen.BlockTagProvider.processCommonBlockTags(context, modCore);
     }
 }

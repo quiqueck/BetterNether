@@ -22,5 +22,6 @@ public class NetherItemTagDataProvider extends WoverTagProvider.ForItems {
                 NetherTags.OBSIDIAN_BREAKER_ENCHANTABLE,
                 NetherTags.NETHER_PICKAXES
         );
+        org.betterx.datagen.bclib.worldgen.ItemTagProvider.processBlockItemCommon(context, modCore);
     }
 }

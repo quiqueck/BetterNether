@@ -7,6 +7,7 @@ import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
 import org.betterx.wover.recipe.api.RecipeBuilder;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -33,7 +34,7 @@ public class VanillaExcavatorsRecipes extends WoverRecipeProvider {
     }
 
     @Override
-    protected void bootstrap(RecipeOutput context) {
+    protected void bootstrap(HolderLookup.Provider provider, RecipeOutput context) {
         makeExcavatorRecipe(
                 context,
                 NetherItems.CINCINNASITE_EXCAVATOR,

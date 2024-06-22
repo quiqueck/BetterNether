@@ -9,7 +9,7 @@ import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.loot.BNLoot;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
-import org.betterx.betternether.tab.CreativeTabs;
+import org.betterx.betternether.tab.BECreativeTabs;
 import org.betterx.betternether.world.BNWorldGenerator;
 import org.betterx.worlds.together.world.WorldConfig;
 import org.betterx.wover.core.api.ModCore;
@@ -68,7 +68,7 @@ public class BetterNether implements ModInitializer {
         WorldConfig.registerModCache(C.modId);
         DataExchangeAPI.registerMod(C.modId);
         Patcher.register();
-        CreativeTabs.register();
+        BECreativeTabs.register();
 
         if (BCLib.isDatagen()) {
             onDatagen();

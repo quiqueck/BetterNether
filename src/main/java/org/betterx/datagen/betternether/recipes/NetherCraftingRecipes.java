@@ -8,6 +8,7 @@ import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
 import org.betterx.wover.recipe.api.RecipeBuilder;
 import org.betterx.wover.tag.api.predefined.CommonItemTags;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.ItemTags;
@@ -20,7 +21,7 @@ public class NetherCraftingRecipes extends WoverRecipeProvider {
     }
 
     @Override
-    protected void bootstrap(RecipeOutput context) {
+    protected void bootstrap(HolderLookup.Provider provider, RecipeOutput context) {
         CraftingRecipeBuilder craftingRecipeBuilder11 = RecipeBuilder.crafting(BCLib.makeID("tag_smith_table"), Blocks.SMITHING_TABLE);
         BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder10 = craftingRecipeBuilder11
                 .shape("II", "##", "##")

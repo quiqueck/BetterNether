@@ -1,19 +1,20 @@
 package org.betterx.betternether.tab;
 
-import org.betterx.bclib.creativetab.BCLCreativeTab;
+import org.betterx.bclib.behaviours.interfaces.BehaviourPlantLike;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.WillowMaterial;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.wover.complex.api.equipment.ToolSlot;
+import org.betterx.wover.tabs.api.CreativeTabs;
 
-public class CreativeTabs {
+public class BECreativeTabs {
     public static void register() {
-        org.betterx.wover.tabs.api.CreativeTabs
+        CreativeTabs
                 .start(BetterNether.C)
                 .createTab("nature")
-                .setPredicate(item -> BCLCreativeTab.NATURE.contains(item)
+                .setPredicate(item -> BehaviourPlantLike.TAB_PREDICATE.contains(item)
                         || item == NetherItems.AGAVE_LEAF
                         || item == NetherItems.BLACK_APPLE
                         || item == NetherBlocks.MAGMA_FLOWER.asItem()

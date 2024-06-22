@@ -11,6 +11,7 @@ import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
 import org.betterx.wover.recipe.api.RecipeBuilder;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.Items;
@@ -22,7 +23,7 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
     }
 
     @Override
-    protected void bootstrap(RecipeOutput context) {
+    protected void bootstrap(HolderLookup.Provider provider, RecipeOutput context) {
         RecipeBuilder.crafting(
                              BetterNether.C.id("mushroom_fir_trimmed_chest"),
                              NetherBlocks.TRIMMED_MUSHROOM_FIR_CHEST

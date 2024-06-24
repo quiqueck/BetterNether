@@ -42,11 +42,13 @@
       "1.21.0"
     ],
     "bclib": "21.0.x",
-    "wover": "21.0.x"
+    "wover": "21.0.x",
+    "wunderlib": "21.0.x"
   },
   "breaks": {
     "bclib": "<21.0.1",
-    "wover": "<21.0.2"
+    "wover": "<21.0.2",
+    "wunderlib": "<21.0.2"
   },
   "custom": {
     "wover": {

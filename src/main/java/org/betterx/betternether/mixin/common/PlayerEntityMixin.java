@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
+import org.jetbrains.annotations.Nullable;
 
 @Mixin(ServerPlayer.class)
 public abstract class PlayerEntityMixin {
@@ -24,11 +25,16 @@ public abstract class PlayerEntityMixin {
     @Shadow
     public abstract ServerLevel serverLevel();
 
+    @Shadow
+    @Nullable
+    private BlockPos respawnPosition;
+
     @Inject(method = "getRespawnPosition", at = @At(value = "HEAD"), cancellable = true)
     private void bn_statueRespawn(
             CallbackInfoReturnable<BlockPos> info
     ) {
-        final BlockPos pos = info.getReturnValue();
+        final BlockPos pos = this.respawnPosition;
+        if (pos == null) return;
         final BlockState blockState = this.serverLevel().getBlockState(pos);
         final Block block = blockState.getBlock();
         if (block instanceof BlockStatueRespawner) {

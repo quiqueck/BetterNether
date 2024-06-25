@@ -5,6 +5,7 @@ import org.betterx.bclib.complexmaterials.entry.SlotMap;
 import org.betterx.bclib.complexmaterials.set.wood.AbstractSaplingSlot;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.BlockNetherSakuraSapling;
+import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.material.MapColor;
 public class NetherSakuraMaterial extends NetherWoodenMaterial<NetherSakuraMaterial> {
     public NetherSakuraMaterial() {
         super("nether_sakura", MapColor.COLOR_PINK, MapColor.COLOR_BROWN);
+        setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override

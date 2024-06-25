@@ -14,7 +14,7 @@ public class NetherEntityTypeTagProvider extends WoverTagProvider.ForEntityTypes
     }
 
     @Override
-    protected void prepareTags(TagBootstrapContext<EntityType<?>> context) {
+    public void prepareTags(TagBootstrapContext<EntityType<?>> context) {
         context.add(EntityTypeTags.UNDEAD, NetherEntities.NAGA.type(), NetherEntities.SKULL.type());
         context.add(EntityTypeTags.ARTHROPOD, NetherEntities.FIREFLY.type());
     }

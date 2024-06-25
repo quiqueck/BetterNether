@@ -12,6 +12,7 @@ import org.betterx.betternether.blocks.BlockWillowTorch;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
+import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -22,6 +23,7 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
 
     public WillowMaterial() {
         super("willow", MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED);
+        setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
+import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.recipe.api.BaseRecipeBuilder;
 import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
 import org.betterx.wover.recipe.api.RecipeBuilder;
@@ -26,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
     public StalagnateMaterial() {
         super("stalagnate", MapColor.TERRACOTTA_LIGHT_GREEN, MapColor.TERRACOTTA_LIGHT_GREEN);
+        setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override

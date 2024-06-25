@@ -25,9 +25,11 @@ public class VanillaWood extends VanillaFallback<VanillaWood> {
         );
     }
 
-    public static VanillaWood create(String baseName) {
+    public static VanillaWood create(String baseName, Block clothMaterial) {
         Block plank = getVanillaBlock(baseName, WoodSlots.PLANKS.suffix);
-        return new VanillaWood(baseName, plank.defaultMapColor(), plank.defaultMapColor()).init();
+        return new VanillaWood(baseName, plank.defaultMapColor(), plank.defaultMapColor())
+                .setFurnitureCloth(clothMaterial)
+                .init();
     }
 }
 

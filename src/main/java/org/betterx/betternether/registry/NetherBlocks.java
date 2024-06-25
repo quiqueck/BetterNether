@@ -42,6 +42,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 public class NetherBlocks {
+    public static final Block NETHER_BRICK_TILE_LARGE = registerBlock("nether_brick_tile_large", new BNNetherBrick());
+
     // Reed //
     public static final Block NETHER_REED_STEM = registerBlock("nether_reed_stem", new BlockNetherReed());
     public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
@@ -157,7 +159,6 @@ public class NetherBlocks {
     );
     public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", new RedstoneOreBlock());
     // Bricks //
-    public static final Block NETHER_BRICK_TILE_LARGE = registerBlock("nether_brick_tile_large", new BNNetherBrick());
     public static final Block NETHER_BRICK_TILE_SMALL = registerBlock("nether_brick_tile_small", new BNNetherBrick());
     public static final Block NETHER_BRICK_WALL = registerWall("nether_brick_wall", NETHER_BRICK_TILE_LARGE);
     public static final Block NETHER_BRICK_TILE_SLAB = registerSlab(
@@ -617,23 +618,23 @@ public class NetherBlocks {
             "warped",
             Blocks.WARPED_PLANKS.defaultMapColor(),
             MapColor.WARPED_STEM
-    ).init();
+    ).setFurnitureCloth(Blocks.RED_WOOL).init();
 
     public static final VanillaNetherWood CRIMSON_WOOD = new VanillaNetherWood(
             "crimson",
             Blocks.CRIMSON_PLANKS.defaultMapColor(),
             MapColor.CRIMSON_STEM
-    ).init();
+    ).setFurnitureCloth(Blocks.RED_WOOL).init();
 
-    public static final VanillaWood OAK_WOOD = VanillaWood.create("oak");
-    public static final VanillaWood SPRUCE_WOOD = VanillaWood.create("spruce");
-    public static final VanillaWood BIRCH_WOOD = VanillaWood.create("birch");
-    public static final VanillaWood JUNGLE_WOOD = VanillaWood.create("jungle");
-    public static final VanillaWood ACACIA_WOOD = VanillaWood.create("acacia");
-    public static final VanillaWood DARK_OAK_WOOD = VanillaWood.create("dark_oak");
-    public static final VanillaWood CHERRY_WOOD = VanillaWood.create("cherry");
-    public static final VanillaWood BAMBOO_WOOD = VanillaWood.create("bamboo");
-    public static final VanillaWood MANGROVE_WOOD = VanillaWood.create("mangrove");
+    public static final VanillaWood OAK_WOOD = VanillaWood.create("oak", Blocks.RED_WOOL);
+    public static final VanillaWood SPRUCE_WOOD = VanillaWood.create("spruce", Blocks.RED_WOOL);
+    public static final VanillaWood BIRCH_WOOD = VanillaWood.create("birch", Blocks.RED_WOOL);
+    public static final VanillaWood JUNGLE_WOOD = VanillaWood.create("jungle", Blocks.RED_WOOL);
+    public static final VanillaWood ACACIA_WOOD = VanillaWood.create("acacia", Blocks.BLACK_WOOL);
+    public static final VanillaWood DARK_OAK_WOOD = VanillaWood.create("dark_oak", Blocks.RED_WOOL);
+    public static final VanillaWood CHERRY_WOOD = VanillaWood.create("cherry", Blocks.WHITE_WOOL);
+    public static final VanillaWood BAMBOO_WOOD = VanillaWood.create("bamboo", Blocks.BROWN_WOOL);
+    public static final VanillaWood MANGROVE_WOOD = VanillaWood.create("mangrove", Blocks.BLACK_WOOL);
     // Storage
     public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
 

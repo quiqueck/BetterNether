@@ -16,6 +16,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MapColor;
 
 import org.jetbrains.annotations.Nullable;
@@ -23,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomMaterial> {
     public NetherMushroomMaterial() {
         super("nether_mushroom", MapColor.TERRACOTTA_WHITE, MapColor.COLOR_LIGHT_GRAY);
+        setFurnitureCloth(Blocks.RED_WOOL);
     }
 
     @Override

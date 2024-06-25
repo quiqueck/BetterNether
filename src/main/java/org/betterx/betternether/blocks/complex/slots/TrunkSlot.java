@@ -36,7 +36,10 @@ public class TrunkSlot extends MaterialSlot<WoodenComplexMaterial> {
     }
 
     @Override
-    public void addRecipeEntry(WoodenComplexMaterial parentMaterial, Consumer<RecipeEntry> adder) {
+    public void addRecipeEntry(
+            WoodenComplexMaterial parentMaterial,
+            Consumer<RecipeEntry> adder
+    ) {
 
     }
 

@@ -35,6 +35,7 @@ class ReedBookshelfBlock extends BaseBookshelfBlock.Wood {
 public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
     public NetherReedMaterial() {
         super("nether_reed", MapColor.COLOR_CYAN, MapColor.COLOR_CYAN);
+        this.setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override
@@ -48,7 +49,8 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                     .replace(new Planks() {
                         @Override
                         protected @NotNull Block createBlock(
-                                WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
+                                WoodenComplexMaterial parentMaterial,
+                                BlockBehaviour.Properties settings
                         ) {
                             return new BlockReedsBlock();
                         }
@@ -70,7 +72,8 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                     .replace(new Bookshelf() {
                         @Override
                         protected @NotNull Block createBlock(
-                                WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
+                                WoodenComplexMaterial parentMaterial,
+                                BlockBehaviour.Properties settings
                         ) {
                             return new ReedBookshelfBlock(parentMaterial.getBlock(WoodSlots.PLANKS));
                         }

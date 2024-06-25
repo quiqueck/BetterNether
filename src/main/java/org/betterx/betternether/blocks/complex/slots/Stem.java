@@ -38,7 +38,10 @@ public class Stem extends SimpleMaterialSlot<WoodenComplexMaterial> {
     }
 
     @Override
-    protected void modifyBlockEntry(WoodenComplexMaterial parentMaterial, @NotNull BlockEntry entry) {
+    protected void modifyBlockEntry(
+            WoodenComplexMaterial parentMaterial,
+            @NotNull BlockEntry entry
+    ) {
         entry.setBlockTags(BlockTags.MINEABLE_WITH_AXE);
     }
 

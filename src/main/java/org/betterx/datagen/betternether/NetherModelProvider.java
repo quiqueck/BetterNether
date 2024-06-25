@@ -1,7 +1,6 @@
 package org.betterx.datagen.betternether;
 
 import org.betterx.bclib.client.models.BCLModels;
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.client.block.BNModels;
@@ -17,7 +16,6 @@ import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -49,31 +47,14 @@ public class NetherModelProvider extends WoverModelProvider {
                         NetherBlocks.BONE_BUTTON,
                         NetherBlocks.CINCINNASITE_PLATE,
                         NetherBlocks.CINCINNASITE_BUTTON,
+                        NetherBlocks.CHAIR_CINCINNASITE,
+                        NetherBlocks.BAR_STOOL_CINCINNASITE,
+                        NetherBlocks.TABURET_CINCINNASITE,
                         NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.PRESSURE_PLATE),
                         NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.BUTTON)
                 )
         );
 
-        addFurniture(generator, NetherBlocks.ACACIA_WOOD, Blocks.BLACK_WOOL);
-        addFurniture(generator, NetherBlocks.MAT_ANCHOR_TREE, NetherBlocks.NETHER_BRICK_TILE_LARGE);
-        addFurniture(generator, NetherBlocks.BAMBOO_WOOD, Blocks.BROWN_WOOL);
-        addFurniture(generator, NetherBlocks.BIRCH_WOOD, Blocks.RED_WOOL);
-        addFurniture(generator, NetherBlocks.CHERRY_WOOD, Blocks.WHITE_WOOL);
-        addFurniture(generator, NetherBlocks.CRIMSON_WOOD, Blocks.RED_WOOL);
-        addFurniture(generator, NetherBlocks.DARK_OAK_WOOD, Blocks.RED_WOOL);
-        addFurniture(generator, NetherBlocks.JUNGLE_WOOD, Blocks.RED_WOOL);
-        addFurniture(generator, NetherBlocks.MANGROVE_WOOD, Blocks.BLACK_WOOL);
-        addFurniture(generator, NetherBlocks.MAT_MUSHROOM_FIR, NetherBlocks.NETHER_BRICK_TILE_LARGE);
-        addFurniture(generator, NetherBlocks.MAT_NETHER_MUSHROOM, Blocks.RED_WOOL);
-        addFurniture(generator, NetherBlocks.MAT_REED, NetherBlocks.NETHER_BRICK_TILE_LARGE);
-        addFurniture(generator, NetherBlocks.MAT_NETHER_SAKURA, NetherBlocks.NETHER_BRICK_TILE_LARGE);
-        addFurniture(generator, NetherBlocks.OAK_WOOD, Blocks.RED_WOOL);
-        addFurniture(generator, NetherBlocks.MAT_RUBEUS, NetherBlocks.NETHER_BRICK_TILE_LARGE);
-        addFurniture(generator, NetherBlocks.SPRUCE_WOOD, Blocks.RED_WOOL);
-        addFurniture(generator, NetherBlocks.MAT_STALAGNATE, NetherBlocks.NETHER_BRICK_TILE_LARGE);
-        addFurniture(generator, NetherBlocks.WARPED_WOOD, Blocks.RED_WOOL);
-        addFurniture(generator, NetherBlocks.MAT_WART, NetherBlocks.NETHER_BRICK_TILE_LARGE);
-        addFurniture(generator, NetherBlocks.MAT_WILLOW, NetherBlocks.NETHER_BRICK_TILE_LARGE);
         addCinFurniture(generator);
 
 
@@ -170,17 +151,6 @@ public class NetherModelProvider extends WoverModelProvider {
 
     public NetherModelProvider(ModCore modCore) {
         super(modCore);
-    }
-
-    protected void addFurniture(WoverBlockModelGenerators generator, ComplexMaterial mat, Block cloth) {
-        addFurniture(
-                generator,
-                mat.getBlock(WoodSlots.PLANKS),
-                cloth,
-                mat.getBlock(WoodSlots.BAR_STOOL),
-                mat.getBlock(WoodSlots.CHAIR),
-                mat.getBlock(WoodSlots.TABURET)
-        );
     }
 
     private static void addFurniture(

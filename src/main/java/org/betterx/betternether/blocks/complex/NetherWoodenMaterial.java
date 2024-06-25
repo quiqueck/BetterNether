@@ -29,6 +29,11 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
     }
 
     @Override
+    public T setFurnitureCloth(Block clothMaterial) {
+        return super.setFurnitureCloth(clothMaterial);
+    }
+
+    @Override
     protected BCLWoodTypeWrapper.Builder createWoodTypeBuilder() {
         return super.createWoodTypeBuilder().setFlammable(false);
     }

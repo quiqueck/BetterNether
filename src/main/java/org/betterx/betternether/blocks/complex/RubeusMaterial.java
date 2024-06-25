@@ -13,6 +13,7 @@ import org.betterx.betternether.blocks.BlockRubeusSapling;
 import org.betterx.betternether.blocks.RubeusBark;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
     public RubeusMaterial() {
         super("rubeus", MapColor.COLOR_MAGENTA, MapColor.COLOR_MAGENTA);
+        setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override
@@ -35,7 +37,8 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
                     .add(new SimpleMaterialSlot<>(NetherSlots.CONE) {
                         @Override
                         protected @NotNull Block createBlock(
-                                WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
+                                WoodenComplexMaterial parentMaterial,
+                                BlockBehaviour.Properties settings
                         ) {
                             return new BlockRubeusCone();
                         }
@@ -50,7 +53,8 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
                     .replace(new Log() {
                         @Override
                         protected @NotNull Block createBlock(
-                                WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
+                                WoodenComplexMaterial parentMaterial,
+                                BlockBehaviour.Properties settings
                         ) {
                             return new RubeusLog(woodColor, getStrippedLog());
                         }
@@ -58,7 +62,8 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
                     .replace(new Bark() {
                         @Override
                         protected @NotNull Block createBlock(
-                                WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
+                                WoodenComplexMaterial parentMaterial,
+                                BlockBehaviour.Properties settings
                         ) {
                             return new RubeusBark(woodColor, getStrippedBark());
                         }

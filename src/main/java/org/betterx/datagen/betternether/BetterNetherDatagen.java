@@ -3,8 +3,6 @@ package org.betterx.datagen.betternether;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.datagen.bclib.worldgen.BlockTagProvider;
-import org.betterx.datagen.bclib.worldgen.ItemTagProvider;
 import org.betterx.datagen.betternether.advancements.NetherAdvancementDataProvider;
 import org.betterx.datagen.betternether.enchantments.NetherEnchantmentProvider;
 import org.betterx.datagen.betternether.enchantments.NetherEnchantmentTagProvider;
@@ -49,8 +47,6 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.addProvider(NetherItemRecipeProvider::new);
         globalPack.addProvider(NetherCraftingRecipes::new);
 
-        globalPack.addProvider(BlockTagProvider::new);
-        globalPack.addProvider(ItemTagProvider::new);
 
         globalPack.callOnInitializeDatapack((generator, pack, location) -> {
             if (location == null) {

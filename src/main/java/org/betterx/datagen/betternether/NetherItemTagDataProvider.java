@@ -12,7 +12,7 @@ public class NetherItemTagDataProvider extends WoverTagProvider.ForItems {
     }
 
     @Override
-    protected void prepareTags(ItemTagBootstrapContext context) {
+    public void prepareTags(ItemTagBootstrapContext context) {
         context.add(
                 NetherTags.FLAMING_RUBY_ENCHANTABLE,
                 NetherItems.FLAMING_RUBY_SET.getAll()
@@ -22,6 +22,5 @@ public class NetherItemTagDataProvider extends WoverTagProvider.ForItems {
                 NetherTags.OBSIDIAN_BREAKER_ENCHANTABLE,
                 NetherTags.NETHER_PICKAXES
         );
-        org.betterx.datagen.bclib.worldgen.ItemTagProvider.processBlockItemCommon(context, modCore);
     }
 }

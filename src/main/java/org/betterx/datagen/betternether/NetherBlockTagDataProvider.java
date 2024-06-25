@@ -17,7 +17,7 @@ public class NetherBlockTagDataProvider extends WoverTagProvider.ForBlocks {
     }
 
     @Override
-    protected void prepareTags(TagBootstrapContext<Block> context) {
+    public void prepareTags(TagBootstrapContext<Block> context) {
         context.add(NetherTags.NETHER_SAND, Blocks.SOUL_SAND);
         context.add(BlockTags.BEACON_BASE_BLOCKS, NetherBlocks.NETHER_RUBY_BLOCK);
 
@@ -54,6 +54,5 @@ public class NetherBlockTagDataProvider extends WoverTagProvider.ForBlocks {
                 BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
                 CommonBlockTags.NETHER_PORTAL_FRAME
         );
-        org.betterx.datagen.bclib.worldgen.BlockTagProvider.processCommonBlockTags(context, modCore);
     }
 }

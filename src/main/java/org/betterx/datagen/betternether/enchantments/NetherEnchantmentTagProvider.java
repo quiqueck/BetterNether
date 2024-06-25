@@ -14,7 +14,7 @@ public class NetherEnchantmentTagProvider extends WoverTagProvider.ForEnchantmen
     }
 
     @Override
-    protected void prepareTags(TagBootstrapContext<Enchantment> context) {
+    public void prepareTags(TagBootstrapContext<Enchantment> context) {
         context.add(EnchantmentTags.CURSE, NetherEnchantments.RUBY_FIRE.key(), NetherEnchantments.OBSIDIAN_BREAKER.key());
         context.add(EnchantmentTags.DOUBLE_TRADE_PRICE, NetherEnchantments.RUBY_FIRE.key(), NetherEnchantments.OBSIDIAN_BREAKER.key());
 

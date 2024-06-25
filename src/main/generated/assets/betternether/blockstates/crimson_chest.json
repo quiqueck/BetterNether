@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "betternether:block/crimson_chest"
+      "model": "minecraft:block/crimson_planks_particles"
     }
   }
 }

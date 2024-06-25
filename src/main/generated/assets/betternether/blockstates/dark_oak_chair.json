@@ -5,27 +5,27 @@
       "y": 90
     },
     "facing=east,top=true": {
-      "model": "betternether:block/dark_oak_chair_top"
+      "model": "minecraft:block/dark_oak_planks_particles"
     },
     "facing=north,top=false": {
       "model": "betternether:block/dark_oak_chair"
     },
     "facing=north,top=true": {
-      "model": "betternether:block/dark_oak_chair_top"
+      "model": "minecraft:block/dark_oak_planks_particles"
     },
     "facing=south,top=false": {
       "model": "betternether:block/dark_oak_chair",
       "y": 180
     },
     "facing=south,top=true": {
-      "model": "betternether:block/dark_oak_chair_top"
+      "model": "minecraft:block/dark_oak_planks_particles"
     },
     "facing=west,top=false": {
       "model": "betternether:block/dark_oak_chair",
       "y": 270
     },
     "facing=west,top=true": {
-      "model": "betternether:block/dark_oak_chair_top"
+      "model": "minecraft:block/dark_oak_planks_particles"
     }
   }
 }

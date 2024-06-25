@@ -369,70 +369,70 @@
   },
   "requirements": [
     [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:soul_plain"
-    ],
-    [
-      "betternether:wart_forest"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:old_swampland"
-    ],
-    [
-      "betternether:sulfuric_bone_reef"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
       "betternether:magma_land"
-    ],
-    [
-      "betternether:upside_down_forest_cleared"
-    ],
-    [
-      "betternether:gravel_desert"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:nether_swampland"
-    ],
-    [
-      "betternether:old_fungiwoods"
     ],
     [
       "betternether:nether_swampland_terraces"
     ],
     [
+      "betternether:sulfuric_bone_reef"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:gravel_desert"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:nether_swampland"
+    ],
+    [
       "betternether:nether_mushroom_forest"
+    ],
+    [
+      "betternether:nether_mushroom_forest_edge"
+    ],
+    [
+      "betternether:soul_plain"
+    ],
+    [
+      "betternether:old_fungiwoods"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:old_swampland"
+    ],
+    [
+      "betternether:nether_jungle"
     ],
     [
       "betternether:old_warped_woods"
     ],
     [
-      "betternether:bone_reef"
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:wart_forest_edge"
     ]
   ],
   "rewards": {

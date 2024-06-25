@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "betternether:block/nether_mushroom_chest"
+      "model": "betternether:block/nether_mushroom_planks_particles"
     }
   }
 }

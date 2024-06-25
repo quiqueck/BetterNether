@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "betternether:block/nether_sakura_chest"
+      "model": "betternether:block/nether_sakura_planks_particles"
     }
   }
 }

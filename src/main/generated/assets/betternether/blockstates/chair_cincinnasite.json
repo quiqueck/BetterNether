@@ -5,27 +5,27 @@
       "y": 90
     },
     "facing=east,top=true": {
-      "model": "betternether:block/chair_cincinnasite_top"
+      "model": "betternether:block/cincinnasite_forged_particles"
     },
     "facing=north,top=false": {
       "model": "betternether:block/chair_cincinnasite"
     },
     "facing=north,top=true": {
-      "model": "betternether:block/chair_cincinnasite_top"
+      "model": "betternether:block/cincinnasite_forged_particles"
     },
     "facing=south,top=false": {
       "model": "betternether:block/chair_cincinnasite",
       "y": 180
     },
     "facing=south,top=true": {
-      "model": "betternether:block/chair_cincinnasite_top"
+      "model": "betternether:block/cincinnasite_forged_particles"
     },
     "facing=west,top=false": {
       "model": "betternether:block/chair_cincinnasite",
       "y": 270
     },
     "facing=west,top=true": {
-      "model": "betternether:block/chair_cincinnasite_top"
+      "model": "betternether:block/cincinnasite_forged_particles"
     }
   }
 }

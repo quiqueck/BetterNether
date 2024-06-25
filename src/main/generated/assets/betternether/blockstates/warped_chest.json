@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "betternether:block/warped_chest"
+      "model": "minecraft:block/warped_planks_particles"
     }
   }
 }

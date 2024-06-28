@@ -44,6 +44,6 @@ public class NetherPickaxe extends BasePickaxeItem implements ItemWithCustomStac
 
     @Override
     public void registerItemTags(ResourceLocation location, ItemTagBootstrapContext context) {
-        context.add(NetherTags.OBSIDIAN_BREAKER_ENCHANTABLE, this);
+        context.add(NetherTags.NETHER_PICKAXES, this);
     }
 }

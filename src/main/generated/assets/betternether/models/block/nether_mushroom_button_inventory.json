@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/button_inventory",
-  "textures": {
-    "texture": "betternether:block/nether_mushroom_button"
-  }
-}

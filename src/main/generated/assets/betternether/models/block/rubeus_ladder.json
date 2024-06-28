@@ -1,0 +1,6 @@
+{
+  "parent": "bclib:block/ladder",
+  "textures": {
+    "texture": "betternether:block/rubeus_ladder"
+  }
+}

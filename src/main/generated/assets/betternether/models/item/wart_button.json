@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/wart_button_inventory"
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "betternether:block/wart_planks"
+  }
 }

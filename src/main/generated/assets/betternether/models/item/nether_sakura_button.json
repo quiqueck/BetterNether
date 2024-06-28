@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/nether_sakura_button_inventory"
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "betternether:block/nether_sakura_planks"
+  }
 }

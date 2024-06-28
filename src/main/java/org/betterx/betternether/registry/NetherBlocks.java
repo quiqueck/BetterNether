@@ -392,7 +392,7 @@ public class NetherBlocks {
             RecipeCategory.BUILDING_BLOCKS,
             Blocks.POLISHED_BASALT
     );
-    public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS, true, true);
+    public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS, true);
     public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS, true);
     public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
     public static final Block BASALT_SLAB = registerSlab(
@@ -768,19 +768,13 @@ public class NetherBlocks {
     }
 
     @SafeVarargs
-    public static Block registerStairs(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
-        return registerStairs(name, source, fireproof, true, tags);
-    }
-
-    @SafeVarargs
     public static Block registerStairs(
             String name,
             Block source,
             boolean fireproof,
-            boolean createModel,
             TagKey<Block>... tags
     ) {
-        Block stairs = BaseStairsBlock.from(source, fireproof, createModel);
+        Block stairs = BaseStairsBlock.from(source, fireproof);
 
         registerBlockDirectly(name, stairs, tags);
         if (stairs.defaultBlockState().ignitedByLava())
@@ -905,7 +899,7 @@ public class NetherBlocks {
     }
 
     public static Block registerChair(String name, Block source) {
-        Block block = BaseChair.from(source);
+        Block block = BaseChair.from(source, NETHER_BRICK_TILE_LARGE);
 
         registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
         addFuel(source, block);
@@ -921,7 +915,7 @@ public class NetherBlocks {
     }
 
     public static Block registerBarStool(String name, Block source) {
-        Block block = BaseBarStool.from(source);
+        Block block = BaseBarStool.from(source, NETHER_BRICK_TILE_LARGE);
 
         registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_PICKAXE);
         addFuel(source, block);

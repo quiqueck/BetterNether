@@ -9,6 +9,7 @@ import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -48,15 +49,12 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         return BaseOreBlock.getDroppedItems(
                 this,
                 Items.REDSTONE,
                 maxCount,
                 minCount,
-                Tiers.IRON.getLevel(),
-                state,
                 builder
         );
     }
@@ -68,6 +66,7 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
 
     @Override
     public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
+        blockTags.add(BlockTags.NEEDS_IRON_TOOL);
         blockTags.add(CommonBlockTags.NETHERRACK);
         blockTags.add(CommonBlockTags.NETHER_ORES);
     }

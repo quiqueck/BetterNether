@@ -83,6 +83,15 @@ public class NetherModelProvider extends WoverModelProvider {
                              })
                              .override(NetherBlocks.BAR_STOOL_CINCINNASITE, block -> BCLModels.createBarStoolBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED, NetherBlocks.NETHER_BRICK_TILE_LARGE))
                              .override(NetherBlocks.TABURET_CINCINNASITE, block -> BCLModels.createTaburetBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED))
+                             .ignore(NetherBlocks.MAT_REED.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.MAT_ANCHOR_TREE.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.MAT_NETHER_SAKURA.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.MAT_MUSHROOM_FIR.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.MAT_STALAGNATE.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.MAT_RUBEUS.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.LADDER))
+                             
         );
 
 

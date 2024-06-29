@@ -1,6 +1,0 @@
-{
-  "parent": "bclib:block/ladder",
-  "textures": {
-    "texture": "betternether:block/willow_ladder"
-  }
-}

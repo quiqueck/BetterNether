@@ -91,7 +91,10 @@ public class NetherModelProvider extends WoverModelProvider {
                              .ignore(NetherBlocks.MAT_STALAGNATE.getBlock(WoodSlots.LADDER))
                              .ignore(NetherBlocks.MAT_RUBEUS.getBlock(WoodSlots.LADDER))
                              .ignore(NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.LADDER))
-                             
+                             .ignore(NetherBlocks.MAT_WART.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.WARPED_WOOD.getBlock(WoodSlots.LADDER))
+                             .ignore(NetherBlocks.CRIMSON_WOOD.getBlock(WoodSlots.LADDER))
+
         );
 
 

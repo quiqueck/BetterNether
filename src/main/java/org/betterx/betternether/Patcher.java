@@ -1,5 +1,6 @@
 package org.betterx.betternether;
 
+import de.ambertation.wunderlib.utils.Version;
 import org.betterx.bclib.api.v2.datafixer.DataFixerAPI;
 import org.betterx.bclib.api.v2.datafixer.MigrationProfile;
 import org.betterx.bclib.api.v2.datafixer.Patch;
@@ -21,7 +22,7 @@ public class Patcher {
 
 class Patcher_003 extends Patch {
     public Patcher_003() {
-        super(BetterNether.C.modId, "9.0.1");
+        super(BetterNether.C, new Version(9, 0, 1));
     }
 
     @Override
@@ -34,7 +35,7 @@ class Patcher_003 extends Patch {
 
 class Patcher_002 extends Patch {
     public Patcher_002() {
-        super(BetterNether.C.modId, "8.2.2");
+        super(BetterNether.C, new Version(8, 2, 2));
     }
 
     @Override
@@ -49,12 +50,12 @@ class Patcher_002 extends Patch {
 //--- Level 01
 class Patcher_001 extends Patch {
     public Patcher_001() {
-        super(BetterNether.C.modId, "5.3.5");
+        super(BetterNether.C, new Version(5, 3, 5));
     }
 
     @Override
     public Map<String, String> getIDReplacements() {
-        return Map.ofEntries(
+        return Map.<String, String>ofEntries(
                 Map.entry("betternether:chest", "bclib:chest"),
                 Map.entry("betternether:barrel", "bclib:barrel"),
                 Map.entry("betternether:sign", "bclib:sign"),

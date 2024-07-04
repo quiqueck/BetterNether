@@ -1,7 +1,6 @@
 package org.betterx.betternether;
 
 import org.betterx.bclib.BCLib;
-import org.betterx.bclib.api.v2.dataexchange.DataExchangeAPI;
 import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
 import org.betterx.betternether.config.Config;
@@ -11,8 +10,8 @@ import org.betterx.betternether.registry.*;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.tab.BECreativeTabs;
 import org.betterx.betternether.world.BNWorldGenerator;
-import org.betterx.worlds.together.world.WorldConfig;
 import org.betterx.wover.core.api.ModCore;
+import org.betterx.wover.state.api.WorldConfig;
 
 import net.minecraft.resources.ResourceLocation;
 
@@ -26,9 +25,6 @@ public class BetterNether implements ModInitializer {
     public static final ResourceLocation VANILLA_HAMMERS_PACK = C.addDatapack(VANILLA_HAMMERS);
     public static final ResourceLocation VANILLA_EXCAVATORS_PACK = C.addDatapack(VANILLA_EXCAVATORS);
 
-    @Deprecated(forRemoval = true)
-    public static final org.betterx.worlds.together.util.Logger LEGACY_LOGGER
-            = new org.betterx.worlds.together.util.Logger(C.modId);
     private static boolean lavafallParticles = true;
     private static float fogStart = 0.05F;
     private static float fogEnd = 0.5F;
@@ -65,8 +61,7 @@ public class BetterNether implements ModInitializer {
         NetherVegetation.setupBonemealFeatures();
 
         Configs.saveConfigs();
-        WorldConfig.registerModCache(C.modId);
-        DataExchangeAPI.registerMod(C.modId);
+        WorldConfig.registerMod(C);
         Patcher.register();
         BECreativeTabs.register();
 

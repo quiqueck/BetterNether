@@ -3,15 +3,18 @@
   "parent": "betternether:upside_down_forest",
   "biome": "betternether:upside_down_forest_cleared",
   "genChance": 0.5,
-  "parameter_points": [
-    {
-      "continentalness": 0.0,
-      "depth": 0.0,
-      "erosion": 0.0,
-      "humidity": 0.3,
-      "offset": 0.125,
-      "temperature": 0.45,
-      "weirdness": 0.0
-    }
-  ]
+  "generation_data": {
+    "intended_dimension": "minecraft:is_nether",
+    "parameter_points": [
+      {
+        "continentalness": 0.0,
+        "depth": 0.0,
+        "erosion": 0.0,
+        "humidity": 0.3,
+        "offset": 0.125,
+        "temperature": 0.45,
+        "weirdness": 0.0
+      }
+    ]
+  }
 }

@@ -1,14 +1,13 @@
 package org.betterx.betternether.world;
 
+import org.betterx.wover.biome.api.data.BiomeGenerationDataContainer;
 import org.betterx.wover.generator.api.biomesource.WoverBiomeData;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Climate;
 
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +18,7 @@ public class NetherBiome extends WoverBiomeData {
     public NetherBiome(
             float fogDensity,
             @NotNull ResourceKey<Biome> biome,
-            @NotNull List<Climate.ParameterPoint> parameterPoints,
+            @NotNull BiomeGenerationDataContainer generationData,
             float terrainHeight,
             float genChance,
             int edgeSize,
@@ -28,7 +27,7 @@ public class NetherBiome extends WoverBiomeData {
             @Nullable ResourceKey<Biome> parent
     ) {
         super(
-                fogDensity, biome, parameterPoints, terrainHeight,
+                fogDensity, biome, generationData, terrainHeight,
                 genChance, edgeSize, vertical, edge, parent
         );
     }

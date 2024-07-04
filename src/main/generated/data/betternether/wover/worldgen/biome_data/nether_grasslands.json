@@ -1,15 +1,18 @@
 {
   "type": "betternether:biome",
   "biome": "betternether:nether_grasslands",
-  "parameter_points": [
-    {
-      "continentalness": 0.0,
-      "depth": 0.0,
-      "erosion": 0.0,
-      "humidity": 0.7,
-      "offset": 0.0,
-      "temperature": 0.0,
-      "weirdness": 0.0
-    }
-  ]
+  "generation_data": {
+    "intended_dimension": "minecraft:is_nether",
+    "parameter_points": [
+      {
+        "continentalness": 0.0,
+        "depth": 0.0,
+        "erosion": 0.0,
+        "humidity": 0.7,
+        "offset": 0.0,
+        "temperature": 0.0,
+        "weirdness": 0.0
+      }
+    ]
+  }
 }

@@ -3,15 +3,18 @@
   "parent": "minecraft:crimson_forest",
   "biome": "betternether:crimson_glowing_woods",
   "genChance": 0.3,
-  "parameter_points": [
-    {
-      "continentalness": 0.0,
-      "depth": 0.0,
-      "erosion": 0.0,
-      "humidity": -0.05,
-      "offset": 0.0,
-      "temperature": 0.4,
-      "weirdness": 0.0
-    }
-  ]
+  "generation_data": {
+    "intended_dimension": "minecraft:is_nether",
+    "parameter_points": [
+      {
+        "continentalness": 0.0,
+        "depth": 0.0,
+        "erosion": 0.0,
+        "humidity": -0.05,
+        "offset": 0.0,
+        "temperature": 0.4,
+        "weirdness": 0.0
+      }
+    ]
+  }
 }

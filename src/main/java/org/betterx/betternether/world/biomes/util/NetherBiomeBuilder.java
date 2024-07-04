@@ -13,6 +13,7 @@ import org.betterx.wover.biome.api.builder.BiomeBootstrapContext;
 import org.betterx.wover.biome.api.builder.BiomeBuilder;
 import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
 import org.betterx.wover.biome.api.data.BiomeData;
+import org.betterx.wover.biome.api.data.BiomeGenerationDataContainer;
 import org.betterx.wover.generator.api.biomesource.WoverBiomeBuilder;
 
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -139,7 +140,7 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
         dataContext.register(
                 key.dataKey,
                 new NetherBiome(
-                        fogDensity, key.key, parameters,
+                        fogDensity, key.key, new BiomeGenerationDataContainer(parameters, intendedPlacement),
                         terrainHeight, genChance, edgeSize, vertical, edge, parent
                 )
         );

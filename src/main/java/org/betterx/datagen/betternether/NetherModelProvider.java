@@ -103,7 +103,10 @@ public class NetherModelProvider extends WoverModelProvider {
     }
 
     private void addMaterialOverrides(ModelOverides overides, WoodenComplexMaterial mat) {
-        overides.ignore(mat.getBlock(WoodSlots.LADDER)).ignore(mat.getBlock(WoodSlots.TRAPDOOR));
+        overides
+                .ignore(mat.getBlock(WoodSlots.LADDER))
+                .ignore(mat.getBlock(WoodSlots.TRAPDOOR))
+                .ignore(mat.getBlock(WoodSlots.GATE));
     }
 
 

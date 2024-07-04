@@ -6,9 +6,13 @@ import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.WoverTagProvider;
 import org.betterx.wover.tag.api.event.context.ItemTagBootstrapContext;
 
+import java.util.Set;
+
 public class NetherItemTagDataProvider extends WoverTagProvider.ForItems {
     public NetherItemTagDataProvider(ModCore modCore) {
-        super(modCore);
+        super(modCore, Set.of(
+                NetherTags.FLAMING_RUBY_PRIMARY
+        ));
     }
 
     @Override

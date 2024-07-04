@@ -30,7 +30,7 @@ public class BoneReef extends NetherBiomeConfig {
                .feature(NetherVegetationPlaced.PATCH_JELLYFISH_MUSHROOM)
                .feature(NetherVinesPlaced.LUMABUS_VINE)
                .feature(NetherObjectsPlaced.STALACTITE)
-               .addNetherClimate(0.0f, 0.7f, 0.375f)
+               .addNetherClimate(-0.01f, -0.05f, 0)
         ;
     }
 

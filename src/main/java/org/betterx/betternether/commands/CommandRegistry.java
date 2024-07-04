@@ -4,7 +4,6 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTags;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
-import org.betterx.worlds.together.world.event.WorldBootstrap;
 import org.betterx.wover.state.api.WorldState;
 
 import com.mojang.brigadier.Command;
@@ -219,12 +218,12 @@ public class CommandRegistry {
                 }
             };
             ResourceKey<Biome> a = biome;
-            if (WorldBootstrap.getLastRegistryAccess() != null) {
+            if (WorldState.allStageRegistryAccess() != null) {
                 Stopwatch stopwatch = Stopwatch.createStarted(Util.TICKER);
-                Holder<Biome> h = WorldBootstrap.getLastRegistryAccess()
-                                                .registryOrThrow(Registries.BIOME)
-                                                .getHolder(a)
-                                                .orElseThrow();
+                Holder<Biome> h = WorldState.allStageRegistryAccess()
+                                            .registryOrThrow(Registries.BIOME)
+                                            .getHolder(a)
+                                            .orElseThrow();
                 stopwatch.stop();
                 return LocateCommand.showLocateResult(
                         source,

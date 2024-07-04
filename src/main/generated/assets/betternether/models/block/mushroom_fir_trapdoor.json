@@ -1,0 +1,7 @@
+{
+  "parent": "bclib:block/sided_trapdoor",
+  "textures": {
+    "side": "betternether:block/mushroom_fir_door_side",
+    "texture": "betternether:block/mushroom_fir_trapdoor"
+  }
+}

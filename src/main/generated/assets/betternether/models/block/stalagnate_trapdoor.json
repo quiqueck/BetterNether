@@ -1,0 +1,7 @@
+{
+  "parent": "bclib:block/sided_trapdoor",
+  "textures": {
+    "side": "betternether:block/stalagnate_door_side",
+    "texture": "betternether:block/stalagnate_trapdoor"
+  }
+}

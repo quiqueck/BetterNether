@@ -1,0 +1,7 @@
+{
+  "parent": "bclib:block/sided_trapdoor",
+  "textures": {
+    "side": "betternether:block/willow_door_side",
+    "texture": "betternether:block/willow_trapdoor"
+  }
+}

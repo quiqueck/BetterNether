@@ -106,7 +106,8 @@ public class NetherModelProvider extends WoverModelProvider {
         overides
                 .ignore(mat.getBlock(WoodSlots.LADDER))
                 .ignore(mat.getBlock(WoodSlots.TRAPDOOR))
-                .ignore(mat.getBlock(WoodSlots.GATE));
+                .ignore(mat.getBlock(WoodSlots.GATE))
+                .ignore(mat.getBlock(WoodSlots.FENCE));
     }
 
 

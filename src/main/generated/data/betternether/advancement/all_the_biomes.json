@@ -369,58 +369,10 @@
   },
   "requirements": [
     [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:soul_plain"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:bone_reef"
-    ],
-    [
-      "betternether:wart_forest_edge"
-    ],
-    [
-      "betternether:gravel_desert"
-    ],
-    [
       "betternether:crimson_pinewood"
     ],
     [
-      "betternether:old_warped_woods"
-    ],
-    [
-      "betternether:nether_swampland_terraces"
-    ],
-    [
-      "betternether:upside_down_forest_cleared"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:upside_down_forest"
-    ],
-    [
-      "betternether:old_fungiwoods"
-    ],
-    [
-      "betternether:wart_forest"
-    ],
-    [
       "betternether:magma_land"
-    ],
-    [
-      "betternether:sulfuric_bone_reef"
-    ],
-    [
-      "betternether:old_swampland"
     ],
     [
       "betternether:poor_nether_grasslands"
@@ -429,10 +381,58 @@
       "betternether:nether_swampland"
     ],
     [
+      "betternether:old_swampland"
+    ],
+    [
+      "betternether:nether_swampland_terraces"
+    ],
+    [
+      "betternether:sulfuric_bone_reef"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
+    ],
+    [
+      "betternether:gravel_desert"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:nether_jungle"
+    ],
+    [
       "betternether:nether_mushroom_forest_edge"
     ],
     [
+      "betternether:old_fungiwoods"
+    ],
+    [
+      "betternether:soul_plain"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
       "betternether:nether_mushroom_forest"
+    ],
+    [
+      "betternether:old_warped_woods"
     ]
   ],
   "rewards": {

@@ -4,7 +4,7 @@
   "biome": "betternether:upside_down_forest_cleared",
   "genChance": 0.5,
   "generation_data": {
-    "intended_dimension": "minecraft:is_nether",
+    "intended_placement": "minecraft:is_nether",
     "parameter_points": [
       {
         "continentalness": 0.0,

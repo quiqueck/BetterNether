@@ -4,7 +4,7 @@
   "biome": "betternether:old_fungiwoods",
   "genChance": 0.3,
   "generation_data": {
-    "intended_dimension": "minecraft:is_nether",
+    "intended_placement": "minecraft:is_nether",
     "parameter_points": [
       {
         "continentalness": 0.0,

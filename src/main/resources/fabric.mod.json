@@ -44,12 +44,12 @@
     "minecraft": [
       "1.21.0"
     ],
-    "bclib": "21.0.4",
+    "bclib": "21.0.5",
     "wover": "21.0.x",
     "wunderlib": "21.0.x"
   },
   "breaks": {
-    "bclib": "<21.0.4",
+    "bclib": "<21.0.5",
     "wover": "<21.0.5",
     "wunderlib": "<21.0.3"
   },

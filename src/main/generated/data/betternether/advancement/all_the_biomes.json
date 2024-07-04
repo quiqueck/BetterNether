@@ -369,25 +369,22 @@
   },
   "requirements": [
     [
+      "betternether:gravel_desert"
+    ],
+    [
       "betternether:flooded_deltas"
     ],
     [
-      "betternether:soul_plain"
+      "betternether:nether_mushroom_forest"
     ],
     [
-      "betternether:upside_down_forest"
+      "betternether:nether_swampland_terraces"
     ],
     [
-      "betternether:crimson_pinewood"
+      "betternether:nether_jungle"
     ],
     [
-      "betternether:old_fungiwoods"
-    ],
-    [
-      "betternether:old_swampland"
-    ],
-    [
-      "betternether:gravel_desert"
+      "betternether:nether_mushroom_forest_edge"
     ],
     [
       "betternether:nether_grasslands"
@@ -396,43 +393,46 @@
       "betternether:upside_down_forest_cleared"
     ],
     [
-      "betternether:nether_swampland_terraces"
-    ],
-    [
-      "betternether:sulfuric_bone_reef"
+      "betternether:old_swampland"
     ],
     [
       "betternether:wart_forest"
     ],
     [
-      "betternether:wart_forest_edge"
-    ],
-    [
       "betternether:nether_swampland"
-    ],
-    [
-      "betternether:crimson_glowing_woods"
-    ],
-    [
-      "betternether:magma_land"
-    ],
-    [
-      "betternether:bone_reef"
-    ],
-    [
-      "betternether:nether_jungle"
-    ],
-    [
-      "betternether:nether_mushroom_forest"
-    ],
-    [
-      "betternether:old_warped_woods"
     ],
     [
       "betternether:poor_nether_grasslands"
     ],
     [
-      "betternether:nether_mushroom_forest_edge"
+      "betternether:wart_forest_edge"
+    ],
+    [
+      "betternether:old_fungiwoods"
+    ],
+    [
+      "betternether:bone_reef"
+    ],
+    [
+      "betternether:soul_plain"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:old_warped_woods"
+    ],
+    [
+      "betternether:magma_land"
+    ],
+    [
+      "betternether:sulfuric_bone_reef"
+    ],
+    [
+      "betternether:crimson_glowing_woods"
     ]
   ],
   "rewards": {

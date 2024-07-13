@@ -44,7 +44,7 @@
     "minecraft": [
       "1.21.0"
     ],
-    "bclib": "21.0.5",
+    "bclib": "21.0.x",
     "wover": "21.0.x",
     "wunderlib": "21.0.x"
   },

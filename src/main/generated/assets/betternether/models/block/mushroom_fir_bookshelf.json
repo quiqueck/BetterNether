@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "betternether:block/mushroom_fir_bookshelf",
+    "end": "betternether:block/mushroom_fir_planks",
     "side": "betternether:block/mushroom_fir_bookshelf"
   }
 }

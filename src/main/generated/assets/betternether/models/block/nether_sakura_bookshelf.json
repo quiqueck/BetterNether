@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "betternether:block/nether_sakura_bookshelf",
+    "end": "betternether:block/nether_sakura_planks",
     "side": "betternether:block/nether_sakura_bookshelf"
   }
 }

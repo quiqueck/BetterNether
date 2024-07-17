@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "betternether:block/anchor_tree_bookshelf",
+    "end": "betternether:block/anchor_tree_planks",
     "side": "betternether:block/anchor_tree_bookshelf"
   }
 }

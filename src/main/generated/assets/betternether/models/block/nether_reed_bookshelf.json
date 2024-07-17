@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "betternether:block/nether_reed_bookshelf",
+    "end": "betternether:block/nether_reed_planks",
     "side": "betternether:block/nether_reed_bookshelf"
   }
 }

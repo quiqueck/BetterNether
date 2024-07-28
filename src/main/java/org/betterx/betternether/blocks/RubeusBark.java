@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MapColor;
 
 public class RubeusBark extends BaseStripableBarkBlock.Wood implements AddMineableAxe {
-    public RubeusBark(MapColor color, Block striped) {
-        super(color, striped, false);
+    public RubeusBark(MapColor color, Block stripped) {
+        super(color, stripped, false);
         this.registerDefaultState(this.defaultBlockState()
                                       .setValue(AXIS, Direction.Axis.Y)
                                       .setValue(RubeusLog.SHAPE, TripleShape.BOTTOM));

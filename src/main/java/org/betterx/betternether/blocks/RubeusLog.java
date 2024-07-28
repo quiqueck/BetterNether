@@ -15,8 +15,8 @@ import net.minecraft.world.level.material.MapColor;
 public class RubeusLog extends BaseStripableLogBlock.Wood implements AddMineableAxe {
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
-    public RubeusLog(MapColor color, Block striped) {
-        super(color, striped, false);
+    public RubeusLog(MapColor color, Block stripped) {
+        super(color, stripped, false);
         this.registerDefaultState(this.defaultBlockState()
                                       .setValue(AXIS, Direction.Axis.Y)
                                       .setValue(SHAPE, TripleShape.BOTTOM));

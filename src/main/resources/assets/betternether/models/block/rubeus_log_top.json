@@ -1,12 +1,12 @@
 {
-    "parent": "block/cube",
-    "textures": {
-        "particle": "betternether:block/striped_rubeus_log_side",
-        "down": "betternether:block/striped_rubeus_log_top",
-        "up": "betternether:block/striped_rubeus_log_top",
-        "north": "betternether:block/striped_rubeus_log_side",
-        "east": "betternether:block/striped_rubeus_log_side",
-        "south": "betternether:block/striped_rubeus_log_side",
-        "west": "betternether:block/striped_rubeus_log_side"
-    }
+  "parent": "block/cube",
+  "textures": {
+    "particle": "betternether:block/stripped_rubeus_log_side",
+    "down": "betternether:block/stripped_rubeus_log_top",
+    "up": "betternether:block/stripped_rubeus_log_top",
+    "north": "betternether:block/stripped_rubeus_log_side",
+    "east": "betternether:block/stripped_rubeus_log_side",
+    "south": "betternether:block/stripped_rubeus_log_side",
+    "west": "betternether:block/stripped_rubeus_log_side"
+  }
 }

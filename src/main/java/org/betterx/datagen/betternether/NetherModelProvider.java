@@ -4,6 +4,7 @@ import org.betterx.bclib.client.models.BCLModels;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
 import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.client.block.BNModels;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockRegistry;
@@ -47,6 +48,21 @@ public class NetherModelProvider extends WoverModelProvider {
                 .override(NetherBlocks.SOUL_SANDSTONE_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_SLABS, SOUL_SANDSTONE_BOTTOM))
                 .override(NetherBlocks.SOUL_SANDSTONE_SMOOTH_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_TOP))
                 .override(NetherBlocks.SOUL_SANDSTONE_CUT_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_CUT_SLABS, SOUL_SANDSTONE_TOP))
+                .ignore(NetherBlocks.SOUL_SANDSTONE_CUT_SLAB)
+                .ignore(NetherBlocks.SOUL_SANDSTONE_SLAB)
+                .ignore(NetherBlocks.SOUL_SANDSTONE_SMOOTH_SLAB)
+                .ignore(NetherBlocks.BASALT_SLAB)
+                .ignore(NetherBlocks.BASALT_BRICKS_SLAB)
+                .ignore(NetherBlocks.BONE_SLAB)
+                .ignore(NetherBlocks.BLUE_OBSIDIAN_BRICKS_SLAB)
+                .ignore(NetherBlocks.BLUE_OBSIDIAN_TILE_SLAB)
+                .ignore(NetherBlocks.NETHER_BRICK_TILE_SLAB)
+                .ignore(NetherBlocks.NETHER_RUBY_SLAB)
+                .ignore(NetherBlocks.OBSIDIAN_BRICKS_SLAB)
+                .ignore(NetherBlocks.OBSIDIAN_TILE_SLAB)
+                .ignore(NetherBlocks.CINCINNASITE_SLAB)
+                .ignore(NetherBlocks.ROOF_TILE_CINCINNASITE_SLAB)
+                .ignore(NetherBlocks.ROOF_TILE_NETHER_BRICKS_SLAB)
                 .override(NetherBlocks.BONE_PLATE, block -> generator.createPressurePlate(block, BetterNether.C.mk("block/bone_block_plate")))
                 .override(NetherBlocks.BONE_BUTTON, block -> generator.createButton(block, BetterNether.C.mk("block/bone_button")))
                 .override(NetherBlocks.CINCINNASITE_PLATE, block -> generator.createPressurePlate(block, BetterNether.C.mk("block/cincinnasite_plate_up")))
@@ -107,7 +123,13 @@ public class NetherModelProvider extends WoverModelProvider {
                 .ignore(mat.getBlock(WoodSlots.LADDER))
                 .ignore(mat.getBlock(WoodSlots.TRAPDOOR))
                 .ignore(mat.getBlock(WoodSlots.GATE))
-                .ignore(mat.getBlock(WoodSlots.FENCE));
+                .ignore(mat.getBlock(WoodSlots.FENCE))
+                .ignore(mat.getBlock(WoodSlots.SLAB))
+                .ignore(mat.getBlock(WoodSlots.LOG))
+                .ignore(mat.getBlock(WoodSlots.STRIPPED_LOG))
+                .ignore(mat.getBlock(WoodSlots.BARK))
+                .ignore(mat.getBlock(WoodSlots.STRIPPED_BARK))
+                .ignore(mat.getBlock(NetherSlots.ROOF_SLAB));
     }
 
 

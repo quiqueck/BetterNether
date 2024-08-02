@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
-public interface SurvivesOnGrassSoil extends SurvivesOnTags {
-    List<TagKey<Block>> TAGS = List.of(CommonBlockTags.GRASS_SOIL);
+public interface SurvivesOnSoilOrLogs extends SurvivesOnTags {
+    List<TagKey<Block>> TAGS = List.of(CommonBlockTags.SOIL_OR_LOGS);
 
     @Override
     default List<TagKey<Block>> getSurvivableTags() {

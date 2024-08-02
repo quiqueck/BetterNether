@@ -5,8 +5,8 @@ import org.betterx.bclib.blocks.BasePlantBlock;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.client.block.BNModels;
-import org.betterx.betternether.interfaces.SurvivesOnGrassSoil;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
+import org.betterx.betternether.interfaces.SurvivesOnSoilOrLogs;
 import org.betterx.wover.block.api.model.BlockModelProvider;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 import org.betterx.wover.loot.api.BlockLootProvider;
@@ -220,7 +220,7 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
         return provider.dropWithSilkTouchOrShears(this);
     }
 
-    public static class OnEverything extends BaseBlockNetherGrass implements SurvivesOnGrassSoil {
+    public static class OnEverything extends BaseBlockNetherGrass implements SurvivesOnSoilOrLogs {
         public OnEverything() {
             super();
         }
@@ -232,7 +232,7 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
 
         @Override
         public boolean isTerrain(BlockState state) {
-            return SurvivesOnGrassSoil.super.isTerrain(state);
+            return SurvivesOnSoilOrLogs.super.isTerrain(state);
         }
     }
 }

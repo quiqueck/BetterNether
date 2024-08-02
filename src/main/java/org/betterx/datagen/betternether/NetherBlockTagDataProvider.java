@@ -49,10 +49,5 @@ public class NetherBlockTagDataProvider extends WoverTagProvider.ForBlocks {
                 NetherBlocks.WEEPING_OBSIDIAN,
                 NetherBlocks.BLUE_WEEPING_OBSIDIAN
         );
-
-        context.add(
-                BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
-                CommonBlockTags.NETHER_PORTAL_FRAME
-        );
     }
 }

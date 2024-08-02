@@ -1,11 +1,32 @@
 {
   "values": [
+    "betternether:anchor_tree_bark",
+    "betternether:anchor_tree_log",
+    "betternether:anchor_tree_stripped_bark",
     "betternether:anchor_tree_stripped_log",
+    "betternether:mushroom_fir_bark",
+    "betternether:mushroom_fir_log",
+    "betternether:mushroom_fir_stripped_bark",
     "betternether:mushroom_fir_stripped_log",
+    "betternether:nether_sakura_bark",
+    "betternether:nether_sakura_log",
+    "betternether:nether_sakura_stripped_bark",
     "betternether:nether_sakura_stripped_log",
+    "betternether:rubeus_bark",
+    "betternether:rubeus_log",
+    "betternether:rubeus_stripped_bark",
     "betternether:rubeus_stripped_log",
+    "betternether:stalagnate_bark",
+    "betternether:stalagnate_log",
+    "betternether:stalagnate_stripped_bark",
     "betternether:stalagnate_stripped_log",
+    "betternether:wart_bark",
+    "betternether:wart_log",
+    "betternether:wart_stripped_bark",
     "betternether:wart_stripped_log",
+    "betternether:willow_bark",
+    "betternether:willow_log",
+    "betternether:willow_stripped_bark",
     "betternether:willow_stripped_log"
   ]
 }

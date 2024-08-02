@@ -50,8 +50,8 @@
   },
   "breaks": {
     "bclib": "<21.0.10",
-    "wover": "<21.0.11",
-    "wunderlib": "<21.0.5"
+    "wover": "<21.0.12",
+    "wunderlib": "<21.0.6"
   },
   "custom": {
     "wover": {

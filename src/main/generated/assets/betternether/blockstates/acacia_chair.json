@@ -5,27 +5,27 @@
       "y": 90
     },
     "facing=east,top=true": {
-      "model": "minecraft:block/acacia_planks_particles"
+      "model": "wover:block/acacia_planks_particles"
     },
     "facing=north,top=false": {
       "model": "betternether:block/acacia_chair"
     },
     "facing=north,top=true": {
-      "model": "minecraft:block/acacia_planks_particles"
+      "model": "wover:block/acacia_planks_particles"
     },
     "facing=south,top=false": {
       "model": "betternether:block/acacia_chair",
       "y": 180
     },
     "facing=south,top=true": {
-      "model": "minecraft:block/acacia_planks_particles"
+      "model": "wover:block/acacia_planks_particles"
     },
     "facing=west,top=false": {
       "model": "betternether:block/acacia_chair",
       "y": 270
     },
     "facing=west,top=true": {
-      "model": "minecraft:block/acacia_planks_particles"
+      "model": "wover:block/acacia_planks_particles"
     }
   }
 }

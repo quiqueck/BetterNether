@@ -17,6 +17,7 @@ import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -298,6 +300,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                     .endDisplay()
                     .addVisitBiomesCriterion(biomes
                             .stream()
+                            .sorted(Comparator.comparing(ResourceKey::location))
                             .map(key -> (Holder<Biome>) biomeLookup.get(key).orElseThrow())
                             .toList()
                     )

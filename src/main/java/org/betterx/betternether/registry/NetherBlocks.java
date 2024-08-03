@@ -702,6 +702,10 @@ public class NetherBlocks {
             NetherTags.NETHER_SAND
     );
 
+    public static final Block NETHERRACK_SLAB = registerSlab("netherrack_slab", Blocks.NETHERRACK, true);
+    public static final Block NETHERRACK_STAIR = registerStairs("netherrack_stairs", Blocks.NETHERRACK, true);
+    public static final Block NETHERRACK_WALLS = registerWall("netherrack_wall", Blocks.NETHERRACK);
+
 
     // DEFERED BLOCKS //
     public static final Block LUMABUS_SEED = registerBlock(
@@ -873,7 +877,7 @@ public class NetherBlocks {
     }
 
     public static Block registerWall(String name, Block source) {
-        Block wall = BNWall.from(source);
+        Block wall = BaseWallBlock.from(source);
 
         registerBlockDirectly(name, wall, BlockTags.WALLS);
         if (ModCore.isDatagen())

@@ -96,7 +96,12 @@ public class NetherModelProvider extends WoverModelProvider {
                     BCLModels.createChairBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED, NetherBlocks.NETHER_BRICK_TILE_LARGE);
                 })
                 .override(NetherBlocks.BAR_STOOL_CINCINNASITE, block -> BCLModels.createBarStoolBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED, NetherBlocks.NETHER_BRICK_TILE_LARGE))
-                .override(NetherBlocks.TABURET_CINCINNASITE, block -> BCLModels.createTaburetBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED));
+                .override(NetherBlocks.TABURET_CINCINNASITE, block -> BCLModels.createTaburetBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED))
+                .ignore(NetherBlocks.NETHER_BRICK_WALL)
+                .ignore(NetherBlocks.BASALT_BRICKS_WALL)
+                .ignore(NetherBlocks.CINCINNASITE_WALL)
+                .ignore(NetherBlocks.SOUL_SANDSTONE_WALL)
+                .ignore(NetherBlocks.BONE_WALL);
 
         addMaterialOverrides(overrides, NetherBlocks.MAT_REED);
         addMaterialOverrides(overrides, NetherBlocks.MAT_ANCHOR_TREE);

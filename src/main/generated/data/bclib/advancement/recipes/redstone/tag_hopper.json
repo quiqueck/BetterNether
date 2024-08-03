@@ -1,21 +1,21 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_tag_c_chest": {
+    "has_tag_c_chests": {
       "conditions": {
         "items": [
           {
-            "items": "#c:chest"
+            "items": "#c:chests"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_tag_c_iron_ingots": {
+    "has_tag_c_ingots/iron": {
       "conditions": {
         "items": [
           {
-            "items": "#c:iron_ingots"
+            "items": "#c:ingots/iron"
           }
         ]
       },
@@ -31,8 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_tag_c_chest",
-      "has_tag_c_iron_ingots"
+      "has_tag_c_chests",
+      "has_tag_c_ingots/iron"
     ]
   ],
   "rewards": {

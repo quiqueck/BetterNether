@@ -4,7 +4,7 @@ import org.betterx.betternether.registry.NetherTemplates;
 import org.betterx.wover.complex.api.equipment.ToolTier;
 import org.betterx.wover.complex.api.equipment.ToolTier.ToolValues;
 import org.betterx.wover.complex.api.equipment.ToolTiers;
-import org.betterx.wover.tag.api.predefined.CommonBlockTags;
+import org.betterx.wover.tag.api.predefined.MineableTags;
 
 import net.minecraft.tags.BlockTags;
 
@@ -36,7 +36,7 @@ public class BNToolTiers {
     public static final ToolTier FLAMING_RUBY = ToolTier
             .builder("flaming_ruby")
             .toolTier(BNToolMaterial.FLAMING_RUBY)
-            .blockTag(CommonBlockTags.NEEDS_NETHERITE_TOOL)
+            .blockTag(MineableTags.NEEDS_NETHERITE_TOOL)
             .toolValuesWithOffset(
                     ToolTiers.NETHERITE_TOOL,
                     new ToolValues(0, 0.4f, NetherTemplates.FLAMING_RUBY_TEMPLATE)

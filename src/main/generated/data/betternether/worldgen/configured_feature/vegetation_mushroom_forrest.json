@@ -51,7 +51,7 @@
                 ],
                 "predicate": {
                   "type": "minecraft:matching_block_tag",
-                  "tag": "c:mycelium"
+                  "tag": "wover:surfaces/mycelium"
                 }
               }
             ]
@@ -99,7 +99,7 @@
                     ],
                     "predicate": {
                       "type": "minecraft:matching_block_tag",
-                      "tag": "c:mycelium"
+                      "tag": "wover:surfaces/mycelium"
                     }
                   }
                 ]
@@ -147,7 +147,7 @@
                     ],
                     "predicate": {
                       "type": "minecraft:matching_block_tag",
-                      "tag": "c:mycelium"
+                      "tag": "wover:surfaces/mycelium"
                     }
                   }
                 ]
@@ -230,7 +230,7 @@
                     ],
                     "predicate": {
                       "type": "minecraft:matching_block_tag",
-                      "tag": "c:mycelium"
+                      "tag": "wover:surfaces/mycelium"
                     }
                   }
                 ]
@@ -289,7 +289,7 @@
                     ],
                     "predicate": {
                       "type": "minecraft:matching_block_tag",
-                      "tag": "c:mycelium"
+                      "tag": "wover:surfaces/mycelium"
                     }
                   }
                 ]
@@ -337,7 +337,7 @@
                     ],
                     "predicate": {
                       "type": "minecraft:matching_block_tag",
-                      "tag": "c:mycelium"
+                      "tag": "wover:surfaces/mycelium"
                     }
                   }
                 ]
@@ -385,7 +385,7 @@
                     ],
                     "predicate": {
                       "type": "minecraft:matching_block_tag",
-                      "tag": "c:mycelium"
+                      "tag": "wover:surfaces/mycelium"
                     }
                   }
                 ]

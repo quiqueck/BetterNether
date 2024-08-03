@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "I": {
-      "tag": "c:iron_ingots"
+      "tag": "c:ingots/iron"
     },
     "W": {
       "tag": "minecraft:planks"

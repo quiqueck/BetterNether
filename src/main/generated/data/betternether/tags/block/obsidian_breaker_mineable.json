@@ -1,8 +1,8 @@
 {
   "values": [
-    "#c:is_obsidian",
-    "#c:nether_ores",
-    "#c:nether_pframe",
-    "#c:nether_stones"
+    "#wover:is_obsidian",
+    "#wover:nether_pframe",
+    "#wover:ores/nether",
+    "#wover:surfaces/nether/stones"
   ]
 }

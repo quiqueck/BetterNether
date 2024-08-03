@@ -65,7 +65,7 @@
           ],
           "predicate": {
             "type": "minecraft:matching_block_tag",
-            "tag": "c:nether_terrain"
+            "tag": "wover:surfaces/nether/terrain"
           }
         }
       ]

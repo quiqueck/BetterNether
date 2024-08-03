@@ -17,9 +17,11 @@ import org.betterx.betternether.loot.BNLoot;
 import org.betterx.wover.complex.api.equipment.ArmorSlot;
 import org.betterx.wover.complex.api.equipment.ToolSlot;
 import org.betterx.wover.item.api.ItemRegistry;
+import org.betterx.wover.state.api.WorldState;
 import org.betterx.wover.tag.api.predefined.CommonItemTags;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.FloatTag;
 import net.minecraft.nbt.ListTag;
@@ -295,13 +297,18 @@ public class NetherItems {
                     "debug/city_loot_surprise",
                     DebugDataItem.forLootTable(BNLoot.CITY_LOOT_SURPRISE, Items.DIAMOND)
             );
-
-            CompoundTag root = buildCitySpawnerData();
-
+            registerNetherItem(
+                    "debug/wither_tower_loot",
+                    DebugDataItem.forLootTable(BNLoot.WITHER_TOWER_LOOT, NetherItems.CINCINNASITE_INGOT)
+            );
+            registerNetherItem(
+                    "debug/wither_tower_bonus_loot",
+                    DebugDataItem.forLootTable(BNLoot.WITHER_TOWER_BONUS_LOOT, NetherItems.NETHER_RUBY)
+            );
 
             registerNetherItem(
                     "debug/city_spawner",
-                    DebugDataItem.forSpawner(root, Items.SPECTRAL_ARROW)
+                    DebugDataItem.forSpawner(NetherItems::buildCitySpawnerData, Items.SPECTRAL_ARROW)
             );
         }
     }
@@ -312,16 +319,18 @@ public class NetherItems {
         tag.putString("id", id.toString());
         tag.putByte("Count", (byte) count);
 
-        //TODO: 1.21 find a way to use enchantments here
-//        if (enchantments.length > 0) {
-//            ListTag chants = new ListTag();
-//            tag.put("Enchantments", chants);
-//            for (ResourceKey<Enchantment> e : enchantments) {
-//                EnchantmentHelper.
-//                        ResourceLocation eID = BuiltInRegistries.ENCHANTMENT.getKey(e);
-//                chants.add(EnchantmentHelper.storeEnchantment(eID, e.getMaxLevel()));
-//            }
-//        }
+        if (enchantments.length > 0 && WorldState.registryAccess() != null) {
+            ListTag chants = new ListTag();
+            final var enchReg = WorldState.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+            tag.put("Enchantments", chants);
+            for (ResourceKey<Enchantment> e : enchantments) {
+                final var ench = enchReg.get(e);
+                final var eTag = new CompoundTag();
+                eTag.putInt("lvl", ench.getMaxLevel());
+                eTag.putString("id", e.location().toString());
+                chants.add(eTag);
+            }
+        }
         return tag;
     }
 

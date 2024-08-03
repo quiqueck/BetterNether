@@ -14,12 +14,12 @@ public class NetherTags {
             "nether_decorations"
     );
 
-    public static final TagKey<Item> SOUL_GROUND_ITEM = TagManager.ITEMS.makeCommonTag("soul_ground");
+    public static final TagKey<Item> SOUL_GROUND_ITEM = TagManager.ITEMS.makeTag(BetterNether.C, "soul_ground");
 
-    public static final TagKey<Block> NETHER_FARMLAND = TagManager.BLOCKS.makeCommonTag("nether_farmland");
+    public static final TagKey<Block> NETHER_FARMLAND = TagManager.BLOCKS.makeTag(BetterNether.C, "nether_farmland");
 
 
-    public static final TagKey<Block> NETHER_SAND = TagManager.BLOCKS.makeCommonTag("nether_sand");
+    public static final TagKey<Block> NETHER_SAND = TagManager.BLOCKS.makeTag(BetterNether.C, "nether_sand");
     public static final TagKey<Biome> BETTER_NETHER = TagManager.BIOMES.makeTag(BetterNether.C, "biome");
 
     public static final TagKey<Block> FIREFLY_FLOWERS = TagManager.BLOCKS.makeTag(

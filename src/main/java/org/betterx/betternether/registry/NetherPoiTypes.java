@@ -1,13 +1,13 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.poi.BCLPoiType;
-import org.betterx.bclib.api.v2.poi.PoiManager;
 import org.betterx.betternether.BetterNether;
+import org.betterx.wover.poi.api.PoiManager;
+import org.betterx.wover.poi.api.WoverPoiType;
 
 public class NetherPoiTypes {
-    public static final BCLPoiType PIG_STATUE = PoiManager.register(
+    public static final WoverPoiType PIG_STATUE = PoiManager.register(
             BetterNether.C.id("pig_statue"),
-            BCLPoiType.getBlockStates(NetherBlocks.PIG_STATUE_RESPAWNER),
+            WoverPoiType.getBlockStates(NetherBlocks.PIG_STATUE_RESPAWNER),
             1, 1
     );
 

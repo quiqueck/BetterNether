@@ -21,6 +21,7 @@ import org.betterx.wover.complex.api.equipment.ToolTiers;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.state.api.WorldState;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
+import org.betterx.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
@@ -607,7 +608,7 @@ public class NetherBlocks {
     public static final Block BASALT_FURNACE = registerFurnace("basalt_furnace", Blocks.BASALT);
     public static final Block NETHERRACK_FURNACE = registerFurnace("netherrack_furnace", Blocks.NETHERRACK);
     public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
-    public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
+    public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand(), CommonPoiTags.CLERIC_WORKSTATION);
     public static final Block CINCINNASITE_ANVIL = registerBlock(
             "cincinnasite_anvil",
             new BlockCincinnasiteAnvil(),
@@ -933,7 +934,7 @@ public class NetherBlocks {
     public static Block registerFurnace(String name, Block source) {
         Block block = new BlockNetherFurnace(source);
 
-        registerBlockDirectly(name, block);
+        registerBlockDirectly(name, block, CommonPoiTags.ARMORER_WORKSTATION);
         if (ModCore.isDatagen())
             RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
 

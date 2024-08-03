@@ -369,22 +369,25 @@
   },
   "requirements": [
     [
-      "betternether:sulfuric_bone_reef"
-    ],
-    [
-      "betternether:nether_mushroom_forest_edge"
-    ],
-    [
-      "betternether:old_warped_woods"
-    ],
-    [
       "betternether:soul_plain"
     ],
     [
-      "betternether:crimson_glowing_woods"
+      "betternether:nether_swampland_terraces"
     ],
     [
-      "betternether:upside_down_forest"
+      "betternether:nether_jungle"
+    ],
+    [
+      "betternether:upside_down_forest_cleared"
+    ],
+    [
+      "betternether:sulfuric_bone_reef"
+    ],
+    [
+      "betternether:nether_grasslands"
+    ],
+    [
+      "betternether:old_swampland"
     ],
     [
       "betternether:old_fungiwoods"
@@ -393,46 +396,43 @@
       "betternether:bone_reef"
     ],
     [
-      "betternether:nether_swampland_terraces"
-    ],
-    [
-      "betternether:flooded_deltas"
-    ],
-    [
-      "betternether:wart_forest"
-    ],
-    [
-      "betternether:poor_nether_grasslands"
-    ],
-    [
-      "betternether:crimson_pinewood"
-    ],
-    [
-      "betternether:old_swampland"
+      "betternether:gravel_desert"
     ],
     [
       "betternether:wart_forest_edge"
     ],
     [
+      "betternether:poor_nether_grasslands"
+    ],
+    [
+      "betternether:upside_down_forest"
+    ],
+    [
+      "betternether:nether_swampland"
+    ],
+    [
+      "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:old_warped_woods"
+    ],
+    [
+      "betternether:wart_forest"
+    ],
+    [
+      "betternether:crimson_pinewood"
+    ],
+    [
       "betternether:magma_land"
     ],
     [
-      "betternether:upside_down_forest_cleared"
-    ],
-    [
-      "betternether:gravel_desert"
-    ],
-    [
-      "betternether:nether_jungle"
+      "betternether:crimson_glowing_woods"
     ],
     [
       "betternether:nether_mushroom_forest"
     ],
     [
-      "betternether:nether_grasslands"
-    ],
-    [
-      "betternether:nether_swampland"
+      "betternether:nether_mushroom_forest_edge"
     ]
   ],
   "rewards": {

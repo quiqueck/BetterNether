@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "walls",
+  "ingredient": {
+    "item": "minecraft:netherrack"
+  },
+  "result": {
+    "count": 1,
+    "id": "betternether:netherrack_wall"
+  }
+}

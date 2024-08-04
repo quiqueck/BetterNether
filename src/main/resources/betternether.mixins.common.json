@@ -26,6 +26,7 @@
     "RecipeManagerMixin",
     "obsidian_breaker.PlayerMixin",
     "piglin.PiglinAiMixin",
+    "piglin.PiglinBruteMixin",
     "piglin.PiglinMixin"
   ],
   "injectors": {

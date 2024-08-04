@@ -1,5 +1,6 @@
 package org.betterx.betternether.mixin.common.piglin;
 
+import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.items.complex.NetherSet;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.wover.complex.api.equipment.ArmorSlot;
@@ -37,7 +38,7 @@ public abstract class PiglinMixin {
             CallbackInfo ci
     ) {
         //Piglins will now also consider to wear BetterNether armor
-        if (((Piglin) (Object) this).isAdult()) {
+        if (((Piglin) (Object) this).isAdult() && Configs.GAME_RULES.piglinWearNetherArmor.get()) {
             int random = randomSource.nextInt(100);
             NetherSet set = null;
 

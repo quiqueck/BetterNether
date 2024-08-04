@@ -1,5 +1,6 @@
 package org.betterx.betternether.mixin.common.piglin;
 
+import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.items.complex.NetherSet;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.wover.complex.api.equipment.ArmorSlot;
@@ -28,19 +29,20 @@ public class PiglinBruteMixin {
             DifficultyInstance difficultyInstance,
             CallbackInfo ci
     ) {
-        //Piglin Brutes will now also consider to wear a BetterNether helmet
+        if (Configs.GAME_RULES.piglinWearNetherArmor.get()) {
+            //Piglin Brutes will now also consider to wear a BetterNether helmet
+            int random = randomSource.nextInt(100);
+            NetherSet set = null;
 
-        int random = randomSource.nextInt(100);
-        NetherSet set = null;
+            if (random < 2) set = NetherItems.FLAMING_RUBY_SET;
+            else if (random < 10) set = NetherItems.NETHER_RUBY_SET;
+            else if (random < 30) set = NetherItems.CINCINNASITE_SET;
 
-        if (random < 2) set = NetherItems.FLAMING_RUBY_SET;
-        else if (random < 10) set = NetherItems.NETHER_RUBY_SET;
-        else if (random < 30) set = NetherItems.CINCINNASITE_SET;
+            if (set != null) {
+                ((PiglinBrute) (Object) this).setItemSlot(EquipmentSlot.HEAD, new ItemStack((Item) set.get(ArmorSlot.HELMET_SLOT)));
 
-        if (set != null) {
-            ((PiglinBrute) (Object) this).setItemSlot(EquipmentSlot.HEAD, new ItemStack((Item) set.get(ArmorSlot.HELMET_SLOT)));
-
-            ci.cancel();
+                ci.cancel();
+            }
         }
     }
 }

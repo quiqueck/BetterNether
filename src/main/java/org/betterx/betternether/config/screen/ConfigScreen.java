@@ -13,7 +13,7 @@ public class ConfigScreen extends de.ambertation.wunderlib.ui.vanilla.ConfigScre
     public static final ResourceLocation BN_LOGO_LOCATION = BetterNether.C.id("icon.png");
 
     public ConfigScreen(Screen parent) {
-        super(parent, BN_LOGO_LOCATION, Component.translatable("bn_config"), List.of(Configs.CLIENT, Configs.WORLD));
+        super(parent, BN_LOGO_LOCATION, Component.translatable("bn_config"), List.of(Configs.CLIENT, Configs.WORLD, Configs.GAME_RULES));
     }
 
     @Override

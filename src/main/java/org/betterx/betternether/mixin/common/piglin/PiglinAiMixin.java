@@ -1,5 +1,6 @@
 package org.betterx.betternether.mixin.common.piglin;
 
+import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.items.materials.BNArmorTiers;
 
 import net.minecraft.core.Holder;
@@ -26,6 +27,7 @@ public class PiglinAiMixin {
             Operation<Boolean> original
     ) {
         //Piglins will now also consider BetterNether armor materials as gold armor
-        return instance.is(BNArmorTiers.CINCINNASITE.armorMaterial) || instance.is(BNArmorTiers.NETHER_RUBY.armorMaterial) || instance.is(BNArmorTiers.FLAMING_RUBY.armorMaterial) || original.call(instance, tHolder);
+        return original.call(instance, tHolder) ||
+                (Configs.GAME_RULES.piglinIgnoreNetherArmor.get() && (instance.is(BNArmorTiers.CINCINNASITE.armorMaterial) || instance.is(BNArmorTiers.NETHER_RUBY.armorMaterial) || instance.is(BNArmorTiers.FLAMING_RUBY.armorMaterial)));
     }
 }

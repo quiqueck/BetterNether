@@ -24,7 +24,9 @@
     "PlayerEntityMixin",
     "PortalShapeMixin",
     "RecipeManagerMixin",
-    "obsidian_breaker.PlayerMixin"
+    "obsidian_breaker.PlayerMixin",
+    "piglin.PiglinAiMixin",
+    "piglin.PiglinMixin"
   ],
   "injectors": {
     "defaultRequire": 1

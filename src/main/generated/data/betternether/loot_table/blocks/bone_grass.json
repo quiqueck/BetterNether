@@ -16,12 +16,6 @@
             {
               "condition": "minecraft:match_tool",
               "predicate": {
-                "items": "#c:tools/shears"
-              }
-            },
-            {
-              "condition": "minecraft:match_tool",
-              "predicate": {
                 "predicates": {
                   "minecraft:enchantments": [
                     {

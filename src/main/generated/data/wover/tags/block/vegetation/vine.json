@@ -1,9 +1,6 @@
 {
   "values": [
-    "betternether:agave",
-    "betternether:anchor_tree_leaves",
     "betternether:anchor_tree_vine",
-    "betternether:barrel_cactus",
     "betternether:black_vine",
     "betternether:blooming_vine",
     "betternether:eye_vine",
@@ -11,10 +8,7 @@
     "betternether:golden_vine",
     "betternether:lumabus_vine",
     "betternether:neon_equisetum",
-    "betternether:nether_sakura_leaves",
-    "betternether:rubeus_leaves",
     "betternether:soul_vein",
-    "betternether:whispering_gourd_vine",
-    "betternether:willow_leaves"
+    "betternether:whispering_gourd_vine"
   ]
 }

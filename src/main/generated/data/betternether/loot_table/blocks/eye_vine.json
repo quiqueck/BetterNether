@@ -45,7 +45,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "betternether:neon_equisetum"
+          "name": "minecraft:air"
         }
       ],
       "rolls": 1.0

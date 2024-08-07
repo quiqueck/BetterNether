@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:whispering_gourd_seeds"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_whispering_gourd": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:whispering_gourd"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_whispering_gourd"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:whispering_gourd_seeds"
+    ]
+  }
+}

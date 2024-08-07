@@ -101,7 +101,16 @@ public class NetherModelProvider extends WoverModelProvider {
                 .ignore(NetherBlocks.BASALT_BRICKS_WALL)
                 .ignore(NetherBlocks.CINCINNASITE_WALL)
                 .ignore(NetherBlocks.SOUL_SANDSTONE_WALL)
-                .ignore(NetherBlocks.BONE_WALL);
+                .ignore(NetherBlocks.BONE_WALL)
+                .ignore(NetherBlocks.NEON_EQUISETUM)
+                .ignore(NetherBlocks.WHISPERING_GOURD_VINE)
+                .ignore(NetherBlocks.GOLDEN_VINE)
+                .ignore(NetherBlocks.LUMABUS_VINE)
+                .ignore(NetherBlocks.GOLDEN_LUMABUS_VINE)
+                .ignore(NetherBlocks.EYE_VINE)
+                .ignore(NetherBlocks.BLACK_VINE)
+                .ignore(NetherBlocks.BLOOMING_VINE);
+
 
         addMaterialOverrides(overrides, NetherBlocks.MAT_REED);
         addMaterialOverrides(overrides, NetherBlocks.MAT_ANCHOR_TREE);

@@ -48,7 +48,11 @@
           "name": "betternether:golden_vine"
         }
       ],
-      "rolls": 1.0
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
     }
   ]
 }

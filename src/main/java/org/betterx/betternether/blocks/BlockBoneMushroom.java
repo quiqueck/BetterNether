@@ -112,8 +112,8 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        super.tick(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        super.randomTick(state, world, pos, random);
         int age = state.getValue(AGE);
         if (age < 2 && random.nextInt(32) == 0) {
             BlocksHelper.setWithoutUpdate(world, pos, state.setValue(AGE, age + 1));

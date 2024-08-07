@@ -93,8 +93,8 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        super.tick(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        super.randomTick(state, world, pos, random);
         if (canGrowTerrain(world, random, pos, state))
             performBonemeal(world, random, pos, state);
     }

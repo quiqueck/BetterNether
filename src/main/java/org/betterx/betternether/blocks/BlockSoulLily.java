@@ -131,8 +131,8 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGro
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        super.tick(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        super.randomTick(state, world, pos, random);
         if (canGrow(world, pos, random)) {
             SoulLilyShape shape = state.getValue(SHAPE);
             if (shape == SoulLilyShape.SMALL && world.isEmptyBlock(pos.above())) {

@@ -71,7 +71,7 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (!canSurvive(state, world, pos)) {
             world.destroyBlock(pos, true);
             return;

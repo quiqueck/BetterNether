@@ -38,7 +38,7 @@ public class BlockEyeball extends BlockEyeBase {
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (random.nextInt(64) == 0) {
             int y = BlocksHelper.downRay(world, pos, 64) + 1;
             BlockPos down = pos.below(y);

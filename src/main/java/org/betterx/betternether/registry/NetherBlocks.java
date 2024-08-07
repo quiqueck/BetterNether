@@ -434,12 +434,11 @@ public class NetherBlocks {
             new BlockGoldenVine()
     );
 
-    public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine());
+    public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(MapColor.COLOR_CYAN));
     public static final BlockLumabusVine GOLDEN_LUMABUS_VINE = registerBlockNI(
             "golden_lumabus_vine",
-            new BlockLumabusVine()
+            new BlockLumabusVine(MapColor.COLOR_YELLOW)
     );
-
 
     // Small Plants
     public static final Block SOUL_VEIN = registerBlock("soul_vein", new BlockSoulVein());

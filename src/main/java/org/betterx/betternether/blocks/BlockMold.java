@@ -79,8 +79,8 @@ class BaseBlockMold extends BlockBaseNotFull {
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        super.tick(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        super.randomTick(state, world, pos, random);
         if (random.nextInt(16) == 0) {
             int c = 0;
             c = world.getBlockState(pos.north()).getBlock() == this ? c++ : c;

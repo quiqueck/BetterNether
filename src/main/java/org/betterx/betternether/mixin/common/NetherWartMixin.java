@@ -31,8 +31,14 @@ public abstract class NetherWartMixin extends BushBlock {
     }
 
     @Inject(method = "randomTick", at = @At(value = "HEAD"), cancellable = true)
-    private void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo info) {
-        super.tick(state, world, pos, random);
+    private void bn_randomTick(
+            BlockState state,
+            ServerLevel world,
+            BlockPos pos,
+            RandomSource random,
+            CallbackInfo info
+    ) {
+        super.randomTick(state, world, pos, random);
 
         int i = state.getValue(NetherWartBlock.AGE);
         if (i < 3) {

@@ -87,8 +87,8 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        super.tick(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        super.randomTick(state, world, pos, random);
         if (isBonemealSuccess(world, random, pos, state)) {
             performBonemeal(world, random, pos, state);
         }

@@ -1,69 +1,26 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.BehaviourBuilders;
-import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
+import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockEyeVine extends BlockBaseNotFull implements BehaviourClimableVine {
-    protected static final VoxelShape SHAPE = box(4, 0, 4, 12, 16, 12);
-
+public class BlockEyeVine extends BaseVineBlock {
     public BlockEyeVine() {
-        super(BehaviourBuilders
-                .createStaticVine(MapColor.COLOR_RED)
-                .noLootTable()
+        super(
+                BehaviourBuilders
+                        .createStaticVine(MapColor.COLOR_RED),
+                9,
+                2
         );
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
-        setDropItself(false);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
-        return SHAPE;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public float getShadeBrightness(BlockState state, BlockGetter view, BlockPos pos) {
-        return 1.0F;
-    }
-
-    @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
-        return true;
-    }
-
-    @Override
-    public BlockState updateShape(
-            BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
-            BlockPos pos,
-            BlockPos neighborPos
-    ) {
-        Block up = world.getBlockState(pos.above()).getBlock();
-        Block down = world.getBlockState(pos.below()).getBlock();
-        if (up != this && up != Blocks.NETHERRACK)
-            return Blocks.AIR.defaultBlockState();
-        else if (down != this && !(down instanceof BlockEyeBase))
-            return Blocks.AIR.defaultBlockState();
-        else
-            return state;
     }
 
     @Override

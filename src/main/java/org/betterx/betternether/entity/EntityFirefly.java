@@ -105,6 +105,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                 return valid;
             }
 
+            @Override
             public void tick() {
                 super.tick();
             }

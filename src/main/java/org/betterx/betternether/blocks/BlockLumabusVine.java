@@ -1,53 +1,55 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.BehaviourBuilders;
-import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
-import org.betterx.betternether.MHelper;
+import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.world.features.DeferedSeedBlock;
 import org.betterx.wover.block.api.BlockProperties;
 import org.betterx.wover.block.api.BlockProperties.TripleShape;
+import org.betterx.wover.loot.api.BlockLootProvider;
+import org.betterx.wover.loot.api.LootLookupProvider;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import com.google.common.collect.Lists;
-
-import java.util.List;
 import java.util.function.ToIntFunction;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlock, BehaviourClimableVine {
+public class BlockLumabusVine extends BaseVineBlock implements DeferedSeedBlock, BlockLootProvider {
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
-    private static final VoxelShape BOTTOM_SHAPE = box(2, 4, 2, 14, 16, 14);
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
-    private static final RandomSource RANDOM = new LegacyRandomSource(130520220102l);
+    static final VoxelShape BOTTOM_SHAPE = box(2, 4, 2, 14, 16, 14);
     private Block seed;
 
-    public BlockLumabusVine() {
-        super(BehaviourBuilders
-                .createStaticVine(MapColor.COLOR_CYAN)
-                .lightLevel(getLuminance()));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
-        this.setDropItself(false);
-        this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
+    public BlockLumabusVine(MapColor color) {
+        super(
+                BehaviourBuilders
+                        .createStaticVine(color)
+                        .lightLevel(getLuminance()),
+                9,
+                1
+        );
     }
 
     @Override
@@ -62,59 +64,54 @@ public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlo
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(SHAPE);
-    }
-
-    @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
         return state.getValue(SHAPE) == TripleShape.BOTTOM ? BOTTOM_SHAPE : MIDDLE_SHAPE;
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        BlockState upState = world.getBlockState(pos.above());
-        return upState.getBlock() == this || upState.isFaceSturdy(world, pos, Direction.DOWN);
-    }
-
     @Environment(EnvType.CLIENT)
-    public float getShadeBrightness(BlockState state, BlockGetter view, BlockPos pos) {
-        return 1.0F;
-    }
-
-    @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
-        return true;
-    }
-
-    @Override
-    public BlockState updateShape(
-            BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
-            BlockPos pos,
-            BlockPos neighborPos
+    public @NotNull ItemStack getCloneItemStack(
+            @NotNull LevelReader level,
+            @NotNull BlockPos pos,
+            @NotNull BlockState state
     ) {
-        return canSurvive(state, world, pos) && (world.getBlockState(pos.below()).getBlock() == this || state.getValue(
-                SHAPE) == TripleShape.BOTTOM) ? state : Blocks.AIR.defaultBlockState();
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        if (state.getValue(SHAPE) == TripleShape.BOTTOM) {
-            return Lists.newArrayList(
-                    new ItemStack(seed, MHelper.randRange(1, 3, RANDOM)),
-                    new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(1, 3, RANDOM))
-            );
-        }
-        return Lists.newArrayList();
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         return new ItemStack(seed);
     }
 
+    @Override
+    public @Nullable LootTable.Builder registerBlockLoot(
+            @NotNull ResourceLocation location,
+            @NotNull LootLookupProvider provider,
+            @NotNull ResourceKey<LootTable> tableKey
+    ) {
+        var fruityState = LootItemBlockStatePropertyCondition
+                .hasBlockStateProperties(this)
+                .setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder
+                        .properties()
+                        .hasProperty(SHAPE, BlockProperties.TripleShape.BOTTOM));
+
+
+        return LootTable
+                .lootTable()
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(seed)
+                                     .when(fruityState.and(provider.shearsOrSilkTouchCondition()))
+                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                                     .otherwise(LootItem.lootTableItem(seed)
+                                                        .when(ExplosionCondition.survivesExplosion())
+                                                        .when(BonusLevelTableCondition.bonusLevelFlatChance(provider.fortune(), LootLookupProvider.VANILLA_LEAVES_SAPLING_CHANCES))
+                                     )
+                        )
+                )
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(NetherItems.GLOWSTONE_PILE)
+                                     .when(fruityState.and(provider.shearsOrHoeSilkTouchCondition()))
+                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                        )
+                );
+    }
 }

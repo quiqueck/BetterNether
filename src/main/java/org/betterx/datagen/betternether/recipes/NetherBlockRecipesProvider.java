@@ -25,6 +25,17 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
     @Override
     protected void bootstrap(HolderLookup.Provider provider, RecipeOutput context) {
         RecipeBuilder.crafting(
+                             BetterNether.C.id("whispering_gourd_seeds"),
+                             NetherBlocks.WHISPERING_GOURD_VINE
+                     )
+                     .shape("##")
+                     .addMaterial('#', NetherBlocks.WHISPERING_GOURD)
+                     .group("seeds")
+                     .outputCount(1)
+                     .category(RecipeCategory.MISC)
+                     .build(context);
+        
+        RecipeBuilder.crafting(
                              BetterNether.C.id("mushroom_fir_trimmed_chest"),
                              NetherBlocks.TRIMMED_MUSHROOM_FIR_CHEST
                      )

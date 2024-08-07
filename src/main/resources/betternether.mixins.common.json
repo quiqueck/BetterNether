@@ -12,7 +12,6 @@
     "DefaultAttributeRegistryMixin",
     "DeltaFeatureMixin",
     "FlatLevelGeneratorPresetsMixin",
-    "LeavesBlockMixin",
     "LightningRodBlockMixin",
     "LiquidBlockMixin",
     "LootTableBuilderAccessor",

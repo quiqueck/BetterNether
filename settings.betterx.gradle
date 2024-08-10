@@ -9,7 +9,7 @@ def allowLocalLibInConsoleMode = true
 //The path were to look for the local libraries
 def BCLibPath = '../BCLib'
 def WoverPath = '../WorldWeaver'
-def WunderLibPath = '../WorldWeaver/WunderLib'
+def WunderLibPath = '../WunderLib'
 
 
 // #### Logic ####
@@ -35,9 +35,9 @@ if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && BCLibFolder.exi
 if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && WunderLibFolder.exists()) {
     println "!! Using local WunderLib from '${WunderLibFolder}'"
 
-    include ':WunderLib'
-    project(":WunderLib").projectDir = WunderLibFolder
-    project(':WunderLib').buildFileName = './wunderlib-composit.gradle'
+    include ':wunderlib'
+    project(":wunderlib").projectDir = WunderLibFolder
+    project(':wunderlib').buildFileName = './wunderlib-composit.gradle'
 }
 
 if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && WoverFolder.exists()) {
@@ -48,9 +48,9 @@ if (allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode) && WoverFolder.exi
     project(':WorldWeaver').buildFileName = './build.composit.gradle'
 
     def WoverModuleFile = WoverFolder.toPath().resolve("module-include.gradle").toFile()
-    apply from : WoverModuleFile
+    apply from: WoverModuleFile
     gradle.ext.set("knownWoverModules", ext.knownWoverModules)
-    ext.knownWoverModules.each { module->
+    ext.knownWoverModules.each { module ->
         def fullName = ":WorldWeaver:${module}";
         def path = WoverFolder.toPath().resolve(module).toFile();
 

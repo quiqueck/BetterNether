@@ -12,7 +12,7 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 def local_bclib = findProject(':BCLib') != null
-def local_wunderlib = findProject(':WunderLib') != null
+def local_wunderlib = findProject(':wunderlib') != null
 def local_wover = findProject(':WorldWeaver') != null
 
 loom {
@@ -84,17 +84,19 @@ dependencies {
     if (local_bclib) {
         implementation project(path: ":BCLib", configuration: 'dev')
     } else {
-        modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
+        modImplementation "org.betterx:bclib:${project.bclib_version}"
     }
 
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
-    
+
     modLocalRuntime "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     println "Using local WunderLib: ${local_wunderlib}"
     if (local_wunderlib) {
-        implementation project(path: ":WunderLib", configuration: 'dev')
+        implementation project(path: ":wunderlib", configuration: 'dev')
+    } else if (local_wover) {
+        modImplementation "de.ambertation:wunderlib:${project.wunderlib_version}"
     }
 
     println "Using local WorldWeaver: ${local_wover}"
@@ -104,6 +106,8 @@ dependencies {
         gradle.knownWoverModules.each {
             implementation project(path: ":WorldWeaver:$it", configuration: 'dev')
         }
+    } else if (local_bclib) {
+        modImplementation "org.betterx:worldweaver:${project.wover_version}"
     }
 }
 
@@ -114,19 +118,9 @@ repositories {
     maven { url 'https://jitpack.io' }
     maven { url "https://maven.bai.lol" }
     maven { url 'https://maven.terraformersmc.com' }
+    maven { url 'https://maven.ambertation.de/releases' }
     flatDir {
         dirs 'libs'
-    }
-}
-
-def useApi(String dep) {
-    dependencies.modImplementation(dep) {
-        exclude group: 'net.fabricmc.fabric-api'
-        exclude group: 'net.fabricmc'
-        if (!dep.contains("me.shedaniel")) {
-            exclude group: 'me.shedaniel.cloth'
-            exclude group: 'me.shedaniel'
-        }
     }
 }
 
@@ -143,7 +137,7 @@ processResources {
 // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
-    it.options.release = 17
+    it.options.release = 21
 }
 
 // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
@@ -164,27 +158,6 @@ java {
 jar {
     from "LICENSE"
     from "LICENSE.ASSETS"
-}
-
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-    }
-
-    // select the repositories you want to publish to
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
-    }
 }
 
 //from https://lowcarbrob.medium.com/android-pro-tip-generating-your-apps-changelog-from-git-inside-build-gradle-19a07533eec4

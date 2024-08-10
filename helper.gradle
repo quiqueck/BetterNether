@@ -111,7 +111,7 @@ modrinth {
             optional.project dep
         }
     }
-    debugMode = true
+    debugMode = false
 }
 
 curseforge {

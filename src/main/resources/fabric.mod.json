@@ -42,7 +42,8 @@
     "fabricloader": ">=0.15.3",
     "fabric": ">=0.99.0",
     "minecraft": [
-      "1.21.0"
+      "1.21.0",
+      "1.21.1"
     ],
     "bclib": "21.0.x",
     "wover": "21.0.x",
@@ -50,8 +51,8 @@
   },
   "breaks": {
     "bclib": "<21.0.11",
-    "wover": "<21.0.12",
-    "wunderlib": "<21.0.6"
+    "wover": "<21.0.13",
+    "wunderlib": "<21.0.8"
   },
   "custom": {
     "wover": {

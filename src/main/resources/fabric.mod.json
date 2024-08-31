@@ -1,72 +1,72 @@
 {
-  "schemaVersion": 1,
-  "id": "betternether",
-  "version": "21.0.12",
-  "name": "Better Nether",
-  "description": "Mod that improves Nether",
-  "authors": [
-    "quiqueck",
-    "paulevs (original author)"
-  ],
-  "contributors": [
-    "edos_ (builder, design help)"
-  ],
-  "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/betternether",
-    "sources": "https://github.com/quiqueck/BetterNether/tree/snapshots",
-    "issues": "https://github.com/quiqueck/BetterNether/issues"
-  },
-  "license": "MIT (CC BY-NC-SA 4.0 for some Assets)",
-  "icon": "assets/betternether/icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "org.betterx.betternether.BetterNether"
+    "schemaVersion": 1,
+    "id": "betternether",
+    "version": "21.0.12",
+    "name": "Better Nether",
+    "description": "Mod that improves Nether",
+    "authors": [
+        "quiqueck",
+        "paulevs (original author)"
     ],
-    "client": [
-      "org.betterx.betternether.client.BetterNetherClient"
+    "contributors": [
+        "edos_ (builder, design help)"
     ],
-    "fabric-datagen": [
-      "org.betterx.datagen.betternether.BetterNetherDatagen"
-    ],
-    "emi": [
-      "org.betterx.betternether.integrations.emi.EMIPlugin"
-    ]
-  },
-  "accessWidener": "betternether.accesswidener",
-  "mixins": [
-    "betternether.mixins.common.json",
-    "betternether.mixins.client.json"
-  ],
-  "depends": {
-    "fabricloader": ">=0.15.3",
-    "fabric-api": ">=0.100.0",
-    "java": ">=21",
-    "minecraft": [
-      "1.21",
-      "1.21.1"
-    ],
-    "bclib": "21.0.x",
-    "wover": "21.0.x",
-    "wunderlib": "21.0.x"
-  },
-  "breaks": {
-    "bclib": "<21.0.13",
-    "wover": "<21.0.13",
-    "wunderlib": "<21.0.8"
-  },
-  "custom": {
-    "wover": {
-      "updater_icon": "icon_updater.png",
-      "downloads": {
-        "modrinth": "https://modrinth.com/mod/betternether",
-        "curseforge": "https://legacy.curseforge.com/minecraft/mc-mods/betternether"
-      }
+    "contact": {
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/betternether",
+        "sources": "https://github.com/quiqueck/BetterNether/tree/snapshots",
+        "issues": "https://github.com/quiqueck/BetterNether/issues"
     },
-    "extrapieces:piecepack": "extrapieces.betternether.json",
-    "modupdater": {
-      "strategy": "curseforge",
-      "projectID": 311377
+    "license": "MIT (CC BY-NC-SA 4.0 for some Assets)",
+    "icon": "assets/betternether/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "org.betterx.betternether.BetterNether"
+        ],
+        "client": [
+            "org.betterx.betternether.client.BetterNetherClient"
+        ],
+        "fabric-datagen": [
+            "org.betterx.datagen.betternether.BetterNetherDatagen"
+        ],
+        "emi": [
+            "org.betterx.betternether.integrations.emi.EMIPlugin"
+        ]
+    },
+    "accessWidener": "betternether.accesswidener",
+    "mixins": [
+        "betternether.mixins.common.json",
+        "betternether.mixins.client.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.15.3",
+        "fabric-api": ">=0.100.0",
+        "java": ">=21",
+        "minecraft": [
+            "1.21",
+            "1.21.1"
+        ],
+        "bclib": "21.0.x",
+        "wover": "21.0.x",
+        "wunderlib": "21.0.x"
+    },
+    "breaks": {
+        "bclib": "<21.0.13",
+        "wover": "<21.0.13",
+        "wunderlib": "<21.0.8"
+    },
+    "custom": {
+        "wover": {
+            "updater_icon": "icon_updater.png",
+            "downloads": {
+                "modrinth": "https://modrinth.com/mod/betternether",
+                "curseforge": "https://legacy.curseforge.com/minecraft/mc-mods/betternether"
+            }
+        },
+        "extrapieces:piecepack": "extrapieces.betternether.json",
+        "modupdater": {
+            "strategy": "curseforge",
+            "projectID": 311377
+        }
     }
-  }
 }

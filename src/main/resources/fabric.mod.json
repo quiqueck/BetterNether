@@ -51,7 +51,7 @@
     "bclib": "<3.0.14"
   },
   "custom": {
-    "bclib": {
+    "wover": {
       "updater_icon": "icon_updater.png"
     },
     "extrapieces:piecepack": "extrapieces.betternether.json",

@@ -1,5 +1,7 @@
 package org.betterx.betternether.items.complex;
 
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.ShearsItem;
 import org.betterx.bclib.api.v2.advancement.AdvancementManager;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BetterNether;
@@ -59,7 +61,7 @@ public class NetherSet extends EquipmentSet {
 
 
             if (withShears) {
-                add(ToolSlot.SHEARS_SLOT, (t, p) -> new BaseShearsItem(p), shearPropertiesBuilder);
+                add(ToolSlot.SHEARS_SLOT, (t, p) -> new BaseShearsItem(p.component(DataComponents.TOOL, ShearsItem.createToolProperties())), shearPropertiesBuilder);
             }
         }
 

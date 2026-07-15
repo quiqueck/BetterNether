@@ -5,10 +5,8 @@ import org.betterx.betternether.registry.BrewingRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.ContainerHelper;
@@ -29,6 +27,8 @@ import net.minecraft.world.level.block.BrewingStandBlock;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -228,20 +228,20 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     @Override
-    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadAdditional(tag, provider);
+    public void loadAdditional(ValueInput valueInput) {
+        super.loadAdditional(valueInput);
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, this.inventory, provider);
-        this.brewTime = tag.getShort("BrewTime");
-        this.fuel = tag.getByte("Fuel");
+        ContainerHelper.loadAllItems(valueInput, this.inventory);
+        this.brewTime = valueInput.getShortOr("BrewTime", (short) 0);
+        this.fuel = valueInput.getByteOr("Fuel", (byte) 0);
     }
 
     @Override
-    public void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveAdditional(tag, provider);
-        tag.putShort("BrewTime", (short) this.brewTime);
-        ContainerHelper.saveAllItems(tag, this.inventory, provider);
-        tag.putByte("Fuel", (byte) this.fuel);
+    public void saveAdditional(ValueOutput valueOutput) {
+        super.saveAdditional(valueOutput);
+        valueOutput.putShort("BrewTime", (short) this.brewTime);
+        ContainerHelper.saveAllItems(valueOutput, this.inventory);
+        valueOutput.putByte("Fuel", (byte) this.fuel);
     }
 
     public ItemStack getItem(int slot) {

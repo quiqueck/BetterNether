@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "betternether",
-    "version": "21.0.12",
+    "version": "21.7.0",
     "name": "Better Nether",
     "description": "Mod that improves Nether",
     "authors": [
@@ -39,21 +39,21 @@
         "betternether.mixins.client.json"
     ],
     "depends": {
-        "fabricloader": ">=0.15.3",
+        "fabricloader": ">=0.15.11",
         "fabric-api": ">=0.100.0",
         "java": ">=21",
         "minecraft": [
-            "1.21",
-            "1.21.1"
+            "1.21.6",
+            "1.21.7"
         ],
-        "bclib": "21.0.x",
-        "wover": "21.0.x",
-        "wunderlib": "21.0.x"
+        "bclib": "21.7.x",
+        "wover": "21.7.x",
+        "wunderlib": "21.7.x"
     },
     "breaks": {
-        "bclib": "<21.0.13",
-        "wover": "<21.0.13",
-        "wunderlib": "<21.0.8"
+        "bclib": "<21.7.0",
+        "wover": "<21.7.0",
+        "wunderlib": "<21.7.0"
     },
     "custom": {
         "wover": {

@@ -17,6 +17,7 @@ classes/
 .settings/
 .vscode/
 bin/
+out/
 .classpath
 .project
 
@@ -45,3 +46,4 @@ CurseForge/
 /tools/biomes.html
 /tools/biomes.js
 /tools/samples.json
+.DS_Store

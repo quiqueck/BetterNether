@@ -2,7 +2,7 @@ package org.betterx.betternether.mixin.common;
 
 import org.betterx.betternether.blockentities.ChangebleCookTime;
 
-import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,7 +15,7 @@ public abstract class AbstractFurnaceBlockEntityMixin {
 
     @Inject(method = "getTotalCookTime", at = @At("RETURN"), cancellable = true)
     private static void betternether$getTotalCookTime(
-            Level level,
+            ServerLevel level,
             AbstractFurnaceBlockEntity inventory,
             CallbackInfoReturnable<Integer> cir
     ) {

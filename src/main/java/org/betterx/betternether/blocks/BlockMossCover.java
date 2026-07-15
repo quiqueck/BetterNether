@@ -15,8 +15,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BlockMossCover extends BaseBlockMold implements BehaviourPlant {
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 4, 16);
 
-    public BlockMossCover() {
-        super(MapColor.COLOR_GREEN, p -> p.offsetType(Block.OffsetType.NONE));
+    public BlockMossCover(net.minecraft.world.level.block.state.BlockBehaviour.Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials
+                .makeNetherGrass(settings, MapColor.COLOR_GREEN)
+                .sound(net.minecraft.world.level.block.SoundType.CROP)
+                .randomTicks()
+                .offsetType(Block.OffsetType.NONE));
     }
 
 

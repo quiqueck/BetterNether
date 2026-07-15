@@ -48,8 +48,8 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull implements AddMine
             BrownMushroomShape.CORNER_W
     };
 
-    public BlockBrownLargeMushroom() {
-        super(Materials.makeNetherWood(MapColor.COLOR_BROWN).strength(1).noOcclusion());
+    public BlockBrownLargeMushroom(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_BROWN).strength(1).noOcclusion());
         this.setDropItself(false);
     }
 

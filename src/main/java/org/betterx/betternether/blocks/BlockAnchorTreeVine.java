@@ -32,9 +32,9 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull implements BehaviourCl
     protected static final VoxelShape SHAPE_SELECTION = Block.box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
-    public BlockAnchorTreeVine() {
-        super(BehaviourBuilders
-                .createStaticVine(MapColor.COLOR_GREEN)
+    public BlockAnchorTreeVine(Properties settings) {
+        super(org.betterx.bclib.behaviours.BehaviourBuilders
+                .createStaticVine(settings, MapColor.COLOR_GREEN)
                 .noLootTable()
                 .lightLevel(BlockAnchorTreeVine::getLuminance));
         this.setRenderLayer(BNRenderLayer.CUTOUT);

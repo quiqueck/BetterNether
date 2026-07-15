@@ -33,21 +33,16 @@ import javax.annotation.Nullable;
 public class BlockNetherFurnace extends AbstractFurnaceBlock implements BehaviourStone, DropSelfLootProvider<BlockNetherFurnace> {
     public static final MapCodec<BlockNetherFurnace> CODEC = simpleCodec(BlockNetherFurnace::new);
 
-    private BlockNetherFurnace(Properties settings) {
-        super(settings);
+    public BlockNetherFurnace(Properties settings) {
+        super(settings
+                .requiresCorrectToolForDrops()
+                .lightLevel(BlockNetherFurnace::getLuminance)
+        );
     }
 
     @Override
     protected MapCodec<? extends AbstractFurnaceBlock> codec() {
         return CODEC;
-    }
-
-    public BlockNetherFurnace(Block source) {
-        super(BlockBehaviour.Properties
-                .ofFullCopy(source)
-                .requiresCorrectToolForDrops()
-                .lightLevel(BlockNetherFurnace::getLuminance)
-        );
     }
 
     private static int getLuminance(BlockState blockState) {

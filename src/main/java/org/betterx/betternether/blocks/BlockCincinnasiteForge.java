@@ -29,19 +29,15 @@ import net.fabricmc.api.Environment;
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock implements BehaviourMetal {
     public static final MapCodec<BlockCincinnasiteForge> CODEC = simpleCodec(BlockCincinnasiteForge::new);
 
-    private BlockCincinnasiteForge(Properties settings) {
-        super(settings);
+    public BlockCincinnasiteForge(Properties settings) {
+        super(settings
+                .requiresCorrectToolForDrops()
+                .lightLevel(BlockCincinnasiteForge::getLuminance));
     }
 
     @Override
     protected MapCodec<? extends AbstractFurnaceBlock> codec() {
         return CODEC;
-    }
-
-    public BlockCincinnasiteForge() {
-        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK)
-                        .requiresCorrectToolForDrops()
-                        .lightLevel(BlockCincinnasiteForge::getLuminance));
     }
 
     private static int getLuminance(BlockState blockState) {

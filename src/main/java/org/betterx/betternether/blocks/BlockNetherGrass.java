@@ -12,6 +12,7 @@ import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 import org.betterx.wover.loot.api.BlockLootProvider;
 import org.betterx.wover.loot.api.LootLookupProvider;
 
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.BlockPos;
@@ -43,6 +44,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOnNetherrackNyliumAndSculk {
+    public BlockNetherGrass(BlockBehaviour.Properties settings) {
+        super(settings);
+    }
+
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
@@ -55,6 +60,10 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
     }
 
     public static class JunglePlant extends BlockNetherGrass implements BlockModelProvider {
+        public JunglePlant(BlockBehaviour.Properties settings) {
+            super(settings);
+        }
+
         @Environment(EnvType.CLIENT)
         @Override
         public void provideBlockModels(WoverBlockModelGenerators generators) {
@@ -120,6 +129,10 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
 
 
     public static class SwampGrass extends BlockNetherGrass implements BlockModelProvider {
+        public SwampGrass(BlockBehaviour.Properties settings) {
+            super(settings);
+        }
+
         @Environment(EnvType.CLIENT)
         @Override
         public void provideBlockModels(WoverBlockModelGenerators generators) {
@@ -128,6 +141,10 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
     }
 
     public static class BoneGrass extends BaseBlockNetherGrass.OnEverything implements BlockModelProvider {
+        public BoneGrass(BlockBehaviour.Properties settings) {
+            super(settings);
+        }
+
         @Environment(EnvType.CLIENT)
         @Override
         public void provideBlockModels(WoverBlockModelGenerators generators) {
@@ -136,6 +153,10 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
     }
 
     public static class SepiaBoneGrass extends BaseBlockNetherGrass.OnEverything implements BlockModelProvider {
+        public SepiaBoneGrass(BlockBehaviour.Properties settings) {
+            super(settings);
+        }
+
         @Environment(EnvType.CLIENT)
         @Override
         public void provideBlockModels(WoverBlockModelGenerators generators) {
@@ -144,6 +165,10 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
     }
 
     public static class NetherGrass extends BlockNetherGrass implements BlockModelProvider {
+        public NetherGrass(BlockBehaviour.Properties settings) {
+            super(settings);
+        }
+
         @Environment(EnvType.CLIENT)
         @Override
         public void provideBlockModels(WoverBlockModelGenerators generators) {
@@ -186,6 +211,10 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
         super(Materials.makeNetherGrass(MapColor.TERRACOTTA_GRAY).offsetType(Block.OffsetType.XZ));
     }
 
+    public BaseBlockNetherGrass(BlockBehaviour.Properties settings) {
+        super(settings);
+    }
+
     @Environment(EnvType.CLIENT)
     public float getShadeBrightness(BlockState state, BlockGetter view, BlockPos pos) {
         return 1.0F;
@@ -226,6 +255,10 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
     public static class OnEverything extends BaseBlockNetherGrass implements SurvivesOnSoilOrLogs {
         public OnEverything() {
             super();
+        }
+
+        public OnEverything(BlockBehaviour.Properties settings) {
+            super(settings);
         }
 
         @Override

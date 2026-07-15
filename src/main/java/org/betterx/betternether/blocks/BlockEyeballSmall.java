@@ -20,8 +20,8 @@ import net.fabricmc.api.Environment;
 public class BlockEyeballSmall extends BlockEyeBase {
     protected static final VoxelShape SHAPE = Block.box(4, 8, 4, 12, 16, 12);
 
-    public BlockEyeballSmall() {
-        super(Materials.NETHER_PLANT
+    public BlockEyeballSmall(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_BROWN)
                 .sound(SoundType.SLIME_BLOCK)
                 .strength(0.5F, 0.5F)

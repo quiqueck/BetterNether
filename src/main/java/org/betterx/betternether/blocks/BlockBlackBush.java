@@ -25,8 +25,8 @@ import net.minecraft.world.level.ScheduledTickAccess;
 public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherGround, BehaviourPlant {
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
 
-    public BlockBlackBush() {
-        super(Materials.NETHER_PLANT.mapColor(MapColor.COLOR_BLACK));
+    public BlockBlackBush(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings).mapColor(MapColor.COLOR_BLACK));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

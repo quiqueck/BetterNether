@@ -29,6 +29,10 @@ public abstract class BlockBNPot extends BlockBaseNotFull {
         super(Properties.ofFullCopy(material).noOcclusion());
     }
 
+    protected BlockBNPot(Properties settings) {
+        super(settings.noOcclusion());
+    }
+
     public boolean useShapeForLightOcclusion(BlockState state) {
         return true;
     }
@@ -76,17 +80,29 @@ public abstract class BlockBNPot extends BlockBaseNotFull {
         public Wood(Block material) {
             super(material);
         }
+
+        public Wood(Properties settings) {
+            super(settings);
+        }
     }
 
     public static class Stone extends BlockBNPot implements BehaviourStone {
         public Stone(Block material) {
             super(material);
         }
+
+        public Stone(Properties settings) {
+            super(settings);
+        }
     }
 
     public static class Metal extends BlockBNPot implements BehaviourMetal {
         public Metal(Block material) {
             super(material);
+        }
+
+        public Metal(Properties settings) {
+            super(settings);
         }
     }
 

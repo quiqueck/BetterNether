@@ -35,10 +35,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockWhisperingGourdVine extends BaseVineBlock.Growing implements BlockLootProvider {
-    public BlockWhisperingGourdVine() {
+    public BlockWhisperingGourdVine(Properties settings) {
         super(
-                BehaviourBuilders
-                        .createStaticVine(MapColor.COLOR_RED)
+                org.betterx.bclib.behaviours.BehaviourBuilders
+                        .createStaticVine(settings, MapColor.COLOR_RED)
                         .randomTicks(),
                 6,
                 1,

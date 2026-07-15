@@ -12,8 +12,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BlockCincinnasitePedestal extends BlockBaseNotFull implements BehaviourMetal {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 16, 14);
 
-    public BlockCincinnasitePedestal() {
-        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
+    public BlockCincinnasitePedestal(Properties settings) {
+        super(settings.noOcclusion());
     }
 
     @Override

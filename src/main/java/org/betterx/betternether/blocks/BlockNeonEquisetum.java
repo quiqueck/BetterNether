@@ -7,9 +7,9 @@ import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 import net.minecraft.world.level.material.MapColor;
 
 public class BlockNeonEquisetum extends BaseVineBlock.Growing implements SurvivesOnNetherrack {
-    public BlockNeonEquisetum() {
+    public BlockNeonEquisetum(Properties settings) {
         super(
-                Materials.NETHER_PLANT
+                org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                         .mapColor(MapColor.COLOR_GREEN)
                         .lightLevel(s -> 15)
                         .offsetType(OffsetType.XZ)

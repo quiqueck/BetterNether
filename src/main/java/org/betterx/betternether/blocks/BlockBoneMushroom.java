@@ -40,8 +40,8 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     public static final IntegerProperty AGE = BlockProperties.AGE_THREE;
 
-    public BlockBoneMushroom() {
-        super(Materials.NETHER_PLANT
+    public BlockBoneMushroom(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_LIGHT_GREEN)
                 .randomTicks()
         );

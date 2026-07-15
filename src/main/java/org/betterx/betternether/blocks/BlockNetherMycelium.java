@@ -35,8 +35,8 @@ public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike
     public static final BooleanProperty IS_BLUE = BooleanProperty.create("blue");
     private BonemealAPI.FeatureProvider vegetationFeature;
 
-    public BlockNetherMycelium() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK).mapColor(MapColor.COLOR_GRAY).requiresCorrectToolForDrops());
+    public BlockNetherMycelium(BlockBehaviour.Properties settings) {
+        super(settings.mapColor(MapColor.COLOR_GRAY).requiresCorrectToolForDrops());
         this.registerDefaultState(getStateDefinition().any().setValue(IS_BLUE, false));
         this.setDropItself(false);
     }

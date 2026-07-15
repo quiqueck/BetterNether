@@ -12,8 +12,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class BlockCincinnasiteFrame extends BlockBaseNotFull implements BehaviourMetal {
-    public BlockCincinnasiteFrame() {
-        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
+    public BlockCincinnasiteFrame(Properties settings) {
+        super(settings.noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

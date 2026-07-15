@@ -20,6 +20,10 @@ public class BNGlass extends BaseGlassBlock implements BlockModelProvider {
         super(block, 0.3f);
     }
 
+    public BNGlass(net.minecraft.world.level.block.state.BlockBehaviour.Properties settings) {
+        super(settings, 0.3f);
+    }
+
     @Override
     @Environment(EnvType.CLIENT)
     public void provideBlockModels(WoverBlockModelGenerators generators) {

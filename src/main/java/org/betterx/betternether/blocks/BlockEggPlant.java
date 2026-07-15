@@ -47,8 +47,8 @@ public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherG
     private boolean enableModDamage = true;
     private boolean enablePlayerDamage = true;
 
-    public BlockEggPlant() {
-        super(MapColor.TERRACOTTA_WHITE);
+    public BlockEggPlant(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings).mapColor(MapColor.TERRACOTTA_WHITE));
         enableModDamage = Configs.GAME_RULES.eggPlantMobDamage.get();
         enablePlayerDamage = Configs.GAME_RULES.eggPlantPlayerDamage.get();
         this.registerDefaultState(getStateDefinition().any().setValue(DESTRUCTED, false));

@@ -15,15 +15,15 @@ import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlockObsidianGlass extends BlockBaseNotFull implements BehaviourImmobile, BehaviourPortalFrame, BehaviourGlass {
-    public BlockObsidianGlass() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)
-                                 .noOcclusion()
-                                 .isSuffocating((arg1, arg2, arg3) -> {
-                                     return false;
-                                 })
-                                 .isViewBlocking((arg1, arg2, arg3) -> {
-                                     return false;
-                                 }));
+    public BlockObsidianGlass(BlockBehaviour.Properties settings) {
+        super(settings
+                .noOcclusion()
+                .isSuffocating((arg1, arg2, arg3) -> {
+                    return false;
+                })
+                .isViewBlocking((arg1, arg2, arg3) -> {
+                    return false;
+                }));
         this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
     }
 

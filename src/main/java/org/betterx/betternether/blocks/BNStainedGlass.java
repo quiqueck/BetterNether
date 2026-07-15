@@ -13,6 +13,10 @@ public class BNStainedGlass extends BNGlass {
         super(block);
     }
 
+    public BNStainedGlass(net.minecraft.world.level.block.state.BlockBehaviour.Properties settings) {
+        super(settings);
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
         stateManager.add(COLOR);

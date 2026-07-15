@@ -28,8 +28,8 @@ import net.minecraft.world.level.ScheduledTickAccess;
 public class BlockGeyser extends BlockBaseNotFull implements BehaviourStone {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 4, 15);
 
-    public BlockGeyser() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK).lightLevel(state -> 10).noOcclusion());
+    public BlockGeyser(BlockBehaviour.Properties settings) {
+        super(settings.lightLevel(state -> 10).noOcclusion());
     }
 
     @Override

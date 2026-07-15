@@ -18,8 +18,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class BlockEyeball extends BlockEyeBase {
-    public BlockEyeball() {
-        super(Materials.NETHER_PLANT
+    public BlockEyeball(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_BROWN)
                 .sound(SoundType.SLIME_BLOCK)
                 .strength(0.5F, 0.5F)

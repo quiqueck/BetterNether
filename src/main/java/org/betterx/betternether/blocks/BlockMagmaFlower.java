@@ -14,8 +14,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BlockMagmaFlower extends BlockCommonPlant implements SurvivesOnMagmaBlockOrSand, AddMineableHoe {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 12, 15);
 
-    public BlockMagmaFlower() {
-        super(MapColor.TERRACOTTA_ORANGE);
+    public BlockMagmaFlower(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings).mapColor(MapColor.TERRACOTTA_ORANGE));
     }
 
     @Override

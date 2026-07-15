@@ -31,8 +31,8 @@ public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGro
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<BlockProperties.TripleShape> SHAPE = org.betterx.wover.block.api.BlockProperties.TRIPLE_SHAPE;
 
-    public BlockSmoker() {
-        super(Materials.makeNetherWood(MapColor.COLOR_BROWN));
+    public BlockSmoker(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_BROWN));
         this.registerDefaultState(getStateDefinition().any()
                                                       .setValue(SHAPE, BlockProperties.TripleShape.TOP)
         );

@@ -26,8 +26,8 @@ public class BlockStalactite extends BlockBaseNotFull implements BehaviourStone 
     public static final IntegerProperty SIZE = BlockProperties.SIZE;
     private static final VoxelShape[] SHAPES;
 
-    public BlockStalactite(Block source) {
-        super(Properties.ofFullCopy(source).noOcclusion());
+    public BlockStalactite(Properties settings) {
+        super(settings.noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(SIZE, 0));
     }
 

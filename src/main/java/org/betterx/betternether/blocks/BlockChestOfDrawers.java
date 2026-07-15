@@ -37,10 +37,6 @@ import java.util.List;
 public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMetal {
     public static final MapCodec<BlockChestOfDrawers> CODEC = simpleCodec(BlockChestOfDrawers::new);
 
-    private BlockChestOfDrawers(Properties settings) {
-        super(settings);
-    }
-
     @Override
     protected MapCodec<? extends BlockChestOfDrawers> codec() {
         return CODEC;
@@ -55,8 +51,8 @@ public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMet
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BNBlockProperties.OPEN;
 
-    public BlockChestOfDrawers() {
-        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
+    public BlockChestOfDrawers(Properties settings) {
+        super(settings.noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(OPEN, false));
     }
 

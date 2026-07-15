@@ -47,8 +47,8 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMinea
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
     public static final EnumProperty<JellyShape> VISUAL = BNBlockProperties.JELLY_MUSHROOM_VISUAL;
 
-    public BlockJellyfishMushroom() {
-        super(Materials.makeNetherWood(MapColor.COLOR_CYAN)
+    public BlockJellyfishMushroom(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_CYAN)
                        .lightLevel(s -> 13)
                        .destroyTime(0.1F)
                        .sound(SoundType.FUNGUS)

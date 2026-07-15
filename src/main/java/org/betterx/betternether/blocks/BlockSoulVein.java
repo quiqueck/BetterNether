@@ -32,8 +32,8 @@ import java.util.List;
 public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherSand, BehaviourClimableVine {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 1, 16);
 
-    public BlockSoulVein() {
-        super(Materials.NETHER_PLANT
+    public BlockSoulVein(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_PURPLE)
                 .randomTicks());
         this.setRenderLayer(BNRenderLayer.CUTOUT);

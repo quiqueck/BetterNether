@@ -10,8 +10,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
 public class BlockSoulLilySapling extends BaseBlockCommonSapling implements SurvivesOnSoulGroundOrFarmLand, BehaviourSapling {
-    public BlockSoulLilySapling() {
-        super(NetherBlocks.SOUL_LILY, MapColor.COLOR_ORANGE);
+    public BlockSoulLilySapling(Properties settings) {
+        super(NetherBlocks.SOUL_LILY, org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_ORANGE).noLootTable());
     }
 
     @Override

@@ -6,7 +6,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import net.minecraft.world.level.material.MapColor;
 
 public class BlockInkBushSeed extends BlockCommonSapling implements BehaviourSeed {
-    public BlockInkBushSeed() {
-        super(NetherBlocks.INK_BUSH, MapColor.COLOR_RED);
+    public BlockInkBushSeed(Properties settings) {
+        super(NetherBlocks.INK_BUSH, org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_RED).noLootTable());
     }
 }

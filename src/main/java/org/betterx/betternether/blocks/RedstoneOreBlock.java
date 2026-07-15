@@ -30,8 +30,8 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements RuntimeBlockMo
     private final int minCount;
     private final int maxCount;
 
-    public RedstoneOreBlock() {
-        super(BehaviourBuilders.createStone(MapColor.COLOR_RED)
+    public RedstoneOreBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties settings) {
+        super(BehaviourBuilders.createStone(settings, MapColor.COLOR_RED)
                                .strength(3, 5)
                                .requiresCorrectToolForDrops()
                                .sound(SoundType.NETHERRACK)

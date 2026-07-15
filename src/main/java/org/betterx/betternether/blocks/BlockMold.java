@@ -33,6 +33,10 @@ public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium
         super(color);
     }
 
+    public BlockMold(Properties settings) {
+        super(settings);
+    }
+
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         return canSurviveOnTop(world, pos);

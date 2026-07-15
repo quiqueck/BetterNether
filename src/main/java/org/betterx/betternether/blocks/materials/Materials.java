@@ -28,4 +28,33 @@ public class Materials {
         return BehaviourBuilders.createGrass(color)
                                 .isValidSpawn((state, world, pos, type) -> true);
     }
+
+    // Props-threaded variants: apply the material defaults on top of an already-configured
+    // (id-bearing) Properties instance instead of building a fresh (id-less) one. Used by the
+    // block constructors that receive their properties from the block-registry definition.
+
+    public static BlockBehaviour.Properties makeNetherWood(BlockBehaviour.Properties props, MapColor color) {
+        return BehaviourBuilders.createWood(props, color, false)
+                                .requiresCorrectToolForDrops();
+    }
+
+    public static BlockBehaviour.Properties makeNetherGrass(BlockBehaviour.Properties props, MapColor color) {
+        return BehaviourBuilders.createGrass(props, color)
+                                .isValidSpawn((state, world, pos, type) -> true);
+    }
+
+    public static BlockBehaviour.Properties netherPlant(BlockBehaviour.Properties props) {
+        return BehaviourBuilders.createPlant(props, MapColor.PLANT)
+                                .sound(SoundType.CROP)
+                                .noOcclusion()
+                                .noCollission();
+    }
+
+    public static BlockBehaviour.Properties netherSapling(BlockBehaviour.Properties props) {
+        return BehaviourBuilders.createPlant(props, MapColor.PLANT)
+                                .randomTicks()
+                                .sound(SoundType.CROP)
+                                .noCollission()
+                                .noOcclusion();
+    }
 }

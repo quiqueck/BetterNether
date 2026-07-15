@@ -18,8 +18,8 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
 
 public class BlockBlackVine extends BaseSimpleVineBlock implements BonemealableBlock, BehaviourClimableVine, BlockLootProvider {
-    public BlockBlackVine() {
-        super(BehaviourBuilders.createStaticVine(MapColor.COLOR_BLACK).instabreak(), 27, 1);
+    public BlockBlackVine(Properties settings) {
+        super(org.betterx.bclib.behaviours.BehaviourBuilders.createStaticVine(settings, MapColor.COLOR_BLACK).instabreak(), 27, 1);
     }
 
     @Override

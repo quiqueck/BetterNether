@@ -18,8 +18,8 @@ import net.minecraft.world.level.ScheduledTickAccess;
 public class BlockCincinnasitPillar extends BlockBase implements BehaviourMetal {
     public static final EnumProperty<CincinnasitPillarShape> SHAPE = BNBlockProperties.PILLAR_SHAPE;
 
-    public BlockCincinnasitPillar() {
-        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK));
+    public BlockCincinnasitPillar(Properties settings) {
+        super(settings);
     }
 
     @Override

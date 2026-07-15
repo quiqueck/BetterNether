@@ -32,8 +32,8 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull implements AddMineab
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
-    public BlockRedLargeMushroom() {
-        super(Materials.makeNetherWood(MapColor.COLOR_RED).noOcclusion());
+    public BlockRedLargeMushroom(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_RED).noOcclusion());
         this.setDropItself(false);
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

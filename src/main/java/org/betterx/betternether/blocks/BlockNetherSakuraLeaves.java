@@ -29,6 +29,16 @@ public class BlockNetherSakuraLeaves extends BNLeaves {
         );
     }
 
+    public BlockNetherSakuraLeaves(Block sapling, Properties settings) {
+        super(
+                sapling,
+                org.betterx.bclib.behaviours.BehaviourBuilders
+                        .createStaticLeaves(settings, MapColor.COLOR_PINK, false)
+                        .noOcclusion()
+                        .lightLevel((state) -> 13)
+        );
+    }
+
     @Environment(EnvType.CLIENT)
     public float getShadeBrightness(BlockState state, BlockGetter view, BlockPos pos) {
         return super.getShadeBrightness(state, view, pos) * 0.5F + 0.5F;

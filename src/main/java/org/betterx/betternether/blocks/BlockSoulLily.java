@@ -61,8 +61,8 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGro
             SoulLilyShape.BIG_TOP_SIDE_W
     };
 
-    public BlockSoulLily() {
-        super(Materials.makeNetherWood(MapColor.COLOR_ORANGE).strength(1).noOcclusion().randomTicks());
+    public BlockSoulLily(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_ORANGE).strength(1).noOcclusion().randomTicks());
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, SoulLilyShape.SMALL));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

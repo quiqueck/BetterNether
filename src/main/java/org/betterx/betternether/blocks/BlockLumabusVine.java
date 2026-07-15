@@ -42,10 +42,10 @@ public class BlockLumabusVine extends BaseVineBlock implements DeferedSeedBlock,
     static final VoxelShape BOTTOM_SHAPE = box(2, 4, 2, 14, 16, 14);
     private Block seed;
 
-    public BlockLumabusVine(MapColor color) {
+    public BlockLumabusVine(Properties settings, MapColor color) {
         super(
-                BehaviourBuilders
-                        .createStaticVine(color)
+                org.betterx.bclib.behaviours.BehaviourBuilders
+                        .createStaticVine(settings, color)
                         .lightLevel(getLuminance()),
                 9,
                 1

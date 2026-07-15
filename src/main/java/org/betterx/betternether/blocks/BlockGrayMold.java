@@ -19,8 +19,8 @@ import net.fabricmc.api.Environment;
 public class BlockGrayMold extends BlockMold implements BehaviourPlant {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 8, 12);
 
-    public BlockGrayMold() {
-        super(MapColor.COLOR_GRAY);
+    public BlockGrayMold(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.makeNetherGrass(settings, MapColor.COLOR_GRAY).sound(net.minecraft.world.level.block.SoundType.CROP).randomTicks());
     }
 
     @Environment(EnvType.CLIENT)

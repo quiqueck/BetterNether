@@ -26,6 +26,11 @@ public abstract class BNPane extends IronBarsBlock implements IRenderTypeable {
         this.dropSelf = dropSelf;
     }
 
+    protected BNPane(BlockBehaviour.Properties settings, boolean dropSelf) {
+        super(settings.strength(0.3F, 0.3F).noOcclusion());
+        this.dropSelf = dropSelf;
+    }
+
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         if (dropSelf)
@@ -58,11 +63,19 @@ public abstract class BNPane extends IronBarsBlock implements IRenderTypeable {
         public Wood(Block block, boolean dropSelf) {
             super(block, dropSelf);
         }
+
+        public Wood(BlockBehaviour.Properties settings, boolean dropSelf) {
+            super(settings, dropSelf);
+        }
     }
 
     public static class Stone extends BNPane implements BehaviourStone {
         public Stone(Block block, boolean dropSelf) {
             super(block, dropSelf);
+        }
+
+        public Stone(BlockBehaviour.Properties settings, boolean dropSelf) {
+            super(settings, dropSelf);
         }
     }
 
@@ -70,17 +83,29 @@ public abstract class BNPane extends IronBarsBlock implements IRenderTypeable {
         public Metal(Block block, boolean dropSelf) {
             super(block, dropSelf);
         }
+
+        public Metal(BlockBehaviour.Properties settings, boolean dropSelf) {
+            super(settings, dropSelf);
+        }
     }
 
     public static class Obsidian extends BNPane implements BehaviourObsidian {
         public Obsidian(Block block, boolean dropSelf) {
             super(block, dropSelf);
         }
+
+        public Obsidian(BlockBehaviour.Properties settings, boolean dropSelf) {
+            super(settings, dropSelf);
+        }
     }
 
     public static class Glass extends BNPane implements BehaviourGlass {
         public Glass(Block block, boolean dropSelf) {
             super(block, dropSelf);
+        }
+
+        public Glass(BlockBehaviour.Properties settings, boolean dropSelf) {
+            super(settings, dropSelf);
         }
     }
 
@@ -92,6 +117,17 @@ public abstract class BNPane extends IronBarsBlock implements IRenderTypeable {
                 (s) -> new Metal(s, dropSelf),
                 (s) -> new Obsidian(s, dropSelf),
                 (s) -> new Glass(s, dropSelf)
+        );
+    }
+
+    public static BNPane from(Block source, BlockBehaviour.Properties settings, boolean dropSelf) {
+        return BehaviourHelper.from(
+                source,
+                (s) -> new Wood(settings, dropSelf),
+                (s) -> new Stone(settings, dropSelf),
+                (s) -> new Metal(settings, dropSelf),
+                (s) -> new Obsidian(settings, dropSelf),
+                (s) -> new Glass(settings, dropSelf)
         );
     }
 }

@@ -24,8 +24,8 @@ import net.minecraft.world.level.ScheduledTickAccess;
 public class BlockSoulSandstone extends BlockBase implements BlockTagProvider, BehaviourStone {
     public static final BooleanProperty UP = BooleanProperty.create("up");
 
-    public BlockSoulSandstone() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE));
+    public BlockSoulSandstone(BlockBehaviour.Properties settings) {
+        super(settings);
     }
 
     @Override

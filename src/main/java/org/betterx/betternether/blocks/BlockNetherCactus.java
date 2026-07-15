@@ -31,8 +31,8 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
     private static final VoxelShape SIDE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
-    public BlockNetherCactus() {
-        super(BehaviourBuilders.createCactus(MapColor.TERRACOTTA_ORANGE, false));
+    public BlockNetherCactus(Properties settings) {
+        super(org.betterx.bclib.behaviours.BehaviourBuilders.createCactus(settings, MapColor.TERRACOTTA_ORANGE, false));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }

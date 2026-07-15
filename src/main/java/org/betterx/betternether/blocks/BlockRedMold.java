@@ -14,8 +14,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BlockRedMold extends BlockMold implements BehaviourPlant {
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
-    public BlockRedMold() {
-        super(MapColor.TERRACOTTA_RED);
+    public BlockRedMold(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.makeNetherGrass(settings, MapColor.TERRACOTTA_RED).sound(net.minecraft.world.level.block.SoundType.CROP).randomTicks());
     }
 
     @Override

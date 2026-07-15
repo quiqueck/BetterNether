@@ -33,8 +33,8 @@ public abstract class BlockSmallLantern extends BlockBaseNotFull {
 
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
-    protected BlockSmallLantern() {
-        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_LANTERN).noOcclusion());
+    protected BlockSmallLantern(Properties settings) {
+        super(settings.noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
@@ -117,6 +117,8 @@ public abstract class BlockSmallLantern extends BlockBaseNotFull {
     }
 
     public static class Metal extends BlockSmallLantern implements BehaviourMetal {
-
+        public Metal(Properties settings) {
+            super(settings);
+        }
     }
 }

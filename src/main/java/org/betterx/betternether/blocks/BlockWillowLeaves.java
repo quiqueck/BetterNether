@@ -30,8 +30,8 @@ public class BlockWillowLeaves extends BNLeaves {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     public static final BooleanProperty NATURAL = BooleanProperty.create("natural");
 
-    public BlockWillowLeaves(Block sapling) {
-        super(sapling, MapColor.TERRACOTTA_RED);
+    public BlockWillowLeaves(Block sapling, Properties settings) {
+        super(sapling, org.betterx.bclib.behaviours.BehaviourBuilders.createStaticLeaves(settings, MapColor.TERRACOTTA_RED, false).noOcclusion());
 
         //this.setDropItself(false);
         this.registerDefaultState(getStateDefinition()

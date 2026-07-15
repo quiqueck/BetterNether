@@ -13,8 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class BNBoneBlock extends BlockBase implements BehaviourStone {
-    public BNBoneBlock() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK));
+    public BNBoneBlock(BlockBehaviour.Properties settings) {
+        super(settings);
     }
 
     @Override

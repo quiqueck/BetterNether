@@ -38,8 +38,8 @@ public class BlockTerrain extends BlockBase implements BlockTagProvider, Bonemea
             SoundEvents.NETHERRACK_FALL
     );
 
-    public BlockTerrain() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK).sound(TERRAIN_SOUND).requiresCorrectToolForDrops());
+    public BlockTerrain(BlockBehaviour.Properties settings) {
+        super(settings.sound(TERRAIN_SOUND).requiresCorrectToolForDrops());
         this.setDropItself(false);
     }
 

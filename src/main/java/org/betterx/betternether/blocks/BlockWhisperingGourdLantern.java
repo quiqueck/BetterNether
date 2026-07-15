@@ -18,8 +18,8 @@ import net.minecraft.world.level.material.MapColor;
 public class BlockWhisperingGourdLantern extends Block implements AddMineableAxe {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-    public BlockWhisperingGourdLantern() {
-        super(Materials.makeNetherWood(MapColor.COLOR_BLUE).lightLevel(s -> 15));
+    public BlockWhisperingGourdLantern(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_BLUE).lightLevel(s -> 15));
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

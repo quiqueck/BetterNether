@@ -16,8 +16,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlueWeepingObsidianBlock extends BNObsidianBase implements BlockModelProvider {
-    public BlueWeepingObsidianBlock() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.CRYING_OBSIDIAN).lightLevel(state -> 14), null);
+    public BlueWeepingObsidianBlock(BlockBehaviour.Properties settings) {
+        super(settings.lightLevel(state -> 14), null);
     }
 
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource random) {

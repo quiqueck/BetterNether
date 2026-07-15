@@ -39,8 +39,8 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
     ));
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-    public BlockLucisSpore() {
-        super(Materials.NETHER_SAPLING
+    public BlockLucisSpore(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings)
                 .mapColor(MapColor.COLOR_LIGHT_GREEN)
                 .lightLevel((bs) -> 7)
         );

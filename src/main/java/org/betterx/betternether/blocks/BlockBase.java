@@ -80,4 +80,13 @@ public class BlockBase extends Block implements IRenderTypeable {
                 Wood::new, Stone::new, Metal::new
         );
     }
+
+    public static BlockBase from(Block source, Properties settings) {
+        return BehaviourHelper.from(
+                source,
+                b -> new Wood(settings),
+                b -> new Stone(settings),
+                b -> new Metal(settings)
+        );
+    }
 }

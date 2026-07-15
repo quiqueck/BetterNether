@@ -20,9 +20,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockGiantLucis extends HugeMushroomBlock implements AddMineableAxe, BlockLootProvider {
-    public BlockGiantLucis() {
-        super(BehaviourBuilders
-                .createWalkablePlant(MapColor.COLOR_YELLOW)
+    public BlockGiantLucis(Properties settings) {
+        super(org.betterx.bclib.behaviours.BehaviourBuilders
+                .createWalkablePlant(settings, MapColor.COLOR_YELLOW)
                 .requiresCorrectToolForDrops()
                 .lightLevel((bs) -> 15)
                 .sound(SoundType.WOOD)

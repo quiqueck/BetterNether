@@ -19,8 +19,8 @@ import net.fabricmc.api.Environment;
 public class BlockBlackApple extends BlockCommonPlant implements SurvivesOnNetherGround, BehaviourPlant {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 16, 12);
 
-    public BlockBlackApple() {
-        super(MapColor.TERRACOTTA_ORANGE);
+    public BlockBlackApple(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings).mapColor(MapColor.TERRACOTTA_ORANGE));
     }
 
     @Override

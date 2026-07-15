@@ -26,8 +26,8 @@ import net.minecraft.world.level.ScheduledTickAccess;
 public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNylium, BehaviourSapling {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 6, 12);
 
-    public BlockJellyfishMushroomSapling() {
-        super(Materials.NETHER_SAPLING
+    public BlockJellyfishMushroomSapling(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings)
                 .mapColor(MapColor.COLOR_CYAN)
                 .lightLevel((bs) -> 9)
         );

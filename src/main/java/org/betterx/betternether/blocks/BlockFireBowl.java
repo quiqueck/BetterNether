@@ -53,6 +53,12 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
+    protected BlockFireBowl(BlockBehaviour.Properties settings) {
+        super(settings.noOcclusion().lightLevel(BlockFireBowl::getLuminance));
+        this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
+        this.setRenderLayer(BNRenderLayer.CUTOUT);
+    }
+
     protected static int getLuminance(BlockState state) {
         return state.getOptionalValue(FIRE).orElse(false) ? 15 : 0;
     }
@@ -151,11 +157,19 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
         public Wood(Block source) {
             super(source);
         }
+
+        public Wood(BlockBehaviour.Properties settings) {
+            super(settings);
+        }
     }
 
     public static class Stone extends BlockFireBowl implements BehaviourStone {
         public Stone(Block source) {
             super(source);
+        }
+
+        public Stone(BlockBehaviour.Properties settings) {
+            super(settings);
         }
     }
 
@@ -163,12 +177,25 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
         public Metal(Block source) {
             super(source);
         }
+
+        public Metal(BlockBehaviour.Properties settings) {
+            super(settings);
+        }
     }
 
 
     public static BlockFireBowl from(Block source) {
         return BehaviourHelper.from(source,
                 Wood::new, Stone::new, Metal::new
+        );
+    }
+
+    public static BlockFireBowl from(Block source, BlockBehaviour.Properties settings) {
+        return BehaviourHelper.from(
+                source,
+                b -> new Wood(settings),
+                b -> new Stone(settings),
+                b -> new Metal(settings)
         );
     }
 }

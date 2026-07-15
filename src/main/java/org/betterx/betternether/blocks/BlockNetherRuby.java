@@ -10,8 +10,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlockNetherRuby extends BlockBase implements CustomBlockItemProvider, BehaviourStone {
-    public BlockNetherRuby() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK));
+    public BlockNetherRuby(BlockBehaviour.Properties settings) {
+        super(settings);
     }
 
     @Override

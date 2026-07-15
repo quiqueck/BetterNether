@@ -14,10 +14,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class BlockEyeVine extends BaseVineBlock {
-    public BlockEyeVine() {
+    public BlockEyeVine(Properties settings) {
         super(
-                BehaviourBuilders
-                        .createStaticVine(MapColor.COLOR_RED),
+                org.betterx.bclib.behaviours.BehaviourBuilders
+                        .createStaticVine(settings, MapColor.COLOR_RED),
                 9,
                 2
         );

@@ -25,11 +25,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable, BehaviourStone {
-    public BNBrewingStand() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_BRICKS)
-                                 .strength(0.5F, 0.5F)
-                                 .lightLevel(state -> 1)
-                                 .noOcclusion());
+    public BNBrewingStand(BlockBehaviour.Properties settings) {
+        super(settings
+                .strength(0.5F, 0.5F)
+                .lightLevel(state -> 1)
+                .noOcclusion());
     }
 
     @Override

@@ -27,8 +27,8 @@ import net.fabricmc.api.Environment;
 public class BlockNetherReed extends BlockBase implements AddMineableSword, AddMineableHoe {
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
-    public BlockNetherReed() {
-        super(Materials.NETHER_PLANT
+    public BlockNetherReed(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_CYAN)
                 .randomTicks());
         this.setRenderLayer(BNRenderLayer.CUTOUT);

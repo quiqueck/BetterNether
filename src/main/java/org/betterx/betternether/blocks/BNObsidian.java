@@ -71,7 +71,7 @@ public class BNObsidian extends BNObsidianBase implements BehaviourObsidianPorta
         super(transformsTo);
     }
 
-    protected BNObsidian(Properties settings, Block transformsTo) {
+    public BNObsidian(Properties settings, Block transformsTo) {
         super(settings, transformsTo);
     }
 

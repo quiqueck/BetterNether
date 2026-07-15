@@ -36,9 +36,9 @@ public class BlockAgave extends BlockCommonPlant implements BehaviourPlant, AddM
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 14, 14);
     private static final RandomSource RANDOM = new LegacyRandomSource(030620222201l);
 
-    public BlockAgave() {
-        super(BehaviourBuilders
-                .createCactus(MapColor.TERRACOTTA_ORANGE, false)
+    public BlockAgave(Properties settings) {
+        super(org.betterx.bclib.behaviours.BehaviourBuilders
+                .createCactus(settings, MapColor.TERRACOTTA_ORANGE, false)
                 .requiresCorrectToolForDrops()
                 .noCollission()
                 .destroyTime(0.4F)

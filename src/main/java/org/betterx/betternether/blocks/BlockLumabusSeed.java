@@ -26,8 +26,8 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
     private final BonemealAPI.FeatureProvider feature;
 
-    public BlockLumabusSeed(DeferedSeedBlock parent, BonemealAPI.FeatureProvider feature) {
-        super(Materials.NETHER_SAPLING.mapColor(MapColor.COLOR_RED));
+    public BlockLumabusSeed(Properties settings, DeferedSeedBlock parent, BonemealAPI.FeatureProvider feature) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_RED));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.feature = feature;
         parent.setSeed(this);

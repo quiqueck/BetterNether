@@ -15,8 +15,8 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 public class BlockCincinnasiteAnvil extends AnvilBlock implements BehaviourMetal {
-    public BlockCincinnasiteAnvil() {
-        super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
+    public BlockCincinnasiteAnvil(Properties settings) {
+        super(settings.noOcclusion());
     }
 
     @Override

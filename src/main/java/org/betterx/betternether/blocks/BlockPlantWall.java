@@ -4,6 +4,7 @@ import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -39,6 +40,11 @@ public class BlockPlantWall extends BlockBaseNotFull implements BehaviourPlant {
 
     public BlockPlantWall(MapColor color) {
         super(Materials.makeNetherGrass(color).offsetType(OffsetType.NONE));
+        this.setRenderLayer(BNRenderLayer.CUTOUT);
+    }
+
+    public BlockPlantWall(BlockBehaviour.Properties settings, MapColor color) {
+        super(Materials.makeNetherGrass(settings, color).offsetType(OffsetType.NONE));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

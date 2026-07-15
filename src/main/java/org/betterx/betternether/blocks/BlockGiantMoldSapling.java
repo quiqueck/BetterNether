@@ -26,8 +26,8 @@ import net.minecraft.world.level.ScheduledTickAccess;
 public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherMycelium, BehaviourSapling {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
 
-    public BlockGiantMoldSapling() {
-        super(Materials.NETHER_SAPLING
+    public BlockGiantMoldSapling(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings)
                 .mapColor(MapColor.COLOR_LIGHT_GREEN)
                 .noLootTable()
         );

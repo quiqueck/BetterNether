@@ -10,8 +10,8 @@ import net.minecraft.world.level.block.ChainBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BNChain extends ChainBlock implements IRenderTypeable, BehaviourMetal, DropSelfLootProvider<BNChain> {
-    public BNChain() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN));
+    public BNChain(BlockBehaviour.Properties settings) {
+        super(settings);
     }
 
     @Override

@@ -6,7 +6,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlockCincinnasiteLantern extends BlockBase implements BehaviourMetal {
-    public BlockCincinnasiteLantern() {
-        super(BlockBehaviour.Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).lightLevel(state -> 15));
+    public BlockCincinnasiteLantern(BlockBehaviour.Properties settings) {
+        super(settings.lightLevel(state -> 15));
     }
 }

@@ -19,8 +19,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class BlockInkBush extends BlockCommonPlant implements SurvivesOnNetherGround, BehaviourPlant {
-    public BlockInkBush() {
-        super(BehaviourBuilders.createPlant(MapColor.COLOR_BLACK)
+    public BlockInkBush(Properties settings) {
+        super(org.betterx.bclib.behaviours.BehaviourBuilders.createPlant(settings, MapColor.COLOR_BLACK)
                                .sound(SoundType.CROP)
                                .noOcclusion()
         );

@@ -21,8 +21,8 @@ public class BlockOrangeMushroom extends BlockCommonPlant implements SurvivesOnN
             Shapes.box(0.0, 0.0, 0.0, 1.0, 1.0, 1.0)
     };
 
-    public BlockOrangeMushroom() {
-        super(Materials.NETHER_PLANT
+    public BlockOrangeMushroom(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_ORANGE)
                 .destroyTime(0.5F)
         );

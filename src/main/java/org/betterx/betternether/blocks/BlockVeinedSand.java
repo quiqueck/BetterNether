@@ -25,9 +25,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class BlockVeinedSand extends BlockBase implements BlockTagProvider, BehaviourSand {
-    public BlockVeinedSand() {
-        super(BlockBehaviour.Properties
-                .ofFullCopy(Blocks.SAND)
+    public BlockVeinedSand(BlockBehaviour.Properties settings) {
+        super(settings
                 .mapColor(MapColor.COLOR_BROWN)
                 .sound(SoundType.SAND)
                 .strength(0.5F, 0.5F)

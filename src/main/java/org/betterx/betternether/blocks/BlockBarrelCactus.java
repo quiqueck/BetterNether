@@ -39,9 +39,9 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
             Block.box(1, 0, 1, 15, 14, 15)
     };
 
-    public BlockBarrelCactus() {
-        super(BehaviourBuilders
-                .createCactus(MapColor.TERRACOTTA_ORANGE, false)
+    public BlockBarrelCactus(Properties settings) {
+        super(org.betterx.bclib.behaviours.BehaviourBuilders
+                .createCactus(settings, MapColor.TERRACOTTA_ORANGE, false)
                 .dynamicShape()
                 .offsetType(Block.OffsetType.XZ)
         );

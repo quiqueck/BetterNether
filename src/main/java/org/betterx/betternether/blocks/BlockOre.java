@@ -22,6 +22,7 @@ public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomBl
     public final boolean fireproof;
 
     public BlockOre(
+            net.minecraft.world.level.block.state.BlockBehaviour.Properties settings,
             Supplier<Item> drop,
             int minCount,
             int maxCount,
@@ -31,7 +32,7 @@ public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomBl
     ) {
         super(
                 BehaviourBuilders
-                        .createStone(MapColor.COLOR_RED)
+                        .createStone(settings, MapColor.COLOR_RED)
                         .strength(3, 5)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.NETHERRACK),

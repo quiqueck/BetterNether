@@ -35,9 +35,9 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<EnumLucisShape> SHAPE = BNBlockProperties.LUCIS_SHAPE;
 
-    public BlockLucisMushroom() {
-        super(BehaviourBuilders
-                .createWalkablePlant(MapColor.COLOR_YELLOW)
+    public BlockLucisMushroom(Properties settings) {
+        super(org.betterx.bclib.behaviours.BehaviourBuilders
+                .createWalkablePlant(settings, MapColor.COLOR_YELLOW)
                 .lightLevel((bs) -> 15)
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.WOOD)

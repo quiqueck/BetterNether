@@ -17,8 +17,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BlockFeatherFern extends BlockCommonPlant implements SurvivesOnNetherGround, BehaviourPlant {
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
-    public BlockFeatherFern() {
-        super(Materials.NETHER_PLANT
+    public BlockFeatherFern(Properties settings) {
+        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_LIGHT_BLUE)
                 .randomTicks()
                 .offsetType(Block.OffsetType.XZ)

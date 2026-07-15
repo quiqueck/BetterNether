@@ -4,6 +4,7 @@ import org.betterx.betternether.client.block.BNModels;
 import org.betterx.wover.block.api.model.BlockModelProvider;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
@@ -14,6 +15,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class BlockSoulGrass extends BaseBlockNetherGrass.OnEverything implements BlockModelProvider {
+    public BlockSoulGrass(BlockBehaviour.Properties settings) {
+        super(settings);
+    }
+
     @Environment(EnvType.CLIENT)
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (random.nextInt(4) == 0) {

@@ -6,10 +6,10 @@ import org.betterx.bclib.blocks.BaseSimpleVineBlock;
 import net.minecraft.world.level.material.MapColor;
 
 public class BlockGoldenVine extends BaseSimpleVineBlock {
-    public BlockGoldenVine() {
+    public BlockGoldenVine(Properties settings) {
         super(
-                BehaviourBuilders
-                        .createStaticVine(MapColor.COLOR_YELLOW)
+                org.betterx.bclib.behaviours.BehaviourBuilders
+                        .createStaticVine(settings, MapColor.COLOR_YELLOW)
                         .lightLevel((bs) -> 15)
                         .instabreak(),
                 29,

@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -52,7 +52,7 @@ public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMet
             Direction.WEST, Block.box(8, 0, 0, 16, 16, 16),
             Direction.EAST, Block.box(0, 0, 0, 8, 16, 16)
     ));
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BNBlockProperties.OPEN;
 
     public BlockChestOfDrawers() {

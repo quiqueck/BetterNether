@@ -16,7 +16,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape V_SHAPE = box(0, 0, 0, 16, 9, 16);
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<EnumLucisShape> SHAPE = BNBlockProperties.LUCIS_SHAPE;
 
     public BlockLucisMushroom() {

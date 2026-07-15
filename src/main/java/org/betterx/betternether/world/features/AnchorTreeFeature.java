@@ -137,7 +137,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
 
         BlockState state;
         int offset = random.nextInt(4);
-        final int minBuildHeight = level.getMinBuildHeight() + 1;
+        final int minBuildHeight = level.getMinY() + 1;
         final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(
                 level,
                 up,

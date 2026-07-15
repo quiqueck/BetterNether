@@ -1,7 +1,7 @@
 package org.betterx.datagen.betternether.recipes;
 
 import org.betterx.bclib.complexmaterials.ComplexMaterial;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
+import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -38,8 +38,8 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
                              NetherBlocks.TRIMMED_MUSHROOM_FIR_CHEST
                      )
                      .shapeless()
-                     .addMaterial('#', NetherBlocks.MAT_MUSHROOM_FIR.getBlock(WoodSlots.CHEST))
-                     .addMaterial('S', NetherBlocks.MAT_MUSHROOM_FIR.getBlock(WoodSlots.STRIPPED_LOG))
+                     .addMaterial('#', NetherBlocks.MAT_MUSHROOM_FIR.getBlock(SlotType.CHEST))
+                     .addMaterial('S', NetherBlocks.MAT_MUSHROOM_FIR.getBlock(SlotType.STRIPPED_LOG))
                      .group("chest")
                      .outputCount(1)
                      .category(RecipeCategory.DECORATIONS)

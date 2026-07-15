@@ -53,8 +53,8 @@ public class BlocksHelper {
     };
 
     public static BoundingBox chunkBounds(LevelAccessor world, BlockPos pos) {
-        final int minBuildHeight = world.getMinBuildHeight() + 1;
-        final int maxBuildHeight = world.getMaxBuildHeight() - 1;
+        final int minBuildHeight = world.getMinY() + 1;
+        final int maxBuildHeight = world.getMaxY() - 1;
         return chunkBounds(world, pos, minBuildHeight, maxBuildHeight);
     }
 
@@ -66,8 +66,8 @@ public class BlocksHelper {
     }
 
     public static BoundingBox decorationBounds(LevelAccessor world, BlockPos pos) {
-        final int minBuildHeight = world.getMinBuildHeight() + 1;
-        final int maxBuildHeight = world.getMaxBuildHeight() - 1;
+        final int minBuildHeight = world.getMinY() + 1;
+        final int maxBuildHeight = world.getMaxY() - 1;
         return decorationBounds(world, pos, minBuildHeight, maxBuildHeight);
     }
 

@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -37,7 +37,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
     private static final VoxelShape SHAPE_WEST = box(8, 1, 1, 16, 15, 15);
     private static final VoxelShape SHAPE_EAST = box(0, 1, 1, 8, 15, 15);
     private static final VoxelShape SHAPE_UP = box(1, 0, 1, 15, 12, 15);
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     public static final IntegerProperty AGE = BlockProperties.AGE_THREE;
 
     public BlockBoneMushroom() {

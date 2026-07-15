@@ -2,7 +2,7 @@ package org.betterx.datagen.betternether;
 
 import org.betterx.bclib.client.models.BCLModels;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
+import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.client.block.BNModels;
@@ -32,7 +32,7 @@ public class NetherModelProvider extends WoverModelProvider {
 
     @Override
     protected void bootstrapBlockStateModels(WoverBlockModelGenerators generator) {
-        final Block reedPlanks = NetherBlocks.MAT_REED.getBlock(WoodSlots.PLANKS);
+        final Block reedPlanks = NetherBlocks.MAT_REED.getBlock(SlotType.PLANKS);
         final ResourceLocation NETHER_REED_PLANKS = TextureMapping.getBlockTexture(reedPlanks);
         final ResourceLocation NETHER_REED_PLANKS_TOP = BetterNether.C.mk("block/nether_reed_planks_top");
 
@@ -44,7 +44,7 @@ public class NetherModelProvider extends WoverModelProvider {
         final ModelOverides overrides = ModelOverides
                 .create()
                 .override(NetherBlocks.BASALT_BRICKS, block -> BNModels.provideSimpleMultiStateBlock(generator, block, "", "_cracked"))
-                .override(NetherBlocks.MAT_REED.getBlock(WoodSlots.STAIRS), block -> generator.createStairs(block, NETHER_REED_PLANKS, NETHER_REED_PLANKS, NETHER_REED_PLANKS_TOP))
+                .override(NetherBlocks.MAT_REED.getBlock(SlotType.STAIRS), block -> generator.createStairs(block, NETHER_REED_PLANKS, NETHER_REED_PLANKS, NETHER_REED_PLANKS_TOP))
                 .override(NetherBlocks.SOUL_SANDSTONE_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_SLABS, SOUL_SANDSTONE_BOTTOM))
                 .override(NetherBlocks.SOUL_SANDSTONE_SMOOTH_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_TOP))
                 .override(NetherBlocks.SOUL_SANDSTONE_CUT_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_CUT_SLABS, SOUL_SANDSTONE_TOP))
@@ -67,8 +67,8 @@ public class NetherModelProvider extends WoverModelProvider {
                 .override(NetherBlocks.BONE_BUTTON, block -> generator.createButton(block, BetterNether.C.mk("block/bone_button")))
                 .override(NetherBlocks.CINCINNASITE_PLATE, block -> generator.createPressurePlate(block, BetterNether.C.mk("block/cincinnasite_plate_up")))
                 .override(NetherBlocks.CINCINNASITE_BUTTON, block -> generator.createButton(block, BetterNether.C.mk("block/cincinnasite_button")))
-                .override(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.PRESSURE_PLATE), block -> generator.createPressurePlate(block, BetterNether.C.mk("block/nether_mushroom_plate")))
-                .override(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(WoodSlots.BUTTON), block -> generator.createButton(block, BetterNether.C.mk("block/nether_mushroom_button")))
+                .override(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(SlotType.PRESSURE_PLATE), block -> generator.createPressurePlate(block, BetterNether.C.mk("block/nether_mushroom_plate")))
+                .override(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(SlotType.BUTTON), block -> generator.createButton(block, BetterNether.C.mk("block/nether_mushroom_button")))
                 .override(NetherBlocks.CHAIR_CINCINNASITE, block -> {
                     //this was a custom Item with a view transform, it is easier to recreate the json instead of finding
                     //an appropriate API call that fits this special case...
@@ -134,15 +134,15 @@ public class NetherModelProvider extends WoverModelProvider {
 
     private void addMaterialOverrides(ModelOverides overides, WoodenComplexMaterial mat) {
         overides
-                .ignore(mat.getBlock(WoodSlots.LADDER))
-                .ignore(mat.getBlock(WoodSlots.TRAPDOOR))
-                .ignore(mat.getBlock(WoodSlots.GATE))
-                .ignore(mat.getBlock(WoodSlots.FENCE))
-                .ignore(mat.getBlock(WoodSlots.SLAB))
-                .ignore(mat.getBlock(WoodSlots.LOG))
-                .ignore(mat.getBlock(WoodSlots.STRIPPED_LOG))
-                .ignore(mat.getBlock(WoodSlots.BARK))
-                .ignore(mat.getBlock(WoodSlots.STRIPPED_BARK))
+                .ignore(mat.getBlock(SlotType.LADDER))
+                .ignore(mat.getBlock(SlotType.TRAPDOOR))
+                .ignore(mat.getBlock(SlotType.FENCE_GATE))
+                .ignore(mat.getBlock(SlotType.FENCE))
+                .ignore(mat.getBlock(SlotType.SLAB))
+                .ignore(mat.getBlock(SlotType.LOG))
+                .ignore(mat.getBlock(SlotType.STRIPPED_LOG))
+                .ignore(mat.getBlock(SlotType.BARK))
+                .ignore(mat.getBlock(SlotType.STRIPPED_BARK))
                 .ignore(mat.getBlock(NetherSlots.ROOF_SLAB));
     }
 

@@ -29,7 +29,7 @@ public class BlockGeyser extends BlockBaseNotFull implements BehaviourStone {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 4, 15);
 
     public BlockGeyser() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK).luminance(10).noOcclusion());
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK).lightLevel(state -> 10).noOcclusion());
     }
 
     @Override

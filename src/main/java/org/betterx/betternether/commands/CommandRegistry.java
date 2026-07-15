@@ -179,13 +179,13 @@ public class CommandRegistry {
                 target = new BlockPos(biomePosition.getX(), (int) yPos, biomePosition.getZ());
                 state = player.level().getBlockState(target);
                 yPos--;
-                if (yPos <= player.level().getMinBuildHeight() + 1) {
+                if (yPos <= player.level().getMinY() + 1) {
                     if (didWrap) break;
                     yPos = 127;
                     didWrap = true;
                 }
-            } while (!state.isAir() && yPos > player.level().getMinBuildHeight() && yPos < player.level()
-                                                                                                 .getMaxBuildHeight());
+            } while (!state.isAir() && yPos > player.level().getMinY() && yPos < player.level()
+                                                                                                 .getMaxY());
             Vector3d targetPlayerPos = new Vector3d(target.getX() + 0.5, target.getY() - 1, target.getZ() + 0.5);
 
             player.connection.teleport(

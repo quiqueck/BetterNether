@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -34,7 +34,7 @@ import java.util.EnumMap;
 
 public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnSouldSand, BehaviourSapling {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(Direction.class);
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
     static {
         BOUNDING_SHAPES.put(Direction.UP, Shapes.box(0.25, 0.0, 0.25, 0.75, 0.5, 0.75));

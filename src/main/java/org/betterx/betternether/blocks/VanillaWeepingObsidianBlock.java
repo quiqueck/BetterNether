@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class VanillaWeepingObsidianBlock extends BNObsidianBase implements BlockModelProvider {
     public VanillaWeepingObsidianBlock() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.CRYING_OBSIDIAN).luminance(14), null);
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.CRYING_OBSIDIAN).lightLevel(state -> 14), null);
     }
 
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource random) {

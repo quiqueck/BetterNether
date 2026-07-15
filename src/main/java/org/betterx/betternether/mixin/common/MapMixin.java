@@ -91,7 +91,7 @@ public abstract class MapMixin extends ComplexItem {
                                                 POS.getZ()
                                         ) + 1;
                                         BlockState blockState;
-                                        if (testY <= level.getMinBuildHeight() + 1) {
+                                        if (testY <= level.getMinY() + 1) {
                                             blockState = Blocks.BEDROCK.defaultBlockState();
                                         } else {
                                             //make sure we get under the nether ceiling and find the first "AIR" block
@@ -101,16 +101,16 @@ public abstract class MapMixin extends ComplexItem {
                                             } while (blockState.is(Blocks.BEDROCK) || blockState.getMapColor(
                                                     level,
                                                     POS
-                                            ) != MapColor.NONE && testY > level.getMinBuildHeight());
+                                            ) != MapColor.NONE && testY > level.getMinY());
 
                                             do {
                                                 --testY;
                                                 POS.setY(testY);
                                                 blockState = levelChunk.getBlockState(POS);
                                             } while (blockState.getMapColor(level, POS)
-                                                    == MapColor.NONE && testY > level.getMinBuildHeight());
+                                                    == MapColor.NONE && testY > level.getMinY());
 
-                                            if (testY > level.getMinBuildHeight()
+                                            if (testY > level.getMinY()
                                                     && !blockState.getFluidState().isEmpty()) {
                                                 int ab = testY - 1;
                                                 POS2.set(POS);
@@ -120,7 +120,7 @@ public abstract class MapMixin extends ComplexItem {
                                                     POS2.setY(ab--);
                                                     blockState2 = levelChunk.getBlockState(POS2);
                                                     ++w;
-                                                } while (ab > level.getMinBuildHeight() && !blockState2.getFluidState()
+                                                } while (ab > level.getMinY() && !blockState2.getFluidState()
                                                                                                        .isEmpty());
 
                                                 blockState = this.getCorrectStateForFluidBlock(level, blockState, POS);

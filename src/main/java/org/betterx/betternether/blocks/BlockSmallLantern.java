@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
@@ -31,7 +31,7 @@ public abstract class BlockSmallLantern extends BlockBaseNotFull {
     private static final VoxelShape SHAPE_UP = box(5, 0, 5, 11, 9, 11);
     private static final VoxelShape SHAPE_DOWN = box(5, 3, 5, 11, 16, 11);
 
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
     protected BlockSmallLantern() {
         super(Properties.ofFullCopy(NetherBlocks.CINCINNASITE_LANTERN).noOcclusion());

@@ -13,7 +13,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -35,7 +35,7 @@ public class BlockPlantWall extends BlockBaseNotFull implements BehaviourPlant {
             Direction.WEST, box(10, 2, 2, 16, 14, 14),
             Direction.EAST, box(0, 2, 2, 6, 14, 14)
     ));
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockPlantWall(MapColor color) {
         super(Materials.makeNetherGrass(color).offsetType(OffsetType.NONE));

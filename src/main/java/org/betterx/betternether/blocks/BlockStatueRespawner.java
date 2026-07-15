@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -45,12 +45,12 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
             box(5, 0, 6, 7, 6, 8)
     );
     private static final DustParticleOptions EFFECT = new DustParticleOptions(0xFF0000, 1.0F);
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty TOP = BooleanProperty.create("top");
     private final ItemStack requiredItem;
 
     public BlockStatueRespawner() {
-        super(BlockBehaviour.Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).luminance(15).noOcclusion());
+        super(BlockBehaviour.Properties.ofFullCopy(NetherBlocks.CINCINNASITE_BLOCK).lightLevel(state -> 15).noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
         this.setDropItself(false);

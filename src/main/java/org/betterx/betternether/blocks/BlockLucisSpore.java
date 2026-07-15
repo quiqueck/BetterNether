@@ -19,7 +19,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -37,7 +37,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
             Direction.WEST, box(8, 4, 4, 16, 12, 12),
             Direction.EAST, box(0, 4, 4, 8, 12, 12)
     ));
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockLucisSpore() {
         super(Materials.NETHER_SAPLING

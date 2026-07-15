@@ -58,7 +58,7 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
 
         BlockState state;
         BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
-        final int minBuildHeight = world.getMinBuildHeight() + 1;
+        final int minBuildHeight = world.getMinY() + 1;
         final BoundingBox blockBox = BlocksHelper.decorationBounds(world, pos, minBuildHeight, MAX_HEIGHT - 2);
         for (BlockPos bpos : context.BLOCKS) {
             //if (!blockBox.contains(bpos)) continue;

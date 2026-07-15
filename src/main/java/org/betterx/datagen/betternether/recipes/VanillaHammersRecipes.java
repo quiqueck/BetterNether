@@ -8,10 +8,8 @@ import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
 import org.betterx.wover.recipe.api.RecipeBuilder;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -22,7 +20,7 @@ public class VanillaHammersRecipes extends WoverRecipeProvider {
         super(modCore, "BetterNether - Vanilla Hammers Recipes");
     }
 
-    private static void makeHammerRecipe(RecipeOutput context, Item hammer, Block block, Item item) {
+    private static void makeHammerRecipe(RecipeBuilder.Context context, Item hammer, Block block, Item item) {
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(hammer);
 
         RecipeBuilder
@@ -37,7 +35,7 @@ public class VanillaHammersRecipes extends WoverRecipeProvider {
     }
 
     @Override
-    protected void bootstrap(HolderLookup.Provider provider, RecipeOutput context) {
+    protected void bootstrap(RecipeBuilder.Context context) {
         makeHammerRecipe(context, NetherItems.CINCINNASITE_HAMMER, NetherBlocks.CINCINNASITE_FORGED, NetherItems.CINCINNASITE_INGOT);
         makeHammerRecipe(context, NetherItems.NETHER_RUBY_HAMMER, NetherBlocks.NETHER_RUBY_BLOCK, NetherItems.NETHER_RUBY);
 

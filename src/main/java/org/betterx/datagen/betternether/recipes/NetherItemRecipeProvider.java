@@ -10,9 +10,7 @@ import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
 import org.betterx.wover.recipe.api.RecipeBuilder;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 
@@ -22,7 +20,7 @@ public class NetherItemRecipeProvider extends WoverRecipeProvider {
     }
 
     @Override
-    protected void bootstrap(HolderLookup.Provider provider, RecipeOutput context) {
+    protected void bootstrap(RecipeBuilder.Context context) {
         RecipeBuilder
                 .crafting(BN.id("bn_glowstone_dust"), Items.GLOWSTONE_DUST)
                 .shape("###", "###", "###")
@@ -212,7 +210,7 @@ public class NetherItemRecipeProvider extends WoverRecipeProvider {
         EquipmentSet.buildAllRecipes(BetterNether.C, context);
     }
 
-    private static void registerShapeLess(RecipeOutput context) {
+    private static void registerShapeLess(RecipeBuilder.Context context) {
         RecipeBuilder.crafting(BetterNether.C.id("agave_medicine"), NetherItems.AGAVE_MEDICINE)
                      .addMaterial('#', NetherItems.STALAGNATE_BOWL)
                      .addMaterial('A', NetherItems.AGAVE_LEAF)
@@ -252,7 +250,7 @@ public class NetherItemRecipeProvider extends WoverRecipeProvider {
                      .build(context);
     }
 
-    private static void registerSmelting(RecipeOutput context) {
+    private static void registerSmelting(RecipeBuilder.Context context) {
         RecipeBuilder.smelting(BetterNether.C.id("black_dye"), Items.BLACK_DYE)
                      .input(NetherBlocks.INK_BUSH_SEED)
                      .cookingTime(200)

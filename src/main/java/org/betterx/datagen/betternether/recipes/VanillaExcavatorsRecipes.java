@@ -7,10 +7,8 @@ import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
 import org.betterx.wover.recipe.api.RecipeBuilder;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -21,7 +19,7 @@ public class VanillaExcavatorsRecipes extends WoverRecipeProvider {
         super(modCore, "BetterNether - Vanilla Excavatprs Recipes");
     }
 
-    private static void makeExcavatorRecipe(RecipeOutput context, Item excavator, Block block, Item item) {
+    private static void makeExcavatorRecipe(RecipeBuilder.Context context, Item excavator, Block block, Item item) {
         final ResourceLocation id = BuiltInRegistries.ITEM.getKey(excavator);
         RecipeBuilder
                 .crafting(BetterNether.C.id(id.getPath()), excavator)
@@ -34,7 +32,7 @@ public class VanillaExcavatorsRecipes extends WoverRecipeProvider {
     }
 
     @Override
-    protected void bootstrap(HolderLookup.Provider provider, RecipeOutput context) {
+    protected void bootstrap(RecipeBuilder.Context context) {
         makeExcavatorRecipe(
                 context,
                 NetherItems.CINCINNASITE_EXCAVATOR,

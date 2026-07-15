@@ -11,9 +11,7 @@ import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
 import org.betterx.wover.recipe.api.RecipeBuilder;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
@@ -23,7 +21,7 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
     }
 
     @Override
-    protected void bootstrap(HolderLookup.Provider provider, RecipeOutput context) {
+    protected void bootstrap(RecipeBuilder.Context context) {
         RecipeBuilder.crafting(
                              BetterNether.C.id("whispering_gourd_seeds"),
                              NetherBlocks.WHISPERING_GOURD_VINE
@@ -426,7 +424,7 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
         ComplexMaterial.provideAllRecipes(context, BetterNether.C);
     }
 
-    private static void registerSmithing(RecipeOutput context) {
+    private static void registerSmithing(RecipeBuilder.Context context) {
         RecipeBuilder
                 .smithing(BetterNether.C.id("netherite_fire_bowl"), NetherBlocks.NETHERITE_FIRE_BOWL)
                 .base(NetherBlocks.CINCINNASITE_FIRE_BOWL)
@@ -444,7 +442,7 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
                 .build(context);
     }
 
-    private static void registerSmelting(RecipeOutput context) {
+    private static void registerSmelting(RecipeBuilder.Context context) {
         RecipeBuilder.smelting(BetterNether.C.id("blue_obsidian_glass"), NetherBlocks.BLUE_OBSIDIAN_GLASS)
                      .input(NetherBlocks.BLUE_OBSIDIAN)
                      .cookingTime(200)
@@ -473,7 +471,7 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
                      .build(context);
     }
 
-    private static void registerBlasting(RecipeOutput context) {
+    private static void registerBlasting(RecipeBuilder.Context context) {
         RecipeBuilder
                 .blasting(BetterNether.C.id("cincinnasite_forged_blasting"), NetherBlocks.CINCINNASITE_FORGED)
                 .input(NetherBlocks.CINCINNASITE_BLOCK)
@@ -482,7 +480,7 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
                 .build(context);
     }
 
-    private static void registerStoneCutting(RecipeOutput context) {
+    private static void registerStoneCutting(RecipeBuilder.Context context) {
         RecipeBuilder
                 .stonecutting(
                         BetterNether.C.id("blue_obsidian_bricks_from_tile_stonecutter"),
@@ -1037,7 +1035,7 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
                 .build(context);
     }
 
-    private void withTemplates(RecipeOutput context) {
+    private void withTemplates(RecipeBuilder.Context context) {
         final var t = new RecipeBuilder.Templates(context, BetterNether.C);
         RecipesHelper.provideRecipes(t);
     }

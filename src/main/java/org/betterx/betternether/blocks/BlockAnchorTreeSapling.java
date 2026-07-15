@@ -9,11 +9,18 @@ import org.betterx.wover.state.api.WorldState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack, BehaviourSapling {
     public BlockAnchorTreeSapling() {
         super((level, pos, state, rnd) -> NetherTrees.ANCHOR_TREE_BRANCH
+                .placeInWorld(WorldState.registryAccess(), level, pos, rnd)
+        );
+    }
+
+    public BlockAnchorTreeSapling(BlockBehaviour.Properties properties) {
+        super(properties, (level, pos, state, rnd) -> NetherTrees.ANCHOR_TREE_BRANCH
                 .placeInWorld(WorldState.registryAccess(), level, pos, rnd)
         );
     }

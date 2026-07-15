@@ -9,6 +9,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -27,6 +28,11 @@ public class BlockStem extends BlockBaseNotFull implements BehaviourWood {
 
     public BlockStem(MapColor color) {
         super(Materials.makeNetherWood(color).strength(0.5f).noOcclusion());
+        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Axis.Y));
+    }
+
+    public BlockStem(BlockBehaviour.Properties properties) {
+        super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Axis.Y));
     }
 

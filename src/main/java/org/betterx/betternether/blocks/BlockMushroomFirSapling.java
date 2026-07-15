@@ -12,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 
@@ -19,6 +20,12 @@ public class BlockMushroomFirSapling extends FeatureSaplingBlock implements Bone
 
     public BlockMushroomFirSapling() {
         super((level, pos, state, rnd) -> NetherTrees.MUSHROOM_FIR
+                .placeInWorld(WorldState.registryAccess(), level, pos, rnd)
+        );
+    }
+
+    public BlockMushroomFirSapling(BlockBehaviour.Properties properties) {
+        super(properties, (level, pos, state, rnd) -> NetherTrees.MUSHROOM_FIR
                 .placeInWorld(WorldState.registryAccess(), level, pos, rnd)
         );
     }

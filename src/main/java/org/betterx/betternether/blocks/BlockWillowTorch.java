@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -39,6 +40,12 @@ public class BlockWillowTorch extends BlockBaseNotFull implements AddMineableAxe
                                .strength(0.3f)
                                .noCollission()
                                .noOcclusion());
+        this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
+        this.setRenderLayer(BNRenderLayer.CUTOUT);
+    }
+
+    public BlockWillowTorch(BlockBehaviour.Properties properties) {
+        super(properties);
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

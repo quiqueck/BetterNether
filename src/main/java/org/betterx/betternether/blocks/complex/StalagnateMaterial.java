@@ -1,28 +1,25 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SimpleBlockOnlyMaterialSlot;
-import org.betterx.bclib.complexmaterials.entry.SlotMap;
-import org.betterx.bclib.complexmaterials.set.wood.Log;
 import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
+import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.recipe.api.BaseRecipeBuilder;
-import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
+import org.betterx.wover.block.api.trait.BlockRecipeTrait;
+import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.recipe.api.RecipeBuilder;
+import org.betterx.wover.sets.api.blocks.BlockSet;
+import org.betterx.wover.sets.api.blocks.SlotMap;
+import org.betterx.wover.sets.api.blocks.types.Log;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
-
-import org.jetbrains.annotations.Nullable;
 
 public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
     public StalagnateMaterial() {
@@ -31,28 +28,26 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
     }
 
     @Override
-    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
-        return super.createMaterialSlots()
-                    .add(NetherSlots.STEM)
+    protected SlotMap createDefaultDefinitions() {
+        return super.createDefaultDefinitions()
+                    .add(Stem.SLOT)
                     .add(TrunkSlot.createClimbable(BlockStalagnate::new))
                     .add(AbstractSeed.create(BlockStalagnateSeed::new))
-                    .add(SimpleBlockOnlyMaterialSlot.createBlockOnly(
+                    .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.BOWL,
-                            (c, p) -> new BlockStalagnateBowl(c.getBlock(NetherSlots.TRUNK))
+                            (set, props) -> new BlockStalagnateBowl(props)
                     ))
-                    .replace(new Log() {
+                    .replace(new Log(true) {
                         @Override
-                        protected @Nullable void makeRecipe(
-                                RecipeOutput context, ComplexMaterial material, ResourceLocation id
-                        ) {
-                            CraftingRecipeBuilder craftingRecipeBuilder1 = RecipeBuilder
-                                    .crafting(id, material.getBlock(suffix));
-                            CraftingRecipeBuilder craftingRecipeBuilder2 = craftingRecipeBuilder1.outputCount(1);
-                            CraftingRecipeBuilder craftingRecipeBuilder = craftingRecipeBuilder2.shape("##", "##")
-                                                                                                .addMaterial('#', material.getBlock(NetherSlots.STEM));
-                            BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder = craftingRecipeBuilder.group("logs");
-                            craftingRecipeBuilderBaseRecipeBuilder.category(RecipeCategory.BUILDING_BLOCKS)
-                                                                  .build(context);
+                        protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                            return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
+                                    .crafting(key.location(), block)
+                                    .outputCount(1)
+                                    .shape("##", "##")
+                                    .addMaterial('#', set.recipeMaterial(NetherSlots.STEM))
+                                    .group("logs")
+                                    .category(RecipeCategory.BUILDING_BLOCKS)
+                                    .build(context));
                         }
                     });
     }

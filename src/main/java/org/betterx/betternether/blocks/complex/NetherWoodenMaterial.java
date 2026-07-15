@@ -1,108 +1,85 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.BCLWoodTypeWrapper;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SlotMap;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.complex.slots.NetherSlots;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherItems;
+import org.betterx.wover.block.api.BlockDefinition;
+import org.betterx.wover.block.api.trait.BlockTraits;
+import org.betterx.wover.sets.api.blocks.SlotMap;
+import org.betterx.wover.sets.api.blocks.SlotType;
+import org.betterx.wover.sets.api.blocks.WoodenBlockSet;
+import org.betterx.wover.sets.api.blocks.slots.WoodSlots;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MapColor;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+/**
+ * Base wooden material for BetterNether, on top of the wover-sets-api {@link WoodenBlockSet}.
+ * <p>
+ * Differs from the vanilla-wood default in two ways: Nether wood does not burn (no
+ * {@link BlockTraits#FLAMMABLE} trait), and the set also carries a {@code wall} slot.
+ */
+public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends WoodenBlockSet<T> {
+    protected final MapColor plankColor;
 
-public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends WoodenComplexMaterial {
     public NetherWoodenMaterial(String name, MapColor woodColor, MapColor planksColor) {
-        super(BetterNether.C, name, "nether", woodColor, planksColor);
+        super(BetterNether.C, name, woodColor);
+        setPlanksColor(planksColor);
+        this.plankColor = planksColor;
     }
 
+    /**
+     * Builds and registers every slot in this set. Kept named {@code init()} for parity with the
+     * previous complex-material API so the {@code NetherBlocks} call sites read the same.
+     */
     public T init() {
-        return (T) super.init(
-                NetherBlocks.getBlockRegistry(),
-                NetherItems.getItemRegistry()
-        );
+        return this.buildAndRegister();
     }
 
-    @Override
+    /**
+     * Furniture (taburet/chair/bar-stool) slots were removed from wover-sets-api; this is a no-op kept so
+     * the existing subclass constructors keep compiling. Remove the calls when convenient.
+     */
     public T setFurnitureCloth(Block clothMaterial) {
-        return super.setFurnitureCloth(clothMaterial);
+        //noinspection unchecked
+        return (T) this;
     }
 
     @Override
-    protected BCLWoodTypeWrapper.Builder createWoodTypeBuilder() {
-        return super.createWoodTypeBuilder().setFlammable(false);
+    protected void addCommonBlockDefinitions(SlotType slot, BlockDefinition<?, ?> blockDefinition) {
+        // Deliberately NOT calling super: the base adds BlockTraits.FLAMMABLE, but nothing burns in the Nether.
+        blockDefinition.addTrait(BlockTraits.WOOD_BLOCK.withDefault());
+        if (slot == SlotType.PLANKS) {
+            blockDefinition.mapColor(plankColor);
+        } else {
+            blockDefinition.mapColor(woodColor);
+        }
     }
 
     @Override
-    protected FabricBlockSettings getBlockSettings() {
-        return FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)
-                                  .mapColor(planksColor);
-    }
-
-    @Override
-    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
-        return SlotMap.of(
-                NetherSlots.STRIPPED_LOG,
-                NetherSlots.STRIPPED_BARK,
-                NetherSlots.LOG,
-                NetherSlots.BARK,
-                WoodSlots.PLANKS,
-                WoodSlots.STAIRS,
-                WoodSlots.SLAB,
-                WoodSlots.FENCE,
-                WoodSlots.GATE,
-                WoodSlots.BUTTON,
-                WoodSlots.PRESSURE_PLATE,
-                WoodSlots.TRAPDOOR,
-                WoodSlots.DOOR,
-                WoodSlots.LADDER,
-                WoodSlots.SIGN,
-                WoodSlots.HANGING_SIGN,
-                WoodSlots.CHEST,
-                WoodSlots.BARREL,
-                WoodSlots.CRAFTING_TABLE,
-                WoodSlots.BOOKSHELF,
-                WoodSlots.COMPOSTER,
-                WoodSlots.BOAT,
-                WoodSlots.CHEST_BOAT,
-                WoodSlots.TABURET,
-                WoodSlots.CHAIR,
-                WoodSlots.BAR_STOOL,
-                WoodSlots.WALL
-        );
-    }
-
-    @Override
-    protected void initFlammable(FlammableBlockRegistry registry) {
-        //Nothing burns in the nether
+    protected SlotMap createDefaultDefinitions() {
+        return super.createDefaultDefinitions().add(WoodSlots.WALL);
     }
 
     public Block getPlanks() {
-        return getBlock(WoodSlots.PLANKS);
+        return getBlock(SlotType.PLANKS);
     }
 
     public Block getSlab() {
-        return getBlock(WoodSlots.SLAB);
+        return getBlock(SlotType.SLAB);
     }
 
     public Block getLog() {
-        return getBlock(WoodSlots.LOG);
+        return getBlock(SlotType.LOG);
     }
 
     public Block getBark() {
-        return getBlock(WoodSlots.BARK);
+        return getBlock(SlotType.BARK);
     }
 
     public Block getStrippedLog() {
-        return getBlock(WoodSlots.STRIPPED_LOG);
+        return getBlock(SlotType.STRIPPED_LOG);
     }
 
     public Block getStrippedBark() {
-        return getBlock(WoodSlots.STRIPPED_BARK);
+        return getBlock(SlotType.STRIPPED_BARK);
     }
 }

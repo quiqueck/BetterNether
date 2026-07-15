@@ -1,12 +1,15 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SlotMap;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
+import org.betterx.wover.sets.api.blocks.SlotMap;
+import org.betterx.wover.sets.api.blocks.SlotType;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 
+/**
+ * A "vanilla wood" set that used to add the wooden furniture (taburet/chair/bar-stool). Those slots were
+ * removed from wover-sets-api in 21.7, so this set now registers nothing; kept so existing call sites compile.
+ */
 public class VanillaWood extends VanillaFallback<VanillaWood> {
     public VanillaWood(
             String name,
@@ -17,19 +20,14 @@ public class VanillaWood extends VanillaFallback<VanillaWood> {
     }
 
     @Override
-    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
-        return SlotMap.of(
-                WoodSlots.TABURET,
-                WoodSlots.BAR_STOOL,
-                WoodSlots.CHAIR
-        );
+    protected SlotMap createDefaultDefinitions() {
+        return SlotMap.of();
     }
 
     public static VanillaWood create(String baseName, Block clothMaterial) {
-        Block plank = getVanillaBlock(baseName, WoodSlots.PLANKS.suffix);
+        Block plank = getVanillaBlock(baseName, SlotType.PLANKS.suffix());
         return new VanillaWood(baseName, plank.defaultMapColor(), plank.defaultMapColor())
                 .setFurnitureCloth(clothMaterial)
                 .init();
     }
 }
-

@@ -8,7 +8,6 @@ import org.betterx.wover.block.api.trait.BlockTraitLookup;
 import org.betterx.wover.sets.api.blocks.BlockSet;
 import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
 
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -19,27 +18,20 @@ import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * The bulky "trunk" of a Nether tree. Parameterized with the concrete block factory (a
- * {@code Foo(BlockBehaviour.Properties)} constructor). Uses a hand-authored (external) model.
+ * The sapling of a Nether tree. Parameterized with the concrete block factory (a
+ * {@code Foo(BlockBehaviour.Properties)} constructor). Replaces bclib's {@code AbstractSaplingSlot}.
+ * Uses a hand-authored (external) cross model.
  */
-public class TrunkSlot extends SlotFromDefinition {
-    public static final String TRUNK_SUFFIX = "trunk";
-
+public class Sapling extends SlotFromDefinition {
     private final Function<BlockBehaviour.Properties, Block> maker;
-    private final boolean climbable;
 
-    private TrunkSlot(Function<BlockBehaviour.Properties, Block> maker, boolean climbable) {
-        super(NetherSlots.TRUNK);
+    private Sapling(Function<BlockBehaviour.Properties, Block> maker) {
+        super(NetherSlots.SAPLING);
         this.maker = maker;
-        this.climbable = climbable;
     }
 
-    public static TrunkSlot create(Function<BlockBehaviour.Properties, Block> maker) {
-        return new TrunkSlot(maker, false);
-    }
-
-    public static TrunkSlot createClimbable(Function<BlockBehaviour.Properties, Block> maker) {
-        return new TrunkSlot(maker, true);
+    public static Sapling create(Function<BlockBehaviour.Properties, Block> maker) {
+        return new Sapling(maker);
     }
 
     @Override
@@ -49,16 +41,6 @@ public class TrunkSlot extends SlotFromDefinition {
             @NotNull String name
     ) {
         return registry.defineDefaultBlock(name, def -> maker.apply(def.getProperties()));
-    }
-
-    @Override
-    protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
-        super.addSlotSpecificDefinitions(set, def);
-        if (climbable) {
-            def.addTags(BlockTags.MINEABLE_WITH_AXE, BlockTags.CLIMBABLE);
-        } else {
-            def.addTags(BlockTags.MINEABLE_WITH_AXE);
-        }
     }
 
     @Environment(EnvType.CLIENT)

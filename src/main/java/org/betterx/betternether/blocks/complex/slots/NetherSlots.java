@@ -1,22 +1,25 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.bclib.complexmaterials.entry.MaterialSlot;
+import org.betterx.wover.sets.api.blocks.SlotType;
 
+/**
+ * BetterNether-specific {@link SlotType}s used by the wover-sets-api wooden material sets
+ * (see {@link org.betterx.betternether.blocks.complex.NetherWoodenMaterial} and subclasses).
+ * <p>
+ * The standard log/bark/plank/... slots come from
+ * {@link org.betterx.wover.sets.api.blocks.slots.WoodSlots}; only the Nether-only extras live here.
+ */
 public class NetherSlots {
-    public static final MaterialSlot STRIPPED_LOG = new NetherStrippedLog();
-    public static final MaterialSlot STRIPPED_BARK = new NetherStrippedBark();
-    public static final MaterialSlot LOG = new NetherLog();
-    public static final MaterialSlot BARK = new NetherBark();
-    public static final MaterialSlot STEM = new Stem();
-    public static final MaterialSlot ROOF = new Roof();
-    public static final MaterialSlot ROOF_STAIRS = new RoofStairs();
-    public static final MaterialSlot ROOF_SLAB = new RoofSlab();
-
-    public static final String TRUNK = TrunkSlot.TRUNK_SUFFIX;
-    public final static String CONE = "cone";
-    public final static String BOWL = "bowl";
-    public final static String ROOTS = "roots";
-    public final static String TORCH = "torch";
-    public final static String BRANCH = "branch";
-    public final static String SEED = AbstractSeed.SEED_SUFFIX;
+    public static final SlotType STEM = new SlotType("stem");
+    public static final SlotType TRUNK = new SlotType("trunk");
+    public static final SlotType ROOF = new SlotType("roof");
+    public static final SlotType ROOF_STAIRS = new SlotType("roof_stairs");
+    public static final SlotType ROOF_SLAB = new SlotType("roof_slab");
+    public static final SlotType CONE = new SlotType("cone");
+    public static final SlotType BOWL = new SlotType("bowl");
+    public static final SlotType ROOTS = new SlotType("roots");
+    public static final SlotType TORCH = new SlotType("torch");
+    public static final SlotType BRANCH = new SlotType("branch");
+    public static final SlotType SEED = new SlotType("seed");
+    public static final SlotType SAPLING = new SlotType("sapling");
 }

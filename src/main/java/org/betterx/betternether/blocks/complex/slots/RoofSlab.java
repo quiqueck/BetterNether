@@ -1,44 +1,58 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.bclib.blocks.BaseSlabBlock;
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
-import org.betterx.wover.recipe.api.BaseRecipeBuilder;
-import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
+import org.betterx.wover.block.api.BlockDefinition;
+import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
+import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.trait.BlockRecipeTrait;
+import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.recipe.api.RecipeBuilder;
+import org.betterx.wover.sets.api.blocks.BlockSet;
+import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.SlabBlock;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class RoofSlab extends SimpleMaterialSlot<WoodenComplexMaterial> {
-    public RoofSlab() {
-        super("roof_slab");
+/**
+ * Slab cut from the {@link Roof} block. Registered after {@link Roof} (see {@code RoofMaterial}).
+ */
+public class RoofSlab extends SlotFromDefinition {
+    public static final RoofSlab SLOT = new RoofSlab();
+
+    private RoofSlab() {
+        super(NetherSlots.ROOF_SLAB);
     }
 
     @Override
-    protected @NotNull Block createBlock(
-            WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
+    protected BlockDefinition<?, ?> startBlockDefinition(
+            @NotNull BlockRegistry registry,
+            @NotNull BlockSet<?> set,
+            @NotNull String name
     ) {
-        return new BaseSlabBlock.Wood(parentMaterial.getBlock(NetherSlots.ROOF), false);
+        return registry.defineDefaultBlock(name, def -> new SlabBlock(def.getProperties()));
     }
 
-
     @Override
-    protected @Nullable void makeRecipe(RecipeOutput context, ComplexMaterial parentMaterial, ResourceLocation id) {
-        CraftingRecipeBuilder craftingRecipeBuilder1 = RecipeBuilder
-                .crafting(id, parentMaterial.getBlock(suffix));
-        CraftingRecipeBuilder craftingRecipeBuilder2 = craftingRecipeBuilder1.outputCount(6);
-        CraftingRecipeBuilder craftingRecipeBuilder = craftingRecipeBuilder2.shape("###")
-                                                                            .addMaterial('#', parentMaterial.getBlock(NetherSlots.ROOF));
-        BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder = craftingRecipeBuilder.group("slabs");
-        craftingRecipeBuilderBaseRecipeBuilder.category(RecipeCategory.BUILDING_BLOCKS)
-                                              .build(context);
+    protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
+                .crafting(key.location(), block)
+                .outputCount(6)
+                .shape("###")
+                .addMaterial('#', set.recipeMaterial(NetherSlots.ROOF))
+                .group("slabs")
+                .category(RecipeCategory.BUILDING_BLOCKS)
+                .build(context));
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        return ModelTraitLibrary.slab(() -> set.getBlock(NetherSlots.ROOF));
     }
 }

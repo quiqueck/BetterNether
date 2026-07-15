@@ -1,47 +1,46 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.bclib.blocks.BaseBlock;
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
-import org.betterx.wover.recipe.api.BaseRecipeBuilder;
-import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
+import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
+import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.trait.BlockRecipeTrait;
+import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.recipe.api.RecipeBuilder;
+import org.betterx.wover.sets.api.blocks.BlockSet;
+import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
+import org.betterx.wover.sets.api.blocks.SlotType;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+/**
+ * A full "roof" block crafted from planks; a plain wood cube (behaviour supplied by the set's
+ * {@code WOOD_BLOCK} trait via {@code NetherWoodenMaterial#addCommonBlockDefinitions}).
+ */
+public class Roof extends SlotFromDefinition {
+    public static final Roof SLOT = new Roof();
 
-public class Roof extends SimpleMaterialSlot<WoodenComplexMaterial> {
-    public Roof() {
-        super("roof");
+    private Roof() {
+        super(NetherSlots.ROOF);
     }
 
     @Override
-    protected @NotNull Block createBlock(
-            WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
-    ) {
-        return new BaseBlock.Wood(FabricBlockSettings.copyOf(parentMaterial.getBlock(
-                WoodSlots.PLANKS)));
+    protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
+                .crafting(key.location(), block)
+                .outputCount(4)
+                .shape("# #", "###", " # ")
+                .addMaterial('#', set.recipeMaterial(SlotType.PLANKS))
+                .group("planks")
+                .category(RecipeCategory.BUILDING_BLOCKS)
+                .build(context));
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
-    protected @Nullable void makeRecipe(RecipeOutput context, ComplexMaterial parentMaterial, ResourceLocation id) {
-        CraftingRecipeBuilder craftingRecipeBuilder1 = RecipeBuilder
-                .crafting(id, parentMaterial.getBlock(suffix));
-        CraftingRecipeBuilder craftingRecipeBuilder2 = craftingRecipeBuilder1.outputCount(4);
-        CraftingRecipeBuilder craftingRecipeBuilder = craftingRecipeBuilder2.shape("# #", "###", " # ")
-                                                                            .addMaterial('#', parentMaterial.getBlock(WoodSlots.PLANKS));
-        BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder = craftingRecipeBuilder.group("planks");
-        craftingRecipeBuilderBaseRecipeBuilder.category(RecipeCategory.BUILDING_BLOCKS)
-                                              .build(context);
+    protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        return ModelTraitLibrary.cube();
     }
 }

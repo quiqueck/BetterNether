@@ -1,59 +1,66 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.BlockEntry;
-import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
-import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.BlockStem;
-import org.betterx.wover.recipe.api.BaseRecipeBuilder;
-import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
+import org.betterx.wover.block.api.BlockDefinition;
+import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
+import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.trait.BlockRecipeTrait;
+import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.recipe.api.RecipeBuilder;
+import org.betterx.wover.sets.api.blocks.BlockSet;
+import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
+import org.betterx.wover.sets.api.blocks.SlotType;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class Stem extends SimpleMaterialSlot<WoodenComplexMaterial> {
-    public Stem() {
-        super("stem");
+/**
+ * The thin axis-aligned "stem" of a Nether tree. Four stems craft into a log.
+ */
+public class Stem extends SlotFromDefinition {
+    public static final Stem SLOT = new Stem();
+
+    protected Stem() {
+        super(NetherSlots.STEM);
     }
 
     @Override
-    protected @NotNull Block createBlock(
-            WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
+    protected BlockDefinition<?, ?> startBlockDefinition(
+            @NotNull BlockRegistry registry,
+            @NotNull BlockSet<?> set,
+            @NotNull String name
     ) {
-        return new BlockStem(parentMaterial.woodColor);
-    }
-
-    protected @Nullable RecipeEntry getRecipeEntry(WoodenComplexMaterial parentMaterial) {
-        return new RecipeEntry(WoodSlots.LOG.suffix + "_" + suffix, (ctx, parentMaterial1, id) -> makeRecipe(ctx, parentMaterial1, id));
+        return registry.defineDefaultBlock(name, def -> new BlockStem(def.getProperties()));
     }
 
     @Override
-    protected void modifyBlockEntry(
-            WoodenComplexMaterial parentMaterial,
-            @NotNull BlockEntry entry
-    ) {
-        entry.setBlockTags(BlockTags.MINEABLE_WITH_AXE);
+    protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        super.addSlotSpecificDefinitions(set, def);
+        def.strength(0.5f).noOcclusion().addTags(BlockTags.MINEABLE_WITH_AXE);
     }
 
     @Override
-    protected @Nullable void makeRecipe(RecipeOutput context, ComplexMaterial parentMaterial, ResourceLocation id) {
-        CraftingRecipeBuilder craftingRecipeBuilder1 = RecipeBuilder
-                .crafting(id, parentMaterial.getBlock(WoodSlots.LOG));
-        CraftingRecipeBuilder craftingRecipeBuilder2 = craftingRecipeBuilder1.outputCount(1);
-        CraftingRecipeBuilder craftingRecipeBuilder = craftingRecipeBuilder2.shape("##", "##")
-                                                                            .addMaterial('#', parentMaterial.getBlock(suffix));
-        BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder = craftingRecipeBuilder.group("planks");
-        craftingRecipeBuilderBaseRecipeBuilder.category(RecipeCategory.BUILDING_BLOCKS)
-                                              .build(context);
+    protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
+                .crafting(key.location().withSuffix("_to_log"), set.getBlock(SlotType.LOG))
+                .outputCount(1)
+                .shape("##", "##")
+                .addMaterial('#', set.recipeMaterial(NetherSlots.STEM))
+                .group("logs")
+                .category(RecipeCategory.BUILDING_BLOCKS)
+                .build(context));
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        return ModelTraitLibrary.pillar();
     }
 }

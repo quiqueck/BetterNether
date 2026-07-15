@@ -12,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,12 @@ import org.jetbrains.annotations.NotNull;
 public class BlockWillowSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherGround, BehaviourSapling {
     public BlockWillowSapling() {
         super((level, pos, state, rnd) -> NetherTrees.WILLOW_TREE
+                .placeInWorld(WorldState.registryAccess(), level, pos, rnd)
+        );
+    }
+
+    public BlockWillowSapling(BlockBehaviour.Properties properties) {
+        super(properties, (level, pos, state, rnd) -> NetherTrees.WILLOW_TREE
                 .placeInWorld(WorldState.registryAccess(), level, pos, rnd)
         );
     }

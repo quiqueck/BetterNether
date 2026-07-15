@@ -1,8 +1,9 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SlotMap;
-import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.Roof;
+import org.betterx.betternether.blocks.complex.slots.RoofSlab;
+import org.betterx.betternether.blocks.complex.slots.RoofStairs;
+import org.betterx.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.material.MapColor;
 
@@ -12,10 +13,10 @@ public class RoofMaterial<T extends RoofMaterial<T>> extends NetherWoodenMateria
     }
 
     @Override
-    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
-        return super.createMaterialSlots()
-                    .add(NetherSlots.ROOF)
-                    .add(NetherSlots.ROOF_STAIRS)
-                    .add(NetherSlots.ROOF_SLAB);
+    protected SlotMap createDefaultDefinitions() {
+        return super.createDefaultDefinitions()
+                    .add(Roof.SLOT)
+                    .add(RoofStairs.SLOT)
+                    .add(RoofSlab.SLOT);
     }
 }

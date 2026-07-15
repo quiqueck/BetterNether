@@ -1,51 +1,52 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
+import org.betterx.wover.block.api.BlockDefinition;
+import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
+import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.sets.api.blocks.BlockSet;
+import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
 
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractSeed extends SimpleMaterialSlot<WoodenComplexMaterial> {
-    protected static final String SEED_SUFFIX = "seed";
+/**
+ * The plantable "seed" of a Nether tree. Parameterized with the concrete block factory
+ * (a {@code Foo(BlockBehaviour.Properties)} constructor). Uses a hand-authored (external) model.
+ */
+public class AbstractSeed extends SlotFromDefinition {
+    public static final String SEED_SUFFIX = "seed";
 
-    protected AbstractSeed() {
-        super(SEED_SUFFIX);
+    private final Function<BlockBehaviour.Properties, Block> maker;
+
+    private AbstractSeed(Function<BlockBehaviour.Properties, Block> maker) {
+        super(NetherSlots.SEED);
+        this.maker = maker;
     }
 
+    public static AbstractSeed create(Function<BlockBehaviour.Properties, Block> maker) {
+        return new AbstractSeed(maker);
+    }
 
     @Override
-    protected @Nullable void makeRecipe(RecipeOutput context, ComplexMaterial parentMaterial, ResourceLocation id) {
-
+    protected BlockDefinition<?, ?> startBlockDefinition(
+            @NotNull BlockRegistry registry,
+            @NotNull BlockSet<?> set,
+            @NotNull String name
+    ) {
+        return registry.defineDefaultBlock(name, def -> maker.apply(def.getProperties()));
     }
 
-    public static AbstractSeed create(BiFunction<ComplexMaterial, BlockBehaviour.Properties, Block> maker) {
-        return new AbstractSeed() {
-            @Override
-            protected @NotNull Block createBlock(
-                    WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
-            ) {
-                return maker.apply(parentMaterial, settings);
-            }
-        };
-    }
-
-    public static AbstractSeed create(Supplier<Block> maker) {
-        return new AbstractSeed() {
-            @Override
-            protected @NotNull Block createBlock(
-                    WoodenComplexMaterial parentMaterial, BlockBehaviour.Properties settings
-            ) {
-                return maker.get();
-            }
-        };
+    @Environment(EnvType.CLIENT)
+    @Override
+    protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        return ModelTraitLibrary.externalModel();
     }
 }

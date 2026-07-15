@@ -33,6 +33,12 @@ public class BlockStalagnateBowl extends BlockBaseNotFull implements AddMineable
         this.registerDefaultState(getStateDefinition().any().setValue(FOOD, FoodShape.NONE));
     }
 
+    public BlockStalagnateBowl(BlockBehaviour.Properties properties) {
+        super(properties.noOcclusion());
+        this.setRenderLayer(BNRenderLayer.CUTOUT);
+        this.registerDefaultState(getStateDefinition().any().setValue(FOOD, FoodShape.NONE));
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
         stateManager.add(FOOD);

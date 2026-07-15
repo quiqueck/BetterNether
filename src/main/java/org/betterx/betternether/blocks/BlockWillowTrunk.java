@@ -8,6 +8,7 @@ import org.betterx.wover.block.api.BlockProperties.TripleShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -22,6 +23,12 @@ public class BlockWillowTrunk extends BlockBaseNotFull implements AddMineableAxe
 
     public BlockWillowTrunk() {
         super(Materials.makeNetherWood(MapColor.TERRACOTTA_RED).noOcclusion());
+        this.setDropItself(false);
+        this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
+    }
+
+    public BlockWillowTrunk(BlockBehaviour.Properties properties) {
+        super(properties);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
     }

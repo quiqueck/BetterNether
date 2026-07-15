@@ -1,24 +1,24 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.MaterialSlot;
-import org.betterx.bclib.complexmaterials.entry.SlotMap;
-import org.betterx.bclib.complexmaterials.set.wood.Planks;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.Stem;
-import org.betterx.wover.recipe.api.BaseRecipeBuilder;
-import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
+import org.betterx.wover.block.api.trait.BlockRecipeTrait;
+import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.recipe.api.RecipeBuilder;
+import org.betterx.wover.sets.api.blocks.BlockSet;
+import org.betterx.wover.sets.api.blocks.SlotMap;
+import org.betterx.wover.sets.api.blocks.SlotType;
+import org.betterx.wover.sets.api.blocks.WoodenBlockSet;
+import org.betterx.wover.sets.api.blocks.slots.WoodSlots;
+import org.betterx.wover.sets.api.blocks.types.Planks;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MapColor;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomMaterial> {
@@ -28,42 +28,41 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomM
     }
 
     @Override
-    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
-        return super.createMaterialSlots()
+    protected SlotMap createDefaultDefinitions() {
+        return super.createDefaultDefinitions()
                     .remove(WoodSlots.LOG)
                     .remove(WoodSlots.BARK)
                     .remove(WoodSlots.STRIPPED_LOG)
                     .remove(WoodSlots.STRIPPED_BARK)
+                    // A stem without the default "4 stems -> log" recipe (this set has no log).
                     .add(new Stem() {
                         @Override
-                        protected @Nullable void makeRecipe(
-                                RecipeOutput context, ComplexMaterial material, ResourceLocation id
-                        ) {
+                        protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                            return null;
                         }
                     })
+                    // Planks are crafted from 4 stems instead of a log.
                     .replace(new Planks() {
                         @Override
-                        protected @Nullable void makeRecipe(
-                                RecipeOutput context, ComplexMaterial material, ResourceLocation id
-                        ) {
-                            CraftingRecipeBuilder craftingRecipeBuilder1 = RecipeBuilder.crafting(id, material.getBlock(WoodSlots.PLANKS));
-                            CraftingRecipeBuilder craftingRecipeBuilder = craftingRecipeBuilder1
+                        protected BlockRecipeTrait buildWoodRecipe(WoodenBlockSet<?> set, BlockTraitLookup traitLookup) {
+                            return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
+                                    .crafting(key.location(), block)
                                     .outputCount(4)
                                     .shapeless()
-                                    .addMaterial('#', material.getBlock(NetherSlots.STEM));
-                            BaseRecipeBuilder<CraftingRecipeBuilder> craftingRecipeBuilderBaseRecipeBuilder = craftingRecipeBuilder.group("planks");
-                            craftingRecipeBuilderBaseRecipeBuilder.category(RecipeCategory.BUILDING_BLOCKS)
-                                                                  .build(context);
+                                    .addMaterial('#', set.recipeMaterial(NetherSlots.STEM))
+                                    .group("planks")
+                                    .category(RecipeCategory.BUILDING_BLOCKS)
+                                    .build(context));
                         }
-                    })
-                ;
+                    });
     }
 
     @Override
-    public @Nullable <M extends ComplexMaterial> Block getBlock(MaterialSlot<M> key) {
-        if (key.suffix.equals(WoodSlots.STRIPPED_LOG.suffix))
+    public @Nullable Block getBlock(@NotNull SlotType type) {
+        if (SlotType.STRIPPED_LOG.equals(type)) {
             return getStem();
-        return super.getBlock(key);
+        }
+        return super.getBlock(type);
     }
 
     public Block getStem() {

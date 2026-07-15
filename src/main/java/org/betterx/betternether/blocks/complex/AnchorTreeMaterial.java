@@ -1,11 +1,10 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SlotMap;
-import org.betterx.bclib.complexmaterials.set.wood.AbstractSaplingSlot;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -17,15 +16,14 @@ public class AnchorTreeMaterial extends NetherWoodenMaterial<AnchorTreeMaterial>
         this.setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
-
     @Override
-    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
-        return super.createMaterialSlots()
-                    .add(AbstractSaplingSlot.create(BlockAnchorTreeSapling::new));
+    protected SlotMap createDefaultDefinitions() {
+        return super.createDefaultDefinitions()
+                    .add(Sapling.create(BlockAnchorTreeSapling::new));
     }
 
     public Block getSapling() {
-        return getBlock(WoodSlots.SAPLING);
+        return getBlock(NetherSlots.SAPLING);
     }
 
     public boolean isTreeLog(Block block) {

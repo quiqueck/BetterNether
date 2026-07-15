@@ -9,6 +9,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -19,6 +20,10 @@ public class BlockRubeusCone extends BlockBaseNotFull implements AddMineableAxe 
 
     public BlockRubeusCone() {
         super(Materials.makeNetherWood(MapColor.COLOR_CYAN).strength(0.5f).lightLevel(s -> 15).noOcclusion());
+    }
+
+    public BlockRubeusCone(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     @Override

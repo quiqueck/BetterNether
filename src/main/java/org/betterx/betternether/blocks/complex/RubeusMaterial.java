@@ -1,28 +1,25 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SimpleMaterialSlot;
-import org.betterx.bclib.complexmaterials.entry.SlotMap;
-import org.betterx.bclib.complexmaterials.set.wood.AbstractSaplingSlot;
-import org.betterx.bclib.complexmaterials.set.wood.Bark;
-import org.betterx.bclib.complexmaterials.set.wood.Log;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.BlockRubeusCone;
 import org.betterx.betternether.blocks.BlockRubeusSapling;
 import org.betterx.betternether.blocks.RubeusBark;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.Sapling;
+import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.block.api.BlockDefinition;
+import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.sets.api.blocks.BlockSet;
+import org.betterx.wover.sets.api.blocks.SlotMap;
+import org.betterx.wover.sets.api.blocks.types.Bark;
+import org.betterx.wover.sets.api.blocks.types.Log;
 
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+
 import net.minecraft.world.level.material.MapColor;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
     public RubeusMaterial() {
@@ -31,51 +28,37 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
     }
 
     @Override
-    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
-        return super.createMaterialSlots()
-                    .add(AbstractSaplingSlot.create(BlockRubeusSapling::new))
-                    .add(new SimpleMaterialSlot<>(NetherSlots.CONE) {
+    protected SlotMap createDefaultDefinitions() {
+        return super.createDefaultDefinitions()
+                    .add(Sapling.create(BlockRubeusSapling::new))
+                    .add(SimpleBlockSlot.withItem(NetherSlots.CONE, (set, props) -> new BlockRubeusCone(props)))
+                    .replace(new Log(true) {
                         @Override
-                        protected @NotNull Block createBlock(
-                                WoodenComplexMaterial parentMaterial,
-                                BlockBehaviour.Properties settings
+                        protected BlockDefinition<?, ?> startBlockDefinition(
+                                @NotNull BlockRegistry registry,
+                                @NotNull BlockSet<?> set,
+                                @NotNull String name
                         ) {
-                            return new BlockRubeusCone();
-                        }
-
-                        @Override
-                        protected @Nullable void makeRecipe(
-                                RecipeOutput context, ComplexMaterial parentMaterial, ResourceLocation id
-                        ) {
-
+                            return registry.defineDefaultBlockWithProps(name, RubeusLog::new);
                         }
                     })
-                    .replace(new Log() {
+                    .replace(new Bark(true) {
                         @Override
-                        protected @NotNull Block createBlock(
-                                WoodenComplexMaterial parentMaterial,
-                                BlockBehaviour.Properties settings
+                        protected BlockDefinition<?, ?> startBlockDefinition(
+                                @NotNull BlockRegistry registry,
+                                @NotNull BlockSet<?> set,
+                                @NotNull String name
                         ) {
-                            return new RubeusLog(woodColor, getStrippedLog());
-                        }
-                    })
-                    .replace(new Bark() {
-                        @Override
-                        protected @NotNull Block createBlock(
-                                WoodenComplexMaterial parentMaterial,
-                                BlockBehaviour.Properties settings
-                        ) {
-                            return new RubeusBark(woodColor, getStrippedBark());
+                            return registry.defineDefaultBlockWithProps(name, RubeusBark::new);
                         }
                     });
     }
-
 
     public Block getCone() {
         return getBlock(NetherSlots.CONE);
     }
 
     public Block getSapling() {
-        return getBlock(WoodSlots.SAPLING);
+        return getBlock(NetherSlots.SAPLING);
     }
 }

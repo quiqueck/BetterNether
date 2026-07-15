@@ -18,6 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -37,6 +38,13 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
 
     public BlockStalagnateSeed() {
         super((level, pos, state, rnd) -> growsDownward(state)
+                ? NetherTrees.STALAGNATE_DOWN.placeInWorld(WorldState.registryAccess(), level, pos, rnd)
+                : NetherTrees.STALAGNATE.placeInWorld(WorldState.registryAccess(), level, pos, rnd));
+        this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
+    }
+
+    public BlockStalagnateSeed(BlockBehaviour.Properties properties) {
+        super(properties, (level, pos, state, rnd) -> growsDownward(state)
                 ? NetherTrees.STALAGNATE_DOWN.placeInWorld(WorldState.registryAccess(), level, pos, rnd)
                 : NetherTrees.STALAGNATE.placeInWorld(WorldState.registryAccess(), level, pos, rnd));
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));

@@ -13,6 +13,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -38,6 +39,12 @@ public class BlockMushroomFir extends BlockBaseNotFull implements BehaviourWood 
 
     public BlockMushroomFir() {
         super(Materials.makeNetherWood(MapColor.COLOR_CYAN).noOcclusion());
+        this.setDropItself(false);
+        this.setRenderLayer(BNRenderLayer.CUTOUT);
+    }
+
+    public BlockMushroomFir(BlockBehaviour.Properties properties) {
+        super(properties);
         this.setDropItself(false);
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

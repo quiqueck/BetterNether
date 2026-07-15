@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -27,6 +28,13 @@ public class BlockStalagnate extends BlockBaseNotFull implements BehaviourWood {
 
     public BlockStalagnate() {
         super(Materials.makeNetherWood(MapColor.TERRACOTTA_LIGHT_GREEN).noOcclusion());
+        this.setRenderLayer(BNRenderLayer.CUTOUT);
+        this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, BlockProperties.TripleShape.MIDDLE));
+        this.setDropItself(false);
+    }
+
+    public BlockStalagnate(BlockBehaviour.Properties properties) {
+        super(properties);
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, BlockProperties.TripleShape.MIDDLE));
         this.setDropItself(false);

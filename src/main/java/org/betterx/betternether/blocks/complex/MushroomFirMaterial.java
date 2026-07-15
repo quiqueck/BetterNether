@@ -1,14 +1,13 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.entry.SlotMap;
-import org.betterx.bclib.complexmaterials.set.wood.AbstractSaplingSlot;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.betternether.blocks.BlockMushroomFir;
 import org.betterx.betternether.blocks.BlockMushroomFirSapling;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.Sapling;
+import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -20,11 +19,11 @@ public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMateria
     }
 
     @Override
-    protected SlotMap<WoodenComplexMaterial> createMaterialSlots() {
-        return super.createMaterialSlots()
+    protected SlotMap createDefaultDefinitions() {
+        return super.createDefaultDefinitions()
                     .add(TrunkSlot.create(BlockMushroomFir::new))
-                    .add(AbstractSaplingSlot.create(BlockMushroomFirSapling::new))
-                    .add(NetherSlots.STEM);
+                    .add(Sapling.create(BlockMushroomFirSapling::new))
+                    .add(Stem.SLOT);
     }
 
     public Block getStem() {
@@ -32,7 +31,7 @@ public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMateria
     }
 
     public Block getSapling() {
-        return getBlock(WoodSlots.SAPLING);
+        return getBlock(NetherSlots.SAPLING);
     }
 
     public Block getTrunk() {

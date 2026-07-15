@@ -82,7 +82,14 @@ public class BNModels {
         generators.acceptBlockState(MultiVariantGenerator.dispatch(bl, new MultiVariant(WeightedList.of(variants))));
 
         Item item = bl.asItem();
-        ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item), TextureMapping.layer0(sources.get(0).textures.get(0).texture), generators.vanillaGenerator.modelOutput);
+        final ResourceLocation itemModel = ModelLocationUtils.getModelLocation(item);
+        ModelTemplates.FLAT_ITEM.create(itemModel, TextureMapping.layer0(sources.get(0).textures.get(0).texture), generators.vanillaGenerator.modelOutput);
+        // The FLAT_ITEM.create above only writes the item MODEL (models/item/<name>.json) through
+        // modelOutput. Register the item-model DEFINITION (items/<name>.json) pointing at it via
+        // delegateItemModel, which also marks the block as having its item model provided so the
+        // flat-item fallback in NetherModelProvider.bootstrapItemModels doesn't re-generate (and
+        // collide with) this model.
+        generators.delegateItemModel(bl, itemModel);
     }
 
     public static ModelTemplate getCropBlockModelTemplate(String suffix) {

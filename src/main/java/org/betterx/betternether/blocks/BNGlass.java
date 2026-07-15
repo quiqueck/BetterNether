@@ -59,7 +59,14 @@ public class BNGlass extends BaseGlassBlock implements BlockModelProvider {
             final var mapping = WoverBlockModelGenerators.textureMappingOf(TextureSlot.ALL, BetterNether.C.mk("item/quartz_glass"));
             final var template = new ModelTemplate(Optional.of(ModelLocationUtils.getModelLocation(this)), Optional.empty(), TextureSlot.ALL);
 
-            template.create(ModelLocationUtils.getModelLocation(this.asItem()), mapping, generators.vanillaGenerator.modelOutput);
+            final var itemModel = ModelLocationUtils.getModelLocation(this.asItem());
+            template.create(itemModel, mapping, generators.vanillaGenerator.modelOutput);
+            // The template.create above only writes the item MODEL (models/item/quartz_glass.json)
+            // through modelOutput. Register the item-model DEFINITION (items/quartz_glass.json) pointing
+            // at it via delegateItemModel, which also marks this block as having its item model provided
+            // so the flat-item fallback in NetherModelProvider.bootstrapItemModels doesn't re-generate
+            // (and collide with) this model.
+            generators.delegateItemModel(this, itemModel);
         }
     }
 }

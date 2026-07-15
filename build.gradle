@@ -130,6 +130,9 @@ repositories {
 }
 
 processResources {
+    // src/main/generated is appended after src/main/resources; EXCLUDE keeps the first (hand-authored)
+    // copy, so hand-authored models (e.g. handheld tool models) win over any redundant datagen output.
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     println "Version: ${project.version}"
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") {

@@ -11,11 +11,16 @@ import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverModelProvider;
+import org.betterx.wover.item.api.ItemRegistry;
+import org.betterx.wover.item.api.client.trait.ClientItemTraits;
+import org.betterx.wover.item.api.client.trait.ItemModelTrait;
 
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 
 import com.google.gson.JsonArray;
@@ -23,15 +28,34 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class NetherModelProvider extends WoverModelProvider {
-
+    /**
+     * Set by {@link #bootstrapBlockStateModels} (which always runs first - vanilla generates block-state
+     * models before item models) and read back by {@link #bootstrapItemModels} to know which blocks
+     * already generated their own item model via {@link WoverBlockModelGenerators#hasItemModel}, so the
+     * flat-item fallback there doesn't step on them.
+     */
+    private WoverBlockModelGenerators generator;
 
     @Override
     protected void bootstrapItemModels(ItemModelGenerators itemModelGenerator) {
+        ItemModelTrait.bootstrapModels(modCore, itemModelGenerator);
 
+        // Every registered item needs an item-model definition (assets/betternether/items/*.json).
+        // Block items normally get theirs as a side effect of their block's model generation - skip
+        // those here (checked via generator.hasItemModel()). Items carrying an explicit ItemModelTrait
+        // are already handled by bootstrapModels() above. Everything else falls back to a plain flat
+        // icon, matching vanilla's convention for simple items.
+        ItemRegistry.forMod(BetterNether.C).allEntries().forEach(entry -> {
+            var item = entry.getValue();
+            if (item instanceof BlockItem blockItem && generator.hasItemModel(blockItem.getBlock())) return;
+            if (ClientItemTraits.MODEL.getRuntimeTraits(item) != null) return;
+            itemModelGenerator.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
+        });
     }
 
     @Override
     protected void bootstrapBlockStateModels(WoverBlockModelGenerators generator) {
+        this.generator = generator;
         final Block reedPlanks = NetherBlocks.MAT_REED.getBlock(SlotType.PLANKS);
         final ResourceLocation NETHER_REED_PLANKS = TextureMapping.getBlockTexture(reedPlanks);
         final ResourceLocation NETHER_REED_PLANKS_TOP = BetterNether.C.mk("block/nether_reed_planks_top");
@@ -93,6 +117,10 @@ public class NetherModelProvider extends WoverModelProvider {
 
                         return root;
                     });
+                    // acceptModelOutput above only writes the item MODEL. Register the item-model
+                    // DEFINITION pointing at it (and mark the block's item model as provided) so the
+                    // flat-item fallback in bootstrapItemModels doesn't re-generate/collide with it.
+                    generator.delegateItemModel(block, ModelLocationUtils.getModelLocation(block.asItem()));
                     BCLModels.createChairBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED, NetherBlocks.NETHER_BRICK_TILE_LARGE);
                 })
                 .override(NetherBlocks.BAR_STOOL_CINCINNASITE, block -> BCLModels.createBarStoolBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED, NetherBlocks.NETHER_BRICK_TILE_LARGE))

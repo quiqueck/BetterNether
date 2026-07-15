@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import de.ambertation.wunderlib.math.Float3;
 import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -34,6 +33,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourMetal {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 16, 15);
@@ -43,7 +44,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
             box(9, 0, 8, 13, 12, 122),
             box(5, 0, 6, 7, 6, 8)
     );
-    private static final DustParticleOptions EFFECT = new DustParticleOptions(Float3.X_AXIS.toVector3(), 1.0F);
+    private static final DustParticleOptions EFFECT = new DustParticleOptions(0xFF0000, 1.0F);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty TOP = BooleanProperty.create("top");
     private final ItemStack requiredItem;
@@ -77,7 +78,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+    public VoxelShape getOcclusionShape(BlockState blockState) {
         return CULL_SHAPE;
     }
 
@@ -104,7 +105,10 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
                 );
             player.displayClientMessage(Component.translatable("message.spawn_set", new Object[0]), true);
             if (!world.isClientSide) {
-                ((ServerPlayer) player).setRespawnPosition(world.dimension(), pos, player.getYHeadRot(), false, true);
+                ((ServerPlayer) player).setRespawnPosition(
+                        new ServerPlayer.RespawnConfig(world.dimension(), pos, player.getYHeadRot(), false),
+                        true
+                );
             }
             player.playSound(SoundEvents.TOTEM_USE, 0.7F, 1.0F);
             return InteractionResult.SUCCESS;
@@ -131,11 +135,13 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (state.getValue(TOP)) {
             return world.getBlockState(pos.below()).getBlock() == this ? state : Blocks.AIR.defaultBlockState();

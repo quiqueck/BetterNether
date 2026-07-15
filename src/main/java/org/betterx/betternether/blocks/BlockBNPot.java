@@ -11,7 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -39,7 +39,7 @@ public abstract class BlockBNPot extends BlockBaseNotFull {
     }
 
     @Override
-    public ItemInteractionResult useItemOn(
+    public InteractionResult useItemOn(
             ItemStack itemStack,
             BlockState state,
             Level world,
@@ -66,10 +66,10 @@ public abstract class BlockBNPot extends BlockBaseNotFull {
                 );
                 if (!player.isCreative())
                     player.getMainHandItem().shrink(1);
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
-        return ItemInteractionResult.FAIL;
+        return InteractionResult.FAIL;
     }
 
     public static class Wood extends BlockBNPot implements BehaviourWood {

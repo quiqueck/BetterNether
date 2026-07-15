@@ -92,7 +92,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(NetherBlocks.LUCIS_SPORE);
     }
 }

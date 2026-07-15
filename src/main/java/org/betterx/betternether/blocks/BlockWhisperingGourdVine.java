@@ -2,7 +2,7 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.blocks.BaseVineBlock;
-import org.betterx.bclib.items.tool.BaseShearsItem;
+import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockProperties;
@@ -13,7 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +47,7 @@ public class BlockWhisperingGourdVine extends BaseVineBlock.Growing implements B
     }
 
     @Override
-    public ItemInteractionResult useItemOn(
+    public InteractionResult useItemOn(
             ItemStack itemStack,
             BlockState state,
             Level world,
@@ -57,7 +57,7 @@ public class BlockWhisperingGourdVine extends BaseVineBlock.Growing implements B
             BlockHitResult hit
     ) {
         ItemStack tool = player.getItemInHand(hand);
-        if (BaseShearsItem.isShear(tool) && state.getValue(SHAPE) == BlockProperties.TripleShape.MIDDLE) {
+        if (LootUtil.isShear(tool) && state.getValue(SHAPE) == BlockProperties.TripleShape.MIDDLE) {
             if (!world.isClientSide) {
                 BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, BlockProperties.TripleShape.BOTTOM));
                 world.addFreshEntity(new ItemEntity(
@@ -78,7 +78,7 @@ public class BlockWhisperingGourdVine extends BaseVineBlock.Growing implements B
                     ));
                 }
             }
-            return ItemInteractionResult.sidedSuccess(world.isClientSide);
+            return InteractionResult.SUCCESS;
         } else {
             return super.useItemOn(itemStack, state, world, pos, player, hand, hit);
         }

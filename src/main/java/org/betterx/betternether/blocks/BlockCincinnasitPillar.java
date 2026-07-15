@@ -11,6 +11,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 public class BlockCincinnasitPillar extends BlockBase implements BehaviourMetal {
     public static final EnumProperty<CincinnasitPillarShape> SHAPE = BNBlockProperties.PILLAR_SHAPE;
@@ -27,11 +30,13 @@ public class BlockCincinnasitPillar extends BlockBase implements BehaviourMetal 
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         boolean top = world.getBlockState(pos.above()).getBlock() == this;
         boolean bottom = world.getBlockState(pos.below()).getBlock() == this;

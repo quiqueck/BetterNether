@@ -25,7 +25,7 @@ public class BlockEyeVine extends BaseVineBlock {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(NetherBlocks.EYE_SEED);
     }
 }

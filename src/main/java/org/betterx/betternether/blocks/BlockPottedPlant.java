@@ -22,6 +22,8 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import java.util.Collections;
 import java.util.List;
@@ -56,7 +58,7 @@ public class BlockPottedPlant extends BlockBaseNotFull implements AddMineableHoe
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
         Block block = state.getValue(PLANT).getBlock();
-        Vec3 vec3d = block.defaultBlockState().getOffset(view, pos);
+        Vec3 vec3d = block.defaultBlockState().getOffset(pos);
         return block.getShape(block.defaultBlockState(), view, pos, ePos).move(-vec3d.x, -0.5 - vec3d.y, -vec3d.z);
     }
 
@@ -73,11 +75,13 @@ public class BlockPottedPlant extends BlockBaseNotFull implements AddMineableHoe
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();

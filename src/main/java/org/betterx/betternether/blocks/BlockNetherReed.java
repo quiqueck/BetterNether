@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -47,11 +48,13 @@ public class BlockNetherReed extends BlockBase implements AddMineableSword, AddM
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         Block up = world.getBlockState(pos.above()).getBlock();
         BlockState down = world.getBlockState(pos.below());

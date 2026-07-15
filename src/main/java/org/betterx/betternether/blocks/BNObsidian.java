@@ -7,12 +7,14 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.advancements.BNCriterion;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightningRodBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.AABB;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -42,14 +44,18 @@ class BNObsidianBase extends BaseBlock implements BehaviourObsidian {
             Level level,
             BlockPos blockPos,
             Block block,
-            BlockPos rodPos,
+            Orientation orientation,
             boolean bl
     ) {
+        // 1.21.7: neighborChanged no longer supplies the source position; scan the
+        // adjacent blocks for a powered lightning rod instead.
         if (transformsTo != null) {
-            final BlockState updaterState = level.getBlockState(rodPos);
-            if (updaterState.is(Blocks.LIGHTNING_ROD)) {
-                if (updaterState.getValue(LightningRodBlock.POWERED)) {
+            for (Direction direction : Direction.values()) {
+                final BlockPos rodPos = blockPos.relative(direction);
+                final BlockState updaterState = level.getBlockState(rodPos);
+                if (updaterState.is(Blocks.LIGHTNING_ROD) && updaterState.getValue(LightningRodBlock.POWERED)) {
                     BNObsidian.onLightningUpdate(level, blockPos, transformsTo);
+                    return;
                 }
             }
         }

@@ -30,6 +30,8 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -68,7 +70,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMinea
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING);
     }
 
@@ -78,18 +80,20 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMinea
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
+    public boolean propagatesSkylightDown(BlockState state) {
         return true;
     }
 
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         switch (state.getValue(SHAPE)) {
             case BOTTOM:
@@ -112,7 +116,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMinea
     }
 
     @Override
-    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         if (world.getBlockState(pos).getValue(SHAPE) != TripleShape.TOP)
             return;
         if (entity.isSuppressingBounce())
@@ -122,9 +126,9 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMinea
     }
 
     @Override
-    public void updateEntityAfterFallOn(BlockGetter world, Entity entity) {
+    public void updateEntityMovementAfterFallOn(BlockGetter world, Entity entity) {
         if (entity.isSuppressingBounce())
-            super.updateEntityAfterFallOn(world, entity);
+            super.updateEntityMovementAfterFallOn(world, entity);
         else
             this.bounce(entity);
     }

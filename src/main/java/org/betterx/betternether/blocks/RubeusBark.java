@@ -27,7 +27,7 @@ public class RubeusBark extends RotatedPillarBlock implements AddMineableAxe {
     }
 
     @Override
-    protected MapCodec<? extends RotatedPillarBlock> codec() {
+    public MapCodec<? extends RotatedPillarBlock> codec() {
         return CODEC;
     }
 

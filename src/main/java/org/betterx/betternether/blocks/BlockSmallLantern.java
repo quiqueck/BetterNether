@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 public abstract class BlockSmallLantern extends BlockBaseNotFull {
     private static final VoxelShape SHAPE_NORTH = box(5, 0, 8, 11, 16, 16);
@@ -83,11 +85,13 @@ public abstract class BlockSmallLantern extends BlockBaseNotFull {
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (canSurvive(state, world, pos))
             return state;

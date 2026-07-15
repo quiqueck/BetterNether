@@ -33,7 +33,7 @@ public class BlockObsidianGlass extends BlockBaseNotFull implements BehaviourImm
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
+    public boolean propagatesSkylightDown(BlockState state) {
         return true;
     }
 

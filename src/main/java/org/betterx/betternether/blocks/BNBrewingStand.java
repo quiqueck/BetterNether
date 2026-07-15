@@ -6,10 +6,11 @@ import org.betterx.betternether.client.IRenderTypeable;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -48,7 +49,7 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(
+    protected InteractionResult useItemOn(
             ItemStack itemStack,
             BlockState state,
             Level world,
@@ -58,7 +59,7 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
             BlockHitResult hit
     ) {
         if (world.isClientSide) {
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof BNBrewingStandBlockEntity) {
@@ -66,20 +67,18 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
                 player.awardStat(Stats.INTERACT_WITH_BREWINGSTAND);
             }
 
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
     }
 
     @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean notify) {
-        if (!state.is(newState.getBlock())) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof BNBrewingStandBlockEntity bn) {
-                Containers.dropContents(world, pos, bn);
-            }
-
-            super.onRemove(state, world, pos, newState, notify);
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean notify) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof BNBrewingStandBlockEntity bn) {
+            Containers.dropContents(world, pos, bn);
         }
+
+        super.affectNeighborsAfterRemoval(state, world, pos, notify);
     }
 
     @Override

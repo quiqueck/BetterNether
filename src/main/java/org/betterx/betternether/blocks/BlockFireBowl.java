@@ -14,7 +14,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -68,12 +68,12 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+    public VoxelShape getOcclusionShape(BlockState blockState) {
         return CULL_SHAPE;
     }
 
     @Override
-    public ItemInteractionResult useItemOn(
+    public InteractionResult useItemOn(
             ItemStack itemStack,
             BlockState state,
             Level world,
@@ -96,7 +96,7 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
                         1.0F,
                         world.random.nextFloat() * 0.4F + 0.8F
                 );
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             } else if (player.getMainHandItem().isEmpty() && state.getValue(FIRE)) {
                 world.setBlockAndUpdate(pos, state.setValue(FIRE, false));
                 world.playSound(
@@ -107,10 +107,10 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
                         1.0F,
                         world.random.nextFloat() * 0.4F + 0.8F
                 );
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
-        return ItemInteractionResult.FAIL;
+        return InteractionResult.FAIL;
     }
 
     @Override

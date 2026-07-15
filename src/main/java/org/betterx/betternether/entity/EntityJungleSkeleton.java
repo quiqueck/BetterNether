@@ -2,9 +2,9 @@ package org.betterx.betternether.entity;
 
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +24,6 @@ public class EntityJungleSkeleton extends Skeleton {
     @Override
     public void aiStep() {
         this.updateSwingTime();
-        this.updateNoActionTime();
         super.aiStep();
     }
 
@@ -33,7 +32,7 @@ public class EntityJungleSkeleton extends Skeleton {
     public SpawnGroupData finalizeSpawn(
             ServerLevelAccessor level,
             DifficultyInstance difficulty,
-            MobSpawnType spawnReason,
+            EntitySpawnReason spawnReason,
             @org.jetbrains.annotations.Nullable SpawnGroupData entityData
     ) {
         entityData = super.finalizeSpawn(level, difficulty, spawnReason, entityData);
@@ -57,7 +56,7 @@ public class EntityJungleSkeleton extends Skeleton {
                                 ? Blocks.JACK_O_LANTERN
                                 : Blocks.CARVED_PUMPKIN)
                 );
-                this.armorDropChances[EquipmentSlot.HEAD.getIndex()] = 0.0F;
+                this.setDropChance(EquipmentSlot.HEAD, 0.0F);
             }
         }
 

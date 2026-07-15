@@ -1,8 +1,10 @@
 package org.betterx.betternether.entity.model;
 
-import org.betterx.betternether.entity.EntityNaga;
+import org.betterx.betternether.entity.render.NagaRenderState;
 
-import net.minecraft.client.model.AgeableListModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
@@ -11,9 +13,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
-import com.google.common.collect.ImmutableList;
-
-public class ModelNaga extends AgeableListModel<EntityNaga> {
+@Environment(EnvType.CLIENT)
+public class ModelNaga extends EntityModel<NagaRenderState> {
     private static final int SPIKE_COUNT = 8;
     private static final int TAIL_COUNT = 4;
     public ModelPart head;
@@ -246,6 +247,7 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
     }
 
     public ModelNaga(ModelPart root) {
+        super(root);
         this.body = root.getChild(PartNames.BODY);
         this.head = root.getChild(PartNames.HEAD);
 
@@ -268,32 +270,15 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
     }
 
     @Override
-    protected Iterable<ModelPart> headParts() {
-        return ImmutableList.of(this.head);
-    }
+    public void setupAnim(NagaRenderState state) {
+        super.setupAnim(state);
+        this.pitch = state.swimAmount;
+        final float animationProgress = state.ageInTicks;
+        final float headYaw = state.yRot;
+        final float headPitch = state.xRot;
 
-    @Override
-    protected Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of(this.body);
-    }
-
-    @Override
-    public void prepareMobModel(EntityNaga livingEntity, float f, float g, float h) {
-        this.pitch = livingEntity.getSwimAmount(h);
-        super.prepareMobModel(livingEntity, f, g, h);
-    }
-
-    @Override
-    public void setupAnim(
-            EntityNaga entity,
-            float limbAngle,
-            float limbDistance,
-            float animationProgress,
-            float headYaw,
-            float headPitch
-    ) {
-        boolean rollTooBig = entity.getFallFlyingTicks() > 4;
-        boolean isSwimming = entity.isVisuallySwimming();
+        boolean rollTooBig = state.rollTooBig;
+        boolean isSwimming = state.isSwimming;
         this.head.yRot = headYaw * 0.017453292F;
         if (rollTooBig) {
             this.head.xRot = -0.7853982F;
@@ -308,9 +293,7 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
         }
 
         // long time = System.currentTimeMillis();
-        double speed = (entity.onGround() && (entity.getDeltaMovement().x != 0 || entity.getDeltaMovement().z != 0) && !entity.isPassenger())
-                ? 6
-                : 0.5;
+        double speed = state.isMovingOnGround ? 6 : 0.5;
         maxAngle = this.lerpAngle(maxAngle, speed > 1 ? 0.1F : 0.5F, 0.03F);
         // animation += (time - preTime) * speed / 1000.0;
         double animation = animationProgress * speed / 20;

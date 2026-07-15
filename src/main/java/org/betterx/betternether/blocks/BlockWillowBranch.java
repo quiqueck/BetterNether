@@ -21,6 +21,8 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -72,11 +74,13 @@ public class BlockWillowBranch extends BlockBaseNotFull implements AddMineableAx
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (world.isEmptyBlock(pos.above()))
             return Blocks.AIR.defaultBlockState();
@@ -86,7 +90,7 @@ public class BlockWillowBranch extends BlockBaseNotFull implements AddMineableAx
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(state.getValue(SHAPE) == WillowBranchShape.END
                 ? NetherBlocks.MAT_WILLOW.getTorch()
                 : NetherBlocks.WILLOW_LEAVES);

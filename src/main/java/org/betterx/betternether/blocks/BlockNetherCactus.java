@@ -23,6 +23,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 
 public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGravel, BehaviourPlant {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
@@ -48,11 +50,13 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (canSurvive(state, world, pos)) {
             Block up = world.getBlockState(pos.above()).getBlock();
@@ -88,7 +92,7 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier) {
         entity.hurt(world.damageSources().cactus(), 1.0F);
     }
 }

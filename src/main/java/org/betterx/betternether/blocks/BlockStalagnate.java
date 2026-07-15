@@ -57,7 +57,7 @@ public class BlockStalagnate extends BlockBaseNotFull implements BehaviourWood {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(NetherBlocks.MAT_STALAGNATE.getStem());
     }
 }

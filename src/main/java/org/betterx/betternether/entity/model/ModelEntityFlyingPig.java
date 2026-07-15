@@ -1,8 +1,10 @@
 package org.betterx.betternether.entity.model;
 
-import org.betterx.betternether.entity.EntityFlyingPig;
+import org.betterx.betternether.entity.render.FlyingPigRenderState;
 
-import net.minecraft.client.model.AgeableListModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,9 +14,8 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
-import com.google.common.collect.ImmutableList;
-
-public class ModelEntityFlyingPig extends AgeableListModel<EntityFlyingPig> {
+@Environment(EnvType.CLIENT)
+public class ModelEntityFlyingPig extends EntityModel<FlyingPigRenderState> {
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
@@ -262,6 +263,7 @@ public class ModelEntityFlyingPig extends AgeableListModel<EntityFlyingPig> {
     private final ModelPart legB;
 
     public ModelEntityFlyingPig(ModelPart root) {
+        super(root);
         this.head = root.getChild(PartNames.HEAD);
         this.body = root.getChild(PartNames.BODY);
         this.tail = this.body.getChild(PartNames.TAIL);
@@ -276,25 +278,12 @@ public class ModelEntityFlyingPig extends AgeableListModel<EntityFlyingPig> {
     }
 
     @Override
-    protected Iterable<ModelPart> headParts() {
-        return ImmutableList.of(head);
-    }
-
-    @Override
-    protected Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of(body);
-    }
-
-    @Override
-    public void setupAnim(
-            EntityFlyingPig entity,
-            float limbAngle,
-            float limbDistance,
-            float animationProgress,
-            float headYaw,
-            float headPitch
-    ) {
-        if (entity.isRoosting()) {
+    public void setupAnim(FlyingPigRenderState state) {
+        super.setupAnim(state);
+        final float animationProgress = state.ageInTicks;
+        final float headYaw = state.yRot;
+        final float headPitch = state.xRot;
+        if (state.isRoosting) {
             this.head.xRot = headPitch * 0.017453292F;
             this.head.yRot = 3.1415927F - headYaw * 0.017453292F;
             this.head.zRot = 3.1415927F;

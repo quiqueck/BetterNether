@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 public abstract class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockProperties.AGE;
@@ -54,11 +55,13 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();

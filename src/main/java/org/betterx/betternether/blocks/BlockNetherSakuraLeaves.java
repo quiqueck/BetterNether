@@ -35,7 +35,7 @@ public class BlockNetherSakuraLeaves extends BNLeaves {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
+    public boolean propagatesSkylightDown(BlockState state) {
         return true;
     }
 

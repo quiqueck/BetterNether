@@ -19,6 +19,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import java.util.Collections;
 import java.util.List;
@@ -63,11 +65,13 @@ public class BlockStalagnateBowl extends BlockBaseNotFull implements AddMineable
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();

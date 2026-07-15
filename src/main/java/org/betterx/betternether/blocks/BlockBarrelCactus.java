@@ -22,6 +22,9 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import com.google.common.collect.Lists;
 
@@ -52,11 +55,13 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (canSurvive(state, world, pos))
             return state;
@@ -65,20 +70,20 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier) {
         if (state.getValue(BlockCommonPlant.AGE) > 1) entity.hurt(world.damageSources().cactus(), 1.0F);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
-        Vec3 vec3d = state.getOffset(view, pos);
+        Vec3 vec3d = state.getOffset(pos);
         return SHAPES[state.getValue(BlockCommonPlant.AGE)].move(vec3d.x, vec3d.y, vec3d.z);
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
         if (state.getValue(BlockCommonPlant.AGE) < 2) return EMPTY;
-        Vec3 vec3d = state.getOffset(view, pos);
+        Vec3 vec3d = state.getOffset(pos);
         return SHAPES[state.getValue(BlockCommonPlant.AGE)].move(vec3d.x, vec3d.y, vec3d.z);
     }
 

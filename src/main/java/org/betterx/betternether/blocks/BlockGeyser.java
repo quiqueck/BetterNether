@@ -23,6 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 public class BlockGeyser extends BlockBaseNotFull implements BehaviourStone {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 4, 15);
@@ -127,11 +128,13 @@ public class BlockGeyser extends BlockBaseNotFull implements BehaviourStone {
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();

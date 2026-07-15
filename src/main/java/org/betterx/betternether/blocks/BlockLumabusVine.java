@@ -73,7 +73,8 @@ public class BlockLumabusVine extends BaseVineBlock implements DeferedSeedBlock,
     public @NotNull ItemStack getCloneItemStack(
             @NotNull LevelReader level,
             @NotNull BlockPos pos,
-            @NotNull BlockState state
+            @NotNull BlockState state,
+            boolean includeData
     ) {
         return new ItemStack(seed);
     }

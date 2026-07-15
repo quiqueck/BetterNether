@@ -22,6 +22,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -53,7 +55,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull implements AddMine
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         BrownMushroomShape shape = state.getValue(SHAPE);
         return shape == BrownMushroomShape.BOTTOM || shape == BrownMushroomShape.MIDDLE
                 ? new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem())
@@ -153,11 +155,13 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull implements AddMine
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         switch (state.getValue(SHAPE)) {
             case BOTTOM:
@@ -181,7 +185,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull implements AddMine
         }
     }
 
-    private BlockState getStateIfSame(BlockState state, LevelAccessor world, BlockPos pos) {
+    private BlockState getStateIfSame(BlockState state, LevelReader world, BlockPos pos) {
         return world.getBlockState(pos).getBlock() == this ? state : Blocks.AIR.defaultBlockState();
     }
 }

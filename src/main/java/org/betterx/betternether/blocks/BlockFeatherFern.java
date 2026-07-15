@@ -27,7 +27,7 @@ public class BlockFeatherFern extends BlockCommonPlant implements SurvivesOnNeth
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
-        Vec3 vec3d = state.getOffset(view, pos);
+        Vec3 vec3d = state.getOffset(pos);
         return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
     }
 

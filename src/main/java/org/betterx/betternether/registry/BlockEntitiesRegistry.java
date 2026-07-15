@@ -1,7 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.blocks.BaseBarrelBlock;
-import org.betterx.bclib.blocks.BaseChestBlock;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blockentities.BNBrewingStandBlockEntity;
 import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
@@ -45,24 +43,6 @@ public class BlockEntitiesRegistry {
 
     public static void RegisterBlockEntity(String name, BlockEntityType<? extends BlockEntity> type) {
         Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, BetterNether.C.mk(name), type);
-    }
-
-    private static Block[] getChests() {
-        List<Block> result = new ArrayList<Block>();
-        NetherBlocks.getModBlocks().forEach((block) -> {
-            if (block instanceof BaseChestBlock)
-                result.add(block);
-        });
-        return result.toArray(new Block[]{});
-    }
-
-    private static Block[] getBarrels() {
-        List<Block> result = new ArrayList<Block>();
-        NetherBlocks.getModBlocks().forEach((block) -> {
-            if (block instanceof BaseBarrelBlock)
-                result.add(block);
-        });
-        return result.toArray(new Block[]{});
     }
 
     private static Block[] getFurnaces() {

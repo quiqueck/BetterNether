@@ -27,7 +27,7 @@ public class BlockInkBush extends BlockCommonPlant implements SurvivesOnNetherGr
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+    public VoxelShape getOcclusionShape(BlockState blockState) {
         if (blockState.getValue(AGE) == 3) {
             //return an empty shape to prevent occlusion
             return Shapes.empty();
@@ -38,7 +38,7 @@ public class BlockInkBush extends BlockCommonPlant implements SurvivesOnNetherGr
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(NetherBlocks.INK_BUSH_SEED);
     }
 

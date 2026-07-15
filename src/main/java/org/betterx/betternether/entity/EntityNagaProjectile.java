@@ -1,16 +1,20 @@
 package org.betterx.betternether.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.FlyingMob;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -18,7 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class EntityNagaProjectile extends FlyingMob {
+public class EntityNagaProjectile extends Mob {
     private static final int MAX_LIFE_TIME = 60; // 3 seconds * 20 ticks
     private int lifeTime = 0;
 
@@ -39,6 +43,51 @@ public class EntityNagaProjectile extends FlyingMob {
     @Override
     public boolean isNoGravity() {
         return true;
+    }
+
+    @Override
+    protected void checkFallDamage(double d, boolean bl, BlockState blockState, BlockPos blockPos) {
+    }
+
+    // Replicates the movement of the removed vanilla FlyingMob.travel(...)
+    @Override
+    public void travel(Vec3 vec3) {
+        if (this.isLocalInstanceAuthoritative()) {
+            if (this.isInWater()) {
+                this.moveRelative(0.02f, vec3);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale(0.8f));
+            } else if (this.isInLava()) {
+                this.moveRelative(0.02f, vec3);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale(0.5));
+            } else {
+                float f = 0.91f;
+                if (this.onGround()) {
+                    f = this.level()
+                            .getBlockState(this.getBlockPosBelowThatAffectsMyMovement())
+                            .getBlock()
+                            .getFriction() * 0.91f;
+                }
+                float g = 0.16277137f / (f * f * f);
+                f = 0.91f;
+                if (this.onGround()) {
+                    f = this.level()
+                            .getBlockState(this.getBlockPosBelowThatAffectsMyMovement())
+                            .getBlock()
+                            .getFriction() * 0.91f;
+                }
+                this.moveRelative(this.onGround() ? 0.1f * g : 0.02f, vec3);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale(f));
+            }
+        }
+        this.calculateEntityAnimation(false);
+    }
+
+    @Override
+    public boolean onClimbable() {
+        return false;
     }
 
     @Environment(EnvType.CLIENT)
@@ -118,7 +167,7 @@ public class EntityNagaProjectile extends FlyingMob {
                     0.1, 0.1, 0.1
             );
         }
-        this.kill();
+        this.discard();
     }
 
     @Override
@@ -132,16 +181,14 @@ public class EntityNagaProjectile extends FlyingMob {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putInt("life", lifeTime);
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("life", lifeTime);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        if (tag.contains("life")) {
-            lifeTime = tag.getInt("life");
-        }
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        lifeTime = input.getIntOr("life", 0);
     }
 }

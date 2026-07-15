@@ -32,6 +32,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -83,7 +84,7 @@ public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherG
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier) {
         if (!state.getValue(DESTRUCTED)) {
             if (enableModDamage && entity instanceof LivingEntity && !((LivingEntity) entity).hasEffect(MobEffects.POISON)) {
                 if (!NetherEntities.isNetherEntity(entity))

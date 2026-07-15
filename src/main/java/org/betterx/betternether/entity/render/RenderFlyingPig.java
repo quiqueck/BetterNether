@@ -5,12 +5,14 @@ import org.betterx.betternether.entity.EntityFlyingPig;
 import org.betterx.betternether.entity.model.ModelEntityFlyingPig;
 import org.betterx.betternether.registry.EntityRenderRegistry;
 
-import net.minecraft.client.model.AgeableListModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-public class RenderFlyingPig extends MobRenderer<EntityFlyingPig, AgeableListModel<EntityFlyingPig>> {
+@Environment(EnvType.CLIENT)
+public class RenderFlyingPig extends MobRenderer<EntityFlyingPig, FlyingPigRenderState, ModelEntityFlyingPig> {
     private static final ResourceLocation TEXTURE = BetterNether.C.mk(
             "textures/entity/flying_pig.png"
     );
@@ -23,7 +25,19 @@ public class RenderFlyingPig extends MobRenderer<EntityFlyingPig, AgeableListMod
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EntityFlyingPig entity) {
-        return entity.isWarted() ? TEXTURE_WARTED : TEXTURE;
+    public FlyingPigRenderState createRenderState() {
+        return new FlyingPigRenderState();
+    }
+
+    @Override
+    public void extractRenderState(EntityFlyingPig entity, FlyingPigRenderState state, float partialTick) {
+        super.extractRenderState(entity, state, partialTick);
+        state.isRoosting = entity.isRoosting();
+        state.isWarted = entity.isWarted();
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(FlyingPigRenderState state) {
+        return state.isWarted ? TEXTURE_WARTED : TEXTURE;
     }
 }

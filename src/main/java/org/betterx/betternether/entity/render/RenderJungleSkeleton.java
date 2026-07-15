@@ -5,63 +5,35 @@ import org.betterx.betternether.entity.EntityJungleSkeleton;
 import org.betterx.betternether.entity.model.ModelJungleSkeleton;
 import org.betterx.betternether.registry.EntityRenderRegistry;
 
-import net.minecraft.client.model.SkeletonModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.ItemInHandRenderer;
+import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
-import net.minecraft.client.renderer.entity.layers.ElytraLayer;
-import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
-import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 
-public class RenderJungleSkeleton extends MobRenderer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>> {
+@Environment(EnvType.CLIENT)
+public class RenderJungleSkeleton extends AbstractSkeletonRenderer<EntityJungleSkeleton, JungleSkeletonRenderState> {
     private static final ResourceLocation TEXTURE = BetterNether.C.mk(
             "textures/entity/jungle_skeleton.png"
     );
 
     public RenderJungleSkeleton(EntityRendererProvider.Context ctx) {
-        this(
+        super(
                 ctx,
-                EntityRenderRegistry.JUNGLE_SKELETON_MODEL,
                 ModelLayers.SKELETON_INNER_ARMOR,
-                ModelLayers.SKELETON_OUTER_ARMOR
+                ModelLayers.SKELETON_OUTER_ARMOR,
+                new ModelJungleSkeleton(ctx.bakeLayer(EntityRenderRegistry.JUNGLE_SKELETON_MODEL))
         );
     }
 
-    public RenderJungleSkeleton(
-            EntityRendererProvider.Context ctx,
-            ModelLayerLocation layer,
-            ModelLayerLocation legArmorLayer,
-            ModelLayerLocation bodyArmorLayer
-    ) {
-        super(ctx, new ModelJungleSkeleton(ctx.bakeLayer(layer)), 0.4F);
-        final SkeletonModel<EntityJungleSkeleton> afm_sem_body = new SkeletonModel<EntityJungleSkeleton>(ctx.bakeLayer(
-                bodyArmorLayer));
-        final SkeletonModel<EntityJungleSkeleton> afm_sem_legins = new SkeletonModel<EntityJungleSkeleton>(ctx.bakeLayer(
-                legArmorLayer));
-        final HumanoidArmorLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>, SkeletonModel<EntityJungleSkeleton>> afm;
-        afm = new HumanoidArmorLayer<>(this, afm_sem_legins, afm_sem_body, ctx.getModelManager());
-        this.addLayer(afm);
-
-        final ItemInHandRenderer itemInHandRenderer = ctx.getItemInHandRenderer();
-
-        this.addLayer(new ItemInHandLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>>(
-                this,
-                itemInHandRenderer
-        ));
-        this.addLayer(new ElytraLayer<>(this, ctx.getModelSet()));
-        this.addLayer(new CustomHeadLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>>(
-                this,
-                ctx.getModelSet(),
-                itemInHandRenderer
-        ));
+    @Override
+    public JungleSkeletonRenderState createRenderState() {
+        return new JungleSkeletonRenderState();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EntityJungleSkeleton entity) {
+    public ResourceLocation getTextureLocation(JungleSkeletonRenderState state) {
         return TEXTURE;
     }
 }

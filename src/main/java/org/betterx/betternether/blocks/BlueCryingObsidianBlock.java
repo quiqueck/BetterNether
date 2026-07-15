@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherParticles;
+import org.betterx.wover.block.api.model.BlockModelProvider;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 
 import net.minecraft.core.BlockPos;
@@ -15,7 +16,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class BlueCryingObsidianBlock extends BNObsidianBase {
+public class BlueCryingObsidianBlock extends BNObsidianBase implements BlockModelProvider {
     public BlueCryingObsidianBlock() {
         super(BlockBehaviour.Properties.ofFullCopy(Blocks.CRYING_OBSIDIAN), NetherBlocks.BLUE_WEEPING_OBSIDIAN);
     }

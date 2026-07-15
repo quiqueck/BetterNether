@@ -5,10 +5,6 @@ import org.betterx.betternether.registry.SoundsRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
@@ -18,9 +14,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.FlyingAnimal;
@@ -36,11 +32,6 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class EntityHydrogenJellyfish extends DespawnableAnimal implements FlyingAnimal {
-    private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(
-            EntityHydrogenJellyfish.class,
-            EntityDataSerializers.FLOAT
-    );
-
     private Vec3 preVelocity;
     private Vec3 newVelocity = new Vec3(0, 0, 0);
     private int timer;
@@ -50,12 +41,9 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
 
     public EntityHydrogenJellyfish(EntityType<? extends EntityHydrogenJellyfish> type, Level world) {
         super(type, world);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(SCALE, 0.5F + random.nextFloat());
+        if (this.getAttribute(Attributes.SCALE) != null) {
+            this.getAttribute(Attributes.SCALE).setBaseValue(0.5F + random.nextFloat());
+        }
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -64,7 +52,8 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
                 .add(Attributes.MAX_HEALTH, 0.5)
                 .add(Attributes.FLYING_SPEED, 0.05)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
-                .add(Attributes.ATTACK_DAMAGE, 20.0);
+                .add(Attributes.ATTACK_DAMAGE, 20.0)
+                .add(Attributes.SCALE);
     }
 
     @Override
@@ -83,35 +72,13 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-
-        tag.putFloat("Scale", getScale());
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-
-        if (tag.contains("Scale")) {
-            this.entityData.set(SCALE, tag.getFloat("Scale"));
-        }
-
-        this.refreshDimensions();
-    }
-
-    @Override
     public boolean isFood(ItemStack itemStack) {
         return false;
     }
 
-    public float getScale() {
-        return this.entityData.get(SCALE);
-    }
-//TODO: 1.21 Check if size of entity is correct
-//    public EntityDimensions getDimensions(Pose pose) {
-//        return super.getDimensions(pose).scale(this.getScale());
-//    }
+    // The per-entity size is now driven by the vanilla Attributes.SCALE attribute
+    // (set randomly in the constructor). LivingEntity.getScale() is final and returns
+    // that value, and the hitbox/eye-height and renderer scale with it automatically.
 
     @Override
     public void playerTouch(Player player) {
@@ -119,23 +86,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     }
 
     @Override
-    public void refreshDimensions() {
-        double x = this.getX();
-        double y = this.getY();
-        double z = this.getZ();
-        super.refreshDimensions();
-        this.setPosRaw(x, y, z);
-    }
-
-    @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
-        if (SCALE.equals(data)) {
-            this.refreshDimensions();
-        }
-    }
-
-    @Override
-    protected void customServerAiStep() {
+    protected void customServerAiStep(ServerLevel serverLevel) {
         timer++;
         if (timer > timeOut) {
             prewYaw = this.getYRot();
@@ -219,7 +170,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     }
 
     @Override
-    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean causeFallDamage(double fallDistance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 
@@ -233,9 +184,9 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource source, float amount) {
         if (source.is(DamageTypes.WITHER) || source.getDirectEntity() != null || source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return super.hurt(source, amount);
+            return super.hurtServer(serverLevel, source, amount);
         }
         return false;
     }
@@ -243,7 +194,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     public static boolean canSpawn(
             EntityType<? extends EntityHydrogenJellyfish> type,
             LevelAccessor world,
-            MobSpawnType spawnReason,
+            EntitySpawnReason spawnReason,
             BlockPos pos,
             RandomSource random
     ) {

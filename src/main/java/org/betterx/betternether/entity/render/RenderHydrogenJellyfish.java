@@ -5,14 +5,15 @@ import org.betterx.betternether.entity.EntityHydrogenJellyfish;
 import org.betterx.betternether.entity.model.ModelEntityHydrogenJellyfish;
 import org.betterx.betternether.registry.EntityRenderRegistry;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.model.AgeableListModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
-public class RenderHydrogenJellyfish extends MobRenderer<EntityHydrogenJellyfish, AgeableListModel<EntityHydrogenJellyfish>> {
+@Environment(EnvType.CLIENT)
+public class RenderHydrogenJellyfish extends MobRenderer<EntityHydrogenJellyfish, HydrogenJellyfishRenderState, ModelEntityHydrogenJellyfish> {
     private static final ResourceLocation TEXTURE =
             BetterNether.C.mk("textures/entity/jellyfish.png");
 
@@ -21,18 +22,17 @@ public class RenderHydrogenJellyfish extends MobRenderer<EntityHydrogenJellyfish
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EntityHydrogenJellyfish entity) {
+    public HydrogenJellyfishRenderState createRenderState() {
+        return new HydrogenJellyfishRenderState();
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(HydrogenJellyfishRenderState state) {
         return TEXTURE;
     }
 
     @Override
     protected int getBlockLightLevel(EntityHydrogenJellyfish entity, BlockPos pos) {
         return 15;
-    }
-
-    @Override
-    protected void scale(EntityHydrogenJellyfish entity, PoseStack matrixStack, float f) {
-        float scale = entity.getScale();
-        matrixStack.scale(scale, scale, scale);
     }
 }

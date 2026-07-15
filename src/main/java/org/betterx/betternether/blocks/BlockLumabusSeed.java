@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBlock, BehaviourSeed {
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
@@ -61,11 +62,13 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();

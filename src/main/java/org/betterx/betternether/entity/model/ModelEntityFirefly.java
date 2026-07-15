@@ -1,16 +1,17 @@
 package org.betterx.betternether.entity.model;
 
-import org.betterx.betternether.entity.EntityFirefly;
+import org.betterx.betternether.entity.render.FireflyRenderState;
 
-import net.minecraft.client.model.AgeableListModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-import com.google.common.collect.ImmutableList;
-
-public class ModelEntityFirefly extends AgeableListModel<EntityFirefly> {
+@Environment(EnvType.CLIENT)
+public class ModelEntityFirefly extends EntityModel<FireflyRenderState> {
     private final ModelPart body;
     // private final ModelPart legs;
     private final ModelPart glow;
@@ -79,31 +80,18 @@ public class ModelEntityFirefly extends AgeableListModel<EntityFirefly> {
     }
 
     public ModelEntityFirefly(ModelPart root) {
+        super(root);
         this.body = root.getChild(PartNames.BODY);
         // this.legs = this.body.getChild(EntityModelPartNames.TAIL);
         this.glow = root.getChild(GLOW);
+        // The glow is drawn separately by the FireflyGlowFeatureRenderer, never in
+        // the main model pass, so keep it hidden by default.
+        this.glow.visible = false;
     }
 
     @Override
-    protected Iterable<ModelPart> headParts() {
-        return ImmutableList.of();
-    }
-
-    @Override
-    protected Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of(this.body);
-    }
-
-    @Override
-    public void setupAnim(
-            EntityFirefly entity,
-            float limbAngle,
-            float limbDistance,
-            float customAngle,
-            float headYaw,
-            float headPitch
-    ) {
-
+    public void setupAnim(FireflyRenderState state) {
+        super.setupAnim(state);
     }
 
     public void syncTransform() {

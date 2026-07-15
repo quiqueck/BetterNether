@@ -17,6 +17,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 public class BlockSoulSandstone extends BlockBase implements BlockTagProvider, BehaviourStone {
     public static final BooleanProperty UP = BooleanProperty.create("up");
@@ -33,11 +36,13 @@ public class BlockSoulSandstone extends BlockBase implements BlockTagProvider, B
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         return state.setValue(UP, world.getBlockState(pos.above()).getBlock() != this);
     }

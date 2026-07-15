@@ -21,6 +21,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -48,7 +50,7 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull implements AddMineab
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return state.getValue(SHAPE) == TripleShape.TOP
                 ? new ItemStack(Items.RED_MUSHROOM)
                 : new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem());
@@ -57,11 +59,13 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull implements AddMineab
     @Override
     public BlockState updateShape(
             BlockState state,
-            Direction facing,
-            BlockState neighborState,
-            LevelAccessor world,
+            LevelReader world,
+            ScheduledTickAccess scheduledTickAccess,
             BlockPos pos,
-            BlockPos neighborPos
+            Direction facing,
+            BlockPos neighborPos,
+            BlockState neighborState,
+            RandomSource randomSource
     ) {
         switch (state.getValue(SHAPE)) {
             case BOTTOM:

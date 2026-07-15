@@ -11,7 +11,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundLevelParticlesPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -24,6 +23,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -49,6 +49,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -107,7 +109,6 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
         };
         birdNavigation.setCanOpenDoors(false);
         birdNavigation.setCanFloat(true);
-        birdNavigation.setCanPassDoors(true);
         return birdNavigation;
     }
 
@@ -118,19 +119,20 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
 
-        tag.putByte("byteData", this.entityData.get(DATA_SHARED_FLAGS_ID));
+        output.putByte("byteData", this.entityData.get(DATA_SHARED_FLAGS_ID));
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
 
-        if (tag.contains("byteData")) {
-            this.entityData.set(DATA_SHARED_FLAGS_ID, tag.getByte("byteData"));
-        }
+        this.entityData.set(
+                DATA_SHARED_FLAGS_ID,
+                input.getByteOr("byteData", this.entityData.get(DATA_SHARED_FLAGS_ID))
+        );
     }
 
     public boolean isRoosting() {
@@ -197,7 +199,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
     }
 
     @Override
-    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean causeFallDamage(double fallDistance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 
@@ -212,10 +214,10 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
     @Override
     protected void tickDeath() {
-        if (!level().isClientSide && this.isWarted() && level().getServer()
-                                                               .getGameRules()
-                                                               .getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-            this.spawnAtLocation(new ItemStack(Items.NETHER_WART, MHelper.randRange(1, 3, random)));
+        if (level() instanceof ServerLevel serverLevel && this.isWarted() && level().getServer()
+                                                                                    .getGameRules()
+                                                                                    .getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+            this.spawnAtLocation(serverLevel, new ItemStack(Items.NETHER_WART, MHelper.randRange(1, 3, random)));
         }
         super.tickDeath();
 
@@ -433,6 +435,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
                         serverPlayerEntity.connection.send(new ClientboundLevelParticlesPacket(
                                 effect,
                                 false,
+                                false,
                                 target.getX(),
                                 target.getY() + 0.2,
                                 target.getZ(),
@@ -445,8 +448,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
                     }
                 }
 
-                EntityFlyingPig.this.eat(level(), stack);
-                target.kill();
+                target.discard();
                 EntityFlyingPig.this.heal(stack.getCount());
                 EntityFlyingPig.this.setDeltaMovement(0, 0.2F, 0);
             }
@@ -471,7 +473,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mate) {
-        EntityFlyingPig pig = NetherEntities.FLYING_PIG.type().create(this.level());
+        EntityFlyingPig pig = NetherEntities.FLYING_PIG.type().create(this.level(), EntitySpawnReason.BREEDING);
         pig.setWarted(pig.isWarted());
         return pig;
     }

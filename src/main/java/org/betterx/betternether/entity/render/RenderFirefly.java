@@ -7,8 +7,8 @@ import org.betterx.betternether.registry.EntityRenderRegistry;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.AgeableListModel;
-import net.minecraft.client.model.EntityModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -24,11 +24,14 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
 
-class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListModel<EntityFirefly>> {
+@Environment(EnvType.CLIENT)
+class FireflyGlowFeatureRenderer extends RenderLayer<FireflyRenderState, ModelEntityFirefly> {
     private static final int LIT = 15728880;
-    //static final ModelEmpty emptyModel = new ModelEmpty();
+    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
+            "textures/entity/firefly.png"
+    );
 
-    public FireflyGlowFeatureRenderer(RenderLayerParent<EntityFirefly, AgeableListModel<EntityFirefly>> featureRendererContext) {
+    public FireflyGlowFeatureRenderer(RenderLayerParent<FireflyRenderState, ModelEntityFirefly> featureRendererContext) {
         super(featureRendererContext);
     }
 
@@ -37,45 +40,39 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
             PoseStack matrices,
             MultiBufferSource vertices,
             int light,
-            EntityFirefly livingEntity,
-            float limbAngle,
-            float limbDistance,
-            float tickDelta,
-            float animationProgress,
+            FireflyRenderState state,
             float headYaw,
             float headPitch
     ) {
-        EntityModel<EntityFirefly> model = this.getParentModel();
+        ModelEntityFirefly model = this.getParentModel();
 
+        RenderType renderLayer = RenderPhaseAccessor.getFirefly(TEXTURE);
+        VertexConsumer vertexConsumer = vertices.getBuffer(renderLayer);
 
-        if (model instanceof ModelEntityFirefly) {
-            ResourceLocation identifier = this.getTextureLocation(livingEntity);
-            RenderType renderLayer = RenderPhaseAccessor.getFirefly(identifier);
-            VertexConsumer vertexConsumer = vertices.getBuffer(renderLayer);
+        int color = state.color;
 
-            int color = livingEntity.getColor();
+        addViewAlignedGlow(matrices, vertexConsumer, color);
 
-            addViewAlignedGlow(matrices, vertexConsumer, color);
-
-
-            ((ModelEntityFirefly) model).getGlowPart()
-                                        .render(
-                                                matrices,
-                                                vertexConsumer,
-                                                light,
-                                                OverlayTexture.NO_OVERLAY,
-                                                color
-                                        );
-            ((ModelEntityFirefly) model).getGlowPart()
-                                        .render(
-                                                matrices,
-                                                vertexConsumer,
-                                                light,
-                                                OverlayTexture.NO_OVERLAY,
-                                                color
-                                        );
-
-        }
+        // Temporarily make the glow part visible while this feature layer draws it;
+        // it stays hidden in the main model pass.
+        model.getGlowPart().visible = true;
+        model.getGlowPart()
+             .render(
+                     matrices,
+                     vertexConsumer,
+                     light,
+                     OverlayTexture.NO_OVERLAY,
+                     color
+             );
+        model.getGlowPart()
+             .render(
+                     matrices,
+                     vertexConsumer,
+                     light,
+                     OverlayTexture.NO_OVERLAY,
+                     color
+             );
+        model.getGlowPart().visible = false;
     }
 
     private void addViewAlignedGlow(
@@ -101,7 +98,6 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
 
         PoseStack.Pose entry = matrices.last();
         Matrix4f matrix4f = entry.pose();
-        Matrix3f matrix3f = entry.normal();
 
         addVertex(matrix4f, entry, vertexConsumer, -1, -1, 0F, 0.5F, color);
         addVertex(matrix4f, entry, vertexConsumer, 1, -1, 1F, 0.5F, color);
@@ -132,7 +128,8 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
     }
 }
 
-public class RenderFirefly extends MobRenderer<EntityFirefly, AgeableListModel<EntityFirefly>> {
+@Environment(EnvType.CLIENT)
+public class RenderFirefly extends MobRenderer<EntityFirefly, FireflyRenderState, ModelEntityFirefly> {
     private static final ResourceLocation TEXTURE = BetterNether.C.mk(
             "textures/entity/firefly.png"
     );
@@ -144,7 +141,18 @@ public class RenderFirefly extends MobRenderer<EntityFirefly, AgeableListModel<E
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EntityFirefly entity) {
+    public FireflyRenderState createRenderState() {
+        return new FireflyRenderState();
+    }
+
+    @Override
+    public void extractRenderState(EntityFirefly entity, FireflyRenderState state, float partialTick) {
+        super.extractRenderState(entity, state, partialTick);
+        state.color = entity.getColor();
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(FireflyRenderState state) {
         return TEXTURE;
     }
 

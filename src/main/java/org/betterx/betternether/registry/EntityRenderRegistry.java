@@ -1,6 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.registry.BaseBlockEntityRenders;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.entity.model.*;
 import org.betterx.betternether.entity.render.*;
@@ -35,7 +34,7 @@ public class EntityRenderRegistry {
         registerRenderMob(NetherEntities.FIREFLY.type(), RenderFirefly.class);
         registerRenderMob(NetherEntities.HYDROGEN_JELLYFISH.type(), RenderHydrogenJellyfish.class);
         registerRenderMob(NetherEntities.NAGA.type(), RenderNaga.class);
-        BaseBlockEntityRenders.registerRender(NetherEntities.NAGA_PROJECTILE, RenderNagaProjectile.class);
+        EntityRendererRegistry.register(NetherEntities.NAGA_PROJECTILE.type(), RenderNagaProjectile::new);
         registerRenderMob(NetherEntities.FLYING_PIG.type(), RenderFlyingPig.class);
         registerRenderMob(NetherEntities.JUNGLE_SKELETON.type(), RenderJungleSkeleton.class);
         registerRenderMob(NetherEntities.SKULL.type(), RenderSkull.class);
@@ -52,7 +51,7 @@ public class EntityRenderRegistry {
         EntityModelLayerRegistry.registerModelLayer(SKULL_MODEL, ModelSkull::getTexturedModelData);
     }
 
-    private static void registerRenderMob(EntityType<?> entity, Class<? extends MobRenderer<?, ?>> renderer) {
+    private static void registerRenderMob(EntityType<?> entity, Class<? extends MobRenderer<?, ?, ?>> renderer) {
         EntityRendererRegistry.register(entity, (context) -> {
             MobRenderer render = null;
             try {

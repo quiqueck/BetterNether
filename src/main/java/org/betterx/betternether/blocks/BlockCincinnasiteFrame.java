@@ -23,7 +23,7 @@ public class BlockCincinnasiteFrame extends BlockBaseNotFull implements Behaviou
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
+    public boolean propagatesSkylightDown(BlockState state) {
         return true;
     }
 

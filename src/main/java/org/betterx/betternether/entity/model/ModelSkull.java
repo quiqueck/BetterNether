@@ -1,8 +1,10 @@
 package org.betterx.betternether.entity.model;
 
-import org.betterx.betternether.entity.EntitySkull;
+import org.betterx.betternether.entity.render.SkullRenderState;
 
-import net.minecraft.client.model.AgeableListModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
@@ -11,9 +13,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
-import com.google.common.collect.ImmutableList;
-
-public class ModelSkull extends AgeableListModel<EntitySkull> {
+@Environment(EnvType.CLIENT)
+public class ModelSkull extends EntityModel<SkullRenderState> {
     private final ModelPart head;
     private float pitch;
 
@@ -38,37 +39,19 @@ public class ModelSkull extends AgeableListModel<EntitySkull> {
     }
 
     public ModelSkull(ModelPart root) {
+        super(root);
         this.head = root.getChild(PartNames.HEAD);
     }
 
     @Override
-    protected Iterable<ModelPart> headParts() {
-        return ImmutableList.of(head);
-    }
-
-    @Override
-    protected Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of();
-    }
-
-    @Override
-    public void prepareMobModel(EntitySkull livingEntity, float f, float g, float h) {
-        this.pitch = livingEntity.getSwimAmount(h);
-        super.prepareMobModel(livingEntity, f, g, h);
-    }
-
-    @Override
-    public void setupAnim(
-            EntitySkull entity,
-            float limbAngle,
-            float limbDistance,
-            float animationProgress,
-            float headYaw,
-            float headPitch
-    ) {
+    public void setupAnim(SkullRenderState state) {
+        super.setupAnim(state);
+        this.pitch = state.swimAmount;
+        final float headYaw = state.yRot;
+        final float headPitch = state.xRot;
         // head.pitch = (float) Math.toRadians(headPitch);
 
-        boolean rollTooBig = entity.getFallFlyingTicks() > 4;
+        boolean rollTooBig = state.rollTooBig;
         this.head.yRot = headYaw * 0.017453292F;
         if (rollTooBig) {
             this.head.xRot = -0.7853982F;

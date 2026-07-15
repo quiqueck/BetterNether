@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.material.MapColor;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public abstract class BNPillar extends RotatedPillarBlock implements DropSelfLootProvider<BNPillar> {
     protected BNPillar(Properties settings) {
@@ -18,7 +18,7 @@ public abstract class BNPillar extends RotatedPillarBlock implements DropSelfLoo
     }
 
     protected BNPillar(Block block) {
-        super(FabricBlockSettings.copyOf(block));
+        super(BlockBehaviour.Properties.ofFullCopy(block));
     }
 
     protected BNPillar(MapColor color) {

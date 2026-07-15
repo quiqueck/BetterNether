@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlockObsidianGlass extends BlockBaseNotFull implements BehaviourImmobile, BehaviourPortalFrame, BehaviourGlass {
     public BlockObsidianGlass() {
-        super(FabricBlockSettings.copyOf(Blocks.OBSIDIAN)
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)
                                  .noOcclusion()
                                  .isSuffocating((arg1, arg2, arg3) -> {
                                      return false;

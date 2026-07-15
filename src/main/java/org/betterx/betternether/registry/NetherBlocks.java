@@ -35,7 +35,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 
 import java.util.stream.Stream;
@@ -388,7 +388,7 @@ public class NetherBlocks {
     // Basalt Bricks //
     public static final Block BASALT_BRICKS = registerMakeable2X2(
             "basalt_bricks",
-            new BlockBase.Stone(FabricBlockSettings.copyOf(Blocks.BASALT)),
+            new BlockBase.Stone(BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT)),
             "basalt_bricks",
             RecipeCategory.BUILDING_BLOCKS,
             Blocks.POLISHED_BASALT

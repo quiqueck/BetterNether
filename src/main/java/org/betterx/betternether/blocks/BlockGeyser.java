@@ -22,13 +22,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlockGeyser extends BlockBaseNotFull implements BehaviourStone {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 4, 15);
 
     public BlockGeyser() {
-        super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).luminance(10).noOcclusion());
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK).luminance(10).noOcclusion());
     }
 
     @Override

@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.LightningRodBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.Iterator;
 
@@ -27,7 +27,7 @@ class BNObsidianBase extends BaseBlock implements BehaviourObsidian {
     }
 
     public BNObsidianBase(Block transformsTo) {
-        this(FabricBlockSettings.copyOf(Blocks.OBSIDIAN), transformsTo);
+        this(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN), transformsTo);
     }
 
     protected BNObsidianBase(Properties settings, Block transformsTo) {

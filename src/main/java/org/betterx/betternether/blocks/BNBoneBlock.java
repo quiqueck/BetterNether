@@ -7,14 +7,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.Collections;
 import java.util.List;
 
 public class BNBoneBlock extends BlockBase implements BehaviourStone {
     public BNBoneBlock() {
-        super(FabricBlockSettings.copyOf(Blocks.BONE_BLOCK));
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK));
     }
 
     @Override

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 public class BlockBase extends Block implements IRenderTypeable {
     public static class Stone extends BlockBase implements BehaviourStone {
         public Stone(Block source) {
-            super(FabricBlockSettings.copyOf(source));
+            super(BlockBehaviour.Properties.ofFullCopy(source));
         }
 
         public Stone(Properties settings) {
@@ -29,7 +29,7 @@ public class BlockBase extends Block implements IRenderTypeable {
 
     public static class Metal extends BlockBase implements BehaviourMetal {
         public Metal(Block source) {
-            super(FabricBlockSettings.copyOf(source));
+            super(BlockBehaviour.Properties.ofFullCopy(source));
         }
 
         public Metal(Properties settings) {
@@ -39,7 +39,7 @@ public class BlockBase extends Block implements IRenderTypeable {
 
     public static class Wood extends BlockBase implements BehaviourWood {
         public Wood(Block source) {
-            super(FabricBlockSettings.copyOf(source));
+            super(BlockBehaviour.Properties.ofFullCopy(source));
         }
 
         public Wood(Properties settings) {

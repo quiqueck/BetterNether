@@ -2,10 +2,10 @@ package org.betterx.betternether.blocks;
 
 import net.minecraft.world.level.block.Blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BNNetherBrick extends BlockBase.Stone {
     public BNNetherBrick() {
-        super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS));
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_BRICKS));
     }
 }

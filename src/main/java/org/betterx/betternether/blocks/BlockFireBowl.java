@@ -33,7 +33,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public abstract class BlockFireBowl extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 12, 16);
@@ -48,7 +48,7 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
     public static final BooleanProperty FIRE = BNBlockProperties.FIRE;
 
     protected BlockFireBowl(Block source) {
-        super(FabricBlockSettings.copyOf(source).noOcclusion().lightLevel(BlockFireBowl::getLuminance));
+        super(BlockBehaviour.Properties.ofFullCopy(source).noOcclusion().lightLevel(BlockFireBowl::getLuminance));
         this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }

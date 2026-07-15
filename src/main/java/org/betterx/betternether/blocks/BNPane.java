@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +22,7 @@ public abstract class BNPane extends IronBarsBlock implements IRenderTypeable {
     private final boolean dropSelf;
 
     protected BNPane(Block block, boolean dropSelf) {
-        super(FabricBlockSettings.copyOf(block).strength(0.3F, 0.3F).noOcclusion());
+        super(BlockBehaviour.Properties.ofFullCopy(block).strength(0.3F, 0.3F).noOcclusion());
         this.dropSelf = dropSelf;
     }
 

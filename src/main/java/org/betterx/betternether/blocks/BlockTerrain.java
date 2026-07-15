@@ -23,7 +23,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +39,7 @@ public class BlockTerrain extends BlockBase implements BlockTagProvider, Bonemea
     );
 
     public BlockTerrain() {
-        super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).sounds(TERRAIN_SOUND).requiresTool());
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK).sounds(TERRAIN_SOUND).requiresTool());
         this.setDropItself(false);
     }
 

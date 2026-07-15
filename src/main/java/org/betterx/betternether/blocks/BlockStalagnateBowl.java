@@ -18,7 +18,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +28,7 @@ public class BlockStalagnateBowl extends BlockBaseNotFull implements AddMineable
     public static final EnumProperty<FoodShape> FOOD = BNBlockProperties.FOOD;
 
     public BlockStalagnateBowl(Block source) {
-        super(FabricBlockSettings.copyOf(source).noOcclusion());
+        super(BlockBehaviour.Properties.ofFullCopy(source).noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(FOOD, FoodShape.NONE));
     }

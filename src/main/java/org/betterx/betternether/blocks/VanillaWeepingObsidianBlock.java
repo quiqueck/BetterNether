@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class VanillaWeepingObsidianBlock extends BNObsidianBase {
     public VanillaWeepingObsidianBlock() {
-        super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN).luminance(14), null);
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.CRYING_OBSIDIAN).luminance(14), null);
     }
 
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource random) {

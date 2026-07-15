@@ -14,8 +14,8 @@ public class ItemBlackApple extends Item {
                                                                                  .saturationModifier(0.5F)
                                                                                  .build();
 
-    public ItemBlackApple() {
-        super(new Item.Properties()
+    public ItemBlackApple(Item.Properties properties) {
+        super(properties
                 .food(BLACK_APPLE)
                 .food(Foods.APPLE));
     }

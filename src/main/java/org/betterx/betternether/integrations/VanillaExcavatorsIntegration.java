@@ -1,7 +1,6 @@
 package org.betterx.betternether.integrations;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.registry.NetherItems;
 import org.betterx.wover.core.api.ModCore;
 
 import net.minecraft.world.item.Item;
@@ -16,12 +15,17 @@ public class VanillaExcavatorsIntegration {
     private static boolean hasExcavators;
     private static Constructor<?> excavatorConstructor;
 
-    public static Item makeExcavator(ToolMaterial material, int attackDamage, float attackSpeed) {
+    public static Item makeExcavator(
+            ToolMaterial material,
+            int attackDamage,
+            float attackSpeed,
+            Item.Properties properties
+    ) {
         if (!hasExcavators) {
             //make sure we generate an Item during datagen. When doing datagen it does not matter what type the item is,
             //we just need to be able to reference it.
             if (ModCore.isDatagen()) {
-                return new Item(NetherItems.defaultSettings());
+                return new Item(properties);
             }
 
             return Items.AIR;
@@ -31,7 +35,7 @@ public class VanillaExcavatorsIntegration {
                     material,
                     attackDamage,
                     attackSpeed,
-                    NetherItems.defaultSettings()
+                    properties
             );
         } catch (Exception e) {
             e.printStackTrace();

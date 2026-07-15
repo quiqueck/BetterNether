@@ -38,46 +38,50 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.component.Consumable;
-import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
+import java.util.function.Function;
 import java.util.stream.Stream;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 public class NetherItems {
-    public static final Item BLACK_APPLE = registerItem("black_apple", new ItemBlackApple());
+    public static final Item BLACK_APPLE = registerItem("black_apple", ItemBlackApple::new);
 
-    public static final Item STALAGNATE_BOWL = registerItem("stalagnate_bowl", new ItemBowlFood(null, FoodShape.NONE));
+    public static final Item STALAGNATE_BOWL = registerItem(
+            "stalagnate_bowl",
+            props -> new ItemBowlFood(null, FoodShape.NONE, props)
+    );
     public static final Item STALAGNATE_BOWL_WART = registerItem(
             "stalagnate_bowl_wart",
-            new ItemBowlFood(
+            props -> new ItemBowlFood(
                     Foods.COOKED_CHICKEN,
-                    FoodShape.WART
+                    FoodShape.WART,
+                    props
             )
     );
     public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem(
             "stalagnate_bowl_mushroom",
-            new ItemBowlFood(
+            props -> new ItemBowlFood(
                     Foods.MUSHROOM_STEW,
-                    FoodShape.MUSHROOM
+                    FoodShape.MUSHROOM,
+                    props
             )
     );
     public static final Item STALAGNATE_BOWL_APPLE = registerItem(
             "stalagnate_bowl_apple",
-            new ItemBowlFood(Foods.APPLE, FoodShape.APPLE)
+            props -> new ItemBowlFood(Foods.APPLE, FoodShape.APPLE, props)
     );
     public static final Item HOOK_MUSHROOM_COOKED = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
-    public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
-    public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()),
+    public static final Item CINCINNASITE = registerItem("cincinnasite", Item::new);
+    public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", Item::new,
             CommonItemTags.IRON_INGOTS
     );
-    public static final Item NETHER_RUBY = registerItem("nether_ruby", new Item(defaultSettings()));
+    public static final Item NETHER_RUBY = registerItem("nether_ruby", Item::new);
 
     public static final NetherSet CINCINNASITE_SET = new NetherSet(
             "cincinnasite",
@@ -105,58 +109,64 @@ public class NetherItems {
     );
     public static final Item CINCINNASITE_HAMMER = registerItem(
             "cincinnasite_hammer",
-            VanillaHammersIntegration.makeHammer(
+            props -> VanillaHammersIntegration.makeHammer(
                     BNToolMaterial.CINCINNASITE,
                     4,
-                    -2.0F
+                    -2.0F,
+                    props
             )
     );
     public static final Item CINCINNASITE_HAMMER_DIAMOND = registerItem(
             "cincinnasite_hammer_diamond",
-            VanillaHammersIntegration.makeHammer(
+            props -> VanillaHammersIntegration.makeHammer(
                     BNToolMaterial.CINCINNASITE_DIAMOND,
                     5,
-                    -2.0F
+                    -2.0F,
+                    props
             )
     );
     public static final Item NETHER_RUBY_HAMMER = registerItem(
             "nether_ruby_hammer",
-            VanillaHammersIntegration.makeHammer(
+            props -> VanillaHammersIntegration.makeHammer(
                     BNToolMaterial.NETHER_RUBY,
                     5,
-                    -2.0F
+                    -2.0F,
+                    props
             )
     );
 
     public static final Item CINCINNASITE_EXCAVATOR = registerItem(
             "cincinnasite_excavator",
-            VanillaExcavatorsIntegration.makeExcavator(
+            props -> VanillaExcavatorsIntegration.makeExcavator(
                     BNToolMaterial.CINCINNASITE,
                     4,
-                    -1.6F
+                    -1.6F,
+                    props
             )
     );
     public static final Item CINCINNASITE_EXCAVATOR_DIAMOND = registerItem(
             "cincinnasite_excavator_diamond",
-            VanillaExcavatorsIntegration.makeExcavator(
+            props -> VanillaExcavatorsIntegration.makeExcavator(
                     BNToolMaterial.CINCINNASITE_DIAMOND,
                     5,
-                    -2.0F
+                    -2.0F,
+                    props
             )
     );
     public static final Item NETHER_RUBY_EXCAVATOR = registerItem(
             "nether_ruby_excavator",
-            VanillaExcavatorsIntegration.makeExcavator(
+            props -> VanillaExcavatorsIntegration.makeExcavator(
                     BNToolMaterial.NETHER_RUBY,
                     5,
-                    -2.0F
+                    -2.0F,
+                    props
             )
     );
 
-    public static final Item GLOWSTONE_PILE = registerItem("glowstone_pile", new Item(defaultSettings()));
-    public static final Item LAPIS_PILE = registerItem("lapis_pile", new Item(defaultSettings()));
+    public static final Item GLOWSTONE_PILE = registerItem("glowstone_pile", Item::new);
+    public static final Item LAPIS_PILE = registerItem("lapis_pile", Item::new);
 
-    public static final Item AGAVE_LEAF = registerItem("agave_leaf", new Item(defaultSettings()));
+    public static final Item AGAVE_LEAF = registerItem("agave_leaf", Item::new);
     public static final Item AGAVE_MEDICINE = registerMedicine("agave_medicine", 40, 2, true);
     public static final Item HERBAL_MEDICINE = registerMedicine("herbal_medicine", 10, 5, true);
 
@@ -194,58 +204,56 @@ public class NetherItems {
         return item;
     }
 
-    public static Item registerItem(String name, Item item, TagKey<Item>... tags) {
-        if (item != Items.AIR) {
-            getItemRegistry().register(name, item, tags);
-        }
-        return item;
+    @SafeVarargs
+    public static Item registerItem(
+            String name,
+            Function<Item.Properties, ? extends Item> factory,
+            TagKey<Item>... tags
+    ) {
+        return getItemRegistry()
+                .<Item>defineDefaultItem(name, def -> factory.apply(def.getProperties()))
+                .addTags(tags)
+                .buildAndRegister();
     }
 
     public static Item registerFood(String name, int hunger, float saturationMultiplier) {
-        return registerItem(
-                name,
-                new Item(defaultSettings().food(new FoodProperties.Builder().nutrition(hunger)
-                                                                            .saturationModifier(
-                                                                                    saturationMultiplier)
-                                                                            .build()))
-        );
-    }
-
-    private static Consumable medicineConsumable(int ticks, int power) {
-        return Consumables.defaultFood()
-                          .onConsume(new ApplyStatusEffectsConsumeEffect(
-                                  new MobEffectInstance(MobEffects.REGENERATION, ticks, power),
-                                  1F
-                          ))
-                          .build();
+        return getItemRegistry()
+                .<Item>defineFoodItem(name, def -> new Item(def.getProperties()))
+                .nutrition(hunger)
+                .saturationModifier(saturationMultiplier)
+                .buildAndRegister();
     }
 
     public static Item registerMedicine(String name, int ticks, int power, boolean bowl) {
-        if (bowl) {
-            Item item = new Item(defaultSettings().stacksTo(16)
-                                                  .food(new FoodProperties.Builder().build(),
-                                                          medicineConsumable(ticks, power))) {
-                @Override
-                public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
-                    if (stack.getCount() == 1) {
-                        super.finishUsingItem(stack, world, user);
-                        return new ItemStack(NetherItems.STALAGNATE_BOWL, stack.getCount());
-                    } else {
-                        if (user instanceof Player player) {
-                            if (!player.isCreative())
-                                player.addItem(new ItemStack(NetherItems.STALAGNATE_BOWL));
-                        }
-                        return super.finishUsingItem(stack, world, user);
-                    }
-                }
-            };
-            return registerItem(name, item);
-        }
-        return registerItem(
-                name,
-                new Item(defaultSettings().food(new FoodProperties.Builder().build(),
-                        medicineConsumable(ticks, power)))
+        final ApplyStatusEffectsConsumeEffect regeneration = new ApplyStatusEffectsConsumeEffect(
+                new MobEffectInstance(MobEffects.REGENERATION, ticks, power),
+                1F
         );
+        if (bowl) {
+            return getItemRegistry()
+                    .<Item>defineFoodItem(name, def -> new Item(def.getProperties()) {
+                        @Override
+                        public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
+                            if (stack.getCount() == 1) {
+                                super.finishUsingItem(stack, world, user);
+                                return new ItemStack(NetherItems.STALAGNATE_BOWL, stack.getCount());
+                            } else {
+                                if (user instanceof Player player) {
+                                    if (!player.isCreative())
+                                        player.addItem(new ItemStack(NetherItems.STALAGNATE_BOWL));
+                                }
+                                return super.finishUsingItem(stack, world, user);
+                            }
+                        }
+                    })
+                    .stacksTo(16)
+                    .onConsume(regeneration)
+                    .buildAndRegister();
+        }
+        return getItemRegistry()
+                .<Item>defineFoodItem(name, def -> new Item(def.getProperties()))
+                .onConsume(regeneration)
+                .buildAndRegister();
     }
 
     public static Properties defaultSettings() {

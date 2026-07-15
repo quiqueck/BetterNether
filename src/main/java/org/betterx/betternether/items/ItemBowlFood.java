@@ -22,8 +22,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public class ItemBowlFood extends Item {
     private final FoodShape bowlFood;
 
-    public ItemBowlFood(FoodProperties component, FoodShape food) {
-        super(new Item.Properties()
+    public ItemBowlFood(FoodProperties component, FoodShape food, Item.Properties properties) {
+        super(properties
                 .food(component)
                 .stacksTo(16)
         );

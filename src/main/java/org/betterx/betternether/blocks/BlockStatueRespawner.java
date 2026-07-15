@@ -55,7 +55,8 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
         this.setDropItself(false);
 
-        Item item = BuiltInRegistries.ITEM.get(BuiltInRegistries.ITEM.getKey(Items.GLOWSTONE));
+        Item item = BuiltInRegistries.ITEM.getOptional(BuiltInRegistries.ITEM.getKey(Items.GLOWSTONE))
+                                          .orElse(Items.GLOWSTONE);
         if (item == Items.AIR)
             item = Items.GLOWSTONE;
         int count = 4;

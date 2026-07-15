@@ -34,7 +34,7 @@ public class EntityRenderRegistry {
         registerRenderMob(NetherEntities.FIREFLY.type(), RenderFirefly.class);
         registerRenderMob(NetherEntities.HYDROGEN_JELLYFISH.type(), RenderHydrogenJellyfish.class);
         registerRenderMob(NetherEntities.NAGA.type(), RenderNaga.class);
-        EntityRendererRegistry.register(NetherEntities.NAGA_PROJECTILE.type(), RenderNagaProjectile::new);
+        EntityRendererRegistry.register(NetherEntities.NAGA_PROJECTILE, RenderNagaProjectile::new);
         registerRenderMob(NetherEntities.FLYING_PIG.type(), RenderFlyingPig.class);
         registerRenderMob(NetherEntities.JUNGLE_SKELETON.type(), RenderJungleSkeleton.class);
         registerRenderMob(NetherEntities.SKULL.type(), RenderSkull.class);

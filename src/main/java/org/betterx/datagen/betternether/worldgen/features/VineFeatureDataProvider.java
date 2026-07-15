@@ -12,7 +12,7 @@ import org.betterx.wover.feature.api.features.config.PillarFeatureConfig;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.state.BlockState;
@@ -145,7 +145,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .add(1, NetherBlocks.WHISPERING_GOURD_VINE
                         .defaultBlockState()
                         .setValue(BlockWhisperingGourdVine.SHAPE, BlockProperties.TripleShape.BOTTOM))
-                .add(BiasedToBottomInt.of(1, 5), new WeightedStateProvider(SimpleWeightedRandomList
+                .add(BiasedToBottomInt.of(1, 5), new WeightedStateProvider(WeightedList
                         .<BlockState>builder()
                         .add(NetherBlocks.WHISPERING_GOURD_VINE
                                 .defaultBlockState()

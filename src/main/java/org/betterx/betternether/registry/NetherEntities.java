@@ -12,6 +12,8 @@ import org.betterx.ui.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.EntityType.EntityFactory;
@@ -99,7 +101,7 @@ public class NetherEntities {
                             1F
                     ))
             .disableSummon()
-            .build();
+            .build(ResourceKey.create(Registries.ENTITY_TYPE, BetterNether.C.id("naga_projectile")));
 
     public static final BCLEntityWrapper<EntityFirefly> FIREFLY =
             register(
@@ -192,12 +194,13 @@ public class NetherEntities {
             int dotsColor
     ) {
         ResourceLocation id = BetterNether.C.id(name);
+        ResourceKey<EntityType<?>> key = ResourceKey.create(Registries.ENTITY_TYPE, id);
         EntityType<T> type = FabricEntityTypeBuilder.create(group, entity)
                                                     .dimensions(fixedSize
                                                             ? EntityDimensions.fixed(width, height)
                                                             : EntityDimensions.scalable(width, height))
                                                     .fireImmune() //Nether Entities are by default immune to fire
-                                                    .build();
+                                                    .build(key);
 
         type = Registry.register(BuiltInRegistries.ENTITY_TYPE, id, type);
         FabricDefaultAttributeRegistry.register(type, attributes);

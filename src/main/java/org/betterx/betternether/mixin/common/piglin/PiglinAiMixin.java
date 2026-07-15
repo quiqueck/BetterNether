@@ -1,33 +1,17 @@
 package org.betterx.betternether.mixin.common.piglin;
 
-import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.items.materials.BNArmorTiers;
-
-import net.minecraft.core.Holder;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
-import net.minecraft.world.item.ArmorMaterial;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
 
+// TODO(1.21.7): revisit piglin nether-armor handling.
+// In 1.21.2+ PiglinAi#isWearingGold was removed/renamed to #isWearingSafeArmor, which no longer
+// inspects the armor material Holder (the old Holder#is(Holder) injection point is gone). Whether an
+// armor piece pacifies piglins is now driven entirely by the #PIGLIN_SAFE_ARMOR item tag. The former
+// behaviour (config option piglinIgnoreNetherArmor making Cincinnasite/Nether Ruby/Flaming Ruby count
+// as safe) should be reimplemented data-side by adding those items to the minecraft:piglin_safe_armor
+// tag, which lives outside the mixin/ package. This mixin is intentionally a no-op so it compiles and
+// applies cleanly without a stale/silently-failing injector.
 @Mixin(PiglinAi.class)
 public class PiglinAiMixin {
-    @WrapOperation(
-            method = "isWearingGold",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/core/Holder;is(Lnet/minecraft/core/Holder;)Z"
-            )
-    )
-    private static boolean bn_isWearingGold(
-            Holder<ArmorMaterial> instance,
-            Holder<ArmorMaterial> tHolder,
-            Operation<Boolean> original
-    ) {
-        //Piglins will now also consider BetterNether armor materials as gold armor
-        return original.call(instance, tHolder) ||
-                (Configs.GAME_RULES.piglinIgnoreNetherArmor.get() && (instance.is(BNArmorTiers.CINCINNASITE.armorMaterial) || instance.is(BNArmorTiers.NETHER_RUBY.armorMaterial) || instance.is(BNArmorTiers.FLAMING_RUBY.armorMaterial)));
-    }
 }

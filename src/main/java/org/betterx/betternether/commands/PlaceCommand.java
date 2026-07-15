@@ -57,7 +57,7 @@ public class PlaceCommand {
     ) throws CommandSyntaxException {
         Registry<Structure> registry = stack.getLevel()
                                             .registryAccess()
-                                            .registryOrThrow(Registries.STRUCTURE);
+                                            .lookupOrThrow(Registries.STRUCTURE);
         HolderSet<Structure> holderSet = LocateCommand.getHolders(result, registry)
                                                       .orElseThrow(() -> ERROR_STRUCTURE_INVALID.create(result.asPrintable()));
 

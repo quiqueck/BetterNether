@@ -9,6 +9,7 @@ import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.CriterionValidator;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +35,9 @@ public class ConvertByLightningTrigger
         return BNCriterion
                 .CONVERT_BY_LIGHTNING
                 .createCriterion(
-                        new TriggerInstance(ItemPredicate.Builder.item().of(item).build())
+                        new TriggerInstance(ItemPredicate.Builder.item()
+                                                                 .of(BuiltInRegistries.ITEM, item)
+                                                                 .build())
                 );
     }
 

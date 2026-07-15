@@ -2,7 +2,7 @@ package org.betterx.betternether.mixin.client;
 
 import org.betterx.betternether.config.Configs;
 
-import net.minecraft.client.model.ArmorStandArmorModel;
+import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -22,10 +23,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(PlayerRenderer.class)
-public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerRenderState, PlayerModel> {
     public PlayerArmorMixin(
             EntityRendererProvider.Context context,
-            PlayerModel<AbstractClientPlayer> entityModel,
+            PlayerModel entityModel,
             float f
     ) {
         super(context, entityModel, f);
@@ -35,7 +36,7 @@ public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClie
     @Inject(method = "<init>*", at = @At(value = "RETURN"))
     private void bcl_onInit(EntityRendererProvider.Context context, boolean bl, CallbackInfo info) {
         if (Configs.CLIENT.thinArmor.get()) {
-            for (RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> feature : this.layers) {
+            for (RenderLayer<PlayerRenderState, PlayerModel> feature : this.layers) {
                 if (feature instanceof HumanoidArmorLayer) {
                     this.layers.remove(feature);
                     break;
@@ -43,11 +44,11 @@ public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClie
             }
             this.layers.add(
                     0,
-                    new HumanoidArmorLayer(
+                    new HumanoidArmorLayer<>(
                             this,
-                            new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
-                            new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR)),
-                            context.getModelManager()
+                            new HumanoidArmorModel<>(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
+                            new HumanoidArmorModel<>(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR)),
+                            context.getEquipmentRenderer()
                     )
             );
         }

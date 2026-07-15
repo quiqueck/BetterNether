@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.state.ArmorStandRenderState;
 import net.minecraft.world.entity.decoration.ArmorStand;
 
 import net.fabricmc.api.EnvType;
@@ -21,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(ArmorStandRenderer.class)
-public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, ArmorStandArmorModel> {
+public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, ArmorStandRenderState, ArmorStandArmorModel> {
     public StandArmorMixin(EntityRendererProvider.Context context, ArmorStandArmorModel entityModel, float f) {
         super(context, entityModel, f);
     }
@@ -30,7 +31,7 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, A
     @Inject(method = "<init>*", at = @At(value = "RETURN"))
     private void onInit(EntityRendererProvider.Context ctx, CallbackInfo info) {
         if (Configs.CLIENT.thinArmor.get()) {
-            for (RenderLayer<ArmorStand, ArmorStandArmorModel> feature : this.layers) {
+            for (RenderLayer<ArmorStandRenderState, ArmorStandArmorModel> feature : this.layers) {
                 if (feature instanceof HumanoidArmorLayer) {
                     this.layers.remove(feature);
                     break;
@@ -38,11 +39,11 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, A
             }
             this.layers.add(
                     0,
-                    new HumanoidArmorLayer(
+                    new HumanoidArmorLayer<>(
                             this,
                             new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
                             new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR)),
-                            ctx.getModelManager()
+                            ctx.getEquipmentRenderer()
                     )
             );
         }

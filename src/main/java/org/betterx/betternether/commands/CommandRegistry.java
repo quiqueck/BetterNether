@@ -193,8 +193,7 @@ public class CommandRegistry {
                     targetPlayerPos.y,
                     targetPlayerPos.z,
                     0,
-                    0,
-                    Collections.EMPTY_SET
+                    0
             );
             ResourceOrTagKeyArgument.Result result = new ResourceOrTagKeyArgument.Result() {
                 @Override
@@ -221,8 +220,8 @@ public class CommandRegistry {
             if (WorldState.allStageRegistryAccess() != null) {
                 Stopwatch stopwatch = Stopwatch.createStarted(Util.TICKER);
                 Holder<Biome> h = WorldState.allStageRegistryAccess()
-                                            .registryOrThrow(Registries.BIOME)
-                                            .getHolder(a)
+                                            .lookupOrThrow(Registries.BIOME)
+                                            .get(a)
                                             .orElseThrow();
                 stopwatch.stop();
                 return LocateCommand.showLocateResult(

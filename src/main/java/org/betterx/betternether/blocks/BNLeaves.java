@@ -18,7 +18,8 @@ public class BNLeaves extends BaseLeavesBlock {
 
 
     public BNLeaves(Block sapling, BlockBehaviour.Properties properties) {
-        super(sapling, properties);
+        // sapling no longer tracked by the vanilla leaves block in 1.21.6
+        super(properties);
     }
 
     @Override

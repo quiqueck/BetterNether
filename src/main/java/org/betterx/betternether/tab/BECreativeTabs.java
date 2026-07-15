@@ -2,7 +2,6 @@ package org.betterx.betternether.tab;
 
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlantLike;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.complex.WillowMaterial;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
@@ -18,8 +17,8 @@ public class BECreativeTabs {
                         || item == NetherItems.AGAVE_LEAF
                         || item == NetherItems.BLACK_APPLE
                         || item == NetherBlocks.MAGMA_FLOWER.asItem()
-                        || item == NetherBlocks.MAT_RUBEUS.getBlockItem(NetherSlots.CONE)
-                        || item == NetherBlocks.MAT_WILLOW.getBlockItem(WillowMaterial.BLOCK_TORCH))
+                        || item == NetherBlocks.MAT_RUBEUS.getItem(NetherSlots.CONE)
+                        || item == NetherBlocks.MAT_WILLOW.getItem(NetherSlots.TORCH))
                 .setIcon(NetherItems.BLACK_APPLE)
                 .buildAndAdd()
                 .createBlockOnlyTab(NetherBlocks.JUNGLE_GRASS)

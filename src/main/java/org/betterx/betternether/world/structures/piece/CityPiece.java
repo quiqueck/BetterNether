@@ -45,7 +45,7 @@ public class CityPiece extends CustomPiece {
         this.building = new StructureCityBuilding(tag.getStringOr("building", ""), tag.getIntOr("offset", 0))
                 .getRotated(Rotation.values()[tag.getIntOr("rotation", 0)]);
         this.building.setMirror(Mirror.values()[tag.getIntOr("mirror", 0)]);
-        this.pos = NbtUtils.readBlockPos(tag, "pos").orElse(BlockPos.ZERO);
+        this.pos = tag.read("pos", BlockPos.CODEC).orElse(BlockPos.ZERO);
         this.boundingBox = building.getBoundingBox(pos);
         this.palette = Palettes.getPalette(tag.getStringOr("palette", ""));
         this.paletteProcessor = new BuildingStructureProcessor(palette);
@@ -60,7 +60,7 @@ public class CityPiece extends CustomPiece {
         tag.putInt("rotation", building.getRotation().ordinal());
         tag.putInt("mirror", building.getMirror().ordinal());
         tag.putInt("offset", building.getYOffset());
-        tag.put("pos", NbtUtils.writeBlockPos(pos));
+        tag.store("pos", BlockPos.CODEC, pos);
         tag.putString("palette", palette.getName());
     }
 

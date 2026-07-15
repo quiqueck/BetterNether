@@ -246,10 +246,10 @@ public class CityPalette {
 
     private BlockState copyWall(BlockState source, Block block) {
         BlockState state = block.defaultBlockState()
-                                .setValue(WallBlock.EAST_WALL, source.getValue(WallBlock.EAST_WALL))
-                                .setValue(WallBlock.NORTH_WALL, source.getValue(WallBlock.NORTH_WALL))
-                                .setValue(WallBlock.SOUTH_WALL, source.getValue(WallBlock.SOUTH_WALL))
-                                .setValue(WallBlock.WEST_WALL, source.getValue(WallBlock.WEST_WALL))
+                                .setValue(WallBlock.EAST, source.getValue(WallBlock.EAST))
+                                .setValue(WallBlock.NORTH, source.getValue(WallBlock.NORTH))
+                                .setValue(WallBlock.SOUTH, source.getValue(WallBlock.SOUTH))
+                                .setValue(WallBlock.WEST, source.getValue(WallBlock.WEST))
                                 .setValue(WallBlock.UP, source.getValue(WallBlock.UP))
                                 .setValue(StairBlock.WATERLOGGED, source.getValue(StairBlock.WATERLOGGED));
         return state;

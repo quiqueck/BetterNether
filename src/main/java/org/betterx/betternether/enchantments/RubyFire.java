@@ -5,6 +5,7 @@ import org.betterx.betternether.registry.NetherEnchantments;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -13,9 +14,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.BlastingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
@@ -62,8 +62,11 @@ public class RubyFire {
                     BlastingRecipe result = resultHolder != null ? resultHolder.value() : null;
                     if (result != null) {
                         didConvert = true;
-                        final ItemStack resultStack = result.getResultItem(level.registryAccess());
-                        xpDrop += result.getExperience();
+                        final ItemStack resultStack = result.assemble(
+                                new SingleRecipeInput(stack),
+                                level.registryAccess()
+                        );
+                        xpDrop += result.experience();
                         convertedDrops.get()
                                       .add(new ItemStack(
                                               resultStack.getItem(),
@@ -99,18 +102,18 @@ public class RubyFire {
     }
 
     private static void buildConversionTable(ServerLevel level) {
-        final List<RecipeHolder<BlastingRecipe>> recipes = level.getRecipeManager()
-                                                                .getAllRecipesFor(RecipeType.BLASTING);
-        for (RecipeHolder<BlastingRecipe> r : recipes) {
-            for (Ingredient ingredient : r.value().getIngredients()) {
-                for (ItemStack stack : ingredient.getItems()) {
-                    if (stack.getItem() instanceof BlockItem blitem) {
-                        if (blitem.getBlock().defaultBlockState().is(CommonBlockTags.IS_OBSIDIAN)) {
-                            continue;
-                        }
+        for (RecipeHolder<?> holder : level.recipeAccess().getRecipes()) {
+            if (!(holder.value() instanceof BlastingRecipe blasting)) continue;
+            @SuppressWarnings("unchecked")
+            final RecipeHolder<BlastingRecipe> r = (RecipeHolder<BlastingRecipe>) holder;
+            for (Holder<Item> itemHolder : blasting.input().items().toList()) {
+                final Item item = itemHolder.value();
+                if (item instanceof BlockItem blitem) {
+                    if (blitem.getBlock().defaultBlockState().is(CommonBlockTags.IS_OBSIDIAN)) {
+                        continue;
                     }
-                    FIRE_CONVERSIONS.put(stack.getItem(), r);
                 }
+                FIRE_CONVERSIONS.put(item, r);
             }
         }
     }

@@ -33,7 +33,7 @@ public class BlockInkBush extends BlockCommonPlant implements SurvivesOnNetherGr
             return Shapes.empty();
         }
 
-        return super.getOcclusionShape(blockState, blockGetter, blockPos);
+        return super.getOcclusionShape(blockState);
     }
 
     @Override

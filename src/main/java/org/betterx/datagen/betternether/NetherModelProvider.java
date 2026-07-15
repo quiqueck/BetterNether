@@ -1,7 +1,7 @@
 package org.betterx.datagen.betternether;
 
 import org.betterx.bclib.client.models.BCLModels;
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
+import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
 import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
@@ -132,11 +132,11 @@ public class NetherModelProvider extends WoverModelProvider {
         );
     }
 
-    private void addMaterialOverrides(ModelOverides overides, WoodenComplexMaterial mat) {
+    private void addMaterialOverrides(ModelOverides overides, NetherWoodenMaterial<?> mat) {
         overides
                 .ignore(mat.getBlock(SlotType.LADDER))
                 .ignore(mat.getBlock(SlotType.TRAPDOOR))
-                .ignore(mat.getBlock(SlotType.FENCE_GATE))
+                .ignore(mat.getBlock(SlotType.GATE))
                 .ignore(mat.getBlock(SlotType.FENCE))
                 .ignore(mat.getBlock(SlotType.SLAB))
                 .ignore(mat.getBlock(SlotType.LOG))

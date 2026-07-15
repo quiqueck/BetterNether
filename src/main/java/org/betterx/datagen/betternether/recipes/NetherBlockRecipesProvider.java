@@ -1,6 +1,5 @@
 package org.betterx.datagen.betternether.recipes;
 
-import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.recipes.RecipesHelper;
@@ -33,17 +32,8 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
                      .category(RecipeCategory.MISC)
                      .build(context);
         
-        RecipeBuilder.crafting(
-                             BetterNether.C.id("mushroom_fir_trimmed_chest"),
-                             NetherBlocks.TRIMMED_MUSHROOM_FIR_CHEST
-                     )
-                     .shapeless()
-                     .addMaterial('#', NetherBlocks.MAT_MUSHROOM_FIR.getBlock(SlotType.CHEST))
-                     .addMaterial('S', NetherBlocks.MAT_MUSHROOM_FIR.getBlock(SlotType.STRIPPED_LOG))
-                     .group("chest")
-                     .outputCount(1)
-                     .category(RecipeCategory.DECORATIONS)
-                     .build(context);
+        // TODO(1.21.7): re-add trimmed chest recipe once TRIMMED_MUSHROOM_FIR_CHEST is re-added
+        //  via the wover chest API (see NetherBlocks.java: the block was dropped in the migration).
 
         RecipeBuilder.crafting(BetterNether.C.id("activator_rail"), Items.ACTIVATOR_RAIL)
                      .shape("XSX", "X#X", "XSX")
@@ -421,7 +411,9 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
         registerSmithing(context);
 
         withTemplates(context);
-        ComplexMaterial.provideAllRecipes(context, BetterNether.C);
+        // Complex-material recipes are now emitted automatically via the block RECIPE traits
+        // (see BlockTraits.RECIPE in the migrated complex materials); the old
+        // ComplexMaterial.provideAllRecipes(...) helper was removed in the wover/bclib refactor.
     }
 
     private static void registerSmithing(RecipeBuilder.Context context) {

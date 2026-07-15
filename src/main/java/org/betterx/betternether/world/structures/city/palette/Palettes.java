@@ -27,7 +27,7 @@ public class Palettes {
             .addFences(NetherBlocks.MAT_WART.getBlock(
                     SlotType.FENCE))
             .addGates(NetherBlocks.MAT_WART.getBlock(
-                    SlotType.FENCE_GATE))
+                    SlotType.GATE))
             .addWalls(NetherBlocks.NETHER_BRICK_WALL)
             .addLogs(
                     NetherBlocks.MAT_WART.getLog(),

@@ -38,6 +38,9 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -208,14 +211,20 @@ public class NetherItems {
         );
     }
 
+    private static Consumable medicineConsumable(int ticks, int power) {
+        return Consumables.defaultFood()
+                          .onConsume(new ApplyStatusEffectsConsumeEffect(
+                                  new MobEffectInstance(MobEffects.REGENERATION, ticks, power),
+                                  1F
+                          ))
+                          .build();
+    }
+
     public static Item registerMedicine(String name, int ticks, int power, boolean bowl) {
         if (bowl) {
             Item item = new Item(defaultSettings().stacksTo(16)
-                                                  .food(new FoodProperties.Builder().effect(new MobEffectInstance(
-                                                          MobEffects.REGENERATION,
-                                                          ticks,
-                                                          power
-                                                  ), 1).build())) {
+                                                  .food(new FoodProperties.Builder().build(),
+                                                          medicineConsumable(ticks, power))) {
                 @Override
                 public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
                     if (stack.getCount() == 1) {
@@ -234,11 +243,8 @@ public class NetherItems {
         }
         return registerItem(
                 name,
-                new Item(defaultSettings().food(new FoodProperties.Builder().effect(new MobEffectInstance(
-                        MobEffects.REGENERATION,
-                        ticks,
-                        power
-                ), 1).build()))
+                new Item(defaultSettings().food(new FoodProperties.Builder().build(),
+                        medicineConsumable(ticks, power)))
         );
     }
 
@@ -294,10 +300,10 @@ public class NetherItems {
 
         if (enchantments.length > 0 && WorldState.registryAccess() != null) {
             ListTag chants = new ListTag();
-            final var enchReg = WorldState.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+            final var enchReg = WorldState.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
             tag.put("Enchantments", chants);
             for (ResourceKey<Enchantment> e : enchantments) {
-                final var ench = enchReg.get(e);
+                final var ench = enchReg.getValue(e);
                 final var eTag = new CompoundTag();
                 eTag.putInt("lvl", ench.getMaxLevel());
                 eTag.putString("id", e.location().toString());

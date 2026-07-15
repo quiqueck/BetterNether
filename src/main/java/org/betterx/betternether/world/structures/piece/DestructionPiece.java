@@ -40,7 +40,7 @@ public class DestructionPiece extends CustomPiece {
 
     public DestructionPiece(StructurePieceSerializationContext context, CompoundTag tag) {
         super(NetherStructurePieces.DESTRUCTION_PIECE, tag);
-        this.center = NbtUtils.readBlockPos(tag, "center").orElse(BlockPos.ZERO);
+        this.center = tag.read("center", BlockPos.CODEC).orElse(BlockPos.ZERO);
         this.radius = tag.getIntOr("radius", 0);
         radSqr = radius * radius;
         makeBoundingBox();
@@ -51,7 +51,7 @@ public class DestructionPiece extends CustomPiece {
             StructurePieceSerializationContext structurePieceSerializationContext,
             CompoundTag tag
     ) {
-        tag.put("center", NbtUtils.writeBlockPos(center));
+        tag.store("center", BlockPos.CODEC, center);
         tag.putInt("radius", radius);
     }
 

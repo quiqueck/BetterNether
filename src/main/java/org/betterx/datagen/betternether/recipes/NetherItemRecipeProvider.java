@@ -207,7 +207,8 @@ public class NetherItemRecipeProvider extends WoverRecipeProvider {
                 NetherItems.CINCINNASITE_INGOT
         ).build(context);
 
-        EquipmentSet.buildAllRecipes(BetterNether.C, context);
+        // Equipment-set recipes are now emitted automatically via item RECIPE traits
+        // (attached by EquipmentSet#add); the old EquipmentSet.buildAllRecipes(...) helper was removed.
     }
 
     private static void registerShapeLess(RecipeBuilder.Context context) {

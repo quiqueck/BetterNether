@@ -13,23 +13,25 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlockEntitiesRegistry {
-    public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = BlockEntityType.Builder.of(
+    public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = FabricBlockEntityTypeBuilder.create(
             BlockEntityForge::new,
             NetherBlocks.CINCINNASITE_FORGE
     ).build(null);
-    public static final BlockEntityType<BlockEntityFurnace> NETHERRACK_FURNACE = BlockEntityType.Builder.of(
+    public static final BlockEntityType<BlockEntityFurnace> NETHERRACK_FURNACE = FabricBlockEntityTypeBuilder.create(
             BlockEntityFurnace::new,
             getFurnaces()
     ).build(null);
-    public static final BlockEntityType<BlockEntityChestOfDrawers> CHEST_OF_DRAWERS = BlockEntityType.Builder.of(
+    public static final BlockEntityType<BlockEntityChestOfDrawers> CHEST_OF_DRAWERS = FabricBlockEntityTypeBuilder.create(
             BlockEntityChestOfDrawers::new,
             NetherBlocks.CHEST_OF_DRAWERS
     ).build(null);
-    public static final BlockEntityType<BNBrewingStandBlockEntity> NETHER_BREWING_STAND = BlockEntityType.Builder.of(
+    public static final BlockEntityType<BNBrewingStandBlockEntity> NETHER_BREWING_STAND = FabricBlockEntityTypeBuilder.create(
             BNBrewingStandBlockEntity::new,
             NetherBlocks.NETHER_BREWING_STAND
     ).build(null);

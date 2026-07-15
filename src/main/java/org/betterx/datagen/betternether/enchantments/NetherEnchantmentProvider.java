@@ -56,7 +56,7 @@ public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
                                         LevelBasedValue.constant(7.0F),
                                         damageGetter.getOrThrow(DamageTypes.INDIRECT_MAGIC)
                                 ),
-                                new DamageItem(
+                                new ChangeItemDamage(
                                         LevelBasedValue.constant(1.0F)
                                 ),
                                 new Ignite(LevelBasedValue.constant(100.0F))

@@ -1,9 +1,8 @@
 accessWidener   v1  named
 
 # Classes
-accessible    class    net/minecraft/client/renderer/RenderStateShard$TransparencyStateShard
-accessible    class    net/minecraft/client/renderer/RenderStateShard$WriteMaskStateShard
-accessible    class    net/minecraft/client/renderer/RenderStateShard$DepthTestStateShard
+# NOTE: RenderStateShard$TransparencyStateShard/WriteMaskStateShard/DepthTestStateShard were removed in the
+# 1.21.5 render-pipeline overhaul (the custom firefly RenderType now uses a stock RenderType — see RenderPhaseAccessor).
 accessible    class    net/minecraft/client/renderer/RenderStateShard$LayeringStateShard
 accessible    class    net/minecraft/client/renderer/RenderStateShard$OutputStateShard
 accessible    class    net/minecraft/client/renderer/RenderType$CompositeState

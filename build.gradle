@@ -87,8 +87,11 @@ dependencies {
         modImplementation "org.betterx:bclib:${project.bclib_version}"
     }
 
-    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
-    modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
+    // EMI 1.1.8+1.21 targets 1.21.1 and its mixins fail against 1.21.7; the BetterNether EMI
+    // integration is disabled for now (see integrations/emi, entrypoint emi_disabled). Re-enable
+    // with an EMI build for 1.21.7.
+//    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+//    modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 
     modLocalRuntime "com.terraformersmc:modmenu:${project.modmenu_version}"
 

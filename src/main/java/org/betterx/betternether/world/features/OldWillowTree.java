@@ -1,6 +1,6 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
+import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.*;
@@ -125,14 +125,14 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                     BlocksHelper.setWithUpdate(
                             world,
                             bpos,
-                            NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.BARK)
+                            NetherBlocks.MAT_WILLOW.getBlock(SlotType.BARK)
                                                    .defaultBlockState()
                     );
                 else
                     BlocksHelper.setWithUpdate(
                             world,
                             bpos,
-                            NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.LOG)
+                            NetherBlocks.MAT_WILLOW.getBlock(SlotType.LOG)
                                                    .defaultBlockState()
                     );
 

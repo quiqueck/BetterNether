@@ -6,7 +6,7 @@ import org.betterx.wover.core.api.ModCore;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.ToolMaterial;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -16,7 +16,7 @@ public class VanillaHammersIntegration {
     private static boolean hasHammers;
     private static Constructor<?> hammerConstructor;
 
-    public static Item makeHammer(Tier material, int attackDamage, float attackSpeed) {
+    public static Item makeHammer(ToolMaterial material, int attackDamage, float attackSpeed) {
         if (!hasHammers) {
             //make sure we generate an Item during datagen. When doing datagen it does not matter what type the item is,
             //we just need to be able to reference it.

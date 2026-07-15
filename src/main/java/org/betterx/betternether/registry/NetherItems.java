@@ -247,8 +247,7 @@ public class NetherItems {
     }
 
     public static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
-        SpawnEggItem egg = new SpawnEggItem(type, background, dots, defaultSettings());
-        return getItemRegistry().registerEgg(name, egg);
+        return getItemRegistry().defineSpawnEgg(name).entityType(type).colors(background, dots).buildAndRegister();
     }
 
     public static Item registerNetherItem(String name, Item item) {
@@ -261,28 +260,28 @@ public class NetherItems {
 
             registerNetherItem(
                     "debug/city_loot",
-                    DebugDataItem.forLootTable(BNLoot.CITY_LOOT, Items.IRON_INGOT)
+                    DebugDataItem.forLootTable(getItemRegistry().key("debug/city_loot"), BNLoot.CITY_LOOT, Items.IRON_INGOT)
             );
             registerNetherItem(
                     "debug/city_loot_common",
-                    DebugDataItem.forLootTable(BNLoot.CITY_LOOT_COMMON, Items.GOLD_INGOT)
+                    DebugDataItem.forLootTable(getItemRegistry().key("debug/city_loot_common"), BNLoot.CITY_LOOT_COMMON, Items.GOLD_INGOT)
             );
             registerNetherItem(
                     "debug/city_loot_surprise",
-                    DebugDataItem.forLootTable(BNLoot.CITY_LOOT_SURPRISE, Items.DIAMOND)
+                    DebugDataItem.forLootTable(getItemRegistry().key("debug/city_loot_surprise"), BNLoot.CITY_LOOT_SURPRISE, Items.DIAMOND)
             );
             registerNetherItem(
                     "debug/wither_tower_loot",
-                    DebugDataItem.forLootTable(BNLoot.WITHER_TOWER_LOOT, NetherItems.CINCINNASITE_INGOT)
+                    DebugDataItem.forLootTable(getItemRegistry().key("debug/wither_tower_loot"), BNLoot.WITHER_TOWER_LOOT, NetherItems.CINCINNASITE_INGOT)
             );
             registerNetherItem(
                     "debug/wither_tower_bonus_loot",
-                    DebugDataItem.forLootTable(BNLoot.WITHER_TOWER_BONUS_LOOT, NetherItems.NETHER_RUBY)
+                    DebugDataItem.forLootTable(getItemRegistry().key("debug/wither_tower_bonus_loot"), BNLoot.WITHER_TOWER_BONUS_LOOT, NetherItems.NETHER_RUBY)
             );
 
             registerNetherItem(
                     "debug/city_spawner",
-                    DebugDataItem.forSpawner(NetherItems::buildCitySpawnerData, Items.SPECTRAL_ARROW)
+                    DebugDataItem.forSpawner(getItemRegistry().key("debug/city_spawner"), NetherItems::buildCitySpawnerData, Items.SPECTRAL_ARROW)
             );
         }
     }

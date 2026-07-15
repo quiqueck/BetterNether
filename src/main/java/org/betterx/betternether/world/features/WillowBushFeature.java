@@ -1,6 +1,6 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
+import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockNetherGrass;
 import org.betterx.betternether.blocks.BlockWillowLeaves;
@@ -94,7 +94,7 @@ public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> 
         BlocksHelper.setWithoutUpdate(
                 world,
                 pos,
-                NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.BARK).defaultBlockState()
+                NetherBlocks.MAT_WILLOW.getBlock(SlotType.BARK).defaultBlockState()
         );
         setIfAir(
                 world,

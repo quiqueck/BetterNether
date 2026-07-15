@@ -35,6 +35,9 @@ public class VanillaFallback<T extends NetherWoodenMaterial<T>> extends NetherWo
 
     public static Block getVanillaBlock(String baseName, String key) {
         var vanillaID = ResourceLocation.withDefaultNamespace(baseName + "_" + key);
+        // BLOCK is a defaulted registry: getValue returns AIR for a missing key. Return null instead so
+        // callers (e.g. BlockSet#recipeMaterial) fall through to the item slot for item-only slots like BOAT.
+        if (!BuiltInRegistries.BLOCK.containsKey(vanillaID)) return null;
         return BuiltInRegistries.BLOCK.getValue(vanillaID);
     }
 }

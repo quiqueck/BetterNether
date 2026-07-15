@@ -3,12 +3,8 @@
   "category": "building",
   "group": "quartz_glass_framed",
   "key": {
-    "#": {
-      "item": "betternether:quartz_glass_framed"
-    },
-    "I": {
-      "item": "minecraft:light_blue_dye"
-    }
+    "#": "betternether:quartz_glass_framed",
+    "I": "minecraft:light_blue_dye"
   },
   "pattern": [
     "###",

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_cincinnasite_frame",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "#": "betternether:cincinnasite_ingot"
   },
   "pattern": [
     "# #",

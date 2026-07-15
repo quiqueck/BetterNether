@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_cincinnasite_forged_from_ingot",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "#": "betternether:cincinnasite_ingot"
   },
   "pattern": [
     "##",

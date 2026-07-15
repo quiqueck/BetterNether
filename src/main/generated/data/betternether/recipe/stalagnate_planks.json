@@ -3,20 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    [
-      {
-        "item": "betternether:stalagnate_log"
-      },
-      {
-        "item": "betternether:stalagnate_bark"
-      },
-      {
-        "item": "betternether:stalagnate_stripped_log"
-      },
-      {
-        "item": "betternether:stalagnate_stripped_bark"
-      }
-    ]
+    "#betternether:stalagnate_logs"
   ],
   "result": {
     "count": 4,

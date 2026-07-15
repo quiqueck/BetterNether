@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "nether_bone_cin_door",
   "key": {
-    "A": {
-      "item": "betternether:cincinnasite_forged"
-    },
-    "B": {
-      "item": "betternether:bone_block"
-    }
+    "A": "betternether:cincinnasite_forged",
+    "B": "betternether:bone_block"
   },
   "pattern": [
     "AB",

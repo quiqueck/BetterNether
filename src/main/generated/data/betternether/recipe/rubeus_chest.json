@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "chest",
   "key": {
-    "#": {
-      "item": "betternether:rubeus_planks"
-    }
+    "#": "betternether:rubeus_planks"
   },
   "pattern": [
     "###",

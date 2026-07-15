@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "fire_bowl",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_forged"
-    },
-    "I": {
-      "item": "minecraft:netherrack"
-    },
-    "L": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "#": "betternether:cincinnasite_forged",
+    "I": "minecraft:netherrack",
+    "L": "betternether:cincinnasite_ingot"
   },
   "pattern": [
     "#I#",

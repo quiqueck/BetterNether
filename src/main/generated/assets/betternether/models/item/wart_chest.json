@@ -1,6 +1,6 @@
 {
-  "parent": "bclib:block/chest_item",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "texture": "betternether:entity/chest/wart_chest"
+    "layer0": "betternether:item/wart_chest"
   }
 }

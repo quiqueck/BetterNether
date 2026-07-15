@@ -3,9 +3,7 @@
   "category": "building",
   "group": "slabs",
   "key": {
-    "#": {
-      "item": "betternether:soul_sandstone_cut"
-    }
+    "#": "betternether:soul_sandstone_cut"
   },
   "pattern": [
     "###"

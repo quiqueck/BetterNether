@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "barrel",
   "key": {
-    "#": {
-      "item": "betternether:stalagnate_planks"
-    },
-    "S": {
-      "item": "betternether:stalagnate_slab"
-    }
+    "#": "betternether:stalagnate_planks",
+    "S": "betternether:stalagnate_slab"
   },
   "pattern": [
     "#S#",

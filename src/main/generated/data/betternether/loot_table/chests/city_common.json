@@ -310,7 +310,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "betternether:bowl_upgrade_smithing_template",
+          "name": "betternether:bowl_upgrade",
           "weight": 3
         },
         {
@@ -326,7 +326,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "betternether:cincinnasite_diamond_upgrade_smithing_template",
+          "name": "betternether:cincinnasite_diamond_upgrade",
           "weight": 3
         },
         {

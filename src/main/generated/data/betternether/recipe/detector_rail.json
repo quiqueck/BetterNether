@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "nether_detector_rail",
   "key": {
-    "#": {
-      "item": "minecraft:stone_pressure_plate"
-    },
-    "R": {
-      "item": "minecraft:redstone"
-    },
-    "X": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "#": "minecraft:stone_pressure_plate",
+    "R": "minecraft:redstone",
+    "X": "betternether:cincinnasite_ingot"
   },
   "pattern": [
     "X X",

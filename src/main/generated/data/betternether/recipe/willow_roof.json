@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "key": {
-    "#": {
-      "item": "betternether:willow_planks"
-    }
+    "#": "betternether:willow_planks"
   },
   "pattern": [
     "# #",

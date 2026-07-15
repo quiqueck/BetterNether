@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "betternether:item/debug/wither_tower_bonus_loot"
+  }
+}

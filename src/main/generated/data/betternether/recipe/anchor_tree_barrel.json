@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "barrel",
   "key": {
-    "#": {
-      "item": "betternether:anchor_tree_planks"
-    },
-    "S": {
-      "item": "betternether:anchor_tree_slab"
-    }
+    "#": "betternether:anchor_tree_planks",
+    "S": "betternether:anchor_tree_slab"
   },
   "pattern": [
     "#S#",

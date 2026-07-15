@@ -1,20 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_nether_sakura_log_nether_sakura_bark_n": {
+    "has_tag_betternether_nether_sakura_logs": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:nether_sakura_log"
-          },
-          {
-            "items": "betternether:nether_sakura_bark"
-          },
-          {
-            "items": "betternether:nether_sakura_stripped_log"
-          },
-          {
-            "items": "betternether:nether_sakura_stripped_bark"
+            "items": "#betternether:nether_sakura_logs"
           }
         ]
       },
@@ -30,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_nether_sakura_log_nether_sakura_bark_n"
+      "has_tag_betternether_nether_sakura_logs"
     ]
   ],
   "rewards": {

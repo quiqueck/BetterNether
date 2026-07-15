@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "ladder",
   "key": {
-    "#": {
-      "item": "minecraft:warped_planks"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
+    "#": "minecraft:warped_planks",
+    "I": "minecraft:stick"
   },
   "pattern": [
     "I I",

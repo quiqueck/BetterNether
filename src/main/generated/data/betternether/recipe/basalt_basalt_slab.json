@@ -3,9 +3,7 @@
   "category": "building",
   "group": "slabs",
   "key": {
-    "#": {
-      "item": "minecraft:basalt"
-    }
+    "#": "minecraft:basalt"
   },
   "pattern": [
     "###"

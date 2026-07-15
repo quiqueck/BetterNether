@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/taburet_cincinnasite"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/taburet_cincinnasite"
+  }
 }

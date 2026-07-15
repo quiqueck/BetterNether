@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "chest",
   "key": {
-    "#": {
-      "item": "betternether:nether_sakura_planks"
-    }
+    "#": "betternether:nether_sakura_planks"
   },
   "pattern": [
     "###",

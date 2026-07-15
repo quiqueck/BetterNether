@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_bone_tile",
   "key": {
-    "#": {
-      "item": "betternether:bone_slab"
-    }
+    "#": "betternether:bone_slab"
   },
   "pattern": [
     "#",

@@ -3,20 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    [
-      {
-        "item": "betternether:wart_log"
-      },
-      {
-        "item": "betternether:wart_bark"
-      },
-      {
-        "item": "betternether:wart_stripped_log"
-      },
-      {
-        "item": "betternether:wart_stripped_bark"
-      }
-    ]
+    "#betternether:wart_logs"
   ],
   "result": {
     "count": 4,

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "nether_cincinnasite_lantern_small",
   "key": {
-    "I": {
-      "item": "betternether:cincinnasite_ingot"
-    },
-    "L": {
-      "item": "betternether:cincinnasite_lantern"
-    }
+    "I": "betternether:cincinnasite_ingot",
+    "L": "betternether:cincinnasite_lantern"
   },
   "pattern": [
     "I",

@@ -3,12 +3,8 @@
   "category": "building",
   "group": "bookshelf",
   "key": {
-    "#": {
-      "item": "betternether:wart_planks"
-    },
-    "P": {
-      "item": "minecraft:book"
-    }
+    "#": "betternether:wart_planks",
+    "P": "minecraft:book"
   },
   "pattern": [
     "###",

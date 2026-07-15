@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "door",
   "key": {
-    "#": {
-      "item": "betternether:mushroom_fir_planks"
-    }
+    "#": "betternether:mushroom_fir_planks"
   },
   "pattern": [
     "##",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "betternether:golden_vine"
-    }
+    "betternether:golden_vine"
   ],
   "result": {
     "count": 2,

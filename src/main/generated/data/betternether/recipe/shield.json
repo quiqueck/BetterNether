@@ -3,12 +3,8 @@
   "category": "equipment",
   "group": "nether_shield",
   "key": {
-    "W": {
-      "tag": "minecraft:planks"
-    },
-    "o": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "W": "#minecraft:planks",
+    "o": "betternether:cincinnasite_ingot"
   },
   "pattern": [
     "WoW",

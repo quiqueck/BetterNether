@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:diamond"
-    },
-    "C": {
-      "item": "betternether:nether_ruby"
-    },
-    "S": {
-      "item": "betternether:flaming_ruby_upgrade_smithing_template"
-    }
+    "#": "minecraft:diamond",
+    "C": "betternether:nether_ruby",
+    "S": "betternether:flaming_ruby_upgrade"
   },
   "pattern": [
     "#S#",
@@ -19,6 +13,6 @@
   ],
   "result": {
     "count": 2,
-    "id": "betternether:flaming_ruby_upgrade_smithing_template"
+    "id": "betternether:flaming_ruby_upgrade"
   }
 }

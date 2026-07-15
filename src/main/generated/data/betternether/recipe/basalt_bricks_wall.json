@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "walls",
   "key": {
-    "#": {
-      "item": "betternether:basalt_bricks"
-    }
+    "#": "betternether:basalt_bricks"
   },
   "pattern": [
     "###",

@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_stalagnate_bowl",
   "key": {
-    "#": {
-      "item": "betternether:stalagnate_stem"
-    }
+    "#": "betternether:stalagnate_stem"
   },
   "pattern": [
     "# #",

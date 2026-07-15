@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "betternether:wall_mushroom_red"
-    }
+    "betternether:wall_mushroom_red"
   ],
   "result": {
     "count": 1,

@@ -1,13 +1,13 @@
 {
   "values": [
-    "betternether:anchor_tree_wall_hanging_sign",
-    "betternether:mushroom_fir_wall_hanging_sign",
-    "betternether:nether_mushroom_wall_hanging_sign",
-    "betternether:nether_reed_wall_hanging_sign",
-    "betternether:nether_sakura_wall_hanging_sign",
-    "betternether:rubeus_wall_hanging_sign",
-    "betternether:stalagnate_wall_hanging_sign",
-    "betternether:wart_wall_hanging_sign",
-    "betternether:willow_wall_hanging_sign"
+    "betternether:anchor_tree_hanging_wall_sign",
+    "betternether:mushroom_fir_hanging_wall_sign",
+    "betternether:nether_mushroom_hanging_wall_sign",
+    "betternether:nether_reed_hanging_wall_sign",
+    "betternether:nether_sakura_hanging_wall_sign",
+    "betternether:rubeus_hanging_wall_sign",
+    "betternether:stalagnate_hanging_wall_sign",
+    "betternether:wart_hanging_wall_sign",
+    "betternether:willow_hanging_wall_sign"
   ]
 }

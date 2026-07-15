@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "fire_bowl",
   "key": {
-    "#": {
-      "item": "betternether:nether_brick_tile_large"
-    },
-    "I": {
-      "item": "minecraft:netherrack"
-    },
-    "L": {
-      "item": "minecraft:nether_brick"
-    }
+    "#": "betternether:nether_brick_tile_large",
+    "I": "minecraft:netherrack",
+    "L": "minecraft:nether_brick"
   },
   "pattern": [
     "#I#",

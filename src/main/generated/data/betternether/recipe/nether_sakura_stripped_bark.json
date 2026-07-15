@@ -1,10 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "bark",
   "key": {
-    "#": {
-      "item": "betternether:nether_sakura_stripped_log"
-    }
+    "#": "betternether:nether_sakura_stripped_log"
   },
   "pattern": [
     "##",

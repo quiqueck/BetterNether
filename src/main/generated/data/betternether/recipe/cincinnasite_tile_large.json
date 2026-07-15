@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_cincinnasite_tile_large",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_slab"
-    }
+    "#": "betternether:cincinnasite_slab"
   },
   "pattern": [
     "#",

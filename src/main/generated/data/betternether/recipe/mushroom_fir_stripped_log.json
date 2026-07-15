@@ -1,10 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "log",
   "key": {
-    "#": {
-      "item": "betternether:mushroom_fir_stripped_bark"
-    }
+    "#": "betternether:mushroom_fir_stripped_bark"
   },
   "pattern": [
     "##",

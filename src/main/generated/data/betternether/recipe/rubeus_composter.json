@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "composter",
   "key": {
-    "#": {
-      "item": "betternether:rubeus_slab"
-    }
+    "#": "betternether:rubeus_slab"
   },
   "pattern": [
     "# #",

@@ -3,9 +3,7 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.5,
-  "ingredient": {
-    "item": "betternether:cincinnasite"
-  },
+  "ingredient": "betternether:cincinnasite",
   "result": {
     "id": "betternether:cincinnasite_ingot"
   }

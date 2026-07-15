@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/crimson_chest_boat"
+  }
+}

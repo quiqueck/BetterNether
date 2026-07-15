@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "betternether:lapis_pile"
-    }
+    "#": "betternether:lapis_pile"
   },
   "pattern": [
     "###",

@@ -1,6 +1,6 @@
 {
-  "parent": "bclib:block/chest_item",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "texture": "betternether:entity/chest/willow_chest"
+    "layer0": "betternether:item/willow_chest"
   }
 }

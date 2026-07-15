@@ -3,9 +3,7 @@
   "category": "building",
   "group": "basalt_bricks",
   "key": {
-    "#": {
-      "item": "minecraft:polished_basalt"
-    }
+    "#": "minecraft:polished_basalt"
   },
   "pattern": [
     "##",

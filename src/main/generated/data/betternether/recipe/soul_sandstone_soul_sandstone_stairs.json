@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stairs",
   "key": {
-    "#": {
-      "item": "betternether:soul_sandstone"
-    }
+    "#": "betternether:soul_sandstone"
   },
   "pattern": [
     "#  ",

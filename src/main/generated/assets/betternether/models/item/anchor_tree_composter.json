@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/anchor_tree_composter"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/anchor_tree_composter"
+  }
 }

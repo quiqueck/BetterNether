@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_blue_obsidian_bricks",
   "key": {
-    "#": {
-      "item": "betternether:blue_obsidian_tile"
-    }
+    "#": "betternether:blue_obsidian_tile"
   },
   "pattern": [
     "##",

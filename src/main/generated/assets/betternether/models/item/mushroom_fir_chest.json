@@ -1,6 +1,6 @@
 {
-  "parent": "bclib:block/chest_item",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "texture": "betternether:entity/chest/mushroom_fir_chest"
+    "layer0": "betternether:item/mushroom_fir_chest"
   }
 }

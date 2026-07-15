@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/willow_roof"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/willow_roof"
+  }
 }

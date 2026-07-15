@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "plates",
   "key": {
-    "#": {
-      "item": "betternether:bone_block"
-    }
+    "#": "betternether:bone_block"
   },
   "pattern": [
     "##"

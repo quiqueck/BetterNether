@@ -1,16 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "minecraft:sculk_catalyst"
-  },
-  "base": {
-    "item": "betternether:nether_ruby_axe"
-  },
+  "addition": "#betternether:flaming_ruby/repair",
+  "base": "betternether:nether_ruby_axe",
   "result": {
-    "count": 1,
     "id": "betternether:flaming_ruby_axe"
   },
-  "template": {
-    "item": "betternether:flaming_ruby_upgrade_smithing_template"
-  }
+  "template": "betternether:flaming_ruby_upgrade"
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cincinnasite_diamond_upgrade_smithing_": {
+    "has_cincinnasite_diamond_upgrade": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:cincinnasite_diamond_upgrade_smithing_template"
+            "items": "betternether:cincinnasite_diamond_upgrade"
           }
         ]
       },
@@ -41,7 +41,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cincinnasite_diamond_upgrade_smithing_",
+      "has_cincinnasite_diamond_upgrade",
       "has_cincinnasite_ingot",
       "has_diamond"
     ]

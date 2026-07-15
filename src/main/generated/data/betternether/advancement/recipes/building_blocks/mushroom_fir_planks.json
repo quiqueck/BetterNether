@@ -1,20 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mushroom_fir_log_mushroom_fir_bark_mus": {
+    "has_tag_betternether_mushroom_fir_logs": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:mushroom_fir_log"
-          },
-          {
-            "items": "betternether:mushroom_fir_bark"
-          },
-          {
-            "items": "betternether:mushroom_fir_stripped_log"
-          },
-          {
-            "items": "betternether:mushroom_fir_stripped_bark"
+            "items": "#betternether:mushroom_fir_logs"
           }
         ]
       },
@@ -30,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_mushroom_fir_log_mushroom_fir_bark_mus"
+      "has_tag_betternether_mushroom_fir_logs"
     ]
   ],
   "rewards": {

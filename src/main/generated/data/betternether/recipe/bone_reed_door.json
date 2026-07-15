@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "nether_bone_reed_door",
   "key": {
-    "A": {
-      "item": "betternether:nether_reed_planks"
-    },
-    "B": {
-      "item": "betternether:bone_block"
-    }
+    "A": "betternether:nether_reed_planks",
+    "B": "betternether:bone_block"
   },
   "pattern": [
     "AB",

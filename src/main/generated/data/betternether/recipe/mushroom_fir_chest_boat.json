@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "chest_boat",
   "ingredients": [
-    {
-      "tag": "c:chests"
-    },
-    {
-      "item": "betternether:mushroom_fir_boat"
-    }
+    "#c:chests",
+    "betternether:mushroom_fir_boat"
   ],
   "result": {
     "count": 1,

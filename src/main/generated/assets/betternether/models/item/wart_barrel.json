@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/wart_barrel"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/wart_barrel"
+  }
 }

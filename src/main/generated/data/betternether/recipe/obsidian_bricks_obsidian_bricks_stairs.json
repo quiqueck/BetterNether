@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stairs",
   "key": {
-    "#": {
-      "item": "betternether:obsidian_bricks"
-    }
+    "#": "betternether:obsidian_bricks"
   },
   "pattern": [
     "#  ",

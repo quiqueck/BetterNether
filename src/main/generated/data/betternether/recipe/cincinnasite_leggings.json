@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "group": "cincinnasite_leggings",
+  "group": "leggings",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "#": "#betternether:cincinnasite/repair"
   },
   "pattern": [
     "###",

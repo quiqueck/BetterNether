@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.betternether.bowl_upgrade_smithing_template": {
+    "has_item.betternether.bowl_upgrade": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:bowl_upgrade_smithing_template"
+            "items": "betternether:bowl_upgrade"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_item.betternether.bowl_upgrade_smithing_template"
+      "has_item.betternether.bowl_upgrade"
     ]
   ],
   "rewards": {

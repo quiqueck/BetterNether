@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_wall_moss",
   "ingredients": [
-    {
-      "item": "betternether:nether_grass"
-    }
+    "betternether:nether_grass"
   ],
   "result": {
     "count": 1,

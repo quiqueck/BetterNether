@@ -3,9 +3,7 @@
   "category": "building",
   "group": "slabs",
   "key": {
-    "#": {
-      "item": "betternether:bone_block"
-    }
+    "#": "betternether:bone_block"
   },
   "pattern": [
     "###"

@@ -3,9 +3,7 @@
   "category": "blocks",
   "cookingtime": 50,
   "experience": 0.0,
-  "ingredient": {
-    "item": "betternether:cincinnasite_block"
-  },
+  "ingredient": "betternether:cincinnasite_block",
   "result": {
     "id": "betternether:cincinnasite_forged"
   }

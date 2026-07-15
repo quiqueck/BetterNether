@@ -3,9 +3,7 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.0,
-  "ingredient": {
-    "item": "betternether:ink_bush_seed"
-  },
+  "ingredient": "betternether:ink_bush_seed",
   "result": {
     "id": "minecraft:black_dye"
   }

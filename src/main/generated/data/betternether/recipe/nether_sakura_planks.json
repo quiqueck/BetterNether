@@ -3,20 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    [
-      {
-        "item": "betternether:nether_sakura_log"
-      },
-      {
-        "item": "betternether:nether_sakura_bark"
-      },
-      {
-        "item": "betternether:nether_sakura_stripped_log"
-      },
-      {
-        "item": "betternether:nether_sakura_stripped_bark"
-      }
-    ]
+    "#betternether:nether_sakura_logs"
   ],
   "result": {
     "count": 4,

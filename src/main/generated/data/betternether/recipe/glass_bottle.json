@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_glass_bottle",
   "key": {
-    "#": {
-      "item": "betternether:quartz_glass"
-    }
+    "#": "betternether:quartz_glass"
   },
   "pattern": [
     "# #",

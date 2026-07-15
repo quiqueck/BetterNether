@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "betternether:nether_ruby_block"
-    },
-    "I": {
-      "item": "betternether:nether_ruby"
-    },
-    "S": {
-      "item": "betternether:nether_reed_stem"
-    }
+    "#": "betternether:nether_ruby_block",
+    "I": "betternether:nether_ruby",
+    "S": "betternether:nether_reed_stem"
   },
   "pattern": [
     " I ",

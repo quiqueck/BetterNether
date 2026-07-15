@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/netherrack_stairs"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/netherrack_stairs"
+  }
 }

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "ladder",
   "key": {
-    "#": {
-      "item": "minecraft:crimson_planks"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
+    "#": "minecraft:crimson_planks",
+    "I": "minecraft:stick"
   },
   "pattern": [
     "I I",

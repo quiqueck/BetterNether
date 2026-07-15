@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_cincinnasite_bricks_pillar",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_bricks"
-    }
+    "#": "betternether:cincinnasite_bricks"
   },
   "pattern": [
     "#",

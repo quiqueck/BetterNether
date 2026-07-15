@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "group": "stairs",
-  "ingredient": {
-    "item": "minecraft:netherrack"
-  },
+  "ingredient": "minecraft:netherrack",
   "result": {
     "count": 1,
     "id": "betternether:netherrack_stairs"

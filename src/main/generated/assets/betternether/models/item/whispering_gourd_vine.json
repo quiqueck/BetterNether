@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/whispering_gourd_vine"
+  }
+}

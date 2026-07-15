@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "quartz_glass_framed_pane",
   "key": {
-    "#": {
-      "item": "betternether:quartz_glass_framed_pane"
-    },
-    "I": {
-      "item": "minecraft:light_blue_dye"
-    }
+    "#": "betternether:quartz_glass_framed_pane",
+    "I": "minecraft:light_blue_dye"
   },
   "pattern": [
     "###",

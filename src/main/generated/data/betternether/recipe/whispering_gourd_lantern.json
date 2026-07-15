@@ -3,12 +3,8 @@
   "category": "building",
   "group": "nether_whispering_gourd_lantern",
   "key": {
-    "#": {
-      "item": "betternether:whispering_gourd"
-    },
-    "T": {
-      "item": "minecraft:torch"
-    }
+    "#": "betternether:whispering_gourd",
+    "T": "minecraft:torch"
   },
   "pattern": [
     "#",

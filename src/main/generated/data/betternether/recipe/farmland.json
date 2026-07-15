@@ -3,18 +3,10 @@
   "category": "misc",
   "group": "nether_farmland",
   "key": {
-    "#": {
-      "item": "betternether:stalagnate_planks"
-    },
-    "H": {
-      "item": "betternether:stalagnate_slab"
-    },
-    "N": {
-      "item": "minecraft:netherrack"
-    },
-    "S": {
-      "item": "minecraft:soul_sand"
-    }
+    "#": "betternether:stalagnate_planks",
+    "H": "betternether:stalagnate_slab",
+    "N": "minecraft:netherrack",
+    "S": "minecraft:soul_sand"
   },
   "pattern": [
     "#S#",

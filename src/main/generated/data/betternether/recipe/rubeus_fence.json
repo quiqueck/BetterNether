@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "fence",
   "key": {
-    "#": {
-      "item": "betternether:rubeus_planks"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
+    "#": "betternether:rubeus_planks",
+    "I": "minecraft:stick"
   },
   "pattern": [
     "#I#",

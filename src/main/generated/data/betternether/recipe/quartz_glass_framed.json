@@ -3,12 +3,8 @@
   "category": "building",
   "group": "nether_quartz_glass_framed",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_ingot"
-    },
-    "G": {
-      "item": "betternether:quartz_glass"
-    }
+    "#": "betternether:cincinnasite_ingot",
+    "G": "betternether:quartz_glass"
   },
   "pattern": [
     "G#G",

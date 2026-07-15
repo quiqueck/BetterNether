@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_cincinnasite_ingot",
   "ingredients": [
-    {
-      "item": "betternether:cincinnasite_forged"
-    }
+    "betternether:cincinnasite_forged"
   ],
   "result": {
     "count": 4,

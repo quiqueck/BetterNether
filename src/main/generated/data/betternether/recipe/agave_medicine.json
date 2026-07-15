@@ -3,18 +3,10 @@
   "category": "misc",
   "group": "nether_agave_medicine",
   "ingredients": [
-    {
-      "item": "betternether:agave_leaf"
-    },
-    {
-      "item": "betternether:agave_leaf"
-    },
-    {
-      "item": "betternether:stalagnate_bowl"
-    },
-    {
-      "item": "betternether:agave_leaf"
-    }
+    "betternether:agave_leaf",
+    "betternether:agave_leaf",
+    "betternether:stalagnate_bowl",
+    "betternether:agave_leaf"
   ],
   "result": {
     "count": 1,

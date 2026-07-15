@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_obsidian_glass_pane",
   "key": {
-    "#": {
-      "item": "betternether:obsidian_glass"
-    }
+    "#": "betternether:obsidian_glass"
   },
   "pattern": [
     "###",

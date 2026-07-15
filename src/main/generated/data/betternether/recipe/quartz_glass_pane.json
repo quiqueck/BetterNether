@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_quartz_glass_pane",
   "key": {
-    "#": {
-      "item": "betternether:quartz_glass"
-    }
+    "#": "betternether:quartz_glass"
   },
   "pattern": [
     "###",

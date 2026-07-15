@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_forged"
-    },
-    "I": {
-      "item": "betternether:cincinnasite_ingot"
-    },
-    "S": {
-      "item": "betternether:nether_reed_stem"
-    }
+    "#": "betternether:cincinnasite_forged",
+    "I": "betternether:cincinnasite_ingot",
+    "S": "betternether:nether_reed_stem"
   },
   "pattern": [
     " I ",

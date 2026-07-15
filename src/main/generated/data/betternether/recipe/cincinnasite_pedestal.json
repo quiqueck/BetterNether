@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_cincinnasite_pedestal",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_forged"
-    }
+    "#": "betternether:cincinnasite_forged"
   },
   "pattern": [
     "##",

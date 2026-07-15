@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "barrel",
   "key": {
-    "#": {
-      "item": "betternether:nether_reed_planks"
-    },
-    "S": {
-      "item": "betternether:nether_reed_slab"
-    }
+    "#": "betternether:nether_reed_planks",
+    "S": "betternether:nether_reed_slab"
   },
   "pattern": [
     "#S#",

@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "seeds",
   "key": {
-    "#": {
-      "item": "betternether:whispering_gourd"
-    }
+    "#": "betternether:whispering_gourd"
   },
   "pattern": [
     "##"

@@ -1,6 +1,0 @@
-{
-  "parent": "bclib:block/chest_item",
-  "textures": {
-    "texture": "betternether:entity/chest/mushroom_fir_trimmed_chest"
-  }
-}

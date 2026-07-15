@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "composter",
   "key": {
-    "#": {
-      "item": "betternether:mushroom_fir_slab"
-    }
+    "#": "betternether:mushroom_fir_slab"
   },
   "pattern": [
     "# #",

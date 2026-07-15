@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "sign",
   "key": {
-    "#": {
-      "item": "betternether:nether_mushroom_planks"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
+    "#": "betternether:nether_mushroom_planks",
+    "I": "minecraft:stick"
   },
   "pattern": [
     "###",

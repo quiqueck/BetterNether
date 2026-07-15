@@ -1,6 +1,0 @@
-{
-  "parent": "bclib:block/chair",
-  "textures": {
-    "texture": "betternether:block/mushroom_fir_planks"
-  }
-}

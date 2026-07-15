@@ -1,20 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stalagnate_log_stalagnate_bark_stalagn": {
+    "has_tag_betternether_stalagnate_logs": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:stalagnate_log"
-          },
-          {
-            "items": "betternether:stalagnate_bark"
-          },
-          {
-            "items": "betternether:stalagnate_stripped_log"
-          },
-          {
-            "items": "betternether:stalagnate_stripped_bark"
+            "items": "#betternether:stalagnate_logs"
           }
         ]
       },
@@ -30,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_stalagnate_log_stalagnate_bark_stalagn"
+      "has_tag_betternether_stalagnate_logs"
     ]
   ],
   "rewards": {

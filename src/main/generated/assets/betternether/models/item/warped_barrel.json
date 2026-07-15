@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/warped_barrel"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/warped_barrel"
+  }
 }

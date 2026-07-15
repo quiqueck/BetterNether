@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "stairs",
+  "group": "wooden_stairs",
   "key": {
-    "#": {
-      "item": "betternether:wart_planks"
-    }
+    "#": "betternether:wart_planks"
   },
   "pattern": [
     "#  ",

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "betternether:cincinnasite_diamond_upgrade_smithing_template"
+            "items": "betternether:cincinnasite_diamond_upgrade"
           }
         ]
       },
@@ -19,7 +19,7 @@
     "frame": "goal",
     "icon": {
       "count": 1,
-      "id": "betternether:cincinnasite_diamond_upgrade_smithing_template"
+      "id": "betternether:cincinnasite_diamond_upgrade"
     },
     "title": {
       "translate": "advancements.betternether.cincinnasite_diamond.title"

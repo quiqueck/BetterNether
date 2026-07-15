@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "nether_cincinnasite_lantern",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_ingot"
-    },
-    "G": {
-      "item": "minecraft:glowstone"
-    }
+    "#": "betternether:cincinnasite_ingot",
+    "G": "minecraft:glowstone"
   },
   "pattern": [
     " # ",

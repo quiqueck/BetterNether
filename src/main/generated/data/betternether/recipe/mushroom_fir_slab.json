@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "slab",
+  "group": "wooden_slab",
   "key": {
-    "#": {
-      "item": "betternether:mushroom_fir_planks"
-    }
+    "#": "betternether:mushroom_fir_planks"
   },
   "pattern": [
     "###"

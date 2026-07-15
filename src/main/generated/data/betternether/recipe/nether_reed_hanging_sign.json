@@ -1,14 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "sign",
+  "group": "hanging_sign",
   "key": {
-    "#": {
-      "item": "betternether:nether_reed_stem"
-    },
-    "I": {
-      "item": "minecraft:chain"
-    }
+    "#": "betternether:nether_reed_stem",
+    "I": "minecraft:chain"
   },
   "pattern": [
     "I I",

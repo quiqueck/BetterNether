@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "sign",
   "key": {
-    "#": {
-      "item": "betternether:stalagnate_planks"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
+    "#": "betternether:stalagnate_planks",
+    "I": "minecraft:stick"
   },
   "pattern": [
     "###",

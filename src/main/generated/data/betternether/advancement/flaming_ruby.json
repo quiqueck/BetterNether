@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "betternether:flaming_ruby_upgrade_smithing_template"
+            "items": "betternether:flaming_ruby_upgrade"
           }
         ]
       },
@@ -19,7 +19,7 @@
     "frame": "goal",
     "icon": {
       "count": 1,
-      "id": "betternether:flaming_ruby_upgrade_smithing_template"
+      "id": "betternether:flaming_ruby_upgrade"
     },
     "title": {
       "translate": "advancements.betternether.flaming_ruby.title"

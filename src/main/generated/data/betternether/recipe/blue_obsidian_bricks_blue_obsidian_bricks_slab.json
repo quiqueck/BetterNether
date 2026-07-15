@@ -3,9 +3,7 @@
   "category": "building",
   "group": "slabs",
   "key": {
-    "#": {
-      "item": "betternether:blue_obsidian_bricks"
-    }
+    "#": "betternether:blue_obsidian_bricks"
   },
   "pattern": [
     "###"

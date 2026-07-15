@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cincinnasite_ingot": {
+    "has_tag_betternether_cincinnasite/repair": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:cincinnasite_ingot"
+            "items": "#betternether:cincinnasite/repair"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cincinnasite_ingot"
+      "has_tag_betternether_cincinnasite/repair"
     ]
   ],
   "rewards": {

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stairs",
   "key": {
-    "#": {
-      "item": "betternether:roof_tile_cincinnasite"
-    }
+    "#": "betternether:roof_tile_cincinnasite"
   },
   "pattern": [
     "#  ",

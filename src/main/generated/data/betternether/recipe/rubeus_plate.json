@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "pressure_plate",
   "key": {
-    "#": {
-      "item": "betternether:rubeus_planks"
-    }
+    "#": "betternether:rubeus_planks"
   },
   "pattern": [
     "##"

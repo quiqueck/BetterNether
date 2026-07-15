@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:diamond"
-    },
-    "I": {
-      "item": "betternether:cincinnasite_hammer"
-    }
+    "#": "minecraft:diamond",
+    "I": "betternether:cincinnasite_hammer"
   },
   "pattern": [
     "#I#"

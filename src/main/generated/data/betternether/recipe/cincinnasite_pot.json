@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "nether_cincinnasite_pot",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_ingot"
-    },
-    "N": {
-      "item": "minecraft:soul_sand"
-    }
+    "#": "betternether:cincinnasite_ingot",
+    "N": "minecraft:soul_sand"
   },
   "pattern": [
     "#N#",

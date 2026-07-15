@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_cincinnasite_bars",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "#": "betternether:cincinnasite_ingot"
   },
   "pattern": [
     "###",

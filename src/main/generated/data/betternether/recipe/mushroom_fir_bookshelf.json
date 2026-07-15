@@ -3,12 +3,8 @@
   "category": "building",
   "group": "bookshelf",
   "key": {
-    "#": {
-      "item": "betternether:mushroom_fir_planks"
-    },
-    "P": {
-      "item": "minecraft:book"
-    }
+    "#": "betternether:mushroom_fir_planks",
+    "P": "minecraft:book"
   },
   "pattern": [
     "###",

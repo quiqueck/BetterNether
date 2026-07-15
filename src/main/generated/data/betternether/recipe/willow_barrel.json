@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "barrel",
   "key": {
-    "#": {
-      "item": "betternether:willow_planks"
-    },
-    "S": {
-      "item": "betternether:willow_slab"
-    }
+    "#": "betternether:willow_planks",
+    "S": "betternether:willow_slab"
   },
   "pattern": [
     "#S#",

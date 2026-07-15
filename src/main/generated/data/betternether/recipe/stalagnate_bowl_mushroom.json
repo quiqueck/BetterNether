@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "nether_stalagnate_bowl_mushroom",
   "ingredients": [
-    {
-      "item": "minecraft:red_mushroom"
-    },
-    {
-      "item": "betternether:stalagnate_bowl"
-    },
-    {
-      "item": "minecraft:brown_mushroom"
-    }
+    "minecraft:red_mushroom",
+    "betternether:stalagnate_bowl",
+    "minecraft:brown_mushroom"
   ],
   "result": {
     "count": 1,

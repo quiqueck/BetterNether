@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/button_inventory",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "texture": "betternether:block/wart_planks"
+    "layer0": "betternether:item/wart_button"
   }
 }

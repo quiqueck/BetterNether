@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_black_apple_seed",
   "ingredients": [
-    {
-      "item": "betternether:black_apple"
-    }
+    "betternether:black_apple"
   ],
   "result": {
     "count": 4,

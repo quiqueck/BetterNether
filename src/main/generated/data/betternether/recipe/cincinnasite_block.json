@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_cincinnasite_block",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite"
-    }
+    "#": "betternether:cincinnasite"
   },
   "pattern": [
     "##",

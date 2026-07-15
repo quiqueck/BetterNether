@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_gray_dye",
   "ingredients": [
-    {
-      "item": "betternether:gray_mold"
-    }
+    "betternether:gray_mold"
   ],
   "result": {
     "count": 1,

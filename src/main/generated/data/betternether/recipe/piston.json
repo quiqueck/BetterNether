@@ -3,18 +3,10 @@
   "category": "redstone",
   "group": "nether_piston",
   "key": {
-    "#": {
-      "item": "minecraft:cobblestone"
-    },
-    "R": {
-      "item": "minecraft:redstone"
-    },
-    "T": {
-      "tag": "minecraft:planks"
-    },
-    "X": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "#": "minecraft:cobblestone",
+    "R": "minecraft:redstone",
+    "T": "#minecraft:planks",
+    "X": "betternether:cincinnasite_ingot"
   },
   "pattern": [
     "TTT",

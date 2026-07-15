@@ -1,8 +1,0 @@
-{
-  "parent": "wover:block/composter",
-  "textures": {
-    "bottom": "betternether:block/wart_composter_bottom",
-    "side": "betternether:block/wart_composter_side",
-    "top": "betternether:block/wart_composter_top"
-  }
-}

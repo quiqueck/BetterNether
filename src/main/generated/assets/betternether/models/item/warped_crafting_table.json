@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/warped_crafting_table"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/warped_crafting_table"
+  }
 }

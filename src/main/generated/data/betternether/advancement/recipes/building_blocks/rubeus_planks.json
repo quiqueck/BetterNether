@@ -1,20 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rubeus_log_rubeus_bark_rubeus_stripped": {
+    "has_tag_betternether_rubeus_logs": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:rubeus_log"
-          },
-          {
-            "items": "betternether:rubeus_bark"
-          },
-          {
-            "items": "betternether:rubeus_stripped_log"
-          },
-          {
-            "items": "betternether:rubeus_stripped_bark"
+            "items": "#betternether:rubeus_logs"
           }
         ]
       },
@@ -30,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_rubeus_log_rubeus_bark_rubeus_stripped"
+      "has_tag_betternether_rubeus_logs"
     ]
   ],
   "rewards": {

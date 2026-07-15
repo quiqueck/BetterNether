@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "pressure_plate",
   "key": {
-    "#": {
-      "item": "betternether:wart_planks"
-    }
+    "#": "betternether:wart_planks"
   },
   "pattern": [
     "##"

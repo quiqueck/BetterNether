@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_obsidian_rod_tiles",
   "key": {
-    "#": {
-      "item": "betternether:obsidian_tile"
-    }
+    "#": "betternether:obsidian_tile"
   },
   "pattern": [
     " ##",

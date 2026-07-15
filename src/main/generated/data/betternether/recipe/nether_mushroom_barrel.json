@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "barrel",
   "key": {
-    "#": {
-      "item": "betternether:nether_mushroom_planks"
-    },
-    "S": {
-      "item": "betternether:nether_mushroom_slab"
-    }
+    "#": "betternether:nether_mushroom_planks",
+    "S": "betternether:nether_mushroom_slab"
   },
   "pattern": [
     "#S#",

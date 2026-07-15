@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/rubeus_barrel"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/rubeus_barrel"
+  }
 }

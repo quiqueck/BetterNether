@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "quartz_glass_pane",
   "key": {
-    "#": {
-      "item": "betternether:quartz_glass_pane"
-    },
-    "I": {
-      "item": "minecraft:purple_dye"
-    }
+    "#": "betternether:quartz_glass_pane",
+    "I": "minecraft:purple_dye"
   },
   "pattern": [
     "###",

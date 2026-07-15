@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "walls",
   "key": {
-    "#": {
-      "item": "betternether:soul_sandstone_cut"
-    }
+    "#": "betternether:soul_sandstone_cut"
   },
   "pattern": [
     "###",

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "chest_boat",
   "ingredients": [
-    {
-      "tag": "c:chests"
-    },
-    {
-      "item": "betternether:nether_reed_boat"
-    }
+    "#c:chests",
+    "betternether:nether_reed_boat"
   ],
   "result": {
     "count": 1,

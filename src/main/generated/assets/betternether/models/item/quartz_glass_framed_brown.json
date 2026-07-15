@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/quartz_glass_framed_brown"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/quartz_glass_framed_brown"
+  }
 }

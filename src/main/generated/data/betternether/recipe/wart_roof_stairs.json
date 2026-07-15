@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stairs",
   "key": {
-    "#": {
-      "item": "betternether:wart_roof"
-    }
+    "#": "betternether:wart_roof"
   },
   "pattern": [
     "#  ",

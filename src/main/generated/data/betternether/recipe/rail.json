@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "nether_rail",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "X": {
-      "item": "betternether:cincinnasite_ingot"
-    }
+    "#": "minecraft:stick",
+    "X": "betternether:cincinnasite_ingot"
   },
   "pattern": [
     "X X",

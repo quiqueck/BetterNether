@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_quartz_glass_framed_pane",
   "key": {
-    "#": {
-      "item": "betternether:quartz_glass_framed"
-    }
+    "#": "betternether:quartz_glass_framed"
   },
   "pattern": [
     "###",

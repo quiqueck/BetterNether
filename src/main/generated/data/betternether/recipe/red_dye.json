@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_red_dye",
   "ingredients": [
-    {
-      "item": "betternether:red_mold"
-    }
+    "betternether:red_mold"
   ],
   "result": {
     "count": 2,

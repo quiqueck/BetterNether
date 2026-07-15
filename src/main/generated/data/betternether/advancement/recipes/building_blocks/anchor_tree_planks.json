@@ -1,20 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_anchor_tree_log_anchor_tree_bark_ancho": {
+    "has_tag_betternether_anchor_tree_logs": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:anchor_tree_log"
-          },
-          {
-            "items": "betternether:anchor_tree_bark"
-          },
-          {
-            "items": "betternether:anchor_tree_stripped_log"
-          },
-          {
-            "items": "betternether:anchor_tree_stripped_bark"
+            "items": "#betternether:anchor_tree_logs"
           }
         ]
       },
@@ -30,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_anchor_tree_log_anchor_tree_bark_ancho"
+      "has_tag_betternether_anchor_tree_logs"
     ]
   ],
   "rewards": {

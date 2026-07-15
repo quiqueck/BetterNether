@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_obsidian_tile_small",
   "key": {
-    "#": {
-      "item": "betternether:obsidian_bricks"
-    }
+    "#": "betternether:obsidian_bricks"
   },
   "pattern": [
     "##",

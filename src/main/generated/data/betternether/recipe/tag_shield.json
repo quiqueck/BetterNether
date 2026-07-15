@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "#c:ingots/iron",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    "WIW",
+    "WWW",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:shield"
+  }
+}

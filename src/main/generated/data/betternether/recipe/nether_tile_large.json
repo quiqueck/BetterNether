@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_nether_tile_large",
   "key": {
-    "#": {
-      "item": "minecraft:nether_brick_slab"
-    }
+    "#": "minecraft:nether_brick_slab"
   },
   "pattern": [
     "##",

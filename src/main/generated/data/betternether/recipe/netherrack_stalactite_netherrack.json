@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_stalactite",
   "key": {
-    "#": {
-      "item": "betternether:netherrack_stalactite"
-    }
+    "#": "betternether:netherrack_stalactite"
   },
   "pattern": [
     "##",

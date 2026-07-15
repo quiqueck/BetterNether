@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/blue_obsidian_rod_tiles"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/blue_obsidian_rod_tiles"
+  }
 }

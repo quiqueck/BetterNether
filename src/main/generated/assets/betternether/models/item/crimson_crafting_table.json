@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/crimson_crafting_table"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/crimson_crafting_table"
+  }
 }

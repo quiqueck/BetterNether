@@ -3,9 +3,7 @@
   "category": "blocks",
   "cookingtime": 200,
   "experience": 0.0,
-  "ingredient": {
-    "item": "betternether:blue_obsidian"
-  },
+  "ingredient": "betternether:blue_obsidian",
   "result": {
     "id": "betternether:blue_obsidian_glass"
   }

@@ -3,20 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    [
-      {
-        "item": "betternether:willow_log"
-      },
-      {
-        "item": "betternether:willow_bark"
-      },
-      {
-        "item": "betternether:willow_stripped_log"
-      },
-      {
-        "item": "betternether:willow_stripped_bark"
-      }
-    ]
+    "#betternether:willow_logs"
   ],
   "result": {
     "count": 4,

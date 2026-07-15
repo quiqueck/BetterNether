@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "nether_nether_brewing_stand",
   "key": {
-    "#": {
-      "item": "minecraft:nether_bricks"
-    },
-    "I": {
-      "item": "betternether:cincinnasite_ingot"
-    },
-    "S": {
-      "item": "minecraft:blaze_rod"
-    }
+    "#": "minecraft:nether_bricks",
+    "I": "betternether:cincinnasite_ingot",
+    "S": "minecraft:blaze_rod"
   },
   "pattern": [
     " I ",

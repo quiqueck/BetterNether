@@ -3,9 +3,7 @@
   "category": "building",
   "group": "slabs",
   "key": {
-    "#": {
-      "item": "betternether:roof_tile_nether_bricks"
-    }
+    "#": "betternether:roof_tile_nether_bricks"
   },
   "pattern": [
     "###"

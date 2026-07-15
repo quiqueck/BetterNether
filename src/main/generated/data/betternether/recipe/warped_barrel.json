@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "barrel",
   "key": {
-    "#": {
-      "item": "minecraft:warped_planks"
-    },
-    "S": {
-      "item": "minecraft:warped_slab"
-    }
+    "#": "minecraft:warped_planks",
+    "S": "minecraft:warped_slab"
   },
   "pattern": [
     "#S#",

@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "slab",
+  "group": "wooden_slab",
   "key": {
-    "#": {
-      "item": "betternether:anchor_tree_planks"
-    }
+    "#": "betternether:anchor_tree_planks"
   },
   "pattern": [
     "###"

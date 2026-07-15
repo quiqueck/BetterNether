@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "composter",
   "key": {
-    "#": {
-      "item": "minecraft:crimson_slab"
-    }
+    "#": "minecraft:crimson_slab"
   },
   "pattern": [
     "# #",

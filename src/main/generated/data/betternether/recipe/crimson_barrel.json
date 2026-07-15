@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "barrel",
   "key": {
-    "#": {
-      "item": "minecraft:crimson_planks"
-    },
-    "S": {
-      "item": "minecraft:crimson_slab"
-    }
+    "#": "minecraft:crimson_planks",
+    "S": "minecraft:crimson_slab"
   },
   "pattern": [
     "#S#",

@@ -1,8 +1,0 @@
-{
-  "parent": "wover:block/composter",
-  "textures": {
-    "bottom": "betternether:block/anchor_tree_composter_bottom",
-    "side": "betternether:block/anchor_tree_composter_side",
-    "top": "betternether:block/anchor_tree_composter_top"
-  }
-}

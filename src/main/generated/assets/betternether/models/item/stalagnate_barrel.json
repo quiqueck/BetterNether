@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/stalagnate_barrel"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/stalagnate_barrel"
+  }
 }

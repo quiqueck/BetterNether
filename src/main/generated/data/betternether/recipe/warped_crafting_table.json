@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "table",
+  "group": "crafting_table",
   "key": {
-    "#": {
-      "item": "minecraft:warped_planks"
-    }
+    "#": "minecraft:warped_planks"
   },
   "pattern": [
     "##",

@@ -3,9 +3,7 @@
   "category": "blocks",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "betternether:soul_sandstone"
-  },
+  "ingredient": "betternether:soul_sandstone",
   "result": {
     "id": "betternether:soul_sandstone_smooth"
   }

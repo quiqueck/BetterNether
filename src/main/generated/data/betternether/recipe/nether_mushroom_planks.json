@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    {
-      "item": "betternether:nether_mushroom_stem"
-    }
+    "betternether:nether_mushroom_stem"
   ],
   "result": {
     "count": 4,

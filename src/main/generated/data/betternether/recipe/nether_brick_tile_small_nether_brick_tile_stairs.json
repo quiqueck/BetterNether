@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stairs",
   "key": {
-    "#": {
-      "item": "betternether:nether_brick_tile_small"
-    }
+    "#": "betternether:nether_brick_tile_small"
   },
   "pattern": [
     "#  ",

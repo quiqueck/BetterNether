@@ -3,12 +3,8 @@
   "category": "building",
   "group": "nether_cincinnasite_bricks",
   "key": {
-    "#": {
-      "item": "betternether:cincinnasite_forged"
-    },
-    "B": {
-      "item": "minecraft:nether_brick"
-    }
+    "#": "betternether:cincinnasite_forged",
+    "B": "minecraft:nether_brick"
   },
   "pattern": [
     "#B",

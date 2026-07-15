@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/roof_tile_cincinnasite_stairs"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/roof_tile_cincinnasite_stairs"
+  }
 }

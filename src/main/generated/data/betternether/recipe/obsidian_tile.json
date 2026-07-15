@@ -3,9 +3,7 @@
   "category": "building",
   "group": "nether_obsidian_tile",
   "key": {
-    "#": {
-      "item": "minecraft:obsidian"
-    }
+    "#": "minecraft:obsidian"
   },
   "pattern": [
     "##",

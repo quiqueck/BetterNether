@@ -3,12 +3,8 @@
   "category": "building",
   "group": "bookshelf",
   "key": {
-    "#": {
-      "item": "betternether:stalagnate_planks"
-    },
-    "P": {
-      "item": "minecraft:book"
-    }
+    "#": "betternether:stalagnate_planks",
+    "P": "minecraft:book"
   },
   "pattern": [
     "###",

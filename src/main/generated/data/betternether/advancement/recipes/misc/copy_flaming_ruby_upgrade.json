@@ -11,11 +11,11 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_flaming_ruby_upgrade_smithing_template": {
+    "has_flaming_ruby_upgrade": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:flaming_ruby_upgrade_smithing_template"
+            "items": "betternether:flaming_ruby_upgrade"
           }
         ]
       },
@@ -42,7 +42,7 @@
     [
       "has_the_recipe",
       "has_nether_ruby",
-      "has_flaming_ruby_upgrade_smithing_template",
+      "has_flaming_ruby_upgrade",
       "has_diamond"
     ]
   ],

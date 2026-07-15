@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "composter",
   "key": {
-    "#": {
-      "item": "betternether:willow_slab"
-    }
+    "#": "betternether:willow_slab"
   },
   "pattern": [
     "# #",

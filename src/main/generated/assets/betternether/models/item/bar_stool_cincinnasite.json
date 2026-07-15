@@ -1,3 +1,6 @@
 {
-  "parent": "betternether:block/bar_stool_cincinnasite"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betternether:item/bar_stool_cincinnasite"
+  }
 }

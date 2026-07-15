@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_furnace",
   "key": {
-    "#": {
-      "item": "minecraft:blackstone"
-    }
+    "#": "minecraft:blackstone"
   },
   "pattern": [
     "###",

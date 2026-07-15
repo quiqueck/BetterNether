@@ -3,12 +3,8 @@
   "category": "building",
   "group": "bookshelf",
   "key": {
-    "#": {
-      "item": "betternether:willow_planks"
-    },
-    "P": {
-      "item": "minecraft:book"
-    }
+    "#": "betternether:willow_planks",
+    "P": "minecraft:book"
   },
   "pattern": [
     "###",

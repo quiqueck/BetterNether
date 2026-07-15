@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "nether_brick_pot",
   "key": {
-    "#": {
-      "item": "minecraft:nether_brick"
-    },
-    "N": {
-      "item": "minecraft:soul_sand"
-    }
+    "#": "minecraft:nether_brick",
+    "N": "minecraft:soul_sand"
   },
   "pattern": [
     "#N#",

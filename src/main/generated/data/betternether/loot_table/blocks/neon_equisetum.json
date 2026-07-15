@@ -48,11 +48,7 @@
           "name": "betternether:neon_equisetum"
         }
       ],
-      "rolls": {
-        "type": "minecraft:uniform",
-        "max": 2.0,
-        "min": 1.0
-      }
+      "rolls": 1.0
     }
   ]
 }

@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "pressure_plate",
   "key": {
-    "#": {
-      "item": "betternether:stalagnate_planks"
-    }
+    "#": "betternether:stalagnate_planks"
   },
   "pattern": [
     "##"

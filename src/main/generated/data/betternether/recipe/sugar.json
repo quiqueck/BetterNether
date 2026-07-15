@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_sugar",
   "ingredients": [
-    {
-      "item": "betternether:nether_reed_stem"
-    }
+    "betternether:nether_reed_stem"
   ],
   "result": {
     "count": 1,

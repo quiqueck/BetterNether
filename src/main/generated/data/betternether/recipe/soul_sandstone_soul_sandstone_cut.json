@@ -3,9 +3,7 @@
   "category": "building",
   "group": "soul_sandstone",
   "key": {
-    "#": {
-      "item": "betternether:soul_sandstone"
-    }
+    "#": "betternether:soul_sandstone"
   },
   "pattern": [
     "##",

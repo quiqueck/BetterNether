@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "gate",
   "key": {
-    "#": {
-      "item": "betternether:anchor_tree_planks"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
+    "#": "betternether:anchor_tree_planks",
+    "I": "minecraft:stick"
   },
   "pattern": [
     "I#I",

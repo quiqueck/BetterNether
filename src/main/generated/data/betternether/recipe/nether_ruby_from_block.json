@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "nether_nether_ruby_from_block",
   "ingredients": [
-    {
-      "item": "betternether:nether_ruby_block"
-    }
+    "betternether:nether_ruby_block"
   ],
   "result": {
     "count": 9,

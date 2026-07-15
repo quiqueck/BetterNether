@@ -1,27 +1,21 @@
 package org.betterx.betternether.items;
 
-import org.betterx.bclib.items.BaseArmorItem;
 import org.betterx.betternether.items.materials.BNArmorTiers;
 import org.betterx.betternether.registry.NetherEnchantments;
 import org.betterx.wover.common.item.api.ItemWithCustomStack;
 import org.betterx.wover.enchantment.api.EnchantmentUtils;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorMaterial;
 
-import org.jetbrains.annotations.NotNull;
+public class NetherArmor extends Item implements ItemWithCustomStack {
+    private final ArmorMaterial material;
 
-public class NetherArmor extends BaseArmorItem implements ItemWithCustomStack {
-    public NetherArmor(Holder<ArmorMaterial> material, Type type, Item.Properties settings) {
-        super(material, type, settings);
-    }
-
-    @Override
-    public @NotNull ItemStack getDefaultInstance() {
-        return super.getDefaultInstance();
+    public NetherArmor(ArmorMaterial material, Item.Properties settings) {
+        super(settings);
+        this.material = material;
     }
 
     @Override

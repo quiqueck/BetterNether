@@ -1,17 +1,18 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.blocks.BaseDoorBlock;
-
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
-public class BNWoodlikeDoor extends BaseDoorBlock.Wood {
+// TODO(1.21.7): bclib BaseDoorBlock.Wood was removed; extend vanilla DoorBlock directly.
+public class BNWoodlikeDoor extends DoorBlock {
 
     public BNWoodlikeDoor(Block source, WoodType type) {
-        super(source, type.setType());
+        super(type.setType(), BlockBehaviour.Properties.ofFullCopy(source));
     }
 
     public BNWoodlikeDoor(Properties properties, WoodType type) {
-        super(properties, type.setType());
+        super(type.setType(), properties);
     }
 }

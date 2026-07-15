@@ -2,13 +2,10 @@ package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
 import org.betterx.bclib.blocks.*;
-import org.betterx.bclib.complexmaterials.set.wood.BarStool;
-import org.betterx.bclib.complexmaterials.set.wood.Chair;
-import org.betterx.bclib.complexmaterials.set.wood.Taburet;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
 import org.betterx.bclib.furniture.block.BaseTaburet;
+import org.betterx.wover.sets.api.blocks.slots.WoodSlots;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
@@ -36,7 +33,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 
 import java.util.stream.Stream;
 import org.jetbrains.annotations.ApiStatus;
@@ -92,7 +89,11 @@ public class NetherBlocks {
     public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
     public static final Block CINCINNASITE_BUTTON = registerBlock(
             "cincinnasite_button",
-            BaseButtonBlock.from(CINCINNASITE_FORGED, BlockSetType.GOLD)
+            new net.minecraft.world.level.block.ButtonBlock(
+                    BlockSetType.GOLD,
+                    20,
+                    BlockBehaviour.Properties.ofFullCopy(CINCINNASITE_FORGED)
+            )
     );
     public static final Block CINCINNASITE_PLATE = registerPlate(
             "cincinnasite_plate",
@@ -647,10 +648,8 @@ public class NetherBlocks {
     );
     // Mushroom Fir //
     public static final MushroomFirMaterial MAT_MUSHROOM_FIR = new MushroomFirMaterial().init();
-    public static final Block TRIMMED_MUSHROOM_FIR_CHEST = registerBlock(
-            "mushroom_fir_trimmed_chest",
-            new BaseChestBlock.Wood(MAT_MUSHROOM_FIR.getBlock(WoodSlots.PLANKS))
-    );
+    // TODO(1.21.7): re-add trimmed chest via wover chest API
+    // (the bclib wood-chest base class was removed; there is no drop-in replacement yet)
     // Mushroom //
     public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
     // Anchor Tree
@@ -767,7 +766,7 @@ public class NetherBlocks {
 
     private static void addFuel(Block source, Block result) {
         if (source.defaultBlockState().ignitedByLava()) {
-            FuelRegistry.INSTANCE.add(result, 40);
+            FuelRegistryEvents.BUILD.register((builder, fuelContext) -> builder.add(result, 40));
         }
     }
 
@@ -778,7 +777,10 @@ public class NetherBlocks {
             boolean fireproof,
             TagKey<Block>... tags
     ) {
-        Block stairs = BaseStairsBlock.from(source, fireproof);
+        Block stairs = new net.minecraft.world.level.block.StairBlock(
+                source.defaultBlockState(),
+                BlockBehaviour.Properties.ofFullCopy(source)
+        );
 
         registerBlockDirectly(name, stairs, tags);
         if (stairs.defaultBlockState().ignitedByLava())
@@ -791,7 +793,9 @@ public class NetherBlocks {
 
     @SafeVarargs
     public static Block registerSlab(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
-        Block slab = BaseSlabBlock.from(source, fireproof);
+        Block slab = new net.minecraft.world.level.block.SlabBlock(
+                BlockBehaviour.Properties.ofFullCopy(source)
+        );
 
         registerBlockDirectly(name, slab, tags);
         if (slab.defaultBlockState().ignitedByLava())
@@ -814,7 +818,11 @@ public class NetherBlocks {
     }
 
     public static Block registerButton(String name, Block source, BlockSetType type) {
-        Block button = BaseButtonBlock.from(source, type);
+        Block button = new net.minecraft.world.level.block.ButtonBlock(
+                type,
+                30,
+                BlockBehaviour.Properties.ofFullCopy(source)
+        );
 
         registerBlockDirectly(name, button);
         addFuel(source, button);
@@ -876,7 +884,9 @@ public class NetherBlocks {
     }
 
     public static Block registerWall(String name, Block source) {
-        Block wall = BaseWallBlock.from(source);
+        Block wall = new net.minecraft.world.level.block.WallBlock(
+                BlockBehaviour.Properties.ofFullCopy(source)
+        );
 
         registerBlockDirectly(name, wall, BlockTags.WALLS);
         if (ModCore.isDatagen())
@@ -891,13 +901,7 @@ public class NetherBlocks {
 
         registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
         addFuel(source, block);
-        RecipesHelper.addProvider(ctx -> Taburet.makeTaburetRecipe(
-                ctx.context,
-                BetterNether.C.mk(name),
-                block,
-                source
-        ));
-
+        // TODO(1.21.7): bclib set.wood.Taburet.makeTaburetRecipe was removed; re-add recipe via wover API.
 
         return block;
     }
@@ -907,13 +911,7 @@ public class NetherBlocks {
 
         registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_AXE);
         addFuel(source, block);
-        RecipesHelper.addProvider(ctx -> Chair.makeChairRecipe(
-                ctx.context,
-                BetterNether.C.mk(name),
-                block,
-                source
-        ));
-
+        // TODO(1.21.7): bclib set.wood.Chair.makeChairRecipe was removed; re-add recipe via wover API.
 
         return block;
     }
@@ -923,13 +921,7 @@ public class NetherBlocks {
 
         registerBlockDirectly(name, block, BlockTags.MINEABLE_WITH_PICKAXE);
         addFuel(source, block);
-        RecipesHelper.addProvider(ctx -> BarStool.makeBarStoolRecipe(
-                ctx.context,
-                BetterNether.C.mk(name),
-                block,
-                source
-        ));
-
+        // TODO(1.21.7): bclib set.wood.BarStool.makeBarStoolRecipe was removed; re-add recipe via wover API.
 
         return block;
     }

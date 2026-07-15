@@ -4,11 +4,14 @@ import org.betterx.bclib.util.Pair;
 import org.betterx.betternether.BetterNether;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 
-import net.minecraft.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.*;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.random.Weighted;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
@@ -38,7 +41,7 @@ public class BNModels {
     }
 
     public interface VariantSupplier {
-        Variant apply(ResourceLocation id, List<ResourceLocation> all);
+        Weighted<Variant> apply(ResourceLocation id, List<ResourceLocation> all);
     }
 
     public record ModelSource(ResourceLocation parent, String suffix,
@@ -71,12 +74,12 @@ public class BNModels {
         }).toList();
 
         List<ResourceLocation> allModels = models.stream().map(p -> p.second).toList();
-        final Variant[] variants = models
+        final List<Weighted<Variant>> variants = models
                 .stream()
                 .flatMap(m -> m.first.variants().stream().map(f -> f.apply(m.second, allModels)))
-                .toArray(Variant[]::new);
+                .toList();
 
-        generators.acceptBlockState(MultiVariantGenerator.multiVariant(bl, variants));
+        generators.acceptBlockState(MultiVariantGenerator.dispatch(bl, new MultiVariant(WeightedList.of(variants))));
 
         Item item = bl.asItem();
         ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item), TextureMapping.layer0(sources.get(0).textures.get(0).texture), generators.vanillaGenerator.modelOutput);
@@ -113,7 +116,7 @@ public class BNModels {
                     BNModels.ModelSource.of(
                             WoverBlockModelGenerators.CROSS,
                             "_" + i,
-                            List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                            List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
                             BNModels.TextureSource.of(TextureSlot.CROSS, texture)
                     )
             );
@@ -121,7 +124,7 @@ public class BNModels {
                     BNModels.ModelSource.of(
                             BNModels.CROP_BLOCK_MODEL_LOCATION,
                             "_" + (count + i),
-                            List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                            List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
                             BNModels.TextureSource.of(TextureSlot.TEXTURE, texture)
                     )
             );
@@ -145,7 +148,7 @@ public class BNModels {
                     BNModels.ModelSource.of(
                             WoverBlockModelGenerators.CUBE_ALL,
                             suffixes[i - 1],
-                            List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                            List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
                             BNModels.TextureSource.of(TextureSlot.ALL, texture)
                     )
             );

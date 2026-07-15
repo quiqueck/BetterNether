@@ -20,6 +20,6 @@ public class BNArmorTiers {
     public static ArmorTier FLAMING_RUBY = ArmorTier
             .builder("flaming_ruby")
             .armorMaterial(BNArmorMaterials.FLAMING_RUBY)
-            .armorValuesWithOffset(ArmorTiers.NETHERITE_ARMOR, new ArmorTier.ArmorValues(5, NetherTemplates.FLAMING_RUBY_TEMPLATE))
+            .armorValuesWithOffset(ArmorTiers.NETHERITE_ARMOR, new ArmorTier.ArmorValues(5, () -> NetherTemplates.FLAMING_RUBY_TEMPLATE))
             .build();
 }

@@ -246,32 +246,6 @@ public class NetherItems {
         return new Item.Properties();
     }
 
-    public static Properties createDefaultNetherArmorSettings(ArmorItem.Type type, int durability) {
-        return NetherItems.defaultSettings().fireResistant().durability(type.getDurability(durability));
-    }
-
-    public static Item.Properties createDefaultNetherToolSettings(
-            Tier material,
-            float attackDamage,
-            float attackSpeed
-    ) {
-        return NetherItems
-                .defaultSettings()
-                .fireResistant()
-                .attributes(DiggerItem.createAttributes(material, attackDamage, attackSpeed));
-    }
-
-    public static Item.Properties createDefaultNetherSwordSettings(
-            Tier material,
-            float attackDamage,
-            float attackSpeed
-    ) {
-        return NetherItems
-                .defaultSettings()
-                .fireResistant()
-                .attributes(SwordItem.createAttributes(material, (int) attackDamage, attackSpeed));
-    }
-
     public static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
         SpawnEggItem egg = new SpawnEggItem(type, background, dots, defaultSettings());
         return getItemRegistry().registerEgg(name, egg);

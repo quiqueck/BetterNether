@@ -1,7 +1,6 @@
 package org.betterx.betternether.world.structures.city.palette;
 
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
-import org.betterx.bclib.complexmaterials.set.wood.WoodSlots;
+import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -24,20 +23,20 @@ public class Palettes {
             .addPlanksBlocks(NetherBlocks.MAT_WART.getPlanks())
             .addPlanksSlabs(NetherBlocks.MAT_WART.getSlab())
             .addPlanksStairs(NetherBlocks.MAT_WART.getBlock(
-                    WoodenComplexMaterial.BLOCK_STAIRS))
+                    SlotType.STAIRS))
             .addFences(NetherBlocks.MAT_WART.getBlock(
-                    WoodenComplexMaterial.BLOCK_FENCE))
+                    SlotType.FENCE))
             .addGates(NetherBlocks.MAT_WART.getBlock(
-                    WoodenComplexMaterial.BLOCK_GATE))
+                    SlotType.FENCE_GATE))
             .addWalls(NetherBlocks.NETHER_BRICK_WALL)
             .addLogs(
                     NetherBlocks.MAT_WART.getLog(),
-                    NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.LOG),
+                    NetherBlocks.MAT_WILLOW.getBlock(SlotType.LOG),
                     NetherBlocks.MAT_WART.getStrippedLog()
             )
             .addBark(
                     NetherBlocks.MAT_WART.getBark(),
-                    NetherBlocks.MAT_WILLOW.getBlock(WoodSlots.BARK),
+                    NetherBlocks.MAT_WILLOW.getBlock(SlotType.BARK),
                     NetherBlocks.MAT_WART.getStrippedBark()
             )
             .addStoneBlocks(
@@ -71,9 +70,9 @@ public class Palettes {
                     NetherBlocks.CINCINNASITE_LANTERN_SMALL
             )
             .addDoors(NetherBlocks.MAT_WART.getBlock(
-                    WoodenComplexMaterial.BLOCK_DOOR))
+                    SlotType.DOOR))
             .addTrapdoors(NetherBlocks.MAT_WART.getBlock(
-                    WoodenComplexMaterial.BLOCK_TRAPDOOR))
+                    SlotType.TRAPDOOR))
             .addGlassBlocks(
                     NetherBlocks.QUARTZ_GLASS_FRAMED_COLORED.red,
                     NetherBlocks.QUARTZ_GLASS_COLORED.red,
@@ -85,7 +84,7 @@ public class Palettes {
                     NetherBlocks.CINCINNASITE_BARS
             )
             .addWoodPlates(NetherBlocks.MAT_WART.getBlock(
-                    WoodenComplexMaterial.BLOCK_PRESSURE_PLATE))
+                    SlotType.PRESSURE_PLATE))
             .addPotsPanes(NetherBlocks.BRICK_POT));
 
     private static CityPalette register(CityPalette palette) {

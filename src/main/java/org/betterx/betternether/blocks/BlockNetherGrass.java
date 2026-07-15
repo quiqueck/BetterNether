@@ -12,13 +12,13 @@ import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 import org.betterx.wover.loot.api.BlockLootProvider;
 import org.betterx.wover.loot.api.LootLookupProvider;
 
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.random.Weighted;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -33,6 +33,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+
+import com.mojang.math.Quadrant;
 
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
@@ -64,40 +66,38 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
                             BNModels.ModelSource.of(
                                     WoverBlockModelGenerators.CROSS,
                                     "_1_a",
-                                    List.of((id, all) -> Variant
-                                            .variant()
-                                            .with(VariantProperties.MODEL, id)
-                                            .with(VariantProperties.WEIGHT, 10)
-                                    ),
+                                    List.of((id, all) -> new Weighted<>(
+                                            BlockModelGenerators.plainModel(id),
+                                            10
+                                    )),
                                     BNModels.TextureSource.of(TextureSlot.CROSS, JP1)
                             ),
                             BNModels.ModelSource.of(
                                     BNModels.CROP_BLOCK_MODEL_LOCATION,
                                     "_1_b",
-                                    List.of((id, all) -> Variant
-                                            .variant()
-                                            .with(VariantProperties.MODEL, id)
-                                            .with(VariantProperties.WEIGHT, 10)
-                                    ),
+                                    List.of((id, all) -> new Weighted<>(
+                                            BlockModelGenerators.plainModel(id),
+                                            10
+                                    )),
                                     BNModels.TextureSource.of(TextureSlot.TEXTURE, JP1)
                             ),
                             BNModels.ModelSource.of(
                                     BNModels.JUNGLE_PLANT_MODEL_LOCATION,
                                     "_2",
                                     List.of(
-                                            (id, all) -> Variant.variant().with(VariantProperties.MODEL, id),
-                                            (id, all) -> Variant
-                                                    .variant()
-                                                    .with(VariantProperties.MODEL, id)
-                                                    .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90),
-                                            (id, all) -> Variant
-                                                    .variant()
-                                                    .with(VariantProperties.MODEL, id)
-                                                    .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180),
-                                            (id, all) -> Variant
-                                                    .variant()
-                                                    .with(VariantProperties.MODEL, id)
-                                                    .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                            (id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1),
+                                            (id, all) -> new Weighted<>(
+                                                    BlockModelGenerators.plainModel(id).withYRot(Quadrant.R90),
+                                                    1
+                                            ),
+                                            (id, all) -> new Weighted<>(
+                                                    BlockModelGenerators.plainModel(id).withYRot(Quadrant.R180),
+                                                    1
+                                            ),
+                                            (id, all) -> new Weighted<>(
+                                                    BlockModelGenerators.plainModel(id).withYRot(Quadrant.R270),
+                                                    1
+                                            )
                                     ),
                                     BNModels.TextureSource.of(TextureSlot.PARTICLE, JP2),
                                     BNModels.TextureSource.of(TextureSlot.TEXTURE, JP3)
@@ -105,11 +105,10 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
                             BNModels.ModelSource.of(
                                     WoverBlockModelGenerators.CROSS,
                                     "_3",
-                                    List.of((id, all) -> Variant
-                                            .variant()
-                                            .with(VariantProperties.MODEL, id)
-                                            .with(VariantProperties.WEIGHT, 2)
-                                    ),
+                                    List.of((id, all) -> new Weighted<>(
+                                            BlockModelGenerators.plainModel(id),
+                                            2
+                                    )),
                                     BNModels.TextureSource.of(TextureSlot.CROSS, JP3)
                             )
                     )
@@ -157,19 +156,19 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
                             BNModels.ModelSource.of(
                                     BNModels.GRASS_FAN_MODEL_LOCATION,
                                     "_1",
-                                    List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                                    List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
                                     BNModels.TextureSource.of(TextureSlot.TEXTURE, T1)
                             ),
                             BNModels.ModelSource.of(
                                     WoverBlockModelGenerators.CROSS,
                                     "_2",
-                                    List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                                    List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
                                     BNModels.TextureSource.of(TextureSlot.CROSS, T2)
                             ),
                             BNModels.ModelSource.of(
                                     BNModels.GRASS_FAN_MODEL_LOCATION,
                                     "_3",
-                                    List.of((id, all) -> Variant.variant().with(VariantProperties.MODEL, id)),
+                                    List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
                                     BNModels.TextureSource.of(TextureSlot.TEXTURE, T3)
                             )
                     )
@@ -192,7 +191,7 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
-        Vec3 vec3d = state.getOffset(view, pos);
+        Vec3 vec3d = state.getOffset(pos);
         return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
     }
 

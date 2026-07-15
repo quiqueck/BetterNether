@@ -4,8 +4,8 @@ import org.betterx.bclib.blocks.BaseGlassBlock;
 import org.betterx.betternether.BetterNether;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.model.*;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
@@ -43,7 +43,7 @@ public class BNGlass extends BaseGlassBlock {
             generators.acceptBlockState(
                     BlockModelGenerators.createSimpleBlock(
                             this,
-                            loc
+                            BlockModelGenerators.plainVariant(loc)
                     )
             );
         } else {

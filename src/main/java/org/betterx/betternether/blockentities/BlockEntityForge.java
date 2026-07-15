@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.FurnaceMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.world.level.block.entity.FuelValues;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockEntityForge extends AbstractFurnaceBlockEntity implements ChangebleCookTime {
@@ -32,8 +33,8 @@ public class BlockEntityForge extends AbstractFurnaceBlockEntity implements Chan
     }
 
     @Override
-    protected int getBurnDuration(ItemStack fuel) {
-        return super.getBurnDuration(fuel) / SPEEDUP;
+    protected int getBurnDuration(FuelValues fuelValues, ItemStack fuel) {
+        return super.getBurnDuration(fuelValues, fuel) / SPEEDUP;
     }
 
     @Override

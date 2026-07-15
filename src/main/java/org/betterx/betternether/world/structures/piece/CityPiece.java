@@ -42,12 +42,12 @@ public class CityPiece extends CustomPiece {
 
     public CityPiece(StructurePieceSerializationContext context, CompoundTag tag) {
         super(NetherStructurePieces.NETHER_CITY_PIECE, tag);
-        this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"))
-                .getRotated(Rotation.values()[tag.getInt("rotation")]);
-        this.building.setMirror(Mirror.values()[tag.getInt("mirror")]);
+        this.building = new StructureCityBuilding(tag.getStringOr("building", ""), tag.getIntOr("offset", 0))
+                .getRotated(Rotation.values()[tag.getIntOr("rotation", 0)]);
+        this.building.setMirror(Mirror.values()[tag.getIntOr("mirror", 0)]);
         this.pos = NbtUtils.readBlockPos(tag, "pos").orElse(BlockPos.ZERO);
         this.boundingBox = building.getBoundingBox(pos);
-        this.palette = Palettes.getPalette(tag.getString("palette"));
+        this.palette = Palettes.getPalette(tag.getStringOr("palette", ""));
         this.paletteProcessor = new BuildingStructureProcessor(palette);
     }
 

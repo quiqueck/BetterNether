@@ -1,6 +1,5 @@
 package org.betterx.betternether.items;
 
-import org.betterx.bclib.items.tool.BasePickaxeItem;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherEnchantments;
 import org.betterx.betternether.registry.NetherTags;
@@ -14,22 +13,25 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-public class NetherPickaxe extends BasePickaxeItem implements ItemWithCustomStack, ItemTagProvider {
-    public NetherPickaxe(Tier material, Item.Properties settings) {
-        super(material, settings);
+public class NetherPickaxe extends Item implements ItemWithCustomStack, ItemTagProvider {
+    private final ToolMaterial material;
+
+    public NetherPickaxe(ToolMaterial material, Item.Properties settings) {
+        super(settings);
+        this.material = material;
     }
 
     @Override
     public void setupItemStack(ItemStack stack, HolderLookup.Provider provider) {
         provider.lookup(Registries.ENCHANTMENT).ifPresent(lookup -> {
             int obsidianLevel = 0;
-            if (this.getTier() == BNToolMaterial.CINCINNASITE_DIAMOND) obsidianLevel = 2;
-            else if (this.getTier() == BNToolMaterial.NETHER_RUBY) {
+            if (this.material == BNToolMaterial.CINCINNASITE_DIAMOND) obsidianLevel = 2;
+            else if (this.material == BNToolMaterial.NETHER_RUBY) {
                 obsidianLevel = 1;
-            } else if (this.getTier() == BNToolMaterial.FLAMING_RUBY) {
+            } else if (this.material == BNToolMaterial.FLAMING_RUBY) {
                 obsidianLevel = 3;
                 EnchantmentUtils.enchantInWorld(stack, NetherEnchantments.RUBY_FIRE.key(), 1, lookup);
                 EnchantmentUtils.enchantInWorld(stack, Enchantments.MENDING, 1, lookup);

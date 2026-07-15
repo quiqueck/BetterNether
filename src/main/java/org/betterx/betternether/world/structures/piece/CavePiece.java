@@ -36,7 +36,7 @@ public class CavePiece extends CustomPiece {
     public CavePiece(StructurePieceSerializationContext context, CompoundTag tag) {
         super(NetherStructurePieces.CAVE_PIECE, tag);
         this.center = NbtUtils.readBlockPos(tag, "center").orElse(BlockPos.ZERO);
-        this.radius = tag.getInt("radius");
+        this.radius = tag.getIntOr("radius", 0);
         this.radSqr = radius * radius;
     }
 

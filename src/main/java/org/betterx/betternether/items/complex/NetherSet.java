@@ -1,12 +1,16 @@
 package org.betterx.betternether.items.complex;
 
 import org.betterx.bclib.api.v2.advancement.AdvancementManager;
-import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.items.*;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherItems;
 import org.betterx.wover.complex.api.equipment.*;
+
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ShearsItem;
+
+import java.util.function.Supplier;
+import org.jetbrains.annotations.NotNull;
 
 public class NetherSet extends EquipmentSet {
     public NetherSet(
@@ -31,53 +35,84 @@ public class NetherSet extends EquipmentSet {
                 toolTier,
                 armorTier,
                 NetherBlocks.NETHER_REED_STEM,
-                templateBaseSet
+                templateBaseSet == null ? null : (Supplier<EquipmentSet>) () -> templateBaseSet
         );
 
 
         if (toolTier != null) {
-            ToolSlot.PropertiesBuilder toolPropertiesBuilder = (slot, tier) -> {
-                var values = tier.getValues(slot);
-                if (values == null) {
-                    throw new IllegalArgumentException("Values for " + slot + " are not defined for " + tier);
-                }
-                if (slot == ToolSlot.SWORD_SLOT)
-                    return NetherItems.createDefaultNetherSwordSettings(tier.toolTier, values.attackDamage(), values.attackSpeed());
-
-                return NetherItems.createDefaultNetherToolSettings(tier.toolTier, values.attackDamage(), values.attackSpeed());
-            };
-
-            ToolSlot.PropertiesBuilder shearPropertiesBuilder = (slot, tier) -> toolPropertiesBuilder
-                    .build(slot, tier)
-                    .durability((int) (tier.toolTier.getUses() * 0.75));
-
-            add(ToolSlot.PICKAXE_SLOT, NetherPickaxe::new, toolPropertiesBuilder);
-            add(ToolSlot.AXE_SLOT, NetherAxe::new, toolPropertiesBuilder);
-            add(ToolSlot.SHOVEL_SLOT, NetherShovel::new, toolPropertiesBuilder);
-            add(ToolSlot.HOE_SLOT, NetherHoe::new, toolPropertiesBuilder);
-            add(ToolSlot.SWORD_SLOT, NetherSword::new, toolPropertiesBuilder);
-
+            add(
+                    ToolSlot.PICKAXE_SLOT,
+                    (definition, values) -> new NetherPickaxe(
+                            toolTier.toolMaterial,
+                            commonToolProperties(definition.getProperties())
+                    )
+            );
+            add(
+                    ToolSlot.AXE_SLOT,
+                    (definition, values) -> new NetherAxe(
+                            toolTier.toolMaterial,
+                            values.attackDamage(), values.attackSpeed(),
+                            commonToolProperties(definition.getProperties())
+                    )
+            );
+            add(
+                    ToolSlot.SHOVEL_SLOT,
+                    (definition, values) -> new NetherShovel(
+                            toolTier.toolMaterial,
+                            values.attackDamage(), values.attackSpeed(),
+                            commonToolProperties(definition.getProperties())
+                    )
+            );
+            add(
+                    ToolSlot.HOE_SLOT,
+                    (definition, values) -> new NetherHoe(
+                            toolTier.toolMaterial,
+                            values.attackDamage(), values.attackSpeed(),
+                            commonToolProperties(definition.getProperties())
+                    )
+            );
+            add(
+                    ToolSlot.SWORD_SLOT,
+                    (definition, values) -> new NetherSword(
+                            toolTier.toolMaterial,
+                            commonToolProperties(definition.getProperties())
+                    )
+            );
 
             if (withShears) {
-                add(ToolSlot.SHEARS_SLOT, (t, p) -> new BaseShearsItem(p), shearPropertiesBuilder);
+                add(
+                        ToolSlot.SHEARS_SLOT,
+                        (definition, values) -> new ShearsItem(
+                                commonToolProperties(definition.getProperties())
+                                        .durability((int) (toolTier.toolMaterial.durability() * 0.75))
+                        )
+                );
             }
         }
 
         if (armorTier != null) {
-            ArmorSlot.PropertiesBuilder armorPropertiesBuilder = (slot, tier) -> {
-                var values = tier.getValues(slot);
-                if (values == null) {
-                    throw new IllegalArgumentException("Values for " + slot + " are not defined for " + tier);
-                }
-
-                return NetherItems.createDefaultNetherArmorSettings(slot.armorType, values.durability());
-            };
-
-            add(ArmorSlot.HELMET_SLOT, NetherArmor::new, armorPropertiesBuilder);
-            add(ArmorSlot.CHESTPLATE_SLOT, NetherArmor::new, armorPropertiesBuilder);
-            add(ArmorSlot.LEGGINGS_SLOT, NetherArmor::new, armorPropertiesBuilder);
-            add(ArmorSlot.BOOTS_SLOT, NetherArmor::new, armorPropertiesBuilder);
+            add(
+                    ArmorSlot.HELMET_SLOT,
+                    (definition) -> new NetherArmor(armorTier.armorMaterial, commonArmorProperties(definition.getProperties()))
+            );
+            add(
+                    ArmorSlot.CHESTPLATE_SLOT,
+                    (definition) -> new NetherArmor(armorTier.armorMaterial, commonArmorProperties(definition.getProperties()))
+            );
+            add(
+                    ArmorSlot.LEGGINGS_SLOT,
+                    (definition) -> new NetherArmor(armorTier.armorMaterial, commonArmorProperties(definition.getProperties()))
+            );
+            add(
+                    ArmorSlot.BOOTS_SLOT,
+                    (definition) -> new NetherArmor(armorTier.armorMaterial, commonArmorProperties(definition.getProperties()))
+            );
         }
+    }
+
+    @Override
+    public @NotNull Item.Properties commonToolProperties(@NotNull Item.Properties properties) {
+        return properties.fireResistant();
     }
 
     //WoVer does not yet have an AdvancementManager, so we need to create a wrapper for the BCLib AdvancementManager

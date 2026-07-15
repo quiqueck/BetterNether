@@ -27,6 +27,11 @@ public class Roof extends SlotFromDefinition {
     }
 
     @Override
+    protected void addSlotSpecificDefinitions(BlockSet<?> set, org.betterx.wover.block.api.BlockDefinition<?, ?> def) {
+        def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+    }
+
+    @Override
     protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
                 .crafting(key.location(), block)

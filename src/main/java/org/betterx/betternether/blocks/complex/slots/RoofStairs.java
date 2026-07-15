@@ -31,6 +31,11 @@ public class RoofStairs extends SlotFromDefinition {
     }
 
     @Override
+    protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+    }
+
+    @Override
     protected BlockDefinition<?, ?> startBlockDefinition(
             @NotNull BlockRegistry registry,
             @NotNull BlockSet<?> set,

@@ -5,6 +5,7 @@ import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
 import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.sets.api.blocks.BlockSet;
 import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
 
@@ -32,6 +33,11 @@ public class Sapling extends SlotFromDefinition {
 
     public static Sapling create(Function<BlockBehaviour.Properties, Block> maker) {
         return new Sapling(maker);
+    }
+
+    @Override
+    protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
     }
 
     @Override

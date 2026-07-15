@@ -5,6 +5,7 @@ import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
 import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.sets.api.blocks.BlockSet;
 import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
 
@@ -33,6 +34,11 @@ public class AbstractSeed extends SlotFromDefinition {
 
     public static AbstractSeed create(Function<BlockBehaviour.Properties, Block> maker) {
         return new AbstractSeed(maker);
+    }
+
+    @Override
+    protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
     }
 
     @Override

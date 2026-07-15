@@ -15,6 +15,7 @@ import org.betterx.betternether.blocks.complex.slots.VanillaWood;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.complex.api.equipment.ToolTiers;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.state.api.WorldState;
@@ -58,8 +59,9 @@ public class NetherBlocks {
 
     // Willow //
     public static final WillowMaterial MAT_WILLOW = new WillowMaterial().init();
-    public static final Block WILLOW_LEAVES = registerBlock(
+    public static final Block WILLOW_LEAVES = registerLeaves(
             "willow_leaves",
+            MAT_WILLOW.getSapling(),
             p -> new BlockWillowLeaves(MAT_WILLOW.getSapling(), p)
     );
 
@@ -99,7 +101,7 @@ public class NetherBlocks {
     public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
     public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
     public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
-    public static final Block CINCINNASITE_BUTTON = registerBlock(
+    public static final Block CINCINNASITE_BUTTON = registerBlockDropSelf(
             "cincinnasite_button",
             CINCINNASITE_FORGED,
             p -> new net.minecraft.world.level.block.ButtonBlock(
@@ -260,22 +262,22 @@ public class NetherBlocks {
             QUARTZ_GLASS
     );
     // Obsidian //
-    public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock(
+    public static final Block BLUE_WEEPING_OBSIDIAN = registerBlockDropSelf(
             "blue_weeping_obsidian",
             Blocks.CRYING_OBSIDIAN,
             BlueWeepingObsidianBlock::new
     );
-    public static final Block WEEPING_OBSIDIAN = registerBlock(
+    public static final Block WEEPING_OBSIDIAN = registerBlockDropSelf(
             "weeping_obsidian",
             Blocks.CRYING_OBSIDIAN,
             VanillaWeepingObsidianBlock::new
     );
-    public static final Block BLUE_CRYING_OBSIDIAN = registerBlock(
+    public static final Block BLUE_CRYING_OBSIDIAN = registerBlockDropSelf(
             "blue_crying_obsidian",
             Blocks.CRYING_OBSIDIAN,
             BlueCryingObsidianBlock::new
     );
-    public static final Block OBSIDIAN_BRICKS = registerBlock(
+    public static final Block OBSIDIAN_BRICKS = registerBlockDropSelf(
             "obsidian_bricks",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
@@ -290,12 +292,12 @@ public class NetherBlocks {
             OBSIDIAN_BRICKS,
             false
     );
-    public static final Block OBSIDIAN_TILE = registerBlock(
+    public static final Block OBSIDIAN_TILE = registerBlockDropSelf(
             "obsidian_tile",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
-    public static final Block OBSIDIAN_TILE_SMALL = registerBlock(
+    public static final Block OBSIDIAN_TILE_SMALL = registerBlockDropSelf(
             "obsidian_tile_small",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
@@ -310,7 +312,7 @@ public class NetherBlocks {
             OBSIDIAN_TILE_SMALL,
             false
     );
-    public static final Block OBSIDIAN_ROD_TILES = registerBlock(
+    public static final Block OBSIDIAN_ROD_TILES = registerBlockDropSelf(
             "obsidian_rod_tiles",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
@@ -325,12 +327,12 @@ public class NetherBlocks {
             OBSIDIAN_GLASS,
             p -> new BNPane.Glass(p, true)
     );
-    public static final Block BLUE_OBSIDIAN = registerBlock(
+    public static final Block BLUE_OBSIDIAN = registerBlockDropSelf(
             "blue_obsidian",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, BLUE_CRYING_OBSIDIAN)
     );
-    public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock(
+    public static final Block BLUE_OBSIDIAN_BRICKS = registerBlockDropSelf(
             "blue_obsidian_bricks",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
@@ -345,12 +347,12 @@ public class NetherBlocks {
             BLUE_OBSIDIAN_BRICKS,
             false
     );
-    public static final Block BLUE_OBSIDIAN_TILE = registerBlock(
+    public static final Block BLUE_OBSIDIAN_TILE = registerBlockDropSelf(
             "blue_obsidian_tile",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
-    public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock(
+    public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlockDropSelf(
             "blue_obsidian_tile_small",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
@@ -365,7 +367,7 @@ public class NetherBlocks {
             BLUE_OBSIDIAN_TILE_SMALL,
             false
     );
-    public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock(
+    public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlockDropSelf(
             "blue_obsidian_rod_tiles",
             Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
@@ -481,7 +483,7 @@ public class NetherBlocks {
     // Vines //
     public static final Block BLACK_VINE = registerBlock("black_vine", BlockBlackVine::new);
     public static final Block BLOOMING_VINE = registerBlock("blooming_vine", BlockBlackVine::new);
-    public static final Block GOLDEN_VINE = registerBlock("golden_vine", BlockGoldenVine::new);
+    public static final Block GOLDEN_VINE = registerVine("golden_vine", BlockGoldenVine::new);
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI(
             "lumabus_vine",
@@ -505,7 +507,7 @@ public class NetherBlocks {
     public static final Block MAGMA_FLOWER = registerBlock("magma_flower", BlockMagmaFlower::new);
     public static final Block FEATHER_FERN = registerBlock("feather_fern", BlockFeatherFern::new);
     public static final Block MOSS_COVER = registerBlock("moss_cover", BlockMossCover::new);
-    public static final Block NEON_EQUISETUM = registerBlock("neon_equisetum", BlockNeonEquisetum::new);
+    public static final Block NEON_EQUISETUM = registerVine("neon_equisetum", BlockNeonEquisetum::new);
     public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", BlockHookMushroom::new);
     public static final Block WHISPERING_GOURD_VINE = registerBlock(
             "whispering_gourd_vine",
@@ -723,8 +725,9 @@ public class NetherBlocks {
     private static BlockRegistry BLOCKS_REGISTRY;
     // Rubeus //
     public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
-    public static final Block RUBEUS_LEAVES = registerBlock(
+    public static final Block RUBEUS_LEAVES = registerLeaves(
             "rubeus_leaves",
+            MAT_RUBEUS.getSapling(),
             p -> new BlockRubeusLeaves(MAT_RUBEUS.getSapling(), p)
     );
     // Mushroom Fir //
@@ -735,8 +738,9 @@ public class NetherBlocks {
     public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
     // Anchor Tree
     public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
-    public static final Block ANCHOR_TREE_LEAVES = registerBlock(
+    public static final Block ANCHOR_TREE_LEAVES = registerLeaves(
             "anchor_tree_leaves",
+            MAT_ANCHOR_TREE.getSapling(),
             p -> new BNLeaves(
                     MAT_ANCHOR_TREE.getSapling(),
                     BehaviourBuilders.createStaticLeaves(p, MapColor.COLOR_GREEN, false).noOcclusion()
@@ -748,8 +752,9 @@ public class NetherBlocks {
     );
     // Nether Sakura
     public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
-    public static final Block NETHER_SAKURA_LEAVES = registerBlock(
+    public static final Block NETHER_SAKURA_LEAVES = registerLeaves(
             "nether_sakura_leaves",
+            MAT_NETHER_SAKURA.getSapling(),
             p -> new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling(), p)
     );
     // Soul lily //
@@ -769,6 +774,7 @@ public class NetherBlocks {
     // Eyes //
     public static final Block EYEBALL = registerBlockNI("eyeball", BlockEyeball::new);
     public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", BlockEyeballSmall::new);
+    // eye_vine has no block item (its clone item is EYE_SEED); it drops nothing, so no loot table is generated.
     public static final Block EYE_VINE = registerBlockNI("eye_vine", BlockEyeVine::new);
 
     public static final Block POTTED_PLANT = registerBlockNI("potted_plant", BlockPottedPlant::new);
@@ -869,6 +875,45 @@ public class NetherBlocks {
                 .buildAndRegister();
     }
 
+    // A full block (no bclib/wover loot provider on its class) that should simply drop itself.
+    @SafeVarargs
+    private static <T extends Block> T registerBlockDropSelf(
+            String name,
+            Block propertiesSource,
+            Function<BlockBehaviour.Properties, T> factory,
+            TagKey<Block>... tags
+    ) {
+        return getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .replacePropertiesWithCopy(propertiesSource)
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
+                .addTags(tags)
+                .buildAndRegister();
+    }
+
+    // Leaves: vanilla-style drop logic (chance-based sapling drop plus sticks).
+    private static <T extends Block> T registerLeaves(
+            String name,
+            Block sapling,
+            Function<BlockBehaviour.Properties, T> factory
+    ) {
+        return getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .addTrait(BlockTraits.LOOT_TABLE.dropLeaves(sapling))
+                .buildAndRegister();
+    }
+
+    // Vine-like plants: drop themselves only when broken with silk touch, a hoe, or shears.
+    private static <T extends Block> T registerVine(
+            String name,
+            Function<BlockBehaviour.Properties, T> factory
+    ) {
+        return getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .addTrait(BlockTraits.LOOT_TABLE.dropWithSilktouchOrHoeOrShears())
+                .buildAndRegister();
+    }
+
     private static void addFuel(Block source, Block result) {
         if (source.defaultBlockState().ignitedByLava()) {
             FuelRegistryEvents.BUILD.register((builder, fuelContext) -> builder.add(result, 40));
@@ -888,6 +933,7 @@ public class NetherBlocks {
                         def -> new net.minecraft.world.level.block.StairBlock(source.defaultBlockState(), def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .addTags(tags)
                 .buildAndRegister();
 
@@ -907,6 +953,7 @@ public class NetherBlocks {
                         def -> new net.minecraft.world.level.block.SlabBlock(def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .addTags(tags)
                 .buildAndRegister();
 
@@ -922,6 +969,7 @@ public class NetherBlocks {
         Block roof = getBlockRegistry()
                 .<BlockBase>defineDefaultBlock(name, def -> BlockBase.from(source, def.getProperties()))
                 .replacePropertiesWithCopy(source)
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .buildAndRegister();
 
         addFuel(source, roof);
@@ -938,6 +986,7 @@ public class NetherBlocks {
                         def -> new net.minecraft.world.level.block.ButtonBlock(type, 30, def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .buildAndRegister();
 
         addFuel(source, button);
@@ -1024,6 +1073,7 @@ public class NetherBlocks {
                         def -> new net.minecraft.world.level.block.WallBlock(def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .addTags(BlockTags.WALLS)
                 .buildAndRegister();
 

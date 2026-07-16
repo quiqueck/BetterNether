@@ -9,6 +9,7 @@ import org.betterx.wover.block.api.client.trait.BlockModelTrait;
 import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 import org.betterx.wover.core.api.ModCore;
+import org.betterx.wover.item.api.client.trait.ItemModelTrait;
 
 import org.betterx.wover.sets.api.blocks.SlotType;
 
@@ -20,6 +21,7 @@ import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.Weighted;
+import net.minecraft.world.item.Item;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -31,6 +33,7 @@ import com.mojang.math.Quadrant;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * BetterNether's own {@link BlockModelTrait} factories, for the blocks whose models are too specific for
@@ -133,8 +136,27 @@ public class NetherModels {
         return ModCore.isDatagen() ? Impl.obsidianVariants() : null;
     }
 
+    /**
+     * A dev-only {@link org.betterx.bclib.items.DebugDataItem}, rendered as a flat icon off {@code icon}'s
+     * texture.
+     * <p>
+     * {@code DebugDataItem} is {@code implements ItemModelProvider} and built its model at runtime from the
+     * same icon ({@code getItemModel} -> {@code ModelsHelper.createItemModel(icon)}). Runtime model building
+     * is gone in 1.21.4+, so without this trait the item's generated model points at a
+     * {@code betternether:item/debug/<name>} texture that has never existed.
+     *
+     * @param icon supplies the item whose texture stands in for the debug item
+     */
+    public static ItemModelTrait debugItem(Supplier<Item> icon) {
+        return ModCore.isDatagen() ? Impl.debugItem(icon) : null;
+    }
+
     @Environment(EnvType.CLIENT)
     private static class Impl {
+        private static ItemModelTrait debugItem(Supplier<Item> icon) {
+            return ModelTraitLibrary.itemModel(icon);
+        }
+
         private static BlockModelTrait grass(String name, int variants) {
             return ClientBlockTraits.MODEL.with((key, block, generator) ->
                     BNModels.provideGrassBlockModels(generator, block, name, variants));

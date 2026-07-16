@@ -23,6 +23,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The bulky "trunk" of a Nether tree. Parameterized with the concrete block factory (a
  * {@code Foo(BlockBehaviour.Properties)} constructor). Uses a hand-authored (external) model.
+ * <p>
+ * Trunks are worldgen-only blocks and deliberately have <b>no</b> {@link net.minecraft.world.item.BlockItem}
+ * (see {@link #startBlockDefinition}): breaking one never yields the trunk itself, it yields the material's
+ * stem/log/sapling instead (see the hand-authored {@code loot_table/blocks/<name>_trunk.json}).
  */
 public class TrunkSlot extends SlotFromDefinition {
     public static final String TRUNK_SUFFIX = "trunk";
@@ -74,7 +78,13 @@ public class TrunkSlot extends SlotFromDefinition {
             @NotNull BlockSet<?> set,
             @NotNull String name
     ) {
-        return registry.defineDefaultBlock(name, def -> maker.apply(def.getProperties()));
+        // noBlockItem() restores the pre-wover behaviour: the legacy BlockEntry was built with
+        // hasItem=false, so the trunk was passed to registerBlockOnly and never got a BlockItem. The
+        // trunk is placed by worldgen and drops a stem/log/sapling, so an inventory item would be a
+        // phantom entry in the creative tab with no model to render it.
+        return registry
+                .defineDefaultBlock(name, def -> maker.apply(def.getProperties()))
+                .noBlockItem();
     }
 
     @Override

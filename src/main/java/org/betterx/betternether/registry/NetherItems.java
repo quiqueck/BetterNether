@@ -4,6 +4,7 @@ import org.betterx.bclib.BCLib;
 import org.betterx.bclib.items.DebugDataItem;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
+import org.betterx.betternether.blocks.NetherModels;
 import org.betterx.betternether.integrations.VanillaExcavatorsIntegration;
 import org.betterx.betternether.integrations.VanillaHammersIntegration;
 import org.betterx.betternether.items.ItemBlackApple;
@@ -268,34 +269,65 @@ public class NetherItems {
         return getItemRegistry().register(name, item);
     }
 
+    /**
+     * Registers a dev-only {@link DebugDataItem} together with the model trait that renders it as
+     * {@code icon}'s texture.
+     * <p>
+     * {@code DebugDataItem} is {@code implements ItemModelProvider} and used to build its model at runtime
+     * from that same icon. Runtime model building is unsupported since 1.21.4, so the model has to be
+     * generated at datagen time instead - hence the {@link NetherModels#debugItem} trait. Traits are
+     * only applied by {@link org.betterx.wover.item.api.ItemDefinition#build()}, so these go through
+     * {@code defineDefaultItem} rather than the plain {@link #registerNetherItem(String, Item)}.
+     *
+     * @param name    the item's registry path
+     * @param factory builds the item from its (already known) registry key
+     * @param icon    the item whose texture stands in for the debug item
+     */
+    private static Item registerDebugItem(
+            String name,
+            Function<ResourceKey<Item>, DebugDataItem> factory,
+            Item icon
+    ) {
+        return getItemRegistry()
+                .<DebugDataItem>defineDefaultItem(name, def -> factory.apply(def.itemKey))
+                .addTrait(NetherModels.debugItem(() -> icon))
+                .buildAndRegister();
+    }
+
     static {
         if (BCLib.isDevEnvironment()) {
             BetterNether.C.log.warn("Generating Debug Helpers");
 
-            registerNetherItem(
+            registerDebugItem(
                     "debug/city_loot",
-                    DebugDataItem.forLootTable(getItemRegistry().key("debug/city_loot"), BNLoot.CITY_LOOT, Items.IRON_INGOT)
+                    key -> DebugDataItem.forLootTable(key, BNLoot.CITY_LOOT, Items.IRON_INGOT),
+                    Items.IRON_INGOT
             );
-            registerNetherItem(
+            registerDebugItem(
                     "debug/city_loot_common",
-                    DebugDataItem.forLootTable(getItemRegistry().key("debug/city_loot_common"), BNLoot.CITY_LOOT_COMMON, Items.GOLD_INGOT)
+                    key -> DebugDataItem.forLootTable(key, BNLoot.CITY_LOOT_COMMON, Items.GOLD_INGOT),
+                    Items.GOLD_INGOT
             );
-            registerNetherItem(
+            registerDebugItem(
                     "debug/city_loot_surprise",
-                    DebugDataItem.forLootTable(getItemRegistry().key("debug/city_loot_surprise"), BNLoot.CITY_LOOT_SURPRISE, Items.DIAMOND)
+                    key -> DebugDataItem.forLootTable(key, BNLoot.CITY_LOOT_SURPRISE, Items.DIAMOND),
+                    Items.DIAMOND
             );
-            registerNetherItem(
+            registerDebugItem(
                     "debug/wither_tower_loot",
-                    DebugDataItem.forLootTable(getItemRegistry().key("debug/wither_tower_loot"), BNLoot.WITHER_TOWER_LOOT, NetherItems.CINCINNASITE_INGOT)
+                    key -> DebugDataItem.forLootTable(key, BNLoot.WITHER_TOWER_LOOT, NetherItems.CINCINNASITE_INGOT),
+                    NetherItems.CINCINNASITE_INGOT
             );
-            registerNetherItem(
+            registerDebugItem(
                     "debug/wither_tower_bonus_loot",
-                    DebugDataItem.forLootTable(getItemRegistry().key("debug/wither_tower_bonus_loot"), BNLoot.WITHER_TOWER_BONUS_LOOT, NetherItems.NETHER_RUBY)
+                    key -> DebugDataItem.forLootTable(key, BNLoot.WITHER_TOWER_BONUS_LOOT, NetherItems.NETHER_RUBY),
+                    NetherItems.NETHER_RUBY
             );
 
-            registerNetherItem(
+            registerDebugItem(
                     "debug/city_spawner",
-                    DebugDataItem.forSpawner(getItemRegistry().key("debug/city_spawner"), NetherItems::buildCitySpawnerData, Items.SPECTRAL_ARROW)
+                    key -> DebugDataItem.forSpawner(key, NetherItems::buildCitySpawnerData, Items.SPECTRAL_ARROW),
+                    Items.SPECTRAL_ARROW
             );
         }
     }

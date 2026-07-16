@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "betternether:item/debug/city_loot_common"
+    "layer0": "minecraft:item/gold_ingot"
   }
 }

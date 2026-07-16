@@ -17,7 +17,6 @@
     "LootTableBuilderAccessor",
     "MapMixin",
     "MappedRegistryMixin",
-    "MapStateMixin",
     "MushroomMixin",
     "NetherWartMixin",
     "PlayerEntityMixin",

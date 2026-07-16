@@ -548,12 +548,12 @@ public class NetherBlocks {
     );
     public static final Block EYE_SEED = registerBlock("eye_seed", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherrack())), BlockEyeSeed::new);
     // Grass //
-    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.netherGrass())), BlockNetherGrass.NetherGrass::new);
-    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.grass("swamp_grass", 3))), BlockNetherGrass.SwampGrass::new);
-    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("soul_grass", 2))), BlockSoulGrass::new);
-    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.junglePlant())), BlockNetherGrass.JunglePlant::new);
-    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("bone_grass", 3))), BlockNetherGrass.BoneGrass::new);
-    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("sepia_bone_grass", 3))), BlockNetherGrass.SepiaBoneGrass::new);
+    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.netherGrass(), NetherLoot.netherGrass())), BlockNetherGrass.NetherGrass::new);
+    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.grass("swamp_grass", 3), NetherLoot.netherGrass())), BlockNetherGrass.SwampGrass::new);
+    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("soul_grass", 2), NetherLoot.netherGrass())), BlockSoulGrass::new);
+    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.junglePlant(), NetherLoot.netherGrass())), BlockNetherGrass.JunglePlant::new);
+    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("bone_grass", 3), NetherLoot.netherGrass())), BlockNetherGrass.BoneGrass::new);
+    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("sepia_bone_grass", 3), NetherLoot.netherGrass())), BlockNetherGrass.SepiaBoneGrass::new);
     // Vines //
     public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine())), BlockBlackVine::new);
     public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine())), BlockBlackVine::new);

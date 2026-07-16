@@ -39,15 +39,27 @@ import java.util.List;
  * {@link BlockTraits#LOOT_TABLE} returns {@code null} outside datagen, so these must be combined through
  * {@link NetherTraits}, which drops nulls, rather than {@link List#of}.
  * <p>
- * <b>Not everything can move here.</b> The two paths are not mutually exclusive - wover runs
- * {@code AutoBlockLootProvider} (which scans for the {@code BlockLootProvider} interface) and
+ * <b>A block must not carry both paths.</b> They are not mutually exclusive - wover runs
+ * {@code AutoBlockLootProvider} (which scans for the deprecated {@code BlockLootProvider} interface) and
  * {@code AutoBlockTraitLootProvider} (which scans for this trait) independently, with no filter between them,
- * so a block carrying both generates its table twice. That is fine only while both happen to produce the same
- * bytes. The nether-grass family therefore keeps the interface: it inherits {@code BlockLootProvider} from
- * bclib's {@code BasePlantBlock}, which cannot be dropped from BetterNether. Its own override was removed,
- * because it only restated {@code BasePlantBlock}'s inherited {@code dropWithSilkTouchOrShears} default.
+ * so a block carrying both generates its table twice, and the tree only looks clean while both happen to emit
+ * the same bytes. A table therefore moves here only once its block has stopped inheriting the interface - for
+ * the nether-grass family that meant dropping it from bclib's {@code BasePlantBlock} first.
  */
 public class NetherLoot {
+    /**
+     * The nether-grass family: drops itself, but only when sheared or silk-touched.
+     * <p>
+     * Reproduces the table {@code BasePlantBlock} generated through the {@code BlockLootProvider} interface,
+     * before bclib dropped it. Deliberately <b>not</b> {@link BlockTraits#LOOT_TABLE}'s
+     * {@code dropWithSilktouchOrHoeOrShears()} shortcut: despite the near-identical name, that one also
+     * accepts a hoe, which is a different table.
+     */
+    public static LootTableTrait netherGrass() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) ->
+                provider.dropWithSilkTouchOrShears(block));
+    }
+
     /** Giant lucis: silk-touch drops itself, otherwise lucis spores and glowstone piles. */
     public static LootTableTrait giantLucis() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> provider.dropWithSilkTouch(

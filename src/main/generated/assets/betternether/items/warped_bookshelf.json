@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/warped_bookshelf"
+    "model": "betternether:block/warped_bookshelf"
   }
 }

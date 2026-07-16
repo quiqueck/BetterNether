@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "betternether:block/crimson_crafting_table_bottom",
+    "east": "betternether:block/crimson_crafting_table_side",
+    "north": "betternether:block/crimson_crafting_table_front",
+    "particle": "betternether:block/crimson_crafting_table_front",
+    "south": "betternether:block/crimson_crafting_table_side",
+    "up": "betternether:block/crimson_crafting_table_top",
+    "west": "betternether:block/crimson_crafting_table_front"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/crimson_bookshelf"
+    "model": "betternether:block/crimson_bookshelf"
   }
 }

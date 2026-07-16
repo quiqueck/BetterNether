@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/nether_reed_roof"
+    "model": "betternether:block/nether_reed_roof"
   }
 }

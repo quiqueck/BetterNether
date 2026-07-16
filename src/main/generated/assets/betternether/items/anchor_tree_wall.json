@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/anchor_tree_wall"
+    "model": "betternether:block/anchor_tree_wall_inventory"
   }
 }

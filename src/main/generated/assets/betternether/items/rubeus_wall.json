@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/rubeus_wall"
+    "model": "betternether:block/rubeus_wall_inventory"
   }
 }

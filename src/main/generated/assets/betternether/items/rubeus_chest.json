@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "betternether:item/rubeus_chest"
+    "type": "minecraft:special",
+    "base": "betternether:item/rubeus_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:rubeus_chest"
+    }
   }
 }

@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "betternether:item/willow_chest"
+    "type": "minecraft:special",
+    "base": "betternether:item/willow_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:willow_chest"
+    }
   }
 }

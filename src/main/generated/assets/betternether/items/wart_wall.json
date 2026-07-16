@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/wart_wall"
+    "model": "betternether:block/wart_wall_inventory"
   }
 }

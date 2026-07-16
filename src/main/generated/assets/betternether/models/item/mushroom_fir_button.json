@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:block/button_inventory",
   "textures": {
-    "layer0": "betternether:item/mushroom_fir_button"
+    "texture": "betternether:block/mushroom_fir_planks"
   }
 }

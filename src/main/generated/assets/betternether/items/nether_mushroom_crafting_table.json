@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/nether_mushroom_crafting_table"
+    "model": "betternether:block/nether_mushroom_crafting_table"
   }
 }

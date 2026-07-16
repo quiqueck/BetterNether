@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "textures": {
+    "bottom": "betternether:block/rubeus_door_bottom",
+    "top": "betternether:block/rubeus_door_top"
+  }
+}

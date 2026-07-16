@@ -8,6 +8,8 @@ import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.client.block.BNModels;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.provider.WoverModelProvider;
@@ -16,12 +18,16 @@ import org.betterx.wover.item.api.client.trait.ClientItemTraits;
 import org.betterx.wover.item.api.client.trait.ItemModelTrait;
 
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -36,6 +42,37 @@ public class NetherModelProvider extends WoverModelProvider {
      */
     private WoverBlockModelGenerators generator;
 
+    /**
+     * The hand-authored resource root (src/main/resources), derived from the datagen output directory
+     * (src/main/generated) that build.gradle passes as {@code fabric-api.datagen.output-dir}.
+     */
+    private static final Path HAND_AUTHORED_ROOT = resolveHandAuthoredRoot();
+
+    private static Path resolveHandAuthoredRoot() {
+        final String outputDir = System.getProperty("fabric-api.datagen.output-dir");
+        if (outputDir == null) return null;
+        return Path.of(outputDir).getParent().resolve("resources");
+    }
+
+    /**
+     * Whether the mod already ships a hand-authored model at {@code model}, in which case datagen must not
+     * write one on top of it. A minimal stand-in for Forge's {@code ExistingFileHelper}, which Fabric has
+     * no equivalent of; the question cannot be answered from the generators, because
+     * {@link ItemModelGenerators} will happily emit a model over a hand-authored file of the same name and
+     * only the resource-pack merge (where source-dir order decides the winner) would notice.
+     */
+    private static boolean shipsHandAuthoredModel(ResourceLocation model) {
+        if (HAND_AUTHORED_ROOT == null) {
+            throw new IllegalStateException(
+                    "fabric-api.datagen.output-dir is not set, so hand-authored models cannot be detected " +
+                            "and datagen would silently overwrite them. Run datagen via the runDatagenClient task."
+            );
+        }
+        return Files.isRegularFile(HAND_AUTHORED_ROOT.resolve(
+                "assets/%s/models/%s.json".formatted(model.getNamespace(), model.getPath())
+        ));
+    }
+
     @Override
     protected void bootstrapItemModels(ItemModelGenerators itemModelGenerator) {
         ItemModelTrait.bootstrapModels(modCore, itemModelGenerator);
@@ -43,13 +80,24 @@ public class NetherModelProvider extends WoverModelProvider {
         // Every registered item needs an item-model definition (assets/betternether/items/*.json).
         // Block items normally get theirs as a side effect of their block's model generation - skip
         // those here (checked via generator.hasItemModel()). Items carrying an explicit ItemModelTrait
-        // are already handled by bootstrapModels() above. Everything else falls back to a plain flat
-        // icon, matching vanilla's convention for simple items.
+        // are already handled by bootstrapModels() above.
         ItemRegistry.forMod(BetterNether.C).allEntries().forEach(entry -> {
             var item = entry.getValue();
             if (item instanceof BlockItem blockItem && generator.hasItemModel(blockItem.getBlock())) return;
             if (ClientItemTraits.MODEL.getRuntimeTraits(item) != null) return;
-            itemModelGenerator.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
+
+            final ResourceLocation model = ModelLocationUtils.getModelLocation(item);
+            if (shipsHandAuthoredModel(model)) {
+                // BetterNether hand-authors most of its item models. Only wire the definition to them:
+                // generateFlatItem() would ALSO write a flat model (ItemModelGenerators#generateFlatItem
+                // -> createFlatItemModel) on top of the hand-authored file, and the generated copy is
+                // usually the worse one - a flat icon where a block model belongs (anchor_tree_log,
+                // anchor_tree_slab), or a layer0 guess pointing at a texture that does not exist at all
+                // (agave, whose hand-authored model correctly uses item/agave_seed).
+                itemModelGenerator.itemModelOutput.accept(item, ItemModelUtils.plainModel(model));
+            } else {
+                itemModelGenerator.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
+            }
         });
     }
 
@@ -69,6 +117,22 @@ public class NetherModelProvider extends WoverModelProvider {
                 .create()
                 .override(NetherBlocks.BASALT_BRICKS, block -> BNModels.provideSimpleMultiStateBlock(generator, block, "", "_cracked"))
                 .override(NetherBlocks.MAT_REED.getBlock(SlotType.STAIRS), block -> generator.createStairs(block, NETHER_REED_PLANKS, NETHER_REED_PLANKS, NETHER_REED_PLANKS_TOP))
+
+                // These three keep their hand-authored blockstate/model, which the generic slot model would
+                // overwrite with a strictly worse one; the override only wires the item model (pointing at the
+                // same model the hand-authored blockstate uses, since the generic one is no longer written).
+                // Reed planks are axis-aware and top-textured: the slot model is an axis-less cube_all, whose
+                // blockstate has no variant for axis=x/z at all. The two stems delegate to a dedicated trunk
+                // model (mushroom fir) and to randomised stem variants (stalagnate).
+                .override(reedPlanks, generator::delegateItemModel)
+                .override(
+                        NetherBlocks.MAT_MUSHROOM_FIR.getStem(),
+                        b -> generator.delegateItemModel(b, BetterNether.C.mk("block/mushroom_fir_trunk_middle"))
+                )
+                .override(
+                        NetherBlocks.MAT_STALAGNATE.getStem(),
+                        b -> generator.delegateItemModel(b, BetterNether.C.mk("block/stalagnate_stem_1"))
+                )
                 .override(NetherBlocks.SOUL_SANDSTONE_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_SLABS, SOUL_SANDSTONE_BOTTOM))
                 .override(NetherBlocks.SOUL_SANDSTONE_SMOOTH_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_TOP))
                 .override(NetherBlocks.SOUL_SANDSTONE_CUT_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_CUT_SLABS, SOUL_SANDSTONE_TOP))
@@ -152,9 +216,27 @@ public class NetherModelProvider extends WoverModelProvider {
         addMaterialOverrides(overrides, NetherBlocks.WARPED_WOOD);
         addMaterialOverrides(overrides, NetherBlocks.CRIMSON_WOOD);
 
+        final BlockRegistry registry = BlockRegistry.forMod(BetterNether.C);
+
+        // The wover block sets express their models as ClientBlockTraits.MODEL traits, which only this
+        // call honours - without it none of the set blocks (planks, chests, doors, furniture, ...) get a
+        // blockstate at all. Blocks with an explicit entry in ModelOverides above are meant to use that
+        // model instead of the trait's (or keep a hand-authored one, via .ignore()), so skip them here.
+        BlockModelTrait.bootstrapModels(modCore, generator, (key, block) -> !overrides.contain(block));
+
+        // Blocks with an explicit ClientBlockTraits.MODEL trait are now fully handled above - skip the
+        // legacy BlockModelProvider-interface fallback in addFromRegistry() for them, since BaseBlock
+        // implements that interface unconditionally (defaulting to a plain cube model) and running both
+        // would register the same model twice.
+        registry.allBlocks().forEach(block -> {
+            if (!overrides.contain(block) && ClientBlockTraits.MODEL.getRuntimeTraits(block) != null) {
+                overrides.ignore(block);
+            }
+        });
+
         this.addFromRegistry(
                 generator,
-                BlockRegistry.forMod(BetterNether.C),
+                registry,
                 true,
                 overrides
         );

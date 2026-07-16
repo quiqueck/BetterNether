@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/stalagnate_wall"
+    "model": "betternether:block/stalagnate_wall_inventory"
   }
 }

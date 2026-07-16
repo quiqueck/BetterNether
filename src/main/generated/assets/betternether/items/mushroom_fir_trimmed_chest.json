@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "betternether:item/mushroom_fir_trimmed_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:mushroom_fir_trimmed_chest"
+    }
+  }
+}

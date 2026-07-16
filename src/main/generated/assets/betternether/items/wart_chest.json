@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "betternether:item/wart_chest"
+    "type": "minecraft:special",
+    "base": "betternether:item/wart_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:wart_chest"
+    }
   }
 }

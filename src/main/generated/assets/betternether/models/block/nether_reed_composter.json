@@ -1,0 +1,8 @@
+{
+  "parent": "wover:block/composter",
+  "textures": {
+    "bottom": "betternether:block/nether_reed_composter_bottom",
+    "side": "betternether:block/nether_reed_composter_side",
+    "top": "betternether:block/nether_reed_composter_top"
+  }
+}

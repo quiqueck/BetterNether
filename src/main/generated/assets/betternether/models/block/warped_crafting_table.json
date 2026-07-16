@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "betternether:block/warped_crafting_table_bottom",
+    "east": "betternether:block/warped_crafting_table_side",
+    "north": "betternether:block/warped_crafting_table_front",
+    "particle": "betternether:block/warped_crafting_table_front",
+    "south": "betternether:block/warped_crafting_table_side",
+    "up": "betternether:block/warped_crafting_table_top",
+    "west": "betternether:block/warped_crafting_table_front"
+  }
+}

@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "betternether:item/stalagnate_chest"
+    "type": "minecraft:special",
+    "base": "betternether:item/stalagnate_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:stalagnate_chest"
+    }
   }
 }

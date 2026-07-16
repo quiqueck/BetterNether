@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "betternether:block/rubeus_crafting_table_bottom",
+    "east": "betternether:block/rubeus_crafting_table_side",
+    "north": "betternether:block/rubeus_crafting_table_front",
+    "particle": "betternether:block/rubeus_crafting_table_front",
+    "south": "betternether:block/rubeus_crafting_table_side",
+    "up": "betternether:block/rubeus_crafting_table_top",
+    "west": "betternether:block/rubeus_crafting_table_front"
+  }
+}

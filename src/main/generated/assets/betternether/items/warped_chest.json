@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "betternether:item/warped_chest"
+    "type": "minecraft:special",
+    "base": "betternether:item/warped_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:warped_chest"
+    }
   }
 }

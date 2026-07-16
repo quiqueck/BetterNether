@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "betternether:block/nether_reed_plate"
+    },
+    "powered=true": {
+      "model": "betternether:block/nether_reed_plate_down"
+    }
+  }
+}

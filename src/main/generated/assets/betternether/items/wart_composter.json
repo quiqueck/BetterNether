@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/wart_composter"
+    "model": "betternether:block/wart_composter"
   }
 }

@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "betternether:item/crimson_chest"
+    "type": "minecraft:special",
+    "base": "betternether:item/crimson_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:crimson_chest"
+    }
   }
 }

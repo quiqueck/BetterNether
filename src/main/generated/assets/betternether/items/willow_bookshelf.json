@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/willow_bookshelf"
+    "model": "betternether:block/willow_bookshelf"
   }
 }

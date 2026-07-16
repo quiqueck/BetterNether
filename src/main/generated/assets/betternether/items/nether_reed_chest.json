@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "betternether:item/nether_reed_chest"
+    "type": "minecraft:special",
+    "base": "betternether:item/nether_reed_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:nether_reed_chest"
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/rubeus_plate"
+    "model": "betternether:block/rubeus_plate"
   }
 }

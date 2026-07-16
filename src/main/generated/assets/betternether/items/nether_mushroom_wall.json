@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/nether_mushroom_wall"
+    "model": "betternether:block/nether_mushroom_wall_inventory"
   }
 }

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "betternether:block/nether_reed_crafting_table_bottom",
+    "east": "betternether:block/nether_reed_crafting_table_side",
+    "north": "betternether:block/nether_reed_crafting_table_front",
+    "particle": "betternether:block/nether_reed_crafting_table_front",
+    "south": "betternether:block/nether_reed_crafting_table_side",
+    "up": "betternether:block/nether_reed_crafting_table_top",
+    "west": "betternether:block/nether_reed_crafting_table_front"
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/template_chest",
   "textures": {
-    "layer0": "betternether:item/nether_sakura_chest"
+    "particle": "betternether:block/nether_sakura_planks"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:block/button_inventory",
   "textures": {
-    "layer0": "betternether:item/rubeus_button"
+    "texture": "betternether:block/rubeus_planks"
   }
 }

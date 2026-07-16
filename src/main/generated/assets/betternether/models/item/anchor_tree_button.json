@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:block/button_inventory",
   "textures": {
-    "layer0": "betternether:item/anchor_tree_button"
+    "texture": "betternether:block/anchor_tree_planks"
   }
 }

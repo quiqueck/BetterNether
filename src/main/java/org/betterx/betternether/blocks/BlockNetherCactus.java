@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnGravel;
@@ -32,7 +32,7 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherCactus(Properties settings) {
-        super(org.betterx.bclib.behaviours.BehaviourBuilders.createCactus(settings, MapColor.TERRACOTTA_ORANGE, false));
+        super(Materials.cactus(settings, MapColor.TERRACOTTA_ORANGE, false));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }

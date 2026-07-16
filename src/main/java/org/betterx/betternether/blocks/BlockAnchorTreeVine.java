@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockProperties;
@@ -33,8 +33,8 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull implements BehaviourCl
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockAnchorTreeVine(Properties settings) {
-        super(org.betterx.bclib.behaviours.BehaviourBuilders
-                .createStaticVine(settings, MapColor.COLOR_GREEN)
+        super(Materials
+                .staticVine(settings, MapColor.COLOR_GREEN)
                 .noLootTable()
                 .lightLevel(BlockAnchorTreeVine::getLuminance));
         this.setRenderLayer(BNRenderLayer.CUTOUT);

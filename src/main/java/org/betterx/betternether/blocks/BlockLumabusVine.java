@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.world.features.DeferedSeedBlock;
@@ -44,8 +44,8 @@ public class BlockLumabusVine extends BaseVineBlock implements DeferedSeedBlock,
 
     public BlockLumabusVine(Properties settings, MapColor color) {
         super(
-                org.betterx.bclib.behaviours.BehaviourBuilders
-                        .createStaticVine(settings, color)
+                Materials
+                        .staticVine(settings, color)
                         .lightLevel(getLuminance()),
                 9,
                 1

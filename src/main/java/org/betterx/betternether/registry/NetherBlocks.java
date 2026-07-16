@@ -1,7 +1,7 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
-import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
@@ -743,7 +743,7 @@ public class NetherBlocks {
             MAT_ANCHOR_TREE.getSapling(),
             p -> new BNLeaves(
                     MAT_ANCHOR_TREE.getSapling(),
-                    BehaviourBuilders.createStaticLeaves(p, MapColor.COLOR_GREEN, false).noOcclusion()
+                    Materials.staticLeaves(p, MapColor.COLOR_GREEN, false).noOcclusion()
             )
     );
     public static final Block ANCHOR_TREE_VINE = registerBlockNI(

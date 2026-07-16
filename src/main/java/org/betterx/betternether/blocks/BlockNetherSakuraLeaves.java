@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.MHelper;
 
 import net.minecraft.core.BlockPos;
@@ -22,8 +22,8 @@ public class BlockNetherSakuraLeaves extends BNLeaves {
     public BlockNetherSakuraLeaves(Block sapling) {
         super(
                 sapling,
-                BehaviourBuilders
-                        .createStaticLeaves(MapColor.COLOR_PINK, false)
+                Materials
+                        .staticLeaves(MapColor.COLOR_PINK, false)
                         .noOcclusion()
                         .lightLevel((state) -> 13)
         );
@@ -32,8 +32,8 @@ public class BlockNetherSakuraLeaves extends BNLeaves {
     public BlockNetherSakuraLeaves(Block sapling, Properties settings) {
         super(
                 sapling,
-                org.betterx.bclib.behaviours.BehaviourBuilders
-                        .createStaticLeaves(settings, MapColor.COLOR_PINK, false)
+                Materials
+                        .staticLeaves(settings, MapColor.COLOR_PINK, false)
                         .noOcclusion()
                         .lightLevel((state) -> 13)
         );

@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -20,7 +20,7 @@ import net.fabricmc.api.Environment;
 
 public class BlockInkBush extends BlockCommonPlant implements SurvivesOnNetherGround, BehaviourPlant {
     public BlockInkBush(Properties settings) {
-        super(org.betterx.bclib.behaviours.BehaviourBuilders.createPlant(settings, MapColor.COLOR_BLACK)
+        super(Materials.plant(settings, MapColor.COLOR_BLACK)
                                .sound(SoundType.CROP)
                                .noOcclusion()
         );

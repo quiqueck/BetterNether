@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
@@ -21,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlockGiantLucis extends HugeMushroomBlock implements AddMineableAxe, BlockLootProvider {
     public BlockGiantLucis(Properties settings) {
-        super(org.betterx.bclib.behaviours.BehaviourBuilders
-                .createWalkablePlant(settings, MapColor.COLOR_YELLOW)
+        super(Materials
+                .walkablePlant(settings, MapColor.COLOR_YELLOW)
                 .requiresCorrectToolForDrops()
                 .lightLevel((bs) -> 15)
                 .sound(SoundType.WOOD)

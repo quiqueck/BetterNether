@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -16,8 +16,8 @@ import net.fabricmc.api.Environment;
 public class BlockEyeVine extends BaseVineBlock {
     public BlockEyeVine(Properties settings) {
         super(
-                org.betterx.bclib.behaviours.BehaviourBuilders
-                        .createStaticVine(settings, MapColor.COLOR_RED),
+                Materials
+                        .staticVine(settings, MapColor.COLOR_RED),
                 9,
                 2
         );

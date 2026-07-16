@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.bclib.blocks.BaseSimpleVineBlock;
 import org.betterx.wover.loot.api.BlockLootProvider;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BlockBlackVine extends BaseSimpleVineBlock implements BonemealableBlock, BehaviourClimableVine, BlockLootProvider {
     public BlockBlackVine(Properties settings) {
-        super(org.betterx.bclib.behaviours.BehaviourBuilders.createStaticVine(settings, MapColor.COLOR_BLACK).instabreak(), 27, 1);
+        super(Materials.staticVine(settings, MapColor.COLOR_BLACK).instabreak(), 27, 1);
     }
 
     @Override

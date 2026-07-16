@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
@@ -37,8 +37,8 @@ public class BlockAgave extends BlockCommonPlant implements BehaviourPlant, AddM
     private static final RandomSource RANDOM = new LegacyRandomSource(030620222201l);
 
     public BlockAgave(Properties settings) {
-        super(org.betterx.bclib.behaviours.BehaviourBuilders
-                .createCactus(settings, MapColor.TERRACOTTA_ORANGE, false)
+        super(Materials
+                .cactus(settings, MapColor.TERRACOTTA_ORANGE, false)
                 .requiresCorrectToolForDrops()
                 .noCollission()
                 .destroyTime(0.4F)

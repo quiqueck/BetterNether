@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
@@ -40,8 +40,8 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
     };
 
     public BlockBarrelCactus(Properties settings) {
-        super(org.betterx.bclib.behaviours.BehaviourBuilders
-                .createCactus(settings, MapColor.TERRACOTTA_ORANGE, false)
+        super(Materials
+                .cactus(settings, MapColor.TERRACOTTA_ORANGE, false)
                 .dynamicShape()
                 .offsetType(Block.OffsetType.XZ)
         );

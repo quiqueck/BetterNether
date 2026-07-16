@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
@@ -37,8 +37,8 @@ import org.jetbrains.annotations.Nullable;
 public class BlockWhisperingGourdVine extends BaseVineBlock.Growing implements BlockLootProvider {
     public BlockWhisperingGourdVine(Properties settings) {
         super(
-                org.betterx.bclib.behaviours.BehaviourBuilders
-                        .createStaticVine(settings, MapColor.COLOR_RED)
+                Materials
+                        .staticVine(settings, MapColor.COLOR_RED)
                         .randomTicks(),
                 6,
                 1,

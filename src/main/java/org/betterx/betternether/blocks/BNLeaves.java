@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.blocks.BaseLeavesBlock;
 
 import net.minecraft.core.BlockPos;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class BNLeaves extends BaseLeavesBlock {
     public BNLeaves(Block sapling, MapColor color) {
-        this(sapling, BehaviourBuilders.createStaticLeaves(color, false).noOcclusion());
+        this(sapling, Materials.staticLeaves(color, false).noOcclusion());
     }
 
 

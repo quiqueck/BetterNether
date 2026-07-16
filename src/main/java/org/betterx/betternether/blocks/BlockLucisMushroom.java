@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
@@ -36,8 +36,8 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
     public static final EnumProperty<EnumLucisShape> SHAPE = BNBlockProperties.LUCIS_SHAPE;
 
     public BlockLucisMushroom(Properties settings) {
-        super(org.betterx.bclib.behaviours.BehaviourBuilders
-                .createWalkablePlant(settings, MapColor.COLOR_YELLOW)
+        super(Materials
+                .walkablePlant(settings, MapColor.COLOR_YELLOW)
                 .lightLevel((bs) -> 15)
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.WOOD)

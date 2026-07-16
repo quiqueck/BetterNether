@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.wover.block.api.BlockTagProvider;
@@ -31,8 +31,8 @@ public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomBl
             boolean fireproof
     ) {
         super(
-                BehaviourBuilders
-                        .createStone(settings, MapColor.COLOR_RED)
+                Materials
+                        .stone(settings, MapColor.COLOR_RED)
                         .strength(3, 5)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.NETHERRACK),

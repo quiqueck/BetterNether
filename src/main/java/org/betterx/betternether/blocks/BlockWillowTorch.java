@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
@@ -37,7 +37,7 @@ public class BlockWillowTorch extends BlockBaseNotFull implements AddMineableAxe
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
     public BlockWillowTorch() {
-        super(BehaviourBuilders.createWood(MapColor.COLOR_LIGHT_BLUE, false)
+        super(Materials.wood(MapColor.COLOR_LIGHT_BLUE, false)
                                .lightLevel(s -> 15)
                                .strength(0.3f)
                                .noCollission()

@@ -1,7 +1,8 @@
 {
   "betternether:plugin": {
-    "initializer": "org.betterx.betternether.integrations.wthit.WailaPlugin",
-    "side": "*",
-    "required": []
+    "entrypoints": {
+      "client": "org.betterx.betternether.integrations.wthit.WailaPlugin"
+    },
+    "side": "client"
   }
 }

@@ -5,19 +5,24 @@ import org.betterx.betternether.blocks.BlockCommonPlant;
 
 import net.minecraft.resources.ResourceLocation;
 
-import mcp.mobius.waila.api.IRegistrar;
-import mcp.mobius.waila.api.IWailaPlugin;
-import mcp.mobius.waila.api.TooltipPosition;
+import mcp.mobius.waila.api.IClientRegistrar;
+import mcp.mobius.waila.api.IWailaClientPlugin;
 
-public class WailaPlugin implements IWailaPlugin {
+public class WailaPlugin implements IWailaClientPlugin {
     static class Options {
-        public static final ResourceLocation CROP_PROGRESS = ResourceLocation.withDefaultNamespace("crop_progress");
+        /**
+         * The config toggle owned by wthit's built-in vanilla plugin. Since wthit 16 the key is
+         * {@code minecraft:plant.crop_progress}; {@code minecraft:crop_progress} only survives as a
+         * config-migration alias and is no longer a registered key.
+         */
+        public static final ResourceLocation CROP_PROGRESS =
+                ResourceLocation.withDefaultNamespace("plant.crop_progress");
     }
 
     @Override
-    public void register(IRegistrar registrar) {
+    public void register(IClientRegistrar registrar) {
         BetterNether.C.log.info("Registering Waila-/Wthit-Plugin.");
 
-        registrar.addComponent(NetherPlantProvider.INSTANCE, TooltipPosition.BODY, BlockCommonPlant.class);
+        registrar.body(NetherPlantProvider.INSTANCE, BlockCommonPlant.class);
     }
 }

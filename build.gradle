@@ -78,9 +78,7 @@ dependencies {
     modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}"
 
     // run against the full jar
-    // wthit 13.0.0 targets an older MC and its accessor mixins crash against 1.21.7; excluded from the
-    // dev runtime until a 1.21.7-compatible wthit is used (the integration still compiles against the API).
-//    modRuntimeOnly "mcp.mobius.waila:wthit:fabric-${project.wthit_version}"
+    modRuntimeOnly "mcp.mobius.waila:wthit:fabric-${project.wthit_version}"
 
     println "Using local BCLib: ${local_bclib}"
     if (local_bclib) {
@@ -153,6 +151,9 @@ tasks.withType(JavaCompile) {
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
     archiveClassifier = "sources"
+    // src/main/generated is part of the resources source set and can restate a hand-authored file;
+    // keep the first (hand-authored) copy, same rule as processResources.
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from sourceSets.main.allSource
 }
 

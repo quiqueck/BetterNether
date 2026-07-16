@@ -7,8 +7,6 @@ import net.minecraft.network.chat.Component;
 import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.PairComponent;
 
-import org.jetbrains.annotations.Nullable;
-
 public enum NetherPlantProvider implements IBlockComponentProvider {
 
     INSTANCE;
@@ -26,12 +24,6 @@ public enum NetherPlantProvider implements IBlockComponentProvider {
                     Component.translatable("tooltip.waila.crop_mature")
             ));
         }
-    }
-
-    @Nullable
-    @Override
-    public ITooltipComponent getIcon(IBlockAccessor accessor, IPluginConfig config) {
-        return null;
     }
 
     @Override

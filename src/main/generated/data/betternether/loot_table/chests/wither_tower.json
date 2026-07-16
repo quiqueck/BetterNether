@@ -71,7 +71,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "betternether:bowl_upgrade",
+          "name": "betternether:bowl_upgrade_smithing_template",
           "weight": 3
         },
         {
@@ -87,7 +87,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "betternether:cincinnasite_diamond_upgrade",
+          "name": "betternether:cincinnasite_diamond_upgrade_smithing_template",
           "weight": 9
         },
         {
@@ -231,7 +231,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "betternether:flaming_ruby_upgrade"
+          "name": "betternether:flaming_ruby_upgrade_smithing_template"
         }
       ],
       "rolls": {

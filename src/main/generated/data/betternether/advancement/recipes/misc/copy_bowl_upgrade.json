@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bowl_upgrade": {
+    "has_bowl_upgrade_smithing_template": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:bowl_upgrade"
+            "items": "betternether:bowl_upgrade_smithing_template"
           }
         ]
       },
@@ -42,8 +42,8 @@
     [
       "has_the_recipe",
       "has_cincinnasite_block",
-      "has_diamond",
-      "has_bowl_upgrade"
+      "has_bowl_upgrade_smithing_template",
+      "has_diamond"
     ]
   ],
   "rewards": {

@@ -93,7 +93,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "betternether:flaming_ruby_upgrade"
+          "name": "betternether:flaming_ruby_upgrade_smithing_template"
         }
       ],
       "rolls": {

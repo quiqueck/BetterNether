@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourHelper;
 import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
@@ -104,11 +103,5 @@ public abstract class BlockBNPot extends BlockBaseNotFull {
         public Metal(Properties settings) {
             super(settings);
         }
-    }
-
-    public static BlockBNPot from(Block source) {
-        return BehaviourHelper.from(source,
-                Wood::new, Stone::new, Metal::new
-        );
     }
 }

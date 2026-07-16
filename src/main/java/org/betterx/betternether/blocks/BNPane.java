@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourHelper;
 import org.betterx.bclib.behaviours.interfaces.*;
 
 import net.minecraft.core.Direction;
@@ -102,27 +101,5 @@ public abstract class BNPane extends IronBarsBlock {
         public Glass(BlockBehaviour.Properties settings, boolean dropSelf) {
             super(settings, dropSelf);
         }
-    }
-
-    public static BNPane from(Block source, boolean dropSelf) {
-        return BehaviourHelper.from(
-                source,
-                (s) -> new Wood(s, dropSelf),
-                (s) -> new Stone(s, dropSelf),
-                (s) -> new Metal(s, dropSelf),
-                (s) -> new Obsidian(s, dropSelf),
-                (s) -> new Glass(s, dropSelf)
-        );
-    }
-
-    public static BNPane from(Block source, BlockBehaviour.Properties settings, boolean dropSelf) {
-        return BehaviourHelper.from(
-                source,
-                (s) -> new Wood(settings, dropSelf),
-                (s) -> new Stone(settings, dropSelf),
-                (s) -> new Metal(settings, dropSelf),
-                (s) -> new Obsidian(settings, dropSelf),
-                (s) -> new Glass(settings, dropSelf)
-        );
     }
 }

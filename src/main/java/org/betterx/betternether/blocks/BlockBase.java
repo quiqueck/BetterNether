@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourHelper;
 import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
@@ -64,20 +63,5 @@ public class BlockBase extends Block {
 
     public void setDropItself(boolean drop) {
         this.dropItself = drop;
-    }
-
-    public static BlockBase from(Block source) {
-        return BehaviourHelper.from(source,
-                Wood::new, Stone::new, Metal::new
-        );
-    }
-
-    public static BlockBase from(Block source, Properties settings) {
-        return BehaviourHelper.from(
-                source,
-                b -> new Wood(settings),
-                b -> new Stone(settings),
-                b -> new Metal(settings)
-        );
     }
 }

@@ -3,6 +3,7 @@ package org.betterx.betternether.blocks.complex;
 import org.betterx.betternether.blocks.BlockWillowBranch;
 import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.betternether.blocks.NetherSurvival;
+import org.betterx.betternether.blocks.NetherTraits;
 import org.betterx.betternether.blocks.BlockWillowSapling;
 import org.betterx.betternether.blocks.BlockWillowTorch;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
@@ -35,7 +36,9 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                     .add(SimpleBlockSlot.withItem(
                             NetherSlots.TORCH,
                             (set, props) -> new BlockWillowTorch(props),
-                            NetherRender.cutout()
+                            // Replaces BlockWillowTorch's BehaviourCompostable marker, which only tagged the
+                            // item and never registered a composter entry.
+                            NetherTraits.compostable(NetherRender.cutout())
                     ));
     }
 

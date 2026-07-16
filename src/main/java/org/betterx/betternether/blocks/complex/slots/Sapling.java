@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex.slots;
 
+import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
@@ -44,6 +45,10 @@ public class Sapling extends SlotFromDefinition {
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
         def.addTrait(survival);
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+        // Real composting. BehaviourSapling (which every sapling block here implements) extends
+        // BehaviourCompostable, but that marker only ever produced the c:compostable item tag - it never
+        // registered a composter entry, so these were tagged compostable yet would not compost.
+        def.addTrait(CompostableBlockTrait.withDefault());
     }
 
     @Override

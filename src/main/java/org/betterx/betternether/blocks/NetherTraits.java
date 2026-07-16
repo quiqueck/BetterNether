@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
 import org.betterx.wover.block.api.trait.BlockTrait;
@@ -22,6 +23,22 @@ public class NetherTraits {
     @SafeVarargs
     public static List<BlockTrait<?, ?>> of(BlockTrait<?, ?>... traits) {
         return and(List.of(), traits);
+    }
+
+    /**
+     * {@code base} plus {@link CompostableBlockTrait} at bclib's default 0.1 chance.
+     * <p>
+     * Unlike the old {@code BehaviourCompostable} marker - which only ever produced the
+     * {@code c:compostable} item tag at datagen, never a composter entry (see its javadoc) - the trait
+     * both tags the item AND calls {@code ComposterAPI.allowCompost}, so the block actually composts.
+     */
+    public static List<BlockTrait<?, ?>> compostable(List<BlockTrait<?, ?>> base) {
+        return and(base, CompostableBlockTrait.withDefault());
+    }
+
+    /** {@link #compostable(List)} with no other traits. */
+    public static List<BlockTrait<?, ?>> compostable() {
+        return compostable(List.of());
     }
 
     /** {@code base} plus the given extra traits, dropping any {@code null}. */

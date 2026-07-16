@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
 import org.betterx.betternether.BlocksHelper;
 
 import net.minecraft.core.BlockPos;
@@ -24,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockWillowTorch extends BlockBaseNotFull implements BehaviourCompostable {
+public class BlockWillowTorch extends BlockBaseNotFull {
     private static final VoxelShape SHAPE_NORTH = Block.box(5, 0, 8, 11, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = Block.box(5, 0, 0, 11, 16, 8);
     private static final VoxelShape SHAPE_WEST = Block.box(8, 0, 5, 16, 16, 11);

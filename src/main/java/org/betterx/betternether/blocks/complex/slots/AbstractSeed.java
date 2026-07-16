@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex.slots;
 
+import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
@@ -45,6 +46,8 @@ public class AbstractSeed extends SlotFromDefinition {
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
         def.addTrait(survival);
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+        // See Sapling: the BehaviourCompostable marker these blocks carry never registered a composter entry.
+        def.addTrait(CompostableBlockTrait.withDefault());
     }
 
     @Override

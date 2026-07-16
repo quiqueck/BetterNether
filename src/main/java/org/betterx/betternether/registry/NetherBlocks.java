@@ -3,6 +3,7 @@ package org.betterx.betternether.registry;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
 import org.betterx.bclib.blocks.*;
+import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
@@ -298,7 +299,7 @@ public class NetherBlocks {
     public static final ColoredGlassMaterial QUARTZ_GLASS_PANE_COLORED = new ColoredGlassMaterial(
             "quartz_glass_pane",
             QUARTZ_GLASS_PANE,
-            false
+            p -> new BNPane.Glass(p, false)
     );
     public static final Block QUARTZ_GLASS_FRAMED_PANE = registerBlock(
             "quartz_glass_framed_pane",
@@ -309,7 +310,7 @@ public class NetherBlocks {
     public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial(
             "quartz_glass_framed_pane",
             QUARTZ_GLASS_FRAMED_PANE,
-            true
+            p -> new BNPane.Metal(p, true)
     );
     // Quartz Glass Colored //
     public static final ColoredGlassMaterial QUARTZ_GLASS_COLORED = new ColoredGlassMaterial(
@@ -530,58 +531,65 @@ public class NetherBlocks {
             false,
             ModelTraitLibrary.externalModel()
     );
-    public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", NetherRender.cutoutAnd(NetherSurvival.netherMycelium()), BlockOrangeMushroom::new);
-    public static final Block RED_MOLD = registerBlock("red_mold", NetherRender.cutoutAnd(NetherSurvival.netherMycelium()), BlockRedMold::new);
-    public static final Block GRAY_MOLD = registerBlock("gray_mold", NetherRender.cutoutAnd(NetherSurvival.netherMycelium()), BlockGrayMold::new);
-    public static final Block LUCIS_SPORE = registerBlock("lucis_spore", BlockLucisSpore::new);
+    public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockOrangeMushroom::new);
+    public static final Block RED_MOLD = registerBlock("red_mold", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockRedMold::new);
+    public static final Block GRAY_MOLD = registerBlock("gray_mold", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockGrayMold::new);
+    public static final Block LUCIS_SPORE = registerBlock("lucis_spore", NetherTraits.compostable(), BlockLucisSpore::new);
     public static final Block GIANT_LUCIS = registerBlock(
             "giant_lucis",
             NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe(), NetherLoot.giantLucis()),
             BlockGiantLucis::new
     );
-    public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", NetherRender.cutoutAnd(NetherSurvival.netherMycelium()), BlockGiantMoldSapling::new);
+    public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockGiantMoldSapling::new);
     public static final Block JELLYFISH_MUSHROOM_SAPLING = registerBlock(
-            "jellyfish_mushroom_sapling", NetherRender.cutoutAnd(NetherSurvival.nylium()),
+            "jellyfish_mushroom_sapling",
+            NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.nylium())),
             BlockJellyfishMushroomSapling::new
     );
-    public static final Block EYE_SEED = registerBlock("eye_seed", NetherRender.cutoutAnd(NetherSurvival.netherrack()), BlockEyeSeed::new);
+    public static final Block EYE_SEED = registerBlock("eye_seed", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherrack())), BlockEyeSeed::new);
     // Grass //
-    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.netherGrass()), BlockNetherGrass.NetherGrass::new);
-    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.grass("swamp_grass", 3)), BlockNetherGrass.SwampGrass::new);
-    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("soul_grass", 2)), BlockSoulGrass::new);
-    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.junglePlant()), BlockNetherGrass.JunglePlant::new);
-    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("bone_grass", 3)), BlockNetherGrass.BoneGrass::new);
-    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("sepia_bone_grass", 3)), BlockNetherGrass.SepiaBoneGrass::new);
+    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.netherGrass())), BlockNetherGrass.NetherGrass::new);
+    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.grass("swamp_grass", 3))), BlockNetherGrass.SwampGrass::new);
+    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("soul_grass", 2))), BlockSoulGrass::new);
+    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherTraits.compostable(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.junglePlant())), BlockNetherGrass.JunglePlant::new);
+    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("bone_grass", 3))), BlockNetherGrass.BoneGrass::new);
+    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("sepia_bone_grass", 3))), BlockNetherGrass.SepiaBoneGrass::new);
     // Vines //
-    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine()), BlockBlackVine::new);
-    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine()), BlockBlackVine::new);
-    public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.of(ModelTraitLibrary.externalModel()), BlockGoldenVine::new);
+    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine())), BlockBlackVine::new);
+    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine())), BlockBlackVine::new);
+    public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModel())), BlockGoldenVine::new);
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI(
             "lumabus_vine",
-            NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem(), NetherLoot.lumabusVine()),
+            NetherTraits.compostable(NetherTraits.of(
+                    ModelTraitLibrary.externalModelDelegatedItem(),
+                    NetherLoot.lumabusVine()
+            )),
             p -> new BlockLumabusVine(p, MapColor.COLOR_CYAN)
     );
     public static final BlockLumabusVine GOLDEN_LUMABUS_VINE = registerBlockNI(
             "golden_lumabus_vine",
-            NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem(), NetherLoot.lumabusVine()),
+            NetherTraits.compostable(NetherTraits.of(
+                    ModelTraitLibrary.externalModelDelegatedItem(),
+                    NetherLoot.lumabusVine()
+            )),
             p -> new BlockLumabusVine(p, MapColor.COLOR_YELLOW)
     );
 
     // Small Plants
-    public static final Block SOUL_VEIN = registerBlock("soul_vein", NetherRender.cutoutAnd(NetherSurvival.netherSand()), BlockSoulVein::new);
-    public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", NetherRender.cutoutAnd(NetherSurvival.boneBlocks()), BlockBoneMushroom::new);
-    public static final Block BLACK_BUSH = registerBlock("black_bush", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockBlackBush::new);
-    public static final Block INK_BUSH = registerBlockNI("ink_bush", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockInkBush::new);
-    public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockInkBushSeed::new);
+    public static final Block SOUL_VEIN = registerBlock("soul_vein", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherSand())), BlockSoulVein::new);
+    public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.boneBlocks())), BlockBoneMushroom::new);
+    public static final Block BLACK_BUSH = registerBlock("black_bush", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockBlackBush::new);
+    public static final Block INK_BUSH = registerBlockNI("ink_bush", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockInkBush::new);
+    public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockInkBushSeed::new);
     public static final Block SMOKER = registerBlock(
             "smoker",
             NetherTraits.and(NetherSurvival.netherGround(), BlockTraits.MINEABLE_WITH.needsAxe()),
             BlockSmoker::new
     );
-    public static final Block EGG_PLANT = registerBlock("egg_plant", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockEggPlant::new);
-    public static final Block BLACK_APPLE = registerBlockNI("black_apple", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockBlackApple::new);
-    public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockBlackAppleSeed::new);
+    public static final Block EGG_PLANT = registerBlock("egg_plant", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockEggPlant::new);
+    public static final Block BLACK_APPLE = registerBlockNI("black_apple", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockBlackApple::new);
+    public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockBlackAppleSeed::new);
     public static final Block MAGMA_FLOWER = registerBlock(
             "magma_flower",
             NetherTraits.and(
@@ -590,17 +598,23 @@ public class NetherBlocks {
             ),
             BlockMagmaFlower::new
     );
-    public static final Block FEATHER_FERN = registerBlock("feather_fern", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockFeatherFern::new);
-    public static final Block MOSS_COVER = registerBlock("moss_cover", NetherRender.cutout(), BlockMossCover::new);
+    public static final Block FEATHER_FERN = registerBlock("feather_fern", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockFeatherFern::new);
+    public static final Block MOSS_COVER = registerBlock("moss_cover", NetherTraits.compostable(NetherRender.cutout()), BlockMossCover::new);
     public static final Block NEON_EQUISETUM = registerVine(
             "neon_equisetum",
-            NetherTraits.and(NetherSurvival.netherrack(), ModelTraitLibrary.externalModel()),
+            NetherTraits.compostable(NetherTraits.and(
+                    NetherSurvival.netherrack(),
+                    ModelTraitLibrary.externalModel()
+            )),
             BlockNeonEquisetum::new
     );
-    public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", NetherRender.cutoutAnd(NetherSurvival.netherrack()), BlockHookMushroom::new);
+    public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherrack())), BlockHookMushroom::new);
     public static final Block WHISPERING_GOURD_VINE = registerBlock(
             "whispering_gourd_vine",
-            NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.whisperingGourdVine()),
+            NetherTraits.compostable(NetherTraits.of(
+                    ModelTraitLibrary.externalModel(),
+                    NetherLoot.whisperingGourdVine()
+            )),
             BlockWhisperingGourdVine::new
     );
     public static final Block WHISPERING_GOURD = registerBlock(
@@ -616,36 +630,36 @@ public class NetherBlocks {
     // Cactuses //
     public static final Block AGAVE = registerBlock(
             "agave",
-            NetherTraits.and(
+            NetherTraits.compostable(NetherTraits.and(
                     NetherRender.cutoutAnd(NetherSurvival.gravel()),
                     BlockTraits.MINEABLE_WITH.needsShears()
-            ),
+            )),
             BlockAgave::new
     );
     public static final Block BARREL_CACTUS = registerBlock(
             "barrel_cactus",
-            NetherTraits.and(
+            NetherTraits.compostable(NetherTraits.and(
                     NetherRender.cutoutAnd(NetherSurvival.gravel()),
                     BlockTraits.MINEABLE_WITH.needsShears()
-            ),
+            )),
             BlockBarrelCactus::new
     );
-    public static final Block NETHER_CACTUS = registerBlock("nether_cactus", NetherRender.cutoutAnd(NetherSurvival.gravel()), BlockNetherCactus::new);
+    public static final Block NETHER_CACTUS = registerBlock("nether_cactus", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.gravel())), BlockNetherCactus::new);
     // Wall plants
-    public static final Block WALL_MOSS = registerBlock("wall_moss", NetherRender.cutout(), p -> new BlockPlantWall(p, MapColor.COLOR_RED));
+    public static final Block WALL_MOSS = registerBlock("wall_moss", NetherTraits.compostable(NetherRender.cutout()), p -> new BlockPlantWall(p, MapColor.COLOR_RED));
     public static final Block WALL_MUSHROOM_BROWN = registerBlock(
             "wall_mushroom_brown",
-            NetherRender.cutout(),
+            NetherTraits.compostable(NetherRender.cutout()),
             p -> new BlockPlantWall(p, MapColor.COLOR_BROWN)
     );
     public static final Block WALL_MUSHROOM_RED = registerBlock(
             "wall_mushroom_red",
-            NetherRender.cutout(),
+            NetherTraits.compostable(NetherRender.cutout()),
             p -> new BlockPlantWall(p, MapColor.COLOR_RED)
     );
     public static final Block JUNGLE_MOSS = registerBlock(
             "jungle_moss",
-            NetherRender.cutout(),
+            NetherTraits.compostable(NetherRender.cutout()),
             p -> new BlockPlantWall(p, MapColor.COLOR_LIGHT_GREEN)
     );
     // Decorations //
@@ -676,37 +690,43 @@ public class NetherBlocks {
             "cincinnasite_fire_bowl",
             CINCINNASITE_FORGED,
             Blocks.NETHERRACK,
-            NetherItems.CINCINNASITE_INGOT
+            NetherItems.CINCINNASITE_INGOT,
+            BlockFireBowl.Metal::new
     );
     public static final Block BRICKS_FIRE_BOWL = registerFireBowl(
             "bricks_fire_bowl",
             NETHER_BRICK_TILE_LARGE,
             Blocks.NETHERRACK,
-            Items.NETHER_BRICK
+            Items.NETHER_BRICK,
+            BlockFireBowl.Stone::new
     );
     public static final Block NETHERITE_FIRE_BOWL = registerFireBowl(
             "netherite_fire_bowl",
             Blocks.NETHERITE_BLOCK,
             Blocks.NETHERRACK,
-            Items.NETHERITE_INGOT
+            Items.NETHERITE_INGOT,
+            BlockFireBowl.Metal::new
     );
     public static final Block CINCINNASITE_FIRE_BOWL_SOUL = registerFireBowl(
             "cincinnasite_fire_bowl_soul",
             CINCINNASITE_FORGED,
             Blocks.SOUL_SAND,
-            NetherItems.CINCINNASITE_INGOT
+            NetherItems.CINCINNASITE_INGOT,
+            BlockFireBowl.Metal::new
     );
     public static final Block BRICKS_FIRE_BOWL_SOUL = registerFireBowl(
             "bricks_fire_bowl_soul",
             NETHER_BRICK_TILE_LARGE,
             Blocks.SOUL_SAND,
-            Items.NETHER_BRICK
+            Items.NETHER_BRICK,
+            BlockFireBowl.Stone::new
     );
     public static final Block NETHERITE_FIRE_BOWL_SOUL = registerFireBowl(
             "netherite_fire_bowl_soul",
             Blocks.NETHERITE_BLOCK,
             Blocks.SOUL_SAND,
-            Items.NETHERITE_INGOT
+            Items.NETHERITE_INGOT,
+            BlockFireBowl.Metal::new
     );
     // Terrain //
     public static final BlockTerrain NETHERRACK_MOSS = registerBlock(
@@ -771,7 +791,7 @@ public class NetherBlocks {
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
     // Roofs //
-    public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS);
+    public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS, BlockBase.Stone::new);
     public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs(
             "roof_tile_nether_bricks_stairs",
             ROOF_TILE_NETHER_BRICKS,
@@ -783,7 +803,7 @@ public class NetherBlocks {
             false,
             ModelTraitLibrary.externalModel()
     );
-    public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED);
+    public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED, BlockBase.Metal::new);
     public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerStairs(
             "roof_tile_cincinnasite_stairs",
             ROOF_TILE_CINCINNASITE,
@@ -876,7 +896,7 @@ public class NetherBlocks {
     );
     public static final Block ANCHOR_TREE_VINE = registerBlockNI(
             "anchor_tree_vine",
-            NetherRender.cutout(),
+            NetherTraits.compostable(NetherRender.cutout()),
             BlockAnchorTreeVine::new
     );
     // Nether Sakura
@@ -895,7 +915,7 @@ public class NetherBlocks {
             ),
             BlockSoulLily::new
     );
-    public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", NetherRender.cutoutAnd(NetherSurvival.soulGroundOrFarmland()), BlockSoulLilySapling::new);
+    public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.soulGroundOrFarmland())), BlockSoulLilySapling::new);
     // Large & Small Mushrooms //
     public static final Block RED_LARGE_MUSHROOM = registerBlockNI(
             "red_large_mushroom",
@@ -943,7 +963,7 @@ public class NetherBlocks {
             BlockEyeballSmall::new
     );
     // eye_vine has no block item (its clone item is EYE_SEED); it drops nothing, so no loot table is generated.
-    public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem()), BlockEyeVine::new);
+    public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem())), BlockEyeVine::new);
 
     public static final Block POTTED_PLANT = registerBlockNI(
             "potted_plant",
@@ -965,13 +985,13 @@ public class NetherBlocks {
     // DEFERED BLOCKS //
     public static final Block LUMABUS_SEED = registerBlock(
             "lumabus_seed",
-            NetherRender.cutout(),
+            NetherTraits.compostable(NetherRender.cutout()),
             p -> new BlockLumabusSeed(p, LUMABUS_VINE, () -> NetherVines.LUMABUS_VINE.getHolder(WorldState.registryAccess()))
     );
 
     public static final Block GOLDEN_LUMABUS_SEED = registerBlock(
             "golden_lumabus_seed",
-            NetherRender.cutout(),
+            NetherTraits.compostable(NetherRender.cutout()),
             p -> new BlockLumabusSeed(p, GOLDEN_LUMABUS_VINE, () -> NetherVines.GOLDEN_LUMABUS_VINE.getHolder(WorldState.registryAccess()))
     );
 
@@ -1211,6 +1231,11 @@ public class NetherBlocks {
         return getBlockRegistry()
                 .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .addTrait(BlockTraits.LOOT_TABLE.dropLeaves(sapling))
+                // BehaviourLeaves (still on these classes, for the LEAVES tags and the creative tab) extends
+                // BehaviourCompostable and overrides compostingChance() to 0.3f - but that marker only ever
+                // produced the c:compostable item tag, never a composter entry. The trait registers the real
+                // one, at the 0.3f the marker always intended.
+                .addTrait(CompostableBlockTrait.withChance(0.3f))
                 .buildAndRegister();
     }
 
@@ -1331,9 +1356,18 @@ public class NetherBlocks {
         return slab;
     }
 
-    private static Block registerRoof(String name, Block source) {
+    /**
+     * @param factory the concrete {@link BlockBase} subclass for this roof's material. This used to be
+     *                inferred from {@code source} by {@code BehaviourHelper.from}; the material is known
+     *                at every call site, so it is passed directly.
+     */
+    private static Block registerRoof(
+            String name,
+            Block source,
+            Function<BlockBehaviour.Properties, BlockBase> factory
+    ) {
         Block roof = getBlockRegistry()
-                .<BlockBase>defineDefaultBlock(name, def -> BlockBase.from(source, def.getProperties()))
+                .<BlockBase>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .replacePropertiesWithCopy(source)
                 .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .buildAndRegister();
@@ -1597,15 +1631,21 @@ public class NetherBlocks {
         return block;
     }
 
-    private static Block registerFireBowl(String name, Block source, Block inside, Item leg) {
+    /**
+     * @param factory the concrete {@link BlockFireBowl} subclass for this bowl's material. This used to be
+     *                inferred from {@code source} by {@code BehaviourHelper.from} (with netherite already
+     *                special-cased by name); every call site knows its material, so it is passed directly.
+     */
+    private static Block registerFireBowl(
+            String name,
+            Block source,
+            Block inside,
+            Item leg,
+            Function<BlockBehaviour.Properties, BlockFireBowl> factory
+    ) {
         final boolean isNetherite = name.startsWith("netherite");
         Block block = getBlockRegistry()
-                .<BlockFireBowl>defineDefaultBlock(
-                        name,
-                        def -> isNetherite
-                                ? new BlockFireBowl.Metal(def.getProperties())
-                                : BlockFireBowl.from(source, def.getProperties())
-                )
+                .<BlockFireBowl>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .replacePropertiesWithCopy(source)
                 .addTrait(NetherRender.cutout())
                 .buildAndRegister();

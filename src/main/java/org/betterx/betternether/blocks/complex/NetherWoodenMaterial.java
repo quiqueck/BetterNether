@@ -71,7 +71,11 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
     @Override
     protected void addCommonBlockDefinitions(SlotType slot, BlockDefinition<?, ?> blockDefinition) {
         // Deliberately NOT calling super: the base adds BlockTraits.FLAMMABLE, but nothing burns in the Nether.
-        blockDefinition.addTrait(BlockTraits.WOOD_BLOCK.withDefault());
+        // withFireResistance() is withDefault() minus FLAMMABLE. Nothing burns in the nether: the wood sets
+        // used to say so through initFlammable(), which was a deliberate no-op, and that hook is gone -
+        // WOOD_BLOCK.withDefault() would silently make every nether wood flammable. Datagen output is the
+        // same either way; both variants still declare MINEABLE_WITH.needsAxe().
+        blockDefinition.addTrait(BlockTraits.WOOD_BLOCK.withFireResistance());
         if (slot == SlotType.PLANKS || isFurniture(slot)) {
             // The furniture is made of (and pre-migration copied its properties from) the planks/slab, so it
             // takes the plank color rather than the log's.

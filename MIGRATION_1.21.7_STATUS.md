@@ -241,29 +241,15 @@ missing-model/texture/resource errors, then kill it (it won't exit on its own).
 
 ## Open tasks
 
+Recently landed: **#22** — the 60 per-wood furniture blocks are restored (BetterNether `f4644161`, BCLib
+`fa73735a`); **#18** `SurvivesOn*` -> `SurvivesOnBlockTrait`; **#19** BetterEnd's FlowerPot server crash.
+
 Kept in sync with the working task list. Each entry carries the traps that make it executable later —
 do not drop them.
 
-### #22 — Restore the 60 per-wood furniture blocks
-Lost in the complexmaterials -> wover-sets rewrite: pre-migration `NetherWoodenMaterial` listed
-`WoodSlots.TABURET/CHAIR/BAR_STOOL`; wover's `WoodSlots` has no furniture slots and wover has no furniture
-code at all. **It is real content, not dead code** — BetterEnd's history has
-`10afe277d [Feature] **New** Wooden Furniture (quiqueck/BetterNether#134)`.
-- Assets still ship: 18 bclib `CustomModelData` materialmaps (`materialmaps/block/<wood>_chair.json`,
-  `{"defaultMaterial": "betternether:noshade"}`) + `textures/block/stalagnate_chair.png`.
-- **No art is missing**: models are generated from each wood's planks texture by
-  `BCLModels.create{Chair,Taburet,BarStool}BlockModel` (BCLModels.java:126/146/163).
-- Still present: bclib `BaseTaburet`/`BaseChair`/`BaseBarStool`; BN's `registerTaburet`/`registerChair`/
-  `registerBarStool` (in use for the 3 cincinnasite pieces, with recipes + fuel).
-- Scope: 20 woods x 3 = 60, named `<wood>_taburet|_chair|_bar_stool` (suffix form; the standalone
-  cincinnasite ones use the prefix form). Woods at `158e63d4`: acacia anchor_tree bamboo birch cherry
-  crimson dark_oak jungle mangrove mushroom_fir nether_mushroom nether_reed nether_sakura oak rubeus
-  spruce stalagnate warped wart willow — BN's own **and** vanilla (via `VanillaWood`).
-- Slot classes go in **BCLib** (shared with #23), shaped like BN's `Sapling`/`TrunkSlot`.
-
-### #23 — BetterEnd: restore the wooden furniture (after #22)
-26 orphaned assets, zero registrations. Reuse #22's BCLib slot classes. Work out the real wood list from
-its pre-migration blockstates — the orphan list is incomplete and is not the scope.
+### #23 — BetterEnd: restore the wooden furniture (in progress)
+26 orphaned assets, zero registrations. Reuses the BCLib slot classes from #22 unchanged. The real wood
+list comes from its pre-migration blockstates — the orphan list is incomplete and is NOT the scope.
 
 ### #17 — `ModelOverides` -> traits, and `IRenderTypeable` -> `RENDER_LAYER`
 37 provider entries + ~110 `addMaterialOverrides`; 43 render-layer blocks. Plumbing is ready
@@ -282,6 +268,19 @@ item models, 6 **dev-only** debug items (behind `BCLib.isDevEnvironment()`).
 Cosmetic only; the correctness hazard is closed by WorldWeaver `a45614b`. Does **not** collapse
 `templatePath` — `build()` still needs the bare path for the four description keys.
 `ItemRegistry.java:536`'s comment stays accurate for the deprecated path — do not delete it as collateral.
+
+## Settled architecture (do not "tidy" these)
+
+**Furniture slots: `SlotType` in wover, slots + `Base*` classes in BCLib.** wover owns the constants
+(`SlotType.java:80-82` — `TABURET`/`CHAIR`/`BAR_STOOL`), which is what fixes the `<wood>_taburet` naming for
+everyone. BCLib owns `furniture/slots/{Taburet,Chair,BarStool}`, `furniture/block/Base*` and
+`BCLModels.create*BlockModel`. wover must NOT depend on BCLib — the dependency runs the other way — and the
+slots need bclib's block classes and model builders for both halves of their work. wover reserving a
+`SlotType` it does not implement is the intended pattern, not an omission: `wover/.../blocks/types/` holding
+23 slot classes and no furniture is correct.
+
+*Grep trap*: a case-SENSITIVE search of WorldWeaver for `Taburet` finds nothing and falsely implies wover
+knows nothing about furniture. The constants are `TABURET`/`CHAIR`/`BAR_STOOL` — search case-insensitively.
 
 ## Traps that keep biting (read before touching models/registration)
 

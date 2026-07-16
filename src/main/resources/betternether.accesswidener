@@ -2,7 +2,9 @@ accessWidener   v1  named
 
 # Classes
 # NOTE: RenderStateShard$TransparencyStateShard/WriteMaskStateShard/DepthTestStateShard were removed in the
-# 1.21.5 render-pipeline overhaul (the custom firefly RenderType now uses a stock RenderType — see RenderPhaseAccessor).
+# 1.21.5 render-pipeline overhaul; those states now live on the RenderPipeline. The custom firefly RenderType
+# (see RenderPhaseAccessor) needs no widening — RenderPipeline, BlendFunction, RenderPipelines.ENTITY_SNIPPET,
+# RenderType.create and the RenderStateShard LIGHTMAP/OVERLAY/TextureStateShard members are all public.
 accessible    class    net/minecraft/client/renderer/RenderStateShard$LayeringStateShard
 accessible    class    net/minecraft/client/renderer/RenderStateShard$OutputStateShard
 accessible    class    net/minecraft/client/renderer/RenderType$CompositeState

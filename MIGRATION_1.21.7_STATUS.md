@@ -238,3 +238,65 @@ export JAVA_HOME=/Users/quiqueck/Library/Java/JavaVirtualMachines/temurin-21.0.7
 ```
 For `runClient`: launch in background, let it reach the title screen / load resources, scan logs for
 missing-model/texture/resource errors, then kill it (it won't exit on its own).
+
+## Open tasks
+
+Kept in sync with the working task list. Each entry carries the traps that make it executable later —
+do not drop them.
+
+### #22 — Restore the 60 per-wood furniture blocks
+Lost in the complexmaterials -> wover-sets rewrite: pre-migration `NetherWoodenMaterial` listed
+`WoodSlots.TABURET/CHAIR/BAR_STOOL`; wover's `WoodSlots` has no furniture slots and wover has no furniture
+code at all. **It is real content, not dead code** — BetterEnd's history has
+`10afe277d [Feature] **New** Wooden Furniture (quiqueck/BetterNether#134)`.
+- Assets still ship: 18 bclib `CustomModelData` materialmaps (`materialmaps/block/<wood>_chair.json`,
+  `{"defaultMaterial": "betternether:noshade"}`) + `textures/block/stalagnate_chair.png`.
+- **No art is missing**: models are generated from each wood's planks texture by
+  `BCLModels.create{Chair,Taburet,BarStool}BlockModel` (BCLModels.java:126/146/163).
+- Still present: bclib `BaseTaburet`/`BaseChair`/`BaseBarStool`; BN's `registerTaburet`/`registerChair`/
+  `registerBarStool` (in use for the 3 cincinnasite pieces, with recipes + fuel).
+- Scope: 20 woods x 3 = 60, named `<wood>_taburet|_chair|_bar_stool` (suffix form; the standalone
+  cincinnasite ones use the prefix form). Woods at `158e63d4`: acacia anchor_tree bamboo birch cherry
+  crimson dark_oak jungle mangrove mushroom_fir nether_mushroom nether_reed nether_sakura oak rubeus
+  spruce stalagnate warped wart willow — BN's own **and** vanilla (via `VanillaWood`).
+- Slot classes go in **BCLib** (shared with #23), shaped like BN's `Sapling`/`TrunkSlot`.
+
+### #23 — BetterEnd: restore the wooden furniture (after #22)
+26 orphaned assets, zero registrations. Reuse #22's BCLib slot classes. Work out the real wood list from
+its pre-migration blockstates — the orphan list is incomplete and is not the scope.
+
+### #17 — `ModelOverides` -> traits, and `IRenderTypeable` -> `RENDER_LAYER`
+37 provider entries + ~110 `addMaterialOverrides`; 43 render-layer blocks. Plumbing is ready
+(`register*`/`Sapling`/`AbstractSeed` take `List<BlockTrait<?, ?>>`).
+
+### #21 — Remove `Behaviour*` / `BehaviourBuilders`, and the deprecated runtime interfaces
+`BlockLootProvider` (9 files), `BlockModelProvider` (8) + `RuntimeBlockModelProvider`,
+`CustomBlockItemProvider`. Overlaps #17 on `BlockModelProvider` — cannot run in parallel with it.
+
+### #15 — Remaining broken assets
+4 log/stem particle models (wover's `particleOnlyModel` guesses `<name>_side` only when the name ends in
+`_log`; BN ships `_side_1..3`, or nothing at all for `nether_reed_stem`/`rubeus_stripped_log`), 3 `*_trunk`
+item models, 6 **dev-only** debug items (behind `BCLib.isDevEnvironment()`).
+
+### #20 — wover: let the definition own the smithing-template id
+Cosmetic only; the correctness hazard is closed by WorldWeaver `a45614b`. Does **not** collapse
+`templatePath` — `build()` still needs the bare path for the four description keys.
+`ItemRegistry.java:536`'s comment stays accurate for the deprecated path — do not delete it as collateral.
+
+## Traps that keep biting (read before touching models/registration)
+
+1. **Lambdas strip badly.** javac does NOT copy `@Environment(CLIENT)` onto the synthetic method it
+   generates for a lambda body, so Fabric's stripper removes the enclosing method on a dedicated server and
+   leaves the lambda behind, still referencing client-only datagen types. If the class is loaded on the
+   server, *verification alone* crashes startup — the code never runs. Put such lambdas in a nested
+   `@Environment(CLIENT)` class: BetterEnd `StoneLanternBlock`, `FlowerPotBlock` (fafba62ba).
+   `ModelTraitLibrary` calls are safe unguarded (they return null outside datagen).
+2. **ModelOverides gates the traits.** `BlockModelTrait.bootstrapModels`' filter is
+   `!overrides.contain(block)`, so an entry must be REMOVED from `ModelOverides` as its trait is added, or
+   the trait is skipped and the block silently loses its model.
+3. **Never derive per-class facts with a whole-file grep.** Several files hold multiple classes; a
+   file-level scan for `setRenderLayer(BNRenderLayer.X)` wrongly attributed CUTOUT to `BNNetherBrick` and
+   `BlockMossCover`. Wrong render layers compile and pass build/datagen/server.
+4. **The dangerous bugs pass every gate.** The 235 missing blockstates, the 43 solid-rendering blocks and a
+   plant with no survival trait all build, datagen and boot cleanly. Diff generated output against
+   `158e63d4` and check coverage counts explicitly.

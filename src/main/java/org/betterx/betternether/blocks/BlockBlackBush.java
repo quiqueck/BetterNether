@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +22,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherGround, BehaviourPlant {
+public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, BehaviourPlant {
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
 
     public BlockBlackBush(Properties settings) {
@@ -37,7 +37,7 @@ public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBloc
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(world, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 
     @Override

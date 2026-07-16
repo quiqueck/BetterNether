@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BlockWartRoots;
+import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockWartSeed;
 import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
@@ -20,7 +21,7 @@ public class WartMaterial extends RoofMaterial<WartMaterial> {
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
-                    .add(AbstractSeed.create(BlockWartSeed::new))
+                    .add(AbstractSeed.create(BlockWartSeed::new, NetherSurvival.soulSand()))
                     .add(SimpleBlockSlot.blockOnly(NetherSlots.ROOTS, (set, props) -> new BlockWartRoots(props)));
     }
 

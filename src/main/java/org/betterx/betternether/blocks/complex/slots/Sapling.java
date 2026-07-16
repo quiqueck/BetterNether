@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex.slots;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
+import java.util.List;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,18 +27,21 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Sapling extends SlotFromDefinition {
     private final Function<BlockBehaviour.Properties, Block> maker;
+    private final List<SurvivesOnBlockTrait> survival;
 
-    private Sapling(Function<BlockBehaviour.Properties, Block> maker) {
+    private Sapling(Function<BlockBehaviour.Properties, Block> maker, List<SurvivesOnBlockTrait> survival) {
         super(NetherSlots.SAPLING);
         this.maker = maker;
+        this.survival = survival;
     }
 
-    public static Sapling create(Function<BlockBehaviour.Properties, Block> maker) {
-        return new Sapling(maker);
+    public static Sapling create(Function<BlockBehaviour.Properties, Block> maker, List<SurvivesOnBlockTrait> survival) {
+        return new Sapling(maker, survival);
     }
 
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        for (SurvivesOnBlockTrait t : survival) def.addTrait(t);
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
     }
 

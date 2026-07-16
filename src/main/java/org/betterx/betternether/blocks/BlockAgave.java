@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.interfaces.SurvivesOnGravel;
 import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.core.BlockPos;
@@ -32,7 +32,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockAgave extends BlockCommonPlant implements BehaviourPlant, AddMineableShears, SurvivesOnGravel {
+public class BlockAgave extends BlockCommonPlant implements BehaviourPlant, AddMineableShears {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 14, 14);
     private static final RandomSource RANDOM = new LegacyRandomSource(030620222201l);
 
@@ -87,6 +87,6 @@ public class BlockAgave extends BlockCommonPlant implements BehaviourPlant, AddM
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(world, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 }

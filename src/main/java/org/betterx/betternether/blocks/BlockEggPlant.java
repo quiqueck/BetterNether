@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.NetherEntities;
 
 import net.minecraft.core.BlockPos;
@@ -40,7 +40,7 @@ import net.fabricmc.api.Environment;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherGround, BehaviourPlant {
+public class BlockEggPlant extends BlockCommonPlant implements BehaviourPlant {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 8, 16);
     public static final BooleanProperty DESTRUCTED = BNBlockProperties.DESTRUCTED;
 
@@ -62,7 +62,7 @@ public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherG
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(world, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 
     @Override

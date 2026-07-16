@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
+import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
@@ -32,7 +33,7 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
         return super.createDefaultDefinitions()
                     .add(Stem.SLOT)
                     .add(TrunkSlot.createClimbable(BlockStalagnate::new))
-                    .add(AbstractSeed.create(BlockStalagnateSeed::new))
+                    .add(AbstractSeed.create(BlockStalagnateSeed::new, NetherSurvival.netherrack()))
                     .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.BOWL,
                             (set, props) -> new BlockStalagnateBowl(props)

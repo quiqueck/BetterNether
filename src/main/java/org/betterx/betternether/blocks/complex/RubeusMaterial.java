@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BlockRubeusCone;
+import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockRubeusSapling;
 import org.betterx.betternether.blocks.RubeusBark;
 import org.betterx.betternether.blocks.RubeusLog;
@@ -30,7 +31,7 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
-                    .add(Sapling.create(BlockRubeusSapling::new))
+                    .add(Sapling.create(BlockRubeusSapling::new, NetherSurvival.netherGround()))
                     .add(SimpleBlockSlot.withItem(NetherSlots.CONE, (set, props) -> new BlockRubeusCone(props)))
                     .replace(new Log(true) {
                         @Override

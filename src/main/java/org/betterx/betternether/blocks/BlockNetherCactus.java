@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.interfaces.SurvivesOnGravel;
 import org.betterx.wover.block.api.BlockProperties;
 
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 
-public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGravel, BehaviourPlant {
+public class BlockNetherCactus extends BlockBaseNotFull implements BehaviourPlant {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
     private static final VoxelShape SIDE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final BooleanProperty TOP = BlockProperties.TOP;
@@ -71,7 +71,7 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         BlockState down = world.getBlockState(pos.below());
-        return isSurvivable(down) || down.getBlock() == this;
+        return SurvivesOnBlockTrait.survivesOn(this, down) || down.getBlock() == this;
     }
 
     @Override

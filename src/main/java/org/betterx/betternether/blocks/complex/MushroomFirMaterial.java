@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BlockMushroomFir;
+import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockMushroomFirSapling;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
@@ -22,7 +23,7 @@ public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMateria
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
                     .add(TrunkSlot.create(BlockMushroomFir::new))
-                    .add(Sapling.create(BlockMushroomFirSapling::new))
+                    .add(Sapling.create(BlockMushroomFirSapling::new, NetherSurvival.netherMycelium()))
                     .add(Stem.SLOT);
     }
 

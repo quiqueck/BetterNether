@@ -1,12 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.blocks.BasePlantBlock;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.client.block.BNModels;
-import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
-import org.betterx.betternether.interfaces.SurvivesOnSoilOrLogs;
 import org.betterx.wover.block.api.model.BlockModelProvider;
 import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 import org.betterx.wover.loot.api.BlockLootProvider;
@@ -43,7 +42,7 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOnNetherrackNyliumAndSculk {
+public abstract class BlockNetherGrass extends BaseBlockNetherGrass {
     public BlockNetherGrass(BlockBehaviour.Properties settings) {
         super(settings);
     }
@@ -51,12 +50,12 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass implements S
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return canSurviveOnTop(level, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, level.getBlockState(pos.below()));
     }
 
     @Override
     public boolean isTerrain(BlockState state) {
-        return SurvivesOnNetherrackNyliumAndSculk.super.isTerrain(state);
+        return SurvivesOnBlockTrait.survivesOn(this, state);
     }
 
     public static class JunglePlant extends BlockNetherGrass implements BlockModelProvider {
@@ -252,7 +251,7 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
         return provider.dropWithSilkTouchOrShears(this);
     }
 
-    public static class OnEverything extends BaseBlockNetherGrass implements SurvivesOnSoilOrLogs {
+    public static class OnEverything extends BaseBlockNetherGrass {
         public OnEverything() {
             super();
         }
@@ -263,12 +262,12 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourP
 
         @Override
         public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-            return canSurviveOnTop(level, pos);
+            return SurvivesOnBlockTrait.survivesOn(this, level.getBlockState(pos.below()));
         }
 
         @Override
         public boolean isTerrain(BlockState state) {
-            return SurvivesOnSoilOrLogs.super.isTerrain(state);
+            return SurvivesOnBlockTrait.survivesOn(this, state);
         }
     }
 }

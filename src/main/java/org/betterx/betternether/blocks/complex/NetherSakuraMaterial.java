@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockNetherSakuraSapling;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
@@ -18,7 +19,7 @@ public class NetherSakuraMaterial extends NetherWoodenMaterial<NetherSakuraMater
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
-                    .add(Sapling.create(BlockNetherSakuraSapling::new));
+                    .add(Sapling.create(BlockNetherSakuraSapling::new, NetherSurvival.netherrack()));
     }
 
     public Block getSapling() {

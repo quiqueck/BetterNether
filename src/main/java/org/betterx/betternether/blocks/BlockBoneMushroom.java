@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnBoneBlocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,7 +31,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBoneBlocks, BehaviourPlant {
+public class BlockBoneMushroom extends BlockBaseNotFull implements BehaviourPlant {
     private static final VoxelShape SHAPE_NORTH = box(1, 1, 8, 15, 15, 16);
     private static final VoxelShape SHAPE_SOUTH = box(1, 1, 0, 15, 15, 8);
     private static final VoxelShape SHAPE_WEST = box(8, 1, 1, 16, 15, 15);
@@ -84,7 +84,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
             return false;
         BlockPos blockPos = pos.relative(direction.getOpposite());
         BlockState blockState = world.getBlockState(blockPos);
-        return isSurvivable(blockState);
+        return SurvivesOnBlockTrait.survivesOn(this, blockState);
     }
 
     @Override

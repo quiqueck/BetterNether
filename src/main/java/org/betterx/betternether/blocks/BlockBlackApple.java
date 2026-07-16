@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
-import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -16,7 +16,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockBlackApple extends BlockCommonPlant implements SurvivesOnNetherGround, BehaviourPlant {
+public class BlockBlackApple extends BlockCommonPlant implements BehaviourPlant {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 16, 12);
 
     public BlockBlackApple(Properties settings) {
@@ -36,6 +36,6 @@ public class BlockBlackApple extends BlockCommonPlant implements SurvivesOnNethe
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(world, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 }

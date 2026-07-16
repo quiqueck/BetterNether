@@ -1,12 +1,12 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 
 import net.minecraft.world.level.material.MapColor;
 
-public class BlockNeonEquisetum extends BaseVineBlock.Growing implements SurvivesOnNetherrack {
+public class BlockNeonEquisetum extends BaseVineBlock.Growing {
     public BlockNeonEquisetum(Properties settings) {
         super(
                 org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
@@ -24,10 +24,10 @@ public class BlockNeonEquisetum extends BaseVineBlock.Growing implements Survive
 //    @Override
 //    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 //        BlockState up = level.getBlockState(pos.above());
-//        return up.getBlock() == this || isSurvivable(up);
+//        return up.getBlock() == this || SurvivesOnBlockTrait.survivesOn(this, up);
 //    }
 }
-//public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack, BehaviourPlant, BlockLootProvider, AddMineableShears {
+//public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, BehaviourPlant, BlockLootProvider, AddMineableShears {
 //    protected static final VoxelShape SHAPE_SELECTION = box(2, 0, 2, 14, 16, 14);
 //    public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 //
@@ -69,7 +69,7 @@ public class BlockNeonEquisetum extends BaseVineBlock.Growing implements Survive
 //    @Override
 //    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
 //        BlockState up = world.getBlockState(pos.above());
-//        return up.getBlock() == this || isSurvivable(up);
+//        return up.getBlock() == this || SurvivesOnBlockTrait.survivesOn(this, up);
 //    }
 //
 //    @Override

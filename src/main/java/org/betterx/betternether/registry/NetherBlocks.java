@@ -3,6 +3,7 @@ package org.betterx.betternether.registry;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
 import org.betterx.bclib.blocks.*;
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
 import org.betterx.bclib.furniture.block.BaseTaburet;
@@ -44,6 +45,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import org.jetbrains.annotations.ApiStatus;
@@ -477,24 +479,24 @@ public class NetherBlocks {
             false,
             ModelTraitLibrary.externalModel()
     );
-    public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", BlockOrangeMushroom::new);
-    public static final Block RED_MOLD = registerBlock("red_mold", BlockRedMold::new);
-    public static final Block GRAY_MOLD = registerBlock("gray_mold", BlockGrayMold::new);
+    public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", NetherSurvival.netherMycelium(), BlockOrangeMushroom::new);
+    public static final Block RED_MOLD = registerBlock("red_mold", NetherSurvival.netherMycelium(), BlockRedMold::new);
+    public static final Block GRAY_MOLD = registerBlock("gray_mold", NetherSurvival.netherMycelium(), BlockGrayMold::new);
     public static final Block LUCIS_SPORE = registerBlock("lucis_spore", BlockLucisSpore::new);
     public static final Block GIANT_LUCIS = registerBlock("giant_lucis", BlockGiantLucis::new);
-    public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", BlockGiantMoldSapling::new);
+    public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", NetherSurvival.netherMycelium(), BlockGiantMoldSapling::new);
     public static final Block JELLYFISH_MUSHROOM_SAPLING = registerBlock(
-            "jellyfish_mushroom_sapling",
+            "jellyfish_mushroom_sapling", NetherSurvival.nylium(),
             BlockJellyfishMushroomSapling::new
     );
-    public static final Block EYE_SEED = registerBlock("eye_seed", BlockEyeSeed::new);
+    public static final Block EYE_SEED = registerBlock("eye_seed", NetherSurvival.netherrack(), BlockEyeSeed::new);
     // Grass //
-    public static final Block NETHER_GRASS = registerBlock("nether_grass", BlockNetherGrass.NetherGrass::new);
-    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", BlockNetherGrass.SwampGrass::new);
-    public static final Block SOUL_GRASS = registerBlock("soul_grass", BlockSoulGrass::new);
-    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", BlockNetherGrass.JunglePlant::new);
-    public static final Block BONE_GRASS = registerBlock("bone_grass", BlockNetherGrass.BoneGrass::new);
-    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", BlockNetherGrass.SepiaBoneGrass::new);
+    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherSurvival.netherrackNyliumAndSculk(), BlockNetherGrass.NetherGrass::new);
+    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherSurvival.netherrackNyliumAndSculk(), BlockNetherGrass.SwampGrass::new);
+    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherSurvival.soilOrLogs(), BlockSoulGrass::new);
+    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherSurvival.netherrackNyliumAndSculk(), BlockNetherGrass.JunglePlant::new);
+    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherSurvival.soilOrLogs(), BlockNetherGrass.BoneGrass::new);
+    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherSurvival.soilOrLogs(), BlockNetherGrass.SepiaBoneGrass::new);
     // Vines //
     public static final Block BLACK_VINE = registerBlock("black_vine", BlockBlackVine::new);
     public static final Block BLOOMING_VINE = registerBlock("blooming_vine", BlockBlackVine::new);
@@ -510,20 +512,20 @@ public class NetherBlocks {
     );
 
     // Small Plants
-    public static final Block SOUL_VEIN = registerBlock("soul_vein", BlockSoulVein::new);
-    public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", BlockBoneMushroom::new);
-    public static final Block BLACK_BUSH = registerBlock("black_bush", BlockBlackBush::new);
-    public static final Block INK_BUSH = registerBlockNI("ink_bush", BlockInkBush::new);
-    public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", BlockInkBushSeed::new);
-    public static final Block SMOKER = registerBlock("smoker", BlockSmoker::new);
-    public static final Block EGG_PLANT = registerBlock("egg_plant", BlockEggPlant::new);
-    public static final Block BLACK_APPLE = registerBlockNI("black_apple", BlockBlackApple::new);
-    public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", BlockBlackAppleSeed::new);
-    public static final Block MAGMA_FLOWER = registerBlock("magma_flower", BlockMagmaFlower::new);
-    public static final Block FEATHER_FERN = registerBlock("feather_fern", BlockFeatherFern::new);
+    public static final Block SOUL_VEIN = registerBlock("soul_vein", NetherSurvival.netherSand(), BlockSoulVein::new);
+    public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", NetherSurvival.boneBlocks(), BlockBoneMushroom::new);
+    public static final Block BLACK_BUSH = registerBlock("black_bush", NetherSurvival.netherGround(), BlockBlackBush::new);
+    public static final Block INK_BUSH = registerBlockNI("ink_bush", NetherSurvival.netherGround(), BlockInkBush::new);
+    public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", NetherSurvival.netherGround(), BlockInkBushSeed::new);
+    public static final Block SMOKER = registerBlock("smoker", NetherSurvival.netherGround(), BlockSmoker::new);
+    public static final Block EGG_PLANT = registerBlock("egg_plant", NetherSurvival.netherGround(), BlockEggPlant::new);
+    public static final Block BLACK_APPLE = registerBlockNI("black_apple", NetherSurvival.netherGround(), BlockBlackApple::new);
+    public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", NetherSurvival.netherGround(), BlockBlackAppleSeed::new);
+    public static final Block MAGMA_FLOWER = registerBlock("magma_flower", NetherSurvival.magmaBlockOrSand(), BlockMagmaFlower::new);
+    public static final Block FEATHER_FERN = registerBlock("feather_fern", NetherSurvival.netherGround(), BlockFeatherFern::new);
     public static final Block MOSS_COVER = registerBlock("moss_cover", BlockMossCover::new);
-    public static final Block NEON_EQUISETUM = registerVine("neon_equisetum", BlockNeonEquisetum::new);
-    public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", BlockHookMushroom::new);
+    public static final Block NEON_EQUISETUM = registerVine("neon_equisetum", NetherSurvival.netherrack(), BlockNeonEquisetum::new);
+    public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", NetherSurvival.netherrack(), BlockHookMushroom::new);
     public static final Block WHISPERING_GOURD_VINE = registerBlock(
             "whispering_gourd_vine",
             BlockWhisperingGourdVine::new
@@ -534,9 +536,9 @@ public class NetherBlocks {
             BlockWhisperingGourdLantern::new
     );
     // Cactuses //
-    public static final Block AGAVE = registerBlock("agave", BlockAgave::new);
-    public static final Block BARREL_CACTUS = registerBlock("barrel_cactus", BlockBarrelCactus::new);
-    public static final Block NETHER_CACTUS = registerBlock("nether_cactus", BlockNetherCactus::new);
+    public static final Block AGAVE = registerBlock("agave", NetherSurvival.gravel(), BlockAgave::new);
+    public static final Block BARREL_CACTUS = registerBlock("barrel_cactus", NetherSurvival.gravel(), BlockBarrelCactus::new);
+    public static final Block NETHER_CACTUS = registerBlock("nether_cactus", NetherSurvival.gravel(), BlockNetherCactus::new);
     // Wall plants
     public static final Block WALL_MOSS = registerBlock("wall_moss", p -> new BlockPlantWall(p, MapColor.COLOR_RED));
     public static final Block WALL_MUSHROOM_BROWN = registerBlock(
@@ -779,8 +781,8 @@ public class NetherBlocks {
             p -> new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling(), p)
     );
     // Soul lily //
-    public static final Block SOUL_LILY = registerBlockNI("soul_lily", BlockSoulLily::new);
-    public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", BlockSoulLilySapling::new);
+    public static final Block SOUL_LILY = registerBlockNI("soul_lily", NetherSurvival.soulGround(), BlockSoulLily::new);
+    public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", NetherSurvival.soulGroundOrFarmland(), BlockSoulLilySapling::new);
     // Large & Small Mushrooms //
     public static final Block RED_LARGE_MUSHROOM = registerBlockNI("red_large_mushroom", BlockRedLargeMushroom::new);
     public static final Block BROWN_LARGE_MUSHROOM = registerBlockNI(
@@ -843,6 +845,23 @@ public class NetherBlocks {
     }
 
     @SafeVarargs
+    /**
+     * @param survival the ground this block can be placed on (see {@link NetherSurvival}); the traits are
+     *                 OR-ed, and {@link SurvivesOnBlockTrait#survivesOn} reads them back in canSurvive
+     */
+    public static <T extends Block> T registerBlock(
+            String name,
+            List<SurvivesOnBlockTrait> survival,
+            Function<BlockBehaviour.Properties, T> factory,
+            TagKey<Block>... tags
+    ) {
+        final var definition = getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .addTags(tags);
+        for (SurvivesOnBlockTrait t : survival) definition.addTrait(t);
+        return definition.buildAndRegister();
+    }
+
     public static <T extends Block> T registerBlock(
             String name,
             Function<BlockBehaviour.Properties, T> factory,
@@ -855,6 +874,25 @@ public class NetherBlocks {
     }
 
     @SafeVarargs
+    /**
+     * @param survival the ground this block can be placed on (see {@link NetherSurvival}); the traits are
+     *                 OR-ed, and {@link SurvivesOnBlockTrait#survivesOn} reads them back in canSurvive
+     */
+    public static <T extends Block> T registerBlock(
+            String name,
+            Block propertiesSource,
+            List<SurvivesOnBlockTrait> survival,
+            Function<BlockBehaviour.Properties, T> factory,
+            TagKey<Block>... tags
+    ) {
+        final var definition = getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .replacePropertiesWithCopy(propertiesSource)
+                .addTags(tags);
+        for (SurvivesOnBlockTrait t : survival) definition.addTrait(t);
+        return definition.buildAndRegister();
+    }
+
     public static <T extends Block> T registerBlock(
             String name,
             Block propertiesSource,
@@ -869,6 +907,24 @@ public class NetherBlocks {
     }
 
     @SafeVarargs
+    /**
+     * @param survival the ground this block can be placed on (see {@link NetherSurvival}); the traits are
+     *                 OR-ed, and {@link SurvivesOnBlockTrait#survivesOn} reads them back in canSurvive
+     */
+    private static <T extends Block> T registerBlockNI(
+            String name,
+            List<SurvivesOnBlockTrait> survival,
+            Function<BlockBehaviour.Properties, T> factory,
+            TagKey<Block>... tags
+    ) {
+        final var definition = getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .withBlockItem((d, b) -> null)
+                .addTags(tags);
+        for (SurvivesOnBlockTrait t : survival) definition.addTrait(t);
+        return definition.buildAndRegister();
+    }
+
     private static <T extends Block> T registerBlockNI(
             String name,
             Function<BlockBehaviour.Properties, T> factory,
@@ -992,6 +1048,22 @@ public class NetherBlocks {
     }
 
     // Vine-like plants: drop themselves only when broken with silk touch, a hoe, or shears.
+    /**
+     * @param survival the ground this block can be placed on (see {@link NetherSurvival}); the traits are
+     *                 OR-ed, and {@link SurvivesOnBlockTrait#survivesOn} reads them back in canSurvive
+     */
+    private static <T extends Block> T registerVine(
+            String name,
+            List<SurvivesOnBlockTrait> survival,
+            Function<BlockBehaviour.Properties, T> factory
+    ) {
+        final var definition = getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .addTrait(BlockTraits.LOOT_TABLE.dropWithSilktouchOrHoeOrShears());
+        for (SurvivesOnBlockTrait t : survival) definition.addTrait(t);
+        return definition.buildAndRegister();
+    }
+
     private static <T extends Block> T registerVine(
             String name,
             Function<BlockBehaviour.Properties, T> factory

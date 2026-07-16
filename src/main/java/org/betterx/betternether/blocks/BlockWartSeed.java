@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnSouldSand;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 import org.betterx.wover.state.api.WorldState;
 
@@ -32,7 +32,7 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnSouldSand, BehaviourSapling {
+public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock, BehaviourSapling {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(Direction.class);
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
@@ -90,7 +90,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         Direction direction = state.getValue(FACING);
         BlockPos blockPos = pos.relative(direction.getOpposite());
-        return canSupportCenter(world, blockPos, direction) || canSurviveOnTop(world, pos);
+        return canSupportCenter(world, blockPos, direction) || SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 
     @Override

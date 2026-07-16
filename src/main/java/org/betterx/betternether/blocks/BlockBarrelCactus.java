@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.interfaces.SurvivesOnGravel;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableShears, BehaviourPlant, SurvivesOnGravel {
+public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableShears, BehaviourPlant {
     private static final VoxelShape EMPTY = Block.box(0, 0, 0, 0, 0, 0);
     private static final VoxelShape[] SHAPES = new VoxelShape[]{
             Block.box(5, 0, 5, 11, 5, 11),
@@ -49,7 +49,7 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(world, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 
     @Override

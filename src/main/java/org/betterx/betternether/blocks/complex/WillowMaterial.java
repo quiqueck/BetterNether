@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BlockWillowBranch;
+import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockWillowSapling;
 import org.betterx.betternether.blocks.BlockWillowTorch;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
@@ -24,7 +25,7 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
                     .add(TrunkSlot.create(BlockWillowTrunk::new))
-                    .add(Sapling.create(BlockWillowSapling::new))
+                    .add(Sapling.create(BlockWillowSapling::new, NetherSurvival.netherGround()))
                     .add(SimpleBlockSlot.blockOnly(NetherSlots.BRANCH, (set, props) -> new BlockWillowBranch(props)))
                     .add(SimpleBlockSlot.withItem(NetherSlots.TORCH, (set, props) -> new BlockWillowTorch(props)));
     }

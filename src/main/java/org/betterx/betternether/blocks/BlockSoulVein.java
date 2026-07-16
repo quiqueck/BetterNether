@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherSand;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -29,7 +29,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherSand, BehaviourClimableVine {
+public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock, BehaviourClimableVine {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 1, 16);
 
     public BlockSoulVein(Properties settings) {
@@ -46,7 +46,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(world, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 
     @Override

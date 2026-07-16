@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 import org.betterx.wover.feature.api.configured.ConfiguredFeatureKey;
 import org.betterx.wover.state.api.WorldState;
@@ -27,7 +27,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import org.jetbrains.annotations.NotNull;
 
-public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack, BehaviourSapling {
+public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock, BehaviourSapling {
     public static final int MAX_SEARCH_LENGTH = 25; // 27
     public static final int MIN_LENGTH = 3; // 5
 
@@ -88,7 +88,7 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
 
     @Override
     protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return isSurvivable(blockState);
+        return SurvivesOnBlockTrait.survivesOn(this, blockState);
     }
 
     @Override

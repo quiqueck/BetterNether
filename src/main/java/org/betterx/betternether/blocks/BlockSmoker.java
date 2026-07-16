@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.wover.block.api.BlockProperties;
 
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGround, AddMineableAxe {
+public class BlockSmoker extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<BlockProperties.TripleShape> SHAPE = org.betterx.wover.block.api.BlockProperties.TRIPLE_SHAPE;
@@ -81,6 +81,6 @@ public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGro
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         BlockState down = world.getBlockState(pos.below());
-        return down.getBlock() == this || isSurvivable(down);
+        return down.getBlock() == this || SurvivesOnBlockTrait.survivesOn(this, down);
     }
 }

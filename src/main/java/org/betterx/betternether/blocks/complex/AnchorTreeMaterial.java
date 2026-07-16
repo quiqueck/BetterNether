@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
@@ -19,7 +20,7 @@ public class AnchorTreeMaterial extends NetherWoodenMaterial<AnchorTreeMaterial>
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
-                    .add(Sapling.create(BlockAnchorTreeSapling::new));
+                    .add(Sapling.create(BlockAnchorTreeSapling::new, NetherSurvival.netherrack()));
     }
 
     public Block getSapling() {

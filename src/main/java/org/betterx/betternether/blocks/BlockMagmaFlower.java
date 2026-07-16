@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.interfaces.tools.AddMineableHoe;
-import org.betterx.betternether.interfaces.SurvivesOnMagmaBlockOrSand;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockMagmaFlower extends BlockCommonPlant implements SurvivesOnMagmaBlockOrSand, AddMineableHoe {
+public class BlockMagmaFlower extends BlockCommonPlant implements AddMineableHoe {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 12, 15);
 
     public BlockMagmaFlower(Properties settings) {
@@ -25,6 +25,6 @@ public class BlockMagmaFlower extends BlockCommonPlant implements SurvivesOnMagm
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(world, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 }

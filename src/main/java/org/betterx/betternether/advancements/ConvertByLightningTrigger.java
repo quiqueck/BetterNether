@@ -18,8 +18,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Optional;
 
 public class ConvertByLightningTrigger
-        extends SimpleCriterionTrigger<ConvertByLightningTrigger.TriggerInstance>
-        implements BNCriterion.TriggerWithID<ConvertByLightningTrigger.TriggerInstance> {
+        extends SimpleCriterionTrigger<ConvertByLightningTrigger.TriggerInstance> implements BNCriterion.TriggerWithID<ConvertByLightningTrigger.TriggerInstance> {
     public static final ResourceLocation ID = BetterNether.C.id("convert_by_lightning");
 
     @Override

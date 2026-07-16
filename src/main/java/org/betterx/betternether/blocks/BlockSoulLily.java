@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnSoulGround;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.SoulLilyFeature;
 
@@ -38,7 +38,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGround, AddMineableAxe {
+public class BlockSoulLily extends BlockBaseNotFull implements AddMineableAxe {
     public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.create("shape", SoulLilyShape.class);
 
     private static final VoxelShape SHAPE_SMALL = box(6, 0, 6, 10, 16, 10);
@@ -223,7 +223,7 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGro
         if (shape == SoulLilyShape.BIG_TOP_SIDE_W)
             return world.getBlockState(pos.west()).getBlock() == this;
         BlockState down = world.getBlockState(pos.below());
-        return down.getBlock() == this || isSurvivable(down);
+        return down.getBlock() == this || SurvivesOnBlockTrait.survivesOn(this, down);
     }
 
     @Override

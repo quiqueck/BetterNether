@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 import org.betterx.wover.state.api.WorldState;
 
@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherMycelium, BehaviourSapling {
+public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock, BehaviourSapling {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
 
     public BlockGiantMoldSapling(Properties settings) {
@@ -41,7 +41,7 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return canSurviveOnTop(level, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, level.getBlockState(pos.below()));
     }
 
     @Override

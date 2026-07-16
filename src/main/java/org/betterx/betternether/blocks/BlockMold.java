@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium {
+public class BlockMold extends BaseBlockMold {
     public BlockMold(MapColor color) {
         super(color);
     }
@@ -39,7 +39,7 @@ public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(world, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, world.getBlockState(pos.below()));
     }
 }
 

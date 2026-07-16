@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 import org.betterx.wover.state.api.WorldState;
 
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 
-public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherMycelium, BehaviourSapling {
+public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock, BehaviourSapling {
 
     public BlockMushroomFirSapling() {
         super((level, pos, state, rnd) -> NetherTrees.MUSHROOM_FIR
@@ -32,7 +32,7 @@ public class BlockMushroomFirSapling extends FeatureSaplingBlock implements Bone
 
     @Override
     protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return isSurvivable(blockState);
+        return SurvivesOnBlockTrait.survivesOn(this, blockState);
     }
 
     @Override

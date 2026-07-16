@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,7 +23,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 
 import org.jetbrains.annotations.NotNull;
 
-public class BlockCommonSapling extends BaseBlockCommonSapling implements SurvivesOnNetherGround {
+public class BlockCommonSapling extends BaseBlockCommonSapling {
 
 
     public BlockCommonSapling(@NotNull Block plant, MapColor color) {
@@ -36,7 +36,7 @@ public class BlockCommonSapling extends BaseBlockCommonSapling implements Surviv
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return canSurviveOnTop(level, pos);
+        return SurvivesOnBlockTrait.survivesOn(this, level.getBlockState(pos.below()));
     }
 }
 

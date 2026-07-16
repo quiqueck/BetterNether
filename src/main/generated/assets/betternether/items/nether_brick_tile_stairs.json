@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/nether_brick_tile_stairs"
+    "model": "betternether:block/nether_brick_tile_stairs"
   }
 }

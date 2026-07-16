@@ -87,7 +87,16 @@ public class NetherModelProvider extends WoverModelProvider {
             if (ClientItemTraits.MODEL.getRuntimeTraits(item) != null) return;
 
             final ResourceLocation model = ModelLocationUtils.getModelLocation(item);
-            if (shipsHandAuthoredModel(model)) {
+            if (!shipsHandAuthoredModel(model) && item instanceof BlockItem blockItem) {
+                // A block item whose block generated (or hand-authors) a model, but did not register an item
+                // model for it - e.g. the blocks handled by a ModelOverides entry. Delegate to the block
+                // model, which is what these shipped pre-migration; a flat icon would look for an
+                // item/<name> texture that does not exist for a block.
+                itemModelGenerator.itemModelOutput.accept(
+                        item,
+                        ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(blockItem.getBlock()))
+                );
+            } else if (shipsHandAuthoredModel(model)) {
                 // BetterNether hand-authors most of its item models. Only wire the definition to them:
                 // generateFlatItem() would ALSO write a flat model (ItemModelGenerators#generateFlatItem
                 // -> createFlatItemModel) on top of the hand-authored file, and the generated copy is

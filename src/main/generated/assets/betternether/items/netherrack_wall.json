@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/netherrack_wall"
+    "model": "betternether:block/netherrack_wall_inventory"
   }
 }

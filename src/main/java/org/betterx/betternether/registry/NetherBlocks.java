@@ -220,12 +220,12 @@ public class NetherBlocks {
     public static final Block BONE_PLATE = registerPlate("bone_plate", BONE_BLOCK, BlockSetType.CRIMSON);
     public static final Block BONE_WALL = registerWall("bone_wall", BONE_BLOCK);
     public static final Block BONE_TILE = registerBlock("bone_tile", Blocks.BONE_BLOCK, BNBoneBlock::new);
-    public static final Block BONE_REED_DOOR = registerBlock(
+    public static final Block BONE_REED_DOOR = registerDoor(
             "bone_reed_door",
             BONE_BLOCK,
             p -> new BNWoodlikeDoor(p, WoodType.CRIMSON)
     );
-    public static final Block BONE_CINCINNASITE_DOOR = registerBlock(
+    public static final Block BONE_CINCINNASITE_DOOR = registerDoor(
             "bone_cincinnasite_door",
             BONE_BLOCK,
             p -> new BNWoodlikeDoor(p, WoodType.CRIMSON)
@@ -282,9 +282,8 @@ public class NetherBlocks {
             Blocks.CRYING_OBSIDIAN,
             BlueCryingObsidianBlock::new
     );
-    public static final Block OBSIDIAN_BRICKS = registerBlockDropSelf(
+    public static final Block OBSIDIAN_BRICKS = registerObsidianCube(
             "obsidian_bricks",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
     public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs(
@@ -297,14 +296,12 @@ public class NetherBlocks {
             OBSIDIAN_BRICKS,
             false
     );
-    public static final Block OBSIDIAN_TILE = registerBlockDropSelf(
+    public static final Block OBSIDIAN_TILE = registerObsidianCube(
             "obsidian_tile",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
-    public static final Block OBSIDIAN_TILE_SMALL = registerBlockDropSelf(
+    public static final Block OBSIDIAN_TILE_SMALL = registerObsidianCube(
             "obsidian_tile_small",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
     public static final Block OBSIDIAN_TILE_STAIRS = registerStairs(
@@ -317,9 +314,8 @@ public class NetherBlocks {
             OBSIDIAN_TILE_SMALL,
             false
     );
-    public static final Block OBSIDIAN_ROD_TILES = registerBlockDropSelf(
+    public static final Block OBSIDIAN_ROD_TILES = registerObsidianCube(
             "obsidian_rod_tiles",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
     public static final Block OBSIDIAN_GLASS = registerBlock(
@@ -332,14 +328,12 @@ public class NetherBlocks {
             OBSIDIAN_GLASS,
             p -> new BNPane.Glass(p, true)
     );
-    public static final Block BLUE_OBSIDIAN = registerBlockDropSelf(
+    public static final Block BLUE_OBSIDIAN = registerObsidianCube(
             "blue_obsidian",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, BLUE_CRYING_OBSIDIAN)
     );
-    public static final Block BLUE_OBSIDIAN_BRICKS = registerBlockDropSelf(
+    public static final Block BLUE_OBSIDIAN_BRICKS = registerObsidianCube(
             "blue_obsidian_bricks",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
     public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs(
@@ -352,14 +346,12 @@ public class NetherBlocks {
             BLUE_OBSIDIAN_BRICKS,
             false
     );
-    public static final Block BLUE_OBSIDIAN_TILE = registerBlockDropSelf(
+    public static final Block BLUE_OBSIDIAN_TILE = registerObsidianCube(
             "blue_obsidian_tile",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
-    public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlockDropSelf(
+    public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerObsidianCube(
             "blue_obsidian_tile_small",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
     public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs(
@@ -372,9 +364,8 @@ public class NetherBlocks {
             BLUE_OBSIDIAN_TILE_SMALL,
             false
     );
-    public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlockDropSelf(
+    public static final Block BLUE_OBSIDIAN_ROD_TILES = registerObsidianCube(
             "blue_obsidian_rod_tiles",
-            Blocks.OBSIDIAN,
             p -> new BNObsidian(p, null)
     );
     public static final Block BLUE_OBSIDIAN_GLASS = registerBlock(
@@ -900,6 +891,41 @@ public class NetherBlocks {
                 .buildAndRegister();
     }
 
+    // A standalone door (one that is not part of a wood set). The model trait routes through vanilla's
+    // createDoor, which supplies the blockstate, the door models and the flat item model - see
+    // registerStairs for why the trait is needed at all.
+    private static <T extends Block> T registerDoor(
+            String name,
+            Block propertiesSource,
+            Function<BlockBehaviour.Properties, T> factory
+    ) {
+        final var definition = getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .replacePropertiesWithCopy(propertiesSource);
+
+        if (ModCore.isClient()) definition.addTrait(ModelTraitLibrary.door());
+
+        return definition.buildAndRegister();
+    }
+
+    // A plain full-cube obsidian variant. Same as registerBlockDropSelf plus the cube model: BNObsidian
+    // extends bclib's BaseBlock, which used to generate its own model, but no longer implements
+    // BlockModelProvider - so these need a model trait or they get no blockstate at all (see
+    // registerStairs).
+    private static <T extends Block> T registerObsidianCube(
+            String name,
+            Function<BlockBehaviour.Properties, T> factory
+    ) {
+        final var definition = getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .replacePropertiesWithCopy(Blocks.OBSIDIAN)
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+
+        if (ModCore.isClient()) definition.addTrait(ModelTraitLibrary.cube());
+
+        return definition.buildAndRegister();
+    }
+
     // A "trimmed" variant of a wooden chest, for a chest that lives outside its wood set (the wover CHEST
     // slot only builds the set's own chest). Mirrors org.betterx.wover.sets.api.blocks.types.Chest: a
     // ChestBlock on the vanilla chest block entity, plus BlockTraits.CHEST_BLOCK - which supplies the loot
@@ -968,15 +994,23 @@ public class NetherBlocks {
             boolean fireproof,
             TagKey<Block>... tags
     ) {
-        Block stairs = getBlockRegistry()
+        final var definition = getBlockRegistry()
                 .<net.minecraft.world.level.block.StairBlock>defineDefaultBlock(
                         name,
                         def -> new net.minecraft.world.level.block.StairBlock(source.defaultBlockState(), def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
                 .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
-                .addTags(tags)
-                .buildAndRegister();
+                .addTags(tags);
+
+        // bclib's BaseStairsBlock (which generated its own models) is gone, and the vanilla StairBlock this
+        // replaced it with has no model source at all - without this trait the block gets no blockstate and
+        // its item falls back to a flat icon on a texture that does not exist. Blocks with an explicit entry
+        // in NetherModelProvider's ModelOverides are skipped there, so a custom or hand-authored model still
+        // wins. The trait lives in the client source set, hence the guard (mirrors SlotFromDefinition).
+        if (ModCore.isClient()) definition.addTrait(ModelTraitLibrary.stairs(() -> source));
+
+        Block stairs = definition.buildAndRegister();
 
         if (stairs.defaultBlockState().ignitedByLava())
             addFuel(source, stairs);
@@ -988,15 +1022,19 @@ public class NetherBlocks {
 
     @SafeVarargs
     public static Block registerSlab(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
-        Block slab = getBlockRegistry()
+        final var definition = getBlockRegistry()
                 .<net.minecraft.world.level.block.SlabBlock>defineDefaultBlock(
                         name,
                         def -> new net.minecraft.world.level.block.SlabBlock(def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
                 .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
-                .addTags(tags)
-                .buildAndRegister();
+                .addTags(tags);
+
+        // See registerStairs: replaces the model generation bclib's BaseSlabBlock used to provide.
+        if (ModCore.isClient()) definition.addTrait(ModelTraitLibrary.slab(() -> source));
+
+        Block slab = definition.buildAndRegister();
 
         if (slab.defaultBlockState().ignitedByLava())
             addFuel(source, slab);
@@ -1108,15 +1146,19 @@ public class NetherBlocks {
     }
 
     public static Block registerWall(String name, Block source) {
-        Block wall = getBlockRegistry()
+        final var definition = getBlockRegistry()
                 .<net.minecraft.world.level.block.WallBlock>defineDefaultBlock(
                         name,
                         def -> new net.minecraft.world.level.block.WallBlock(def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
                 .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
-                .addTags(BlockTags.WALLS)
-                .buildAndRegister();
+                .addTags(BlockTags.WALLS);
+
+        // See registerStairs: replaces the model generation bclib's BaseWallBlock used to provide.
+        if (ModCore.isClient()) definition.addTrait(ModelTraitLibrary.wall(() -> source));
+
+        Block wall = definition.buildAndRegister();
 
         if (ModCore.isDatagen())
             RecipesHelper.makeWallRecipe(source, wall);

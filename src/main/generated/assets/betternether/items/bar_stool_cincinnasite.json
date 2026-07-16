@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/bar_stool_cincinnasite"
+    "model": "betternether:block/bar_stool_cincinnasite"
   }
 }

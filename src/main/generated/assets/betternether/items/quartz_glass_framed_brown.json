@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/quartz_glass_framed_brown"
+    "model": "betternether:block/quartz_glass_framed_brown"
   }
 }

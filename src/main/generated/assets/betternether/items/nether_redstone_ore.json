@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/nether_redstone_ore"
+    "model": "betternether:block/nether_redstone_ore"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/netherrack_slab"
+    "model": "betternether:block/netherrack_slab"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/weeping_obsidian"
+    "model": "betternether:block/weeping_obsidian"
   }
 }

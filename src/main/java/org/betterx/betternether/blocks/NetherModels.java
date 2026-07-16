@@ -7,13 +7,19 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
 import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
+import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 import org.betterx.wover.core.api.ModCore;
 
 import org.betterx.wover.sets.api.blocks.SlotType;
 
+import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.random.Weighted;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -21,6 +27,10 @@ import net.fabricmc.api.Environment;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.math.Quadrant;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * BetterNether's own {@link BlockModelTrait} factories, for the blocks whose models are too specific for
@@ -91,8 +101,195 @@ public class NetherModels {
         return ModCore.isDatagen() ? Impl.taburetCincinnasite() : null;
     }
 
+    /**
+     * A nether-grass-family block built from {@code <name>_1..<variants>} cross textures - swamp/bone/sepia
+     * bone grass (3 variants) and soul grass (2).
+     */
+    public static BlockModelTrait grass(String name, int variants) {
+        return ModCore.isDatagen() ? Impl.grass(name, variants) : null;
+    }
+
+    /** Nether grass: two weighted grass fans plus a cross, all equally likely. */
+    public static BlockModelTrait netherGrass() {
+        return ModCore.isDatagen() ? Impl.netherGrass() : null;
+    }
+
+    /** Jungle plant: a weighted mix of two crosses, a crop model and a 4-way-rotated jungle-plant model. */
+    public static BlockModelTrait junglePlant() {
+        return ModCore.isDatagen() ? Impl.junglePlant() : null;
+    }
+
+    /**
+     * Quartz glass and its framed/coloured variants. The plain and framed blocks use their own cube texture;
+     * every coloured variant re-points {@code quartz_glass_<colour>} at the {@code quartz_stained_glass_<colour>}
+     * texture. Plain {@code quartz_glass} additionally gets a hand-built item model off its item texture.
+     */
+    public static BlockModelTrait quartzGlass() {
+        return ModCore.isDatagen() ? Impl.quartzGlass() : null;
+    }
+
+    /** The weeping/crying obsidian variants. */
+    public static BlockModelTrait obsidianVariants() {
+        return ModCore.isDatagen() ? Impl.obsidianVariants() : null;
+    }
+
     @Environment(EnvType.CLIENT)
     private static class Impl {
+        private static BlockModelTrait grass(String name, int variants) {
+            return ClientBlockTraits.MODEL.with((key, block, generator) ->
+                    BNModels.provideGrassBlockModels(generator, block, name, variants));
+        }
+
+        private static BlockModelTrait netherGrass() {
+            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+                final ResourceLocation T1 = BetterNether.C.mk("block/ngrass_1");
+                final ResourceLocation T2 = BetterNether.C.mk("block/ngrass_2");
+                final ResourceLocation T3 = BetterNether.C.mk("block/ngrass_3");
+
+                BNModels.createComplex(
+                        generator,
+                        block,
+                        List.of(
+                                BNModels.ModelSource.of(
+                                        BNModels.GRASS_FAN_MODEL_LOCATION,
+                                        "_1",
+                                        List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
+                                        BNModels.TextureSource.of(TextureSlot.TEXTURE, T1)
+                                ),
+                                BNModels.ModelSource.of(
+                                        WoverBlockModelGenerators.CROSS,
+                                        "_2",
+                                        List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
+                                        BNModels.TextureSource.of(TextureSlot.CROSS, T2)
+                                ),
+                                BNModels.ModelSource.of(
+                                        BNModels.GRASS_FAN_MODEL_LOCATION,
+                                        "_3",
+                                        List.of((id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1)),
+                                        BNModels.TextureSource.of(TextureSlot.TEXTURE, T3)
+                                )
+                        )
+                );
+            });
+        }
+
+        private static BlockModelTrait junglePlant() {
+            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+                final ResourceLocation JP1 = BetterNether.C.mk("block/jungle_plant_1");
+                final ResourceLocation JP2 = BetterNether.C.mk("block/jungle_plant_2");
+                final ResourceLocation JP3 = BetterNether.C.mk("block/jungle_plant_3");
+                BNModels.createComplex(
+                        generator,
+                        block,
+                        List.of(
+                                BNModels.ModelSource.of(
+                                        WoverBlockModelGenerators.CROSS,
+                                        "_1_a",
+                                        List.of((id, all) -> new Weighted<>(
+                                                BlockModelGenerators.plainModel(id),
+                                                10
+                                        )),
+                                        BNModels.TextureSource.of(TextureSlot.CROSS, JP1)
+                                ),
+                                BNModels.ModelSource.of(
+                                        BNModels.CROP_BLOCK_MODEL_LOCATION,
+                                        "_1_b",
+                                        List.of((id, all) -> new Weighted<>(
+                                                BlockModelGenerators.plainModel(id),
+                                                10
+                                        )),
+                                        BNModels.TextureSource.of(TextureSlot.TEXTURE, JP1)
+                                ),
+                                BNModels.ModelSource.of(
+                                        BNModels.JUNGLE_PLANT_MODEL_LOCATION,
+                                        "_2",
+                                        List.of(
+                                                (id, all) -> new Weighted<>(BlockModelGenerators.plainModel(id), 1),
+                                                (id, all) -> new Weighted<>(
+                                                        BlockModelGenerators.plainModel(id).withYRot(Quadrant.R90),
+                                                        1
+                                                ),
+                                                (id, all) -> new Weighted<>(
+                                                        BlockModelGenerators.plainModel(id).withYRot(Quadrant.R180),
+                                                        1
+                                                ),
+                                                (id, all) -> new Weighted<>(
+                                                        BlockModelGenerators.plainModel(id).withYRot(Quadrant.R270),
+                                                        1
+                                                )
+                                        ),
+                                        BNModels.TextureSource.of(TextureSlot.PARTICLE, JP2),
+                                        BNModels.TextureSource.of(TextureSlot.TEXTURE, JP3)
+                                ),
+                                BNModels.ModelSource.of(
+                                        WoverBlockModelGenerators.CROSS,
+                                        "_3",
+                                        List.of((id, all) -> new Weighted<>(
+                                                BlockModelGenerators.plainModel(id),
+                                                2
+                                        )),
+                                        BNModels.TextureSource.of(TextureSlot.CROSS, JP3)
+                                )
+                        )
+                );
+            });
+        }
+
+        private static BlockModelTrait quartzGlass() {
+            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+                final ResourceLocation resource = TextureMapping.getBlockTexture(block);
+                if (!resource.getPath().equals("block/quartz_glass")
+                        && !resource.getPath().equals("block/quartz_glass_framed")) {
+                    final var model = TexturedModel.CUBE.get(block);
+                    final var mapping = WoverBlockModelGenerators.textureMappingOf(
+                            TextureSlot.ALL,
+                            ResourceLocation.fromNamespaceAndPath(
+                                    resource.getNamespace(),
+                                    resource.getPath().replace("quartz_glass_", "quartz_stained_glass_")
+                            )
+                    );
+
+                    final var loc = model.getTemplate()
+                                         .create(block, mapping, generator.vanillaGenerator.modelOutput);
+
+                    generator.acceptBlockState(
+                            BlockModelGenerators.createSimpleBlock(
+                                    block,
+                                    BlockModelGenerators.plainVariant(loc)
+                            )
+                    );
+                } else {
+                    generator.modelFor(TexturedModel.CUBE.get(block)).createFullBlock(block);
+                }
+
+                if (resource.getPath().equals("block/quartz_glass")) {
+                    final var mapping = WoverBlockModelGenerators.textureMappingOf(
+                            TextureSlot.ALL,
+                            BetterNether.C.mk("item/quartz_glass")
+                    );
+                    final var template = new ModelTemplate(
+                            Optional.of(ModelLocationUtils.getModelLocation(block)),
+                            Optional.empty(),
+                            TextureSlot.ALL
+                    );
+
+                    final ResourceLocation itemModel = ModelLocationUtils.getModelLocation(block.asItem());
+                    template.create(itemModel, mapping, generator.vanillaGenerator.modelOutput);
+                    // The template.create above only writes the item MODEL (models/item/quartz_glass.json)
+                    // through modelOutput. Register the item-model DEFINITION (items/quartz_glass.json)
+                    // pointing at it via delegateItemModel, which also marks this block as having its item
+                    // model provided so the flat-item fallback in NetherModelProvider.bootstrapItemModels
+                    // doesn't re-generate (and collide with) this model.
+                    generator.delegateItemModel(block, itemModel);
+                }
+            });
+        }
+
+        private static BlockModelTrait obsidianVariants() {
+            return ClientBlockTraits.MODEL.with((key, block, generator) ->
+                    generator.createObsidianVariants(generator, block));
+        }
+
         private static BlockModelTrait basaltBricks() {
             return ClientBlockTraits.MODEL.with((key, block, generator) ->
                     BNModels.provideSimpleMultiStateBlock(generator, block, "", "_cracked"));

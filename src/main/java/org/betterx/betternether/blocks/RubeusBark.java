@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.wover.block.api.BlockProperties.TripleShape;
 
 import com.mojang.serialization.MapCodec;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
  * bclib's {@code BaseStripableBarkBlock} was removed in 21.7, so this now extends vanilla
  * {@link RotatedPillarBlock} directly and reuses {@link RubeusLog#SHAPE}.
  */
-public class RubeusBark extends RotatedPillarBlock implements AddMineableAxe {
+public class RubeusBark extends RotatedPillarBlock {
     public static final MapCodec<RubeusBark> CODEC = simpleCodec(RubeusBark::new);
 
     public RubeusBark(BlockBehaviour.Properties properties) {

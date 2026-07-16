@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
-import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
 
 import net.minecraft.core.BlockPos;
@@ -12,7 +11,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -30,7 +28,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableShears, BehaviourPlant {
+public class BlockBarrelCactus extends BlockCommonPlant implements BehaviourPlant {
     private static final VoxelShape EMPTY = Block.box(0, 0, 0, 0, 0, 0);
     private static final VoxelShape[] SHAPES = new VoxelShape[]{
             Block.box(5, 0, 5, 11, 5, 11),

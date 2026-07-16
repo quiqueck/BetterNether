@@ -1,8 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
-import org.betterx.bclib.interfaces.tools.AddMineableSword;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -11,7 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -24,7 +21,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockNetherReed extends BlockBase implements AddMineableSword, AddMineableHoe {
+public class BlockNetherReed extends BlockBase {
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherReed(Properties settings) {

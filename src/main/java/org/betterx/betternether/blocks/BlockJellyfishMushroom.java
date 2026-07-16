@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BNBlockProperties.JellyShape;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -17,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -40,7 +38,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockJellyfishMushroom extends BlockBaseNotFull {
     private static final VoxelShape TOP_SHAPE = box(1, 0, 1, 15, 16, 15);
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;

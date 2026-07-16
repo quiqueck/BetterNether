@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherTags;
 import org.betterx.wover.block.api.BlockTagProvider;
@@ -11,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 
-public class BlockFarmland extends BlockBase implements BlockTagProvider, AddMineableAxe {
+public class BlockFarmland extends BlockBase implements BlockTagProvider {
     public BlockFarmland(net.minecraft.world.level.block.state.BlockBehaviour.Properties settings) {
         super(Materials.makeNetherWood(settings, MapColor.TERRACOTTA_LIGHT_GREEN));
     }

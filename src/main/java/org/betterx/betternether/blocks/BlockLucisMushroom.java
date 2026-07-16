@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BNBlockProperties.EnumLucisShape;
@@ -30,7 +29,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockLucisMushroom extends BlockBaseNotFull {
     private static final VoxelShape V_SHAPE = box(0, 0, 0, 16, 9, 16);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<EnumLucisShape> SHAPE = BNBlockProperties.LUCIS_SHAPE;

@@ -61,7 +61,15 @@ public class NetherBlocks {
     );
 
     // Reed //
-    public static final Block NETHER_REED_STEM = registerBlock("nether_reed_stem", NetherRender.cutout(), BlockNetherReed::new);
+    public static final Block NETHER_REED_STEM = registerBlock(
+            "nether_reed_stem",
+            NetherTraits.and(
+                    NetherRender.cutout(),
+                    BlockTraits.MINEABLE_WITH.needsHoe(),
+                    BlockTraits.MINEABLE_WITH.needsSword()
+            ),
+            BlockNetherReed::new
+    );
     public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
 
     // Stalagnate //
@@ -219,7 +227,7 @@ public class NetherBlocks {
                     false
             )
     );
-    public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", RedstoneOreBlock::new);
+    public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", NetherTraits.of(NetherLoot.redstoneOre(1, 3)), RedstoneOreBlock::new);
     // Bricks //
     public static final Block NETHER_BRICK_TILE_SMALL = registerBlock(
             "nether_brick_tile_small",
@@ -270,10 +278,11 @@ public class NetherBlocks {
             p -> new BNWoodlikeDoor(p, WoodType.CRIMSON)
     );
     // Quartz Glass //
-    public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", Blocks.GLASS, BNGlass::new);
+    public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", Blocks.GLASS, NetherTraits.of(NetherModels.quartzGlass()), BNGlass::new);
     public static final Block QUARTZ_GLASS_FRAMED = registerBlock(
             "quartz_glass_framed",
             CINCINNASITE_BLOCK,
+            NetherTraits.of(NetherModels.quartzGlass()),
             BNGlass::new
     );
     public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_COLORED = new ColoredGlassMaterial(
@@ -311,16 +320,19 @@ public class NetherBlocks {
     public static final Block BLUE_WEEPING_OBSIDIAN = registerBlockDropSelf(
             "blue_weeping_obsidian",
             Blocks.CRYING_OBSIDIAN,
+            NetherModels.obsidianVariants(),
             BlueWeepingObsidianBlock::new
     );
     public static final Block WEEPING_OBSIDIAN = registerBlockDropSelf(
             "weeping_obsidian",
             Blocks.CRYING_OBSIDIAN,
+            NetherModels.obsidianVariants(),
             VanillaWeepingObsidianBlock::new
     );
     public static final Block BLUE_CRYING_OBSIDIAN = registerBlockDropSelf(
             "blue_crying_obsidian",
             Blocks.CRYING_OBSIDIAN,
+            NetherModels.obsidianVariants(),
             BlueCryingObsidianBlock::new
     );
     public static final Block OBSIDIAN_BRICKS = registerObsidianCube(
@@ -522,7 +534,11 @@ public class NetherBlocks {
     public static final Block RED_MOLD = registerBlock("red_mold", NetherRender.cutoutAnd(NetherSurvival.netherMycelium()), BlockRedMold::new);
     public static final Block GRAY_MOLD = registerBlock("gray_mold", NetherRender.cutoutAnd(NetherSurvival.netherMycelium()), BlockGrayMold::new);
     public static final Block LUCIS_SPORE = registerBlock("lucis_spore", BlockLucisSpore::new);
-    public static final Block GIANT_LUCIS = registerBlock("giant_lucis", BlockGiantLucis::new);
+    public static final Block GIANT_LUCIS = registerBlock(
+            "giant_lucis",
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe(), NetherLoot.giantLucis()),
+            BlockGiantLucis::new
+    );
     public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", NetherRender.cutoutAnd(NetherSurvival.netherMycelium()), BlockGiantMoldSapling::new);
     public static final Block JELLYFISH_MUSHROOM_SAPLING = registerBlock(
             "jellyfish_mushroom_sapling", NetherRender.cutoutAnd(NetherSurvival.nylium()),
@@ -530,25 +546,25 @@ public class NetherBlocks {
     );
     public static final Block EYE_SEED = registerBlock("eye_seed", NetherRender.cutoutAnd(NetherSurvival.netherrack()), BlockEyeSeed::new);
     // Grass //
-    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherSurvival.netherrackNyliumAndSculk(), BlockNetherGrass.NetherGrass::new);
-    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherSurvival.netherrackNyliumAndSculk(), BlockNetherGrass.SwampGrass::new);
-    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherSurvival.soilOrLogs(), BlockSoulGrass::new);
-    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherSurvival.netherrackNyliumAndSculk(), BlockNetherGrass.JunglePlant::new);
-    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherSurvival.soilOrLogs(), BlockNetherGrass.BoneGrass::new);
-    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherSurvival.soilOrLogs(), BlockNetherGrass.SepiaBoneGrass::new);
+    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.netherGrass()), BlockNetherGrass.NetherGrass::new);
+    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.grass("swamp_grass", 3)), BlockNetherGrass.SwampGrass::new);
+    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("soul_grass", 2)), BlockSoulGrass::new);
+    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.junglePlant()), BlockNetherGrass.JunglePlant::new);
+    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("bone_grass", 3)), BlockNetherGrass.BoneGrass::new);
+    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("sepia_bone_grass", 3)), BlockNetherGrass.SepiaBoneGrass::new);
     // Vines //
-    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.of(ModelTraitLibrary.externalModel()), BlockBlackVine::new);
-    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.of(ModelTraitLibrary.externalModel()), BlockBlackVine::new);
+    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine()), BlockBlackVine::new);
+    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine()), BlockBlackVine::new);
     public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.of(ModelTraitLibrary.externalModel()), BlockGoldenVine::new);
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI(
             "lumabus_vine",
-            NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem()),
+            NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem(), NetherLoot.lumabusVine()),
             p -> new BlockLumabusVine(p, MapColor.COLOR_CYAN)
     );
     public static final BlockLumabusVine GOLDEN_LUMABUS_VINE = registerBlockNI(
             "golden_lumabus_vine",
-            NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem()),
+            NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem(), NetherLoot.lumabusVine()),
             p -> new BlockLumabusVine(p, MapColor.COLOR_YELLOW)
     );
 
@@ -558,11 +574,22 @@ public class NetherBlocks {
     public static final Block BLACK_BUSH = registerBlock("black_bush", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockBlackBush::new);
     public static final Block INK_BUSH = registerBlockNI("ink_bush", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockInkBush::new);
     public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockInkBushSeed::new);
-    public static final Block SMOKER = registerBlock("smoker", NetherSurvival.netherGround(), BlockSmoker::new);
+    public static final Block SMOKER = registerBlock(
+            "smoker",
+            NetherTraits.and(NetherSurvival.netherGround(), BlockTraits.MINEABLE_WITH.needsAxe()),
+            BlockSmoker::new
+    );
     public static final Block EGG_PLANT = registerBlock("egg_plant", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockEggPlant::new);
     public static final Block BLACK_APPLE = registerBlockNI("black_apple", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockBlackApple::new);
     public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockBlackAppleSeed::new);
-    public static final Block MAGMA_FLOWER = registerBlock("magma_flower", NetherRender.cutoutAnd(NetherSurvival.magmaBlockOrSand()), BlockMagmaFlower::new);
+    public static final Block MAGMA_FLOWER = registerBlock(
+            "magma_flower",
+            NetherTraits.and(
+                    NetherRender.cutoutAnd(NetherSurvival.magmaBlockOrSand()),
+                    BlockTraits.MINEABLE_WITH.needsHoe()
+            ),
+            BlockMagmaFlower::new
+    );
     public static final Block FEATHER_FERN = registerBlock("feather_fern", NetherRender.cutoutAnd(NetherSurvival.netherGround()), BlockFeatherFern::new);
     public static final Block MOSS_COVER = registerBlock("moss_cover", NetherRender.cutout(), BlockMossCover::new);
     public static final Block NEON_EQUISETUM = registerVine(
@@ -573,17 +600,36 @@ public class NetherBlocks {
     public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", NetherRender.cutoutAnd(NetherSurvival.netherrack()), BlockHookMushroom::new);
     public static final Block WHISPERING_GOURD_VINE = registerBlock(
             "whispering_gourd_vine",
-            NetherTraits.of(ModelTraitLibrary.externalModel()),
+            NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.whisperingGourdVine()),
             BlockWhisperingGourdVine::new
     );
-    public static final Block WHISPERING_GOURD = registerBlock("whispering_gourd", BlockWhisperingGourd::new);
+    public static final Block WHISPERING_GOURD = registerBlock(
+            "whispering_gourd",
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe()),
+            BlockWhisperingGourd::new
+    );
     public static final Block WHISPERING_GOURD_LANTERN = registerBlock(
             "whispering_gourd_lantern",
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe()),
             BlockWhisperingGourdLantern::new
     );
     // Cactuses //
-    public static final Block AGAVE = registerBlock("agave", NetherRender.cutoutAnd(NetherSurvival.gravel()), BlockAgave::new);
-    public static final Block BARREL_CACTUS = registerBlock("barrel_cactus", NetherRender.cutoutAnd(NetherSurvival.gravel()), BlockBarrelCactus::new);
+    public static final Block AGAVE = registerBlock(
+            "agave",
+            NetherTraits.and(
+                    NetherRender.cutoutAnd(NetherSurvival.gravel()),
+                    BlockTraits.MINEABLE_WITH.needsShears()
+            ),
+            BlockAgave::new
+    );
+    public static final Block BARREL_CACTUS = registerBlock(
+            "barrel_cactus",
+            NetherTraits.and(
+                    NetherRender.cutoutAnd(NetherSurvival.gravel()),
+                    BlockTraits.MINEABLE_WITH.needsShears()
+            ),
+            BlockBarrelCactus::new
+    );
     public static final Block NETHER_CACTUS = registerBlock("nether_cactus", NetherRender.cutoutAnd(NetherSurvival.gravel()), BlockNetherCactus::new);
     // Wall plants
     public static final Block WALL_MOSS = registerBlock("wall_moss", NetherRender.cutout(), p -> new BlockPlantWall(p, MapColor.COLOR_RED));
@@ -666,12 +712,14 @@ public class NetherBlocks {
     public static final BlockTerrain NETHERRACK_MOSS = registerBlock(
             "netherrack_moss",
             Blocks.NETHERRACK,
+            NetherTraits.of(NetherLoot.terrain()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
     public static final BlockNetherMycelium NETHER_MYCELIUM = registerBlock(
             "nether_mycelium",
             Blocks.NETHERRACK,
+            NetherTraits.of(NetherLoot.terrain()),
             BlockNetherMycelium::new,
             CommonBlockTags.MYCELIUM,
             CommonBlockTags.NETHER_MYCELIUM,
@@ -681,6 +729,7 @@ public class NetherBlocks {
     public static final BlockTerrain JUNGLE_GRASS = registerBlock(
             "jungle_grass",
             Blocks.NETHERRACK,
+            NetherTraits.of(NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -688,6 +737,7 @@ public class NetherBlocks {
     public static final BlockTerrain MUSHROOM_GRASS = registerBlock(
             "mushroom_grass",
             Blocks.NETHERRACK,
+            NetherTraits.of(NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -695,6 +745,7 @@ public class NetherBlocks {
     public static final BlockTerrain SEPIA_MUSHROOM_GRASS = registerBlock(
             "sepia_mushroom_grass",
             Blocks.NETHERRACK,
+            NetherTraits.of(NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -702,17 +753,20 @@ public class NetherBlocks {
     public static final BlockTerrain SWAMPLAND_GRASS = registerBlock(
             "swampland_grass",
             Blocks.NETHERRACK,
+            NetherTraits.of(NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
     public static final Block FARMLAND = registerBlock(
             "farmland",
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe()),
             BlockFarmland::new
     );
     public static final BlockTerrain CEILING_MUSHROOMS = registerBlock(
             "ceiling_mushrooms",
             Blocks.NETHERRACK,
+            NetherTraits.of(NetherLoot.terrain()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
@@ -833,34 +887,69 @@ public class NetherBlocks {
             p -> new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling(), p)
     );
     // Soul lily //
-    public static final Block SOUL_LILY = registerBlockNI("soul_lily", NetherRender.cutoutAnd(NetherSurvival.soulGround()), BlockSoulLily::new);
+    public static final Block SOUL_LILY = registerBlockNI(
+            "soul_lily",
+            NetherTraits.and(
+                    NetherRender.cutoutAnd(NetherSurvival.soulGround()),
+                    BlockTraits.MINEABLE_WITH.needsAxe()
+            ),
+            BlockSoulLily::new
+    );
     public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", NetherRender.cutoutAnd(NetherSurvival.soulGroundOrFarmland()), BlockSoulLilySapling::new);
     // Large & Small Mushrooms //
-    public static final Block RED_LARGE_MUSHROOM = registerBlockNI("red_large_mushroom", NetherRender.cutout(), BlockRedLargeMushroom::new);
+    public static final Block RED_LARGE_MUSHROOM = registerBlockNI(
+            "red_large_mushroom",
+            NetherTraits.and(NetherRender.cutout(), BlockTraits.MINEABLE_WITH.needsAxe()),
+            BlockRedLargeMushroom::new
+    );
     public static final Block BROWN_LARGE_MUSHROOM = registerBlockNI(
             "brown_large_mushroom",
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe()),
             BlockBrownLargeMushroom::new
     );
     // Lucis //
-    public static final Block LUCIS_MUSHROOM = registerBlockNI("lucis_mushroom", BlockLucisMushroom::new);
+    public static final Block LUCIS_MUSHROOM = registerBlockNI(
+            "lucis_mushroom",
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe()),
+            BlockLucisMushroom::new
+    );
     // Giant Mold //
-    public static final Block GIANT_MOLD = registerBlockNI("giant_mold", NetherRender.cutout(), BlockGiantMold::new);
+    public static final Block GIANT_MOLD = registerBlockNI(
+            "giant_mold",
+            NetherTraits.and(NetherRender.cutout(), BlockTraits.MINEABLE_WITH.needsAxe()),
+            BlockGiantMold::new
+    );
     // Sodium renders the translucent variant with artefacts, so under Sodium this falls back to cutout.
     // The conditional moved here verbatim from the old BlockJellyfishMushroom constructor.
     public static final Block JELLYFISH_MUSHROOM = registerBlockNI(
             "jellyfish_mushroom",
-            FabricLoader.getInstance().isModLoaded("sodium")
-                    ? NetherRender.cutout()
-                    : NetherRender.translucent(),
+            NetherTraits.and(
+                    FabricLoader.getInstance().isModLoaded("sodium")
+                            ? NetherRender.cutout()
+                            : NetherRender.translucent(),
+                    BlockTraits.MINEABLE_WITH.needsAxe()
+            ),
             BlockJellyfishMushroom::new
     );
     // Eyes //
-    public static final Block EYEBALL = registerBlockNI("eyeball", BlockEyeball::new);
-    public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", BlockEyeballSmall::new);
+    public static final Block EYEBALL = registerBlockNI(
+            "eyeball",
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsHoe()),
+            BlockEyeball::new
+    );
+    public static final Block EYEBALL_SMALL = registerBlockNI(
+            "eyeball_small",
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsHoe()),
+            BlockEyeballSmall::new
+    );
     // eye_vine has no block item (its clone item is EYE_SEED); it drops nothing, so no loot table is generated.
     public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem()), BlockEyeVine::new);
 
-    public static final Block POTTED_PLANT = registerBlockNI("potted_plant", NetherRender.cutout(), BlockPottedPlant::new);
+    public static final Block POTTED_PLANT = registerBlockNI(
+            "potted_plant",
+            NetherTraits.and(NetherRender.cutout(), BlockTraits.MINEABLE_WITH.needsHoe()),
+            BlockPottedPlant::new
+    );
     public static final Block VEINED_SAND = registerBlockNI(
             "veined_sand",
             Blocks.SAND,

@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -8,7 +7,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -19,7 +17,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockEyeBase extends BlockBase implements AddMineableHoe {
+public class BlockEyeBase extends BlockBase {
     public BlockEyeBase(Properties settings) {
         super(settings);
         setDropItself(false);

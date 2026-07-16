@@ -2,21 +2,16 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherParticles;
-import org.betterx.wover.block.api.model.BlockModelProvider;
-import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class BlueCryingObsidianBlock extends BNObsidianBase implements BlockModelProvider {
+public class BlueCryingObsidianBlock extends BNObsidianBase {
     public BlueCryingObsidianBlock(BlockBehaviour.Properties settings) {
         super(settings, NetherBlocks.BLUE_WEEPING_OBSIDIAN);
     }
@@ -49,11 +44,5 @@ public class BlueCryingObsidianBlock extends BNObsidianBase implements BlockMode
                 }
             }
         }
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public void provideBlockModels(WoverBlockModelGenerators generators) {
-        generators.createObsidianVariants(generators, this);
     }
 }

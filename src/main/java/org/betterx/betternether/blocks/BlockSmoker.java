@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.wover.block.api.BlockProperties;
 
@@ -11,7 +10,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -26,7 +24,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockSmoker extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockSmoker extends BlockBaseNotFull {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<BlockProperties.TripleShape> SHAPE = org.betterx.wover.block.api.BlockProperties.TRIPLE_SHAPE;

@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -27,7 +26,7 @@ public class BlockNeonEquisetum extends BaseVineBlock.Growing {
 //        return up.getBlock() == this || SurvivesOnBlockTrait.survivesOn(this, up);
 //    }
 }
-//public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, BehaviourPlant, BlockLootProvider, AddMineableShears {
+//public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, BehaviourPlant, BlockLootProvider {
 //    protected static final VoxelShape SHAPE_SELECTION = box(2, 0, 2, 14, 16, 14);
 //    public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 //

@@ -1,13 +1,11 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -25,7 +23,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockStalagnateBowl extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockStalagnateBowl extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(5, 0, 5, 11, 3, 11);
     public static final EnumProperty<FoodShape> FOOD = BNBlockProperties.FOOD;
 

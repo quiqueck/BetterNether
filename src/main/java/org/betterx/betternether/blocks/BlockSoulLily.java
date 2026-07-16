@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -16,7 +15,6 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -38,7 +36,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockSoulLily extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockSoulLily extends BlockBaseNotFull {
     public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.create("shape", SoulLilyShape.class);
 
     private static final VoxelShape SHAPE_SMALL = box(6, 0, 6, 10, 16, 10);

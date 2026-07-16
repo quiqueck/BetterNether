@@ -3,35 +3,27 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
-import org.betterx.wover.loot.api.BlockLootProvider;
-import org.betterx.wover.loot.api.LootLookupProvider;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike, BehaviourStone, BlockLootProvider {
+public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike, BehaviourStone {
     public static final BooleanProperty IS_BLUE = BooleanProperty.create("blue");
     private BonemealAPI.FeatureProvider vegetationFeature;
 
@@ -82,14 +74,5 @@ public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike
     @Override
     public @Nullable Holder<? extends ConfiguredFeature<?, ?>> getCoverFeature() {
         return vegetationFeature.getFeature();
-    }
-
-    @Override
-    public @Nullable LootTable.Builder registerBlockLoot(
-            @NotNull ResourceLocation location,
-            @NotNull LootLookupProvider provider,
-            @NotNull ResourceKey<LootTable> tableKey
-    ) {
-        return provider.dropWithSilkTouch(this, Blocks.NETHERRACK, ConstantValue.exactly(1));
     }
 }

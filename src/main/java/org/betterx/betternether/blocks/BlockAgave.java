@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
-import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherItems;
 
@@ -14,7 +13,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -32,7 +30,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockAgave extends BlockCommonPlant implements BehaviourPlant, AddMineableShears {
+public class BlockAgave extends BlockCommonPlant implements BehaviourPlant {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 14, 14);
     private static final RandomSource RANDOM = new LegacyRandomSource(030620222201l);
 

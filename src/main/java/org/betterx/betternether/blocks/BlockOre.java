@@ -4,13 +4,11 @@ import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.wover.block.api.BlockTagProvider;
-import org.betterx.wover.block.api.CustomBlockItemProvider;
 import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -18,7 +16,18 @@ import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.Supplier;
 
-public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomBlockItemProvider, BehaviourOre {
+public class BlockOre extends BaseOreBlock implements BlockTagProvider, BehaviourOre {
+    /**
+     * Whether this ore's block item should survive lava.
+     * <p>
+     * Currently inert. It used to be applied through {@code CustomBlockItemProvider#getCustomBlockItem},
+     * which wover only ever consults from the legacy {@code BlockRegistry#registerLegacy} path; since
+     * BetterNether moved to {@code defineDefaultBlock(...).buildAndRegister()} the hook is never called, so
+     * the flag has had no effect for a while. The same is true of the {@code fireproof} parameters on
+     * {@code NetherBlocks#registerStairs} and {@code NetherBlocks#registerSlab}, which their building
+     * overloads ignore. Re-wire all of them together via {@code BlockDefinition#withBlockItem(...)} plus
+     * {@code ItemDefinition#fireResistant()} - doing it for the ores alone would be inconsistent.
+     */
     public final boolean fireproof;
 
     public BlockOre(
@@ -45,11 +54,6 @@ public class BlockOre extends BaseOreBlock implements BlockTagProvider, CustomBl
         this.fireproof = fireproof;
     }
 
-    @Override
-    public BlockItem getCustomBlockItem(ResourceLocation blockID, Item.Properties settings) {
-        if (fireproof) settings = settings.fireResistant();
-        return new BlockItem(this, settings);
-    }
 
     @Override
     public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {

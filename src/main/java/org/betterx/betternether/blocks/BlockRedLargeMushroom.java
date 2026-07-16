@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockProperties;
@@ -11,7 +10,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -27,7 +25,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockRedLargeMushroom extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockRedLargeMushroom extends BlockBaseNotFull {
     private static final VoxelShape TOP_SHAPE = box(0, 0.1, 0, 16, 16, 16);
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;

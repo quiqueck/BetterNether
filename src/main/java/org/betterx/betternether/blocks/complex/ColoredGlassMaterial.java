@@ -2,7 +2,9 @@ package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BNGlass;
 import org.betterx.betternether.blocks.BNPane;
+import org.betterx.betternether.blocks.NetherModels;
 import org.betterx.betternether.blocks.NetherRender;
+import org.betterx.betternether.blocks.NetherTraits;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.trait.BlockTrait;
@@ -96,11 +98,14 @@ public class ColoredGlassMaterial {
     ) {
         String name = group + "_" + ((DyeItem) dye).getDyeColor().getSerializedName();
 
-        // The full-block variant (BNGlass) renders solid; only the pane variant is translucent.
+        // The full-block variant (BNGlass) renders solid; only the pane variant is translucent. Only the
+        // full block carries the glass model trait - the panes get theirs from BNPane's own provider.
         Block block = NetherBlocks.registerBlock(
                 name,
                 base,
-                isFullBlock ? List.<BlockTrait<?, ?>>of() : NetherRender.translucent(),
+                isFullBlock
+                        ? NetherTraits.of(NetherModels.quartzGlass())
+                        : NetherRender.translucent(),
                 p -> isFullBlock ? new BNGlass(p) : BNPane.from(base, p, paneDropItself)
         );
         if (ModCore.isDatagen())

@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -15,7 +14,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 
-public class BlockWhisperingGourdLantern extends Block implements AddMineableAxe {
+public class BlockWhisperingGourdLantern extends Block {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockWhisperingGourdLantern(Properties settings) {

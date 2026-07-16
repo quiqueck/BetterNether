@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.BNBlockProperties.WillowBranchShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -9,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -31,7 +29,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockWillowBranch extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockWillowBranch extends BlockBaseNotFull {
     private static final VoxelShape V_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<WillowBranchShape> SHAPE = BNBlockProperties.WILLOW_SHAPE;
 

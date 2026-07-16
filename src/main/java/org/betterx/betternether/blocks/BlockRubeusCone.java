@@ -1,12 +1,10 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -17,7 +15,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockRubeusCone extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockRubeusCone extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(3, 3, 3, 13, 16, 13);
 
     public BlockRubeusCone() {

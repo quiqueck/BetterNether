@@ -2,14 +2,12 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.behaviours.interfaces.BehaviourCompostable;
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -26,7 +24,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockWillowTorch extends BlockBaseNotFull implements AddMineableAxe, BehaviourCompostable {
+public class BlockWillowTorch extends BlockBaseNotFull implements BehaviourCompostable {
     private static final VoxelShape SHAPE_NORTH = Block.box(5, 0, 8, 11, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = Block.box(5, 0, 0, 11, 16, 8);
     private static final VoxelShape SHAPE_WEST = Block.box(8, 0, 5, 16, 16, 11);

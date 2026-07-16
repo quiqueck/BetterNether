@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.wover.block.api.BlockProperties;
 import org.betterx.wover.block.api.BlockProperties.TripleShape;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockWillowTrunk extends BlockBaseNotFull implements AddMineableAxe {
+public class BlockWillowTrunk extends BlockBaseNotFull {
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
     private static final VoxelShape SHAPE_BOTTOM = box(4, 0, 4, 12, 16, 12);
     private static final VoxelShape SHAPE_TOP = box(4, 0, 4, 12, 12, 12);

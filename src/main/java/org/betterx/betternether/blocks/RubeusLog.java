@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.wover.block.api.BlockProperties;
 import org.betterx.wover.block.api.BlockProperties.TripleShape;
 
@@ -18,7 +17,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
  * Stripping is provided by the {@code LOG_BLOCK} trait of the slot that registers it (bclib's
  * {@code BaseStripableLogBlock} was removed in 21.7).
  */
-public class RubeusLog extends RotatedPillarBlock implements AddMineableAxe {
+public class RubeusLog extends RotatedPillarBlock {
     public static final MapCodec<RubeusLog> CODEC = simpleCodec(RubeusLog::new);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 

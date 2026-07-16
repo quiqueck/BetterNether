@@ -1,8 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.client.block.BNModels;
-import org.betterx.wover.block.api.model.BlockModelProvider;
-import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.BlockPos;
@@ -14,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockSoulGrass extends BaseBlockNetherGrass.OnEverything implements BlockModelProvider {
+public class BlockSoulGrass extends BaseBlockNetherGrass.OnEverything {
     public BlockSoulGrass(BlockBehaviour.Properties settings) {
         super(settings);
     }
@@ -32,11 +29,5 @@ public class BlockSoulGrass extends BaseBlockNetherGrass.OnEverything implements
                     random.nextDouble() * 0.05
             );
         }
-    }
-
-    @Environment(EnvType.CLIENT)
-    @Override
-    public void provideBlockModels(WoverBlockModelGenerators generators) {
-        BNModels.provideGrassBlockModels(generators, this, "soul_grass", 2);
     }
 }

@@ -282,7 +282,19 @@ slots need bclib's block classes and model builders for both halves of their wor
 *Grep trap*: a case-SENSITIVE search of WorldWeaver for `Taburet` finds nothing and falsely implies wover
 knows nothing about furniture. The constants are `TABURET`/`CHAIR`/`BAR_STOOL` — search case-insensitively.
 
-## Traps that keep biting (read before touching models/registration)
+## Traps that keep biting
+
+0. **Traits ALWAYS win over the chain — ordering cannot save you.** `replacePropertiesWithCopy()` mutates
+   `this.properties` EAGERLY at chain time (`BlockDefinition:1030`), while a trait's `configure()` runs later
+   inside `build()` and its property calls only APPEND to `propertySetters` (`:578+`), which are applied to
+   `this.properties` afterwards (`:299`). So trait > chain setters > `replacePropertiesWithCopy`, regardless
+   of the order you write them in. Only the block CONSTRUCTOR can override a trait.
+   Proven: adding `STONE_BLOCK.withDefault()` to `nether_ruby_block` (whose helper copies
+   `Blocks.DIAMOND_BLOCK`) moved it from `destroy 5.000 / instrument HARP` to `destroy 2.000 / BASEDRUM`.
+   This is why `STONE_BLOCK`/`OBSIDIAN_BLOCK`/`METAL_BLOCK`/`PlantBlockTrait` cannot simply be adopted: they
+   force `strength`/`mapColor`/`instabreak`, and it is invisible to datagen diff, server boot, the
+   render-layer probe and the tab check.
+ (read before touching models/registration)
 
 1. **Lambdas strip badly.** javac does NOT copy `@Environment(CLIENT)` onto the synthetic method it
    generates for a lambda body, so Fabric's stripper removes the enclosing method on a dedicated server and

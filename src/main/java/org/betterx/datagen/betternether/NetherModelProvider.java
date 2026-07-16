@@ -1,11 +1,6 @@
 package org.betterx.datagen.betternether;
 
-import org.betterx.bclib.client.models.BCLModels;
-import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
-import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.complex.slots.NetherSlots;
-import org.betterx.betternether.client.block.BNModels;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
@@ -21,17 +16,12 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.level.block.Block;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 public class NetherModelProvider extends WoverModelProvider {
     /**
@@ -113,104 +103,17 @@ public class NetherModelProvider extends WoverModelProvider {
     @Override
     protected void bootstrapBlockStateModels(WoverBlockModelGenerators generator) {
         this.generator = generator;
-        final Block reedPlanks = NetherBlocks.MAT_REED.getBlock(SlotType.PLANKS);
-        final ResourceLocation NETHER_REED_PLANKS = TextureMapping.getBlockTexture(reedPlanks);
-        final ResourceLocation NETHER_REED_PLANKS_TOP = BetterNether.C.mk("block/nether_reed_planks_top");
-
-        final ResourceLocation SOUL_SANDSTONE_BOTTOM = BetterNether.C.mk("block/soul_sandstone_bottom");
-        final ResourceLocation SOUL_SANDSTONE_TOP = BetterNether.C.mk("block/soul_sandstone_top");
-        final ResourceLocation SOUL_SANDSTONE_SLABS = BetterNether.C.mk("block/soul_sandstone_slabs");
-        final ResourceLocation SOUL_SANDSTONE_CUT_SLABS = BetterNether.C.mk("block/soul_sandstone_cut_slabs");
-
-        final ModelOverides overrides = ModelOverides
-                .create()
-                .override(NetherBlocks.BASALT_BRICKS, block -> BNModels.provideSimpleMultiStateBlock(generator, block, "", "_cracked"))
-                .override(NetherBlocks.MAT_REED.getBlock(SlotType.STAIRS), block -> generator.createStairs(block, NETHER_REED_PLANKS, NETHER_REED_PLANKS, NETHER_REED_PLANKS_TOP))
-
-                // These three keep their hand-authored blockstate/model, which the generic slot model would
-                // overwrite with a strictly worse one; the override only wires the item model (pointing at the
-                // same model the hand-authored blockstate uses, since the generic one is no longer written).
-                // Reed planks are axis-aware and top-textured: the slot model is an axis-less cube_all, whose
-                // blockstate has no variant for axis=x/z at all. The two stems delegate to a dedicated trunk
-                // model (mushroom fir) and to randomised stem variants (stalagnate).
-                .override(reedPlanks, generator::delegateItemModel)
-                .override(
-                        NetherBlocks.MAT_MUSHROOM_FIR.getStem(),
-                        b -> generator.delegateItemModel(b, BetterNether.C.mk("block/mushroom_fir_trunk_middle"))
-                )
-                .override(
-                        NetherBlocks.MAT_STALAGNATE.getStem(),
-                        b -> generator.delegateItemModel(b, BetterNether.C.mk("block/stalagnate_stem_1"))
-                )
-                .override(NetherBlocks.SOUL_SANDSTONE_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_SLABS, SOUL_SANDSTONE_BOTTOM))
-                .override(NetherBlocks.SOUL_SANDSTONE_SMOOTH_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_TOP))
-                .override(NetherBlocks.SOUL_SANDSTONE_CUT_STAIRS, block -> generator.createStairs(block, SOUL_SANDSTONE_TOP, SOUL_SANDSTONE_CUT_SLABS, SOUL_SANDSTONE_TOP))
-                .override(NetherBlocks.BONE_PLATE, block -> generator.createPressurePlate(block, BetterNether.C.mk("block/bone_block_plate")))
-                .override(NetherBlocks.BONE_BUTTON, block -> generator.createButton(block, BetterNether.C.mk("block/bone_button")))
-                .override(NetherBlocks.CINCINNASITE_PLATE, block -> generator.createPressurePlate(block, BetterNether.C.mk("block/cincinnasite_plate_up")))
-                .override(NetherBlocks.CINCINNASITE_BUTTON, block -> generator.createButton(block, BetterNether.C.mk("block/cincinnasite_button")))
-                .override(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(SlotType.PRESSURE_PLATE), block -> generator.createPressurePlate(block, BetterNether.C.mk("block/nether_mushroom_plate")))
-                .override(NetherBlocks.MAT_NETHER_MUSHROOM.getBlock(SlotType.BUTTON), block -> generator.createButton(block, BetterNether.C.mk("block/nether_mushroom_button")))
-                .override(NetherBlocks.CHAIR_CINCINNASITE, block -> {
-                    //this was a custom Item with a view transform, it is easier to recreate the json instead of finding
-                    //an appropriate API call that fits this special case...
-                    generator.acceptModelOutput(ModelLocationUtils.getModelLocation(block.asItem()), () -> {
-                        JsonObject root = new JsonObject();
-                        JsonObject display = new JsonObject();
-                        JsonObject gui = new JsonObject();
-                        JsonObject fixed = new JsonObject();
-
-                        root.addProperty("parent", ModelLocationUtils.getModelLocation(block).toString());
-                        root.add("display", display);
-
-                        display.add("gui", gui);
-                        gui.add("rotation", toArray(30, 45, 0));
-                        gui.add("translation", toArray(0, -1.4f, 0));
-                        gui.add("scale", toArray(0.625f, 0.625f, 0.625f));
-
-                        display.add("fixed", fixed);
-                        fixed.add("rotation", toArray(0, 0, 0));
-                        fixed.add("translation", toArray(0, 0, 0));
-                        fixed.add("scale", toArray(0.5f, 0.5f, 0.5f));
-
-                        return root;
-                    });
-                    // acceptModelOutput above only writes the item MODEL. Register the item-model
-                    // DEFINITION pointing at it (and mark the block's item model as provided) so the
-                    // flat-item fallback in bootstrapItemModels doesn't re-generate/collide with it.
-                    generator.delegateItemModel(block, ModelLocationUtils.getModelLocation(block.asItem()));
-                    BCLModels.createChairBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED, NetherBlocks.NETHER_BRICK_TILE_LARGE);
-                })
-                .override(NetherBlocks.BAR_STOOL_CINCINNASITE, block -> BCLModels.createBarStoolBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED, NetherBlocks.NETHER_BRICK_TILE_LARGE))
-                .override(NetherBlocks.TABURET_CINCINNASITE, block -> BCLModels.createTaburetBlockModel(generator, block, NetherBlocks.CINCINNASITE_FORGED))
-                .ignore(NetherBlocks.NEON_EQUISETUM)
-                .ignore(NetherBlocks.WHISPERING_GOURD_VINE)
-                .ignore(NetherBlocks.GOLDEN_VINE)
-                .ignore(NetherBlocks.LUMABUS_VINE)
-                .ignore(NetherBlocks.GOLDEN_LUMABUS_VINE)
-                .ignore(NetherBlocks.EYE_VINE)
-                .ignore(NetherBlocks.BLACK_VINE)
-                .ignore(NetherBlocks.BLOOMING_VINE);
-
-
-        addMaterialOverrides(overrides, NetherBlocks.MAT_REED);
-        addMaterialOverrides(overrides, NetherBlocks.MAT_ANCHOR_TREE);
-        addMaterialOverrides(overrides, NetherBlocks.MAT_NETHER_MUSHROOM);
-        addMaterialOverrides(overrides, NetherBlocks.MAT_NETHER_SAKURA);
-        addMaterialOverrides(overrides, NetherBlocks.MAT_MUSHROOM_FIR);
-        addMaterialOverrides(overrides, NetherBlocks.MAT_STALAGNATE);
-        addMaterialOverrides(overrides, NetherBlocks.MAT_RUBEUS);
-        addMaterialOverrides(overrides, NetherBlocks.MAT_WILLOW);
-        addMaterialOverrides(overrides, NetherBlocks.MAT_WART);
-        addMaterialOverrides(overrides, NetherBlocks.WARPED_WOOD);
-        addMaterialOverrides(overrides, NetherBlocks.CRIMSON_WOOD);
+        // Every BetterNether block now declares its model as a ClientBlockTraits.MODEL trait at
+        // registration (ModelTraitLibrary / NetherModels / its wood slot), so there is nothing left to
+        // override centrally by block identity. The map stays only to feed the two filters below.
+        final ModelOverides overrides = ModelOverides.create();
 
         final BlockRegistry registry = BlockRegistry.forMod(BetterNether.C);
 
-        // The wover block sets express their models as ClientBlockTraits.MODEL traits, which only this
-        // call honours - without it none of the set blocks (planks, chests, doors, furniture, ...) get a
-        // blockstate at all. Blocks with an explicit entry in ModelOverides above are meant to use that
-        // model instead of the trait's (or keep a hand-authored one, via .ignore()), so skip them here.
+        // The blocks and wover block sets express their models as ClientBlockTraits.MODEL traits, which
+        // only this call honours - without it none of them (planks, chests, doors, furniture, ...) get a
+        // blockstate at all. The filter keeps the contract that anything re-added to the (now empty)
+        // override map above wins over its trait, rather than generating both.
         BlockModelTrait.bootstrapModels(modCore, generator, (key, block) -> !overrides.contain(block));
 
         // Blocks with an explicit ClientBlockTraits.MODEL trait are now fully handled above - skip the
@@ -231,30 +134,10 @@ public class NetherModelProvider extends WoverModelProvider {
         );
     }
 
-    private void addMaterialOverrides(ModelOverides overides, NetherWoodenMaterial<?> mat) {
-        overides
-                .ignore(mat.getBlock(SlotType.LADDER))
-                .ignore(mat.getBlock(SlotType.TRAPDOOR))
-                .ignore(mat.getBlock(SlotType.GATE))
-                .ignore(mat.getBlock(SlotType.FENCE))
-                .ignore(mat.getBlock(SlotType.SLAB))
-                .ignore(mat.getBlock(SlotType.LOG))
-                .ignore(mat.getBlock(SlotType.STRIPPED_LOG))
-                .ignore(mat.getBlock(SlotType.BARK))
-                .ignore(mat.getBlock(SlotType.STRIPPED_BARK))
-                .ignore(mat.getBlock(NetherSlots.ROOF_SLAB));
-    }
 
 
     public NetherModelProvider(ModCore modCore) {
         super(modCore);
     }
 
-    private static JsonElement toArray(float... values) {
-        JsonArray array = new JsonArray(values.length);
-        for (float value : values) {
-            array.add(value);
-        }
-        return array;
-    }
 }

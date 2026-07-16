@@ -2,8 +2,10 @@ package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BNGlass;
 import org.betterx.betternether.blocks.BNPane;
+import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.block.api.trait.BlockTrait;
 import org.betterx.wover.core.api.ModCore;
 
 import net.minecraft.data.recipes.RecipeCategory;
@@ -11,6 +13,8 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+
+import java.util.List;
 
 public class ColoredGlassMaterial {
     public final Block white;
@@ -92,9 +96,11 @@ public class ColoredGlassMaterial {
     ) {
         String name = group + "_" + ((DyeItem) dye).getDyeColor().getSerializedName();
 
+        // The full-block variant (BNGlass) renders solid; only the pane variant is translucent.
         Block block = NetherBlocks.registerBlock(
                 name,
                 base,
+                isFullBlock ? List.<BlockTrait<?, ?>>of() : NetherRender.translucent(),
                 p -> isFullBlock ? new BNGlass(p) : BNPane.from(base, p, paneDropItself)
         );
         if (ModCore.isDatagen())

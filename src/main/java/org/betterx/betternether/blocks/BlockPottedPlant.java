@@ -39,7 +39,6 @@ public class BlockPottedPlant extends BlockBaseNotFull implements AddMineableHoe
         );
         this.setDropItself(false);
 
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(PLANT, PottedPlantShape.AGAVE));
     }
 

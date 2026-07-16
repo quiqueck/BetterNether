@@ -37,7 +37,6 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull implements BehaviourCl
                 .staticVine(settings, MapColor.COLOR_GREEN)
                 .noLootTable()
                 .lightLevel(BlockAnchorTreeVine::getLuminance));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         setDropItself(false);
     }
 

@@ -34,7 +34,6 @@ public class BlockGiantMold extends BlockBaseNotFull implements AddMineableAxe {
     public BlockGiantMold(Properties settings) {
         super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_GRAY).noOcclusion().strength(1));
         this.setDropItself(false);
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

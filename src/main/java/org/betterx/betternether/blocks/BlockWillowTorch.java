@@ -43,13 +43,11 @@ public class BlockWillowTorch extends BlockBaseNotFull implements AddMineableAxe
                                .noCollission()
                                .noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     public BlockWillowTorch(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

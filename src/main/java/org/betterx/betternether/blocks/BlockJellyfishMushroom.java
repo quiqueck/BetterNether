@@ -35,7 +35,6 @@ import net.minecraft.world.level.ScheduledTickAccess;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 
 import com.google.common.collect.Lists;
 
@@ -54,8 +53,6 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull implements AddMinea
                        .sound(SoundType.FUNGUS)
                        .strength(1)
                        .noOcclusion());
-        boolean sodium = FabricLoader.getInstance().isModLoaded("sodium");
-        this.setRenderLayer(sodium ? BNRenderLayer.CUTOUT : BNRenderLayer.TRANSLUCENT);
     }
 
     @Override

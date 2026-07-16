@@ -32,7 +32,6 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
 
     public BlockCommonPlant(Properties settings) {
         super(settings.randomTicks());
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
     }
 

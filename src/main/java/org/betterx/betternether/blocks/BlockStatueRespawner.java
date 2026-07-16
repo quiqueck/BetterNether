@@ -51,7 +51,6 @@ public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourM
 
     public BlockStatueRespawner(BlockBehaviour.Properties settings) {
         super(settings.lightLevel(state -> 15).noOcclusion());
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
         this.setDropItself(false);
 

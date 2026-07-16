@@ -28,7 +28,6 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 
     public BlockLumabusSeed(Properties settings, DeferedSeedBlock parent, BonemealAPI.FeatureProvider feature) {
         super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_RED));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.feature = feature;
         parent.setSeed(this);
     }

@@ -28,14 +28,12 @@ public class BlockStalagnate extends BlockBaseNotFull implements BehaviourWood {
 
     public BlockStalagnate() {
         super(Materials.makeNetherWood(MapColor.TERRACOTTA_LIGHT_GREEN).noOcclusion());
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, BlockProperties.TripleShape.MIDDLE));
         this.setDropItself(false);
     }
 
     public BlockStalagnate(BlockBehaviour.Properties properties) {
         super(properties);
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, BlockProperties.TripleShape.MIDDLE));
         this.setDropItself(false);
     }

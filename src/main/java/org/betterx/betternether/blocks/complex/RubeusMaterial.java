@@ -6,6 +6,7 @@ import org.betterx.betternether.blocks.BlockRubeusSapling;
 import org.betterx.betternether.blocks.RubeusBark;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -33,7 +34,7 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
         return super.createDefaultDefinitions()
                     .add(Sapling.create(BlockRubeusSapling::new, NetherSurvival.netherGround()))
                     .add(SimpleBlockSlot.withItem(NetherSlots.CONE, (set, props) -> new BlockRubeusCone(props)))
-                    .replace(new Log(true) {
+                    .replace(new NetherWoodSlots.Log(true) {
                         @Override
                         protected BlockDefinition<?, ?> startBlockDefinition(
                                 @NotNull BlockRegistry registry,
@@ -43,7 +44,7 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
                             return registry.defineDefaultBlockWithProps(name, RubeusLog::new);
                         }
                     })
-                    .replace(new Bark(true) {
+                    .replace(new NetherWoodSlots.Bark(true) {
                         @Override
                         protected BlockDefinition<?, ?> startBlockDefinition(
                                 @NotNull BlockRegistry registry,

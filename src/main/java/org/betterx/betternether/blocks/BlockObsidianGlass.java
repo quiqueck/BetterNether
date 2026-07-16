@@ -24,7 +24,6 @@ public class BlockObsidianGlass extends BlockBaseNotFull implements BehaviourImm
                 .isViewBlocking((arg1, arg2, arg3) -> {
                     return false;
                 }));
-        this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
     }
 
     @Environment(EnvType.CLIENT)

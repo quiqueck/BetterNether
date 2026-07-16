@@ -4,6 +4,7 @@ import org.betterx.bclib.furniture.slots.BarStool;
 import org.betterx.bclib.furniture.slots.Chair;
 import org.betterx.bclib.furniture.slots.Taburet;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.sets.api.blocks.SlotMap;
@@ -86,7 +87,19 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
 
     @Override
     protected SlotMap createDefaultDefinitions() {
-        return addFurniture(super.createDefaultDefinitions().add(WoodSlots.WALL));
+        // The replaced slots keep their default block/recipe/tags and only opt out of model generation:
+        // BetterNether hand-authors their blockstates and models (see NetherWoodSlots).
+        return addFurniture(super.createDefaultDefinitions()
+                                 .add(WoodSlots.WALL)
+                                 .replace(new NetherWoodSlots.Ladder())
+                                 .replace(new NetherWoodSlots.Trapdoor())
+                                 .replace(new NetherWoodSlots.Gate())
+                                 .replace(new NetherWoodSlots.Fence())
+                                 .replace(new NetherWoodSlots.Slab())
+                                 .replace(new NetherWoodSlots.Log(true))
+                                 .replace(new NetherWoodSlots.Log(false))
+                                 .replace(new NetherWoodSlots.Bark(true))
+                                 .replace(new NetherWoodSlots.Bark(false)));
     }
 
     public Block getPlanks() {

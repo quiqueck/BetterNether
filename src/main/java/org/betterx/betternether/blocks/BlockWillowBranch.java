@@ -40,14 +40,12 @@ public class BlockWillowBranch extends BlockBaseNotFull implements AddMineableAx
                        .noOcclusion()
                        .noCollission()
                        .lightLevel(BlockWillowBranch::getLuminance));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, WillowBranchShape.MIDDLE));
     }
 
     public BlockWillowBranch(BlockBehaviour.Properties properties) {
         super(properties);
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, WillowBranchShape.MIDDLE));
     }

@@ -64,7 +64,6 @@ public class BlockSoulLily extends BlockBaseNotFull implements AddMineableAxe {
     public BlockSoulLily(Properties settings) {
         super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_ORANGE).strength(1).noOcclusion().randomTicks());
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, SoulLilyShape.SMALL));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

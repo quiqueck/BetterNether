@@ -42,13 +42,11 @@ public class BlockMushroomFir extends BlockBaseNotFull implements BehaviourWood 
     public BlockMushroomFir() {
         super(Materials.makeNetherWood(MapColor.COLOR_CYAN).noOcclusion());
         this.setDropItself(false);
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     public BlockMushroomFir(BlockBehaviour.Properties properties) {
         super(properties);
         this.setDropItself(false);
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

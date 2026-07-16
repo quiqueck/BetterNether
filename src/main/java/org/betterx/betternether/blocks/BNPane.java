@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.BehaviourHelper;
 import org.betterx.bclib.behaviours.interfaces.*;
-import org.betterx.betternether.client.IRenderTypeable;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class BNPane extends IronBarsBlock implements IRenderTypeable {
+public abstract class BNPane extends IronBarsBlock {
     private final boolean dropSelf;
 
     protected BNPane(Block block, boolean dropSelf) {
@@ -39,10 +38,6 @@ public abstract class BNPane extends IronBarsBlock implements IRenderTypeable {
             return super.getDrops(state, builder);
     }
 
-    @Override
-    public BNRenderLayer getRenderLayer() {
-        return BNRenderLayer.TRANSLUCENT;
-    }
 
     @Environment(EnvType.CLIENT)
     public boolean skipRendering(BlockState state, BlockState neighbor, Direction facing) {

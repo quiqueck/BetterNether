@@ -33,7 +33,6 @@ public class BlockNetherCactus extends BlockBaseNotFull implements BehaviourPlan
 
     public BlockNetherCactus(Properties settings) {
         super(Materials.cactus(settings, MapColor.TERRACOTTA_ORANGE, false));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }
 

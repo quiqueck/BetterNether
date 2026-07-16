@@ -39,7 +39,6 @@ public class BlockNeonEquisetum extends BaseVineBlock.Growing {
 //                .randomTicks()
 //                .instabreak()
 //        );
-//        this.setRenderLayer(BNRenderLayer.CUTOUT);
 //        this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.BOTTOM));
 //        setDropItself(false);
 //    }

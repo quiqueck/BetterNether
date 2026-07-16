@@ -53,13 +53,11 @@ class BaseBlockMold extends BlockBaseNotFull {
                                              .sound(SoundType.CROP)
                                              .randomTicks())
         );
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
     }
 
     public BaseBlockMold(Properties settings) {
         super(settings);
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
     }
 

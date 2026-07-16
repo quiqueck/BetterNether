@@ -31,7 +31,6 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
                 .mapColor(MapColor.COLOR_CYAN)
                 .lightLevel((bs) -> 9)
         );
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

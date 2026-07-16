@@ -36,7 +36,6 @@ public abstract class BlockSmallLantern extends BlockBaseNotFull {
     protected BlockSmallLantern(Properties settings) {
         super(settings.noOcclusion());
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

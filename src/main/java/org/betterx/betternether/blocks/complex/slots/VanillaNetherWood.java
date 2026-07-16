@@ -27,7 +27,7 @@ public class VanillaNetherWood extends VanillaFallback<VanillaNetherWood> {
                 WoodSlots.COMPOSTER,
                 WoodSlots.CHEST,
                 WoodSlots.BARREL,
-                WoodSlots.LADDER,
+                new NetherWoodSlots.Ladder(),
                 WoodSlots.BOAT,
                 WoodSlots.CHEST_BOAT
         ));

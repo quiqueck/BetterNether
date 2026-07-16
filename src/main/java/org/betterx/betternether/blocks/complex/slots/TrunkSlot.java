@@ -4,6 +4,7 @@ import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.trait.BlockTrait;
 import org.betterx.wover.block.api.trait.BlockTraitLookup;
 import org.betterx.wover.sets.api.blocks.BlockSet;
 import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
+import java.util.List;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,19 +29,43 @@ public class TrunkSlot extends SlotFromDefinition {
 
     private final Function<BlockBehaviour.Properties, Block> maker;
     private final boolean climbable;
+    private final List<BlockTrait<?, ?>> extraTraits;
 
-    private TrunkSlot(Function<BlockBehaviour.Properties, Block> maker, boolean climbable) {
+    private TrunkSlot(
+            Function<BlockBehaviour.Properties, Block> maker,
+            boolean climbable,
+            List<BlockTrait<?, ?>> extraTraits
+    ) {
         super(NetherSlots.TRUNK);
         this.maker = maker;
         this.climbable = climbable;
+        this.extraTraits = extraTraits;
     }
 
     public static TrunkSlot create(Function<BlockBehaviour.Properties, Block> maker) {
-        return new TrunkSlot(maker, false);
+        return create(maker, List.of());
+    }
+
+    /**
+     * @param extraTraits e.g. a {@link org.betterx.betternether.blocks.NetherRender} layer - not every
+     *                    trunk is non-solid ({@code willow_trunk} renders solid)
+     */
+    public static TrunkSlot create(
+            Function<BlockBehaviour.Properties, Block> maker,
+            List<BlockTrait<?, ?>> extraTraits
+    ) {
+        return new TrunkSlot(maker, false, extraTraits);
     }
 
     public static TrunkSlot createClimbable(Function<BlockBehaviour.Properties, Block> maker) {
-        return new TrunkSlot(maker, true);
+        return createClimbable(maker, List.of());
+    }
+
+    public static TrunkSlot createClimbable(
+            Function<BlockBehaviour.Properties, Block> maker,
+            List<BlockTrait<?, ?>> extraTraits
+    ) {
+        return new TrunkSlot(maker, true, extraTraits);
     }
 
     @Override
@@ -54,6 +80,7 @@ public class TrunkSlot extends SlotFromDefinition {
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
         super.addSlotSpecificDefinitions(set, def);
+        def.addTrait(extraTraits);
         if (climbable) {
             def.addTags(BlockTags.MINEABLE_WITH_AXE, BlockTags.CLIMBABLE);
         } else {

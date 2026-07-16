@@ -31,7 +31,6 @@ public class BlockNetherReed extends BlockBase implements AddMineableSword, AddM
         super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_CYAN)
                 .randomTicks());
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }
 

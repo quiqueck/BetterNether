@@ -27,7 +27,6 @@ public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBloc
 
     public BlockBlackBush(Properties settings) {
         super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings).mapColor(MapColor.COLOR_BLACK));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

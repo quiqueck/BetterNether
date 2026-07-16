@@ -45,7 +45,6 @@ public class BlockAgave extends BlockCommonPlant implements BehaviourPlant, AddM
                 .instabreak()
                 .offsetType(Block.OffsetType.XZ)
         );
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

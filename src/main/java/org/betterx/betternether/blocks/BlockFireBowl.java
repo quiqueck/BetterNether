@@ -50,13 +50,11 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
     protected BlockFireBowl(Block source) {
         super(BlockBehaviour.Properties.ofFullCopy(source).noOcclusion().lightLevel(BlockFireBowl::getLuminance));
         this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     protected BlockFireBowl(BlockBehaviour.Properties settings) {
         super(settings.noOcclusion().lightLevel(BlockFireBowl::getLuminance));
         this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     protected static int getLuminance(BlockState state) {

@@ -40,12 +40,10 @@ public class BlockPlantWall extends BlockBaseNotFull implements BehaviourPlant {
 
     public BlockPlantWall(MapColor color) {
         super(Materials.makeNetherGrass(color).offsetType(OffsetType.NONE));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     public BlockPlantWall(BlockBehaviour.Properties settings, MapColor color) {
         super(Materials.makeNetherGrass(settings, color).offsetType(OffsetType.NONE));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Environment(EnvType.CLIENT)

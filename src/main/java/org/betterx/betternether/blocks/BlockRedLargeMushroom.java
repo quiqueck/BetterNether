@@ -35,7 +35,6 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull implements AddMineab
     public BlockRedLargeMushroom(Properties settings) {
         super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_RED).noOcclusion());
         this.setDropItself(false);
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

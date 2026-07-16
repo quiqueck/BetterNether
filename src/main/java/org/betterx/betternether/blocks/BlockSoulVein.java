@@ -36,7 +36,6 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
         super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
                 .mapColor(MapColor.COLOR_PURPLE)
                 .randomTicks());
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

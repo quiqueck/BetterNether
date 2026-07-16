@@ -45,7 +45,6 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements BehaviourPlan
                 .mapColor(MapColor.COLOR_LIGHT_GREEN)
                 .randomTicks()
         );
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(AGE, 0).setValue(FACING, Direction.UP));
     }

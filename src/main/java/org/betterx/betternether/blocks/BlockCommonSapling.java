@@ -49,13 +49,11 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
                 .mapColor(color)
                 .noLootTable()
         );
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.plant = plant;
     }
 
     public BaseBlockCommonSapling(@NotNull Block plant, Properties settings) {
         super(settings);
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.plant = plant;
     }
 

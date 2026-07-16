@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BlockReedsBlock;
-import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
@@ -27,6 +26,8 @@ import net.fabricmc.api.Environment;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.betterx.betternether.blocks.NetherModels;
+import org.betterx.wover.sets.api.blocks.types.Stairs;
 
 public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
     public NetherReedMaterial() {
@@ -64,10 +65,23 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                                     .build(context));
                         }
 
+                        // The hand-authored blockstate/model stay: the generic planks model is an axis-less
+                        // cube_all, whose blockstate has no variant for axis=x/z at all. Only the item model
+                        // is wired, to the same block model the hand-authored blockstate uses.
+                        // NOTE: Planks overrides buildModel() itself, so it never routes through
+                        // WoodenSlotFromDefinition's buildWoodModel() hook - this has to override buildModel.
                         @Environment(EnvType.CLIENT)
                         @Override
-                        protected BlockModelTrait buildWoodModel(WoodenBlockSet<?> set, BlockTraitLookup traitLookup) {
-                            return ModelTraitLibrary.pillar();
+                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                            return ModelTraitLibrary.externalModelDelegatedItem();
+                        }
+                    })
+                    // Reed stairs need the axis-aware plank textures, not the slot's single-texture default.
+                    .replace(new Stairs() {
+                        @Environment(EnvType.CLIENT)
+                        @Override
+                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                            return NetherModels.reedStairs();
                         }
                     });
     }

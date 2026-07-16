@@ -42,7 +42,6 @@ public class BlockWillowLeaves extends BNLeaves {
                 .setValue(FACING, Direction.UP)
                 .setValue(NATURAL, true)
                 .setValue(WATERLOGGED, false));
-        //this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

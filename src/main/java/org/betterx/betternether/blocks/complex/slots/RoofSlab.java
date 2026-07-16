@@ -58,6 +58,7 @@ public class RoofSlab extends SlotFromDefinition {
     @Environment(EnvType.CLIENT)
     @Override
     protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
-        return ModelTraitLibrary.slab(() -> set.getBlock(NetherSlots.ROOF));
+        // hand-authored blockstate/model in src/main/resources (was an addMaterialOverrides .ignore())
+        return ModelTraitLibrary.externalModel();
     }
 }

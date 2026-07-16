@@ -27,7 +27,6 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock,
 
     public BlockEyeSeed(Properties settings) {
         super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_RED));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
     @Override

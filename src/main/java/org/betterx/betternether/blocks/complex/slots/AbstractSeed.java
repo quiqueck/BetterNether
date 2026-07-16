@@ -6,6 +6,7 @@ import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
 import org.betterx.wover.block.api.trait.BlockTraitLookup;
+import org.betterx.wover.block.api.trait.BlockTrait;
 import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.sets.api.blocks.BlockSet;
 import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
@@ -28,21 +29,21 @@ public class AbstractSeed extends SlotFromDefinition {
     public static final String SEED_SUFFIX = "seed";
 
     private final Function<BlockBehaviour.Properties, Block> maker;
-    private final List<SurvivesOnBlockTrait> survival;
+    private final List<BlockTrait<?, ?>> survival;
 
-    private AbstractSeed(Function<BlockBehaviour.Properties, Block> maker, List<SurvivesOnBlockTrait> survival) {
+    private AbstractSeed(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
         super(NetherSlots.SEED);
         this.maker = maker;
         this.survival = survival;
     }
 
-    public static AbstractSeed create(Function<BlockBehaviour.Properties, Block> maker, List<SurvivesOnBlockTrait> survival) {
+    public static AbstractSeed create(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
         return new AbstractSeed(maker, survival);
     }
 
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
-        for (SurvivesOnBlockTrait t : survival) def.addTrait(t);
+        def.addTrait(survival);
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
     }
 

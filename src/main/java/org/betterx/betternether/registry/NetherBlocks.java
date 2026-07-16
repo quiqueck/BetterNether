@@ -19,6 +19,7 @@ import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.trait.BlockTrait;
 import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.complex.api.equipment.ToolTiers;
 import org.betterx.wover.core.api.ModCore;
@@ -851,14 +852,14 @@ public class NetherBlocks {
      */
     public static <T extends Block> T registerBlock(
             String name,
-            List<SurvivesOnBlockTrait> survival,
+            List<BlockTrait<?, ?>> survival,
             Function<BlockBehaviour.Properties, T> factory,
             TagKey<Block>... tags
     ) {
         final var definition = getBlockRegistry()
                 .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .addTags(tags);
-        for (SurvivesOnBlockTrait t : survival) definition.addTrait(t);
+        definition.addTrait(survival);
         return definition.buildAndRegister();
     }
 
@@ -881,7 +882,7 @@ public class NetherBlocks {
     public static <T extends Block> T registerBlock(
             String name,
             Block propertiesSource,
-            List<SurvivesOnBlockTrait> survival,
+            List<BlockTrait<?, ?>> survival,
             Function<BlockBehaviour.Properties, T> factory,
             TagKey<Block>... tags
     ) {
@@ -889,7 +890,7 @@ public class NetherBlocks {
                 .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .replacePropertiesWithCopy(propertiesSource)
                 .addTags(tags);
-        for (SurvivesOnBlockTrait t : survival) definition.addTrait(t);
+        definition.addTrait(survival);
         return definition.buildAndRegister();
     }
 
@@ -913,7 +914,7 @@ public class NetherBlocks {
      */
     private static <T extends Block> T registerBlockNI(
             String name,
-            List<SurvivesOnBlockTrait> survival,
+            List<BlockTrait<?, ?>> survival,
             Function<BlockBehaviour.Properties, T> factory,
             TagKey<Block>... tags
     ) {
@@ -921,7 +922,7 @@ public class NetherBlocks {
                 .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .withBlockItem((d, b) -> null)
                 .addTags(tags);
-        for (SurvivesOnBlockTrait t : survival) definition.addTrait(t);
+        definition.addTrait(survival);
         return definition.buildAndRegister();
     }
 
@@ -1054,13 +1055,13 @@ public class NetherBlocks {
      */
     private static <T extends Block> T registerVine(
             String name,
-            List<SurvivesOnBlockTrait> survival,
+            List<BlockTrait<?, ?>> survival,
             Function<BlockBehaviour.Properties, T> factory
     ) {
         final var definition = getBlockRegistry()
                 .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .addTrait(BlockTraits.LOOT_TABLE.dropWithSilktouchOrHoeOrShears());
-        for (SurvivesOnBlockTrait t : survival) definition.addTrait(t);
+        definition.addTrait(survival);
         return definition.buildAndRegister();
     }
 

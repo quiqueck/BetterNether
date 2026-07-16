@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
+import org.betterx.wover.block.api.trait.BlockTrait;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTags;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
@@ -28,7 +29,7 @@ public class NetherSurvival {
      * {@code BlocksHelper.isNetherGround(state) || RED_SAND || SAND}, with isNetherGround expanding to
      * NETHER_STONES, SOUL_GROUND (isSoulSand), NETHER_MYCELIUM and NYLIUM.
      */
-    public static List<SurvivesOnBlockTrait> netherGround() {
+    public static List<BlockTrait<?, ?>> netherGround() {
         return List.of(
                 SurvivesOnBlockTrait.withTag(CommonBlockTags.NETHER_STONES),
                 SurvivesOnBlockTrait.withTag(CommonBlockTags.SOUL_GROUND),
@@ -38,11 +39,11 @@ public class NetherSurvival {
         );
     }
 
-    public static List<SurvivesOnBlockTrait> netherrack() {
+    public static List<BlockTrait<?, ?>> netherrack() {
         return List.of(SurvivesOnBlockTrait.withTag(CommonBlockTags.NETHERRACK));
     }
 
-    public static List<SurvivesOnBlockTrait> netherrackNyliumAndSculk() {
+    public static List<BlockTrait<?, ?>> netherrackNyliumAndSculk() {
         return List.of(
                 SurvivesOnBlockTrait.withTag(CommonBlockTags.NETHERRACK),
                 SurvivesOnBlockTrait.withTag(BlockTags.NYLIUM),
@@ -50,42 +51,42 @@ public class NetherSurvival {
         );
     }
 
-    public static List<SurvivesOnBlockTrait> nylium() {
+    public static List<BlockTrait<?, ?>> nylium() {
         return List.of(SurvivesOnBlockTrait.withTag(BlockTags.NYLIUM));
     }
 
-    public static List<SurvivesOnBlockTrait> netherMycelium() {
+    public static List<BlockTrait<?, ?>> netherMycelium() {
         return List.of(SurvivesOnBlockTrait.withTag(CommonBlockTags.NETHER_MYCELIUM));
     }
 
-    public static List<SurvivesOnBlockTrait> netherSand() {
+    public static List<BlockTrait<?, ?>> netherSand() {
         return List.of(SurvivesOnBlockTrait.withTag(NetherTags.NETHER_SAND));
     }
 
-    public static List<SurvivesOnBlockTrait> soulGround() {
+    public static List<BlockTrait<?, ?>> soulGround() {
         return List.of(SurvivesOnBlockTrait.withTag(CommonBlockTags.SOUL_GROUND));
     }
 
-    public static List<SurvivesOnBlockTrait> soulGroundOrFarmland() {
+    public static List<BlockTrait<?, ?>> soulGroundOrFarmland() {
         return List.of(
                 SurvivesOnBlockTrait.withTag(CommonBlockTags.SOUL_GROUND),
                 SurvivesOnBlockTrait.withTag(NetherTags.NETHER_FARMLAND)
         );
     }
 
-    public static List<SurvivesOnBlockTrait> soilOrLogs() {
+    public static List<BlockTrait<?, ?>> soilOrLogs() {
         return List.of(SurvivesOnBlockTrait.withTag(CommonBlockTags.SOIL_OR_LOGS));
     }
 
-    public static List<SurvivesOnBlockTrait> soulSand() {
+    public static List<BlockTrait<?, ?>> soulSand() {
         return List.of(SurvivesOnBlockTrait.withBlocks(Blocks.SOUL_SAND));
     }
 
-    public static List<SurvivesOnBlockTrait> gravel() {
+    public static List<BlockTrait<?, ?>> gravel() {
         return List.of(SurvivesOnBlockTrait.withBlocks(Blocks.GRAVEL));
     }
 
-    public static List<SurvivesOnBlockTrait> magmaBlockOrSand() {
+    public static List<BlockTrait<?, ?>> magmaBlockOrSand() {
         return List.of(SurvivesOnBlockTrait.withBlocks(
                 Blocks.MAGMA_BLOCK,
                 Blocks.RED_SAND,
@@ -94,7 +95,7 @@ public class NetherSurvival {
         ));
     }
 
-    public static List<SurvivesOnBlockTrait> boneBlocks() {
+    public static List<BlockTrait<?, ?>> boneBlocks() {
         return List.of(SurvivesOnBlockTrait.withBlocks(Blocks.BONE_BLOCK, NetherBlocks.BONE_BLOCK));
     }
 }

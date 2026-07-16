@@ -6,6 +6,7 @@ import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
 import org.betterx.bclib.furniture.block.BaseTaburet;
+import org.betterx.wover.sets.api.blocks.SlotType;
 import org.betterx.wover.sets.api.blocks.slots.WoodSlots;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
@@ -15,9 +16,11 @@ import org.betterx.betternether.blocks.complex.slots.VanillaWood;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.complex.api.equipment.ToolTiers;
 import org.betterx.wover.core.api.ModCore;
+import org.betterx.wover.recipe.api.RecipeBuilder;
 import org.betterx.wover.state.api.WorldState;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 import org.betterx.wover.tag.api.predefined.CommonPoiTags;
@@ -30,6 +33,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -732,8 +737,12 @@ public class NetherBlocks {
     );
     // Mushroom Fir //
     public static final MushroomFirMaterial MAT_MUSHROOM_FIR = new MushroomFirMaterial().init();
-    // TODO(1.21.7): re-add trimmed chest via wover chest API
-    // (the bclib wood-chest base class was removed; there is no drop-in replacement yet)
+    public static final Block TRIMMED_MUSHROOM_FIR_CHEST = registerTrimmedChest(
+            "mushroom_fir_trimmed_chest",
+            MAT_MUSHROOM_FIR.getPlanks(),
+            MAT_MUSHROOM_FIR.getBlock(SlotType.CHEST),
+            MAT_MUSHROOM_FIR.getStrippedLog()
+    );
     // Mushroom //
     public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
     // Anchor Tree
@@ -889,6 +898,38 @@ public class NetherBlocks {
                 .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .addTags(tags)
                 .buildAndRegister();
+    }
+
+    // A "trimmed" variant of a wooden chest, for a chest that lives outside its wood set (the wover CHEST
+    // slot only builds the set's own chest). Mirrors org.betterx.wover.sets.api.blocks.types.Chest: a
+    // ChestBlock on the vanilla chest block entity, plus BlockTraits.CHEST_BLOCK - which supplies the loot
+    // table, the c:chests[/wooden] tags, the block-entity type and (outside datagen) the client chest
+    // renderer. Both the renderer and the item model resolve their textures from the block's id, so this
+    // picks up assets/betternether/textures/entity/chest/<name>{,_left,_right}.png.
+    private static Block registerTrimmedChest(String name, Block planks, Block chest, Block trim) {
+        final var definition = getBlockRegistry()
+                .<ChestBlock>defineDefaultBlock(
+                        name,
+                        def -> new ChestBlock(() -> BlockEntityType.CHEST, def.getProperties())
+                )
+                .replacePropertiesWithCopy(planks)
+                .addTrait(BlockTraits.WOOD_BLOCK.withDefault())
+                .addTrait(BlockTraits.CHEST_BLOCK)
+                .addTrait(BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
+                        .crafting(key.location(), block)
+                        .shapeless()
+                        .addMaterial('C', chest)
+                        .addMaterial('#', trim)
+                        .group("chest")
+                        .outputCount(1)
+                        .category(RecipeCategory.DECORATIONS)
+                        .build(context)));
+
+        // The model trait lives in the client source set, so only touch it on the client (mirrors
+        // SlotFromDefinition, which guards its buildModel() call the same way).
+        if (ModCore.isClient()) definition.addTrait(ModelTraitLibrary.chest(() -> planks));
+
+        return definition.buildAndRegister();
     }
 
     // Leaves: vanilla-style drop logic (chance-based sapling drop plus sticks).
@@ -1089,10 +1130,18 @@ public class NetherBlocks {
                 .<BaseTaburet>defineDefaultBlock(name, def -> BaseTaburet.from(source, def.getProperties()))
                 .replacePropertiesWithCopy(source)
                 .addTags(BlockTags.MINEABLE_WITH_AXE)
+                .addTrait(BlockTraits.RECIPE.with((key, b, context) -> RecipeBuilder
+                        .crafting(key.location(), b)
+                        .shape("##", "II")
+                        .addMaterial('#', source)
+                        .addMaterial('I', Items.STICK)
+                        .group("taburet")
+                        .outputCount(1)
+                        .category(RecipeCategory.DECORATIONS)
+                        .build(context)))
                 .buildAndRegister();
 
         addFuel(source, block);
-        // TODO(1.21.7): bclib set.wood.Taburet.makeTaburetRecipe was removed; re-add recipe via wover API.
 
         return block;
     }
@@ -1105,10 +1154,18 @@ public class NetherBlocks {
                 )
                 .replacePropertiesWithCopy(source)
                 .addTags(BlockTags.MINEABLE_WITH_AXE)
+                .addTrait(BlockTraits.RECIPE.with((key, b, context) -> RecipeBuilder
+                        .crafting(key.location(), b)
+                        .shape("I ", "##", "II")
+                        .addMaterial('#', source)
+                        .addMaterial('I', Items.STICK)
+                        .group("chair")
+                        .outputCount(1)
+                        .category(RecipeCategory.DECORATIONS)
+                        .build(context)))
                 .buildAndRegister();
 
         addFuel(source, block);
-        // TODO(1.21.7): bclib set.wood.Chair.makeChairRecipe was removed; re-add recipe via wover API.
 
         return block;
     }
@@ -1121,10 +1178,18 @@ public class NetherBlocks {
                 )
                 .replacePropertiesWithCopy(source)
                 .addTags(BlockTags.MINEABLE_WITH_PICKAXE)
+                .addTrait(BlockTraits.RECIPE.with((key, b, context) -> RecipeBuilder
+                        .crafting(key.location(), b)
+                        .shape("##", "II", "II")
+                        .addMaterial('#', source)
+                        .addMaterial('I', Items.STICK)
+                        .group("bar_stool")
+                        .outputCount(1)
+                        .category(RecipeCategory.DECORATIONS)
+                        .build(context)))
                 .buildAndRegister();
 
         addFuel(source, block);
-        // TODO(1.21.7): bclib set.wood.BarStool.makeBarStoolRecipe was removed; re-add recipe via wover API.
 
         return block;
     }

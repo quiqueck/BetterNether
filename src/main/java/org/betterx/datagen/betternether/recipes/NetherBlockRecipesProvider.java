@@ -31,9 +31,9 @@ public class NetherBlockRecipesProvider extends WoverRecipeProvider {
                      .outputCount(1)
                      .category(RecipeCategory.MISC)
                      .build(context);
-        
-        // TODO(1.21.7): re-add trimmed chest recipe once TRIMMED_MUSHROOM_FIR_CHEST is re-added
-        //  via the wover chest API (see NetherBlocks.java: the block was dropped in the migration).
+
+        // The trimmed mushroom-fir chest builds its recipe from a BlockTraits.RECIPE trait on its block
+        // definition (see NetherBlocks.registerTrimmedChest), the same way the wood sets' own chests do.
 
         RecipeBuilder.crafting(BetterNether.C.id("activator_rail"), Items.ACTIVATOR_RAIL)
                      .shape("XSX", "X#X", "XSX")

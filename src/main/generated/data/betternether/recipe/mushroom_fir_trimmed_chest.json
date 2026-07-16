@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest",
+  "ingredients": [
+    "betternether:mushroom_fir_chest",
+    "betternether:mushroom_fir_stripped_log"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:mushroom_fir_trimmed_chest"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bar_stool",
+  "key": {
+    "#": "betternether:willow_slab",
+    "I": "minecraft:stick"
+  },
+  "pattern": [
+    "##",
+    "II",
+    "II"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betternether:willow_bar_stool"
+  }
+}

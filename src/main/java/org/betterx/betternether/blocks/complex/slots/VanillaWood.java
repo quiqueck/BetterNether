@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 
 /**
- * A "vanilla wood" set that used to add the wooden furniture (taburet/chair/bar-stool). Those slots were
- * removed from wover-sets-api in 21.7, so this set now registers nothing; kept so existing call sites compile.
+ * A "vanilla wood" set: adds only the wooden furniture (taburet/chair/bar-stool) on top of vanilla planks/slabs,
+ * which {@link VanillaFallback} resolves from the vanilla registry.
  */
 public class VanillaWood extends VanillaFallback<VanillaWood> {
     public VanillaWood(
@@ -21,7 +21,7 @@ public class VanillaWood extends VanillaFallback<VanillaWood> {
 
     @Override
     protected SlotMap createDefaultDefinitions() {
-        return SlotMap.of();
+        return addFurniture(SlotMap.of());
     }
 
     public static VanillaWood create(String baseName, Block clothMaterial) {

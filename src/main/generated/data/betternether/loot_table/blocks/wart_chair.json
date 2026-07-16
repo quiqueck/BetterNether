@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:wart_chair",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "top": "false"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:wart_chair"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

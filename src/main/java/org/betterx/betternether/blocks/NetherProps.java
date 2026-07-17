@@ -8,7 +8,6 @@ import org.betterx.wover.block.api.trait.GenericBlockTrait;
 import org.betterx.wover.block.impl.trait.BlockTraitImpl;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 
 import java.util.function.Consumer;
 
@@ -46,10 +45,5 @@ public final class NetherProps {
     /** Chains {@code strength(destroyTime, explosionResistance)} after any preceding material trait. */
     public static BlockTrait<?, ?> strength(float destroyTime, float explosionResistance) {
         return of(def -> def.strength(destroyTime, explosionResistance));
-    }
-
-    /** Chains {@code sound(soundType)} after any preceding material trait. */
-    public static BlockTrait<?, ?> sound(SoundType soundType) {
-        return of(def -> def.sound(soundType));
     }
 }

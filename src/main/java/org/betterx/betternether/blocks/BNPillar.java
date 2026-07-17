@@ -1,8 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.datagen.DropSelfLootProvider;
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
-import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.world.level.block.Block;
@@ -38,7 +36,7 @@ public abstract class BNPillar extends RotatedPillarBlock implements DropSelfLoo
         }
     }
 
-    public static class Stone extends BNPillar implements BehaviourStone {
+    public static class Stone extends BNPillar {
         public Stone(Properties settings) {
             super(settings);
         }
@@ -52,7 +50,7 @@ public abstract class BNPillar extends RotatedPillarBlock implements DropSelfLoo
         }
     }
 
-    public static class Metal extends BNPillar implements BehaviourMetal {
+    public static class Metal extends BNPillar {
         public Metal(Properties settings) {
             super(settings);
         }

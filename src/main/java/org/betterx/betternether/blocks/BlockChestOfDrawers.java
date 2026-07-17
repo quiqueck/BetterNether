@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -34,7 +33,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
-public class BlockChestOfDrawers extends BaseEntityBlock implements BehaviourMetal {
+public class BlockChestOfDrawers extends BaseEntityBlock {
     public static final MapCodec<BlockChestOfDrawers> CODEC = simpleCodec(BlockChestOfDrawers::new);
 
     @Override

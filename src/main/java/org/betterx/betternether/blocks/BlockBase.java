@@ -1,8 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
-import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
-
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class BlockBase extends Block {
-    public static class Stone extends BlockBase implements BehaviourStone {
+    public static class Stone extends BlockBase {
         public Stone(Block source) {
             super(BlockBehaviour.Properties.ofFullCopy(source));
         }
@@ -24,7 +21,7 @@ public class BlockBase extends Block {
         }
     }
 
-    public static class Metal extends BlockBase implements BehaviourMetal {
+    public static class Metal extends BlockBase {
         public Metal(Block source) {
             super(BlockBehaviour.Properties.ofFullCopy(source));
         }

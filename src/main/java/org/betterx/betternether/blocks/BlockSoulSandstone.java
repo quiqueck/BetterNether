@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.wover.block.api.BlockTagProvider;
 import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
@@ -21,7 +20,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockSoulSandstone extends BlockBase implements BlockTagProvider, BehaviourStone {
+public class BlockSoulSandstone extends BlockBase implements BlockTagProvider {
     public static final BooleanProperty UP = BooleanProperty.create("up");
 
     public BlockSoulSandstone(BlockBehaviour.Properties settings) {

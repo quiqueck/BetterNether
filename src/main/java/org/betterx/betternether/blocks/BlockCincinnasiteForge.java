@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.blockentities.BlockEntityForge;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -26,7 +25,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockCincinnasiteForge extends AbstractFurnaceBlock implements BehaviourMetal {
+public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
     public static final MapCodec<BlockCincinnasiteForge> CODEC = simpleCodec(BlockCincinnasiteForge::new);
 
     public BlockCincinnasiteForge(Properties settings) {

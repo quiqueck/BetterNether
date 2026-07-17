@@ -1,7 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
-import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -159,7 +157,7 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
         }
     }
 
-    public static class Stone extends BlockFireBowl implements BehaviourStone {
+    public static class Stone extends BlockFireBowl {
         public Stone(Block source) {
             super(source);
         }
@@ -169,7 +167,7 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
         }
     }
 
-    public static class Metal extends BlockFireBowl implements BehaviourMetal {
+    public static class Metal extends BlockFireBowl {
         public Metal(Block source) {
             super(source);
         }

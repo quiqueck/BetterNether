@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -36,7 +35,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockStatueRespawner extends BlockBaseNotFull implements BehaviourMetal {
+public class BlockStatueRespawner extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 16, 15);
     private static final VoxelShape CULL_SHAPE = Shapes.or(
             box(9, 0, 4, 13, 12, 8),

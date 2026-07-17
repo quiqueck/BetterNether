@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.blocks.BNBlockProperties.CincinnasitPillarShape;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -15,7 +14,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockCincinnasitPillar extends BlockBase implements BehaviourMetal {
+public class BlockCincinnasitPillar extends BlockBase {
     public static final EnumProperty<CincinnasitPillarShape> SHAPE = BNBlockProperties.PILLAR_SHAPE;
 
     public BlockCincinnasitPillar(Properties settings) {

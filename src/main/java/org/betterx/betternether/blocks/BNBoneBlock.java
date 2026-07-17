@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
@@ -12,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import java.util.Collections;
 import java.util.List;
 
-public class BNBoneBlock extends BlockBase implements BehaviourStone {
+public class BNBoneBlock extends BlockBase {
     public BNBoneBlock(BlockBehaviour.Properties settings) {
         super(settings);
     }

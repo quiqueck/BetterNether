@@ -13,11 +13,20 @@ import java.util.List;
  * explicit traits to hand to a block definition at registration.
  * <p>
  * Each method reproduces exactly what its marker contributed through bclib's {@code BCLAutoBlockTagProvider}
- * - the tool tag and, where the marker had one, its extra block tags - and nothing else. The wover material
- * traits ({@code BlockTraits.STONE_BLOCK}, {@code METAL_BLOCK}, {@code OBSIDIAN_BLOCK}) are deliberately NOT
- * used here: their {@code configure()} also forces {@code strength}/{@code mapColor}/{@code instrument}, and
- * a trait always wins over the chain setters and {@code replacePropertiesWithCopy} regardless of ordering,
- * so adopting one to obtain a tool tag would silently rewrite the block's properties.
+ * - the tool tag and, where the marker had one, its extra block tags - and nothing else.
+ * <p>
+ * The wover material traits ({@code BlockTraits.STONE_BLOCK}, {@code METAL_BLOCK}, {@code OBSIDIAN_BLOCK})
+ * are deliberately NOT used to reproduce the {@code BehaviourStone}/{@code BehaviourMetal} markers. Those
+ * markers were empty (they contributed only the {@code #minecraft:mineable/pickaxe} tag and forced no block
+ * property), whereas {@code STONE_BLOCK.withDefault()}/{@code METAL_BLOCK.withDefault()} force
+ * {@code strength}, {@code instrument}, {@code requiresCorrectToolForDrops} (and, for metal, {@code sound}).
+ * Property call-order is now honoured (WorldWeaver 5dcd992), so those forced values <em>can</em> be chained
+ * back afterwards - but BetterNether's stone/metal blocks diverge wholesale from the material defaults
+ * (netherrack 0.4, basalt 1.25/4.2, bone XYLOPHONE, cincinnasite 3/10, netherite 50/1200, and
+ * {@code glowstone_stalactite} is not even {@code requiresCorrectToolForDrops}). Adopting a material trait
+ * would force then immediately override every one of those, which is pure churn, and {@code METAL_BLOCK}'s
+ * {@code sound(IRON)} is not captured by the {@code block_properties.txt} audit. The property-free pickaxe
+ * tag below is the faithful, audit-clean reproduction of an empty classification marker.
  * <p>
  * These are methods rather than constants because the builders return {@code null} outside datagen; a
  * constant would capture that null once, at class-init.

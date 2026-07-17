@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -115,7 +114,7 @@ public abstract class BlockSmallLantern extends BlockBaseNotFull {
         return null;
     }
 
-    public static class Metal extends BlockSmallLantern implements BehaviourMetal {
+    public static class Metal extends BlockSmallLantern {
         public Metal(Properties settings) {
             super(settings);
         }

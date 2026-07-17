@@ -63,7 +63,7 @@ public abstract class BNPane extends IronBarsBlock {
         }
     }
 
-    public static class Stone extends BNPane implements BehaviourStone {
+    public static class Stone extends BNPane {
         public Stone(Block block, boolean dropSelf) {
             super(block, dropSelf);
         }

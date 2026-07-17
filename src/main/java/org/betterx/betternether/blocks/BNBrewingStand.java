@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.betternether.blockentities.BNBrewingStandBlockEntity;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
@@ -23,7 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class BNBrewingStand extends BrewingStandBlock implements BehaviourStone {
+public class BNBrewingStand extends BrewingStandBlock {
     public BNBrewingStand(BlockBehaviour.Properties settings) {
         super(settings
                 .strength(0.5F, 0.5F)

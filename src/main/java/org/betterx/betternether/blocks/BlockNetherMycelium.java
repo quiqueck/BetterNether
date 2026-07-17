@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
-import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -23,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import org.jetbrains.annotations.Nullable;
 
-public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike, BehaviourStone {
+public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike {
     public static final BooleanProperty IS_BLUE = BooleanProperty.create("blue");
     private BonemealAPI.FeatureProvider vegetationFeature;
 

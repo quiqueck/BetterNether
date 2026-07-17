@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -14,7 +13,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockCincinnasiteAnvil extends AnvilBlock implements BehaviourMetal {
+public class BlockCincinnasiteAnvil extends AnvilBlock {
     public BlockCincinnasiteAnvil(Properties settings) {
         super(settings.noOcclusion());
     }

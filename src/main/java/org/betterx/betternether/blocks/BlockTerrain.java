@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
-import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
 import org.betterx.wover.block.api.BlockTagProvider;
 import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
@@ -21,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import org.jetbrains.annotations.Nullable;
 
-public class BlockTerrain extends BlockBase implements BlockTagProvider, BonemealNyliumLike, BehaviourStone {
+public class BlockTerrain extends BlockBase implements BlockTagProvider, BonemealNyliumLike {
     protected BonemealAPI.FeatureProvider vegetationFeature;
     public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
             SoundEvents.NETHERRACK_BREAK,

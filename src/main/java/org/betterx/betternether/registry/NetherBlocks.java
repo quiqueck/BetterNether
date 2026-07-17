@@ -58,6 +58,7 @@ public class NetherBlocks {
     public static final Block NETHER_BRICK_TILE_LARGE = registerBlock(
             "nether_brick_tile_large",
             Blocks.NETHER_BRICKS,
+            NetherMaterial.stone(),
             BNNetherBrick::new
     );
 
@@ -103,16 +104,18 @@ public class NetherBlocks {
                     true
             )
     );
-    public static final Block CINCINNASITE_BLOCK = registerBlock("cincinnasite_block", BlockCincinnasite::new);
-    public static final Block CINCINNASITE_FORGED = registerBlock("cincinnasite_forged", BlockCincinnasite::new);
+    public static final Block CINCINNASITE_BLOCK = registerBlock("cincinnasite_block", NetherMaterial.metal(), BlockCincinnasite::new);
+    public static final Block CINCINNASITE_FORGED = registerBlock("cincinnasite_forged", NetherMaterial.metal(), BlockCincinnasite::new);
     public static final Block CINCINNASITE_PILLAR = registerBlock(
             "cincinnasite_pillar",
             CINCINNASITE_BLOCK,
+            NetherMaterial.metal(),
             BlockCincinnasitPillar::new
     );
-    public static final Block CINCINNASITE_BRICKS = registerBlock("cincinnasite_bricks", BlockCincinnasite::new);
+    public static final Block CINCINNASITE_BRICKS = registerBlock("cincinnasite_bricks", NetherMaterial.metal(), BlockCincinnasite::new);
     public static final Block CINCINNASITE_BRICK_PLATE = registerBlock(
             "cincinnasite_brick_plate",
+            NetherMaterial.metal(),
             BlockCincinnasite::new
     );
     public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED, false, NetherMaterial.metal());
@@ -153,22 +156,26 @@ public class NetherBlocks {
     public static final Block CINCINNASITE_LANTERN = registerBlock(
             "cincinnasite_lantern",
             CINCINNASITE_BLOCK,
+            NetherMaterial.metal(),
             BlockCincinnasiteLantern::new
     );
     public static final Block CINCINNASITE_TILE_LARGE = registerBlock(
             "cincinnasite_tile_large",
+            NetherMaterial.metal(),
             BlockCincinnasite::new
     );
     public static final Block CINCINNASITE_TILE_SMALL = registerBlock(
             "cincinnasite_tile_small",
+            NetherMaterial.metal(),
             BlockCincinnasite::new
     );
-    public static final Block CINCINNASITE_CARVED = registerBlock("cincinnasite_carved", BlockCincinnasite::new);
+    public static final Block CINCINNASITE_CARVED = registerBlock("cincinnasite_carved", NetherMaterial.metal(), BlockCincinnasite::new);
     public static final Block CINCINNASITE_WALL = registerWall("cincinnasite_wall", CINCINNASITE_FORGED,
             NetherMaterial.metal(), ModelTraitLibrary.externalModel());
     public static final Block CINCINNASITE_BRICKS_PILLAR = registerBlock(
             "cincinnasite_bricks_pillar",
             CINCINNASITE_FORGED,
+            NetherMaterial.metal(),
             BNPillar.Metal::new
     );
     public static final Block CINCINNASITE_BARS = registerBlock(
@@ -180,21 +187,22 @@ public class NetherBlocks {
     public static final Block CINCINNASITE_PEDESTAL = registerBlock(
             "cincinnasite_pedestal",
             CINCINNASITE_BLOCK,
+            NetherMaterial.metal(),
             BlockCincinnasitePedestal::new
     );
     public static final Block CINCINNASITE_FRAME = registerBlock(
             "cincinnasite_frame",
             CINCINNASITE_BLOCK,
-            NetherRender.cutout(),
+            NetherTraits.concat(NetherRender.cutout(), NetherMaterial.metal()),
             BlockCincinnasiteFrame::new
     );
     public static final Block CINCINNASITE_LANTERN_SMALL = registerBlock(
             "cincinnasite_lantern_small",
             CINCINNASITE_LANTERN,
-            NetherRender.cutout(),
+            NetherTraits.concat(NetherRender.cutout(), NetherMaterial.metal()),
             BlockSmallLantern.Metal::new
     );
-    public static final Block CINCINNASITE_CHAIN = registerBlock("cincinnasite_chain", Blocks.CHAIN, NetherRender.cutout(), BNChain::new);
+    public static final Block CINCINNASITE_CHAIN = registerBlock("cincinnasite_chain", Blocks.CHAIN, NetherTraits.concat(NetherRender.cutout(), NetherMaterial.metal()), BNChain::new);
     // Ruby //
     public static final Block NETHER_RUBY_ORE = registerBlock(
             "nether_ruby_ore",
@@ -211,6 +219,7 @@ public class NetherBlocks {
     public static final Block NETHER_RUBY_BLOCK = registerBlock(
             "nether_ruby_block",
             Blocks.DIAMOND_BLOCK,
+            NetherMaterial.stone(),
             BlockNetherRuby::new
     );
     public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK, true, NetherMaterial.metal());
@@ -234,6 +243,7 @@ public class NetherBlocks {
     public static final Block NETHER_BRICK_TILE_SMALL = registerBlock(
             "nether_brick_tile_small",
             Blocks.NETHER_BRICKS,
+            NetherMaterial.stone(),
             BNNetherBrick::new
     );
     public static final Block NETHER_BRICK_WALL = registerWall("nether_brick_wall", NETHER_BRICK_TILE_LARGE,
@@ -252,7 +262,7 @@ public class NetherBlocks {
             NetherMaterial.stone()
     );
     // Bone //
-    public static final Block BONE_BLOCK = registerBlock("bone_block", Blocks.BONE_BLOCK, BNBoneBlock::new);
+    public static final Block BONE_BLOCK = registerBlock("bone_block", Blocks.BONE_BLOCK, NetherMaterial.stone(), BNBoneBlock::new);
     public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK, false, NetherMaterial.stone());
     public static final Block BONE_SLAB = registerSlab("bone_slab", BONE_BLOCK, false,
             NetherMaterial.stone(), ModelTraitLibrary.externalModel());
@@ -271,7 +281,7 @@ public class NetherBlocks {
     );
     public static final Block BONE_WALL = registerWall("bone_wall", BONE_BLOCK,
             NetherMaterial.stone(), ModelTraitLibrary.externalModel());
-    public static final Block BONE_TILE = registerBlock("bone_tile", Blocks.BONE_BLOCK, BNBoneBlock::new);
+    public static final Block BONE_TILE = registerBlock("bone_tile", Blocks.BONE_BLOCK, NetherMaterial.stone(), BNBoneBlock::new);
     public static final Block BONE_REED_DOOR = registerDoor(
             "bone_reed_door",
             BONE_BLOCK,
@@ -696,20 +706,22 @@ public class NetherBlocks {
     public static final Block PIG_STATUE_RESPAWNER = registerBlock(
             "pig_statue_respawner",
             CINCINNASITE_BLOCK,
-            NetherRender.cutout(),
+            NetherTraits.concat(NetherRender.cutout(), NetherMaterial.metal()),
             BlockStatueRespawner::new
     );
     public static final Block CINCINNASITE_POT = registerBlock(
             "cincinnasite_pot",
             CINCINNASITE_BLOCK,
+            NetherMaterial.metal(),
             p -> new BlockBNPot.Metal(p)
     );
     public static final Block BRICK_POT = registerBlock(
             "brick_pot",
             Blocks.NETHER_BRICKS,
+            NetherMaterial.stone(),
             p -> new BlockBNPot.Stone(p)
     );
-    public static final Block GEYSER = registerBlock("geyser", Blocks.NETHERRACK, BlockGeyser::new);
+    public static final Block GEYSER = registerBlock("geyser", Blocks.NETHERRACK, NetherMaterial.stone(), BlockGeyser::new);
     public static final Block NETHERRACK_STALACTITE = registerStalactite("netherrack_stalactite", Blocks.NETHERRACK);
     public static final Block GLOWSTONE_STALACTITE = registerStalactite("glowstone_stalactite", Blocks.GLOWSTONE);
     public static final Block BLACKSTONE_STALACTITE = registerStalactite("blackstone_stalactite", Blocks.BLACKSTONE);
@@ -721,55 +733,61 @@ public class NetherBlocks {
             CINCINNASITE_FORGED,
             Blocks.NETHERRACK,
             NetherItems.CINCINNASITE_INGOT,
-            BlockFireBowl.Metal::new
+            BlockFireBowl.Metal::new,
+            NetherMaterial.metal()
     );
     public static final Block BRICKS_FIRE_BOWL = registerFireBowl(
             "bricks_fire_bowl",
             NETHER_BRICK_TILE_LARGE,
             Blocks.NETHERRACK,
             Items.NETHER_BRICK,
-            BlockFireBowl.Stone::new
+            BlockFireBowl.Stone::new,
+            NetherMaterial.stone()
     );
     public static final Block NETHERITE_FIRE_BOWL = registerFireBowl(
             "netherite_fire_bowl",
             Blocks.NETHERITE_BLOCK,
             Blocks.NETHERRACK,
             Items.NETHERITE_INGOT,
-            BlockFireBowl.Metal::new
+            BlockFireBowl.Metal::new,
+            NetherMaterial.metal()
     );
     public static final Block CINCINNASITE_FIRE_BOWL_SOUL = registerFireBowl(
             "cincinnasite_fire_bowl_soul",
             CINCINNASITE_FORGED,
             Blocks.SOUL_SAND,
             NetherItems.CINCINNASITE_INGOT,
-            BlockFireBowl.Metal::new
+            BlockFireBowl.Metal::new,
+            NetherMaterial.metal()
     );
     public static final Block BRICKS_FIRE_BOWL_SOUL = registerFireBowl(
             "bricks_fire_bowl_soul",
             NETHER_BRICK_TILE_LARGE,
             Blocks.SOUL_SAND,
             Items.NETHER_BRICK,
-            BlockFireBowl.Stone::new
+            BlockFireBowl.Stone::new,
+            NetherMaterial.stone()
     );
     public static final Block NETHERITE_FIRE_BOWL_SOUL = registerFireBowl(
             "netherite_fire_bowl_soul",
             Blocks.NETHERITE_BLOCK,
             Blocks.SOUL_SAND,
             Items.NETHERITE_INGOT,
-            BlockFireBowl.Metal::new
+            BlockFireBowl.Metal::new,
+            NetherMaterial.metal()
     );
     // Terrain //
     public static final BlockTerrain NETHERRACK_MOSS = registerBlock(
             "netherrack_moss",
             Blocks.NETHERRACK,
-            NetherTraits.of(NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
     public static final BlockNetherMycelium NETHER_MYCELIUM = registerBlock(
             "nether_mycelium",
             Blocks.NETHERRACK,
-            NetherTraits.of(NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
             BlockNetherMycelium::new,
             CommonBlockTags.MYCELIUM,
             CommonBlockTags.NETHER_MYCELIUM,
@@ -779,7 +797,7 @@ public class NetherBlocks {
     public static final BlockTerrain JUNGLE_GRASS = registerBlock(
             "jungle_grass",
             Blocks.NETHERRACK,
-            NetherTraits.of(NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -787,7 +805,7 @@ public class NetherBlocks {
     public static final BlockTerrain MUSHROOM_GRASS = registerBlock(
             "mushroom_grass",
             Blocks.NETHERRACK,
-            NetherTraits.of(NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -795,7 +813,7 @@ public class NetherBlocks {
     public static final BlockTerrain SEPIA_MUSHROOM_GRASS = registerBlock(
             "sepia_mushroom_grass",
             Blocks.NETHERRACK,
-            NetherTraits.of(NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -803,7 +821,7 @@ public class NetherBlocks {
     public static final BlockTerrain SWAMPLAND_GRASS = registerBlock(
             "swampland_grass",
             Blocks.NETHERRACK,
-            NetherTraits.of(NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -816,12 +834,12 @@ public class NetherBlocks {
     public static final BlockTerrain CEILING_MUSHROOMS = registerBlock(
             "ceiling_mushrooms",
             Blocks.NETHERRACK,
-            NetherTraits.of(NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
     // Roofs //
-    public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS, BlockBase.Stone::new);
+    public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS, BlockBase.Stone::new, NetherMaterial.stone());
     public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs(
             "roof_tile_nether_bricks_stairs",
             ROOF_TILE_NETHER_BRICKS,
@@ -835,7 +853,7 @@ public class NetherBlocks {
             NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
-    public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED, BlockBase.Metal::new);
+    public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED, BlockBase.Metal::new, NetherMaterial.metal());
     public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerStairs(
             "roof_tile_cincinnasite_stairs",
             ROOF_TILE_CINCINNASITE,
@@ -856,18 +874,20 @@ public class NetherBlocks {
     public static final Block CINCINNASITE_FORGE = registerBlock(
             "cincinnasite_forge",
             CINCINNASITE_BLOCK,
+            NetherMaterial.metal(),
             BlockCincinnasiteForge::new
     );
     public static final Block NETHER_BREWING_STAND = registerBlock(
             "nether_brewing_stand",
             Blocks.NETHER_BRICKS,
-            NetherRender.cutout(),
+            NetherTraits.concat(NetherRender.cutout(), NetherMaterial.stone()),
             BNBrewingStand::new,
             CommonPoiTags.CLERIC_WORKSTATION
     );
     public static final Block CINCINNASITE_ANVIL = registerBlock(
             "cincinnasite_anvil",
             CINCINNASITE_BLOCK,
+            NetherMaterial.metal(),
             BlockCincinnasiteAnvil::new,
             BlockTags.ANVIL
     );
@@ -897,6 +917,7 @@ public class NetherBlocks {
     public static final Block CHEST_OF_DRAWERS = registerBlock(
             "chest_of_drawers",
             CINCINNASITE_BLOCK,
+            NetherMaterial.metal(),
             BlockChestOfDrawers::new
     );
 
@@ -1456,13 +1477,18 @@ public class NetherBlocks {
     private static Block registerRoof(
             String name,
             Block source,
-            Function<BlockBehaviour.Properties, BlockBase> factory
+            Function<BlockBehaviour.Properties, BlockBase> factory,
+            List<BlockTrait<?, ?>> material
     ) {
-        Block roof = getBlockRegistry()
+        // The roof block is a BlockBase.Stone / BlockBase.Metal that dropped its Behaviour* marker; the
+        // caller passes the matching pickaxe tool tag (NetherMaterial.stone()/metal()). Tag only, no forced
+        // property, so the copied source hardness is unchanged.
+        final var definition = getBlockRegistry()
                 .<BlockBase>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .replacePropertiesWithCopy(source)
-                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
-                .buildAndRegister();
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+        definition.addTrait(material);
+        Block roof = definition.buildAndRegister();
 
         addFuel(source, roof);
         if (ModCore.isDatagen())
@@ -1531,9 +1557,12 @@ public class NetherBlocks {
             Block propertiesSource,
             Function<BlockBehaviour.Properties, T> factory
     ) {
+        // registerSoulBlock only builds soul_sandstone_smooth (a BlockBase.Stone). That class dropped its
+        // BehaviourStone marker, so the pickaxe tool tag is supplied here. Tag only, no forced property.
         return registerBlock(
                 name,
                 propertiesSource,
+                NetherMaterial.stone(),
                 factory,
                 BlockTags.SOUL_FIRE_BASE_BLOCKS,
                 BlockTags.SOUL_SPEED_BLOCKS
@@ -1583,7 +1612,10 @@ public class NetherBlocks {
             Block recipeSource,
             TagKey<Block>... tags
     ) {
-        T result = registerBlock(name, propertiesSource, NetherTraits.of(model), factory, tags);
+        // Every registerMakeable2X2 block is a stone material (BlockSoulSandstone / BlockBase.Stone), which
+        // dropped its BehaviourStone marker - restore the pickaxe tool tag alongside the model. Tag only,
+        // no forced property, so the copied source hardness (sandstone 0.8, basalt 1.25/4.2) is unchanged.
+        T result = registerBlock(name, propertiesSource, NetherTraits.and(NetherMaterial.stone(), model), factory, tags);
         if (ModCore.isDatagen())
             RecipesHelper.makeSimpleRecipe2(recipeSource, result, 4, group, category);
 
@@ -1704,11 +1736,14 @@ public class NetherBlocks {
     }
 
     public static Block registerFurnace(String name, Block source) {
-        Block block = getBlockRegistry()
+        // BlockNetherFurnace dropped its BehaviourStone marker; restore the pickaxe tool tag (all furnaces
+        // are stone). Tag only, no forced property (see registerStalactite).
+        final var definition = getBlockRegistry()
                 .<BlockNetherFurnace>defineDefaultBlock(name, def -> new BlockNetherFurnace(def.getProperties()))
                 .replacePropertiesWithCopy(source)
-                .addTags(CommonPoiTags.ARMORER_WORKSTATION)
-                .buildAndRegister();
+                .addTags(CommonPoiTags.ARMORER_WORKSTATION);
+        definition.addTrait(NetherMaterial.stone());
+        Block block = definition.buildAndRegister();
 
         if (ModCore.isDatagen())
             RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
@@ -1718,10 +1753,14 @@ public class NetherBlocks {
     }
 
     private static Block registerStalactite(String name, Block source) {
-        Block block = getBlockRegistry()
+        // BlockStalactite dropped its BehaviourStone marker; the pickaxe tool tag it used to contribute is
+        // restored here (all stalactites are stone). NetherMaterial.stone() is the tag only - no property is
+        // forced, so a source like glowstone (which is not requiresCorrectToolForDrops) is unchanged.
+        final var definition = getBlockRegistry()
                 .<BlockStalactite>defineDefaultBlock(name, def -> new BlockStalactite(def.getProperties()))
-                .replacePropertiesWithCopy(source)
-                .buildAndRegister();
+                .replacePropertiesWithCopy(source);
+        definition.addTrait(NetherMaterial.stone());
+        Block block = definition.buildAndRegister();
 
         if (ModCore.isDatagen())
             RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite", RecipeCategory.DECORATIONS);
@@ -1740,14 +1779,18 @@ public class NetherBlocks {
             Block source,
             Block inside,
             Item leg,
-            Function<BlockBehaviour.Properties, BlockFireBowl> factory
+            Function<BlockBehaviour.Properties, BlockFireBowl> factory,
+            List<BlockTrait<?, ?>> material
     ) {
+        // BlockFireBowl.Stone / BlockFireBowl.Metal dropped their Behaviour* markers; the caller passes the
+        // matching pickaxe tool tag. Tag only, no forced property (see registerStalactite).
         final boolean isNetherite = name.startsWith("netherite");
-        Block block = getBlockRegistry()
+        final var definition = getBlockRegistry()
                 .<BlockFireBowl>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .replacePropertiesWithCopy(source)
-                .addTrait(NetherRender.cutout())
-                .buildAndRegister();
+                .addTrait(NetherRender.cutout());
+        definition.addTrait(material);
+        Block block = definition.buildAndRegister();
 
         if (!isNetherite) {
             RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);

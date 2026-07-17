@@ -79,12 +79,14 @@ public class NetherMaterial {
         return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsShovel());
     }
 
-    /** The old {@code BehaviourOre}: mineable with a pickaxe, plus {@link CommonBlockTags#ORES}. */
+    /**
+     * The ore classification: {@code ORE_BLOCK.withDefault()} (instrument BASEDRUM, strength 3/9, reqTool,
+     * sound STONE, pickaxe tag and {@link CommonBlockTags#ORES}). Reproduces the old {@code BehaviourOre}
+     * marker's tags (pickaxe + c:ores); its forced properties are overridden by the ore block's own
+     * constructor ({@code Materials.stone(...).strength(3,5).sound(NETHERRACK)}), which runs last.
+     */
     public static List<BlockTrait<?, ?>> ore() {
-        return NetherTraits.of(
-                BlockTraits.MINEABLE_WITH.needsPickAxe(),
-                BlockTraits.BLOCK_TAG.with(CommonBlockTags.ORES)
-        );
+        return BlockTraits.ORE_BLOCK.withDefault();
     }
 
     /** The old {@code BehaviourImmobile}: {@link CommonBlockTags#IMMOBILE} + {@link BlockTags#DRAGON_IMMUNE}. */

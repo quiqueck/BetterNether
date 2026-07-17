@@ -94,15 +94,9 @@ public class NetherBlocks {
     // Cincinnasite //
     public static final Block CINCINNASITE_ORE = registerBlock(
             "cincinnasite_ore",
-            p -> new BlockOre(
-                    p,
-                    () -> NetherItems.CINCINNASITE,
-                    1,
-                    3,
-                    0,
-                    ToolTiers.IRON_TOOL.blockTag,
-                    true
-            )
+            NetherTraits.and(NetherMaterial.ore(), NetherLoot.ore(() -> NetherItems.CINCINNASITE, 1, 3)),
+            p -> new BlockOre(p, 0, true),
+            ToolTiers.IRON_TOOL.blockTag
     );
     public static final Block CINCINNASITE_BLOCK = registerBlock("cincinnasite_block", NetherMaterial.metal(), BlockCincinnasite::new);
     public static final Block CINCINNASITE_FORGED = registerBlock("cincinnasite_forged", NetherMaterial.metal(), BlockCincinnasite::new);
@@ -206,15 +200,9 @@ public class NetherBlocks {
     // Ruby //
     public static final Block NETHER_RUBY_ORE = registerBlock(
             "nether_ruby_ore",
-            p -> new BlockOre(
-                    p,
-                    () -> NetherItems.NETHER_RUBY,
-                    1,
-                    2,
-                    5,
-                    ToolTiers.DIAMOND_TOOL.blockTag,
-                    true
-            )
+            NetherTraits.and(NetherMaterial.ore(), NetherLoot.ore(() -> NetherItems.NETHER_RUBY, 1, 2)),
+            p -> new BlockOre(p, 5, true),
+            ToolTiers.DIAMOND_TOOL.blockTag
     );
     public static final Block NETHER_RUBY_BLOCK = registerBlock(
             "nether_ruby_block",
@@ -230,15 +218,9 @@ public class NetherBlocks {
     // Vanilla Ores
     public static final Block NETHER_LAPIS_ORE = registerBlock(
             "nether_lapis_ore",
-            p -> new BlockOre(
-                    p,
-                    () -> NetherItems.LAPIS_PILE,
-                    3,
-                    6,
-                    3,
-                    ToolTiers.IRON_TOOL.blockTag,
-                    false
-            )
+            NetherTraits.and(NetherMaterial.ore(), NetherLoot.ore(() -> NetherItems.LAPIS_PILE, 3, 6)),
+            p -> new BlockOre(p, 3, false),
+            ToolTiers.IRON_TOOL.blockTag
     );
     public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", NetherTraits.and(NetherMaterial.ore(), NetherLoot.redstoneOre(1, 3)), RedstoneOreBlock::new);
     // Bricks //

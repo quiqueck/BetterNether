@@ -84,6 +84,11 @@ public class NetherLoot {
                 provider.dropOre(block, Items.REDSTONE, UniformGenerator.between(minCount, maxCount)));
     }
 
+    /** A generic ore: silk-touch drops the block itself, otherwise a fortune-boosted {@code min..max} of {@code drop}. */
+    public static LootTableTrait ore(java.util.function.Supplier<net.minecraft.world.item.Item> drop, int minCount, int maxCount) {
+        return BlockTraits.LOOT_TABLE.dropOre(drop, minCount, maxCount);
+    }
+
     /** Black vine (and blooming vine): 1-2 of itself, and only when sheared/hoed/silk-touched. */
     public static LootTableTrait blackVine() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable

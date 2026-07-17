@@ -115,9 +115,9 @@ public class NetherBlocks {
             "cincinnasite_brick_plate",
             BlockCincinnasite::new
     );
-    public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED, false);
+    public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED, false, NetherMaterial.metal());
     public static final Block CINCINNASITE_SLAB = registerSlab("cincinnasite_slab", CINCINNASITE_FORGED, false,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.metal(), ModelTraitLibrary.externalModel());
     public static final Block TABURET_CINCINNASITE = registerTaburet(
             "taburet_cincinnasite",
             CINCINNASITE_SLAB,
@@ -137,6 +137,7 @@ public class NetherBlocks {
             "cincinnasite_button",
             CINCINNASITE_FORGED,
             NetherModels.button("block/cincinnasite_button"),
+            NetherMaterial.metal(),
             p -> new net.minecraft.world.level.block.ButtonBlock(
                     BlockSetType.GOLD,
                     20,
@@ -164,7 +165,7 @@ public class NetherBlocks {
     );
     public static final Block CINCINNASITE_CARVED = registerBlock("cincinnasite_carved", BlockCincinnasite::new);
     public static final Block CINCINNASITE_WALL = registerWall("cincinnasite_wall", CINCINNASITE_FORGED,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.metal(), ModelTraitLibrary.externalModel());
     public static final Block CINCINNASITE_BRICKS_PILLAR = registerBlock(
             "cincinnasite_bricks_pillar",
             CINCINNASITE_FORGED,
@@ -212,9 +213,9 @@ public class NetherBlocks {
             Blocks.DIAMOND_BLOCK,
             BlockNetherRuby::new
     );
-    public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK, true);
+    public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK, true, NetherMaterial.metal());
     public static final Block NETHER_RUBY_SLAB = registerSlab("nether_ruby_slab", NETHER_RUBY_BLOCK, true,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.metal(), ModelTraitLibrary.externalModel());
     // Vanilla Ores
     public static final Block NETHER_LAPIS_ORE = registerBlock(
             "nether_lapis_ore",
@@ -236,27 +237,30 @@ public class NetherBlocks {
             BNNetherBrick::new
     );
     public static final Block NETHER_BRICK_WALL = registerWall("nether_brick_wall", NETHER_BRICK_TILE_LARGE,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
     public static final Block NETHER_BRICK_TILE_SLAB = registerSlab(
             "nether_brick_tile_slab",
             NETHER_BRICK_TILE_SMALL,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     public static final Block NETHER_BRICK_TILE_STAIRS = registerStairs(
             "nether_brick_tile_stairs",
             NETHER_BRICK_TILE_SMALL,
-            false
+            false,
+            NetherMaterial.stone()
     );
     // Bone //
     public static final Block BONE_BLOCK = registerBlock("bone_block", Blocks.BONE_BLOCK, BNBoneBlock::new);
-    public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK, false);
+    public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK, false, NetherMaterial.stone());
     public static final Block BONE_SLAB = registerSlab("bone_slab", BONE_BLOCK, false,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
     public static final Block BONE_BUTTON = registerButton(
             "bone_button",
             BONE_BLOCK,
             BlockSetType.CRIMSON,
+            NetherMaterial.stone(),
             NetherModels.button("block/bone_button")
     );
     public static final Block BONE_PLATE = registerPlate(
@@ -266,7 +270,7 @@ public class NetherBlocks {
             NetherModels.pressurePlate("block/bone_block_plate")
     );
     public static final Block BONE_WALL = registerWall("bone_wall", BONE_BLOCK,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
     public static final Block BONE_TILE = registerBlock("bone_tile", Blocks.BONE_BLOCK, BNBoneBlock::new);
     public static final Block BONE_REED_DOOR = registerDoor(
             "bone_reed_door",
@@ -348,12 +352,14 @@ public class NetherBlocks {
     public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs(
             "obsidian_bricks_stairs",
             OBSIDIAN_BRICKS,
-            false
+            false,
+            NetherMaterial.stone()
     );
     public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab(
             "obsidian_bricks_slab",
             OBSIDIAN_BRICKS,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     public static final Block OBSIDIAN_TILE = registerObsidianCube(
@@ -367,12 +373,14 @@ public class NetherBlocks {
     public static final Block OBSIDIAN_TILE_STAIRS = registerStairs(
             "obsidian_tile_stairs",
             OBSIDIAN_TILE_SMALL,
-            false
+            false,
+            NetherMaterial.stone()
     );
     public static final Block OBSIDIAN_TILE_SLAB = registerSlab(
             "obsidian_tile_slab",
             OBSIDIAN_TILE_SMALL,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     public static final Block OBSIDIAN_ROD_TILES = registerObsidianCube(
@@ -402,12 +410,14 @@ public class NetherBlocks {
     public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs(
             "blue_obsidian_bricks_stairs",
             BLUE_OBSIDIAN_BRICKS,
-            false
+            false,
+            NetherMaterial.stone()
     );
     public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab(
             "blue_obsidian_bricks_slab",
             BLUE_OBSIDIAN_BRICKS,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     public static final Block BLUE_OBSIDIAN_TILE = registerObsidianCube(
@@ -421,12 +431,14 @@ public class NetherBlocks {
     public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs(
             "blue_obsidian_tile_stairs",
             BLUE_OBSIDIAN_TILE_SMALL,
-            false
+            false,
+            NetherMaterial.stone()
     );
     public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab(
             "blue_obsidian_tile_slab",
             BLUE_OBSIDIAN_TILE_SMALL,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     public static final Block BLUE_OBSIDIAN_ROD_TILES = registerObsidianCube(
@@ -466,6 +478,7 @@ public class NetherBlocks {
             "soul_sandstone_cut_stairs",
             SOUL_SANDSTONE_CUT,
             false,
+            NetherMaterial.stone(),
             NetherModels.soulSandstoneCutStairs(),
             BlockTags.SOUL_SPEED_BLOCKS,
             BlockTags.SOUL_FIRE_BASE_BLOCKS
@@ -474,10 +487,11 @@ public class NetherBlocks {
             "soul_sandstone_cut_slab",
             SOUL_SANDSTONE_CUT,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     public static final Block SOUL_SANDSTONE_WALL = registerWall("soul_sandstone_wall", SOUL_SANDSTONE_CUT,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
     public static final Block SOUL_SANDSTONE_SMOOTH = registerSoulBlock(
             "soul_sandstone_smooth",
             Blocks.SANDSTONE,
@@ -495,6 +509,7 @@ public class NetherBlocks {
             "soul_sandstone_stairs",
             SOUL_SANDSTONE,
             false,
+            NetherMaterial.stone(),
             NetherModels.soulSandstoneStairs(),
             BlockTags.SOUL_SPEED_BLOCKS,
             BlockTags.SOUL_FIRE_BASE_BLOCKS
@@ -503,16 +518,18 @@ public class NetherBlocks {
             "soul_sandstone_smooth_stairs",
             SOUL_SANDSTONE_SMOOTH,
             false,
+            NetherMaterial.stone(),
             NetherModels.soulSandstoneSmoothStairs(),
             BlockTags.SOUL_SPEED_BLOCKS,
             BlockTags.SOUL_FIRE_BASE_BLOCKS
     );
     public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE, false,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
     public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = registerSlab(
             "soul_sandstone_smooth_slab",
             SOUL_SANDSTONE_SMOOTH,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     // Basalt Bricks //
@@ -525,15 +542,16 @@ public class NetherBlocks {
             RecipeCategory.BUILDING_BLOCKS,
             Blocks.POLISHED_BASALT
     );
-    public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS, true);
+    public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS, true, NetherMaterial.stone());
     public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS, true,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
     public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS,
-            ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
     public static final Block BASALT_SLAB = registerSlab(
             "basalt_slab",
             Blocks.BASALT,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockOrangeMushroom::new);
@@ -807,24 +825,28 @@ public class NetherBlocks {
     public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs(
             "roof_tile_nether_bricks_stairs",
             ROOF_TILE_NETHER_BRICKS,
-            false
+            false,
+            NetherMaterial.stone()
     );
     public static final Block ROOF_TILE_NETHER_BRICKS_SLAB = registerSlab(
             "roof_tile_nether_bricks_slab",
             ROOF_TILE_NETHER_BRICKS,
             false,
+            NetherMaterial.stone(),
             ModelTraitLibrary.externalModel()
     );
     public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED, BlockBase.Metal::new);
     public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerStairs(
             "roof_tile_cincinnasite_stairs",
             ROOF_TILE_CINCINNASITE,
-            false
+            false,
+            NetherMaterial.metal()
     );
     public static final Block ROOF_TILE_CINCINNASITE_SLAB = registerSlab(
             "roof_tile_cincinnasite_slab",
             ROOF_TILE_CINCINNASITE,
             false,
+            NetherMaterial.metal(),
             ModelTraitLibrary.externalModel()
     );
     // Craft Stations //
@@ -991,9 +1013,9 @@ public class NetherBlocks {
             NetherTags.NETHER_SAND
     );
 
-    public static final Block NETHERRACK_SLAB = registerSlab("netherrack_slab", Blocks.NETHERRACK, true);
-    public static final Block NETHERRACK_STAIR = registerStairs("netherrack_stairs", Blocks.NETHERRACK, true);
-    public static final Block NETHERRACK_WALLS = registerWall("netherrack_wall", Blocks.NETHERRACK);
+    public static final Block NETHERRACK_SLAB = registerSlab("netherrack_slab", Blocks.NETHERRACK, true, NetherMaterial.stone());
+    public static final Block NETHERRACK_STAIR = registerStairs("netherrack_stairs", Blocks.NETHERRACK, true, NetherMaterial.stone());
+    public static final Block NETHERRACK_WALLS = registerWall("netherrack_wall", Blocks.NETHERRACK, NetherMaterial.stone());
 
 
     // DEFERED BLOCKS //
@@ -1212,6 +1234,9 @@ public class NetherBlocks {
                 .replacePropertiesWithCopy(propertiesSource);
 
         definition.addTrait(ModelTraitLibrary.door());
+        // BNWoodlikeDoor carries no Behaviour* marker, so - like the slot blocks (see registerStairs) - it
+        // needs its mineable tool tag spelled out or it drops nothing. Every door built here is wood.
+        definition.addTrait(NetherMaterial.wood());
 
         return definition.buildAndRegister();
     }
@@ -1322,23 +1347,28 @@ public class NetherBlocks {
             String name,
             Block source,
             boolean fireproof,
+            List<BlockTrait<?, ?>> material,
             TagKey<Block>... tags
     ) {
         // bclib's BaseStairsBlock (which generated its own models) is gone, and the vanilla StairBlock this
         // replaced it with has no model source at all - without this trait the block gets no blockstate and
         // its item falls back to a flat icon on a texture that does not exist.
-        return registerStairs(name, source, fireproof, ModelTraitLibrary.stairs(() -> source), tags);
+        return registerStairs(name, source, fireproof, material, ModelTraitLibrary.stairs(() -> source), tags);
     }
 
     /**
-     * @param model the model trait to build the stairs with; pass a {@link NetherModels} factory for
-     *              stairs whose textures are not simply their material block's.
+     * @param material the material tool/tag traits (a {@link NetherMaterial} list) - the vanilla
+     *                 {@code StairBlock} carries no {@code Behaviour*} marker, so without this the copied
+     *                 {@code requiresCorrectToolForDrops} leaves it in no mineable tag and it drops nothing.
+     * @param model    the model trait to build the stairs with; pass a {@link NetherModels} factory for
+     *                 stairs whose textures are not simply their material block's.
      */
     @SafeVarargs
     public static Block registerStairs(
             String name,
             Block source,
             boolean fireproof,
+            List<BlockTrait<?, ?>> material,
             BlockModelTrait model,
             TagKey<Block>... tags
     ) {
@@ -1352,6 +1382,7 @@ public class NetherBlocks {
                 .addTags(tags);
 
         definition.addTrait(model);
+        definition.addTrait(material);
 
         Block stairs = definition.buildAndRegister();
 
@@ -1364,18 +1395,28 @@ public class NetherBlocks {
     }
 
     @SafeVarargs
-    public static Block registerSlab(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
-        return registerSlab(name, source, fireproof, ModelTraitLibrary.slab(() -> source), tags);
-    }
-
-    /**
-     * @param model the model trait to build the slab with; pass {@code ModelTraitLibrary.externalModel()}
-     *              for a slab whose blockstate is hand-authored in src/main/resources.
-     */
     public static Block registerSlab(
             String name,
             Block source,
             boolean fireproof,
+            List<BlockTrait<?, ?>> material,
+            TagKey<Block>... tags
+    ) {
+        return registerSlab(name, source, fireproof, material, ModelTraitLibrary.slab(() -> source), tags);
+    }
+
+    /**
+     * @param material the material tool/tag traits (a {@link NetherMaterial} list); see
+     *                 {@link #registerStairs} for why the vanilla {@code SlabBlock} needs it.
+     * @param model    the model trait to build the slab with; pass {@code ModelTraitLibrary.externalModel()}
+     *                 for a slab whose blockstate is hand-authored in src/main/resources.
+     */
+    @SafeVarargs
+    public static Block registerSlab(
+            String name,
+            Block source,
+            boolean fireproof,
+            List<BlockTrait<?, ?>> material,
             BlockModelTrait model,
             TagKey<Block>... tags
     ) {
@@ -1390,6 +1431,7 @@ public class NetherBlocks {
 
         // See registerStairs: replaces the model generation bclib's BaseSlabBlock used to provide.
         definition.addTrait(model);
+        definition.addTrait(material);
 
         Block slab = definition.buildAndRegister();
 
@@ -1424,15 +1466,17 @@ public class NetherBlocks {
         return roof;
     }
 
-    public static Block registerButton(String name, Block source, BlockSetType type) {
-        return registerButton(name, source, type, ModelTraitLibrary.button(() -> source));
+    public static Block registerButton(String name, Block source, BlockSetType type, List<BlockTrait<?, ?>> material) {
+        return registerButton(name, source, type, material, ModelTraitLibrary.button(() -> source));
     }
 
     /**
-     * @param model the model trait to build the button with; pass a {@link NetherModels} factory for a
-     *              button whose texture is not simply its material block's.
+     * @param material the material tool/tag traits (a {@link NetherMaterial} list); see
+     *                 {@link #registerStairs} for why the vanilla {@code ButtonBlock} needs it.
+     * @param model    the model trait to build the button with; pass a {@link NetherModels} factory for a
+     *                 button whose texture is not simply its material block's.
      */
-    public static Block registerButton(String name, Block source, BlockSetType type, BlockModelTrait model) {
+    public static Block registerButton(String name, Block source, BlockSetType type, List<BlockTrait<?, ?>> material, BlockModelTrait model) {
         Block button = getBlockRegistry()
                 .<net.minecraft.world.level.block.ButtonBlock>defineDefaultBlock(
                         name,
@@ -1441,6 +1485,7 @@ public class NetherBlocks {
                 .replacePropertiesWithCopy(source)
                 .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .addTrait(model)
+                .addTrait(material)
                 .buildAndRegister();
 
         addFuel(source, button);
@@ -1547,15 +1592,17 @@ public class NetherBlocks {
         return result;
     }
 
-    public static Block registerWall(String name, Block source) {
-        return registerWall(name, source, ModelTraitLibrary.wall(() -> source));
+    public static Block registerWall(String name, Block source, List<BlockTrait<?, ?>> material) {
+        return registerWall(name, source, material, ModelTraitLibrary.wall(() -> source));
     }
 
     /**
-     * @param model the model trait to build the wall with; see {@link #registerSlab} for when to pass
-     *              {@code ModelTraitLibrary.externalModel()}.
+     * @param material the material tool/tag traits (a {@link NetherMaterial} list); see
+     *                 {@link #registerStairs} for why the vanilla {@code WallBlock} needs it.
+     * @param model    the model trait to build the wall with; see {@link #registerSlab} for when to pass
+     *                 {@code ModelTraitLibrary.externalModel()}.
      */
-    public static Block registerWall(String name, Block source, BlockModelTrait model) {
+    public static Block registerWall(String name, Block source, List<BlockTrait<?, ?>> material, BlockModelTrait model) {
         final var definition = getBlockRegistry()
                 .<net.minecraft.world.level.block.WallBlock>defineDefaultBlock(
                         name,
@@ -1567,6 +1614,7 @@ public class NetherBlocks {
 
         // See registerStairs: replaces the model generation bclib's BaseWallBlock used to provide.
         definition.addTrait(model);
+        definition.addTrait(material);
 
         Block wall = definition.buildAndRegister();
 

@@ -15,30 +15,52 @@ import java.util.List;
  * Each method reproduces exactly what its marker contributed through bclib's {@code BCLAutoBlockTagProvider}
  * - the tool tag and, where the marker had one, its extra block tags - and nothing else.
  * <p>
- * The wover material traits ({@code BlockTraits.STONE_BLOCK}, {@code METAL_BLOCK}, {@code OBSIDIAN_BLOCK})
- * are deliberately NOT used to reproduce the {@code BehaviourStone}/{@code BehaviourMetal} markers. Those
- * markers were empty (they contributed only the {@code #minecraft:mineable/pickaxe} tag and forced no block
- * property), whereas {@code STONE_BLOCK.withDefault()}/{@code METAL_BLOCK.withDefault()} force
- * {@code strength}, {@code instrument}, {@code requiresCorrectToolForDrops} (and, for metal, {@code sound}).
- * Property call-order is now honoured (WorldWeaver 5dcd992), so those forced values <em>can</em> be chained
- * back afterwards - but BetterNether's stone/metal blocks diverge wholesale from the material defaults
- * (netherrack 0.4, basalt 1.25/4.2, bone XYLOPHONE, cincinnasite 3/10, netherite 50/1200, and
- * {@code glowstone_stalactite} is not even {@code requiresCorrectToolForDrops}). Adopting a material trait
- * would force then immediately override every one of those, which is pure churn, and {@code METAL_BLOCK}'s
- * {@code sound(IRON)} is not captured by the {@code block_properties.txt} audit. The property-free pickaxe
- * tag below is the faithful, audit-clean reproduction of an empty classification marker.
+ * The stone/metal blocks now adopt the full wover material classification:
+ * {@link #stone()} = {@code BlockTraits.STONE_BLOCK.withDefault()} and {@link #metal()} =
+ * {@code BlockTraits.METAL_BLOCK.withDefault()}. {@code STONE_BLOCK} forces {@code instrument(BASEDRUM)},
+ * {@code requiresCorrectToolForDrops}, {@code strength(2,6)} and the pickaxe tag (no sound - the copied
+ * source's sound is kept); {@code METAL_BLOCK} forces {@code instrument(IRON_XYLOPHONE)},
+ * {@code requiresCorrectToolForDrops}, {@code strength(5,6)}, {@code sound(METAL)} and the pickaxe tag.
+ * <p>
+ * Property call-order is honoured (WorldWeaver 5dcd992): every {@code register*} helper applies
+ * {@code replacePropertiesWithCopy(source)} (eager, during the chain) BEFORE adding the material trait, so
+ * the material's forced values win over the copied source while the source's {@code mapColor}/{@code sound}
+ * survive. A block whose constructor sets its own strength/sound/mapColor (via {@code Materials.*}) still
+ * wins over the trait, because the block factory runs last in {@code BlockDefinition.build()} - for those
+ * blocks the material trait only contributes the classification and the pickaxe tag.
+ * <p>
+ * A few blocks keep the property-free pickaxe tag ({@link #stoneTagOnly()}/{@link #metalTagOnly()}) instead
+ * of the full material default, because the material strength would nerf an intentionally tough block; they
+ * are listed for task #32: the eight obsidian brick/tile stairs and slabs (obsidian 50/1200) and the two
+ * netherite fire bowls (netherite 50/1200).
  * <p>
  * These are methods rather than constants because the builders return {@code null} outside datagen; a
  * constant would capture that null once, at class-init.
  */
 public class NetherMaterial {
-    /** The old {@code BehaviourStone}: mineable with a pickaxe. */
+    /** The stone classification: {@code STONE_BLOCK.withDefault()} (instrument BASEDRUM, strength 2/6, reqTool, pickaxe). */
     public static List<BlockTrait<?, ?>> stone() {
+        return BlockTraits.STONE_BLOCK.withDefault();
+    }
+
+    /** The metal classification: {@code METAL_BLOCK.withDefault()} (instrument IRON_XYLOPHONE, strength 5/6, reqTool, sound METAL, pickaxe). */
+    public static List<BlockTrait<?, ?>> metal() {
+        return BlockTraits.METAL_BLOCK.withDefault();
+    }
+
+    /**
+     * The old pickaxe-tag-only compensation (no forced property), for a stone block whose full material
+     * strength would be a regression. Deferred to task #32 - the obsidian brick/tile stairs and slabs.
+     */
+    public static List<BlockTrait<?, ?>> stoneTagOnly() {
         return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsPickAxe());
     }
 
-    /** The old {@code BehaviourMetal}: mineable with a pickaxe. */
-    public static List<BlockTrait<?, ?>> metal() {
+    /**
+     * The old pickaxe-tag-only compensation (no forced property), for a metal block whose full material
+     * strength would be a regression. Deferred to task #32 - the netherite fire bowls.
+     */
+    public static List<BlockTrait<?, ?>> metalTagOnly() {
         return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsPickAxe());
     }
 

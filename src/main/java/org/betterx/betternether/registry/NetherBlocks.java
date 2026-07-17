@@ -219,7 +219,9 @@ public class NetherBlocks {
     public static final Block NETHER_RUBY_BLOCK = registerBlock(
             "nether_ruby_block",
             Blocks.DIAMOND_BLOCK,
-            NetherMaterial.stone(),
+            // Classify as STONE_BLOCK but keep the gem-block toughness (diamond-block 5/6) chained after the
+            // trait, since STONE_BLOCK's material default (2/6) would soften it.
+            NetherTraits.and(NetherMaterial.stone(), NetherProps.strength(5.0f, 6.0f)),
             BlockNetherRuby::new
     );
     public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK, true, NetherMaterial.metal());
@@ -363,13 +365,13 @@ public class NetherBlocks {
             "obsidian_bricks_stairs",
             OBSIDIAN_BRICKS,
             false,
-            NetherMaterial.stone()
+            NetherMaterial.stoneTagOnly() // #32: obsidian toughness (50/1200); material 2/6 would nerf it
     );
     public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab(
             "obsidian_bricks_slab",
             OBSIDIAN_BRICKS,
             false,
-            NetherMaterial.stone(),
+            NetherMaterial.stoneTagOnly(), // #32: obsidian toughness (50/1200); material 2/6 would nerf it
             ModelTraitLibrary.externalModel()
     );
     public static final Block OBSIDIAN_TILE = registerObsidianCube(
@@ -384,13 +386,13 @@ public class NetherBlocks {
             "obsidian_tile_stairs",
             OBSIDIAN_TILE_SMALL,
             false,
-            NetherMaterial.stone()
+            NetherMaterial.stoneTagOnly() // #32: obsidian toughness (50/1200); material 2/6 would nerf it
     );
     public static final Block OBSIDIAN_TILE_SLAB = registerSlab(
             "obsidian_tile_slab",
             OBSIDIAN_TILE_SMALL,
             false,
-            NetherMaterial.stone(),
+            NetherMaterial.stoneTagOnly(), // #32: obsidian toughness (50/1200); material 2/6 would nerf it
             ModelTraitLibrary.externalModel()
     );
     public static final Block OBSIDIAN_ROD_TILES = registerObsidianCube(
@@ -421,13 +423,13 @@ public class NetherBlocks {
             "blue_obsidian_bricks_stairs",
             BLUE_OBSIDIAN_BRICKS,
             false,
-            NetherMaterial.stone()
+            NetherMaterial.stoneTagOnly() // #32: obsidian toughness (50/1200); material 2/6 would nerf it
     );
     public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab(
             "blue_obsidian_bricks_slab",
             BLUE_OBSIDIAN_BRICKS,
             false,
-            NetherMaterial.stone(),
+            NetherMaterial.stoneTagOnly(), // #32: obsidian toughness (50/1200); material 2/6 would nerf it
             ModelTraitLibrary.externalModel()
     );
     public static final Block BLUE_OBSIDIAN_TILE = registerObsidianCube(
@@ -442,13 +444,13 @@ public class NetherBlocks {
             "blue_obsidian_tile_stairs",
             BLUE_OBSIDIAN_TILE_SMALL,
             false,
-            NetherMaterial.stone()
+            NetherMaterial.stoneTagOnly() // #32: obsidian toughness (50/1200); material 2/6 would nerf it
     );
     public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab(
             "blue_obsidian_tile_slab",
             BLUE_OBSIDIAN_TILE_SMALL,
             false,
-            NetherMaterial.stone(),
+            NetherMaterial.stoneTagOnly(), // #32: obsidian toughness (50/1200); material 2/6 would nerf it
             ModelTraitLibrary.externalModel()
     );
     public static final Block BLUE_OBSIDIAN_ROD_TILES = registerObsidianCube(
@@ -750,7 +752,7 @@ public class NetherBlocks {
             Blocks.NETHERRACK,
             Items.NETHERITE_INGOT,
             BlockFireBowl.Metal::new,
-            NetherMaterial.metal()
+            NetherMaterial.metalTagOnly() // #32: netherite toughness (50/1200); material 5/6 would nerf it
     );
     public static final Block CINCINNASITE_FIRE_BOWL_SOUL = registerFireBowl(
             "cincinnasite_fire_bowl_soul",
@@ -774,20 +776,24 @@ public class NetherBlocks {
             Blocks.SOUL_SAND,
             Items.NETHERITE_INGOT,
             BlockFireBowl.Metal::new,
-            NetherMaterial.metal()
+            NetherMaterial.metalTagOnly() // #32: netherite toughness (50/1200); material 5/6 would nerf it
     );
     // Terrain //
     public static final BlockTerrain NETHERRACK_MOSS = registerBlock(
             "netherrack_moss",
             Blocks.NETHERRACK,
-            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
+            // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
+            // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
     public static final BlockNetherMycelium NETHER_MYCELIUM = registerBlock(
             "nether_mycelium",
             Blocks.NETHERRACK,
-            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
+            // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
+            // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
             BlockNetherMycelium::new,
             CommonBlockTags.MYCELIUM,
             CommonBlockTags.NETHER_MYCELIUM,
@@ -797,7 +803,9 @@ public class NetherBlocks {
     public static final BlockTerrain JUNGLE_GRASS = registerBlock(
             "jungle_grass",
             Blocks.NETHERRACK,
-            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
+            // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
+            // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -805,7 +813,9 @@ public class NetherBlocks {
     public static final BlockTerrain MUSHROOM_GRASS = registerBlock(
             "mushroom_grass",
             Blocks.NETHERRACK,
-            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
+            // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
+            // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -813,7 +823,9 @@ public class NetherBlocks {
     public static final BlockTerrain SEPIA_MUSHROOM_GRASS = registerBlock(
             "sepia_mushroom_grass",
             Blocks.NETHERRACK,
-            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
+            // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
+            // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -821,7 +833,9 @@ public class NetherBlocks {
     public static final BlockTerrain SWAMPLAND_GRASS = registerBlock(
             "swampland_grass",
             Blocks.NETHERRACK,
-            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
+            // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
+            // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -834,7 +848,9 @@ public class NetherBlocks {
     public static final BlockTerrain CEILING_MUSHROOMS = registerBlock(
             "ceiling_mushrooms",
             Blocks.NETHERRACK,
-            NetherTraits.and(NetherMaterial.stone(), NetherLoot.terrain()),
+            // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
+            // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );

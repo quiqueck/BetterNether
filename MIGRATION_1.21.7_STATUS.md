@@ -299,17 +299,16 @@ knows nothing about furniture. The constants are `TABURET`/`CHAIR`/`BAR_STOOL` â
 
 ## Traps that keep biting
 
-0. **Traits ALWAYS win over the chain â€” ordering cannot save you.** `replacePropertiesWithCopy()` mutates
-   `this.properties` EAGERLY at chain time (`BlockDefinition:1030`), while a trait's `configure()` runs later
-   inside `build()` and its property calls only APPEND to `propertySetters` (`:578+`), which are applied to
-   `this.properties` afterwards (`:299`). So trait > chain setters > `replacePropertiesWithCopy`, regardless
-   of the order you write them in. Only the block CONSTRUCTOR can override a trait.
-   Proven: adding `STONE_BLOCK.withDefault()` to `nether_ruby_block` (whose helper copies
-   `Blocks.DIAMOND_BLOCK`) moved it from `destroy 5.000 / instrument HARP` to `destroy 2.000 / BASEDRUM`.
-   This is why `STONE_BLOCK`/`OBSIDIAN_BLOCK`/`METAL_BLOCK`/`PlantBlockTrait` cannot simply be adopted: they
-   force `strength`/`mapColor`/`instabreak`, and it is invisible to datagen diff, server boot, the
-   render-layer probe and the tab check.
- (read before touching models/registration)
+0. **RESOLVED (WorldWeaver 5dcd992): properties now apply in CALL ORDER.** A chain setter written
+   AFTER a trait overrides it; written BEFORE, the trait wins.
+       `.addTrait(STONE_BLOCK).strength(5)`  -> strength 5 (your override wins)
+       `.strength(5).addTrait(STONE_BLOCK)`  -> trait's strength(2,6) wins
+   So the classification-first model works: add STONE_BLOCK/METAL_BLOCK/OBSIDIAN_BLOCK/BUTTON_BLOCK for
+   what the block IS, then chain the few properties that differ AFTER it. `replacePropertiesWithCopy` stays
+   eager (applied before all setters), so `.addTrait(X).replacePropertiesWithCopy(src)` still lets the copy
+   win over the trait - that combination is contradictory and is being migrated away (task #32).
+   Properties have NO datagen surface, so verify property changes with a FILE-BASED dump of every block's
+   properties (before/after, python diff), NOT a runtime log and NOT diff -rq.
 
 1. **Lambdas strip badly.** javac does NOT copy `@Environment(CLIENT)` onto the synthetic method it
    generates for a lambda body, so Fabric's stripper removes the enclosing method on a dedicated server and

@@ -2,7 +2,7 @@
     "parent": "betternether:block/stalagnate_trunk",
 	"textures":
 	{
-        "side": "betternether:block/nether_mushroom_stem_side",
+        "side": "betternether:block/nether_mushroom_stem",
         "top": "betternether:block/nether_mushroom_stem_top"
     }
 }

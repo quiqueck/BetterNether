@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "betternether:block/reeds_middle"
+        "cross": "betternether:block/nether_reed_stem"
     }
 }

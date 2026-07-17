@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "betternether:block/stripped_rubeus_log_side"
+    "all": "betternether:block/rubeus_stripped_log_side"
   }
 }

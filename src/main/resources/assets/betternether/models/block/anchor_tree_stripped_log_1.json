@@ -1,12 +1,12 @@
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "betternether:block/anchor_tree_stripped_log_side_1",
+        "particle": "betternether:block/anchor_tree_stripped_log_side",
         "down": "betternether:block/anchor_tree_stripped_log_top",
         "up": "betternether:block/anchor_tree_stripped_log_top",
-        "north": "betternether:block/anchor_tree_stripped_log_side_1",
-        "east": "betternether:block/anchor_tree_stripped_log_side_1",
-        "south": "betternether:block/anchor_tree_stripped_log_side_1",
-        "west": "betternether:block/anchor_tree_stripped_log_side_1"
+        "north": "betternether:block/anchor_tree_stripped_log_side",
+        "east": "betternether:block/anchor_tree_stripped_log_side",
+        "south": "betternether:block/anchor_tree_stripped_log_side",
+        "west": "betternether:block/anchor_tree_stripped_log_side"
     }
 }

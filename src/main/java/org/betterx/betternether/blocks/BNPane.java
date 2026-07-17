@@ -53,7 +53,7 @@ public abstract class BNPane extends IronBarsBlock {
         return super.skipRendering(state, neighbor, facing);
     }
 
-    public static class Wood extends BNPane implements BehaviourWood {
+    public static class Wood extends BNPane {
         public Wood(Block block, boolean dropSelf) {
             super(block, dropSelf);
         }
@@ -73,7 +73,7 @@ public abstract class BNPane extends IronBarsBlock {
         }
     }
 
-    public static class Metal extends BNPane implements BehaviourMetal {
+    public static class Metal extends BNPane {
         public Metal(Block block, boolean dropSelf) {
             super(block, dropSelf);
         }
@@ -93,7 +93,7 @@ public abstract class BNPane extends IronBarsBlock {
         }
     }
 
-    public static class Glass extends BNPane implements BehaviourGlass {
+    public static class Glass extends BNPane {
         public Glass(Block block, boolean dropSelf) {
             super(block, dropSelf);
         }

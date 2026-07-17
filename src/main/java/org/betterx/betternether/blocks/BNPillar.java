@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.api.v3.datagen.DropSelfLootProvider;
 import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
-import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.world.level.block.Block;
@@ -25,7 +24,7 @@ public abstract class BNPillar extends RotatedPillarBlock implements DropSelfLoo
         super(Materials.makeNetherWood(color));
     }
 
-    public static class Wood extends BNPillar implements BehaviourWood {
+    public static class Wood extends BNPillar {
         public Wood(Properties settings) {
             super(settings);
         }

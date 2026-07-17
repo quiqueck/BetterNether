@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourSand;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockTagProvider;
 import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
@@ -24,7 +23,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockVeinedSand extends BlockBase implements BlockTagProvider, BehaviourSand {
+public class BlockVeinedSand extends BlockBase implements BlockTagProvider {
     public BlockVeinedSand(BlockBehaviour.Properties settings) {
         super(settings
                 .mapColor(MapColor.COLOR_BROWN)

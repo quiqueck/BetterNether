@@ -78,8 +78,10 @@ public class ColoredGlassMaterial {
     public <T extends Block> ColoredGlassMaterial(
             String name,
             Block base,
-            Function<BlockBehaviour.Properties, BNPane> paneFactory
+            Function<BlockBehaviour.Properties, BNPane> paneFactory,
+            List<BlockTrait<?, ?>> paneTraits
     ) {
+        this.paneTraits = paneTraits;
         white = makeInstance(name, base, Items.WHITE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
         orange = makeInstance(name, base, Items.ORANGE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
         magenta = makeInstance(name, base, Items.MAGENTA_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
@@ -98,6 +100,9 @@ public class ColoredGlassMaterial {
         black = makeInstance(name, base, Items.BLACK_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
     }
 
+    /** The material traits for the pane variant (see {@link NetherMaterial}); empty for the full block. */
+    private List<BlockTrait<?, ?>> paneTraits = List.of();
+
     private Block makeInstance(
             String group,
             Block base,
@@ -115,7 +120,7 @@ public class ColoredGlassMaterial {
                 base,
                 isFullBlock
                         ? NetherTraits.of(NetherModels.quartzGlass())
-                        : NetherRender.translucent(),
+                        : NetherTraits.concat(NetherRender.translucent(), paneTraits),
                 p -> isFullBlock ? new BNGlass(p) : paneFactory.apply(p)
         );
         if (ModCore.isDatagen())

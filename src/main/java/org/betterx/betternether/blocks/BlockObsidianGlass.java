@@ -1,8 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourGlass;
-import org.betterx.bclib.behaviours.interfaces.BehaviourImmobile;
-import org.betterx.bclib.behaviours.interfaces.BehaviourPortalFrame;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,7 +11,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class BlockObsidianGlass extends BlockBaseNotFull implements BehaviourImmobile, BehaviourPortalFrame, BehaviourGlass {
+public class BlockObsidianGlass extends BlockBaseNotFull {
     public BlockObsidianGlass(BlockBehaviour.Properties settings) {
         super(settings
                 .noOcclusion()

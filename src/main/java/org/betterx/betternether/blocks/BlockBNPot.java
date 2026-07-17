@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
-import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
 import org.betterx.betternether.BlocksHelper;
 
 import net.minecraft.core.BlockPos;
@@ -75,7 +74,7 @@ public abstract class BlockBNPot extends BlockBaseNotFull {
         return InteractionResult.FAIL;
     }
 
-    public static class Wood extends BlockBNPot implements BehaviourWood {
+    public static class Wood extends BlockBNPot {
         public Wood(Block material) {
             super(material);
         }

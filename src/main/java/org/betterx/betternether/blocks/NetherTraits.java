@@ -41,6 +41,14 @@ public class NetherTraits {
         return compostable(List.of());
     }
 
+    /** {@code a} followed by {@code b}, dropping any {@code null}. */
+    public static List<BlockTrait<?, ?>> concat(List<BlockTrait<?, ?>> a, List<BlockTrait<?, ?>> b) {
+        final List<BlockTrait<?, ?>> combined = new ArrayList<>(a.size() + b.size());
+        a.stream().filter(t -> t != null).forEach(combined::add);
+        b.stream().filter(t -> t != null).forEach(combined::add);
+        return combined;
+    }
+
     /** {@code base} plus the given extra traits, dropping any {@code null}. */
     @SafeVarargs
     public static List<BlockTrait<?, ?>> and(List<BlockTrait<?, ?>> base, BlockTrait<?, ?>... extra) {

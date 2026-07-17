@@ -173,7 +173,7 @@ public class NetherBlocks {
     public static final Block CINCINNASITE_BARS = registerBlock(
             "cincinnasite_bars",
             CINCINNASITE_FORGED,
-            NetherRender.translucent(),
+            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.metal()),
             p -> new BNPane.Metal(p, true)
     );
     public static final Block CINCINNASITE_PEDESTAL = registerBlock(
@@ -228,7 +228,7 @@ public class NetherBlocks {
                     false
             )
     );
-    public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", NetherTraits.of(NetherLoot.redstoneOre(1, 3)), RedstoneOreBlock::new);
+    public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", NetherTraits.and(NetherMaterial.ore(), NetherLoot.redstoneOre(1, 3)), RedstoneOreBlock::new);
     // Bricks //
     public static final Block NETHER_BRICK_TILE_SMALL = registerBlock(
             "nether_brick_tile_small",
@@ -293,24 +293,26 @@ public class NetherBlocks {
     public static final Block QUARTZ_GLASS_PANE = registerBlock(
             "quartz_glass_pane",
             QUARTZ_GLASS,
-            NetherRender.translucent(),
+            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.glass()),
             p -> new BNPane.Glass(p, true)
     );
     public static final ColoredGlassMaterial QUARTZ_GLASS_PANE_COLORED = new ColoredGlassMaterial(
             "quartz_glass_pane",
             QUARTZ_GLASS_PANE,
-            p -> new BNPane.Glass(p, false)
+            p -> new BNPane.Glass(p, false),
+            NetherMaterial.glass()
     );
     public static final Block QUARTZ_GLASS_FRAMED_PANE = registerBlock(
             "quartz_glass_framed_pane",
             CINCINNASITE_BLOCK,
-            NetherRender.translucent(),
+            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.metal()),
             p -> new BNPane.Metal(p, true)
     );
     public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial(
             "quartz_glass_framed_pane",
             QUARTZ_GLASS_FRAMED_PANE,
-            p -> new BNPane.Metal(p, true)
+            p -> new BNPane.Metal(p, true),
+            NetherMaterial.metal()
     );
     // Quartz Glass Colored //
     public static final ColoredGlassMaterial QUARTZ_GLASS_COLORED = new ColoredGlassMaterial(
@@ -322,18 +324,21 @@ public class NetherBlocks {
             "blue_weeping_obsidian",
             Blocks.CRYING_OBSIDIAN,
             NetherModels.obsidianVariants(),
+            NetherMaterial.obsidian(),
             BlueWeepingObsidianBlock::new
     );
     public static final Block WEEPING_OBSIDIAN = registerBlockDropSelf(
             "weeping_obsidian",
             Blocks.CRYING_OBSIDIAN,
             NetherModels.obsidianVariants(),
+            NetherMaterial.obsidian(),
             VanillaWeepingObsidianBlock::new
     );
     public static final Block BLUE_CRYING_OBSIDIAN = registerBlockDropSelf(
             "blue_crying_obsidian",
             Blocks.CRYING_OBSIDIAN,
             NetherModels.obsidianVariants(),
+            NetherMaterial.obsidian(),
             BlueCryingObsidianBlock::new
     );
     public static final Block OBSIDIAN_BRICKS = registerObsidianCube(
@@ -377,13 +382,13 @@ public class NetherBlocks {
     public static final Block OBSIDIAN_GLASS = registerBlock(
             "obsidian_glass",
             Blocks.OBSIDIAN,
-            NetherRender.translucent(),
+            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.obsidianGlass()),
             BlockObsidianGlass::new
     );
     public static final Block OBSIDIAN_GLASS_PANE = registerBlock(
             "obsidian_glass_pane",
             OBSIDIAN_GLASS,
-            NetherRender.translucent(),
+            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.glass()),
             p -> new BNPane.Glass(p, true)
     );
     public static final Block BLUE_OBSIDIAN = registerObsidianCube(
@@ -431,13 +436,13 @@ public class NetherBlocks {
     public static final Block BLUE_OBSIDIAN_GLASS = registerBlock(
             "blue_obsidian_glass",
             Blocks.OBSIDIAN,
-            NetherRender.translucent(),
+            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.obsidianGlass()),
             BlockObsidianGlass::new
     );
     public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock(
             "blue_obsidian_glass_pane",
             BLUE_OBSIDIAN_GLASS,
-            NetherRender.translucent(),
+            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.glass()),
             p -> new BNPane.Glass(p, true)
     );
     // Soul Sandstone //
@@ -976,6 +981,7 @@ public class NetherBlocks {
     public static final Block VEINED_SAND = registerBlockNI(
             "veined_sand",
             Blocks.SAND,
+            NetherTraits.of(BlockTraits.MINEABLE_WITH.needsShovel()),
             BlockVeinedSand::new,
             NetherTags.NETHER_SAND
     );
@@ -1126,6 +1132,23 @@ public class NetherBlocks {
                 .buildAndRegister();
     }
 
+    @SafeVarargs
+    private static <T extends Block> T registerBlockNI(
+            String name,
+            Block propertiesSource,
+            List<BlockTrait<?, ?>> traits,
+            Function<BlockBehaviour.Properties, T> factory,
+            TagKey<Block>... tags
+    ) {
+        final var definition = getBlockRegistry()
+                .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
+                .replacePropertiesWithCopy(propertiesSource)
+                .withBlockItem((d, b) -> null)
+                .addTags(tags);
+        definition.addTrait(traits);
+        return definition.buildAndRegister();
+    }
+
     // A full block (no bclib/wover loot provider on its class) that should simply drop itself.
     @SafeVarargs
     private static <T extends Block> T registerBlockDropSelf(
@@ -1149,13 +1172,26 @@ public class NetherBlocks {
             Function<BlockBehaviour.Properties, T> factory,
             TagKey<Block>... tags
     ) {
-        return getBlockRegistry()
+        return registerBlockDropSelf(name, propertiesSource, model, List.of(), factory, tags);
+    }
+
+    @SafeVarargs
+    private static <T extends Block> T registerBlockDropSelf(
+            String name,
+            Block propertiesSource,
+            BlockModelTrait model,
+            List<BlockTrait<?, ?>> traits,
+            Function<BlockBehaviour.Properties, T> factory,
+            TagKey<Block>... tags
+    ) {
+        final var definition = getBlockRegistry()
                 .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .replacePropertiesWithCopy(propertiesSource)
                 .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .addTrait(model)
-                .addTags(tags)
-                .buildAndRegister();
+                .addTags(tags);
+        definition.addTrait(traits);
+        return definition.buildAndRegister();
     }
 
     // A standalone door (one that is not part of a wood set). The model trait routes through vanilla's
@@ -1189,6 +1225,7 @@ public class NetherBlocks {
                 .addTrait(BlockTraits.LOOT_TABLE.dropSelf());
 
         definition.addTrait(ModelTraitLibrary.cube());
+        definition.addTrait(NetherMaterial.obsidianPortalFrame());
 
         return definition.buildAndRegister();
     }

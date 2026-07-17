@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.wover.block.api.BlockTagProvider;
 import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.ToIntFunction;
 
-public class RedstoneOreBlock extends RedStoneOreBlock implements BlockTagProvider, BehaviourOre {
+public class RedstoneOreBlock extends RedStoneOreBlock implements BlockTagProvider {
     private final int minCount;
     private final int maxCount;
 

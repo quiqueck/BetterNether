@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.behaviours.interfaces.BehaviourMetal;
 import org.betterx.bclib.behaviours.interfaces.BehaviourStone;
-import org.betterx.bclib.behaviours.interfaces.BehaviourWood;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -35,7 +34,7 @@ public class BlockBase extends Block {
         }
     }
 
-    public static class Wood extends BlockBase implements BehaviourWood {
+    public static class Wood extends BlockBase {
         public Wood(Block source) {
             super(BlockBehaviour.Properties.ofFullCopy(source));
         }

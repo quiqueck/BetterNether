@@ -1,0 +1,119 @@
+package org.betterx.betternether.blocks;
+
+import org.betterx.wover.block.api.trait.BlockTrait;
+import org.betterx.wover.block.api.trait.BlockTraits;
+import org.betterx.wover.tag.api.predefined.CommonBlockTags;
+
+import net.minecraft.tags.BlockTags;
+
+import java.util.List;
+
+/**
+ * The material-derived tags a block used to inherit from bclib's {@code Behaviour*} marker interfaces, as
+ * explicit traits to hand to a block definition at registration.
+ * <p>
+ * Each method reproduces exactly what its marker contributed through bclib's {@code BCLAutoBlockTagProvider}
+ * - the tool tag and, where the marker had one, its extra block tags - and nothing else. The wover material
+ * traits ({@code BlockTraits.STONE_BLOCK}, {@code METAL_BLOCK}, {@code OBSIDIAN_BLOCK}) are deliberately NOT
+ * used here: their {@code configure()} also forces {@code strength}/{@code mapColor}/{@code instrument}, and
+ * a trait always wins over the chain setters and {@code replacePropertiesWithCopy} regardless of ordering,
+ * so adopting one to obtain a tool tag would silently rewrite the block's properties.
+ * <p>
+ * These are methods rather than constants because the builders return {@code null} outside datagen; a
+ * constant would capture that null once, at class-init.
+ */
+public class NetherMaterial {
+    /** The old {@code BehaviourStone}: mineable with a pickaxe. */
+    public static List<BlockTrait<?, ?>> stone() {
+        return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsPickAxe());
+    }
+
+    /** The old {@code BehaviourMetal}: mineable with a pickaxe. */
+    public static List<BlockTrait<?, ?>> metal() {
+        return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsPickAxe());
+    }
+
+    /** The old {@code BehaviourGlass}: mineable with a pickaxe. */
+    public static List<BlockTrait<?, ?>> glass() {
+        return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsPickAxe());
+    }
+
+    /** The old {@code BehaviourWood}: mineable with an axe. */
+    public static List<BlockTrait<?, ?>> wood() {
+        return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe());
+    }
+
+    /** The old {@code BehaviourSand}: mineable with a shovel. */
+    public static List<BlockTrait<?, ?>> sand() {
+        return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsShovel());
+    }
+
+    /** The old {@code BehaviourOre}: mineable with a pickaxe, plus {@link CommonBlockTags#ORES}. */
+    public static List<BlockTrait<?, ?>> ore() {
+        return NetherTraits.of(
+                BlockTraits.MINEABLE_WITH.needsPickAxe(),
+                BlockTraits.BLOCK_TAG.with(CommonBlockTags.ORES)
+        );
+    }
+
+    /** The old {@code BehaviourImmobile}: {@link CommonBlockTags#IMMOBILE} + {@link BlockTags#DRAGON_IMMUNE}. */
+    public static List<BlockTrait<?, ?>> immobile() {
+        return NetherTraits.of(BlockTraits.BLOCK_TAG.with(List.of(
+                CommonBlockTags.IMMOBILE,
+                BlockTags.DRAGON_IMMUNE
+        )));
+    }
+
+    /**
+     * {@code BlockObsidianGlass}' old {@code BehaviourImmobile, BehaviourPortalFrame, BehaviourGlass}: a
+     * pickaxe plus {@link CommonBlockTags#IMMOBILE}, {@link BlockTags#DRAGON_IMMUNE} and
+     * {@link CommonBlockTags#NETHER_PORTAL_FRAME}. Despite the name it was never {@code BehaviourObsidian},
+     * so it gets neither {@link CommonBlockTags#IS_OBSIDIAN} nor {@link BlockTags#NEEDS_DIAMOND_TOOL}.
+     */
+    public static List<BlockTrait<?, ?>> obsidianGlass() {
+        return NetherTraits.of(
+                BlockTraits.MINEABLE_WITH.needsPickAxe(),
+                BlockTraits.BLOCK_TAG.with(List.of(
+                        CommonBlockTags.IMMOBILE,
+                        BlockTags.DRAGON_IMMUNE,
+                        CommonBlockTags.NETHER_PORTAL_FRAME
+                ))
+        );
+    }
+
+    /** The old {@code BehaviourPortalFrame}: {@link CommonBlockTags#NETHER_PORTAL_FRAME}. */
+    public static List<BlockTrait<?, ?>> portalFrame() {
+        return NetherTraits.of(BlockTraits.BLOCK_TAG.with(CommonBlockTags.NETHER_PORTAL_FRAME));
+    }
+
+    /**
+     * The old {@code BehaviourObsidian}: a pickaxe, {@link CommonBlockTags#IS_OBSIDIAN},
+     * {@link BlockTags#NEEDS_DIAMOND_TOOL} and - through its {@code BehaviourImmobile} parent -
+     * {@link CommonBlockTags#IMMOBILE} and {@link BlockTags#DRAGON_IMMUNE}.
+     */
+    public static List<BlockTrait<?, ?>> obsidian() {
+        return NetherTraits.of(
+                BlockTraits.MINEABLE_WITH.needsPickAxe(),
+                BlockTraits.BLOCK_TAG.with(List.of(
+                        CommonBlockTags.IS_OBSIDIAN,
+                        CommonBlockTags.IMMOBILE,
+                        BlockTags.DRAGON_IMMUNE,
+                        BlockTags.NEEDS_DIAMOND_TOOL
+                ))
+        );
+    }
+
+    /** The old {@code BehaviourObsidianPortalFrame}: {@link #obsidian()} plus {@link #portalFrame()}. */
+    public static List<BlockTrait<?, ?>> obsidianPortalFrame() {
+        return NetherTraits.of(
+                BlockTraits.MINEABLE_WITH.needsPickAxe(),
+                BlockTraits.BLOCK_TAG.with(List.of(
+                        CommonBlockTags.IS_OBSIDIAN,
+                        CommonBlockTags.IMMOBILE,
+                        BlockTags.DRAGON_IMMUNE,
+                        BlockTags.NEEDS_DIAMOND_TOOL,
+                        CommonBlockTags.NETHER_PORTAL_FRAME
+                ))
+        );
+    }
+}

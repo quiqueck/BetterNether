@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.bclib.behaviours.interfaces.BehaviourOre;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.wover.block.api.BlockTagProvider;
 import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.Supplier;
 
-public class BlockOre extends BaseOreBlock implements BlockTagProvider, BehaviourOre {
+public class BlockOre extends BaseOreBlock implements BlockTagProvider {
     /**
      * Whether this ore's block item should survive lava.
      * <p>

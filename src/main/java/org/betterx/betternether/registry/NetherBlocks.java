@@ -94,7 +94,7 @@ public class NetherBlocks {
     // Cincinnasite //
     public static final Block CINCINNASITE_ORE = registerBlock(
             "cincinnasite_ore",
-            NetherTraits.and(NetherMaterial.ore(), NetherLoot.ore(() -> NetherItems.CINCINNASITE, 1, 3)),
+            BlockTraits.ORE_BLOCK.dropping(() -> NetherItems.CINCINNASITE, 1, 3),
             p -> new BlockOre(p, 0, true),
             ToolTiers.IRON_TOOL.blockTag
     );
@@ -205,7 +205,7 @@ public class NetherBlocks {
     // Ruby //
     public static final Block NETHER_RUBY_ORE = registerBlock(
             "nether_ruby_ore",
-            NetherTraits.and(NetherMaterial.ore(), NetherLoot.ore(() -> NetherItems.NETHER_RUBY, 1, 2)),
+            BlockTraits.ORE_BLOCK.dropping(() -> NetherItems.NETHER_RUBY, 1, 2),
             p -> new BlockOre(p, 5, true),
             ToolTiers.DIAMOND_TOOL.blockTag
     );
@@ -223,11 +223,11 @@ public class NetherBlocks {
     // Vanilla Ores
     public static final Block NETHER_LAPIS_ORE = registerBlock(
             "nether_lapis_ore",
-            NetherTraits.and(NetherMaterial.ore(), NetherLoot.ore(() -> NetherItems.LAPIS_PILE, 3, 6)),
+            BlockTraits.ORE_BLOCK.dropping(() -> NetherItems.LAPIS_PILE, 3, 6),
             p -> new BlockOre(p, 3, false),
             ToolTiers.IRON_TOOL.blockTag
     );
-    public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", NetherTraits.and(NetherMaterial.ore(), NetherLoot.redstoneOre(1, 3)), RedstoneOreBlock::new);
+    public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", BlockTraits.ORE_BLOCK.dropping(() -> Items.REDSTONE, 1, 3), RedstoneOreBlock::new);
     // Bricks //
     public static final Block NETHER_BRICK_TILE_SMALL = registerBlock(
             "nether_brick_tile_small",

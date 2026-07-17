@@ -8,7 +8,6 @@ import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.block.api.trait.behaviour.LootTableTrait;
 import org.betterx.wover.loot.api.LootLookupProvider;
 
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -97,16 +96,9 @@ public class NetherLoot {
                 provider.dropWithSilkTouch(block, Blocks.NETHERRACK, ConstantValue.exactly(1)));
     }
 
-    /** Nether redstone ore: drops redstone, or itself with silk touch. */
-    public static LootTableTrait redstoneOre(int minCount, int maxCount) {
-        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) ->
-                provider.dropOre(block, Items.REDSTONE, UniformGenerator.between(minCount, maxCount)));
-    }
-
-    /** A generic ore: silk-touch drops the block itself, otherwise a fortune-boosted {@code min..max} of {@code drop}. */
-    public static LootTableTrait ore(java.util.function.Supplier<net.minecraft.world.item.Item> drop, int minCount, int maxCount) {
-        return BlockTraits.LOOT_TABLE.dropOre(drop, minCount, maxCount);
-    }
+    // Nether ores (cincinnasite/ruby/lapis/redstone) now use BlockTraits.ORE_BLOCK.dropping(drop, min, max),
+    // which bundles the ore classification with the vanilla ore-drop loot trait, so the old redstoneOre()/ore()
+    // helpers here are no longer needed.
 
     /** Black vine (and blooming vine): 1-2 of itself, and only when sheared/hoed/silk-touched. */
     public static LootTableTrait blackVine() {

@@ -89,15 +89,11 @@ public class NetherMaterial {
         return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsShovel());
     }
 
-    /**
-     * The ore classification: {@code ORE_BLOCK.withDefault()} (instrument BASEDRUM, strength 3/9, reqTool,
-     * sound STONE, pickaxe tag and {@link CommonBlockTags#ORES}). Reproduces the old {@code BehaviourOre}
-     * marker's tags (pickaxe + c:ores); its forced properties are overridden by the ore block's own
-     * constructor ({@code Materials.stone(...).strength(3,5).sound(NETHERRACK)}), which runs last.
-     */
-    public static List<BlockTrait<?, ?>> ore() {
-        return BlockTraits.ORE_BLOCK.withDefault();
-    }
+    // The ore classification now lives on BlockTraits.ORE_BLOCK.dropping(drop, min, max), used directly at
+    // each ore's registration: it bundles ORE_BLOCK.withDefault() (instrument BASEDRUM, strength 3/9, reqTool,
+    // sound STONE, pickaxe tag and c:ores) with the vanilla ore-drop loot trait, so no separate ore() helper
+    // (or LOOT_TABLE.dropOre call) is needed here. The forced properties are still overridden by the ore
+    // block's own constructor (Materials.stone(...).strength(3,5).sound(NETHERRACK)), which runs last.
 
     /** The old {@code BehaviourImmobile}: {@link CommonBlockTags#IMMOBILE} + {@link BlockTags#DRAGON_IMMUNE}. */
     public static List<BlockTrait<?, ?>> immobile() {

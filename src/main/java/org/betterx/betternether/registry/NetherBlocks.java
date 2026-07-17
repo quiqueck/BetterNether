@@ -560,24 +560,27 @@ public class NetherBlocks {
     public static final Block BONE_GRASS = registerBlock("bone_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("bone_grass", 3), NetherLoot.netherGrass())), BlockNetherGrass.BoneGrass::new);
     public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherTraits.compostable(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("sepia_bone_grass", 3), NetherLoot.netherGrass())), BlockNetherGrass.SepiaBoneGrass::new);
     // Vines //
-    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine())), BlockBlackVine::new);
-    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine())), BlockBlackVine::new);
-    public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModel())), BlockGoldenVine::new);
+    // Cutout, for the same reason as NEON_EQUISETUM below: these extend bclib's BaseVineBlock /
+    // BaseSimpleVineBlock rather than BlockBase, so they were never IRenderTypeable and the old
+    // registerRenderLayers() walk never gave them a layer. Every texture they reach is binary alpha.
+    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine()))), BlockBlackVine::new);
+    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine()))), BlockBlackVine::new);
+    public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(ModelTraitLibrary.externalModel()))), BlockGoldenVine::new);
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI(
             "lumabus_vine",
-            NetherTraits.compostable(NetherTraits.of(
+            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(
                     ModelTraitLibrary.externalModelDelegatedItem(),
                     NetherLoot.lumabusVine()
-            )),
+            ))),
             p -> new BlockLumabusVine(p, MapColor.COLOR_CYAN)
     );
     public static final BlockLumabusVine GOLDEN_LUMABUS_VINE = registerBlockNI(
             "golden_lumabus_vine",
-            NetherTraits.compostable(NetherTraits.of(
+            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(
                     ModelTraitLibrary.externalModelDelegatedItem(),
                     NetherLoot.lumabusVine()
-            )),
+            ))),
             p -> new BlockLumabusVine(p, MapColor.COLOR_YELLOW)
     );
 
@@ -617,12 +620,13 @@ public class NetherBlocks {
             BlockNeonEquisetum::new
     );
     public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherrack())), BlockHookMushroom::new);
+    // Cutout, same BaseVineBlock gap as the vines above.
     public static final Block WHISPERING_GOURD_VINE = registerBlock(
             "whispering_gourd_vine",
-            NetherTraits.compostable(NetherTraits.of(
+            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(
                     ModelTraitLibrary.externalModel(),
                     NetherLoot.whisperingGourdVine()
-            )),
+            ))),
             BlockWhisperingGourdVine::new
     );
     public static final Block WHISPERING_GOURD = registerBlock(
@@ -971,7 +975,8 @@ public class NetherBlocks {
             BlockEyeballSmall::new
     );
     // eye_vine has no block item (its clone item is EYE_SEED); it drops nothing, so no loot table is generated.
-    public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.compostable(NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem())), BlockEyeVine::new);
+    // Cutout, same BaseVineBlock gap as the vines above.
+    public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem()))), BlockEyeVine::new);
 
     public static final Block POTTED_PLANT = registerBlockNI(
             "potted_plant",

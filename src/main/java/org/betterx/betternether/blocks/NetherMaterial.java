@@ -49,6 +49,16 @@ public class NetherMaterial {
     }
 
     /**
+     * Cincinnasite: METAL_BLOCK classification, but weaker to mine (3) and more blast-resistant (10) than
+     * the metal default 5/6 - the strength override runs after the trait (call order). Base BlockCincinnasite
+     * cubes get the same 3/10 from their constructor; this is for the copy-based decorative variants whose
+     * factory does not set strength, where METAL_BLOCK would otherwise drive them to 5/6.
+     */
+    public static List<BlockTrait<?, ?>> cincinnasite() {
+        return NetherTraits.and(metal(), NetherProps.strength(3.0F, 10.0F));
+    }
+
+    /**
      * The old pickaxe-tag-only compensation (no forced property), for a stone block whose full material
      * strength would be a regression. Deferred to task #32 - the obsidian brick/tile stairs and slabs.
      */

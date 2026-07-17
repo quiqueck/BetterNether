@@ -600,12 +600,15 @@ public class NetherBlocks {
     );
     public static final Block FEATHER_FERN = registerBlock("feather_fern", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockFeatherFern::new);
     public static final Block MOSS_COVER = registerBlock("moss_cover", NetherTraits.compostable(NetherRender.cutout()), BlockMossCover::new);
+    // Cutout: BlockNeonEquisetum extends bclib's BaseVineBlock rather than BlockBase, so it was never
+    // IRenderTypeable and the old registerRenderLayers() walk never gave it a layer - its stem/leaf
+    // textures have drawn their transparent pixels opaque since long before the trait migration.
     public static final Block NEON_EQUISETUM = registerVine(
             "neon_equisetum",
-            NetherTraits.compostable(NetherTraits.and(
+            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.and(
                     NetherSurvival.netherrack(),
                     ModelTraitLibrary.externalModel()
-            )),
+            ))),
             BlockNeonEquisetum::new
     );
     public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherrack())), BlockHookMushroom::new);

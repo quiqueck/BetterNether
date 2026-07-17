@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
+import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
@@ -45,6 +46,12 @@ public class Sapling extends SlotFromDefinition {
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
         def.addTrait(survival);
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+        // Cutout, like every other sapling. These blocks extend bclib's FeatureSaplingBlock rather than
+        // BetterNether's BlockBase, so they were never IRenderTypeable and the old
+        // BetterNetherClient.registerRenderLayers() walk never saw them - they have rendered their cross
+        // model as SOLID (transparent pixels drawn opaque) since long before the trait migration.
+        // bclib's SaplingBlockTrait, which this slot replaces, bundles the same cutout layer.
+        def.addTrait(NetherRender.cutout());
         // Real composting. BehaviourSapling (which every sapling block here implements) extends
         // BehaviourCompostable, but that marker only ever produced the c:compostable item tag - it never
         // registered a composter entry, so these were tagged compostable yet would not compost.

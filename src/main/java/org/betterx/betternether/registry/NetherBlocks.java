@@ -169,7 +169,10 @@ public class NetherBlocks {
     public static final Block CINCINNASITE_BRICKS_PILLAR = registerBlock(
             "cincinnasite_bricks_pillar",
             CINCINNASITE_FORGED,
-            NetherMaterial.cincinnasite(),
+            // BNPillar no longer implements DropSelfLootProvider; the loot table it used to get from that
+            // interface (a plain self-drop, no survives_explosion - the block is not explosion resistant) is
+            // now carried explicitly as a trait so it stays byte-identical.
+            NetherTraits.and(NetherMaterial.cincinnasite(), NetherLoot.dropSelfNoExplosion()),
             BNPillar.Metal::new
     );
     public static final Block CINCINNASITE_BARS = registerBlock(
@@ -196,7 +199,9 @@ public class NetherBlocks {
             NetherTraits.concat(NetherRender.cutout(), NetherMaterial.cincinnasite()),
             BlockSmallLantern.Metal::new
     );
-    public static final Block CINCINNASITE_CHAIN = registerBlock("cincinnasite_chain", Blocks.CHAIN, NetherTraits.concat(NetherRender.cutout(), NetherMaterial.cincinnasite()), BNChain::new);
+    // BNChain no longer implements DropSelfLootProvider; carry its plain self-drop (no survives_explosion)
+    // as a trait so the table stays byte-identical.
+    public static final Block CINCINNASITE_CHAIN = registerBlock("cincinnasite_chain", Blocks.CHAIN, NetherTraits.and(NetherTraits.concat(NetherRender.cutout(), NetherMaterial.cincinnasite()), NetherLoot.dropSelfNoExplosion()), BNChain::new);
     // Ruby //
     public static final Block NETHER_RUBY_ORE = registerBlock(
             "nether_ruby_ore",
@@ -1741,6 +1746,9 @@ public class NetherBlocks {
                 .replacePropertiesWithCopy(source)
                 .addTags(CommonPoiTags.ARMORER_WORKSTATION);
         definition.addTrait(NetherMaterial.stone());
+        // BlockNetherFurnace no longer implements DropSelfLootProvider; carry its plain self-drop (no
+        // survives_explosion) as a trait so the table stays byte-identical.
+        definition.addTrait(NetherLoot.dropSelfNoExplosion());
         Block block = definition.buildAndRegister();
 
         if (ModCore.isDatagen())

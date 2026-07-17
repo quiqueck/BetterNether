@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.api.v3.datagen.DropSelfLootProvider;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.world.level.block.Block;
@@ -9,7 +8,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public abstract class BNPillar extends RotatedPillarBlock implements DropSelfLootProvider<BNPillar> {
+public abstract class BNPillar extends RotatedPillarBlock {
     protected BNPillar(Properties settings) {
         super(settings);
     }

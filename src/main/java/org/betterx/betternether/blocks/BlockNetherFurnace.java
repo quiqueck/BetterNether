@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.api.v3.datagen.DropSelfLootProvider;
 import org.betterx.betternether.blockentities.BlockEntityFurnace;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
@@ -29,7 +28,7 @@ import net.fabricmc.api.Environment;
 
 import javax.annotation.Nullable;
 
-public class BlockNetherFurnace extends AbstractFurnaceBlock implements DropSelfLootProvider<BlockNetherFurnace> {
+public class BlockNetherFurnace extends AbstractFurnaceBlock {
     public static final MapCodec<BlockNetherFurnace> CODEC = simpleCodec(BlockNetherFurnace::new);
 
     public BlockNetherFurnace(Properties settings) {

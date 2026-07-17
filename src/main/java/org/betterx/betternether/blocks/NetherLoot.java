@@ -48,6 +48,25 @@ import java.util.List;
  */
 public class NetherLoot {
     /**
+     * A plain self-drop with <b>no</b> {@code survives_explosion} condition.
+     * <p>
+     * Reproduces byte-for-byte the table bclib's {@code DropSelfLootProvider} generated for a block that is
+     * <b>not</b> {@code BehaviourExplosionResistant} (the common case). Deliberately <b>not</b>
+     * {@link BlockTraits#LOOT_TABLE}'s {@code dropSelf()} shortcut: that one routes through vanilla's
+     * {@code createSingleItemTable}, which adds the {@code survives_explosion} condition and so would change
+     * the committed table. Used to move blocks off the deprecated {@code DropSelfLootProvider} interface
+     * without regenerating their loot.
+     */
+    public static LootTableTrait dropSelfNoExplosion() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
+                .lootTable()
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(block))));
+    }
+
+    /**
      * The nether-grass family: drops itself, but only when sheared or silk-touched.
      * <p>
      * Reproduces the table {@code BasePlantBlock} generated through the {@code BlockLootProvider} interface,

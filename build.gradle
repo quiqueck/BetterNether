@@ -168,6 +168,9 @@ processResources {
     // first (hand-authored) copy. Any duplicate that reaches this point is a bug; checkDuplicateAssets
     // above is what actually reports it.
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    // block_properties.txt is a committed property-audit snapshot (see BlockPropertiesProvider); it lives in
+    // the resources source set so git tracks it, but it is not a runtime asset - keep it out of the jar.
+    exclude 'block_properties.txt'
     println "Version: ${project.version}"
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") {
@@ -191,6 +194,8 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     // src/main/generated is part of the resources source set and can restate a hand-authored file;
     // keep the first (hand-authored) copy, same rule as processResources.
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    // Same property-audit snapshot as processResources - committed, but not shipped in the sources jar.
+    exclude 'block_properties.txt'
     from sourceSets.main.allSource
 }
 

@@ -58,7 +58,7 @@ public class NetherBlocks {
     public static final Block NETHER_BRICK_TILE_LARGE = registerBlock(
             "nether_brick_tile_large",
             Blocks.NETHER_BRICKS,
-            NetherMaterial.stone(),
+            NetherTraits.and(NetherMaterial.stone(), ModelTraitLibrary.cube()),
             BNNetherBrick::new
     );
 
@@ -99,17 +99,17 @@ public class NetherBlocks {
             ToolTiers.IRON_TOOL.blockTag
     );
     public static final Block CINCINNASITE_BLOCK = registerBlock("cincinnasite_block", NetherMaterial.cincinnasite(), BlockCincinnasite::new);
-    public static final Block CINCINNASITE_FORGED = registerBlock("cincinnasite_forged", NetherMaterial.cincinnasite(), BlockCincinnasite::new);
+    public static final Block CINCINNASITE_FORGED = registerBlock("cincinnasite_forged", NetherTraits.and(NetherMaterial.cincinnasite(), ModelTraitLibrary.cube()), BlockCincinnasite::new);
     public static final Block CINCINNASITE_PILLAR = registerBlock(
             "cincinnasite_pillar",
             CINCINNASITE_BLOCK,
             NetherMaterial.cincinnasite(),
             BlockCincinnasitPillar::new
     );
-    public static final Block CINCINNASITE_BRICKS = registerBlock("cincinnasite_bricks", NetherMaterial.cincinnasite(), BlockCincinnasite::new);
+    public static final Block CINCINNASITE_BRICKS = registerBlock("cincinnasite_bricks", NetherTraits.and(NetherMaterial.cincinnasite(), ModelTraitLibrary.cube()), BlockCincinnasite::new);
     public static final Block CINCINNASITE_BRICK_PLATE = registerBlock(
             "cincinnasite_brick_plate",
-            NetherMaterial.cincinnasite(),
+            NetherTraits.and(NetherMaterial.cincinnasite(), ModelTraitLibrary.cube()),
             BlockCincinnasite::new
     );
     public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED, false, NetherMaterial.cincinnasite());
@@ -150,7 +150,7 @@ public class NetherBlocks {
     public static final Block CINCINNASITE_LANTERN = registerBlock(
             "cincinnasite_lantern",
             CINCINNASITE_BLOCK,
-            NetherMaterial.cincinnasite(),
+            NetherTraits.and(NetherMaterial.cincinnasite(), ModelTraitLibrary.cube()),
             BlockCincinnasiteLantern::new
     );
     public static final Block CINCINNASITE_TILE_LARGE = registerBlock(
@@ -214,7 +214,7 @@ public class NetherBlocks {
             Blocks.DIAMOND_BLOCK,
             // Classify as STONE_BLOCK but keep the gem-block toughness (diamond-block 5/6) chained after the
             // trait, since STONE_BLOCK's material default (2/6) would soften it.
-            NetherTraits.and(NetherMaterial.stone(), NetherProps.strength(5.0f, 6.0f)),
+            NetherTraits.and(NetherMaterial.stone(), NetherProps.strength(5.0f, 6.0f), ModelTraitLibrary.cube()),
             BlockNetherRuby::new
     );
     public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK, true, NetherMaterial.metal());
@@ -232,7 +232,7 @@ public class NetherBlocks {
     public static final Block NETHER_BRICK_TILE_SMALL = registerBlock(
             "nether_brick_tile_small",
             Blocks.NETHER_BRICKS,
-            NetherMaterial.stone(),
+            NetherTraits.and(NetherMaterial.stone(), ModelTraitLibrary.cube()),
             BNNetherBrick::new
     );
     public static final Block NETHER_BRICK_WALL = registerWall("nether_brick_wall", NETHER_BRICK_TILE_LARGE,
@@ -389,7 +389,7 @@ public class NetherBlocks {
     public static final Block OBSIDIAN_GLASS = registerBlock(
             "obsidian_glass",
             Blocks.OBSIDIAN,
-            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.obsidianGlass()),
+            NetherTraits.and(NetherTraits.concat(NetherRender.translucent(), NetherMaterial.obsidianGlass()), ModelTraitLibrary.cube()),
             BlockObsidianGlass::new
     );
     public static final Block OBSIDIAN_GLASS_PANE = registerBlock(
@@ -447,7 +447,7 @@ public class NetherBlocks {
     public static final Block BLUE_OBSIDIAN_GLASS = registerBlock(
             "blue_obsidian_glass",
             Blocks.OBSIDIAN,
-            NetherTraits.concat(NetherRender.translucent(), NetherMaterial.obsidianGlass()),
+            NetherTraits.and(NetherTraits.concat(NetherRender.translucent(), NetherMaterial.obsidianGlass()), ModelTraitLibrary.cube()),
             BlockObsidianGlass::new
     );
     public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock(
@@ -973,7 +973,7 @@ public class NetherBlocks {
             ),
             BlockSoulLily::new
     );
-    public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", NetherTraits.sapling(NetherRender.cutoutAnd(NetherSurvival.soulGroundOrFarmland())), BlockSoulLilySapling::new);
+    public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", NetherTraits.and(NetherTraits.sapling(NetherRender.cutoutAnd(NetherSurvival.soulGroundOrFarmland())), ModelTraitLibrary.crossPlant()), BlockSoulLilySapling::new);
     // Large & Small Mushrooms //
     public static final Block RED_LARGE_MUSHROOM = registerBlockNI(
             "red_large_mushroom",

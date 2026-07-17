@@ -79,6 +79,6 @@ public class Sapling extends SlotFromDefinition {
     @Environment(EnvType.CLIENT)
     @Override
     protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
-        return ModelTraitLibrary.externalModel();
+        return ModelTraitLibrary.crossPlant();
     }
 }

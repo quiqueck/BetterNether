@@ -31,7 +31,8 @@ public class RoofSlab extends SlotFromDefinition {
 
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
-        def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+        // See RoofStairs: SLAB_BLOCK.withDefault() restores #minecraft:slabs and carries the loot.
+        def.addTrait(BlockTraits.SLAB_BLOCK.withDefault());
     }
 
     @Override

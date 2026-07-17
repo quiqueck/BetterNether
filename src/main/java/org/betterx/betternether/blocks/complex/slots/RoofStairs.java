@@ -32,7 +32,9 @@ public class RoofStairs extends SlotFromDefinition {
 
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
-        def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+        // STAIR_BLOCK.withDefault() carries #minecraft:stairs + item tag AND its own LOOT_TABLE.dropSelf(),
+        // so it replaces the bare loot trait and restores the stairs tag these roof pieces lost.
+        def.addTrait(BlockTraits.STAIR_BLOCK.withDefault());
     }
 
     @Override

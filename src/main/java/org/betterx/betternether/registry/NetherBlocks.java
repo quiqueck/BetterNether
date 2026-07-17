@@ -1378,7 +1378,11 @@ public class NetherBlocks {
                         def -> new net.minecraft.world.level.block.StairBlock(source.defaultBlockState(), def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
-                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
+                // STAIR_BLOCK.withDefault() is property-free (BlockTags.STAIRS + item tag, and its own
+                // LOOT_TABLE.dropSelf()) - it restores the #minecraft:stairs membership the vanilla StairBlock
+                // lost in the migration, and supplies loot so no separate LOOT_TABLE is added (two would
+                // double-generate).
+                .addTrait(BlockTraits.STAIR_BLOCK.withDefault())
                 .addTags(tags);
 
         definition.addTrait(model);
@@ -1426,7 +1430,8 @@ public class NetherBlocks {
                         def -> new net.minecraft.world.level.block.SlabBlock(def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
-                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
+                // See registerStairs: SLAB_BLOCK.withDefault() restores #minecraft:slabs and carries the loot.
+                .addTrait(BlockTraits.SLAB_BLOCK.withDefault())
                 .addTags(tags);
 
         // See registerStairs: replaces the model generation bclib's BaseSlabBlock used to provide.
@@ -1609,8 +1614,9 @@ public class NetherBlocks {
                         def -> new net.minecraft.world.level.block.WallBlock(def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
-                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
-                .addTags(BlockTags.WALLS);
+                // See registerStairs: WALL_BLOCK.withDefault() supplies #minecraft:walls + item tag and the
+                // loot, replacing the manual addTags(WALLS) + LOOT_TABLE that did the same job separately.
+                .addTrait(BlockTraits.WALL_BLOCK.withDefault());
 
         // See registerStairs: replaces the model generation bclib's BaseWallBlock used to provide.
         definition.addTrait(model);

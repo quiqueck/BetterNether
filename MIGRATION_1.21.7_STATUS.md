@@ -269,6 +269,21 @@ Cosmetic only; the correctness hazard is closed by WorldWeaver `a45614b`. Does *
 `templatePath` — `build()` still needs the bare path for the four description keys.
 `ItemRegistry.java:536`'s comment stays accurate for the deprecated path — do not delete it as collateral.
 
+## GOVERNING RULE — never keep an interface because removal changes behaviour
+
+If dropping a legacy interface (Behaviour*, DropSelfLootProvider, BlockLootProvider, IRenderTypeable,
+ItemModelProvider, RuntimeBlockModelProvider, ...) would change ANY behaviour or generated output, that is
+NOT a reason to keep it. It is the instruction to find or generate the trait(s) that reproduce exactly what
+the interface contributed, add them, THEN remove the interface — so nothing changes. "Removal changes X" ->
+"add the trait that supplies X" -> remove. Every time this has come up the answer was to fix the trait side:
+  - OBSIDIAN_BLOCK lacked IS_OBSIDIAN/NEEDS_DIAMOND_TOOL that BehaviourObsidian gave  -> taught the trait (b1a492e)
+  - BehaviourPlantLike drove the creative tab                                          -> PlantLikeBlockTrait + TAB_PREDICATE (d1467f98)
+  - BasePlantBlock's BlockLootProvider double-generated                               -> LOOT_TABLE trait at the site (0ac0506f/420f341c)
+  - DropSelfLootProvider on BNPillar (#29)                                            -> LOOT_TABLE trait, compensate cincinnasite_bricks_pillar
+A trait may not force a block property (TRAP 0), so where the marker set no property, the compensating trait
+must not either - verify with the property audit. If the needed trait does not exist, CREATE it (in wover or
+BCLib), do not keep the interface.
+
 ## Settled architecture (do not "tidy" these)
 
 **Furniture slots: `SlotType` in wover, slots + `Base*` classes in BCLib.** wover owns the constants

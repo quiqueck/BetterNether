@@ -1,7 +1,9 @@
 package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
+import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
+import org.betterx.bclib.trait.block.VegetationTagTrait;
 import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
@@ -56,6 +58,13 @@ public class Sapling extends SlotFromDefinition {
         // BehaviourCompostable, but that marker only ever produced the c:compostable item tag - it never
         // registered a composter entry, so these were tagged compostable yet would not compost.
         def.addTrait(CompostableBlockTrait.withDefault());
+        // The rest of what the retired BehaviourSapling marker contributed: the creative nature-tab marker
+        // (BehaviourPlantLike), mineable/hoe (AddMineableHoe), and the c:saplings/minecraft:saplings
+        // block+item tags (BehaviourSaplingLike). Compostable is added above, so the PlantLikeBlockTrait
+        // bundle is not used here (it would add compostable a second time).
+        def.addTrait(PlantLikeBlockTrait.withDefault());
+        def.addTrait(BlockTraits.MINEABLE_WITH.needsHoe());
+        def.addTrait(VegetationTagTrait.sapling());
     }
 
     @Override

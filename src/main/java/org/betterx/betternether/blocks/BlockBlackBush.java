@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
@@ -22,7 +21,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, BehaviourPlant {
+public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock {
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
 
     public BlockBlackBush(Properties settings) {

@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
@@ -15,7 +14,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BlockRubeusSapling extends FeatureSaplingBlock implements BonemealableBlock, BehaviourSapling {
+public class BlockRubeusSapling extends FeatureSaplingBlock implements BonemealableBlock {
     public BlockRubeusSapling() {
         super((level, pos, state, rnd) -> NetherTrees.RUBEUS_TREE
                 .placeInWorld(WorldState.registryAccess(), level, pos, rnd)

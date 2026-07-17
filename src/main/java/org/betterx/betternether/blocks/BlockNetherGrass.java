@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.bclib.blocks.BasePlantBlock;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -77,7 +76,7 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass {
     }
 }
 
-abstract class BaseBlockNetherGrass extends BasePlantBlock implements BehaviourPlant {
+abstract class BaseBlockNetherGrass extends BasePlantBlock {
     private static final VoxelShape SHAPE = box(4, 0, 4, 14, 12, 14);
 
     public BaseBlockNetherGrass() {

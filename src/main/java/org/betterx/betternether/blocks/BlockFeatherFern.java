@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
@@ -14,7 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockFeatherFern extends BlockCommonPlant implements BehaviourPlant {
+public class BlockFeatherFern extends BlockCommonPlant {
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
     public BlockFeatherFern(Properties settings) {

@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.MHelper;
 
 import net.minecraft.core.BlockPos;
@@ -28,7 +27,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockBarrelCactus extends BlockCommonPlant implements BehaviourPlant {
+public class BlockBarrelCactus extends BlockCommonPlant {
     private static final VoxelShape EMPTY = Block.box(0, 0, 0, 0, 0, 0);
     private static final VoxelShape[] SHAPES = new VoxelShape[]{
             Block.box(5, 0, 5, 11, 5, 11),

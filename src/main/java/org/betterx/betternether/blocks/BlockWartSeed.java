@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
@@ -32,7 +31,7 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock, BehaviourSapling {
+public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(Direction.class);
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 

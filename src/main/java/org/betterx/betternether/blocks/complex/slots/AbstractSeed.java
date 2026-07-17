@@ -1,7 +1,9 @@
 package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
+import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
+import org.betterx.bclib.trait.block.VegetationTagTrait;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
@@ -48,6 +50,13 @@ public class AbstractSeed extends SlotFromDefinition {
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
         // See Sapling: the BehaviourCompostable marker these blocks carry never registered a composter entry.
         def.addTrait(CompostableBlockTrait.withDefault());
+        // The blocks in this slot (BlockStalagnateSeed, BlockWartSeed) are named "seed" but actually
+        // implement BehaviourSapling, not BehaviourSeed - so they carry the sapling tags, the nature-tab
+        // marker and mineable/hoe, exactly as the retired marker contributed. Compostable is added above,
+        // so the PlantLikeBlockTrait.sapling() bundle (which re-adds compostable) is not used here.
+        def.addTrait(PlantLikeBlockTrait.withDefault());
+        def.addTrait(BlockTraits.MINEABLE_WITH.needsHoe());
+        def.addTrait(VegetationTagTrait.sapling());
     }
 
     @Override

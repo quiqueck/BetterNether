@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
@@ -13,7 +12,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockOrangeMushroom extends BlockCommonPlant implements BehaviourPlant {
+public class BlockOrangeMushroom extends BlockCommonPlant {
     private static final VoxelShape[] SHAPES = new VoxelShape[]{
             Shapes.box(0.25, 0.0, 0.25, 0.75, 0.375, 0.75),
             Shapes.box(0.125, 0.0, 0.125, 0.875, 0.625, 0.875),

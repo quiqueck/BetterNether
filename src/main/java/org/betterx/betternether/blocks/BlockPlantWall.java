@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -29,7 +28,7 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockPlantWall extends BlockBaseNotFull implements BehaviourPlant {
+public class BlockPlantWall extends BlockBaseNotFull {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, box(2, 2, 10, 14, 14, 16),
             Direction.SOUTH, box(2, 2, 0, 14, 14, 6),

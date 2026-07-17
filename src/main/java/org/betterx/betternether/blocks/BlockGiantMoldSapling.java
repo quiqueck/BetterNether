@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.behaviours.interfaces.BehaviourSapling;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
@@ -23,7 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock, BehaviourSapling {
+public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
 
     public BlockGiantMoldSapling(Properties settings) {

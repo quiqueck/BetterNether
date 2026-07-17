@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -18,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockInkBush extends BlockCommonPlant implements BehaviourPlant {
+public class BlockInkBush extends BlockCommonPlant {
     public BlockInkBush(Properties settings) {
         super(Materials.plant(settings, MapColor.COLOR_BLACK)
                                .sound(SoundType.CROP)

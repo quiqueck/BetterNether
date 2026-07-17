@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlant;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -16,7 +15,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockGrayMold extends BlockMold implements BehaviourPlant {
+public class BlockGrayMold extends BlockMold {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 8, 12);
 
     public BlockGrayMold(Properties settings) {

@@ -1,9 +1,12 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
+import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
+import org.betterx.bclib.trait.block.VegetationTagTrait;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
 import org.betterx.wover.block.api.trait.BlockTrait;
+import org.betterx.wover.block.api.trait.BlockTraits;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +42,73 @@ public class NetherTraits {
     /** {@link #compostable(List)} with no other traits. */
     public static List<BlockTrait<?, ?>> compostable() {
         return compostable(List.of());
+    }
+
+    /**
+     * {@code base} plus everything the retired {@code BehaviourPlant} marker used to contribute, reproduced
+     * as traits: the {@link PlantLikeBlockTrait} nature-tab marker, {@code mineable/hoe}
+     * ({@link BlockTraits#MINEABLE_WITH}), {@link CompostableBlockTrait} at 0.1, and the
+     * {@code c:plant} block tag ({@link VegetationTagTrait#plant()}).
+     * <p>
+     * {@code BehaviourPlant} extended {@code AddMineableHoe + BehaviourCompostable + BehaviourPlantLike}; the
+     * PLANT block tag came from the {@code BehaviourPlant} scan in {@code BCLAutoBlockTagProvider}. This is
+     * NOT {@code PlantLikeBlockTrait.plant()} because that bundles its own {@code CompostableBlockTrait} - we
+     * fold {@link #compostable(List)} in here instead so the compostable trait is added exactly once.
+     */
+    public static List<BlockTrait<?, ?>> plant(List<BlockTrait<?, ?>> base) {
+        return and(
+                compostable(base),
+                PlantLikeBlockTrait.withDefault(),
+                BlockTraits.MINEABLE_WITH.needsHoe(),
+                VegetationTagTrait.plant()
+        );
+    }
+
+    /** {@link #plant(List)} with no other traits. */
+    public static List<BlockTrait<?, ?>> plant() {
+        return plant(List.of());
+    }
+
+    /**
+     * {@code base} plus everything the retired {@code BehaviourSapling} marker contributed: the nature-tab
+     * marker, {@code mineable/hoe}, {@link CompostableBlockTrait} at 0.1, and the sapling block/item tags
+     * ({@link VegetationTagTrait#sapling()} = {@code minecraft/c:saplings}). {@code BehaviourSapling} extended
+     * {@code AddMineableHoe + BehaviourCompostable + BehaviourPlantLike + BehaviourSaplingLike}; unlike
+     * {@code BehaviourPlant} it never carried the PLANT tag.
+     */
+    public static List<BlockTrait<?, ?>> sapling(List<BlockTrait<?, ?>> base) {
+        return and(
+                compostable(base),
+                PlantLikeBlockTrait.withDefault(),
+                BlockTraits.MINEABLE_WITH.needsHoe(),
+                VegetationTagTrait.sapling()
+        );
+    }
+
+    /** {@link #sapling(List)} with no other traits. */
+    public static List<BlockTrait<?, ?>> sapling() {
+        return sapling(List.of());
+    }
+
+    /**
+     * {@code base} plus everything the retired {@code BehaviourSeed} marker contributed: the nature-tab
+     * marker, {@code mineable/hoe}, {@link CompostableBlockTrait} at 0.1, and the seed block/item tags
+     * ({@link VegetationTagTrait#seed()} = {@code c:seeds}). {@code BehaviourSeed} extended
+     * {@code AddMineableHoe + BehaviourCompostable + BehaviourPlantLike + BehaviourSeedLike}; like
+     * {@code BehaviourSapling} it never carried the PLANT tag.
+     */
+    public static List<BlockTrait<?, ?>> seed(List<BlockTrait<?, ?>> base) {
+        return and(
+                compostable(base),
+                PlantLikeBlockTrait.withDefault(),
+                BlockTraits.MINEABLE_WITH.needsHoe(),
+                VegetationTagTrait.seed()
+        );
+    }
+
+    /** {@link #seed(List)} with no other traits. */
+    public static List<BlockTrait<?, ?>> seed() {
+        return seed(List.of());
     }
 
     /** {@code a} followed by {@code b}, dropping any {@code null}. */

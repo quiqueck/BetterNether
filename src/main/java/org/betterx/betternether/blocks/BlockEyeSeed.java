@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.behaviours.interfaces.BehaviourSeed;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.wover.state.api.WorldState;
@@ -22,7 +21,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock, BehaviourSeed {
+public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
 
     public BlockEyeSeed(Properties settings) {

@@ -5,6 +5,7 @@ import org.betterx.bclib.api.v3.tag.BCLBlockTags;
 import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
+import org.betterx.bclib.trait.block.WeightedCrossModelTrait;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
 import org.betterx.bclib.furniture.block.BaseTaburet;
@@ -582,9 +583,46 @@ public class NetherBlocks {
     // Cutout, for the same reason as NEON_EQUISETUM below: these extend bclib's BaseVineBlock /
     // BaseSimpleVineBlock rather than BlockBase, so they were never IRenderTypeable and the old
     // registerRenderLayers() walk never gave them a layer. Every texture they reach is binary alpha.
-    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine()))), BlockBlackVine::new);
-    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(ModelTraitLibrary.externalModel(), NetherLoot.blackVine()))), BlockBlackVine::new);
-    public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(ModelTraitLibrary.externalModel()))), BlockGoldenVine::new);
+    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
+            BaseSimpleVineBlock.BOTTOM,
+            List.of(
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block"), BetterNether.C.mk("block/black_vine")),
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block_inverted"), BetterNether.C.mk("block/black_vine"))
+            ),
+            List.of(
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block"), BetterNether.C.mk("block/black_vine_bottom")),
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block_inverted"), BetterNether.C.mk("block/black_vine_bottom"))
+            ),
+            WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("block/black_vine"))
+    ), NetherLoot.blackVine()))), BlockBlackVine::new);
+    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
+            BaseSimpleVineBlock.BOTTOM,
+            List.of(
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block"), BetterNether.C.mk("block/flowered_vine_1")),
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block_inverted"), BetterNether.C.mk("block/flowered_vine_1")),
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block"), BetterNether.C.mk("block/flowered_vine_2")),
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block_inverted"), BetterNether.C.mk("block/flowered_vine_2")),
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block"), BetterNether.C.mk("block/flowered_vine_3")),
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block_inverted"), BetterNether.C.mk("block/flowered_vine_3"))
+            ),
+            List.of(
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block"), BetterNether.C.mk("block/flowered_vine_bottom_1")),
+                    WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block_inverted"), BetterNether.C.mk("block/flowered_vine_bottom_1"))
+            ),
+            WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("item/flowered_vine"))
+    ), NetherLoot.blackVine()))), BlockBlackVine::new);
+    public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
+            BaseSimpleVineBlock.BOTTOM,
+            List.of(
+                    WeightedCrossModelTrait.cross(BetterNether.C.mk("block/golden_vine")),
+                    WeightedCrossModelTrait.crossParent(BetterNether.C.mk("block/cross_inverted"), BetterNether.C.mk("block/golden_vine"))
+            ),
+            List.of(
+                    WeightedCrossModelTrait.cross(BetterNether.C.mk("block/golden_vine_bottom")),
+                    WeightedCrossModelTrait.crossParent(BetterNether.C.mk("block/cross_inverted"), BetterNether.C.mk("block/golden_vine_bottom"))
+            ),
+            WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("item/golden_vine"))
+    )))), BlockGoldenVine::new);
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI(
             "lumabus_vine",
@@ -1027,7 +1065,10 @@ public class NetherBlocks {
     );
     // eye_vine has no block item (its clone item is EYE_SEED); it drops nothing, so no loot table is generated.
     // Cutout, same BaseVineBlock gap as the vines above.
-    public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(ModelTraitLibrary.externalModelDelegatedItem()))), BlockEyeVine::new);
+    public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.simple(
+            List.of(WeightedCrossModelTrait.cross(BetterNether.C.mk("block/eye_vine"))),
+            WeightedCrossModelTrait.Item.delegated()
+    )))), BlockEyeVine::new);
 
     public static final Block POTTED_PLANT = registerBlockNI(
             "potted_plant",

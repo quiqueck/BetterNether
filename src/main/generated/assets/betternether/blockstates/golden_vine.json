@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "bottom=false": [
+      {
+        "model": "betternether:block/golden_vine_false_0"
+      },
+      {
+        "model": "betternether:block/golden_vine_false_1"
+      }
+    ],
+    "bottom=true": [
+      {
+        "model": "betternether:block/golden_vine_true_0"
+      },
+      {
+        "model": "betternether:block/golden_vine_true_1"
+      }
+    ]
+  }
+}

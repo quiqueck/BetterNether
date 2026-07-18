@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "bottom=false": [
+      {
+        "model": "betternether:block/blooming_vine_false_0"
+      },
+      {
+        "model": "betternether:block/blooming_vine_false_1"
+      },
+      {
+        "model": "betternether:block/blooming_vine_false_2"
+      },
+      {
+        "model": "betternether:block/blooming_vine_false_3"
+      },
+      {
+        "model": "betternether:block/blooming_vine_false_4"
+      },
+      {
+        "model": "betternether:block/blooming_vine_false_5"
+      }
+    ],
+    "bottom=true": [
+      {
+        "model": "betternether:block/blooming_vine_true_0"
+      },
+      {
+        "model": "betternether:block/blooming_vine_true_1"
+      }
+    ]
+  }
+}

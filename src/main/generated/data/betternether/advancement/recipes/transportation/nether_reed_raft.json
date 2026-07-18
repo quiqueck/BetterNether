@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_reed_boat"
+        "recipe": "betternether:nether_reed_raft"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "betternether:nether_reed_boat"
+      "betternether:nether_reed_raft"
     ]
   }
 }

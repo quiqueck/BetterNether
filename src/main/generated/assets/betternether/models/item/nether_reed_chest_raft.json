@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "betternether:item/nether_reed_boat"
+    "layer0": "betternether:item/nether_reed_chest_raft"
   }
 }

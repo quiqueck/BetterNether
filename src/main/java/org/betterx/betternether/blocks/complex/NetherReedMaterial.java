@@ -43,6 +43,11 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                     .remove(WoodSlots.BARK)
                     .remove(WoodSlots.STRIPPED_LOG)
                     .remove(WoodSlots.STRIPPED_BARK)
+                    // nether_reed is a plant, not wood - its boat is a raft (like vanilla's bamboo raft)
+                    .remove(WoodSlots.BOAT)
+                    .remove(WoodSlots.CHEST_BOAT)
+                    .add(WoodSlots.RAFT)
+                    .add(WoodSlots.CHEST_RAFT)
                     // nether_reed's own ladder model IS the shared ladder template (NetherWoodSlots.LADDER_TEMPLATE),
                     // so it stays hand-authored - it cannot be generated as a child of itself.
                     .replace(new NetherWoodSlots.LadderExternal())

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_nether_reed_boat": {
+    "has_nether_reed_raft": {
       "conditions": {
         "items": [
           {
-            "items": "betternether:nether_reed_boat"
+            "items": "betternether:nether_reed_raft"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_reed_chest_boat"
+        "recipe": "betternether:nether_reed_chest_raft"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -31,13 +31,13 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_nether_reed_boat",
-      "has_tag_c_chests"
+      "has_tag_c_chests",
+      "has_nether_reed_raft"
     ]
   ],
   "rewards": {
     "recipes": [
-      "betternether:nether_reed_chest_boat"
+      "betternether:nether_reed_chest_raft"
     ]
   }
 }

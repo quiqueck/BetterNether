@@ -4,10 +4,10 @@
   "group": "chest_boat",
   "ingredients": [
     "#c:chests",
-    "betternether:nether_reed_boat"
+    "betternether:nether_reed_raft"
   ],
   "result": {
     "count": 1,
-    "id": "betternether:nether_reed_chest_boat"
+    "id": "betternether:nether_reed_chest_raft"
   }
 }

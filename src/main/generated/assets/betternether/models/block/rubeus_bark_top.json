@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "betternether:block/rubeus_stripped_log_side"
+  }
+}

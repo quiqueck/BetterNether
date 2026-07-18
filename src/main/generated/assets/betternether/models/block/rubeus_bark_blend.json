@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "betternether:block/rubeus_log_side",
+    "side": "betternether:block/rubeus_log_side_blend",
+    "top": "betternether:block/rubeus_stripped_log_side"
+  }
+}

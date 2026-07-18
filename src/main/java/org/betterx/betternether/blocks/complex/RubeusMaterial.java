@@ -10,8 +10,12 @@ import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.bclib.trait.block.TripleShapePillarModelTrait;
+import org.betterx.betternether.BetterNether;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
+import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.trait.BlockTraitLookup;
 import org.betterx.wover.sets.api.blocks.BlockSet;
 import org.betterx.wover.sets.api.blocks.SlotMap;
 import org.betterx.wover.sets.api.blocks.types.Bark;
@@ -20,6 +24,9 @@ import org.betterx.wover.sets.api.blocks.types.Log;
 import net.minecraft.world.level.block.Block;
 
 import net.minecraft.world.level.material.MapColor;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,6 +50,23 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
                         ) {
                             return registry.defineDefaultBlockWithProps(name, RubeusLog::new);
                         }
+
+                        @Environment(EnvType.CLIENT)
+                        @Override
+                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                            // shape=bottom/middle/top blend pillar: all three shape models are plain vanilla-template
+                            // children (cube_column / cube_bottom_top), so the whole blockstate is generated.
+                            return TripleShapePillarModelTrait.log(
+                                    RubeusLog.SHAPE,
+                                    BetterNether.C.mk("block/rubeus_log_side"),
+                                    BetterNether.C.mk("block/rubeus_log_top"),
+                                    BetterNether.C.mk("block/rubeus_log_side_blend"),
+                                    BetterNether.C.mk("block/rubeus_stripped_log_top"),
+                                    BetterNether.C.mk("block/rubeus_log_top"),
+                                    BetterNether.C.mk("block/rubeus_stripped_log_side"),
+                                    BetterNether.C.mk("block/rubeus_stripped_log_top")
+                            );
+                        }
                     })
                     .replace(new NetherWoodSlots.Bark(true) {
                         @Override
@@ -52,6 +76,19 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
                                 @NotNull String name
                         ) {
                             return registry.defineDefaultBlockWithProps(name, RubeusBark::new);
+                        }
+
+                        @Environment(EnvType.CLIENT)
+                        @Override
+                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                            return TripleShapePillarModelTrait.bark(
+                                    RubeusLog.SHAPE,
+                                    BetterNether.C.mk("block/rubeus_log_side"),
+                                    BetterNether.C.mk("block/rubeus_log_side_blend"),
+                                    BetterNether.C.mk("block/rubeus_stripped_log_side"),
+                                    BetterNether.C.mk("block/rubeus_log_side"),
+                                    BetterNether.C.mk("block/rubeus_stripped_log_side")
+                            );
                         }
                     });
     }

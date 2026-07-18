@@ -29,6 +29,10 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
+                    // willow's trapdoor is exactly nether_sakura's shared #side trapdoor mesh with only the
+                    // #side texture swapped (willow_planks) - generate it from the shared template.
+                    .replace(new org.betterx.betternether.blocks.complex.slots.NetherWoodSlots.TrapdoorSideTemplate(
+                            BetterNether.C.mk("block/willow_planks")))
                     // Restore the randomized-log look: generate the weighted willow_log/willow_bark blockstates
                     // (base + _2) instead of hand-authoring them. willow's log uses the willow_bark texture on its
                     // sides (there is no willow_log_side), so the base model textures are supplied explicitly.

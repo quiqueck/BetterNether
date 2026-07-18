@@ -89,6 +89,36 @@ public class NetherWoodSlots {
         }
     }
 
+    /**
+     * The shared, hand-authored {@code #side} trapdoor template that {@link TrapdoorSideTemplate} children
+     * parent from. nether_sakura's own {@code nether_sakura_trapdoor} model (a {@code #texture}/{@code #side}
+     * mesh) doubles as this template; wart and willow reuse the identical geometry with only a different
+     * {@code #side} (planks) texture, so they no longer need their own hand-authored trapdoor model.
+     */
+    public static final net.minecraft.resources.ResourceLocation TRAPDOOR_SIDE_TEMPLATE =
+            BetterNether.C.mk("block/nether_sakura_trapdoor");
+
+    /**
+     * A trapdoor whose child model/blockstate/item are generated from the shared {@link #TRAPDOOR_SIDE_TEMPLATE}
+     * (nether_sakura's {@code #side} trapdoor mesh). Used by the wood sets whose trapdoor is exactly that shared
+     * shape but whose {@code #side} texture is <em>not</em> an {@code _side} suffix of the block texture (wart's
+     * {@code wart_planks}, willow's {@code willow_planks}), so the generic {@code withSide} suffix rule cannot
+     * derive it and it is passed explicitly.
+     */
+    public static class TrapdoorSideTemplate extends org.betterx.wover.sets.api.blocks.types.Trapdoor {
+        private final net.minecraft.resources.ResourceLocation sideTexture;
+
+        public TrapdoorSideTemplate(net.minecraft.resources.ResourceLocation sideTexture) {
+            this.sideTexture = sideTexture;
+        }
+
+        @Environment(EnvType.CLIENT)
+        @Override
+        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+            return TemplateModelTrait.trapdoor(TRAPDOOR_SIDE_TEMPLATE, sideTexture);
+        }
+    }
+
     /** A fence gate with hand-authored models. */
     public static class Gate extends org.betterx.wover.sets.api.blocks.types.Gate {
         @Environment(EnvType.CLIENT)

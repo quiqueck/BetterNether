@@ -21,6 +21,10 @@ public class WartMaterial extends RoofMaterial<WartMaterial> {
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
+                    // wart's trapdoor is exactly nether_sakura's shared #side trapdoor mesh with only the
+                    // #side texture swapped (wart_planks) - generate it from the shared template.
+                    .replace(new org.betterx.betternether.blocks.complex.slots.NetherWoodSlots.TrapdoorSideTemplate(
+                            org.betterx.betternether.BetterNether.C.mk("block/wart_planks")))
                     .add(AbstractSeed.create(BlockWartSeed::new, NetherSurvival.soulSand()))
                     .add(SimpleBlockSlot.blockOnly(NetherSlots.ROOTS, (set, props) -> new BlockWartRoots(props)));
     }

@@ -66,5 +66,7 @@ public class BlockTerrain extends BlockBase implements BlockTagProvider, Bonemea
     @Override
     public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
         context.add(this, CommonBlockTags.NETHERRACK, CommonBlockTags.NETHER_STONES);
+        // Nylium-like nether terrain is plantable ground - small plants may grow on it.
+        context.add(CommonBlockTags.SOIL, this);
     }
 }

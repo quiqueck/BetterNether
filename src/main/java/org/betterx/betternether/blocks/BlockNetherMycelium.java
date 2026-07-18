@@ -2,10 +2,14 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
+import org.betterx.wover.block.api.BlockTagProvider;
+import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
+import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -22,9 +26,15 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import org.jetbrains.annotations.Nullable;
 
-public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike {
+public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike, BlockTagProvider {
     public static final BooleanProperty IS_BLUE = BooleanProperty.create("blue");
     private BonemealAPI.FeatureProvider vegetationFeature;
+
+    @Override
+    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
+        // Nether mycelium is plantable ground - small plants may grow on it.
+        context.add(CommonBlockTags.SOIL, this);
+    }
 
     public BlockNetherMycelium(BlockBehaviour.Properties settings) {
         super(settings.mapColor(MapColor.COLOR_GRAY).requiresCorrectToolForDrops());

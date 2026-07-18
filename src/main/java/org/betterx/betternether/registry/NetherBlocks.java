@@ -6,6 +6,7 @@ import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.trait.block.WeightedCrossModelTrait;
+import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
 import org.betterx.bclib.furniture.block.BaseBarStool;
 import org.betterx.bclib.furniture.block.BaseChair;
 import org.betterx.bclib.furniture.block.BaseTaburet;
@@ -1038,8 +1039,49 @@ public class NetherBlocks {
     public static final Block NETHER_SAKURA_LEAVES = registerLeaves(
             "nether_sakura_leaves",
             MAT_NETHER_SAKURA.getSapling(),
-            p -> new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling(), p)
+            p -> new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling(), p),
+            netherSakuraLeavesModelTrait()
     );
+
+    /**
+     * The nether-sakura-leaves blockstate is a 28-entry weighted variant list (equal weight): a base leaf model
+     * plus six flower-overlay members, each placed at the four Y rotations. The six flower members are
+     * texture-permutation children of just two hand-authored geometry templates - {@code
+     * nether_sakura_leaves_flowers_3} (flower box UV {@code [0,0,16,16]}) parents {@code _flowers_1}/{@code _2};
+     * {@code nether_sakura_leaves_flowers_6} (flower box UV {@code [16,16,0,0]}) parents {@code _flowers_4}/{@code
+     * _5}. The base leaf model, the two flower templates and the custom-display item model stay hand-authored;
+     * the four sibling children and the blockstate are generated. Item is kept ({@link
+     * WeightedTemplateModelTrait.Item#none()}) because {@code item/nether_sakura_leaves} carries a bespoke display
+     * transform the default item fallback preserves.
+     */
+    private static BlockModelTrait netherSakuraLeavesModelTrait() {
+        final var base = BetterNether.C.mk("block/nether_sakura_leaves");
+        final var tmplP = BetterNether.C.mk("block/nether_sakura_leaves_flowers_3");
+        final var tmplM = BetterNether.C.mk("block/nether_sakura_leaves_flowers_6");
+        final var nsf1 = BetterNether.C.mk("block/nether_sakura_flowers_1");
+        final var nsf2 = BetterNether.C.mk("block/nether_sakura_flowers_2");
+        final var nsf3 = BetterNether.C.mk("block/nether_sakura_flowers_3");
+        // permutation A (flowers_1 / flowers_4): flowers1=nsf3, flowers2=nsf1, flowers3=nsf2
+        final var permA = java.util.Map.of("flowers1", nsf3, "flowers2", nsf1, "flowers3", nsf2);
+        // permutation B (flowers_2 / flowers_5): flowers1=nsf2, flowers2=nsf3, flowers3=nsf1
+        final var permB = java.util.Map.of("flowers1", nsf2, "flowers2", nsf3, "flowers3", nsf1);
+        final java.util.List<WeightedTemplateModelTrait.Layer> members = java.util.List.of(
+                WeightedTemplateModelTrait.model(base),
+                WeightedTemplateModelTrait.child(tmplP, permA),
+                WeightedTemplateModelTrait.child(tmplP, permB),
+                WeightedTemplateModelTrait.model(tmplP),
+                WeightedTemplateModelTrait.child(tmplM, permA),
+                WeightedTemplateModelTrait.child(tmplM, permB),
+                WeightedTemplateModelTrait.model(tmplM)
+        );
+        final java.util.List<WeightedTemplateModelTrait.Layer> variants = new java.util.ArrayList<>();
+        for (WeightedTemplateModelTrait.Layer m : members) {
+            for (int y : new int[]{0, 90, 180, 270}) {
+                variants.add(m.rotated(0, y));
+            }
+        }
+        return WeightedTemplateModelTrait.simple(variants, WeightedTemplateModelTrait.Item.none());
+    }
     // Soul lily //
     public static final Block SOUL_LILY = registerBlockNI(
             "soul_lily",
@@ -1401,15 +1443,27 @@ public class NetherBlocks {
             Block sapling,
             Function<BlockBehaviour.Properties, T> factory
     ) {
-        return getBlockRegistry()
+        return registerLeaves(name, sapling, factory, null);
+    }
+
+    private static <T extends Block> T registerLeaves(
+            String name,
+            Block sapling,
+            Function<BlockBehaviour.Properties, T> factory,
+            BlockModelTrait modelTrait
+    ) {
+        final var definition = getBlockRegistry()
                 .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .addTrait(BlockTraits.LOOT_TABLE.dropLeaves(sapling))
                 // BehaviourLeaves (still on these classes, for the LEAVES tags and the creative tab) extends
                 // BehaviourCompostable and overrides compostingChance() to 0.3f - but that marker only ever
                 // produced the c:compostable item tag, never a composter entry. The trait registers the real
                 // one, at the 0.3f the marker always intended.
-                .addTrait(CompostableBlockTrait.withChance(0.3f))
-                .buildAndRegister();
+                .addTrait(CompostableBlockTrait.withChance(0.3f));
+        if (modelTrait != null) {
+            definition.addTrait(modelTrait);
+        }
+        return definition.buildAndRegister();
     }
 
     // Vine-like plants: drop themselves only when broken with silk touch, a hoe, or shears.

@@ -43,9 +43,13 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomM
                     .remove(WoodSlots.BARK)
                     .remove(WoodSlots.STRIPPED_LOG)
                     .remove(WoodSlots.STRIPPED_BARK)
-                    // The mushroom fence is a bespoke shape (custom top/lower bars on a dedicated
-                    // fence texture), not the vanilla plank fence - keep its hand-authored assets.
-                    .replace(new NetherWoodSlots.Fence())
+                    // The mushroom fence's post/side models are pure texture-swap children of nether_reed's
+                    // bespoke fence templates - generate them (and the multipart/inventory) from those templates
+                    // instead of hand-authoring. The nether_reed fence templates stay hand-authored.
+                    .replace(new NetherWoodSlots.FenceTemplate(
+                            org.betterx.betternether.BetterNether.C.mk("block/nether_mushroom_fence_side"),
+                            org.betterx.betternether.BetterNether.C.mk("block/nether_mushroom_fence_top"),
+                            org.betterx.betternether.BetterNether.C.mk("block/nether_mushroom_planks")))
                     // A stem without the default "4 stems -> log" recipe (this set has no log), whose
                     // blockstate/model/item model are hand-authored rather than the generic pillar.
                     .add(new Stem() {

@@ -107,6 +107,44 @@ public class NetherWoodSlots {
         }
     }
 
+    /**
+     * The shared, hand-authored fence templates (bespoke top/lower-bar geometry) that {@link FenceTemplate}
+     * children parent from. nether_reed's own fence post/side models double as these templates.
+     */
+    public static final net.minecraft.resources.ResourceLocation FENCE_POST_TEMPLATE =
+            BetterNether.C.mk("block/nether_reed_fence_post");
+    public static final net.minecraft.resources.ResourceLocation FENCE_SIDE_TEMPLATE =
+            BetterNether.C.mk("block/nether_reed_fence_side");
+
+    /**
+     * A fence whose post/side child models are generated from the shared {@link #FENCE_POST_TEMPLATE}/
+     * {@link #FENCE_SIDE_TEMPLATE} (nether_reed's bespoke fence geometry). Used by nether_mushroom, whose fence
+     * post/side are exactly texture-swap children of those templates. The block's own {@code _side}/{@code _top}
+     * fence textures feed the post/side; the item model uses a separate {@code _planks} inventory texture.
+     */
+    public static class FenceTemplate extends org.betterx.wover.sets.api.blocks.types.Fence {
+        private final net.minecraft.resources.ResourceLocation sideTexture;
+        private final net.minecraft.resources.ResourceLocation topTexture;
+        private final net.minecraft.resources.ResourceLocation inventoryTexture;
+
+        public FenceTemplate(
+                net.minecraft.resources.ResourceLocation sideTexture,
+                net.minecraft.resources.ResourceLocation topTexture,
+                net.minecraft.resources.ResourceLocation inventoryTexture
+        ) {
+            this.sideTexture = sideTexture;
+            this.topTexture = topTexture;
+            this.inventoryTexture = inventoryTexture;
+        }
+
+        @Environment(EnvType.CLIENT)
+        @Override
+        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+            return TemplateModelTrait.fence(
+                    FENCE_POST_TEMPLATE, FENCE_SIDE_TEMPLATE, sideTexture, topTexture, inventoryTexture);
+        }
+    }
+
     /** A slab with hand-authored models. */
     public static class Slab extends org.betterx.wover.sets.api.blocks.types.Slab {
         @Environment(EnvType.CLIENT)

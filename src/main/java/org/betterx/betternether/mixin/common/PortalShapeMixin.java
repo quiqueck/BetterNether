@@ -1,9 +1,11 @@
 package org.betterx.betternether.mixin.common;
 
 import org.betterx.betternether.portals.BNPortalShape;
+import org.betterx.betternether.portals.BNPortalShapeProvider;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.portal.PortalShape;
 
@@ -15,60 +17,55 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PortalShape.class)
-public class PortalShapeMixin {
+public class PortalShapeMixin implements BNPortalShapeProvider {
     @Unique
     private BNPortalShape bn_shape;
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Ljava/lang/Object;<init>()V", shift = At.Shift.AFTER))
-    private void bn_init(LevelAccessor levelAccessor, BlockPos blockPos, Direction.Axis axis, CallbackInfo ci) {
-        bn_shape = new BNPortalShape(levelAccessor, blockPos, axis);
+    @Override
+    public void bn_setShape(BNPortalShape shape) {
+        this.bn_shape = shape;
     }
 
-    @Inject(method = "calculateBottomLeft", at = @At(value = "HEAD"), cancellable = true)
-    private void bn_calculateBottomLeft(BlockPos blockPos, CallbackInfoReturnable<BlockPos> cir) {
-        if (bn_shape != null) {
-            cir.setReturnValue(bn_shape.calculateBottomLeft(blockPos));
-            cir.cancel();
+    @Override
+    public BNPortalShape bn_getShape() {
+        return this.bn_shape;
+    }
+
+    // findAnyShape is the single entry point used both for portal creation (fire lighting)
+    // and for validating existing portals. Attach BetterNether's flexible flood-fill shape to
+    // every PortalShape it produces so the overrides below can drive the behaviour.
+    @Inject(method = "findAnyShape", at = @At("RETURN"))
+    private static void bn_findAnyShape(
+            BlockGetter blockGetter,
+            BlockPos blockPos,
+            Direction.Axis axis,
+            CallbackInfoReturnable<PortalShape> cir
+    ) {
+        PortalShape shape = cir.getReturnValue();
+        if (shape != null) {
+            ((BNPortalShapeProvider) shape).bn_setShape(new BNPortalShape(blockGetter, blockPos, axis));
         }
     }
 
-    @Inject(method = "calculateWidth", at = @At(value = "HEAD"), cancellable = true)
-    private void bn_calculateWidth(CallbackInfoReturnable<Integer> cir) {
-        if (bn_shape != null) {
-            cir.setReturnValue(bn_shape.calculateWidth());
-            cir.cancel();
-        }
-    }
-
-    @Inject(method = "calculateHeight", at = @At(value = "HEAD"), cancellable = true)
-    private void bn_calculateHeight(CallbackInfoReturnable<Integer> cir) {
-        if (bn_shape != null) {
-            cir.setReturnValue(bn_shape.calculateHeight());
-            cir.cancel();
-        }
-    }
-
-    @Inject(method = "createPortalBlocks", at = @At(value = "HEAD"), cancellable = true)
-    private void bn_createPortalBlocks(CallbackInfo ci) {
-        if (bn_shape != null) {
-            bn_shape.createPortalBlocks();
-            ci.cancel();
-        }
-    }
-
-    @Inject(method = "isComplete", at = @At(value = "HEAD"), cancellable = true)
-    private void bn_isComplete(CallbackInfoReturnable<Boolean> cir) {
-        if (bn_shape != null) {
-            cir.setReturnValue(bn_shape.isComplete());
-            cir.cancel();
-        }
-    }
-
-    @Inject(method = "isValid", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "isValid", at = @At("HEAD"), cancellable = true)
     private void bn_isValid(CallbackInfoReturnable<Boolean> cir) {
         if (bn_shape != null) {
             cir.setReturnValue(bn_shape.isValid());
-            cir.cancel();
+        }
+    }
+
+    @Inject(method = "isComplete", at = @At("HEAD"), cancellable = true)
+    private void bn_isComplete(CallbackInfoReturnable<Boolean> cir) {
+        if (bn_shape != null) {
+            cir.setReturnValue(bn_shape.isComplete());
+        }
+    }
+
+    @Inject(method = "createPortalBlocks", at = @At("HEAD"), cancellable = true)
+    private void bn_createPortalBlocks(LevelAccessor levelAccessor, CallbackInfo ci) {
+        if (bn_shape != null) {
+            bn_shape.createPortalBlocks(levelAccessor);
+            ci.cancel();
         }
     }
 }

@@ -3,6 +3,7 @@ package org.betterx.betternether.portals;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherPortalBlock;
@@ -17,7 +18,7 @@ public class BNPortalShape {
     private static final Direction[] DIR_Z = {Direction.UP, Direction.DOWN, Direction.NORTH, Direction.SOUTH};
     public static final int MAX_SEARCH_DIST = 21;
 
-    private final LevelAccessor levelAccessor;
+    private final BlockGetter blockGetter;
     private final BlockPos blockPos;
     private final Direction.Axis axis;
 
@@ -28,11 +29,11 @@ public class BNPortalShape {
     private int numPortalBlocks = 0;
 
     public BNPortalShape(
-            LevelAccessor levelAccessor,
+            BlockGetter blockGetter,
             BlockPos blockPos,
             Direction.Axis axis
     ) {
-        this.levelAccessor = levelAccessor;
+        this.blockGetter = blockGetter;
         this.blockPos = blockPos;
         this.axis = axis;
 
@@ -55,7 +56,7 @@ public class BNPortalShape {
         todo.add(blockPos);
         while (!todo.isEmpty()) {
             BlockPos p = todo.pop();
-            BlockState tstate = levelAccessor.getBlockState(p);
+            BlockState tstate = blockGetter.getBlockState(p);
             if (tstate.is(Blocks.NETHER_PORTAL)) numPortalBlocks++;
 
             portalBlocks.add(p);
@@ -75,7 +76,7 @@ public class BNPortalShape {
                         portalBlocks.clear();
                         return false;
                     }
-                    BlockState state = levelAccessor.getBlockState(pp);
+                    BlockState state = blockGetter.getBlockState(pp);
                     if (isEmpty(state)) {
 
                         todo.add(pp);
@@ -121,10 +122,10 @@ public class BNPortalShape {
         return valid;
     }
 
-    public void createPortalBlocks() {
+    public void createPortalBlocks(LevelAccessor levelAccessor) {
         BlockState blockState = Blocks.NETHER_PORTAL.defaultBlockState()
                                                     .setValue(NetherPortalBlock.AXIS, this.axis);
-        portalBlocks.forEach(p -> this.levelAccessor.setBlock(p, blockState, 18));
+        portalBlocks.forEach(p -> levelAccessor.setBlock(p, blockState, 18));
     }
 
     public boolean isComplete() {

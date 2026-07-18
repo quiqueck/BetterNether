@@ -111,6 +111,34 @@ public class NetherTraits {
         return seed(List.of());
     }
 
+    /**
+     * {@code base} plus everything the retired {@code BehaviourVine}/{@code BehaviourClimableVine} markers
+     * contributed: {@code mineable/hoe}, {@code mineable/shears}, {@link CompostableBlockTrait} at 0.1, the
+     * {@link BlockTraits#CLIMBABLE} tag, and the vine block tag ({@link VegetationTagTrait#vine()}).
+     * {@code BehaviourVine} extended {@code AddMineableShears + AddMineableHoe + BehaviourCompostable +
+     * BehaviourClimable}; {@code BehaviourClimableVine} was just {@code BehaviourClimable + BehaviourVine}
+     * combined, so both retire to the same set of traits here.
+     * <p>
+     * This is NOT {@code bclib}'s full {@code VineBlockTrait} - that also forces a map color/light-level
+     * {@code PlantBlockTrait} and a datagen cube model, which would fight the hand-authored
+     * {@code WeightedCrossModelTrait}/external models these blocks already carry and double up the
+     * {@link CompostableBlockTrait} already folded in via {@link #compostable(List)} above.
+     */
+    public static List<BlockTrait<?, ?>> vine(List<BlockTrait<?, ?>> base) {
+        return and(
+                compostable(base),
+                BlockTraits.MINEABLE_WITH.needsHoe(),
+                BlockTraits.MINEABLE_WITH.needsShears(),
+                BlockTraits.CLIMBABLE.withDefault(),
+                VegetationTagTrait.vine()
+        );
+    }
+
+    /** {@link #vine(List)} with no other traits. */
+    public static List<BlockTrait<?, ?>> vine() {
+        return vine(List.of());
+    }
+
     /** {@code a} followed by {@code b}, dropping any {@code null}. */
     public static List<BlockTrait<?, ?>> concat(List<BlockTrait<?, ?>> a, List<BlockTrait<?, ?>> b) {
         final List<BlockTrait<?, ?>> combined = new ArrayList<>(a.size() + b.size());

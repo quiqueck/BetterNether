@@ -619,7 +619,11 @@ public class NetherBlocks {
     // Cutout, for the same reason as NEON_EQUISETUM below: these extend bclib's BaseVineBlock /
     // BaseSimpleVineBlock rather than BlockBase, so they were never IRenderTypeable and the old
     // registerRenderLayers() walk never gave them a layer. Every texture they reach is binary alpha.
-    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
+    // NetherTraits.vine() replaces the retired BehaviourVine/BehaviourClimableVine markers (mineable
+    // hoe/shears, the CLIMBABLE tag and the vine block tag), folding in the CompostableBlockTrait these
+    // registrations already carried - see NetherTraits.vine()'s doc-comment for why this isn't bclib's
+    // full VineBlockTrait.
+    public static final Block BLACK_VINE = registerBlock("black_vine", NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
             BaseSimpleVineBlock.BOTTOM,
             List.of(
                     WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block"), BetterNether.C.mk("block/black_vine")),
@@ -631,7 +635,7 @@ public class NetherBlocks {
             ),
             WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("block/black_vine"))
     ), NetherLoot.blackVine()))), BlockBlackVine::new);
-    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
+    public static final Block BLOOMING_VINE = registerBlock("blooming_vine", NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
             BaseSimpleVineBlock.BOTTOM,
             List.of(
                     WeightedCrossModelTrait.cropParent(BetterNether.C.mk("block/crop_block"), BetterNether.C.mk("block/flowered_vine_1")),
@@ -647,7 +651,7 @@ public class NetherBlocks {
             ),
             WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("item/flowered_vine"))
     ), NetherLoot.blackVine()))), BlockBlackVine::new);
-    public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
+    public static final Block GOLDEN_VINE = registerVine("golden_vine", NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.booleanDispatch(
             BaseSimpleVineBlock.BOTTOM,
             List.of(
                     WeightedCrossModelTrait.cross(BetterNether.C.mk("block/golden_vine")),
@@ -662,7 +666,7 @@ public class NetherBlocks {
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI(
             "lumabus_vine",
-            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(
+            NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.of(
                     lumabusVineModelTrait("lumabus"),
                     NetherLoot.lumabusVine()
             ))),
@@ -670,7 +674,7 @@ public class NetherBlocks {
     );
     public static final BlockLumabusVine GOLDEN_LUMABUS_VINE = registerBlockNI(
             "golden_lumabus_vine",
-            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(
+            NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.of(
                     lumabusVineModelTrait("golden_lumabus"),
                     NetherLoot.lumabusVine()
             ))),
@@ -715,7 +719,7 @@ public class NetherBlocks {
     }
 
     // Small Plants
-    public static final Block SOUL_VEIN = registerBlock("soul_vein", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherSand())), BlockSoulVein::new);
+    public static final Block SOUL_VEIN = registerBlock("soul_vein", NetherTraits.vine(NetherRender.cutoutAnd(NetherSurvival.netherSand())), BlockSoulVein::new);
     public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.boneBlocks())), BlockBoneMushroom::new);
     public static final Block BLACK_BUSH = registerBlock("black_bush", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockBlackBush::new);
     public static final Block INK_BUSH = registerBlockNI("ink_bush", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockInkBush::new);
@@ -746,7 +750,7 @@ public class NetherBlocks {
     // textures have drawn their transparent pixels opaque since long before the trait migration.
     public static final Block NEON_EQUISETUM = registerVine(
             "neon_equisetum",
-            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.and(
+            NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.and(
                     NetherSurvival.netherrack(),
                     ModelTraitLibrary.externalModel()
             ))),
@@ -756,7 +760,7 @@ public class NetherBlocks {
     // Cutout, same BaseVineBlock gap as the vines above.
     public static final Block WHISPERING_GOURD_VINE = registerBlock(
             "whispering_gourd_vine",
-            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(
+            NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.of(
                     ModelTraitLibrary.externalModel(),
                     NetherLoot.whisperingGourdVine()
             ))),
@@ -1071,7 +1075,7 @@ public class NetherBlocks {
     );
     public static final Block ANCHOR_TREE_VINE = registerBlockNI(
             "anchor_tree_vine",
-            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.propertyDispatch(
+            NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.propertyDispatch(
                     BlockAnchorTreeVine.SHAPE,
                     List.of(
                             WeightedCrossModelTrait.Case.of(BlockProperties.TripleShape.BOTTOM, List.of(
@@ -1203,7 +1207,7 @@ public class NetherBlocks {
     );
     // eye_vine has no block item (its clone item is EYE_SEED); it drops nothing, so no loot table is generated.
     // Cutout, same BaseVineBlock gap as the vines above.
-    public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.simple(
+    public static final Block EYE_VINE = registerBlockNI("eye_vine", NetherTraits.vine(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.simple(
             List.of(WeightedCrossModelTrait.cross(BetterNether.C.mk("block/eye_vine"))),
             WeightedCrossModelTrait.Item.delegated()
     )))), BlockEyeVine::new);

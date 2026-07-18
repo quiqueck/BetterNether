@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.bclib.behaviours.interfaces.BehaviourClimableVine;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockProperties;
 import org.betterx.wover.block.api.BlockProperties.TripleShape;
@@ -28,7 +27,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockAnchorTreeVine extends BlockBaseNotFull implements BehaviourClimableVine {
+public class BlockAnchorTreeVine extends BlockBaseNotFull {
     protected static final VoxelShape SHAPE_SELECTION = Block.box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 

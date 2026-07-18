@@ -1,7 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.behaviours.interfaces.*;
-
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -83,7 +81,7 @@ public abstract class BNPane extends IronBarsBlock {
         }
     }
 
-    public static class Obsidian extends BNPane implements BehaviourObsidian {
+    public static class Obsidian extends BNPane {
         public Obsidian(Block block, boolean dropSelf) {
             super(block, dropSelf);
         }

@@ -22,26 +22,50 @@ import net.fabricmc.api.Environment;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The plantable "seed" of a Nether tree. Parameterized with the concrete block factory
- * (a {@code Foo(BlockBehaviour.Properties)} constructor). Uses a hand-authored (external) model.
+ * (a {@code Foo(BlockBehaviour.Properties)} constructor). Uses a hand-authored (external) model by default, or a
+ * caller-supplied {@link BlockModelTrait} (e.g. {@code WeightedCrossModelTrait}) when the seed's parent-based
+ * blockstate is generated in code instead.
  */
 public class AbstractSeed extends SlotFromDefinition {
     public static final String SEED_SUFFIX = "seed";
 
     private final Function<BlockBehaviour.Properties, Block> maker;
     private final List<BlockTrait<?, ?>> survival;
+    @Nullable
+    private final Supplier<BlockModelTrait> modelTrait;
 
-    private AbstractSeed(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
+    private AbstractSeed(
+            Function<BlockBehaviour.Properties, Block> maker,
+            List<BlockTrait<?, ?>> survival,
+            @Nullable Supplier<BlockModelTrait> modelTrait
+    ) {
         super(NetherSlots.SEED);
         this.maker = maker;
         this.survival = survival;
+        this.modelTrait = modelTrait;
     }
 
     public static AbstractSeed create(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
-        return new AbstractSeed(maker, survival);
+        return new AbstractSeed(maker, survival, null);
+    }
+
+    /**
+     * Like {@link #create(Function, List)} but with a code-generated model trait (its parent-based blockstate,
+     * variant models and item are generated instead of hand-authored). {@code modelTrait} must be a supplier so
+     * the client-only trait is resolved lazily inside {@link #buildModel} rather than at slot construction.
+     */
+    public static AbstractSeed create(
+            Function<BlockBehaviour.Properties, Block> maker,
+            List<BlockTrait<?, ?>> survival,
+            Supplier<BlockModelTrait> modelTrait
+    ) {
+        return new AbstractSeed(maker, survival, modelTrait);
     }
 
     @Override
@@ -71,6 +95,6 @@ public class AbstractSeed extends SlotFromDefinition {
     @Environment(EnvType.CLIENT)
     @Override
     protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
-        return ModelTraitLibrary.externalModel();
+        return modelTrait != null ? modelTrait.get() : ModelTraitLibrary.externalModel();
     }
 }

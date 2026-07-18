@@ -18,6 +18,7 @@ import org.betterx.betternether.blocks.complex.slots.VanillaNetherWood;
 import org.betterx.betternether.blocks.complex.slots.VanillaWood;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
+import org.betterx.wover.block.api.BlockProperties;
 import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
@@ -69,7 +70,13 @@ public class NetherBlocks {
             NetherTraits.and(
                     NetherRender.cutout(),
                     BlockTraits.MINEABLE_WITH.needsHoe(),
-                    BlockTraits.MINEABLE_WITH.needsSword()
+                    BlockTraits.MINEABLE_WITH.needsSword(),
+                    WeightedCrossModelTrait.booleanDispatch(
+                            BlockNetherReed.TOP,
+                            List.of(WeightedCrossModelTrait.cross(BetterNether.C.mk("block/nether_reed_stem"))),
+                            List.of(WeightedCrossModelTrait.cross(BetterNether.C.mk("block/reeds_top"))),
+                            WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("item/nether_reed_stem"))
+                    )
             ),
             BlockNetherReed::new
     );
@@ -646,7 +653,10 @@ public class NetherBlocks {
     public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.boneBlocks())), BlockBoneMushroom::new);
     public static final Block BLACK_BUSH = registerBlock("black_bush", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockBlackBush::new);
     public static final Block INK_BUSH = registerBlockNI("ink_bush", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockInkBush::new);
-    public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", NetherTraits.seed(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockInkBushSeed::new);
+    public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", NetherTraits.and(NetherTraits.seed(NetherRender.cutoutAnd(NetherSurvival.netherGround())), WeightedCrossModelTrait.simple(
+            List.of(WeightedCrossModelTrait.cross(BetterNether.C.mk("block/ink_bush_seed"))),
+            WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("item/ink_bush_seed"))
+    )), BlockInkBushSeed::new);
     public static final Block SMOKER = registerBlock(
             "smoker",
             NetherTraits.and(NetherSurvival.netherGround(), BlockTraits.MINEABLE_WITH.needsAxe()),
@@ -997,7 +1007,30 @@ public class NetherBlocks {
     );
     public static final Block ANCHOR_TREE_VINE = registerBlockNI(
             "anchor_tree_vine",
-            NetherTraits.compostable(NetherRender.cutout()),
+            NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(WeightedCrossModelTrait.propertyDispatch(
+                    BlockAnchorTreeVine.SHAPE,
+                    List.of(
+                            WeightedCrossModelTrait.Case.of(BlockProperties.TripleShape.BOTTOM, List.of(
+                                    WeightedCrossModelTrait.cross(BetterNether.C.mk("block/anchor_tree_vine_end_2")),
+                                    WeightedCrossModelTrait.crossParent(
+                                            BetterNether.C.mk("block/cross_inverted"),
+                                            BetterNether.C.mk("block/anchor_tree_vine_end_2"))
+                            )),
+                            WeightedCrossModelTrait.Case.of(BlockProperties.TripleShape.MIDDLE, List.of(
+                                    WeightedCrossModelTrait.cross(BetterNether.C.mk("block/anchor_tree_vine_end_1")),
+                                    WeightedCrossModelTrait.crossParent(
+                                            BetterNether.C.mk("block/cross_inverted"),
+                                            BetterNether.C.mk("block/anchor_tree_vine_end_1"))
+                            )),
+                            WeightedCrossModelTrait.Case.of(BlockProperties.TripleShape.TOP, List.of(
+                                    WeightedCrossModelTrait.cross(BetterNether.C.mk("block/anchor_tree_vine")),
+                                    WeightedCrossModelTrait.crossParent(
+                                            BetterNether.C.mk("block/cross_inverted"),
+                                            BetterNether.C.mk("block/anchor_tree_vine"))
+                            ))
+                    ),
+                    WeightedCrossModelTrait.Item.delegated()
+            )))),
             BlockAnchorTreeVine::new
     );
     // Nether Sakura

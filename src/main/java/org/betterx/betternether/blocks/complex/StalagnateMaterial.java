@@ -12,6 +12,7 @@ import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
 import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.bclib.trait.block.WeightedCrossModelTrait;
 import org.betterx.wover.block.api.trait.BlockRecipeTrait;
 import org.betterx.wover.block.api.trait.BlockTraitLookup;
 import org.betterx.wover.block.api.trait.BlockTraits;
@@ -50,7 +51,18 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                         }
                     })
                     .add(TrunkSlot.createClimbable(BlockStalagnate::new, NetherRender.cutout()))
-                    .add(AbstractSeed.create(BlockStalagnateSeed::new, NetherSurvival.netherrack()))
+                    .add(AbstractSeed.create(
+                            BlockStalagnateSeed::new,
+                            NetherSurvival.netherrack(),
+                            () -> WeightedCrossModelTrait.booleanDispatch(
+                                    BlockStalagnateSeed.TOP,
+                                    java.util.List.of(WeightedCrossModelTrait.cross(
+                                            BetterNether.C.mk("block/stalagnate_seed"))),
+                                    java.util.List.of(WeightedCrossModelTrait.cross(
+                                            BetterNether.C.mk("block/stalagnate_seed")).rotated(180, 0)),
+                                    WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("item/stalagnate_seed"))
+                            )
+                    ))
                     .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.BOWL,
                             (set, props) -> new BlockStalagnateBowl(props),

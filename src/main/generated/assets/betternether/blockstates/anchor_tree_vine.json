@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "shape=bottom": [
+      {
+        "model": "betternether:block/anchor_tree_vine_bottom_0"
+      },
+      {
+        "model": "betternether:block/anchor_tree_vine_bottom_1"
+      }
+    ],
+    "shape=middle": [
+      {
+        "model": "betternether:block/anchor_tree_vine_middle_0"
+      },
+      {
+        "model": "betternether:block/anchor_tree_vine_middle_1"
+      }
+    ],
+    "shape=top": [
+      {
+        "model": "betternether:block/anchor_tree_vine_top_0"
+      },
+      {
+        "model": "betternether:block/anchor_tree_vine_top_1"
+      }
+    ]
+  }
+}

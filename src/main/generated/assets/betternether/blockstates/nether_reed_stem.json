@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "top=false": {
+      "model": "betternether:block/nether_reed_stem_false"
+    },
+    "top=true": {
+      "model": "betternether:block/nether_reed_stem_true"
+    }
+  }
+}

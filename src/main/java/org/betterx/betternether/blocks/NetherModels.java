@@ -16,12 +16,14 @@ import org.betterx.wover.sets.api.blocks.SlotType;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.Weighted;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -54,6 +56,42 @@ public class NetherModels {
     /** Basalt bricks: a plain block plus a randomised {@code _cracked} variant. */
     public static BlockModelTrait basaltBricks() {
         return ModCore.isDatagen() ? Impl.basaltBricks() : null;
+    }
+
+    /**
+     * A slab whose half-slab faces use explicit textures (not simply the source block's own texture), but
+     * whose double-slab (full block) state reuses the plain source block's model. Use this for slabs whose
+     * bottom/top/side faces are dedicated slab textures while the doubled block is genuinely the source block
+     * (e.g. soul-sandstone slabs, whose double is the full soul-sandstone block).
+     * <p>
+     * {@code top}/{@code bottom}/{@code side} are the per-face textures of the half-slab models; the standard
+     * generator derives the {@code type=top} state as a {@code slab_top} model from the same mapping (render-
+     * equivalent to the legacy "bottom model rotated x=180 uvlock" form).
+     *
+     * @param source supplies the block whose own model backs the {@code type=double} state
+     */
+    public static BlockModelTrait slab(
+            Supplier<Block> source,
+            ResourceLocation top,
+            ResourceLocation bottom,
+            ResourceLocation side
+    ) {
+        return ModCore.isDatagen() ? Impl.slab(source, top, bottom, side) : null;
+    }
+
+    /**
+     * A slab whose half-slab faces AND whose double-slab (full block) state both use bespoke slab textures,
+     * because the doubled block does not match the source block's own texture. The half-slab top/bottom faces
+     * and the doubled block's up/down faces use {@code topBottom}; every side face uses {@code side}. The
+     * {@code type=double} state is a {@code cube_column} built from those two textures rather than the source
+     * block's model (e.g. bone / nether-ruby / cincinnasite / nether-brick-tile slabs, whose doubled block
+     * carries the same slab seam texture as the half slab).
+     */
+    public static BlockModelTrait slabColumnDouble(
+            ResourceLocation topBottom,
+            ResourceLocation side
+    ) {
+        return ModCore.isDatagen() ? Impl.slabColumnDouble(topBottom, side) : null;
     }
 
     /** Soul sandstone stairs, textured top/side/bottom from the soul-sandstone set. */
@@ -315,6 +353,51 @@ public class NetherModels {
         private static BlockModelTrait basaltBricks() {
             return ClientBlockTraits.MODEL.with((key, block, generator) ->
                     BNModels.provideSimpleMultiStateBlock(generator, block, "", "_cracked"));
+        }
+
+        private static BlockModelTrait slab(
+                Supplier<Block> source,
+                ResourceLocation top,
+                ResourceLocation bottom,
+                ResourceLocation side
+        ) {
+            return ClientBlockTraits.MODEL.with((key, block, generator) ->
+                    generator.createSlab(block, source.get(), new TextureMapping()
+                            .put(TextureSlot.TOP, top)
+                            .put(TextureSlot.BOTTOM, bottom)
+                            .put(TextureSlot.SIDE, side)));
+        }
+
+        private static BlockModelTrait slabColumnDouble(
+                ResourceLocation topBottom,
+                ResourceLocation side
+        ) {
+            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+                final TextureMapping halfMapping = new TextureMapping()
+                        .put(TextureSlot.TOP, topBottom)
+                        .put(TextureSlot.BOTTOM, topBottom)
+                        .put(TextureSlot.SIDE, side);
+                final ResourceLocation bottomModel = ModelTemplates.SLAB_BOTTOM.create(
+                        block, halfMapping, generator.vanillaGenerator.modelOutput);
+                final ResourceLocation topModel = ModelTemplates.SLAB_TOP.create(
+                        block, halfMapping, generator.vanillaGenerator.modelOutput);
+                // The doubled block reuses the slab's own textures (up/down = topBottom, sides = side), so it
+                // cannot delegate to the source block's model the way ModelTraitLibrary.slab does. cube_column
+                // (parent block/cube) binds up/down to #end and the four sides to #side, reproducing the
+                // hand-authored block/cube double model's faces exactly.
+                final ResourceLocation doubleModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(
+                        block, "_double",
+                        new TextureMapping()
+                                .put(TextureSlot.END, topBottom)
+                                .put(TextureSlot.SIDE, side),
+                        generator.vanillaGenerator.modelOutput);
+                generator.acceptBlockState(BlockModelGenerators.createSlab(
+                        block,
+                        BlockModelGenerators.plainVariant(bottomModel),
+                        BlockModelGenerators.plainVariant(topModel),
+                        BlockModelGenerators.plainVariant(doubleModel)));
+                generator.delegateItemModel(block, bottomModel);
+            });
         }
 
         private static BlockModelTrait soulSandstoneStairs() {

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/roof_tile_cincinnasite_slab"
+    "model": "betternether:block/roof_tile_cincinnasite_slab"
   }
 }

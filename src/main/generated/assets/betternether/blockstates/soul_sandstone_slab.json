@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/soul_sandstone_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/soul_sandstone"
+    },
+    "type=top": {
+      "model": "betternether:block/soul_sandstone_slab_top"
+    }
+  }
+}

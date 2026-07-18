@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/nether_ruby_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/nether_ruby_slab_double"
+    },
+    "type=top": {
+      "model": "betternether:block/nether_ruby_slab_top"
+    }
+  }
+}

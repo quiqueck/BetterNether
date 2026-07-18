@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/obsidian_tile_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/obsidian_tile_small"
+    },
+    "type=top": {
+      "model": "betternether:block/obsidian_tile_slab_top"
+    }
+  }
+}

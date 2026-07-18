@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/roof_tile_cincinnasite_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/roof_tile_cincinnasite"
+    },
+    "type=top": {
+      "model": "betternether:block/roof_tile_cincinnasite_slab_top"
+    }
+  }
+}

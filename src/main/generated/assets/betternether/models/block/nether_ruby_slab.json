@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "betternether:block/nether_ruby_block",
+    "side": "betternether:block/nether_ruby_slab_side",
+    "top": "betternether:block/nether_ruby_block"
+  }
+}

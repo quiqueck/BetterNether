@@ -33,6 +33,7 @@ import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 import org.betterx.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -123,7 +124,9 @@ public class NetherBlocks {
     );
     public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED, false, NetherMaterial.cincinnasite());
     public static final Block CINCINNASITE_SLAB = registerSlab("cincinnasite_slab", CINCINNASITE_FORGED, false,
-            NetherMaterial.cincinnasite(), ModelTraitLibrary.externalModel());
+            NetherMaterial.cincinnasite(), NetherModels.slabColumnDouble(
+                    BetterNether.C.mk("block/cincinnasite_plate_up"),
+                    BetterNether.C.mk("block/cincinnasite_slab")));
     public static final Block TABURET_CINCINNASITE = registerTaburet(
             "taburet_cincinnasite",
             CINCINNASITE_SLAB,
@@ -228,7 +231,9 @@ public class NetherBlocks {
     );
     public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK, true, NetherMaterial.metal());
     public static final Block NETHER_RUBY_SLAB = registerSlab("nether_ruby_slab", NETHER_RUBY_BLOCK, true,
-            NetherMaterial.metal(), ModelTraitLibrary.externalModel());
+            NetherMaterial.metal(), NetherModels.slabColumnDouble(
+                    BetterNether.C.mk("block/nether_ruby_block"),
+                    BetterNether.C.mk("block/nether_ruby_slab_side")));
     // Vanilla Ores
     public static final Block NETHER_LAPIS_ORE = registerBlock(
             "nether_lapis_ore",
@@ -251,7 +256,10 @@ public class NetherBlocks {
             NETHER_BRICK_TILE_SMALL,
             false,
             NetherMaterial.stone(),
-            ModelTraitLibrary.externalModel()
+            NetherModels.slabColumnDouble(
+                    BetterNether.C.mk("block/nether_brick_tile_small"),
+                    BetterNether.C.mk("block/nether_brick_tile_slab_side")
+            )
     );
     public static final Block NETHER_BRICK_TILE_STAIRS = registerStairs(
             "nether_brick_tile_stairs",
@@ -263,7 +271,9 @@ public class NetherBlocks {
     public static final Block BONE_BLOCK = registerBlock("bone_block", Blocks.BONE_BLOCK, NetherMaterial.stone(), BNBoneBlock::new);
     public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK, false, NetherMaterial.stone());
     public static final Block BONE_SLAB = registerSlab("bone_slab", BONE_BLOCK, false,
-            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), NetherModels.slabColumnDouble(
+                    BetterNether.C.mk("block/bone_slab_top"),
+                    BetterNether.C.mk("block/bone_slab_side")));
     public static final Block BONE_BUTTON = registerButton(
             "bone_button",
             BONE_BLOCK,
@@ -369,8 +379,7 @@ public class NetherBlocks {
             "obsidian_bricks_slab",
             OBSIDIAN_BRICKS,
             false,
-            NetherMaterial.stoneTagOnly(), // #32: obsidian toughness (50/1200); material 2/6 would nerf it
-            ModelTraitLibrary.externalModel()
+            NetherMaterial.stoneTagOnly() // #32: obsidian toughness (50/1200); material 2/6 would nerf it
     );
     public static final Block OBSIDIAN_TILE = registerObsidianCube(
             "obsidian_tile",
@@ -390,8 +399,7 @@ public class NetherBlocks {
             "obsidian_tile_slab",
             OBSIDIAN_TILE_SMALL,
             false,
-            NetherMaterial.stoneTagOnly(), // #32: obsidian toughness (50/1200); material 2/6 would nerf it
-            ModelTraitLibrary.externalModel()
+            NetherMaterial.stoneTagOnly() // #32: obsidian toughness (50/1200); material 2/6 would nerf it
     );
     public static final Block OBSIDIAN_ROD_TILES = registerObsidianCube(
             "obsidian_rod_tiles",
@@ -427,8 +435,7 @@ public class NetherBlocks {
             "blue_obsidian_bricks_slab",
             BLUE_OBSIDIAN_BRICKS,
             false,
-            NetherMaterial.stoneTagOnly(), // #32: obsidian toughness (50/1200); material 2/6 would nerf it
-            ModelTraitLibrary.externalModel()
+            NetherMaterial.stoneTagOnly() // #32: obsidian toughness (50/1200); material 2/6 would nerf it
     );
     public static final Block BLUE_OBSIDIAN_TILE = registerObsidianCube(
             "blue_obsidian_tile",
@@ -448,8 +455,7 @@ public class NetherBlocks {
             "blue_obsidian_tile_slab",
             BLUE_OBSIDIAN_TILE_SMALL,
             false,
-            NetherMaterial.stoneTagOnly(), // #32: obsidian toughness (50/1200); material 2/6 would nerf it
-            ModelTraitLibrary.externalModel()
+            NetherMaterial.stoneTagOnly() // #32: obsidian toughness (50/1200); material 2/6 would nerf it
     );
     public static final Block BLUE_OBSIDIAN_ROD_TILES = registerObsidianCube(
             "blue_obsidian_rod_tiles",
@@ -498,7 +504,12 @@ public class NetherBlocks {
             SOUL_SANDSTONE_CUT,
             false,
             NetherMaterial.stone(),
-            ModelTraitLibrary.externalModel()
+            NetherModels.slab(
+                    () -> SOUL_SANDSTONE_CUT,
+                    BetterNether.C.mk("block/soul_sandstone_top"),
+                    BetterNether.C.mk("block/soul_sandstone_top"),
+                    BetterNether.C.mk("block/soul_sandstone_cut_slabs")
+            )
     );
     public static final Block SOUL_SANDSTONE_WALL = registerWall("soul_sandstone_wall", SOUL_SANDSTONE_CUT,
             NetherMaterial.stone(), ModelTraitLibrary.externalModel());
@@ -534,13 +545,23 @@ public class NetherBlocks {
             BlockTags.SOUL_FIRE_BASE_BLOCKS
     );
     public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE, false,
-            NetherMaterial.stone(), ModelTraitLibrary.externalModel());
+            NetherMaterial.stone(), NetherModels.slab(
+                    () -> SOUL_SANDSTONE,
+                    BetterNether.C.mk("block/soul_sandstone_top"),
+                    BetterNether.C.mk("block/soul_sandstone_bottom"),
+                    BetterNether.C.mk("block/soul_sandstone_slabs")
+            ));
     public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = registerSlab(
             "soul_sandstone_smooth_slab",
             SOUL_SANDSTONE_SMOOTH,
             false,
             NetherMaterial.stone(),
-            ModelTraitLibrary.externalModel()
+            NetherModels.slab(
+                    () -> SOUL_SANDSTONE_SMOOTH,
+                    BetterNether.C.mk("block/soul_sandstone_top"),
+                    BetterNether.C.mk("block/soul_sandstone_top"),
+                    BetterNether.C.mk("block/soul_sandstone_top")
+            )
     );
     // Basalt Bricks //
     public static final Block BASALT_BRICKS = registerMakeable2X2(
@@ -562,7 +583,12 @@ public class NetherBlocks {
             Blocks.BASALT,
             false,
             NetherMaterial.stone(),
-            ModelTraitLibrary.externalModel()
+            NetherModels.slab(
+                    () -> Blocks.BASALT,
+                    ResourceLocation.withDefaultNamespace("block/basalt_top"),
+                    ResourceLocation.withDefaultNamespace("block/basalt_top"),
+                    ResourceLocation.withDefaultNamespace("block/basalt_side")
+            )
     );
     public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockOrangeMushroom::new);
     public static final Block RED_MOLD = registerBlock("red_mold", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockRedMold::new);
@@ -941,8 +967,7 @@ public class NetherBlocks {
             "roof_tile_nether_bricks_slab",
             ROOF_TILE_NETHER_BRICKS,
             false,
-            NetherMaterial.stone(),
-            ModelTraitLibrary.externalModel()
+            NetherMaterial.stone()
     );
     public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED, BlockBase.Metal::new, NetherMaterial.cincinnasite());
     public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerStairs(
@@ -955,8 +980,7 @@ public class NetherBlocks {
             "roof_tile_cincinnasite_slab",
             ROOF_TILE_CINCINNASITE,
             false,
-            NetherMaterial.cincinnasite(),
-            ModelTraitLibrary.externalModel()
+            NetherMaterial.cincinnasite()
     );
     // Craft Stations //
     public static final Block BLACKSTONE_FURNACE = registerFurnace("blackstone_furnace", Blocks.BLACKSTONE);

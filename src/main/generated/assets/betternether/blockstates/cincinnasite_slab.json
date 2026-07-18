@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/cincinnasite_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/cincinnasite_slab_double"
+    },
+    "type=top": {
+      "model": "betternether:block/cincinnasite_slab_top"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/roof_tile_nether_bricks_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/roof_tile_nether_bricks"
+    },
+    "type=top": {
+      "model": "betternether:block/roof_tile_nether_bricks_slab_top"
+    }
+  }
+}

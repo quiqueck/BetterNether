@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/basalt_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/basalt"
+    },
+    "type=top": {
+      "model": "betternether:block/basalt_slab_top"
+    }
+  }
+}

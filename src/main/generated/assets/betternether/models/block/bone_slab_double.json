@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "betternether:block/bone_slab_top",
+    "side": "betternether:block/bone_slab_side"
+  }
+}

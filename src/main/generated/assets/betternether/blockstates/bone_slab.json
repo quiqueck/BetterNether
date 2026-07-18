@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/bone_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/bone_slab_double"
+    },
+    "type=top": {
+      "model": "betternether:block/bone_slab_top"
+    }
+  }
+}

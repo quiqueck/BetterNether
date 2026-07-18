@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/bone_slab"
+    "model": "betternether:block/bone_slab"
   }
 }

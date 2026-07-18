@@ -1,6 +1,6 @@
 package org.betterx.betternether.tab;
 
-import org.betterx.bclib.behaviours.interfaces.BehaviourPlantLike;
+import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -13,7 +13,7 @@ public class BECreativeTabs {
         CreativeTabs
                 .start(BetterNether.C)
                 .createTab("nature")
-                .setPredicate(item -> BehaviourPlantLike.TAB_PREDICATE.contains(item)
+                .setPredicate(item -> PlantLikeBlockTrait.TAB_PREDICATE.contains(item)
                         || item == NetherItems.AGAVE_LEAF
                         || item == NetherItems.BLACK_APPLE
                         || item == NetherBlocks.MAGMA_FLOWER.asItem()

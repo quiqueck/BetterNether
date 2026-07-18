@@ -4,7 +4,9 @@ import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
 import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
+import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
+import org.betterx.bclib.trait.block.VegetationTagTrait;
 import org.betterx.bclib.trait.block.WeightedCrossModelTrait;
 import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
 import org.betterx.bclib.furniture.block.BaseBarStool;
@@ -1516,11 +1518,19 @@ public class NetherBlocks {
         final var definition = getBlockRegistry()
                 .<T>defineDefaultBlock(name, def -> factory.apply(def.getProperties()))
                 .addTrait(BlockTraits.LOOT_TABLE.dropLeaves(sapling))
-                // BehaviourLeaves (still on these classes, for the LEAVES tags and the creative tab) extends
-                // BehaviourCompostable and overrides compostingChance() to 0.3f - but that marker only ever
-                // produced the c:compostable item tag, never a composter entry. The trait registers the real
-                // one, at the 0.3f the marker always intended.
-                .addTrait(CompostableBlockTrait.withChance(0.3f));
+                // The retired BehaviourLeaves marker overrode compostingChance() to 0.3f - but that marker
+                // only ever produced the c:compostable item tag, never a composter entry. The trait
+                // registers the real one, at the 0.3f the marker always intended.
+                .addTrait(CompostableBlockTrait.withChance(0.3f))
+                // Replaces the rest of what the retired BehaviourLeaves marker (extends AddMineableShears +
+                // AddMineableHoe) and BehaviourPlantLike.TAB_PREDICATE's explicit BehaviourLeaves check used
+                // to contribute: mineable/shears, mineable/hoe, the creative nature-tab marker, and the
+                // LEAVES block/item tags. CompostableBlockTrait is already added above at the same 0.3f
+                // chance, so PlantLikeBlockTrait.leaves() (which bundles its own) is not used here.
+                .addTrait(PlantLikeBlockTrait.withDefault())
+                .addTrait(BlockTraits.MINEABLE_WITH.needsShears())
+                .addTrait(BlockTraits.MINEABLE_WITH.needsHoe())
+                .addTrait(VegetationTagTrait.leaves());
         if (modelTrait != null) {
             definition.addTrait(modelTrait);
         }

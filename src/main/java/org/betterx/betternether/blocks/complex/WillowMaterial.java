@@ -11,7 +11,10 @@ import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.bclib.trait.block.WeightedBark;
+import org.betterx.bclib.trait.block.WeightedLog;
 import org.betterx.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
@@ -26,6 +29,19 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
+                    // Restore the randomized-log look: generate the weighted willow_log/willow_bark blockstates
+                    // (base + _2) instead of hand-authoring them. willow's log uses the willow_bark texture on its
+                    // sides (there is no willow_log_side), so the base model textures are supplied explicitly.
+                    .replace(new WeightedLog(
+                            true, new int[]{1, 1},
+                            BetterNether.C.mk("block/willow_bark"),
+                            BetterNether.C.mk("block/willow_log_top")
+                    ))
+                    .replace(new WeightedBark(
+                            true, new int[]{1, 1},
+                            BetterNether.C.mk("block/willow_bark"),
+                            null
+                    ))
                     .add(TrunkSlot.create(BlockWillowTrunk::new))
                     .add(Sapling.create(BlockWillowSapling::new, NetherSurvival.netherGround()))
                     .add(SimpleBlockSlot.blockOnly(

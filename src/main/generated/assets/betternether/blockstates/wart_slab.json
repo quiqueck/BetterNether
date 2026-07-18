@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/wart_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/wart_planks"
+    },
+    "type=top": {
+      "model": "betternether:block/wart_slab_top"
+    }
+  }
+}

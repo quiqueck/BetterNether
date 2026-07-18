@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/stalagnate_slab"
+    "model": "betternether:block/stalagnate_slab"
   }
 }

@@ -3,6 +3,7 @@ package org.betterx.betternether.blocks.complex;
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.bclib.trait.block.WeightedBark;
@@ -29,6 +30,9 @@ public class AnchorTreeMaterial extends NetherWoodenMaterial<AnchorTreeMaterial>
                     .replace(new WeightedBark(true, new int[]{1, 1, 1}))
                     .replace(new WeightedLog(false, new int[]{1, 1, 1}))
                     .replace(new WeightedBark(false, new int[]{1, 1, 1}))
+                    // anchor_tree's trapdoor is exactly stalagnate's shared (no-side) trapdoor mesh - generate
+                    // its child model/blockstate/item from the template instead of hand-authoring them.
+                    .replace(new NetherWoodSlots.TrapdoorTemplate())
                     .add(Sapling.create(BlockAnchorTreeSapling::new, NetherSurvival.netherrack()));
     }
 

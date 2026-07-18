@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/willow_slab"
+    "model": "betternether:block/willow_slab"
   }
 }

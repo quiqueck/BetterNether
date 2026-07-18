@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/anchor_tree_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/anchor_tree_planks"
+    },
+    "type=top": {
+      "model": "betternether:block/anchor_tree_slab_top"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/wart_gate"
+    "model": "betternether:block/wart_gate"
   }
 }

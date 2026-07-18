@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/nether_sakura_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/nether_sakura_planks"
+    },
+    "type=top": {
+      "model": "betternether:block/nether_sakura_slab_top"
+    }
+  }
+}

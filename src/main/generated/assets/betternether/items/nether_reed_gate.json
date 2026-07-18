@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/nether_reed_gate"
+    "model": "betternether:block/nether_reed_gate"
   }
 }

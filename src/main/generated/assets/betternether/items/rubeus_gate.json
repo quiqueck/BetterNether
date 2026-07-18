@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/rubeus_gate"
+    "model": "betternether:block/rubeus_gate"
   }
 }

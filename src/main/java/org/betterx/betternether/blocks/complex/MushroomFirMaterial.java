@@ -5,6 +5,7 @@ import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockMushroomFirSapling;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
@@ -30,6 +31,9 @@ public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMateria
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
+                    // mushroom_fir's trapdoor is exactly stalagnate's shared (no-side) trapdoor mesh -
+                    // generate its child model/blockstate/item from the template instead of hand-authoring.
+                    .replace(new NetherWoodSlots.TrapdoorTemplate())
                     .add(TrunkSlot.create(BlockMushroomFir::new, NetherRender.cutout()))
                     .add(Sapling.create(BlockMushroomFirSapling::new, NetherSurvival.netherMycelium()))
                     // The stem delegates its item model to the dedicated trunk model; its blockstate and

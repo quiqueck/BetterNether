@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/mushroom_fir_fence"
+    "model": "betternether:block/mushroom_fir_fence_inventory"
   }
 }

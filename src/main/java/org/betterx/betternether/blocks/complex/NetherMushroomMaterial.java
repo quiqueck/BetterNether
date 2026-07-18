@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
+import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
@@ -42,6 +43,9 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomM
                     .remove(WoodSlots.BARK)
                     .remove(WoodSlots.STRIPPED_LOG)
                     .remove(WoodSlots.STRIPPED_BARK)
+                    // The mushroom fence is a bespoke shape (custom top/lower bars on a dedicated
+                    // fence texture), not the vanilla plank fence - keep its hand-authored assets.
+                    .replace(new NetherWoodSlots.Fence())
                     // A stem without the default "4 stems -> log" recipe (this set has no log), whose
                     // blockstate/model/item model are hand-authored rather than the generic pillar.
                     .add(new Stem() {

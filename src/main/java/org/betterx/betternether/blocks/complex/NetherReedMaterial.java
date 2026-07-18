@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
 import org.betterx.betternether.blocks.BlockReedsBlock;
+import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.wover.block.api.BlockDefinition;
 import org.betterx.wover.block.api.BlockRegistry;
@@ -42,6 +43,17 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                     .remove(WoodSlots.BARK)
                     .remove(WoodSlots.STRIPPED_LOG)
                     .remove(WoodSlots.STRIPPED_BARK)
+                    // nether_reed's own ladder model IS the shared ladder template (NetherWoodSlots.LADDER_TEMPLATE),
+                    // so it stays hand-authored - it cannot be generated as a child of itself.
+                    .replace(new NetherWoodSlots.LadderExternal())
+                    // nether_reed's trapdoor is exactly stalagnate's shared (no-side) trapdoor mesh -
+                    // generate its child model/blockstate/item from the template.
+                    .replace(new NetherWoodSlots.TrapdoorTemplate())
+                    // The reed slab reuses the reed planks' dedicated top texture (nether_reed_planks_top)
+                    // on its top/bottom faces, and the reed fence is a bespoke bar shape - neither matches
+                    // the vanilla plank slab/fence generator, so keep their hand-authored assets.
+                    .replace(new NetherWoodSlots.Slab())
+                    .replace(new NetherWoodSlots.Fence())
                     // Reed "planks" are a pillar block crafted from 4 reed stems.
                     .replace(new Planks() {
                         @Override

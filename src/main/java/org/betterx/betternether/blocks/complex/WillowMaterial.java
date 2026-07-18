@@ -15,6 +15,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.bclib.trait.block.WeightedBark;
 import org.betterx.bclib.trait.block.WeightedLog;
+import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
 import org.betterx.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
@@ -46,7 +47,8 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                             BetterNether.C.mk("block/willow_bark"),
                             null
                     ))
-                    .add(TrunkSlot.create(BlockWillowTrunk::new))
+                    .add(TrunkSlot.create(BlockWillowTrunk::new)
+                                  .withModelTrait(WillowMaterial::willowTrunkModelTrait))
                     .add(Sapling.create(BlockWillowSapling::new, NetherSurvival.netherGround()))
                     .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.BRANCH,
@@ -60,6 +62,40 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                             // item and never registered a composter entry.
                             NetherTraits.compostable(NetherRender.cutout())
                     ));
+    }
+
+    /**
+     * The willow-trunk blockstate is dispatched over its {@code shape} (bottom/middle/top) property. The {@code
+     * middle} and {@code top} states each hold a two-entry weighted list whose {@code _2} variant is the same mesh
+     * with the {@code willow_bark} texture+particle swapped to {@code willow_bark_mossy}; those two children are
+     * generated. The hand-authored {@code willow_trunk_bottom}/{@code _middle}/{@code _top} meshes stay the kept
+     * templates and are referenced directly. Trunk has no item ({@code noBlockItem}).
+     */
+    @org.jetbrains.annotations.Nullable
+    private static org.betterx.wover.block.api.client.trait.BlockModelTrait willowTrunkModelTrait() {
+        final var mossy = BetterNether.C.mk("block/willow_bark_mossy");
+        final var swap = java.util.Map.of("particle", mossy, "texture", mossy);
+        final var bottom = BetterNether.C.mk("block/willow_trunk_bottom");
+        final var middle = BetterNether.C.mk("block/willow_trunk_middle");
+        final var top = BetterNether.C.mk("block/willow_trunk_top");
+        return WeightedTemplateModelTrait.propertyDispatch(
+                BlockWillowTrunk.SHAPE,
+                java.util.List.of(
+                        WeightedTemplateModelTrait.Case.of(
+                                org.betterx.wover.block.api.BlockProperties.TripleShape.BOTTOM,
+                                java.util.List.of(WeightedTemplateModelTrait.model(bottom))),
+                        WeightedTemplateModelTrait.Case.of(
+                                org.betterx.wover.block.api.BlockProperties.TripleShape.MIDDLE,
+                                java.util.List.of(
+                                        WeightedTemplateModelTrait.model(middle),
+                                        WeightedTemplateModelTrait.child(middle, swap))),
+                        WeightedTemplateModelTrait.Case.of(
+                                org.betterx.wover.block.api.BlockProperties.TripleShape.TOP,
+                                java.util.List.of(
+                                        WeightedTemplateModelTrait.model(top),
+                                        WeightedTemplateModelTrait.child(top, swap)))
+                ),
+                WeightedTemplateModelTrait.Item.none());
     }
 
     public Block getTrunk() {

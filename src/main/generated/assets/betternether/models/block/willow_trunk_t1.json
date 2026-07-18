@@ -1,0 +1,7 @@
+{
+  "parent": "betternether:block/willow_trunk_top",
+  "textures": {
+    "particle": "betternether:block/willow_bark_mossy",
+    "texture": "betternether:block/willow_bark_mossy"
+  }
+}

@@ -635,7 +635,7 @@ public class NetherBlocks {
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI(
             "lumabus_vine",
             NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(
-                    ModelTraitLibrary.externalModelDelegatedItem(),
+                    lumabusVineModelTrait("lumabus"),
                     NetherLoot.lumabusVine()
             ))),
             p -> new BlockLumabusVine(p, MapColor.COLOR_CYAN)
@@ -643,11 +643,48 @@ public class NetherBlocks {
     public static final BlockLumabusVine GOLDEN_LUMABUS_VINE = registerBlockNI(
             "golden_lumabus_vine",
             NetherTraits.compostable(NetherRender.cutoutAnd(NetherTraits.of(
-                    ModelTraitLibrary.externalModelDelegatedItem(),
+                    lumabusVineModelTrait("golden_lumabus"),
                     NetherLoot.lumabusVine()
             ))),
             p -> new BlockLumabusVine(p, MapColor.COLOR_YELLOW)
     );
+
+    /**
+     * The lumabus-vine blockstate is dispatched over the {@code shape} (top/middle/bottom) property. Its {@code
+     * bottom} state is a four-entry weighted list of bulb models where {@code <prefix>_bulb_2/_3/_4} are already
+     * texture-swap children (particle+texture) of the hand-authored {@code <prefix>_bulb_1} mesh - those three
+     * are generated; {@code bulb_1} stays the kept template. The {@code top} ({@code <prefix>_roots}) and {@code
+     * middle} ({@code <prefix>_vine} plus the {@code _vine_mirrored} variant, whose UVs differ in the mesh and so
+     * is a kept sibling) models stay hand-authored and are referenced directly. No item ({@code registerBlockNI}).
+     */
+    private static BlockModelTrait lumabusVineModelTrait(String prefix) {
+        final var roots = BetterNether.C.mk("block/" + prefix + "_roots");
+        final var vine = BetterNether.C.mk("block/" + prefix + "_vine");
+        final var mirrored = BetterNether.C.mk("block/" + prefix + "_vine_mirrored");
+        final var bulb1 = BetterNether.C.mk("block/" + prefix + "_bulb_1");
+        final java.util.function.Function<Integer, WeightedTemplateModelTrait.Layer> bulb = i -> {
+            final var tex = BetterNether.C.mk("block/" + prefix + "_bulb_" + i);
+            return WeightedTemplateModelTrait.child(bulb1, java.util.Map.of("particle", tex, "texture", tex));
+        };
+        return WeightedTemplateModelTrait.propertyDispatch(
+                BlockProperties.TRIPLE_SHAPE,
+                java.util.List.of(
+                        WeightedTemplateModelTrait.Case.of(
+                                BlockProperties.TripleShape.TOP,
+                                java.util.List.of(WeightedTemplateModelTrait.model(roots))),
+                        WeightedTemplateModelTrait.Case.of(
+                                BlockProperties.TripleShape.MIDDLE,
+                                java.util.List.of(
+                                        WeightedTemplateModelTrait.model(vine),
+                                        WeightedTemplateModelTrait.model(mirrored))),
+                        WeightedTemplateModelTrait.Case.of(
+                                BlockProperties.TripleShape.BOTTOM,
+                                java.util.List.of(
+                                        WeightedTemplateModelTrait.model(bulb1),
+                                        bulb.apply(2), bulb.apply(3), bulb.apply(4)))
+                ),
+                WeightedTemplateModelTrait.Item.none());
+    }
 
     // Small Plants
     public static final Block SOUL_VEIN = registerBlock("soul_vein", NetherTraits.compostable(NetherRender.cutoutAnd(NetherSurvival.netherSand())), BlockSoulVein::new);

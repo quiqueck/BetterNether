@@ -18,7 +18,9 @@ import net.fabricmc.api.Environment;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The bulky "trunk" of a Nether tree. Parameterized with the concrete block factory (a
@@ -34,6 +36,11 @@ public class TrunkSlot extends SlotFromDefinition {
     private final Function<BlockBehaviour.Properties, Block> maker;
     private final boolean climbable;
     private final List<BlockTrait<?, ?>> extraTraits;
+    // Optional per-block model-trait override; when null, the trunk uses the shared external (hand-authored)
+    // model. willow_trunk supplies a WeightedTemplateModelTrait so its weighted blockstate + the _2 texture-swap
+    // children are generated instead of hand-authored. Evaluated lazily in buildModel (client/datagen only).
+    @Nullable
+    private Supplier<BlockModelTrait> modelTraitOverride = null;
 
     private TrunkSlot(
             Function<BlockBehaviour.Properties, Block> maker,
@@ -72,6 +79,15 @@ public class TrunkSlot extends SlotFromDefinition {
         return new TrunkSlot(maker, true, extraTraits);
     }
 
+    /**
+     * Overrides the shared external model with a custom (generated) block-model trait - e.g. willow_trunk's
+     * {@link WeightedTemplateModelTrait} weighted blockstate. The supplier is evaluated once at datagen time.
+     */
+    public TrunkSlot withModelTrait(Supplier<BlockModelTrait> supplier) {
+        this.modelTraitOverride = supplier;
+        return this;
+    }
+
     @Override
     protected BlockDefinition<?, ?> startBlockDefinition(
             @NotNull BlockRegistry registry,
@@ -101,6 +117,6 @@ public class TrunkSlot extends SlotFromDefinition {
     @Environment(EnvType.CLIENT)
     @Override
     protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
-        return ModelTraitLibrary.externalModel();
+        return modelTraitOverride != null ? modelTraitOverride.get() : ModelTraitLibrary.externalModel();
     }
 }

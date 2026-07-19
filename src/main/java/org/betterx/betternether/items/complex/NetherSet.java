@@ -4,6 +4,7 @@ import org.betterx.bclib.api.v2.advancement.AdvancementManager;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.items.*;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherTags;
 import org.betterx.wover.complex.api.equipment.*;
 
 import net.minecraft.world.item.Item;
@@ -42,10 +43,15 @@ public class NetherSet extends EquipmentSet {
         if (toolTier != null) {
             add(
                     ToolSlot.PICKAXE_SLOT,
-                    (definition, values) -> new NetherPickaxe(
-                            toolTier.toolMaterial,
-                            commonToolProperties(definition.getProperties())
-                    )
+                    (definition, values) -> {
+                        // NETHER_PICKAXES used to be applied through the retired ItemTagProvider interface;
+                        // add it directly to the definition here instead (the item registers with this tag).
+                        definition.addTags(NetherTags.NETHER_PICKAXES);
+                        return new NetherPickaxe(
+                                toolTier.toolMaterial,
+                                commonToolProperties(definition.getProperties())
+                        );
+                    }
             );
             add(
                     ToolSlot.AXE_SLOT,

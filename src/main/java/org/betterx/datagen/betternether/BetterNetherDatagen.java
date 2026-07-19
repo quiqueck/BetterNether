@@ -16,6 +16,7 @@ import org.betterx.datagen.betternether.worldgen.features.*;
 import org.betterx.wover.core.api.ModCore;
 import org.betterx.wover.datagen.api.PackBuilder;
 import org.betterx.wover.datagen.api.WoverDataGenEntryPoint;
+import org.betterx.wover.datagen.api.provider.BlockPropertiesProvider;
 
 import net.minecraft.core.RegistrySetBuilder;
 

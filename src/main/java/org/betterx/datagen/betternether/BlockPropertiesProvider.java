@@ -138,7 +138,7 @@ public class BlockPropertiesProvider implements WoverDataProvider<DataProvider> 
                 + "  hasCollision=" + hasCollision(block)
                 + "  canOcclude=" + state.canOcclude()
                 // The effective chunk render layer (SOLID/CUTOUT/TRANSLUCENT), read from the vanilla registry
-                // that both the RenderLayerProvider scan and the RENDER_LAYER trait populate via
+                // that both the retired RenderLayerProvider scan and the RENDER_LAYER trait populate via
                 // BlockRenderLayerMap - so migrating a block from the interface to the trait shows up here as a
                 // diff only if the layer actually changed. Datagen always runs client-side, so this is safe.
                 + "  renderLayer=" + ItemBlockRenderTypes.getChunkRenderType(state).name();

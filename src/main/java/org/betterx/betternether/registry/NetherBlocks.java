@@ -2,6 +2,7 @@ package org.betterx.betternether.registry;
 
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
+import org.betterx.bclib.behaviours.BehaviourHelper;
 import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
@@ -25,6 +26,7 @@ import org.betterx.wover.block.api.BlockProperties;
 import org.betterx.wover.block.api.BlockRegistry;
 import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
 import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
 import org.betterx.wover.block.api.trait.BlockTrait;
 import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.complex.api.equipment.ToolTiers;
@@ -106,7 +108,7 @@ public class NetherBlocks {
     // Cincinnasite //
     public static final Block CINCINNASITE_ORE = registerBlock(
             "cincinnasite_ore",
-            BlockTraits.ORE_BLOCK.dropping(() -> NetherItems.CINCINNASITE, 1, 3),
+            NetherMaterial.ore(() -> NetherItems.CINCINNASITE, 1, 3),
             p -> new BlockOre(p, 0, true),
             ToolTiers.IRON_TOOL.blockTag
     );
@@ -219,7 +221,7 @@ public class NetherBlocks {
     // Ruby //
     public static final Block NETHER_RUBY_ORE = registerBlock(
             "nether_ruby_ore",
-            BlockTraits.ORE_BLOCK.dropping(() -> NetherItems.NETHER_RUBY, 1, 2),
+            NetherMaterial.ore(() -> NetherItems.NETHER_RUBY, 1, 2),
             p -> new BlockOre(p, 5, true),
             ToolTiers.DIAMOND_TOOL.blockTag
     );
@@ -239,11 +241,11 @@ public class NetherBlocks {
     // Vanilla Ores
     public static final Block NETHER_LAPIS_ORE = registerBlock(
             "nether_lapis_ore",
-            BlockTraits.ORE_BLOCK.dropping(() -> NetherItems.LAPIS_PILE, 3, 6),
+            NetherMaterial.ore(() -> NetherItems.LAPIS_PILE, 3, 6),
             p -> new BlockOre(p, 3, false),
             ToolTiers.IRON_TOOL.blockTag
     );
-    public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", BlockTraits.ORE_BLOCK.dropping(() -> Items.REDSTONE, 1, 3), RedstoneOreBlock::new);
+    public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", NetherMaterial.ore(() -> Items.REDSTONE, 1, 3), RedstoneOreBlock::new);
     // Bricks //
     public static final Block NETHER_BRICK_TILE_SMALL = registerBlock(
             "nether_brick_tile_small",
@@ -303,11 +305,13 @@ public class NetherBlocks {
             p -> new BNWoodlikeDoor(p, WoodType.CRIMSON)
     );
     // Quartz Glass //
-    public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", Blocks.GLASS, NetherTraits.of(NetherModels.quartzGlass()), BNGlass::new);
+    // BNGlass (BaseGlassBlock) used to drop itself only when silk-touched through the retired
+    // BlockLootProvider interface; that loot is now a wover trait.
+    public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", Blocks.GLASS, NetherTraits.of(ClientBlockTraits.RENDER_LAYER.translucent(), NetherModels.quartzGlass(), BlockTraits.LOOT_TABLE.silkTouchSelf(), BlockTraits.MINEABLE_WITH.needsPickAxe()), BNGlass::new);
     public static final Block QUARTZ_GLASS_FRAMED = registerBlock(
             "quartz_glass_framed",
             CINCINNASITE_BLOCK,
-            NetherTraits.of(NetherModels.quartzGlass()),
+            NetherTraits.of(ClientBlockTraits.RENDER_LAYER.translucent(), NetherModels.quartzGlass(), BlockTraits.LOOT_TABLE.silkTouchSelf(), BlockTraits.MINEABLE_WITH.needsPickAxe()),
             BNGlass::new
     );
     public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_COLORED = new ColoredGlassMaterial(
@@ -482,7 +486,8 @@ public class NetherBlocks {
             BlockSoulSandstone::new,
             "soul_sandstone",
             RecipeCategory.BUILDING_BLOCKS,
-            Blocks.SOUL_SAND
+            Blocks.SOUL_SAND,
+            CommonBlockTags.NETHER_TERRAIN
     );
     public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2Soul(
             "soul_sandstone_cut",
@@ -490,7 +495,8 @@ public class NetherBlocks {
             BlockSoulSandstone::new,
             "soul_sandstone",
             RecipeCategory.BUILDING_BLOCKS,
-            SOUL_SANDSTONE
+            SOUL_SANDSTONE,
+            CommonBlockTags.NETHER_TERRAIN
     );
     public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs(
             "soul_sandstone_cut_stairs",
@@ -609,12 +615,12 @@ public class NetherBlocks {
     );
     public static final Block EYE_SEED = registerBlock("eye_seed", NetherTraits.seed(NetherRender.cutoutAnd(NetherSurvival.netherrack())), BlockEyeSeed::new);
     // Grass //
-    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherTraits.plant(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.netherGrass(), NetherLoot.netherGrass())), BlockNetherGrass.NetherGrass::new);
-    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherTraits.plant(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.grass("swamp_grass", 3), NetherLoot.netherGrass())), BlockNetherGrass.SwampGrass::new);
-    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherTraits.plant(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("soul_grass", 2), NetherLoot.netherGrass())), BlockSoulGrass::new);
-    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherTraits.plant(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.junglePlant(), NetherLoot.netherGrass())), BlockNetherGrass.JunglePlant::new);
-    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherTraits.plant(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("bone_grass", 3), NetherLoot.netherGrass())), BlockNetherGrass.BoneGrass::new);
-    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherTraits.plant(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("sepia_bone_grass", 3), NetherLoot.netherGrass())), BlockNetherGrass.SepiaBoneGrass::new);
+    public static final Block NETHER_GRASS = registerBlock("nether_grass", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.netherGrass(), NetherLoot.netherGrass()))), BlockNetherGrass.NetherGrass::new);
+    public static final Block SWAMP_GRASS = registerBlock("swamp_grass", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.grass("swamp_grass", 3), NetherLoot.netherGrass()))), BlockNetherGrass.SwampGrass::new);
+    public static final Block SOUL_GRASS = registerBlock("soul_grass", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("soul_grass", 2), NetherLoot.netherGrass()))), BlockSoulGrass::new);
+    public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.netherrackNyliumAndSculk(), NetherModels.junglePlant(), NetherLoot.netherGrass()))), BlockNetherGrass.JunglePlant::new);
+    public static final Block BONE_GRASS = registerBlock("bone_grass", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("bone_grass", 3), NetherLoot.netherGrass()))), BlockNetherGrass.BoneGrass::new);
+    public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.soilOrLogs(), NetherModels.grass("sepia_bone_grass", 3), NetherLoot.netherGrass()))), BlockNetherGrass.SepiaBoneGrass::new);
     // Vines //
     // Cutout, for the same reason as NEON_EQUISETUM below: these extend bclib's BaseVineBlock /
     // BaseSimpleVineBlock rather than BlockBase, so they were never IRenderTypeable and the old
@@ -891,7 +897,7 @@ public class NetherBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
@@ -905,14 +911,16 @@ public class NetherBlocks {
             CommonBlockTags.MYCELIUM,
             CommonBlockTags.NETHER_MYCELIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK,
-            org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHER_MYCELIUM
+            org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHER_MYCELIUM,
+            // Nether mycelium is plantable ground - small plants may grow on it.
+            CommonBlockTags.SOIL
     );
     public static final BlockTerrain JUNGLE_GRASS = registerBlock(
             "jungle_grass",
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -922,7 +930,7 @@ public class NetherBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -932,7 +940,7 @@ public class NetherBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -942,7 +950,7 @@ public class NetherBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -950,14 +958,17 @@ public class NetherBlocks {
     public static final Block FARMLAND = registerBlock(
             "farmland",
             NetherTraits.of(BlockTraits.MINEABLE_WITH.needsAxe()),
-            BlockFarmland::new
+            BlockFarmland::new,
+            CommonBlockTags.SOUL_GROUND,
+            CommonBlockTags.NETHERRACK,
+            NetherTags.NETHER_FARMLAND
     );
     public static final BlockTerrain CEILING_MUSHROOMS = registerBlock(
             "ceiling_mushrooms",
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
+            NetherTraits.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
@@ -1222,7 +1233,8 @@ public class NetherBlocks {
             Blocks.SAND,
             NetherTraits.of(BlockTraits.MINEABLE_WITH.needsShovel()),
             BlockVeinedSand::new,
-            NetherTags.NETHER_SAND
+            NetherTags.NETHER_SAND,
+            CommonBlockTags.SOUL_GROUND
     );
 
     public static final Block NETHERRACK_SLAB = registerSlab("netherrack_slab", Blocks.NETHERRACK, true, NetherMaterial.stone());
@@ -1746,14 +1758,32 @@ public class NetherBlocks {
      *              for a plate whose texture is not simply its material block's.
      */
     public static Block registerPlate(String name, Block source, BlockSetType type, BlockModelTrait model) {
-        Block plate = getBlockRegistry()
+        // The block tags and plain (no survives_explosion) self-drop loot BasePressurePlateBlock (and its
+        // Wood subclass) used to add through the retired BlockTagProvider/DropSelfLootProvider interfaces.
+        // from(...) picks Wood unless the set type sounds like stone/metal (BehaviourHelper), and only the
+        // Wood plate carried the WOODEN_PRESSURE_PLATES block tag. (The Wood plate's registerItemTags was
+        // already dead - these plates get a plain BlockItem through the definition system, not the
+        // ItemTagProvider-aware WoverBlockItemImpl - so no item tag is added here.)
+        final boolean wooden = !BehaviourHelper.isMetal(type) && !BehaviourHelper.isStone(type);
+        var definition = getBlockRegistry()
                 .<BasePressurePlateBlock>defineDefaultBlock(
                         name,
                         def -> BasePressurePlateBlock.from(source, type, def.getProperties())
                 )
                 .replacePropertiesWithCopy(source)
                 .addTrait(model)
-                .buildAndRegister();
+                .addTrait(NetherLoot.dropSelfNoExplosion())
+                .addTags(BlockTags.PRESSURE_PLATES);
+        // The mineable tag BasePressurePlateBlock's Wood/Stone/Metal subclasses used to add through the
+        // retired AddMineable* markers: from(...) resolves to Wood (axe) unless the set type is stone/metal
+        // (pickaxe), matching the `wooden` split above.
+        if (wooden) {
+            definition.addTags(BlockTags.WOODEN_PRESSURE_PLATES);
+            definition.addTags(BlockTags.MINEABLE_WITH_AXE);
+        } else {
+            definition.addTags(BlockTags.MINEABLE_WITH_PICKAXE);
+        }
+        Block plate = definition.buildAndRegister();
 
         addFuel(source, plate);
         if (ModCore.isDatagen())
@@ -1880,6 +1910,8 @@ public class NetherBlocks {
                 .replacePropertiesWithCopy(source)
                 .addTrait(model)
                 .addTags(BlockTags.MINEABLE_WITH_AXE)
+                // Self-drop loot BaseTaburet used to generate through the retired BlockLootProvider interface.
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .addTrait(BlockTraits.RECIPE.with((key, b, context) -> RecipeBuilder
                         .crafting(key.location(), b)
                         .shape("##", "II")
@@ -1905,6 +1937,9 @@ public class NetherBlocks {
                 .replacePropertiesWithCopy(source)
                 .addTrait(model)
                 .addTags(BlockTags.MINEABLE_WITH_AXE)
+                // The bottom-half-only self-drop loot BaseChair used to generate through the retired
+                // BlockLootProvider interface.
+                .addTrait(BlockTraits.LOOT_TABLE.with((tableKey, blockKey, chairBlock, provider) -> BaseChair.chairLoot(chairBlock)))
                 .addTrait(BlockTraits.RECIPE.with((key, b, context) -> RecipeBuilder
                         .crafting(key.location(), b)
                         .shape("I ", "##", "II")
@@ -1922,7 +1957,11 @@ public class NetherBlocks {
     }
 
     public static Block registerBarStool(String name, Block source, BlockModelTrait model) {
-        Block block = getBlockRegistry()
+        // BaseBarStool.from(...) resolves to the Wood variant unless the source is stone/metal (BehaviourHelper);
+        // the Wood variant used to add mineable/axe through the retired AddMineableAxe marker (on top of the
+        // pickaxe tag added explicitly below). Restore that axe tag for the wooden case.
+        final boolean wooden = !BehaviourHelper.isStone(source) && !BehaviourHelper.isMetal(source);
+        var definition = getBlockRegistry()
                 .<BaseBarStool>defineDefaultBlock(
                         name,
                         def -> BaseBarStool.from(source, NETHER_BRICK_TILE_LARGE, def.getProperties())
@@ -1930,6 +1969,8 @@ public class NetherBlocks {
                 .replacePropertiesWithCopy(source)
                 .addTrait(model)
                 .addTags(BlockTags.MINEABLE_WITH_PICKAXE)
+                // Self-drop loot BaseBarStool used to generate through the retired BlockLootProvider interface.
+                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
                 .addTrait(BlockTraits.RECIPE.with((key, b, context) -> RecipeBuilder
                         .crafting(key.location(), b)
                         .shape("##", "II", "II")
@@ -1938,8 +1979,11 @@ public class NetherBlocks {
                         .group("bar_stool")
                         .outputCount(1)
                         .category(RecipeCategory.DECORATIONS)
-                        .build(context)))
-                .buildAndRegister();
+                        .build(context)));
+        if (wooden) {
+            definition.addTags(BlockTags.MINEABLE_WITH_AXE);
+        }
+        Block block = definition.buildAndRegister();
 
         addFuel(source, block);
 

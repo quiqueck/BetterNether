@@ -5,8 +5,10 @@ import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Item;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * The material-derived tags a block used to inherit from bclib's {@code Behaviour*} marker interfaces, as
@@ -89,11 +91,38 @@ public class NetherMaterial {
         return NetherTraits.of(BlockTraits.MINEABLE_WITH.needsShovel());
     }
 
-    // The ore classification now lives on BlockTraits.ORE_BLOCK.dropping(drop, min, max), used directly at
-    // each ore's registration: it bundles ORE_BLOCK.withDefault() (instrument BASEDRUM, strength 3/9, reqTool,
-    // sound STONE, pickaxe tag and c:ores) with the vanilla ore-drop loot trait, so no separate ore() helper
-    // (or LOOT_TABLE.dropOre call) is needed here. The forced properties are still overridden by the ore
-    // block's own constructor (Materials.stone(...).strength(3,5).sound(NETHERRACK)), which runs last.
+    /**
+     * A nether ore: {@code BlockTraits.ORE_BLOCK.dropping(drop, min, max)} (instrument BASEDRUM, strength 3/9,
+     * reqTool, sound STONE, pickaxe tag, {@code c:ores}, and the vanilla ore-drop loot trait) plus the
+     * netherrack ore block tags {@link CommonBlockTags#NETHERRACK} and {@link CommonBlockTags#NETHER_ORES}
+     * (which the {@code BlockOre}/{@code RedstoneOreBlock} classes used to add through the retired
+     * {@code BlockTagProvider} interface). The forced properties are still overridden by the ore block's own
+     * constructor (Materials.stone(...).strength(3,5).sound(NETHERRACK)), which runs last.
+     */
+    public static List<BlockTrait<?, ?>> ore(Supplier<Item> drop, int min, int max) {
+        return NetherTraits.and(
+                BlockTraits.ORE_BLOCK.dropping(drop, min, max),
+                BlockTraits.BLOCK_TAG.with(List.of(
+                        CommonBlockTags.NETHERRACK,
+                        CommonBlockTags.NETHER_ORES
+                ))
+        );
+    }
+
+    /**
+     * The netherrack terrain tags a {@code BlockTerrain} used to add through the retired
+     * {@code BlockTagProvider} interface: {@link CommonBlockTags#NETHERRACK},
+     * {@link CommonBlockTags#NETHER_STONES} and - since nylium-like nether terrain is plantable ground -
+     * {@link CommonBlockTags#SOIL}. Returns a single trait (null off-datagen) so it can be dropped straight
+     * into a {@link NetherTraits#and(List, BlockTrait[])} call alongside the block's other traits.
+     */
+    public static BlockTrait<?, ?> netherTerrainTags() {
+        return BlockTraits.BLOCK_TAG.with(List.of(
+                CommonBlockTags.NETHERRACK,
+                CommonBlockTags.NETHER_STONES,
+                CommonBlockTags.SOIL
+        ));
+    }
 
     /** The old {@code BehaviourImmobile}: {@link CommonBlockTags#IMMOBILE} + {@link BlockTags#DRAGON_IMMUNE}. */
     public static List<BlockTrait<?, ?>> immobile() {

@@ -2,13 +2,9 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.bclib.api.v3.bonemeal.BonemealNyliumLike;
-import org.betterx.wover.block.api.BlockTagProvider;
-import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
-import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import org.jetbrains.annotations.Nullable;
 
-public class BlockTerrain extends BlockBase implements BlockTagProvider, BonemealNyliumLike {
+public class BlockTerrain extends BlockBase implements BonemealNyliumLike {
     protected BonemealAPI.FeatureProvider vegetationFeature;
     public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
             SoundEvents.NETHERRACK_BREAK,
@@ -60,13 +56,5 @@ public class BlockTerrain extends BlockBase implements BlockTagProvider, Bonemea
     @Override
     public @Nullable Holder<? extends ConfiguredFeature<?, ?>> getCoverFeature() {
         return vegetationFeature.getFeature();
-    }
-
-
-    @Override
-    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
-        context.add(this, CommonBlockTags.NETHERRACK, CommonBlockTags.NETHER_STONES);
-        // Nylium-like nether terrain is plantable ground - small plants may grow on it.
-        context.add(CommonBlockTags.SOIL, this);
     }
 }

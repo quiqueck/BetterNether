@@ -1,17 +1,17 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.bclib.blocks.BaseLeavesBlock;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.TintedParticleLeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
-public class BNLeaves extends BaseLeavesBlock {
+public class BNLeaves extends TintedParticleLeavesBlock {
     public BNLeaves(Block sapling, MapColor color) {
         this(sapling, Materials.staticLeaves(color, false).noOcclusion());
     }
@@ -19,7 +19,7 @@ public class BNLeaves extends BaseLeavesBlock {
 
     public BNLeaves(Block sapling, BlockBehaviour.Properties properties) {
         // sapling no longer tracked by the vanilla leaves block in 1.21.6
-        super(properties);
+        super(0.01F, properties);
     }
 
     @Override

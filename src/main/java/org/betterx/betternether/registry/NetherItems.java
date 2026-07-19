@@ -35,17 +35,17 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
 import java.util.function.Function;
-import java.util.stream.Stream;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
@@ -79,7 +79,8 @@ public class NetherItems {
     public static final Item HOOK_MUSHROOM_COOKED = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
     public static final Item CINCINNASITE = registerItem("cincinnasite", Item::new);
-    public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", Item::new,
+    public static final Item CINCINNASITE_INGOT = registerItem(
+            "cincinnasite_ingot", Item::new,
             CommonItemTags.IRON_INGOTS
     );
     public static final Item NETHER_RUBY = registerItem("nether_ruby", Item::new);
@@ -184,27 +185,6 @@ public class NetherItems {
         return ITEMS_REGISTRY;
     }
 
-    public static Stream<Item> getModItems() {
-        return getItemRegistry().allItems();
-    }
-
-
-    public static Item registerShears(String name, Item item) {
-        if (item != Items.AIR) {
-            return getItemRegistry().registerAsTool(name, item);
-        }
-
-        return item;
-    }
-
-    public static Item registerTool(String name, Item item, TagKey<Item>... tags) {
-        if (item != Items.AIR) {
-            getItemRegistry().registerAsTool(name, item, tags);
-        }
-
-        return item;
-    }
-
     @SafeVarargs
     public static Item registerItem(
             String name,
@@ -232,21 +212,23 @@ public class NetherItems {
         );
         if (bowl) {
             return getItemRegistry()
-                    .<Item>defineFoodItem(name, def -> new Item(def.getProperties()) {
-                        @Override
-                        public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
-                            if (stack.getCount() == 1) {
-                                super.finishUsingItem(stack, world, user);
-                                return new ItemStack(NetherItems.STALAGNATE_BOWL, stack.getCount());
-                            } else {
-                                if (user instanceof Player player) {
-                                    if (!player.isCreative())
-                                        player.addItem(new ItemStack(NetherItems.STALAGNATE_BOWL));
+                    .<Item>defineFoodItem(
+                            name, def -> new Item(def.getProperties()) {
+                                @Override
+                                public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
+                                    if (stack.getCount() == 1) {
+                                        super.finishUsingItem(stack, world, user);
+                                        return new ItemStack(NetherItems.STALAGNATE_BOWL, stack.getCount());
+                                    } else {
+                                        if (user instanceof Player player) {
+                                            if (!player.isCreative())
+                                                player.addItem(new ItemStack(NetherItems.STALAGNATE_BOWL));
+                                        }
+                                        return super.finishUsingItem(stack, world, user);
+                                    }
                                 }
-                                return super.finishUsingItem(stack, world, user);
                             }
-                        }
-                    })
+                    )
                     .stacksTo(16)
                     .onConsume(regeneration)
                     .buildAndRegister();

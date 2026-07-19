@@ -7,7 +7,9 @@ import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.betternether.blocks.NetherTraits;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
 import org.betterx.wover.block.api.trait.BlockTrait;
+import org.betterx.wover.block.api.trait.BlockTraits;
 import org.betterx.wover.core.api.ModCore;
 
 import net.minecraft.data.recipes.RecipeCategory;
@@ -113,13 +115,23 @@ public class ColoredGlassMaterial {
     ) {
         String name = group + "_" + ((DyeItem) dye).getDyeColor().getSerializedName();
 
-        // The full-block variant (BNGlass) renders solid; only the pane variant is translucent. Only the
+        // Both the full-block variant (BNGlass) and the pane variant render translucent. Only the
         // full block carries the glass model trait - the panes get theirs from BNPane's own provider.
         Block block = NetherBlocks.registerBlock(
                 name,
                 base,
                 isFullBlock
-                        ? NetherTraits.of(NetherModels.quartzGlass())
+                        // BNGlass (BaseGlassBlock) used to drop itself only when silk-touched through the
+                        // retired BlockLootProvider interface; that loot is now a wover trait. The translucent
+                        // render layer used to come from BaseGlassBlock's RenderLayerProvider interface; it is
+                        // now the RENDER_LAYER trait.
+                        ? NetherTraits.of(
+                        ClientBlockTraits.RENDER_LAYER.translucent(),
+                        NetherModels.quartzGlass(),
+                        BlockTraits.LOOT_TABLE.silkTouchSelf(),
+                        // BNGlass (BaseGlassBlock) used to get mineable/pickaxe from the retired AddMineablePickaxe marker.
+                        BlockTraits.MINEABLE_WITH.needsPickAxe()
+                )
                         : NetherTraits.concat(NetherRender.translucent(), paneTraits),
                 p -> isFullBlock ? new BNGlass(p) : paneFactory.apply(p)
         );

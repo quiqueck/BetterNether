@@ -1,18 +1,13 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.wover.block.api.BlockTagProvider;
-import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
-import org.betterx.wover.tag.api.predefined.CommonBlockTags;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
-public class BlockOre extends DropExperienceBlock implements BlockTagProvider {
+public class BlockOre extends DropExperienceBlock {
     /**
      * Whether this ore's block item should survive lava.
      * <p>
@@ -40,11 +35,5 @@ public class BlockOre extends DropExperienceBlock implements BlockTagProvider {
                         .sound(SoundType.NETHERRACK)
         );
         this.fireproof = fireproof;
-    }
-
-
-    @Override
-    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
-        context.add(this, CommonBlockTags.NETHERRACK, CommonBlockTags.NETHER_ORES);
     }
 }

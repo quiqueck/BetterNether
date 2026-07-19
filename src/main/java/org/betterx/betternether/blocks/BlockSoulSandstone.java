@@ -1,16 +1,9 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.wover.block.api.BlockTagProvider;
-import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
-import org.betterx.wover.tag.api.predefined.CommonBlockTags;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -20,7 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockSoulSandstone extends BlockBase implements BlockTagProvider {
+public class BlockSoulSandstone extends BlockBase {
     public static final BooleanProperty UP = BooleanProperty.create("up");
 
     public BlockSoulSandstone(BlockBehaviour.Properties settings) {
@@ -50,10 +43,5 @@ public class BlockSoulSandstone extends BlockBase implements BlockTagProvider {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return this.defaultBlockState()
                    .setValue(UP, ctx.getLevel().getBlockState(ctx.getClickedPos().above()).getBlock() != this);
-    }
-
-    @Override
-    public void registerBlockTags(ResourceLocation location, TagBootstrapContext<Block> context) {
-        context.add(this, CommonBlockTags.NETHER_TERRAIN);
     }
 }

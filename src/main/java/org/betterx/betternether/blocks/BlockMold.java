@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -9,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -17,15 +15,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.ScheduledTickAccess;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.function.Function;
 
 public class BlockMold extends BaseBlockMold {
@@ -113,14 +107,5 @@ class BaseBlockMold extends BlockBaseNotFull {
                 }
             }
         }
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (LootUtil.isCorrectTool(this, state, tool))
-            return Collections.singletonList(new ItemStack(this.asItem()));
-        else
-            return super.getDrops(state, builder);
     }
 }

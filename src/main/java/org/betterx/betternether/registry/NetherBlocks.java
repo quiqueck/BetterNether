@@ -599,8 +599,8 @@ public class NetherBlocks {
             )
     );
     public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockOrangeMushroom::new);
-    public static final Block RED_MOLD = registerBlock("red_mold", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockRedMold::new);
-    public static final Block GRAY_MOLD = registerBlock("gray_mold", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherMycelium())), BlockGrayMold::new);
+    public static final Block RED_MOLD = registerBlock("red_mold", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.netherMycelium(), NetherLoot.netherGrass()))), BlockRedMold::new);
+    public static final Block GRAY_MOLD = registerBlock("gray_mold", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.netherMycelium(), NetherLoot.netherGrass()))), BlockGrayMold::new);
     public static final Block LUCIS_SPORE = registerBlock("lucis_spore", NetherTraits.seed(), BlockLucisSpore::new);
     public static final Block GIANT_LUCIS = registerBlock(
             "giant_lucis",
@@ -727,7 +727,7 @@ public class NetherBlocks {
     // Small Plants
     public static final Block SOUL_VEIN = registerBlock("soul_vein", NetherTraits.vine(NetherRender.cutoutAnd(NetherSurvival.netherSand())), BlockSoulVein::new);
     public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.boneBlocks())), BlockBoneMushroom::new);
-    public static final Block BLACK_BUSH = registerBlock("black_bush", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockBlackBush::new);
+    public static final Block BLACK_BUSH = registerBlock("black_bush", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.netherGround(), NetherLoot.dropSelfNoExplosion()))), BlockBlackBush::new);
     public static final Block INK_BUSH = registerBlockNI("ink_bush", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockInkBush::new);
     public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", NetherTraits.and(NetherTraits.seed(NetherRender.cutoutAnd(NetherSurvival.netherGround())), WeightedCrossModelTrait.simple(
             List.of(WeightedCrossModelTrait.cross(BetterNether.C.mk("block/ink_bush_seed"))),
@@ -738,7 +738,7 @@ public class NetherBlocks {
             NetherTraits.and(NetherSurvival.netherGround(), BlockTraits.MINEABLE_WITH.needsAxe()),
             BlockSmoker::new
     );
-    public static final Block EGG_PLANT = registerBlock("egg_plant", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockEggPlant::new);
+    public static final Block EGG_PLANT = registerBlock("egg_plant", NetherTraits.plant(NetherRender.cutoutAnd(NetherTraits.and(NetherSurvival.netherGround(), NetherLoot.netherGrass()))), BlockEggPlant::new);
     public static final Block BLACK_APPLE = registerBlockNI("black_apple", NetherTraits.plant(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockBlackApple::new);
     public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", NetherTraits.seed(NetherRender.cutoutAnd(NetherSurvival.netherGround())), BlockBlackAppleSeed::new);
     public static final Block MAGMA_FLOWER = registerBlock(

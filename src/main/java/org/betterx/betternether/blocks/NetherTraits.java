@@ -59,7 +59,8 @@ public class NetherTraits {
         return and(
                 compostable(base),
                 PlantLikeBlockTrait.withDefault(),
-                BlockTraits.MINEABLE_WITH.needsHoe(),
+                // Grass/moss/fern/crop-style plants get NO mineable tag, matching vanilla
+                // short_grass/fern/flowers/crops (and mirroring bclib PlantBlockTrait.compostableWithColor).
                 VegetationTagTrait.plant()
         );
     }

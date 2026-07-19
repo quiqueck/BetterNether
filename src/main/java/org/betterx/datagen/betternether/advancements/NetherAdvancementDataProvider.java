@@ -48,7 +48,7 @@ public class NetherAdvancementDataProvider extends AdvancementDataProvider {
                 .startDisplay(NetherBlocks.CINCINNASITE_LANTERN)
                 .task()
                 .hideFromChat()
-                .background(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/nether.png"))
+                .background(ResourceLocation.withDefaultNamespace("gui/advancements/backgrounds/nether"))
                 .endDisplay()
                 .addCriterion(
                         "welcome",

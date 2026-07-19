@@ -178,9 +178,9 @@ public class NetherModels {
      * A dev-only {@link org.betterx.bclib.items.DebugDataItem}, rendered as a flat icon off {@code icon}'s
      * texture.
      * <p>
-     * {@code DebugDataItem} is {@code implements ItemModelProvider} and built its model at runtime from the
-     * same icon ({@code getItemModel} -> {@code ModelsHelper.createItemModel(icon)}). Runtime model building
-     * is gone in 1.21.4+, so without this trait the item's generated model points at a
+     * {@code DebugDataItem} used to build its model at runtime from the same icon (via the old
+     * {@code ItemModelProvider#getItemModel} -> {@code ModelsHelper.createItemModel(icon)}). Runtime model
+     * building is gone in 1.21.4+, so without this trait the item's generated model points at a
      * {@code betternether:item/debug/<name>} texture that has never existed.
      *
      * @param icon supplies the item whose texture stands in for the debug item

@@ -255,8 +255,8 @@ public class NetherItems {
      * Registers a dev-only {@link DebugDataItem} together with the model trait that renders it as
      * {@code icon}'s texture.
      * <p>
-     * {@code DebugDataItem} is {@code implements ItemModelProvider} and used to build its model at runtime
-     * from that same icon. Runtime model building is unsupported since 1.21.4, so the model has to be
+     * {@code DebugDataItem} used to build its model at runtime from that same icon (via the old
+     * {@code ItemModelProvider}). Runtime model building is unsupported since 1.21.4, so the model has to be
      * generated at datagen time instead - hence the {@link NetherModels#debugItem} trait. Traits are
      * only applied by {@link org.betterx.wover.item.api.ItemDefinition#build()}, so these go through
      * {@code defineDefaultItem} rather than the plain {@link #registerNetherItem(String, Item)}.

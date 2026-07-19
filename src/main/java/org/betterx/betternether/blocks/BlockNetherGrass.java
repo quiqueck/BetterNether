@@ -84,7 +84,7 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock {
     }
 
     public BaseBlockNetherGrass(BlockBehaviour.Properties settings) {
-        super(settings);
+        super(Materials.makeNetherGrass(settings, MapColor.TERRACOTTA_GRAY));
     }
 
     @Environment(EnvType.CLIENT)

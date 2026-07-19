@@ -197,7 +197,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
             float b = input.getFloatOr("ColorBlue", Float.NaN);
 
             if (!Float.isNaN(r) && !Float.isNaN(g) && !Float.isNaN(b)) {
-                color = ColorUtil.color((int) (r * 0xFF), (int) (g * 0xFF), (int) (g * 0xFF));
+                color = ColorUtil.color((int) (r * 0xFF), (int) (g * 0xFF), (int) (b * 0xFF));
             }
         }
 

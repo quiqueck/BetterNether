@@ -1,17 +1,20 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.configured.NetherObjects;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
-import org.betterx.wover.block.api.predicate.BlockPredicates;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
-import org.betterx.wover.feature.api.configured.ConfiguredFeatureManager;
-import org.betterx.wover.feature.api.features.config.PillarFeatureConfig;
-import org.betterx.wover.feature.api.placed.modifiers.ExtendXYZ;
+import de.ambertation.wover.block.api.predicate.BlockPredicates;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
+import de.ambertation.wover.feature.api.configured.ConfiguredFeatureManager;
+import de.ambertation.wover.feature.api.features.config.PillarFeatureConfig;
+import de.ambertation.wover.feature.api.placed.modifiers.ExtendXYZ;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -36,10 +39,10 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
                 .direction(Direction.DOWN)
-                .blockState(NetherBlocks.BASALT_STALACTITE)
+                .blockState(NetherStoneBlocks.BASALT_STALACTITE)
                 .maxHeight(BiasedToBottomInt.of(4, 11))
                 .inlinePlace()
-                .isEmptyAndUnder(org.betterx.wover.block.api.predicate.BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
+                .isEmptyAndUnder(de.ambertation.wover.block.api.predicate.BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
                 .inRandomPatch()
                 .register();
 
@@ -47,17 +50,17 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
                 .direction(Direction.UP)
-                .blockState(NetherBlocks.BASALT_STALACTITE)
+                .blockState(NetherStoneBlocks.BASALT_STALACTITE)
                 .maxHeight(BiasedToBottomInt.of(3, 9))
                 .inlinePlace()
-                .isEmptyAndOn(org.betterx.wover.block.api.predicate.BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
+                .isEmptyAndOn(de.ambertation.wover.block.api.predicate.BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
                 .inRandomPatch()
                 .register();
 
         NetherObjects.PATCH_SMOKER
                 .bootstrap(ctx)
                 .direction(Direction.UP)
-                .addTripleShape(NetherBlocks.SMOKER.defaultBlockState(), BiasedToBottomInt.of(0, 4))
+                .addTripleShape(NetherMushroomBlocks.SMOKER.defaultBlockState(), BiasedToBottomInt.of(0, 4))
                 .prioritizeTip()
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
@@ -118,7 +121,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                 .sequence()
                 .add(ConfiguredFeatureManager.INLINE_BUILDER
                         .simple()
-                        .block(NetherBlocks.BONE_BLOCK)
+                        .block(NetherStoneBlocks.BONE_BLOCK)
                         .inlinePlace()
                         .extendXYZ(
                                 UniformInt.of(3, 4), ConstantFloat.of(1.0f), UniformFloat.of(0.1f, 0.3f),
@@ -132,11 +135,11 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                         .pillar()
                         .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
                         .direction(Direction.UP)
-                        .blockState(NetherBlocks.BONE_STALACTITE)
+                        .blockState(NetherStoneBlocks.BONE_STALACTITE)
                         .maxHeight(BiasedToBottomInt.of(2, 7))
                         .inlinePlace()
                         .isEmpty()
-                        .isOn(BlockPredicate.matchesBlocks(NetherBlocks.BONE_BLOCK, Blocks.BONE_BLOCK))
+                        .isOn(BlockPredicate.matchesBlocks(NetherStoneBlocks.BONE_BLOCK, Blocks.BONE_BLOCK))
                         .inRandomPatch()
                         .spreadXZ(4)
                         .inlinePlace()
@@ -152,7 +155,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                 .pillar()
                 .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
                 .direction(Direction.DOWN)
-                .blockState(NetherBlocks.NETHERRACK_STALACTITE)
+                .blockState(NetherStoneBlocks.NETHERRACK_STALACTITE)
                 .maxHeight(BiasedToBottomInt.of(2, 7))
                 .inlinePlace()
                 .isEmptyAndUnderNetherGround()
@@ -167,7 +170,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                 .pillar()
                 .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
                 .direction(Direction.UP)
-                .blockState(NetherBlocks.NETHERRACK_STALACTITE)
+                .blockState(NetherStoneBlocks.NETHERRACK_STALACTITE)
                 .maxHeight(BiasedToBottomInt.of(2, 7))
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
@@ -208,7 +211,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                         .pillar()
                         .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
                         .direction(Direction.DOWN)
-                        .blockState(NetherBlocks.BLACKSTONE_STALACTITE)
+                        .blockState(NetherStoneBlocks.BLACKSTONE_STALACTITE)
                         .maxHeight(BiasedToBottomInt.of(3, 9))
                         .inlinePlace()
                         .isOn(BlockPredicate.matchesBlocks(Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BASALT))
@@ -228,7 +231,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                         .pillar()
                         .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
                         .direction(Direction.UP)
-                        .blockState(NetherBlocks.BLACKSTONE_STALACTITE)
+                        .blockState(NetherStoneBlocks.BLACKSTONE_STALACTITE)
                         .maxHeight(BiasedToBottomInt.of(3, 8))
                         .inlinePlace()
                         .isOn(BlockPredicate.matchesBlocks(Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BASALT))

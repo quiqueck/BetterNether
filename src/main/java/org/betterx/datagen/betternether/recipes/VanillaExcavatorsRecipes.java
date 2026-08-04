@@ -1,11 +1,17 @@
 package org.betterx.datagen.betternether.recipes;
 
+import org.betterx.betternether.registry.block.NetherMetalBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
+import org.betterx.betternether.registry.item.NetherEquipmentItems;
+import org.betterx.betternether.registry.item.NetherResourceItems;
+
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
-import org.betterx.wover.recipe.api.RecipeBuilder;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.WoverRecipeProvider;
+import de.ambertation.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -26,7 +32,7 @@ public class VanillaExcavatorsRecipes extends WoverRecipeProvider {
                 .shape(" I ", "#S#", " S ")
                 .addMaterial('#', block)
                 .addMaterial('I', item)
-                .addMaterial('S', NetherBlocks.MAT_REED.getStem())
+                .addMaterial('S', NetherWoodBlocks.MAT_REED.getStem())
                 .category(RecipeCategory.TOOLS)
                 .build(context);
     }
@@ -35,22 +41,22 @@ public class VanillaExcavatorsRecipes extends WoverRecipeProvider {
     protected void bootstrap(RecipeBuilder.Context context) {
         makeExcavatorRecipe(
                 context,
-                NetherItems.CINCINNASITE_EXCAVATOR,
-                NetherBlocks.CINCINNASITE_FORGED,
-                NetherItems.CINCINNASITE_INGOT
+                NetherEquipmentItems.CINCINNASITE_EXCAVATOR,
+                NetherMetalBlocks.CINCINNASITE_FORGED,
+                NetherResourceItems.CINCINNASITE_INGOT
         );
         makeExcavatorRecipe(
                 context,
-                NetherItems.NETHER_RUBY_EXCAVATOR,
-                NetherBlocks.NETHER_RUBY_BLOCK,
-                NetherItems.NETHER_RUBY
+                NetherEquipmentItems.NETHER_RUBY_EXCAVATOR,
+                NetherMetalBlocks.NETHER_RUBY_BLOCK,
+                NetherResourceItems.NETHER_RUBY
         );
 
         RecipeBuilder
-                .crafting(BetterNether.C.id("cincinnasite_excavator_diamond"), NetherItems.CINCINNASITE_EXCAVATOR_DIAMOND)
+                .crafting(BetterNether.C.id("cincinnasite_excavator_diamond"), NetherEquipmentItems.CINCINNASITE_EXCAVATOR_DIAMOND)
                 .shape("#I#")
                 .addMaterial('#', Items.DIAMOND)
-                .addMaterial('I', NetherItems.CINCINNASITE_EXCAVATOR)
+                .addMaterial('I', NetherEquipmentItems.CINCINNASITE_EXCAVATOR)
                 .category(RecipeCategory.TOOLS)
                 .build(context);
     }

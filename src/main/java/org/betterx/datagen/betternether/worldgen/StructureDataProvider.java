@@ -1,10 +1,10 @@
 package org.betterx.datagen.betternether.worldgen;
 
 import org.betterx.betternether.registry.NetherStructures;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.multi.WoverStructureProvider;
-import org.betterx.wover.structure.api.sets.StructureSetManager;
-import org.betterx.wover.tag.api.event.context.TagBootstrapContext;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.multi.WoverStructureProvider;
+import de.ambertation.wover.structure.api.sets.StructureSetManager;
+import de.ambertation.wover.tag.api.event.context.TagBootstrapContext;
 
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.biome.Biome;

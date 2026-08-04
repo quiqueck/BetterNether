@@ -1,11 +1,13 @@
 package org.betterx.betternether.items.complex;
 
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.bclib.api.v2.advancement.AdvancementManager;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.items.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTags;
-import org.betterx.wover.complex.api.equipment.*;
+import de.ambertation.wover.complex.api.equipment.*;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShearsItem;
@@ -35,7 +37,7 @@ public class NetherSet extends EquipmentSet {
                 prefix,
                 toolTier,
                 armorTier,
-                NetherBlocks.NETHER_REED_STEM,
+                NetherWoodBlocks.NETHER_REED_STEM,
                 templateBaseSet == null ? null : (Supplier<EquipmentSet>) () -> templateBaseSet
         );
 

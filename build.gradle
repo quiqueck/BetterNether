@@ -1,6 +1,5 @@
 plugins {
     id 'fabric-loom' version "${loom_version}"
-    id 'maven-publish'
     id "me.modmuss50.mod-publish-plugin" version "2.1.1"
 }
 
@@ -10,9 +9,6 @@ targetCompatibility = JavaVersion.VERSION_21
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
-def local_bclib = findProject(':BCLib') != null
-def local_wunderlib = findProject(':wunderlib') != null
-def local_wover = findProject(':WorldWeaver') != null
 
 loom {
     accessWidenerPath = file("src/main/resources/betternether.accesswidener")
@@ -24,13 +20,13 @@ loom {
             vmArg "-Dfabric-api.datagen"
             vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
             vmArg "-Dfabric-api.datagen.strict-validation"
-            vmArg "-Dfabric-api.datagen.modid=${project.modrinth_id}"
+            vmArg "-Dfabric-api.datagen.modid=${project.mod_id}"
 
             runDir "build/datagen"
         }
     }
 
-    if (local_wover || local_wunderlib || local_bclib) {
+    if (findProject(':WorldWeaver') != null || findProject(':wunderlib') != null || findProject(':BCLib') != null) {
         enableTransitiveAccessWideners = true
     }
 }
@@ -44,6 +40,48 @@ sourceSets {
             ]
         }
     }
+    // Test-only mod. Never shipped: it is its own fabric mod (see src/testmod/resources/fabric.mod.json)
+    // and is only ever put on the classpath by the `gametest` run below, so nothing here ends up in
+    // the release jar. Mirrors WorldWeaver's per-module testmod source set (WorldWeaver/common.gradle).
+    testmod {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+    }
+}
+
+loom {
+    runs {
+        // Headless Fabric GameTest run: boots a dedicated server, executes every @GameTest in
+        // src/testmod, writes a JUnit-style report.xml and exits non-zero if any test failed.
+        // Usage: `./gradlew :runGametest` (the leading colon matters - without it the task name also
+        // matches the runGametest tasks of every included WorldWeaver module).
+        gametest {
+            server()
+            name "GameTest"
+            runDir "build/gametest"
+            vmArg "-Dfabric-api.gametest"
+            vmArg "-Dfabric-api.gametest.report-file=${file("build/gametest/report.xml")}"
+            source sourceSets.testmod
+            ideConfigGenerated true
+        }
+    }
+
+    // Loom 1.15 dropped the mod*-prefixed configurations, so source-set-to-mod mapping is explicit
+    // (see the note at the top of common-settings.gradle). The testmod has to be its own mod entry or
+    // the loader would see two fabric.mod.json files on a single mod path.
+    mods {
+        register(project.mod_id) {
+            sourceSet sourceSets.main
+        }
+        register("${project.mod_id}-testmod") {
+            sourceSet sourceSets.testmod
+        }
+    }
+}
+
+dependencies {
+    // The testmod compiles and runs against the mod itself.
+    testmodImplementation sourceSets.main.output
 }
 
 subprojects { subproject ->
@@ -79,12 +117,8 @@ dependencies {
     // run against the full jar
     modRuntimeOnly "mcp.mobius.waila:wthit:fabric-${project.wthit_version}"
 
-    println "Using local BCLib: ${local_bclib}"
-    if (local_bclib) {
-        implementation project(path: ":BCLib", configuration: 'dev')
-    } else {
-        modImplementation "org.betterx:bclib:${project.bclib_version}"
-    }
+    // alsoInclude=false: BetterNether doesn't bundle BCLib into its own jar.
+    gradle.modApiOrLocal(dependencies, ':BCLib', "org.betterx:bclib:${project.bclib_version}", false)
 
     // EMI 1.1.8+1.21 targets 1.21.1 and its mixins fail against 1.21.7; the BetterNether EMI
     // integration is disabled for now (see integrations/emi, entrypoint emi_disabled). Re-enable
@@ -94,21 +128,23 @@ dependencies {
 
     modLocalRuntime "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-    println "Using local WunderLib: ${local_wunderlib}"
-    if (local_wunderlib) {
-        implementation project(path: ":wunderlib", configuration: 'dev')
-    } else if (local_wover) {
-        modImplementation "de.ambertation:wunderlib:${project.wunderlib_version}"
-    }
+    // alsoInclude=false: BetterNether doesn't bundle wunderlib into its own jar.
+    gradle.modApiOrLocal(dependencies, ':wunderlib', "de.ambertation:wunderlib:${project.wunderlib_version}", false)
 
-    println "Using local WorldWeaver: ${local_wover}"
-    if (local_wover) {
-        implementation project(path: ":WorldWeaver", configuration: 'dev')
+    if (findProject(':WorldWeaver') != null) {
+        // 'localDev' (not 'dev') because it bundles the packaged jar, which includes the root
+        // WorldWeaver project's own client classes (e.g. ModMenuEntryPoint) - 'dev' only exposes
+        // sourceSets.main.output, so 'dev' alone would silently drop client-only entrypoints.
+        implementation project(path: ":WorldWeaver", configuration: 'localDev')
 
         gradle.knownWoverModules.each {
             implementation project(path: ":WorldWeaver:$it", configuration: 'dev')
+            // BetterNether doesn't split its own client/common sources, so its single sourceSet needs
+            // each wover module's client output too (WorldWeaver itself now enforces the split - see
+            // WorldWeaver/common.gradle's devClient configuration).
+            implementation project(path: ":WorldWeaver:$it", configuration: 'devClient')
         }
-    } else if (local_bclib) {
+    } else {
         modImplementation "org.betterx:worldweaver:${project.wover_version}"
     }
 }
@@ -170,6 +206,9 @@ processResources {
     // block_properties.txt is a committed property-audit snapshot (see BlockPropertiesProvider); it lives in
     // the resources source set so git tracks it, but it is not a runtime asset - keep it out of the jar.
     exclude 'block_properties.txt'
+    exclude 'block_registrations.txt'
+    exclude 'item_registrations.txt'
+    exclude 'block_shapes.txt'
     println "Version: ${project.version}"
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") {
@@ -195,6 +234,9 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     // Same property-audit snapshot as processResources - committed, but not shipped in the sources jar.
     exclude 'block_properties.txt'
+    exclude 'block_registrations.txt'
+    exclude 'item_registrations.txt'
+    exclude 'block_shapes.txt'
     from sourceSets.main.allSource
 }
 
@@ -210,7 +252,8 @@ jar {
     from "LICENSE.ASSETS"
 }
 
-apply from: "helper.gradle"
+apply from: "common-helper.gradle"
+apply from: "common-publish-tag.gradle"
 
 allprojects {
     // Allow 400 errors.

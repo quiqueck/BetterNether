@@ -1,5 +1,7 @@
 package org.betterx.betternether.mixin.common;
 
+import org.betterx.betternether.registry.block.NetherObsidianBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -36,7 +38,7 @@ public class BlockAgeProcessorMixin {
             final BlockPos structurePos = structureBlockInfo2.pos();
             final RandomSource random = structurePlaceSettings.getRandom(structurePos);
 
-            Block block = random.nextFloat() < 0.15F ? NetherBlocks.BLUE_CRYING_OBSIDIAN : NetherBlocks.BLUE_OBSIDIAN;
+            Block block = random.nextFloat() < 0.15F ? NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN : NetherObsidianBlocks.BLUE_OBSIDIAN;
             cir.setReturnValue(new StructureTemplate.StructureBlockInfo(
                     structurePos,
                     block.defaultBlockState(),

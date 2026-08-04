@@ -5,7 +5,7 @@ import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.world.structures.city.palette.Palettes;
 import org.betterx.betternether.world.structures.piece.CavePiece;
 import org.betterx.betternether.world.structures.piece.CityPiece;
-import org.betterx.wover.structure.api.StructureUtils;
+import de.ambertation.wover.structure.api.StructureUtils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;

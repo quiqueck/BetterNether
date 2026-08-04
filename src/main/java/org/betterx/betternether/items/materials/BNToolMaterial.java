@@ -1,7 +1,7 @@
 package org.betterx.betternether.items.materials;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.tag.api.TagManager;
+import de.ambertation.wover.tag.api.TagManager;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ToolMaterial;

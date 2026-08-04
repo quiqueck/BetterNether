@@ -2,10 +2,10 @@ package org.betterx.betternether.world.structures.templates;
 
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherStructures;
-import org.betterx.wover.structure.api.structures.StructurePlacement;
-import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructure;
-import org.betterx.wover.structure.api.structures.nbt.RandomNbtStructureElement;
-import org.betterx.wover.util.RandomizedWeightedList;
+import de.ambertation.wover.structure.api.structures.StructurePlacement;
+import de.ambertation.wover.structure.api.structures.nbt.RandomNbtStructure;
+import de.ambertation.wover.structure.api.structures.nbt.RandomNbtStructureElement;
+import de.ambertation.wover.util.RandomizedWeightedList;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.levelgen.structure.StructureType;

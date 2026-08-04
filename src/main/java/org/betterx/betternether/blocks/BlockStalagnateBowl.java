@@ -23,17 +23,20 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockStalagnateBowl extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone; noOcclusion() moves to the registration site (StalagnateMaterial's BOWL slot). The
+// class already carries its own getDrops() override, so BlockBase's dropItself mechanism was never in play.
+public class BlockStalagnateBowl extends Block {
     private static final VoxelShape SHAPE = box(5, 0, 5, 11, 3, 11);
     public static final EnumProperty<FoodShape> FOOD = BNBlockProperties.FOOD;
 
     public BlockStalagnateBowl(Block source) {
-        super(BlockBehaviour.Properties.ofFullCopy(source).noOcclusion());
+        super(BlockBehaviour.Properties.ofFullCopy(source));
         this.registerDefaultState(getStateDefinition().any().setValue(FOOD, FoodShape.NONE));
     }
 
     public BlockStalagnateBowl(BlockBehaviour.Properties properties) {
-        super(properties.noOcclusion());
+        super(properties);
         this.registerDefaultState(getStateDefinition().any().setValue(FOOD, FoodShape.NONE));
     }
 

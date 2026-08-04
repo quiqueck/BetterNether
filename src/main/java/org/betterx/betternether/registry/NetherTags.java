@@ -1,7 +1,7 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.tag.api.TagManager;
+import de.ambertation.wover.tag.api.TagManager;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;

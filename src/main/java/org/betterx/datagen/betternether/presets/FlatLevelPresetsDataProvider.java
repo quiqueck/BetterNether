@@ -1,9 +1,9 @@
 package org.betterx.datagen.betternether.presets;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.WoverRegistryContentProvider;
-import org.betterx.wover.preset.api.flat.FlatLevelPresetManager;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.WoverRegistryContentProvider;
+import de.ambertation.wover.preset.api.flat.FlatLevelPresetManager;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;

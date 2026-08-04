@@ -2,9 +2,8 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
-import org.betterx.wover.state.api.WorldState;
+import de.ambertation.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,22 +13,23 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. Always dropped itself unconditionally via BlockBase's inherited getDrops() override
+// (no loot table json was generated for it), reproduced explicitly as NetherLoot.dropSelfNoExplosion() on
+// the registration.
+public class BlockJellyfishMushroomSapling extends Block implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 6, 12);
 
     public BlockJellyfishMushroomSapling(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings)
-                .mapColor(MapColor.COLOR_CYAN)
-                .lightLevel((bs) -> 9)
-        );
+        super(settings);
     }
 
     @Override

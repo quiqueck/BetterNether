@@ -1,16 +1,15 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -19,10 +18,7 @@ import net.fabricmc.api.Environment;
 
 public class BlockInkBush extends BlockCommonPlant {
     public BlockInkBush(Properties settings) {
-        super(Materials.plant(settings, MapColor.COLOR_BLACK)
-                               .sound(SoundType.CROP)
-                               .noOcclusion()
-        );
+        super(settings);
     }
 
     @Override
@@ -38,7 +34,7 @@ public class BlockInkBush extends BlockCommonPlant {
     @Override
     @Environment(EnvType.CLIENT)
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
-        return new ItemStack(NetherBlocks.INK_BUSH_SEED);
+        return new ItemStack(NetherPlantBlocks.INK_BUSH_SEED);
     }
 
 

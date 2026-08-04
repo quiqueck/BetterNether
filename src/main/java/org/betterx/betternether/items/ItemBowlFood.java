@@ -1,5 +1,9 @@
 package org.betterx.betternether.items;
 
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
+import org.betterx.betternether.registry.item.NetherFoodItems;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
@@ -36,12 +40,12 @@ public class ItemBowlFood extends Item {
         BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
         if (context.getPlayer().isShiftKeyDown() &&
                 world.isEmptyBlock(pos) &&
-                NetherBlocks.MAT_STALAGNATE.getBowl()
+                NetherWoodBlocks.MAT_STALAGNATE.getBowl()
                                            .canSurvive(
                                                    world.getBlockState(pos), world, pos
                                            )) {
             if (!world.isClientSide()) {
-                BlockState state = NetherBlocks.MAT_STALAGNATE.getBowl()
+                BlockState state = NetherWoodBlocks.MAT_STALAGNATE.getBowl()
                                                               .defaultBlockState()
                                                               .setValue(BlockStalagnateBowl.FOOD, bowlFood);
                 BlocksHelper.setWithoutUpdate(world, pos, state);
@@ -68,12 +72,12 @@ public class ItemBowlFood extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
         if (stack.getCount() == 1) {
             super.finishUsingItem(stack, world, user);
-            return new ItemStack(NetherItems.STALAGNATE_BOWL, 1);
+            return new ItemStack(NetherFoodItems.STALAGNATE_BOWL, 1);
         } else {
             if (user instanceof Player) {
                 Player player = (Player) user;
                 if (!player.isCreative())
-                    player.addItem(new ItemStack(NetherItems.STALAGNATE_BOWL));
+                    player.addItem(new ItemStack(NetherFoodItems.STALAGNATE_BOWL));
             }
             return super.finishUsingItem(stack, world, user);
         }

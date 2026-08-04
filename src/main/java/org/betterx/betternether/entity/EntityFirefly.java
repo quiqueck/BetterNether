@@ -1,5 +1,7 @@
 package org.betterx.betternether.entity;
 
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+
 import org.betterx.bclib.entity.DespawnableAnimal;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
@@ -100,7 +102,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                 if (valid) {
                     state = this.level.getBlockState(pos);
                     valid = state.isAir() || !state.blocksMotion();
-                    valid = valid && state.getBlock() != NetherBlocks.EGG_PLANT;
+                    valid = valid && state.getBlock() != NetherPlantBlocks.EGG_PLANT;
                     valid = valid && !state.blocksMotion();
                 }
                 return valid;

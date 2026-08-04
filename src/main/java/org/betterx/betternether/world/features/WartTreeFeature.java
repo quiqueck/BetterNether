@@ -1,11 +1,16 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+import org.betterx.betternether.registry.block.NetherSaplingBlocks;
+import org.betterx.betternether.registry.block.NetherVineBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockWartSeed;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.feature.api.features.GrowableFeature;
+import de.ambertation.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -68,13 +73,13 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
                                         BlocksHelper.setWithUpdate(
                                                 world,
                                                 context.POS,
-                                                NetherBlocks.MAT_WART.getRoot().defaultBlockState()
+                                                NetherWoodBlocks.MAT_WART.getRoot().defaultBlockState()
                                         );
                                     else if (y < h2)
                                         BlocksHelper.setWithUpdate(
                                                 world,
                                                 context.POS,
-                                                NetherBlocks.MAT_WART.getLog().defaultBlockState()
+                                                NetherWoodBlocks.MAT_WART.getLog().defaultBlockState()
                                         );
                                     else
                                         BlocksHelper.setWithUpdate(world, context.POS, WART_BLOCK);
@@ -99,13 +104,13 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
                                         BlocksHelper.setWithUpdate(
                                                 world,
                                                 context.POS,
-                                                NetherBlocks.MAT_WART.getLog().defaultBlockState()
+                                                NetherWoodBlocks.MAT_WART.getLog().defaultBlockState()
                                         );
                                     else {
                                         BlocksHelper.setWithUpdate(
                                                 world,
                                                 context.POS,
-                                                NetherBlocks.MAT_WART.getRoot().defaultBlockState()
+                                                NetherWoodBlocks.MAT_WART.getRoot().defaultBlockState()
                                         );
                                         break;
                                     }
@@ -144,7 +149,7 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
     }
 
     private void PlaceRandomSeed(LevelAccessor world, BlockPos pos) {
-        BlockState seed = NetherBlocks.MAT_WART.getSeed().defaultBlockState();
+        BlockState seed = NetherWoodBlocks.MAT_WART.getSeed().defaultBlockState();
         if (isReplaceable(world.getBlockState(pos))) {
             if (isWart(world.getBlockState(pos.above())))
                 seed = seed.setValue(BlockWartSeed.FACING, Direction.DOWN);
@@ -166,16 +171,16 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
         Block block = state.getBlock();
         return state.canBeReplaced() ||
                 block == Blocks.AIR ||
-                block == NetherBlocks.MAT_WART.getSeed() ||
-                block == NetherBlocks.BLACK_BUSH ||
-                block == NetherBlocks.SOUL_VEIN ||
-                block == NetherBlocks.SOUL_LILY ||
-                block == NetherBlocks.SOUL_LILY_SAPLING ||
+                block == NetherWoodBlocks.MAT_WART.getSeed() ||
+                block == NetherPlantBlocks.BLACK_BUSH ||
+                block == NetherVineBlocks.SOUL_VEIN ||
+                block == NetherPlantBlocks.SOUL_LILY ||
+                block == NetherSaplingBlocks.SOUL_LILY_SAPLING ||
                 block == Blocks.NETHER_WART;
     }
 
     private boolean isWart(BlockState state) {
-        return state == WART_BLOCK || state.getBlock() == NetherBlocks.MAT_WART.getLog();
+        return state == WART_BLOCK || state.getBlock() == NetherWoodBlocks.MAT_WART.getLog();
     }
 
     @Override

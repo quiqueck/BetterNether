@@ -1,5 +1,7 @@
 package org.betterx.betternether.world.biomes;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
@@ -8,9 +10,9 @@ import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.providers.NetherMushroomForestEdgeNumericProvider;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
-import org.betterx.wover.surface.impl.BaseSurfaceRuleBuilder;
-import org.betterx.wover.surface.impl.rules.SwitchRuleSource;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
+import de.ambertation.wover.surface.impl.rules.SwitchRuleSource;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.levelgen.SurfaceRules;
@@ -41,8 +43,8 @@ public class NetherMushroomForestEdge extends NetherBiomeConfig {
                         new SwitchRuleSource(
                                 NetherMushroomForestEdgeNumericProvider.DEFAULT,
                                 List.of(
-                                        SurfaceRules.state(NetherBlocks.NETHER_MYCELIUM.defaultBlockState()),
-                                        SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState()),
+                                        SurfaceRules.state(NetherTerrainBlocks.NETHER_MYCELIUM.defaultBlockState()),
+                                        SurfaceRules.state(NetherTerrainBlocks.NETHERRACK_MOSS.defaultBlockState()),
                                         NETHERRACK
                                 )
                         )

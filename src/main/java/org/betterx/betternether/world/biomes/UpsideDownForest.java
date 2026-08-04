@@ -1,12 +1,14 @@
 package org.betterx.betternether.world.biomes;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
-import org.betterx.wover.surface.api.Conditions;
-import org.betterx.wover.surface.impl.BaseSurfaceRuleBuilder;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.surface.api.Conditions;
+import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
@@ -16,8 +18,8 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 ;
 
 public class UpsideDownForest extends NetherBiomeConfig {
-    static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
-    static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
+    static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherTerrainBlocks.CEILING_MUSHROOMS.defaultBlockState());
+    static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherTerrainBlocks.NETHERRACK_MOSS.defaultBlockState());
     static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(
             Noises.NETHER_STATE_SELECTOR,
             0.0
@@ -82,7 +84,7 @@ public class UpsideDownForest extends NetherBiomeConfig {
                                 Conditions.roughNoise(Noises.NETHERRACK, 0.021),
                                 NETHERRACK_MOSS
                         ), SurfaceRules.state(
-                                NetherBlocks.MUSHROOM_GRASS.defaultBlockState()))
+                                NetherTerrainBlocks.MUSHROOM_GRASS.defaultBlockState()))
                 ),
                 BaseSurfaceRuleBuilder.FLOOR_PRIORITY
         );

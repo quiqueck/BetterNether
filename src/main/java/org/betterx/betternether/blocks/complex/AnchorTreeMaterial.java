@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
@@ -8,7 +10,7 @@ import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.bclib.trait.block.WeightedBark;
 import org.betterx.bclib.trait.block.WeightedLog;
-import org.betterx.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -17,7 +19,7 @@ public class AnchorTreeMaterial extends NetherWoodenMaterial<AnchorTreeMaterial>
 
     public AnchorTreeMaterial() {
         super("anchor_tree", MapColor.COLOR_BLUE, MapColor.COLOR_GREEN);
-        this.setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
+        this.setFurnitureCloth(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override

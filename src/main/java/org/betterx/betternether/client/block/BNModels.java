@@ -2,7 +2,7 @@ package org.betterx.betternether.client.block;
 
 import org.betterx.bclib.util.Pair;
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
+import de.ambertation.wover.block.api.model.WoverBlockModelGenerators;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -59,6 +59,21 @@ public class BNModels {
     }
 
     public static void createComplex(WoverBlockModelGenerators generators, Block bl, List<ModelSource> sources) {
+        createComplex(generators, bl, sources, true);
+    }
+
+    /**
+     * @param flatItemModel when {@code true} the item is a flat sprite of the first variant's first texture
+     *                      (right for plants and other cross/fan models). When {@code false} the item
+     *                      delegates to the first generated block model, so a full block shows as a cube
+     *                      in the inventory.
+     */
+    public static void createComplex(
+            WoverBlockModelGenerators generators,
+            Block bl,
+            List<ModelSource> sources,
+            boolean flatItemModel
+    ) {
         List<Pair<ModelSource, ResourceLocation>> models = sources.stream().map(s -> {
             Optional<ResourceLocation> parent = s.parent() == null ? Optional.empty() : Optional.of(s.parent());
             Optional<String> suffix = (s.suffix() == null || s.suffix().trim().isEmpty())
@@ -81,15 +96,21 @@ public class BNModels {
 
         generators.acceptBlockState(MultiVariantGenerator.dispatch(bl, new MultiVariant(WeightedList.of(variants))));
 
-        Item item = bl.asItem();
-        final ResourceLocation itemModel = ModelLocationUtils.getModelLocation(item);
-        ModelTemplates.FLAT_ITEM.create(itemModel, TextureMapping.layer0(sources.get(0).textures.get(0).texture), generators.vanillaGenerator.modelOutput);
-        // The FLAT_ITEM.create above only writes the item MODEL (models/item/<name>.json) through
-        // modelOutput. Register the item-model DEFINITION (items/<name>.json) pointing at it via
-        // delegateItemModel, which also marks the block as having its item model provided so the
-        // flat-item fallback in NetherModelProvider.bootstrapItemModels doesn't re-generate (and
-        // collide with) this model.
-        generators.delegateItemModel(bl, itemModel);
+        if (flatItemModel) {
+            Item item = bl.asItem();
+            final ResourceLocation itemModel = ModelLocationUtils.getModelLocation(item);
+            ModelTemplates.FLAT_ITEM.create(itemModel, TextureMapping.layer0(sources.get(0).textures.get(0).texture), generators.vanillaGenerator.modelOutput);
+            // The FLAT_ITEM.create above only writes the item MODEL (models/item/<name>.json) through
+            // modelOutput. Register the item-model DEFINITION (items/<name>.json) pointing at it via
+            // delegateItemModel, which also marks the block as having its item model provided so the
+            // flat-item fallback in NetherModelProvider.bootstrapItemModels doesn't re-generate (and
+            // collide with) this model.
+            generators.delegateItemModel(bl, itemModel);
+        } else {
+            // No separate item model - the definition points straight at the first block model, the same
+            // delegation the vanilla cube_all blocks use.
+            generators.delegateItemModel(bl, allModels.get(0));
+        }
     }
 
     public static ModelTemplate getCropBlockModelTemplate(String suffix) {
@@ -161,6 +182,7 @@ public class BNModels {
             );
         }
 
-        BNModels.createComplex(generators, bl, variants);
+        // Full blocks: the inventory item is the cube_all model, not a flat sprite.
+        BNModels.createComplex(generators, bl, variants, false);
     }
 }

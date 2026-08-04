@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "betternether:flaming_ruby"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "betternether:flaming_ruby"
+      }
+    ]
+  }
+}

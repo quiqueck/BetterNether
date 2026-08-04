@@ -13,10 +13,14 @@ import org.betterx.datagen.betternether.worldgen.NetherBiomeModificationProvider
 import org.betterx.datagen.betternether.worldgen.NetherBiomesProvider;
 import org.betterx.datagen.betternether.worldgen.StructureDataProvider;
 import org.betterx.datagen.betternether.worldgen.features.*;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.PackBuilder;
-import org.betterx.wover.datagen.api.WoverDataGenEntryPoint;
-import org.betterx.wover.datagen.api.provider.BlockPropertiesProvider;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.PackBuilder;
+import de.ambertation.wover.datagen.api.WoverDataGenEntryPoint;
+import de.ambertation.wover.datagen.api.provider.BlockPropertiesProvider;
+import de.ambertation.wover.datagen.api.provider.WoverBlockRegistrationsProvider;
+import de.ambertation.wover.datagen.api.provider.WoverBlockShapesProvider;
+import de.ambertation.wover.datagen.api.provider.WoverEquipmentAssetProvider;
+import de.ambertation.wover.datagen.api.provider.WoverItemRegistrationsProvider;
 
 import net.minecraft.core.RegistrySetBuilder;
 
@@ -44,10 +48,14 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.addProvider(NetherEnchantmentTagProvider::new);
         globalPack.addProvider(NetherEntityTypeTagProvider::new);
         globalPack.addProvider(NetherModelProvider::new);
+        globalPack.addProvider(WoverEquipmentAssetProvider::new);
         globalPack.addProvider(NetherBlockRecipesProvider::new);
         globalPack.addProvider(NetherItemRecipeProvider::new);
         globalPack.addProvider(NetherCraftingRecipes::new);
         globalPack.addProvider(BlockPropertiesProvider::new);
+        globalPack.addProvider(WoverBlockRegistrationsProvider::new);
+        globalPack.addProvider(WoverItemRegistrationsProvider::new);
+        globalPack.addProvider(WoverBlockShapesProvider::new);
 
 
         globalPack.callOnInitializeDatapack((generator, pack, location) -> {
@@ -76,4 +84,5 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
     protected ModCore modCore() {
         return BetterNether.C;
     }
+
 }

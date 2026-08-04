@@ -2,7 +2,7 @@ package org.betterx.betternether.config;
 
 import de.ambertation.wunderlib.configs.ConfigFile;
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.config.api.MainConfig;
+import de.ambertation.wover.config.api.MainConfig;
 
 public class DefaultWorldConfig extends ConfigFile {
     public final static Group DAMAGE_GROUP = new Group(BetterNether.C.namespace, "damage", 500);

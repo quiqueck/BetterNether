@@ -644,7 +644,7 @@
   "enchantment.betternether.obsidian_breaker": "Obsidiangräber",
   "enchantment.betternether.obsidian_breaker.desc": "Beschleunigt das graben von Obsidian.",
   "enchantment.betternether.ruby_fire": "Rubinfeuer",
-  "enchantment.betternether.ruby_fire.desc": "Automatische Schmelzen von Erzen mit Spitzhacke / Flamme und Rückstoß bei Rüstung und Schwertern.",
+  "enchantment.betternether.ruby_fire.desc": "Schmilzt Erze automatisch (Spitzhacke) \n Zus\u00e4tzlicher R\u00fccksto\u00df beim Angriff \n Setzt Angreifer in Brand, wenn getragen oder gehalten",
   "entity.betternether.firefly": "Irrlicht",
   "entity.betternether.flying_pig": "Fliegendes Schwein",
   "entity.betternether.hydrogen_jellyfish": "Wasserstoffqualle",

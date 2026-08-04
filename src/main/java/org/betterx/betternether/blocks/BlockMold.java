@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,22 +10,15 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.ScheduledTickAccess;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import java.util.function.Function;
-
 public class BlockMold extends BaseBlockMold {
-    public BlockMold(MapColor color) {
-        super(color);
-    }
-
     public BlockMold(Properties settings) {
         super(settings);
     }
@@ -37,22 +29,13 @@ public class BlockMold extends BaseBlockMold {
     }
 }
 
-class BaseBlockMold extends BlockBaseNotFull {
-    public BaseBlockMold(MapColor color) {
-        this(color, p -> p);
-    }
-
-    public BaseBlockMold(MapColor color, Function<Properties, Properties> adaptProperties) {
-        super(adaptProperties.apply(Materials.makeNetherGrass(color)
-                                             .sound(SoundType.CROP)
-                                             .randomTicks())
-        );
-        this.setDropItself(false);
-    }
-
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. setDropItself(false) is gone too - it only ever made the block fall through to the
+// vanilla loot-table-driven getDrops(), which is what happens by default once the class no longer extends
+// BlockBase.
+class BaseBlockMold extends Block {
     public BaseBlockMold(Properties settings) {
         super(settings);
-        this.setDropItself(false);
     }
 
     @Environment(EnvType.CLIENT)

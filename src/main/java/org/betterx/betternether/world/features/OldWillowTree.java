@@ -1,13 +1,18 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.wover.sets.api.blocks.SlotType;
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+import org.betterx.betternether.registry.block.NetherWallPlantBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
+import de.ambertation.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.feature.api.features.GrowableFeature;
+import de.ambertation.wover.feature.api.WriteZone;
+import de.ambertation.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,13 +26,21 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguration> implements GrowableFeature<NaturalTreeConfiguration> {
+    /**
+     * How much narrower a crown is than its nominal radius. {@link #crown} tests
+     * {@code 2*cx^2 + cy^2 + 2*cz^2 < r^2}, so the shell is squashed by {@code sqrt(2)} horizontally and
+     * the furthest column it ever touches is {@code r/sqrt(2)}. A crown's headroom therefore buys
+     * {@code sqrt(2)} times as much radius.
+     */
+    private static final float CROWN_SQUASH = 0.70710678F;
+
     private static final float[] CURVE_X = new float[]{9F, 7F, 1.5F, 0.5F, 3F, 7F};
     private static final float[] CURVE_Y = new float[]{20F, 17F, 12F, 4F, 0F, -2F};
     private static final Block[] wallPlants = {
-            NetherBlocks.WALL_MOSS,
-            NetherBlocks.WALL_MOSS,
-            NetherBlocks.WALL_MUSHROOM_BROWN,
-            NetherBlocks.WALL_MUSHROOM_RED
+            NetherWallPlantBlocks.WALL_MOSS,
+            NetherWallPlantBlocks.WALL_MOSS,
+            NetherWallPlantBlocks.WALL_MUSHROOM_BROWN,
+            NetherWallPlantBlocks.WALL_MUSHROOM_RED
     };
 
 
@@ -44,12 +57,21 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
             NaturalTreeConfiguration config,
             StructureGeneratorThreadContext context
     ) {
+        // Emptied on the way in, not only on the way out. The context is one instance per worker thread,
+        // shared by every tree feature, and the others (AnchorTreeFeature, AnchorTreeRootFeature,
+        // LegacyStructureAnchorTree) clear it before they fill it - so each of them leaves BLOCKS full
+        // when it returns. Filling on top of that drew the previous tree's blocks into this one, and
+        // since which feature precedes which on a given thread depends on chunk scheduling, the result
+        // differed between runs of the same seed.
+        context.BLOCKS.clear();
+
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
         float scale = MHelper.randRange(0.7F, 1.3F, random);
         int minCount = scale < 1 ? 3 : 4;
         int maxCount = scale < 1 ? 5 : 7;
         int count = MHelper.randRange(minCount, maxCount, random);
         final BoundingBox blockBox = BlocksHelper.decorationBounds(world, pos);
+        final WriteZone zone = WriteZone.of(world);
         for (int n = 0; n < count; n++) {
             float branchSize = MHelper.randRange(0.5F, 1F, random) * scale;
             float angle = n * MHelper.PI2 / count;
@@ -67,7 +89,17 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
             ) * branchSize);
             float crownR = 10 * branchSize;
             if (crownR < 1.5F) crownR = 1.5F;
-            crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, blockBox);
+            // Size the crown to the room it has rather than letting the write zone cut a plane through it.
+            // A crown's centre always fits - it sits at most 11*bs ~ 14.3 blocks from the trunk, against
+            // 16 blocks of guaranteed room - so shrinking the radius is always enough and nothing has to
+            // move. The horizontal reach is radius/sqrt(2), not radius: the shell test below doubles the X
+            // and Z terms, which squashes the crown by sqrt(2) horizontally, so the headroom converts at
+            // that rate.
+            final float fittedR = zone.fitRadius(x1, z1, crownR * CROWN_SQUASH, 1.5F * CROWN_SQUASH);
+            if (fittedR >= 0) {
+                crownR = Math.min(crownR, fittedR / CROWN_SQUASH);
+                crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, blockBox);
+            }
 
             boolean generate = true;
             for (int i = 1; i < CURVE_X.length && generate; i++) {
@@ -125,47 +157,44 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                     BlocksHelper.setWithUpdate(
                             world,
                             bpos,
-                            NetherBlocks.MAT_WILLOW.getBlock(SlotType.BARK)
+                            NetherWoodBlocks.MAT_WILLOW.getBlock(SlotType.BARK)
                                                    .defaultBlockState()
                     );
                 else
                     BlocksHelper.setWithUpdate(
                             world,
                             bpos,
-                            NetherBlocks.MAT_WILLOW.getBlock(SlotType.LOG)
+                            NetherWoodBlocks.MAT_WILLOW.getBlock(SlotType.LOG)
                                                    .defaultBlockState()
                     );
 
                 if (random.nextInt(8) == 0) {
                     state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
-                    if (random.nextInt(8) == 0 && !context.BLOCKS.contains(bpos.north()) && world.isEmptyBlock(bpos.north()))
+                    // BlocksHelper.HORIZONTAL is N/S/E/W - the order these four sides used to be rolled
+                    // in. Direction.Plane.HORIZONTAL is N/S/W/E and would shift the random stream.
+                    for (Direction side : BlocksHelper.HORIZONTAL) {
+                        // The roll is consumed for every side, whatever the outcome, so the world keeps
+                        // generating exactly as it did before the bounds check was added.
+                        if (random.nextInt(8) != 0) continue;
+                        final BlockPos sidePos = bpos.relative(side);
+                        // bpos is only known to be inside blockBox itself; a neighbour of one sitting on the
+                        // edge is another chunk out, one too far to read. The write there was already dropped
+                        // by the world, so refusing it here only skips the read that 26.3 objects to.
+                        if (!BlocksHelper.isInsideHorizontally(blockBox, sidePos)) continue;
+                        if (context.BLOCKS.contains(sidePos) || !world.isEmptyBlock(sidePos)) continue;
                         BlocksHelper.setWithUpdate(
                                 world,
-                                bpos.north(),
-                                state.setValue(BlockPlantWall.FACING, Direction.NORTH)
+                                sidePos,
+                                state.setValue(BlockPlantWall.FACING, side),
+                                blockBox
                         );
-                    if (random.nextInt(8) == 0 && !context.BLOCKS.contains(bpos.south()) && world.isEmptyBlock(bpos.south()))
-                        BlocksHelper.setWithUpdate(
-                                world,
-                                bpos.south(),
-                                state.setValue(BlockPlantWall.FACING, Direction.SOUTH)
-                        );
-                    if (random.nextInt(8) == 0 && !context.BLOCKS.contains(bpos.east()) && world.isEmptyBlock(bpos.east()))
-                        BlocksHelper.setWithUpdate(
-                                world,
-                                bpos.east(),
-                                state.setValue(BlockPlantWall.FACING, Direction.EAST)
-                        );
-                    if (random.nextInt(8) == 0 && !context.BLOCKS.contains(bpos.west()) && world.isEmptyBlock(bpos.west()))
-                        BlocksHelper.setWithUpdate(
-                                world,
-                                bpos.west(),
-                                state.setValue(BlockPlantWall.FACING, Direction.WEST)
-                        );
+                    }
                 }
             }
         }
 
+        // Kept as well as the one at the top: leaving the set empty is what the next feature on this
+        // thread would want, whether or not it clears for itself.
         context.BLOCKS.clear();
 
         return true;
@@ -190,7 +219,7 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
 
     @Override
     protected boolean isStructure(BlockState state) {
-        return state.getBlock() == NetherBlocks.MAT_RUBEUS.getLog();
+        return state.getBlock() == NetherWoodBlocks.MAT_RUBEUS.getLog();
     }
 
     @Override
@@ -266,8 +295,8 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
     private void crown(LevelAccessor world, BlockPos pos, float radius, RandomSource random, BoundingBox bounds) {
         final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 
-        BlockState leaves = NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);
-        BlockState vine = NetherBlocks.MAT_WILLOW.getBranch().defaultBlockState();
+        BlockState leaves = NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);
+        BlockState vine = NetherWoodBlocks.MAT_WILLOW.getBranch().defaultBlockState();
         float halfR = radius * 0.5F;
         float r2 = radius * radius;
         int start = (int) Math.floor(-radius);
@@ -283,6 +312,18 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                     int cz2 = cz * cz * 2;
                     if (cx2 + cy2_out + cz2 < r2 && cx2 + cy2_in + cz2 > r2) {
                         POS.setZ(pos.getZ() + cz);
+                        // A crown sits up to 14 blocks out from the trunk and is itself up to 13 wide, so it
+                        // reaches ~27 blocks - two chunks past the one being decorated. 26.3 flags the read,
+                        // not the write, so the column has to be rejected before the getBlockState below.
+                        //
+                        // No block is lost by this: everything the branch writes stays in this column and was
+                        // already dropped by the `bounds` check inside setWithUpdate. It does shift the random
+                        // stream, though - the skipped branch no longer draws the nextBoolean/randRange calls
+                        // it used to - so a tree whose crown crosses the boundary grows a slightly different
+                        // shape than in 26.1. That cannot be avoided while the draw stays conditional on a
+                        // read we are not allowed to make, and it only touches trees that were already being
+                        // clipped at that boundary.
+                        if (!BlocksHelper.isInsideHorizontally(bounds, POS)) continue;
                         if (world.getBlockState(POS).canBeReplaced()) {
                             if (random.nextBoolean()) {
                                 int length = BlocksHelper.downRay(world, POS, 12);

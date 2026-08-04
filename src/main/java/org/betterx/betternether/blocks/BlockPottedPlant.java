@@ -1,7 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+
 import org.betterx.betternether.blocks.BNBlockProperties.PottedPlantShape;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -26,21 +26,20 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockPottedPlant extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. setDropItself(false) is gone too - the class's own getDrops() override below is
+// unaffected either way.
+public class BlockPottedPlant extends Block {
     public static final EnumProperty<PottedPlantShape> PLANT = BNBlockProperties.PLANT;
 
     public BlockPottedPlant(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
-                .mapColor(MapColor.COLOR_BLACK)
-                .lightLevel(BlockPottedPlant::getLuminance)
-                .offsetType(OffsetType.NONE)
-        );
-        this.setDropItself(false);
+        super(settings);
 
         this.registerDefaultState(getStateDefinition().any().setValue(PLANT, PottedPlantShape.AGAVE));
     }
 
-    private static int getLuminance(BlockState blockState) {
+    /** Public so {@code NetherBlocks} can chain it as a {@code lightLevel(...)} registration-site setter. */
+    public static int getLuminance(BlockState blockState) {
         if (!blockState.hasProperty(PLANT)) return 0;
 
         if (blockState.getValue(PLANT) == PottedPlantShape.WILLOW)
@@ -95,7 +94,7 @@ public class BlockPottedPlant extends BlockBaseNotFull {
     public static BlockState getPlant(Item item) {
         for (PottedPlantShape shape : PottedPlantShape.values()) {
             if (shape.getItem().equals(item))
-                return NetherBlocks.POTTED_PLANT.defaultBlockState().setValue(PLANT, shape);
+                return NetherPlantBlocks.POTTED_PLANT.defaultBlockState().setValue(PLANT, shape);
         }
         return null;
     }

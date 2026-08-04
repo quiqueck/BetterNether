@@ -7,8 +7,8 @@ import org.betterx.betternether.world.biomes.providers.NetherGrasslandsNumericPr
 import org.betterx.betternether.world.biomes.providers.NetherMushroomForestEdgeNumericProvider;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.betternether.world.biomes.util.NetherBiomeKey;
-import org.betterx.wover.biome.api.data.BiomeCodecRegistry;
-import org.betterx.wover.surface.api.noise.NumericProviderRegistry;
+import de.ambertation.wover.biome.api.data.BiomeCodecRegistry;
+import de.ambertation.wover.surface.api.noise.NumericProviderRegistry;
 
 import net.minecraft.core.Registry;
 

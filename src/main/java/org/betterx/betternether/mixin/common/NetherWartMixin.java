@@ -1,5 +1,7 @@
 package org.betterx.betternether.mixin.common;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -26,7 +28,7 @@ public abstract class NetherWartMixin extends VegetationBlock {
 
     @Inject(method = "mayPlaceOn", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void canStay(BlockState floor, BlockGetter view, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
-        if (floor.getBlock() == NetherBlocks.FARMLAND)
+        if (floor.getBlock() == NetherTerrainBlocks.FARMLAND)
             info.setReturnValue(true);
     }
 

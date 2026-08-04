@@ -3,7 +3,7 @@ package org.betterx.betternether.blocks.complex;
 import org.betterx.betternether.blocks.complex.slots.Roof;
 import org.betterx.betternether.blocks.complex.slots.RoofSlab;
 import org.betterx.betternether.blocks.complex.slots.RoofStairs;
-import org.betterx.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.material.MapColor;
 

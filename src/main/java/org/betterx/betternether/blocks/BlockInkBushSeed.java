@@ -1,11 +1,11 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
 
-import net.minecraft.world.level.material.MapColor;
+import org.betterx.betternether.registry.NetherBlocks;
 
 public class BlockInkBushSeed extends BlockCommonSapling {
     public BlockInkBushSeed(Properties settings) {
-        super(NetherBlocks.INK_BUSH, org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_RED).noLootTable());
+        super(NetherPlantBlocks.INK_BUSH, settings);
     }
 }

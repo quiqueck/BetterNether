@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.blocks.BaseBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.advancements.BNCriterion;
 
@@ -19,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.Iterator;
 
-class BNObsidianBase extends BaseBlock {
+class BNObsidianBase extends Block {
     final Block transformsTo;
 
     public BNObsidianBase() {

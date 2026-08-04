@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import org.jetbrains.annotations.Nullable;
 
-public class BlockTerrain extends BlockBase implements BonemealNyliumLike {
+public class BlockTerrain extends Block implements BonemealNyliumLike {
     protected BonemealAPI.FeatureProvider vegetationFeature;
     public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
             SoundEvents.NETHERRACK_BREAK,
@@ -28,7 +28,6 @@ public class BlockTerrain extends BlockBase implements BonemealNyliumLike {
 
     public BlockTerrain(BlockBehaviour.Properties settings) {
         super(settings.sound(TERRAIN_SOUND).requiresCorrectToolForDrops());
-        this.setDropItself(false);
     }
 
     public void setVegetationFeature(BonemealAPI.FeatureProvider vegetationFeature) {

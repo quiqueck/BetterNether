@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.betternether.blocks.BlockWartRoots;
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockWartSeed;
@@ -7,7 +9,7 @@ import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -15,7 +17,7 @@ import net.minecraft.world.level.material.MapColor;
 public class WartMaterial extends RoofMaterial<WartMaterial> {
     public WartMaterial(String name, MapColor woodColor, MapColor planksColor) {
         super(name, woodColor, planksColor);
-        setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
+        setFurnitureCloth(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override

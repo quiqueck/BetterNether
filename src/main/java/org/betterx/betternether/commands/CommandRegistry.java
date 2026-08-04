@@ -4,7 +4,7 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTags;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
-import org.betterx.wover.state.api.WorldState;
+import de.ambertation.wover.state.api.WorldState;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;

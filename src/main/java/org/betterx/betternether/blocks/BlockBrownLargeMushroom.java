@@ -1,7 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.blocks.BNBlockProperties.BrownMushroomShape;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
@@ -26,7 +26,11 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockBrownLargeMushroom extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. setDropItself(false) is gone too - it only ever made the block fall through to the
+// vanilla loot-table-driven getDrops(), which is what happens by default once the class no longer extends
+// BlockBase.
+public class BlockBrownLargeMushroom extends Block {
     private static final VoxelShape TOP_CENTER_SHAPE = box(0, 0.1, 0, 16, 16, 16);
     private static final VoxelShape TOP_EDGE_SHAPE = box(0, 8, 0, 16, 16, 16);
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
@@ -47,8 +51,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
     };
 
     public BlockBrownLargeMushroom(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_BROWN).strength(1).noOcclusion());
-        this.setDropItself(false);
+        super(settings);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         BrownMushroomShape shape = state.getValue(SHAPE);
         return shape == BrownMushroomShape.BOTTOM || shape == BrownMushroomShape.MIDDLE
-                ? new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem())
+                ? new ItemStack(NetherWoodBlocks.MAT_NETHER_MUSHROOM.getStem())
                 : new ItemStack(Items.BROWN_MUSHROOM);
     }
 

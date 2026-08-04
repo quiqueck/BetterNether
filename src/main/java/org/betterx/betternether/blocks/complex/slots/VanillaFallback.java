@@ -1,11 +1,13 @@
 package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
-import org.betterx.wover.sets.api.blocks.SlotType;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.sets.api.blocks.SlotType;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +24,33 @@ public class VanillaFallback<T extends NetherWoodenMaterial<T>> extends NetherWo
             MapColor planksColor
     ) {
         super(name, woodColor, planksColor);
+    }
+
+    /**
+     * WP8.3 (REVIEWED) scope note: the vanilla-alignment review's nether-wood sound split
+     * ({@link NetherWoodenMaterial#soundOverride}/{@link NetherWoodenMaterial#setTypeSound}) and
+     * furnace-fuel policy ({@link NetherWoodenMaterial#fuelTrait}) cover this mod's own 9 nether-wood species
+     * only. Both {@link VanillaWood} (overworld-wood-flavored furniture) and {@link VanillaNetherWood}
+     * (crimson/warped furniture built on vanilla nether wood) sit on this shared base class but were not part
+     * of that review, so all three hooks are neutralized here rather than left to silently inherit the
+     * 9-species behaviour. (In practice neither subclass registers a door/trapdoor/button/plate/gate/sign
+     * slot, so {@code setTypeSound} would be inert either way - null here for defensive clarity.)
+     */
+    @Override
+    protected SoundType soundOverride(SlotType slot) {
+        return null;
+    }
+
+    /** @see #soundOverride(SlotType) */
+    @Override
+    protected SoundType setTypeSound() {
+        return null;
+    }
+
+    /** @see #soundOverride(SlotType) */
+    @Override
+    protected BlockTrait<?, ?> fuelTrait(SlotType slot) {
+        return null;
     }
 
     @Override

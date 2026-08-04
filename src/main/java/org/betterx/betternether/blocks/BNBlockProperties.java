@@ -1,5 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherCropBlocks;
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+import org.betterx.betternether.registry.block.NetherSaplingBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.util.StringRepresentable;
@@ -162,29 +168,29 @@ public class BNBlockProperties {
     }
 
     public enum PottedPlantShape implements StringRepresentable {
-        AGAVE("agave", () -> NetherBlocks.AGAVE),
-        BARREL_CACTUS("barrel_cactus", () -> NetherBlocks.BARREL_CACTUS),
-        BLACK_APPLE("black_apple", () -> NetherBlocks.BLACK_APPLE_SEED),
-        BLACK_BUSH("black_bush", () -> NetherBlocks.BLACK_BUSH),
-        EGG_PLANT("egg_plant", () -> NetherBlocks.EGG_PLANT),
-        INK_BUSH("ink_bush", () -> NetherBlocks.INK_BUSH_SEED),
-        REEDS("reeds", () -> NetherBlocks.MAT_REED.getStem()),
-        NETHER_CACTUS("nether_cactus", () -> NetherBlocks.NETHER_CACTUS),
-        NETHER_GRASS("nether_grass", () -> NetherBlocks.NETHER_GRASS),
-        ORANGE_MUSHROOM("orange_mushroom", () -> NetherBlocks.ORANGE_MUSHROOM),
-        RED_MOLD("red_mold", () -> NetherBlocks.RED_MOLD),
-        GRAY_MOLD("gray_mold", () -> NetherBlocks.GRAY_MOLD),
-        MAGMA_FLOWER("magma_flower", () -> NetherBlocks.MAGMA_FLOWER),
-        NETHER_WART("nether_wart", () -> NetherBlocks.MAT_WART.getSeed()),
-        WILLOW("willow", () -> NetherBlocks.MAT_WILLOW.getSapling()),
-        SMOKER("smoker", () -> NetherBlocks.SMOKER),
+        AGAVE("agave", () -> NetherPlantBlocks.AGAVE),
+        BARREL_CACTUS("barrel_cactus", () -> NetherPlantBlocks.BARREL_CACTUS),
+        BLACK_APPLE("black_apple", () -> NetherCropBlocks.BLACK_APPLE_SEED),
+        BLACK_BUSH("black_bush", () -> NetherPlantBlocks.BLACK_BUSH),
+        EGG_PLANT("egg_plant", () -> NetherPlantBlocks.EGG_PLANT),
+        INK_BUSH("ink_bush", () -> NetherPlantBlocks.INK_BUSH_SEED),
+        REEDS("reeds", () -> NetherWoodBlocks.MAT_REED.getStem()),
+        NETHER_CACTUS("nether_cactus", () -> NetherPlantBlocks.NETHER_CACTUS),
+        NETHER_GRASS("nether_grass", () -> NetherPlantBlocks.NETHER_GRASS),
+        ORANGE_MUSHROOM("orange_mushroom", () -> NetherMushroomBlocks.ORANGE_MUSHROOM),
+        RED_MOLD("red_mold", () -> NetherMushroomBlocks.RED_MOLD),
+        GRAY_MOLD("gray_mold", () -> NetherMushroomBlocks.GRAY_MOLD),
+        MAGMA_FLOWER("magma_flower", () -> NetherPlantBlocks.MAGMA_FLOWER),
+        NETHER_WART("nether_wart", () -> NetherWoodBlocks.MAT_WART.getSeed()),
+        WILLOW("willow", () -> NetherWoodBlocks.MAT_WILLOW.getSapling()),
+        SMOKER("smoker", () -> NetherMushroomBlocks.SMOKER),
         WART("wart", () -> Blocks.NETHER_WART),
-        JUNGLE_PLANT("jungle_plant", () -> NetherBlocks.JUNGLE_PLANT),
-        JELLYFISH_MUSHROOM("jellyfish_mushroom", () -> NetherBlocks.JELLYFISH_MUSHROOM_SAPLING),
-        SWAMP_GRASS("swamp_grass", () -> NetherBlocks.SWAMP_GRASS),
-        SOUL_GRASS("soul_grass", () -> NetherBlocks.SOUL_GRASS),
-        BONE_GRASS("bone_grass", () -> NetherBlocks.BONE_GRASS),
-        BONE_MUSHROOM("bone_mushroom", () -> NetherBlocks.BONE_MUSHROOM);
+        JUNGLE_PLANT("jungle_plant", () -> NetherPlantBlocks.JUNGLE_PLANT),
+        JELLYFISH_MUSHROOM("jellyfish_mushroom", () -> NetherSaplingBlocks.JELLYFISH_MUSHROOM_SAPLING),
+        SWAMP_GRASS("swamp_grass", () -> NetherPlantBlocks.SWAMP_GRASS),
+        SOUL_GRASS("soul_grass", () -> NetherPlantBlocks.SOUL_GRASS),
+        BONE_GRASS("bone_grass", () -> NetherPlantBlocks.BONE_GRASS),
+        BONE_MUSHROOM("bone_mushroom", () -> NetherMushroomBlocks.BONE_MUSHROOM);
 
         private final Supplier<Block> block;
         private final String name;

@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+
 import org.betterx.betternether.MHelper;
 
 import net.minecraft.core.BlockPos;
@@ -11,7 +12,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,24 +19,12 @@ import net.fabricmc.api.Environment;
 public class BlockNetherSakuraLeaves extends BNLeaves {
     private static final int COLOR = MHelper.color(251, 113, 143);
 
-    public BlockNetherSakuraLeaves(Block sapling) {
-        super(
-                sapling,
-                Materials
-                        .staticLeaves(MapColor.COLOR_PINK, false)
-                        .noOcclusion()
-                        .lightLevel((state) -> 13)
-        );
-    }
-
+    // The (sapling)-only overload was dead code: BNLeaves has no no-Properties constructor for it to
+    // forward to without building an id-less BlockBehaviour.Properties.of() from scratch, and nothing in
+    // src called it (the only construction site is NetherLeavesBlocks.NETHER_SAKURA_LEAVES, which always passes
+    // the registration's own settings). Removed rather than ported (WP3.6 gap-fill).
     public BlockNetherSakuraLeaves(Block sapling, Properties settings) {
-        super(
-                sapling,
-                Materials
-                        .staticLeaves(settings, MapColor.COLOR_PINK, false)
-                        .noOcclusion()
-                        .lightLevel((state) -> 13)
-        );
+        super(sapling, settings);
     }
 
     @Environment(EnvType.CLIENT)

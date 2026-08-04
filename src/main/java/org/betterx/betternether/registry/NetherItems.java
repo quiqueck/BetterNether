@@ -15,11 +15,11 @@ import org.betterx.betternether.items.materials.BNArmorTiers;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.items.materials.BNToolTiers;
 import org.betterx.betternether.loot.BNLoot;
-import org.betterx.wover.complex.api.equipment.ArmorSlot;
-import org.betterx.wover.complex.api.equipment.ToolSlot;
-import org.betterx.wover.item.api.ItemRegistry;
-import org.betterx.wover.state.api.WorldState;
-import org.betterx.wover.tag.api.predefined.CommonItemTags;
+import de.ambertation.wover.complex.api.equipment.ArmorSlot;
+import de.ambertation.wover.complex.api.equipment.ToolSlot;
+import de.ambertation.wover.item.api.ItemRegistry;
+import de.ambertation.wover.state.api.WorldState;
+import de.ambertation.wover.tag.api.predefined.CommonItemTags;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -48,129 +48,18 @@ import net.minecraft.world.level.Level;
 import java.util.function.Function;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.betterx.betternether.registry.item.NetherFoodItems;
+import org.betterx.betternether.registry.item.NetherEquipmentItems;
+import org.betterx.betternether.registry.item.NetherResourceItems;
 
+/**
+ * Registry facade for BetterNether's items. The actual field declarations live in the per-category
+ * classes under {@code org.betterx.betternether.registry.item} (see {@link #register()}
+ * for the boot order); this class only keeps the shared registration forwarders, the debug-item
+ * bootstrap, and the driver that loads every category class in the correct order.
+ */
 public class NetherItems {
-    public static final Item BLACK_APPLE = registerItem("black_apple", ItemBlackApple::new);
 
-    public static final Item STALAGNATE_BOWL = registerItem(
-            "stalagnate_bowl",
-            props -> new ItemBowlFood(null, FoodShape.NONE, props)
-    );
-    public static final Item STALAGNATE_BOWL_WART = registerItem(
-            "stalagnate_bowl_wart",
-            props -> new ItemBowlFood(
-                    Foods.COOKED_CHICKEN,
-                    FoodShape.WART,
-                    props
-            )
-    );
-    public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem(
-            "stalagnate_bowl_mushroom",
-            props -> new ItemBowlFood(
-                    Foods.MUSHROOM_STEW,
-                    FoodShape.MUSHROOM,
-                    props
-            )
-    );
-    public static final Item STALAGNATE_BOWL_APPLE = registerItem(
-            "stalagnate_bowl_apple",
-            props -> new ItemBowlFood(Foods.APPLE, FoodShape.APPLE, props)
-    );
-    public static final Item HOOK_MUSHROOM_COOKED = registerFood("hook_mushroom_cooked", 4, 0.4F);
-
-    public static final Item CINCINNASITE = registerItem("cincinnasite", Item::new);
-    public static final Item CINCINNASITE_INGOT = registerItem(
-            "cincinnasite_ingot", Item::new,
-            CommonItemTags.IRON_INGOTS
-    );
-    public static final Item NETHER_RUBY = registerItem("nether_ruby", Item::new);
-
-    public static final NetherSet CINCINNASITE_SET = new NetherSet(
-            "cincinnasite",
-            BNToolTiers.CINCINNASITE,
-            BNArmorTiers.CINCINNASITE,
-            true
-    );
-
-
-    public static final NetherSet NETHER_RUBY_SET = new NetherSet(
-            "nether_ruby",
-            BNToolTiers.NETHER_RUBY,
-            BNArmorTiers.NETHER_RUBY,
-            false
-    );
-
-    public static final DiamondSet CINCINNASITE_DIAMOND_SET = new DiamondSet(CINCINNASITE_SET);
-
-    public static final NetherSet FLAMING_RUBY_SET = new NetherSet(
-            "flaming_ruby",
-            BNToolTiers.FLAMING_RUBY,
-            BNArmorTiers.FLAMING_RUBY,
-            false,
-            NETHER_RUBY_SET
-    );
-    public static final Item CINCINNASITE_HAMMER = registerItem(
-            "cincinnasite_hammer",
-            props -> VanillaHammersIntegration.makeHammer(
-                    BNToolMaterial.CINCINNASITE,
-                    4,
-                    -2.0F,
-                    props
-            )
-    );
-    public static final Item CINCINNASITE_HAMMER_DIAMOND = registerItem(
-            "cincinnasite_hammer_diamond",
-            props -> VanillaHammersIntegration.makeHammer(
-                    BNToolMaterial.CINCINNASITE_DIAMOND,
-                    5,
-                    -2.0F,
-                    props
-            )
-    );
-    public static final Item NETHER_RUBY_HAMMER = registerItem(
-            "nether_ruby_hammer",
-            props -> VanillaHammersIntegration.makeHammer(
-                    BNToolMaterial.NETHER_RUBY,
-                    5,
-                    -2.0F,
-                    props
-            )
-    );
-
-    public static final Item CINCINNASITE_EXCAVATOR = registerItem(
-            "cincinnasite_excavator",
-            props -> VanillaExcavatorsIntegration.makeExcavator(
-                    BNToolMaterial.CINCINNASITE,
-                    4,
-                    -1.6F,
-                    props
-            )
-    );
-    public static final Item CINCINNASITE_EXCAVATOR_DIAMOND = registerItem(
-            "cincinnasite_excavator_diamond",
-            props -> VanillaExcavatorsIntegration.makeExcavator(
-                    BNToolMaterial.CINCINNASITE_DIAMOND,
-                    5,
-                    -2.0F,
-                    props
-            )
-    );
-    public static final Item NETHER_RUBY_EXCAVATOR = registerItem(
-            "nether_ruby_excavator",
-            props -> VanillaExcavatorsIntegration.makeExcavator(
-                    BNToolMaterial.NETHER_RUBY,
-                    5,
-                    -2.0F,
-                    props
-            )
-    );
-
-    public static final Item GLOWSTONE_PILE = registerItem("glowstone_pile", Item::new);
-    public static final Item LAPIS_PILE = registerItem("lapis_pile", Item::new);
-
-    public static final Item AGAVE_LEAF = registerItem("agave_leaf", Item::new);
-    public static final Item AGAVE_MEDICINE = registerMedicine("agave_medicine", 40, 2, true);
-    public static final Item HERBAL_MEDICINE = registerMedicine("herbal_medicine", 10, 5, true);
 
     private NetherItems() {
     }
@@ -218,11 +107,11 @@ public class NetherItems {
                                 public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
                                     if (stack.getCount() == 1) {
                                         super.finishUsingItem(stack, world, user);
-                                        return new ItemStack(NetherItems.STALAGNATE_BOWL, stack.getCount());
+                                        return new ItemStack(NetherFoodItems.STALAGNATE_BOWL, stack.getCount());
                                     } else {
                                         if (user instanceof Player player) {
                                             if (!player.isCreative())
-                                                player.addItem(new ItemStack(NetherItems.STALAGNATE_BOWL));
+                                                player.addItem(new ItemStack(NetherFoodItems.STALAGNATE_BOWL));
                                         }
                                         return super.finishUsingItem(stack, world, user);
                                     }
@@ -258,7 +147,7 @@ public class NetherItems {
      * {@code DebugDataItem} used to build its model at runtime from that same icon (via the old
      * {@code ItemModelProvider}). Runtime model building is unsupported since 1.21.4, so the model has to be
      * generated at datagen time instead - hence the {@link NetherModels#debugItem} trait. Traits are
-     * only applied by {@link org.betterx.wover.item.api.ItemDefinition#build()}, so these go through
+     * only applied by {@link de.ambertation.wover.item.api.ItemDefinition#build()}, so these go through
      * {@code defineDefaultItem} rather than the plain {@link #registerNetherItem(String, Item)}.
      *
      * @param name    the item's registry path
@@ -297,13 +186,13 @@ public class NetherItems {
             );
             registerDebugItem(
                     "debug/wither_tower_loot",
-                    key -> DebugDataItem.forLootTable(key, BNLoot.WITHER_TOWER_LOOT, NetherItems.CINCINNASITE_INGOT),
-                    NetherItems.CINCINNASITE_INGOT
+                    key -> DebugDataItem.forLootTable(key, BNLoot.WITHER_TOWER_LOOT, NetherResourceItems.CINCINNASITE_INGOT),
+                    NetherResourceItems.CINCINNASITE_INGOT
             );
             registerDebugItem(
                     "debug/wither_tower_bonus_loot",
-                    key -> DebugDataItem.forLootTable(key, BNLoot.WITHER_TOWER_BONUS_LOOT, NetherItems.NETHER_RUBY),
-                    NetherItems.NETHER_RUBY
+                    key -> DebugDataItem.forLootTable(key, BNLoot.WITHER_TOWER_BONUS_LOOT, NetherResourceItems.NETHER_RUBY),
+                    NetherResourceItems.NETHER_RUBY
             );
 
             registerDebugItem(
@@ -338,29 +227,29 @@ public class NetherItems {
     @NotNull
     private static CompoundTag buildCitySpawnerData() {
         ListTag handItems = new ListTag();
-        handItems.add(buildItem(1, CINCINNASITE_DIAMOND_SET.get(ToolSlot.SWORD_SLOT)));
+        handItems.add(buildItem(1, NetherEquipmentItems.CINCINNASITE_DIAMOND_SET.get(ToolSlot.SWORD_SLOT)));
         handItems.add(buildItem(1, Items.SHIELD));
 
         ListTag armorItems = new ListTag();
         armorItems.add(buildItem(
                 1,
-                CINCINNASITE_SET.get(ArmorSlot.BOOTS_SLOT),
+                NetherEquipmentItems.CINCINNASITE_SET.get(ArmorSlot.BOOTS_SLOT),
                 Enchantments.PROTECTION
         ));
         armorItems.add(buildItem(
                 1,
-                CINCINNASITE_SET.get(ArmorSlot.LEGGINGS_SLOT),
+                NetherEquipmentItems.CINCINNASITE_SET.get(ArmorSlot.LEGGINGS_SLOT),
                 Enchantments.PROTECTION
         ));
         armorItems.add(buildItem(
                 1,
-                CINCINNASITE_SET.get(ArmorSlot.CHESTPLATE_SLOT),
+                NetherEquipmentItems.CINCINNASITE_SET.get(ArmorSlot.CHESTPLATE_SLOT),
                 Enchantments.PROTECTION,
                 Enchantments.THORNS
         ));
         armorItems.add(buildItem(
                 1,
-                CINCINNASITE_SET.get(ArmorSlot.HELMET_SLOT),
+                NetherEquipmentItems.CINCINNASITE_SET.get(ArmorSlot.HELMET_SLOT),
                 Enchantments.PROTECTION
         ));
 
@@ -411,9 +300,10 @@ public class NetherItems {
         return root;
     }
 
-
     @ApiStatus.Internal
     public static void register() {
-        //NO-OP
+        NetherFoodItems.ensureLoaded();
+        NetherEquipmentItems.ensureLoaded();
+        NetherResourceItems.ensureLoaded();
     }
 }

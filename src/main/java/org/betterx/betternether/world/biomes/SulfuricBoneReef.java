@@ -1,5 +1,7 @@
 package org.betterx.betternether.world.biomes;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
@@ -7,7 +9,7 @@ import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
@@ -38,7 +40,7 @@ public class SulfuricBoneReef extends NetherBiomeConfig {
     @Override
     public void surface(BiomeSurfaceRuleBuilder<NetherBiomeBuilder> builder) {
         super.surface(builder);
-        builder.floor(NetherBlocks.SEPIA_MUSHROOM_GRASS.defaultBlockState());
+        builder.floor(NetherTerrainBlocks.SEPIA_MUSHROOM_GRASS.defaultBlockState());
     }
 
     @Override

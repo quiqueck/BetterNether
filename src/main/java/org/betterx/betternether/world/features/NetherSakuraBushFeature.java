@@ -1,5 +1,8 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
@@ -57,7 +60,7 @@ public class NetherSakuraBushFeature extends ContextFeature<NoneFeatureConfigura
                         setIfAir(
                                 world,
                                 context.POS,
-                                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState()
+                                NetherLeavesBlocks.NETHER_SAKURA_LEAVES.defaultBlockState()
                                                                  .setValue(LeavesBlock.PERSISTENT, true)
                         );
                     }
@@ -65,31 +68,31 @@ public class NetherSakuraBushFeature extends ContextFeature<NoneFeatureConfigura
             }
         }
 
-        BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_NETHER_SAKURA.getBark().defaultBlockState());
+        BlocksHelper.setWithoutUpdate(world, pos, NetherWoodBlocks.MAT_NETHER_SAKURA.getBark().defaultBlockState());
         setIfAir(
                 world,
                 pos.above(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+                NetherLeavesBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
         );
         setIfAir(
                 world,
                 pos.north(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+                NetherLeavesBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
         );
         setIfAir(
                 world,
                 pos.south(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+                NetherLeavesBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
         );
         setIfAir(
                 world,
                 pos.east(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+                NetherLeavesBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
         );
         setIfAir(
                 world,
                 pos.west(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+                NetherLeavesBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
         );
 
         return true;

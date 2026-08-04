@@ -3,8 +3,8 @@ package org.betterx.betternether.registry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.world.structures.city.CityStructure;
 import org.betterx.betternether.world.structures.templates.*;
-import org.betterx.wover.structure.api.StructureKey;
-import org.betterx.wover.structure.api.StructureManager;
+import de.ambertation.wover.structure.api.StructureKey;
+import de.ambertation.wover.structure.api.StructureManager;
 
 import net.minecraft.world.level.levelgen.GenerationStep;
 

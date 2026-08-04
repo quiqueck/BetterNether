@@ -2,17 +2,14 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.blocks.BasePlantBlock;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -79,12 +76,8 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass {
 abstract class BaseBlockNetherGrass extends BasePlantBlock {
     private static final VoxelShape SHAPE = box(4, 0, 4, 14, 12, 14);
 
-    public BaseBlockNetherGrass() {
-        super(Materials.makeNetherGrass(MapColor.TERRACOTTA_GRAY).offsetType(Block.OffsetType.XZ));
-    }
-
     public BaseBlockNetherGrass(BlockBehaviour.Properties settings) {
-        super(Materials.makeNetherGrass(settings, MapColor.TERRACOTTA_GRAY));
+        super(settings);
     }
 
     @Environment(EnvType.CLIENT)
@@ -117,10 +110,6 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock {
 
 
     public static class OnEverything extends BaseBlockNetherGrass {
-        public OnEverything() {
-            super();
-        }
-
         public OnEverything(BlockBehaviour.Properties settings) {
             super(settings);
         }

@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -12,13 +11,12 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 
 public class BlockWhisperingGourdLantern extends Block {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockWhisperingGourdLantern(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_BLUE).lightLevel(s -> 15));
+        super(settings);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

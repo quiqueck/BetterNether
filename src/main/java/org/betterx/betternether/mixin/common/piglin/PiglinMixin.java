@@ -1,9 +1,11 @@
 package org.betterx.betternether.mixin.common.piglin;
 
+import org.betterx.betternether.registry.item.NetherEquipmentItems;
+
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.items.complex.NetherSet;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.wover.complex.api.equipment.ArmorSlot;
+import de.ambertation.wover.complex.api.equipment.ArmorSlot;
 
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -42,9 +44,9 @@ public abstract class PiglinMixin {
             int random = randomSource.nextInt(100);
             NetherSet set = null;
 
-            if (random < 2) set = NetherItems.FLAMING_RUBY_SET;
-            else if (random < 10) set = NetherItems.NETHER_RUBY_SET;
-            else if (random < 30) set = NetherItems.CINCINNASITE_SET;
+            if (random < 2) set = NetherEquipmentItems.FLAMING_RUBY_SET;
+            else if (random < 10) set = NetherEquipmentItems.NETHER_RUBY_SET;
+            else if (random < 30) set = NetherEquipmentItems.CINCINNASITE_SET;
 
             if (set != null) {
                 this.maybeWearArmor(EquipmentSlot.HEAD, new ItemStack((Item) set.get(ArmorSlot.HELMET_SLOT)), randomSource);

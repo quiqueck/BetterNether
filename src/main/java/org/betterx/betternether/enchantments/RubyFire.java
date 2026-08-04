@@ -2,7 +2,7 @@ package org.betterx.betternether.enchantments;
 
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEnchantments;
-import org.betterx.wover.tag.api.predefined.CommonBlockTags;
+import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

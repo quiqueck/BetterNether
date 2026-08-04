@@ -1,16 +1,18 @@
 package org.betterx.betternether.registry.features.configured;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.NetherSakuraBushFeature;
 import org.betterx.betternether.world.features.WillowBushFeature;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.feature.api.configured.ConfiguredFeatureKey;
-import org.betterx.wover.feature.api.configured.ConfiguredFeatureManager;
-import org.betterx.wover.feature.api.configured.configurators.*;
-import org.betterx.wover.state.api.WorldState;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.feature.api.configured.ConfiguredFeatureKey;
+import de.ambertation.wover.feature.api.configured.ConfiguredFeatureManager;
+import de.ambertation.wover.feature.api.configured.configurators.*;
+import de.ambertation.wover.state.api.WorldState;
 
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -96,13 +98,13 @@ public class NetherVegetation {
             ConfiguredFeatureManager.simple(C.id("patch_moss_cover"));
 
     public static void setupBonemealFeatures() {
-        NetherBlocks.NETHERRACK_MOSS.setVegetationFeature(() -> BONEMEAL_NETHERRACK_MOSS.getHolder(WorldState.registryAccess()));
-        NetherBlocks.NETHER_MYCELIUM.setVegetationFeature(() -> BONEMEAL_NETHER_MYCELIUM.getHolder(WorldState.registryAccess()));
-        NetherBlocks.JUNGLE_GRASS.setVegetationFeature(() -> BONEMEAL_JUNGLE_GRASS.getHolder(WorldState.registryAccess()));
-        NetherBlocks.MUSHROOM_GRASS.setVegetationFeature(() -> BONEMEAL_MUSHROOM_GRASS.getHolder(WorldState.registryAccess()));
-        NetherBlocks.SEPIA_MUSHROOM_GRASS.setVegetationFeature(() -> BONEMEAL_SEPIA_MUSHROOM_GRASS.getHolder(WorldState.registryAccess()));
-        NetherBlocks.SWAMPLAND_GRASS.setVegetationFeature(() -> BONEMEAL_SWAMPLAND_GRASS.getHolder(WorldState.registryAccess()));
-        NetherBlocks.CEILING_MUSHROOMS.setVegetationFeature(() -> BONEMEAL_CEILING_MUSHROOMS.getHolder(WorldState.registryAccess()));
+        NetherTerrainBlocks.NETHERRACK_MOSS.setVegetationFeature(() -> BONEMEAL_NETHERRACK_MOSS.getHolder(WorldState.registryAccess()));
+        NetherTerrainBlocks.NETHER_MYCELIUM.setVegetationFeature(() -> BONEMEAL_NETHER_MYCELIUM.getHolder(WorldState.registryAccess()));
+        NetherTerrainBlocks.JUNGLE_GRASS.setVegetationFeature(() -> BONEMEAL_JUNGLE_GRASS.getHolder(WorldState.registryAccess()));
+        NetherTerrainBlocks.MUSHROOM_GRASS.setVegetationFeature(() -> BONEMEAL_MUSHROOM_GRASS.getHolder(WorldState.registryAccess()));
+        NetherTerrainBlocks.SEPIA_MUSHROOM_GRASS.setVegetationFeature(() -> BONEMEAL_SEPIA_MUSHROOM_GRASS.getHolder(WorldState.registryAccess()));
+        NetherTerrainBlocks.SWAMPLAND_GRASS.setVegetationFeature(() -> BONEMEAL_SWAMPLAND_GRASS.getHolder(WorldState.registryAccess()));
+        NetherTerrainBlocks.CEILING_MUSHROOMS.setVegetationFeature(() -> BONEMEAL_CEILING_MUSHROOMS.getHolder(WorldState.registryAccess()));
 
         BonemealAPI.INSTANCE.addSpreadableFeatures(Blocks.SOUL_SOIL, () -> BONEMEAL_SOUL_SOIL.getHolder(WorldState.registryAccess()));
         BonemealAPI.INSTANCE.addSpreadableFeatures(Blocks.SOUL_SAND, () -> BONEMEAL_SOUL_SOIL.getHolder(WorldState.registryAccess()));

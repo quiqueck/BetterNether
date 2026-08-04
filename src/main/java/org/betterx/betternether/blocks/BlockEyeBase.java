@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+import org.betterx.betternether.registry.block.NetherVineBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -17,10 +20,9 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockEyeBase extends BlockBase {
+public class BlockEyeBase extends Block {
     public BlockEyeBase(Properties settings) {
         super(settings);
-        setDropItself(false);
     }
 
     public boolean allowsSpawning(BlockState state, BlockGetter view, BlockPos pos, EntityType<?> type) {
@@ -39,16 +41,20 @@ public class BlockEyeBase extends BlockBase {
             RandomSource randomSource
     ) {
         BlockPos blockPos = pos.above();
-        Block up = world.getBlockState(blockPos).getBlock();
-        if (up != NetherBlocks.EYE_VINE && up != Blocks.NETHERRACK)
-            return Blocks.AIR.defaultBlockState();
-        else
+        BlockState above = world.getBlockState(blockPos);
+        // Decoration rule (superset of the former eye-vine/netherrack whitelist): the block above must be an
+        // eye vine (the plant's own stem) or any solid/leaves ceiling. NETHERRACK is a sturdy solid, so the
+        // old worldgen anchor still passes.
+        if (above.is(NetherVineBlocks.EYE_VINE) || org.betterx.bclib.util.BlocksHelper.isDecorationSupport(
+                world, blockPos, above, Direction.DOWN))
             return state;
+        else
+            return Blocks.AIR.defaultBlockState();
     }
 
     @Override
     @Environment(EnvType.CLIENT)
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
-        return new ItemStack(NetherBlocks.EYE_SEED);
+        return new ItemStack(NetherPlantBlocks.EYE_SEED);
     }
 }

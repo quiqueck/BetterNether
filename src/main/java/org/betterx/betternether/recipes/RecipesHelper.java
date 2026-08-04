@@ -21,13 +21,13 @@ public class RecipesHelper {
     private static final String[] SHAPE_ROUND = new String[]{"###", "# #", "###"};
     private static final String[] SHAPE_FIRE_BOWL = new String[]{"#I#", " # ", "L L"};
 
-    public interface RecipeBuilder extends Consumer<org.betterx.wover.recipe.api.RecipeBuilder.Templates> {
+    public interface RecipeBuilder extends Consumer<de.ambertation.wover.recipe.api.RecipeBuilder.Templates> {
     }
 
     private static final List<RecipeBuilder> RECIPES = new LinkedList<>();
 
     @ApiStatus.Internal
-    public static void provideRecipes(org.betterx.wover.recipe.api.RecipeBuilder.Templates t) {
+    public static void provideRecipes(de.ambertation.wover.recipe.api.RecipeBuilder.Templates t) {
         RECIPES.forEach(r -> r.accept(t));
     }
 

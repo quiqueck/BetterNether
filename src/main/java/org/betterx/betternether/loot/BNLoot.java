@@ -1,5 +1,7 @@
 package org.betterx.betternether.loot;
 
+import org.betterx.betternether.registry.block.NetherObsidianBlocks;
+
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTemplates;
@@ -38,7 +40,7 @@ public class BNLoot {
         LootTableEvents.MODIFY.register((id, table, source) -> {
             if (BuiltInLootTables.RUINED_PORTAL.equals(id) || BuiltInLootTables.NETHER_BRIDGE.equals(id)) {
                 table.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0, 4))
-                                       .add(LootItem.lootTableItem(NetherBlocks.BLUE_OBSIDIAN.asItem())
+                                       .add(LootItem.lootTableItem(NetherObsidianBlocks.BLUE_OBSIDIAN.asItem())
                                                     .setWeight(1)
                                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(
                                                             1.0F,
@@ -55,20 +57,20 @@ public class BNLoot {
                     id)) {
                 table.withPool(LootPool.lootPool()
                                        .setRolls(UniformGenerator.between(1, 2))
-                                       .add(LootItem.lootTableItem(NetherBlocks.BLUE_CRYING_OBSIDIAN.asItem())
+                                       .add(LootItem.lootTableItem(NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN.asItem())
                                                     .setWeight(5)
                                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(
                                                             3.0F,
                                                             8.0F
                                                     ))))
                                        .add(LootItem
-                                               .lootTableItem(NetherBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
+                                               .lootTableItem(NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
                                                .setWeight(1)
                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(
                                                        1.0F,
                                                        4.0F
                                                ))))
-                                       .add(LootItem.lootTableItem(NetherBlocks.WEEPING_OBSIDIAN.asItem())
+                                       .add(LootItem.lootTableItem(NetherObsidianBlocks.WEEPING_OBSIDIAN.asItem())
                                                     .setWeight(1)
                                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(
                                                             1.0F,
@@ -84,26 +86,26 @@ public class BNLoot {
             } else if (BuiltInLootTables.BASTION_OTHER.equals(id)) {
                 table.withPool(LootPool.lootPool()
                                        .setRolls(UniformGenerator.between(1, 2))
-                                       .add(LootItem.lootTableItem(NetherBlocks.BLUE_OBSIDIAN.asItem())
+                                       .add(LootItem.lootTableItem(NetherObsidianBlocks.BLUE_OBSIDIAN.asItem())
                                                     .setWeight(10)
                                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(
                                                             4.0F,
                                                             6.0F
                                                     ))))
-                                       .add(LootItem.lootTableItem(NetherBlocks.BLUE_CRYING_OBSIDIAN.asItem())
+                                       .add(LootItem.lootTableItem(NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN.asItem())
                                                     .setWeight(5)
                                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(
                                                             1.0F,
                                                             5.0F
                                                     ))))
                                        .add(LootItem
-                                               .lootTableItem(NetherBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
+                                               .lootTableItem(NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
                                                .setWeight(1)
                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(
                                                        1.0F,
                                                        2.0F
                                                ))))
-                                       .add(LootItem.lootTableItem(NetherBlocks.WEEPING_OBSIDIAN.asItem())
+                                       .add(LootItem.lootTableItem(NetherObsidianBlocks.WEEPING_OBSIDIAN.asItem())
                                                     .setWeight(1)
                                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(
                                                             1.0F,
@@ -122,10 +124,10 @@ public class BNLoot {
                 // would hand out an extra stack on every barter).
                 table.modifyPools(pool -> pool
                         .add(LootItem
-                                .lootTableItem(NetherBlocks.BLUE_OBSIDIAN.asItem())
+                                .lootTableItem(NetherObsidianBlocks.BLUE_OBSIDIAN.asItem())
                                 .setWeight(40))
                         .add(LootItem
-                                .lootTableItem(NetherBlocks.BLUE_CRYING_OBSIDIAN.asItem())
+                                .lootTableItem(NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN.asItem())
                                 .setWeight(40)
                                 .apply(SetItemCountFunction.setCount(
                                         UniformGenerator.between(
@@ -133,7 +135,7 @@ public class BNLoot {
                                                 3.0F
                                         ))))
                         .add(LootItem
-                                .lootTableItem(NetherBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
+                                .lootTableItem(NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
                                 .setWeight(20)
                                 .apply(SetItemCountFunction.setCount(
                                         UniformGenerator.between(
@@ -141,7 +143,7 @@ public class BNLoot {
                                                 2.0F
                                         ))))
                         .add(LootItem
-                                .lootTableItem(NetherBlocks.WEEPING_OBSIDIAN.asItem())
+                                .lootTableItem(NetherObsidianBlocks.WEEPING_OBSIDIAN.asItem())
                                 .setWeight(20)
                                 .apply(SetItemCountFunction.setCount(
                                         UniformGenerator.between(

@@ -1,15 +1,18 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BN;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
-import org.betterx.wover.block.api.predicate.BlockPredicates;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
-import org.betterx.wover.feature.api.features.config.PillarFeatureConfig;
+import de.ambertation.wover.block.api.predicate.BlockPredicates;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
+import de.ambertation.wover.feature.api.features.config.PillarFeatureConfig;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -35,7 +38,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .transformer(PillarFeatureConfig.KnownTransformers.TRIPLE_SHAPE_FILL)
                 .direction(Direction.UP)
-                .blockState(NetherBlocks.MAT_STALAGNATE.getTrunk())
+                .blockState(NetherWoodBlocks.MAT_STALAGNATE.getTrunk())
                 .minHeight(3)
                 .maxHeight(64)
                 .register();
@@ -44,7 +47,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .transformer(PillarFeatureConfig.KnownTransformers.TRIPLE_SHAPE_FILL)
                 .direction(Direction.DOWN)
-                .blockState(NetherBlocks.MAT_STALAGNATE.getTrunk())
+                .blockState(NetherWoodBlocks.MAT_STALAGNATE.getTrunk())
                 .minHeight(3)
                 .maxHeight(64)
                 .register();
@@ -52,14 +55,14 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
         NetherTrees.GIANT_MOLD
                 .bootstrap(ctx)
                 .direction(Direction.UP)
-                .addTripleShape(NetherBlocks.GIANT_MOLD.defaultBlockState(), ClampedNormalInt.of(5, 1.3f, 3, 8))
+                .addTripleShape(NetherMushroomBlocks.GIANT_MOLD.defaultBlockState(), ClampedNormalInt.of(5, 1.3f, 3, 8))
                 .register();
 
         NetherTrees.PATCH_BIG_RED_MUSHROOM
                 .bootstrap(ctx)
                 .direction(Direction.UP)
                 .prioritizeTip()
-                .addTripleShape(NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState(), ClampedNormalInt.of(6, 2.1f, 3, 9))
+                .addTripleShape(NetherMushroomBlocks.RED_LARGE_MUSHROOM.defaultBlockState(), ClampedNormalInt.of(6, 2.1f, 3, 9))
                 .inlinePlace()
                 .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
                 .inRandomPatch()

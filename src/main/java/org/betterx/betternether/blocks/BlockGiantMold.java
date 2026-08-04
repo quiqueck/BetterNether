@@ -1,9 +1,11 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.block.NetherSaplingBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.block.api.BlockProperties;
-import org.betterx.wover.block.api.BlockProperties.TripleShape;
+import de.ambertation.wover.block.api.BlockProperties;
+import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,7 +17,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
@@ -24,14 +25,17 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockGiantMold extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. setDropItself(false) is gone too - it only ever made the block fall through to the
+// vanilla loot-table-driven getDrops(), which is what happens by default once the class no longer extends
+// BlockBase.
+public class BlockGiantMold extends Block {
     private static final VoxelShape TOP_SHAPE = box(2, 2, 2, 14, 14, 14);
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockGiantMold(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_GRAY).noOcclusion().strength(1));
-        this.setDropItself(false);
+        super(settings);
     }
 
     @Override
@@ -49,8 +53,8 @@ public class BlockGiantMold extends BlockBaseNotFull {
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         TripleShape shape = state.getValue(SHAPE);
         return shape == TripleShape.TOP
-                ? new ItemStack(NetherBlocks.GIANT_MOLD_SAPLING)
-                : new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem());
+                ? new ItemStack(NetherSaplingBlocks.GIANT_MOLD_SAPLING)
+                : new ItemStack(NetherWoodBlocks.MAT_NETHER_MUSHROOM.getStem());
     }
 
     @Override

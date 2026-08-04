@@ -6,9 +6,9 @@ import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
-import org.betterx.wover.surface.api.Conditions;
-import org.betterx.wover.surface.impl.BaseSurfaceRuleBuilder;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.surface.api.Conditions;
+import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;

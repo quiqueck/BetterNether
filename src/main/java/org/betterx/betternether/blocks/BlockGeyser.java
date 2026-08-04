@@ -1,6 +1,8 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.wover.tag.api.predefined.CommonBlockTags;
+import org.betterx.betternether.registry.block.NetherDecorBlocks;
+
+import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -24,11 +27,16 @@ import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockGeyser extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12, KEEP per plan - genuine block-entity-adjacent behaviour, not
+// dissolved): its dead canSuffocate/isSimpleFullBlock/allowsSpawning overrides are gone; lightLevel()/
+// noOcclusion() move to the registration site (NetherDecorBlocks.GEYSER). Always dropped itself unconditionally
+// via BlockBase's inherited getDrops() override (no loot table json was generated for it), reproduced
+// explicitly as NetherLoot.dropSelfNoExplosion().
+public class BlockGeyser extends Block {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 4, 15);
 
     public BlockGeyser(BlockBehaviour.Properties settings) {
-        super(settings.lightLevel(state -> 10).noOcclusion());
+        super(settings);
     }
 
     @Override

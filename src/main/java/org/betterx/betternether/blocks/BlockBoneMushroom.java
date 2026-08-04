@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +21,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
@@ -30,7 +28,11 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockBoneMushroom extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. setDropItself(false) is gone too - it only ever made the block fall through to the
+// vanilla loot-table-driven getDrops(), which is what happens by default once the class no longer extends
+// BlockBase.
+public class BlockBoneMushroom extends Block {
     private static final VoxelShape SHAPE_NORTH = box(1, 1, 8, 15, 15, 16);
     private static final VoxelShape SHAPE_SOUTH = box(1, 1, 0, 15, 15, 8);
     private static final VoxelShape SHAPE_WEST = box(8, 1, 1, 16, 15, 15);
@@ -40,11 +42,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull {
     public static final IntegerProperty AGE = BlockProperties.AGE_THREE;
 
     public BlockBoneMushroom(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
-                .mapColor(MapColor.COLOR_LIGHT_GREEN)
-                .randomTicks()
-        );
-        this.setDropItself(false);
+        super(settings);
         this.registerDefaultState(getStateDefinition().any().setValue(AGE, 0).setValue(FACING, Direction.UP));
     }
 

@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.blocks.NetherRender;
@@ -13,27 +15,28 @@ import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.bclib.trait.block.WeightedCrossModelTrait;
-import org.betterx.wover.block.api.trait.BlockRecipeTrait;
-import org.betterx.wover.block.api.trait.BlockTraitLookup;
-import org.betterx.wover.block.api.trait.BlockTraits;
-import org.betterx.wover.recipe.api.RecipeBuilder;
-import org.betterx.wover.sets.api.blocks.BlockSet;
-import org.betterx.wover.sets.api.blocks.SlotMap;
-import org.betterx.wover.sets.api.blocks.types.Log;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockRecipeTrait;
+import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.block.api.trait.BlockTraits;
+import de.ambertation.wover.recipe.api.RecipeBuilder;
+import de.ambertation.wover.sets.api.blocks.BlockSet;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.types.Log;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.model.ModelTraitLibrary;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
     public StalagnateMaterial() {
         super("stalagnate", MapColor.TERRACOTTA_LIGHT_GREEN, MapColor.TERRACOTTA_LIGHT_GREEN);
-        setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
+        setFurnitureCloth(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override
@@ -44,7 +47,7 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                     .add(new Stem() {
                         @Environment(EnvType.CLIENT)
                         @Override
-                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
                             return ModelTraitLibrary.externalModelDelegatedItem(
                                     () -> BetterNether.C.mk("block/stalagnate_stem_1")
                             );
@@ -63,10 +66,15 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                                     WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("item/stalagnate_seed"))
                             )
                     ))
+                    // BlockStalagnateBowl (WP6.12): noOcclusion() moved out of its constructor (R1) to this
+                    // slot's extraProperties - there is no BlockDefinition at this call site to chain a
+                    // setter onto directly (SimpleBlockSlot builds it later), so this is the visible
+                    // equivalent of the former NetherProps.noOcclusion() trait.
                     .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.BOWL,
                             (set, props) -> new BlockStalagnateBowl(props),
-                            NetherRender.cutout()
+                            NetherRender.cutout(),
+                            def -> def.noOcclusion()
                     ))
                     .replace(new NetherWoodSlots.Log(true) {
                         @Override

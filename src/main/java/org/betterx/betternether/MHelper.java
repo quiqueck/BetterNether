@@ -60,6 +60,15 @@ public class MHelper {
 
     public static final float PI2 = (float) (Math.PI * 2);
     private static final int ALPHA = 255 << 24;
+    /**
+     * @deprecated Never use this for anything the world is built from. It is backed by
+     * {@link ThreadLocalRandom}, which carries no seed of its own, refuses to be given one
+     * ({@link ThreadLocalRandom#setSeed(long)} throws) and hands a different stream to every thread and
+     * every start of the game. Whatever it decides can therefore never be decided the same way twice, so
+     * the same world seed cannot rebuild the same world. Seed a {@link RandomSource} from the position
+     * instead, the way the surface providers in {@code world.biomes.providers} now do.
+     */
+    @Deprecated(forRemoval = true)
     public static final RandomSource RANDOM = new ThreadLocalRandomSource();
 
     public static int color(int r, int g, int b) {

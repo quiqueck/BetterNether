@@ -1,6 +1,13 @@
 package org.betterx.betternether.world.structures.city.palette;
 
-import org.betterx.wover.sets.api.blocks.SlotType;
+import org.betterx.betternether.registry.block.NetherDecorBlocks;
+import org.betterx.betternether.registry.block.NetherGlassBlocks;
+import org.betterx.betternether.registry.block.NetherLightBlocks;
+import org.betterx.betternether.registry.block.NetherMetalBlocks;
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
+import de.ambertation.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -17,75 +24,75 @@ public class Palettes {
     public static final CityPalette EMPTY = register(new CityPalette("empty"));
 
     public static final CityPalette RED = register(new CityPalette("red")
-            .addRoofBlocks(NetherBlocks.MAT_WART.getBlock(NetherSlots.ROOF))
-            .addRoofSlabs(NetherBlocks.MAT_WART.getBlock(NetherSlots.ROOF_SLAB))
-            .addRoofStairs(NetherBlocks.MAT_WART.getBlock(NetherSlots.ROOF_STAIRS))
-            .addPlanksBlocks(NetherBlocks.MAT_WART.getPlanks())
-            .addPlanksSlabs(NetherBlocks.MAT_WART.getSlab())
-            .addPlanksStairs(NetherBlocks.MAT_WART.getBlock(
+            .addRoofBlocks(NetherWoodBlocks.MAT_WART.getBlock(NetherSlots.ROOF))
+            .addRoofSlabs(NetherWoodBlocks.MAT_WART.getBlock(NetherSlots.ROOF_SLAB))
+            .addRoofStairs(NetherWoodBlocks.MAT_WART.getBlock(NetherSlots.ROOF_STAIRS))
+            .addPlanksBlocks(NetherWoodBlocks.MAT_WART.getPlanks())
+            .addPlanksSlabs(NetherWoodBlocks.MAT_WART.getSlab())
+            .addPlanksStairs(NetherWoodBlocks.MAT_WART.getBlock(
                     SlotType.STAIRS))
-            .addFences(NetherBlocks.MAT_WART.getBlock(
+            .addFences(NetherWoodBlocks.MAT_WART.getBlock(
                     SlotType.FENCE))
-            .addGates(NetherBlocks.MAT_WART.getBlock(
+            .addGates(NetherWoodBlocks.MAT_WART.getBlock(
                     SlotType.GATE))
-            .addWalls(NetherBlocks.NETHER_BRICK_WALL)
+            .addWalls(NetherStoneBlocks.NETHER_BRICK_WALL)
             .addLogs(
-                    NetherBlocks.MAT_WART.getLog(),
-                    NetherBlocks.MAT_WILLOW.getBlock(SlotType.LOG),
-                    NetherBlocks.MAT_WART.getStrippedLog()
+                    NetherWoodBlocks.MAT_WART.getLog(),
+                    NetherWoodBlocks.MAT_WILLOW.getBlock(SlotType.LOG),
+                    NetherWoodBlocks.MAT_WART.getStrippedLog()
             )
             .addBark(
-                    NetherBlocks.MAT_WART.getBark(),
-                    NetherBlocks.MAT_WILLOW.getBlock(SlotType.BARK),
-                    NetherBlocks.MAT_WART.getStrippedBark()
+                    NetherWoodBlocks.MAT_WART.getBark(),
+                    NetherWoodBlocks.MAT_WILLOW.getBlock(SlotType.BARK),
+                    NetherWoodBlocks.MAT_WART.getStrippedBark()
             )
             .addStoneBlocks(
                     Blocks.NETHER_BRICKS,
                     Blocks.NETHER_WART_BLOCK,
-                    NetherBlocks.NETHER_BRICK_TILE_LARGE,
-                    NetherBlocks.NETHER_BRICK_TILE_SMALL
+                    NetherStoneBlocks.NETHER_BRICK_TILE_LARGE,
+                    NetherStoneBlocks.NETHER_BRICK_TILE_SMALL
             )
             .addStoneSlabs(
                     Blocks.NETHER_BRICK_SLAB,
-                    NetherBlocks.NETHER_BRICK_TILE_SLAB
+                    NetherStoneBlocks.NETHER_BRICK_TILE_SLAB
             )
             .addStoneStairs(
                     Blocks.NETHER_BRICK_STAIRS,
-                    NetherBlocks.NETHER_BRICK_TILE_STAIRS
+                    NetherStoneBlocks.NETHER_BRICK_TILE_STAIRS
             )
             .addGlowingBlocks(
                     Blocks.GLOWSTONE,
-                    NetherBlocks.CINCINNASITE_LANTERN
+                    NetherLightBlocks.CINCINNASITE_LANTERN
             )
             .addCeilingLights(
                     Blocks.LANTERN,
-                    NetherBlocks.CINCINNASITE_LANTERN_SMALL
+                    NetherLightBlocks.CINCINNASITE_LANTERN_SMALL
             )
             .addWallLights(
                     Blocks.WALL_TORCH,
-                    NetherBlocks.CINCINNASITE_LANTERN_SMALL
+                    NetherLightBlocks.CINCINNASITE_LANTERN_SMALL
             )
             .addFloorLights(
                     Blocks.TORCH,
-                    NetherBlocks.CINCINNASITE_LANTERN_SMALL
+                    NetherLightBlocks.CINCINNASITE_LANTERN_SMALL
             )
-            .addDoors(NetherBlocks.MAT_WART.getBlock(
+            .addDoors(NetherWoodBlocks.MAT_WART.getBlock(
                     SlotType.DOOR))
-            .addTrapdoors(NetherBlocks.MAT_WART.getBlock(
+            .addTrapdoors(NetherWoodBlocks.MAT_WART.getBlock(
                     SlotType.TRAPDOOR))
             .addGlassBlocks(
-                    NetherBlocks.QUARTZ_GLASS_FRAMED_COLORED.red,
-                    NetherBlocks.QUARTZ_GLASS_COLORED.red,
-                    NetherBlocks.CINCINNASITE_FRAME
+                    NetherGlassBlocks.QUARTZ_GLASS_FRAMED_COLORED.red,
+                    NetherGlassBlocks.QUARTZ_GLASS_COLORED.red,
+                    NetherDecorBlocks.CINCINNASITE_FRAME
             )
             .addGlassPanes(
-                    NetherBlocks.QUARTZ_GLASS_FRAMED_PANE_COLORED.red,
-                    NetherBlocks.QUARTZ_GLASS_PANE_COLORED.red,
-                    NetherBlocks.CINCINNASITE_BARS
+                    NetherGlassBlocks.QUARTZ_GLASS_FRAMED_PANE_COLORED.red,
+                    NetherGlassBlocks.QUARTZ_GLASS_PANE_COLORED.red,
+                    NetherMetalBlocks.CINCINNASITE_BARS
             )
-            .addWoodPlates(NetherBlocks.MAT_WART.getBlock(
+            .addWoodPlates(NetherWoodBlocks.MAT_WART.getBlock(
                     SlotType.PRESSURE_PLATE))
-            .addPotsPanes(NetherBlocks.BRICK_POT));
+            .addPotsPanes(NetherDecorBlocks.BRICK_POT));
 
     private static CityPalette register(CityPalette palette) {
         REGISTRY.put(palette.getName(), palette);

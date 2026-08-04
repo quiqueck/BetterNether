@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherObsidianBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherParticles;
 
@@ -13,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlueCryingObsidianBlock extends BNObsidianBase {
     public BlueCryingObsidianBlock(BlockBehaviour.Properties settings) {
-        super(settings, NetherBlocks.BLUE_WEEPING_OBSIDIAN);
+        super(settings, NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN);
     }
 
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource random) {

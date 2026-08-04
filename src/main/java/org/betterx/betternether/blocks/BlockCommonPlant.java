@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,22 +16,18 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public abstract class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. setDropItself(false) is gone too - it only ever made the block fall through to the
+// vanilla loot-table-driven getDrops(), which is what happens by default once the class no longer extends
+// BlockBase. Its eight subclasses (BlockEggPlant, BlockFeatherFern, BlockInkBush, BlockMagmaFlower,
+// BlockOrangeMushroom, BlockBarrelCactus, BlockBlackApple, BlockAgave) inherit the new parent unchanged.
+public abstract class BlockCommonPlant extends Block implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockProperties.AGE;
 
-    public BlockCommonPlant(MapColor color) {
-        this(Materials.NETHER_PLANT
-                .mapColor(color)
-                .randomTicks()
-        );
-    }
-
     public BlockCommonPlant(Properties settings) {
-        super(settings.randomTicks());
-        this.setDropItself(false);
+        super(settings);
     }
 
     public int getMaxAge() {

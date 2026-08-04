@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
-import org.betterx.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import de.ambertation.wover.block.api.trait.BlockTrait;
 
 import java.util.ArrayList;
 import java.util.Collections;

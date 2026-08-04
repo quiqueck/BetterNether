@@ -1,14 +1,12 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -17,11 +15,7 @@ public class BlockFeatherFern extends BlockCommonPlant {
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
     public BlockFeatherFern(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
-                .mapColor(MapColor.COLOR_LIGHT_BLUE)
-                .randomTicks()
-                .offsetType(Block.OffsetType.XZ)
-        );
+        super(settings);
     }
 
     @Override

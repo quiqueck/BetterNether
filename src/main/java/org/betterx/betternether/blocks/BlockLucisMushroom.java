@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BNBlockProperties.EnumLucisShape;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
@@ -17,31 +17,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import com.google.common.collect.Lists;
-
-import java.util.List;
-
-public class BlockLucisMushroom extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. The class carried its own getDrops() override, so BlockBase's dropItself mechanism was
+// never in play; that override has since been replaced by a NetherLoot.lucisMushroom() trait on the registration.
+public class BlockLucisMushroom extends Block {
     private static final VoxelShape V_SHAPE = box(0, 0, 0, 16, 9, 16);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<EnumLucisShape> SHAPE = BNBlockProperties.LUCIS_SHAPE;
 
     public BlockLucisMushroom(Properties settings) {
-        super(Materials
-                .walkablePlant(settings, MapColor.COLOR_YELLOW)
-                .lightLevel((bs) -> 15)
-                .requiresCorrectToolForDrops()
-                .sound(SoundType.WOOD)
-                .strength(1F)
-        );
+        super(settings);
         this.registerDefaultState(getStateDefinition().any()
                                                       .setValue(FACING, Direction.NORTH)
                                                       .setValue(SHAPE, EnumLucisShape.CORNER));
@@ -54,14 +45,6 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
         return V_SHAPE;
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        return Lists.newArrayList(
-                new ItemStack(NetherBlocks.LUCIS_SPORE),
-                new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(2, 4, MHelper.RANDOM))
-        );
     }
 
     @Override
@@ -92,6 +75,6 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
     @Override
     @Environment(EnvType.CLIENT)
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
-        return new ItemStack(NetherBlocks.LUCIS_SPORE);
+        return new ItemStack(NetherMushroomBlocks.LUCIS_SPORE);
     }
 }

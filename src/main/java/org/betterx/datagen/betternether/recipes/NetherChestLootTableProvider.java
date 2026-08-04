@@ -1,14 +1,22 @@
 package org.betterx.datagen.betternether.recipes;
 
+import org.betterx.betternether.registry.block.NetherFunctionalBlocks;
+import org.betterx.betternether.registry.block.NetherMetalBlocks;
+import org.betterx.betternether.registry.block.NetherObsidianBlocks;
+
+import org.betterx.betternether.registry.item.NetherEquipmentItems;
+import org.betterx.betternether.registry.item.NetherFoodItems;
+import org.betterx.betternether.registry.item.NetherResourceItems;
+
 import org.betterx.betternether.loot.BNLoot;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.registry.NetherTemplates;
-import org.betterx.wover.complex.api.equipment.ArmorSlot;
-import org.betterx.wover.complex.api.equipment.EquipmentSet;
-import org.betterx.wover.complex.api.equipment.ToolSlot;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.WoverLootTableProvider;
+import de.ambertation.wover.complex.api.equipment.ArmorSlot;
+import de.ambertation.wover.complex.api.equipment.EquipmentSet;
+import de.ambertation.wover.complex.api.equipment.ToolSlot;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.WoverLootTableProvider;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -93,8 +101,8 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                          .withPool(simpleSwords(enchantments))
                          .withPool(hoes(enchantments))
                          .withPool(flamingTemplate(2, 0.2f))
-                         .withPool(armor(enchantments, NetherItems.NETHER_RUBY_SET, 1, 0.2f))
-                         .withPool(armor(enchantments, NetherItems.CINCINNASITE_SET, 1, 0.2f))
+                         .withPool(armor(enchantments, NetherEquipmentItems.NETHER_RUBY_SET, 1, 0.2f))
+                         .withPool(armor(enchantments, NetherEquipmentItems.CINCINNASITE_SET, 1, 0.2f))
         );
 
 
@@ -104,8 +112,8 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                          .withPool(netherFiller())
                          .withPool(bonusSwords(enchantments, 0.3f))
                          .withPool(flamingTemplate(4, 0.99f))
-                         .withPool(armor(enchantments, NetherItems.NETHER_RUBY_SET, 2, 0.6f))
-                         .withPool(armor(enchantments, NetherItems.FLAMING_RUBY_SET, 1, 0.4f))
+                         .withPool(armor(enchantments, NetherEquipmentItems.NETHER_RUBY_SET, 2, 0.6f))
+                         .withPool(armor(enchantments, NetherEquipmentItems.FLAMING_RUBY_SET, 1, 0.4f))
                          .withPool(superBonusOreLoot())
         );
 
@@ -121,11 +129,11 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 .lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
-                        .lootTableItem(NetherBlocks.NETHER_RUBY_BLOCK)
+                        .lootTableItem(NetherMetalBlocks.NETHER_RUBY_BLOCK)
                         .setWeight(15)
                 )
                 .add(LootItem
-                        .lootTableItem(NetherBlocks.NETHER_RUBY_BLOCK)
+                        .lootTableItem(NetherMetalBlocks.NETHER_RUBY_BLOCK)
                         .setWeight(15)
                 )
                 .add(LootItem
@@ -133,7 +141,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                         .setWeight(3)
                 )
                 .add(LootItem
-                        .lootTableItem(NetherItems.FLAMING_RUBY_SET.get(ArmorSlot.CHESTPLATE_SLOT))
+                        .lootTableItem(NetherEquipmentItems.FLAMING_RUBY_SET.get(ArmorSlot.CHESTPLATE_SLOT))
                         .setWeight(1)
                 )
                 .when(LootItemRandomChanceCondition.randomChance(0.1f));
@@ -192,7 +200,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 )
 
                 .add(LootItem
-                        .lootTableItem(NetherItems.BLACK_APPLE)
+                        .lootTableItem(NetherFoodItems.BLACK_APPLE)
                         .setWeight(40)
                 );
     }
@@ -219,7 +227,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                         .lootTableItem(Blocks.LECTERN)
                         .setWeight(4)
                 ).add(LootItem
-                        .lootTableItem(NetherBlocks.NETHER_BREWING_STAND)
+                        .lootTableItem(NetherFunctionalBlocks.NETHER_BREWING_STAND)
                         .setWeight(2)
                 )
                 .when(LootItemRandomChanceCondition.randomChance(0.7f));
@@ -326,7 +334,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 .lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
-                        .lootTableItem(NetherItems.FLAMING_RUBY_SET.get(ToolSlot.SWORD_SLOT))
+                        .lootTableItem(NetherEquipmentItems.FLAMING_RUBY_SET.get(ToolSlot.SWORD_SLOT))
                         .apply(new EnchantRandomlyFunction.Builder()
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SHARPNESS))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.LOOTING))
@@ -340,13 +348,13 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 .lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
-                        .lootTableItem(NetherItems.NETHER_RUBY_SET.get(ToolSlot.SWORD_SLOT))
+                        .lootTableItem(NetherEquipmentItems.NETHER_RUBY_SET.get(ToolSlot.SWORD_SLOT))
                         .apply(new EnchantRandomlyFunction.Builder()
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SHARPNESS))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.LOOTING))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.MENDING)))
                 ).add(LootItem
-                        .lootTableItem(NetherItems.CINCINNASITE_SET.get(ToolSlot.SWORD_SLOT))
+                        .lootTableItem(NetherEquipmentItems.CINCINNASITE_SET.get(ToolSlot.SWORD_SLOT))
                         .apply(new EnchantRandomlyFunction.Builder()
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SHARPNESS))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.LOOTING))
@@ -360,13 +368,13 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 .lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
-                        .lootTableItem(NetherItems.NETHER_RUBY_SET.get(ToolSlot.HOE_SLOT))
+                        .lootTableItem(NetherEquipmentItems.NETHER_RUBY_SET.get(ToolSlot.HOE_SLOT))
                         .apply(new EnchantRandomlyFunction.Builder()
                                 .withEnchantment(lookup.getOrThrow(Enchantments.EFFICIENCY))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SILK_TOUCH))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.UNBREAKING)))
                 ).add(LootItem
-                        .lootTableItem(NetherItems.CINCINNASITE_SET.get(ToolSlot.HOE_SLOT))
+                        .lootTableItem(NetherEquipmentItems.CINCINNASITE_SET.get(ToolSlot.HOE_SLOT))
                         .apply(new EnchantRandomlyFunction.Builder()
                                 .withEnchantment(lookup.getOrThrow(Enchantments.EFFICIENCY))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SILK_TOUCH))
@@ -384,14 +392,14 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                         .setWeight(8)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)))
                 ).add(LootItem
-                        .lootTableItem(NetherItems.FLAMING_RUBY_SET.get(ToolSlot.PICKAXE_SLOT))
+                        .lootTableItem(NetherEquipmentItems.FLAMING_RUBY_SET.get(ToolSlot.PICKAXE_SLOT))
                         .apply(new EnchantRandomlyFunction.Builder()
                                 .withEnchantment(lookup.getOrThrow(Enchantments.EFFICIENCY))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SILK_TOUCH))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.UNBREAKING)))
                         .setWeight(1)
                 ).add(LootItem
-                        .lootTableItem(NetherItems.NETHER_RUBY_SET.get(ToolSlot.PICKAXE_SLOT))
+                        .lootTableItem(NetherEquipmentItems.NETHER_RUBY_SET.get(ToolSlot.PICKAXE_SLOT))
                         .apply(new EnchantRandomlyFunction.Builder()
                                 .withEnchantment(lookup.getOrThrow(Enchantments.EFFICIENCY))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SILK_TOUCH))
@@ -427,7 +435,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                         .setWeight(9)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 8)))
                 ).add(LootItem
-                        .lootTableItem(NetherBlocks.BLUE_OBSIDIAN)
+                        .lootTableItem(NetherObsidianBlocks.BLUE_OBSIDIAN)
                         .setWeight(9)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 8)))
                 ).add(LootItem
@@ -435,15 +443,15 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                         .setWeight(3)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 ).add(LootItem
-                        .lootTableItem(NetherBlocks.BLUE_CRYING_OBSIDIAN)
+                        .lootTableItem(NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN)
                         .setWeight(3)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 ).add(LootItem
-                        .lootTableItem(NetherBlocks.WEEPING_OBSIDIAN)
+                        .lootTableItem(NetherObsidianBlocks.WEEPING_OBSIDIAN)
                         .setWeight(1)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 ).add(LootItem
-                        .lootTableItem(NetherBlocks.BLUE_WEEPING_OBSIDIAN)
+                        .lootTableItem(NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN)
                         .setWeight(1)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 );
@@ -486,7 +494,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)))
                 )
                 .add(LootItem
-                        .lootTableItem(NetherItems.NETHER_RUBY)
+                        .lootTableItem(NetherResourceItems.NETHER_RUBY)
                         .setWeight(8)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(3, 8)))
                 )
@@ -517,7 +525,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 )
                 .add(LootItem
-                        .lootTableItem(NetherItems.NETHER_RUBY)
+                        .lootTableItem(NetherResourceItems.NETHER_RUBY)
                         .setWeight(12)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
                 )
@@ -533,12 +541,12 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 .lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
-                        .lootTableItem(NetherItems.CINCINNASITE_INGOT)
+                        .lootTableItem(NetherResourceItems.CINCINNASITE_INGOT)
                         .setWeight(5)
 
                 )
                 .add(LootItem
-                        .lootTableItem(NetherItems.NETHER_RUBY)
+                        .lootTableItem(NetherResourceItems.NETHER_RUBY)
                         .setWeight(2)
 
                 )
@@ -550,12 +558,12 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 .lootPool()
                 .setRolls(UniformGenerator.between(1, 3))
                 .add(LootItem
-                        .lootTableItem(NetherBlocks.BLUE_CRYING_OBSIDIAN)
+                        .lootTableItem(NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN)
                         .setWeight(3)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 )
                 .add(LootItem
-                        .lootTableItem(NetherBlocks.BLUE_WEEPING_OBSIDIAN)
+                        .lootTableItem(NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN)
                         .setWeight(2)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
                 )
@@ -565,12 +573,12 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 )
                 .add(LootItem
-                        .lootTableItem(NetherBlocks.WEEPING_OBSIDIAN)
+                        .lootTableItem(NetherObsidianBlocks.WEEPING_OBSIDIAN)
                         .setWeight(2)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
                 )
                 .add(LootItem
-                        .lootTableItem(NetherBlocks.BLUE_OBSIDIAN)
+                        .lootTableItem(NetherObsidianBlocks.BLUE_OBSIDIAN)
                         .setWeight(4)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 )

@@ -1,5 +1,8 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -15,11 +18,11 @@ public class BrewingRegistry {
 
     public static void register() {
         register(
-                new ItemStack(NetherBlocks.BARREL_CACTUS),
+                new ItemStack(NetherPlantBlocks.BARREL_CACTUS),
                 new ItemStack(Items.GLASS_BOTTLE),
                 makePotion(Potions.WATER)
         );
-        register(new ItemStack(NetherBlocks.HOOK_MUSHROOM), makePotion(Potions.AWKWARD), makePotion(Potions.HEALING));
+        register(new ItemStack(NetherMushroomBlocks.HOOK_MUSHROOM), makePotion(Potions.AWKWARD), makePotion(Potions.HEALING));
     }
 
     private static void register(ItemStack source, ItemStack bottle, ItemStack result) {

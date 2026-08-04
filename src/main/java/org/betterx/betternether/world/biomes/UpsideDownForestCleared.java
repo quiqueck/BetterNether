@@ -1,13 +1,15 @@
 package org.betterx.betternether.world.biomes;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
-import org.betterx.wover.surface.api.Conditions;
-import org.betterx.wover.surface.impl.BaseSurfaceRuleBuilder;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.surface.api.Conditions;
+import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
@@ -65,7 +67,7 @@ public class UpsideDownForestCleared extends NetherBiomeConfig {
                                                UpsideDownForest.NETHERRACK_MOSS
                                        ),
                                        SurfaceRules.state(
-                                               NetherBlocks.MUSHROOM_GRASS.defaultBlockState())
+                                               NetherTerrainBlocks.MUSHROOM_GRASS.defaultBlockState())
                                )
                        ),
                        BaseSurfaceRuleBuilder.FLOOR_PRIORITY

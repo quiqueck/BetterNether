@@ -1,7 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -13,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -21,15 +18,18 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockStem extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone; noOcclusion() already lived at the registration site (complex/slots/Stem.java's
+// addSlotSpecificDefinitions), not the constructor, so no R1 fix was needed here. Always dropped itself
+// unconditionally via BlockBase's inherited getDrops() override - see Stem.java for the reproduction.
+public class BlockStem extends Block {
     public static final EnumProperty<Axis> AXIS = BlockStateProperties.AXIS;
     private static final EnumMap<Axis, VoxelShape> OUTLINES = Maps.newEnumMap(Axis.class);
 
-    public BlockStem(MapColor color) {
-        super(Materials.makeNetherWood(color).strength(0.5f).noOcclusion());
-        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Axis.Y));
-    }
-
+    // The (MapColor)-only overload (building a fresh, id-less BlockBehaviour.Properties.of() via
+    // Materials.makeNetherWood(...)) was dead code - nothing in src called it, only the (Properties)
+    // overload below is ever used at registration (see complex/slots/Stem.java). Removed rather than
+    // ported (WP3.8).
     public BlockStem(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Axis.Y));

@@ -31,7 +31,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public abstract class BlockFireBowl extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone; noOcclusion()/lightLevel(getLuminance) move to each of the six registration sites
+// (NetherBlocks.java's Fire Bowls section). All six always dropped themselves unconditionally via
+// BlockBase's inherited getDrops() override (no loot table json was generated for any of them), reproduced
+// explicitly as NetherLoot.dropSelfNoExplosion().
+public abstract class BlockFireBowl extends Block {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 12, 16);
 
     private static final VoxelShape CULL_SHAPE = Shapes.or(
@@ -44,16 +49,16 @@ public abstract class BlockFireBowl extends BlockBaseNotFull {
     public static final BooleanProperty FIRE = BNBlockProperties.FIRE;
 
     protected BlockFireBowl(Block source) {
-        super(BlockBehaviour.Properties.ofFullCopy(source).noOcclusion().lightLevel(BlockFireBowl::getLuminance));
+        super(BlockBehaviour.Properties.ofFullCopy(source));
         this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
     }
 
     protected BlockFireBowl(BlockBehaviour.Properties settings) {
-        super(settings.noOcclusion().lightLevel(BlockFireBowl::getLuminance));
+        super(settings);
         this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
     }
 
-    protected static int getLuminance(BlockState state) {
+    public static int getLuminance(BlockState state) {
         return state.getOptionalValue(FIRE).orElse(false) ? 15 : 0;
     }
 

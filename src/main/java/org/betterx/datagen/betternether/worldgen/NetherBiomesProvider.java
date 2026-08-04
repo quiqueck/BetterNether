@@ -4,9 +4,9 @@ import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.*;
 import org.betterx.betternether.world.biomes.util.NetherBiomeKey;
-import org.betterx.wover.biome.api.builder.BiomeBootstrapContext;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.multi.WoverBiomeProvider;
+import de.ambertation.wover.biome.api.builder.BiomeBootstrapContext;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.multi.WoverBiomeProvider;
 
 public class NetherBiomesProvider extends WoverBiomeProvider {
     /**

@@ -22,14 +22,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import org.jetbrains.annotations.Nullable;
 
-public class BlockNetherMycelium extends BlockBase implements BonemealNyliumLike {
+public class BlockNetherMycelium extends Block implements BonemealNyliumLike {
     public static final BooleanProperty IS_BLUE = BooleanProperty.create("blue");
     private BonemealAPI.FeatureProvider vegetationFeature;
 
     public BlockNetherMycelium(BlockBehaviour.Properties settings) {
         super(settings.mapColor(MapColor.COLOR_GRAY).requiresCorrectToolForDrops());
         this.registerDefaultState(getStateDefinition().any().setValue(IS_BLUE, false));
-        this.setDropItself(false);
     }
 
     public void setVegetationFeature(BonemealAPI.FeatureProvider vegetationFeature) {

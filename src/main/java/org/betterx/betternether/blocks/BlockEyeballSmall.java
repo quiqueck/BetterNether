@@ -1,16 +1,12 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -21,11 +17,7 @@ public class BlockEyeballSmall extends BlockEyeBase {
     protected static final VoxelShape SHAPE = Block.box(4, 8, 4, 12, 16, 12);
 
     public BlockEyeballSmall(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
-                .mapColor(MapColor.COLOR_BROWN)
-                .sound(SoundType.SLIME_BLOCK)
-                .strength(0.5F, 0.5F)
-        );
+        super(settings);
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {

@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.wover.block.api.BlockProperties.TripleShape;
+import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;

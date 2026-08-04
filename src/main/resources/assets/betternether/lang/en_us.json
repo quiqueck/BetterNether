@@ -644,7 +644,7 @@
   "enchantment.betternether.obsidian_breaker": "Obsidian Breaker",
   "enchantment.betternether.obsidian_breaker.desc": "Increases the breaking speed of Obsidian",
   "enchantment.betternether.ruby_fire": "Rubys' Fire",
-  "enchantment.betternether.ruby_fire.desc": "Auto-Smelts ores (Pickaxe) \n Flame and Knockback (Armor and Sword)",
+  "enchantment.betternether.ruby_fire.desc": "Auto-Smelts ores (Pickaxe) \n Extra Knockback when attacking \n Burns and hurts attackers when worn or held",
   "entity.betternether.firefly": "Firefly",
   "entity.betternether.flying_pig": "Flying Pig",
   "entity.betternether.hydrogen_jellyfish": "Hydrogen Jellyfish",

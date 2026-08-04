@@ -4,7 +4,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.world.structures.piece.CavePiece;
 import org.betterx.betternether.world.structures.piece.CityPiece;
 import org.betterx.betternether.world.structures.piece.DestructionPiece;
-import org.betterx.wover.structure.api.StructureManager;
+import de.ambertation.wover.structure.api.StructureManager;
 
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 

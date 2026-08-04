@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.BlockPos;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
@@ -28,7 +26,11 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockPlantWall extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. Always dropped itself unconditionally via BlockBase's inherited getDrops() override
+// (no loot table json was generated for any of its four registrations), reproduced explicitly as
+// NetherLoot.dropSelfNoExplosion() on each.
+public class BlockPlantWall extends Block {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, box(2, 2, 10, 14, 14, 16),
             Direction.SOUTH, box(2, 2, 0, 14, 14, 6),
@@ -37,12 +39,8 @@ public class BlockPlantWall extends BlockBaseNotFull {
     ));
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-    public BlockPlantWall(MapColor color) {
-        super(Materials.makeNetherGrass(color).offsetType(OffsetType.NONE));
-    }
-
-    public BlockPlantWall(BlockBehaviour.Properties settings, MapColor color) {
-        super(Materials.makeNetherGrass(settings, color).offsetType(OffsetType.NONE));
+    public BlockPlantWall(BlockBehaviour.Properties settings) {
+        super(settings);
     }
 
     @Environment(EnvType.CLIENT)
@@ -65,7 +63,7 @@ public class BlockPlantWall extends BlockBaseNotFull {
         Direction direction = state.getValue(FACING);
         BlockPos targetPos = pos.relative(direction.getOpposite());
         BlockState targetState = level.getBlockState(targetPos);
-        return targetState.isFaceSturdy(level, targetPos, direction);
+        return org.betterx.bclib.util.BlocksHelper.isDecorationSupport(level, targetPos, targetState, direction);
     }
 
     @Override

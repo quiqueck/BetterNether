@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherDecorBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 
 import net.minecraft.core.BlockPos;
@@ -18,15 +20,19 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public abstract class BlockBNPot extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone; noOcclusion() moves to each registration site (NetherDecorBlocks.CINCINNASITE_POT,
+// BRICK_POT). Always dropped itself unconditionally via BlockBase's inherited getDrops() override (no loot
+// table json was generated for either), reproduced explicitly as NetherLoot.dropSelfNoExplosion().
+public abstract class BlockBNPot extends Block {
     private static final VoxelShape SHAPE = box(3, 0, 3, 13, 8, 13);
 
     protected BlockBNPot(Block material) {
-        super(Properties.ofFullCopy(material).noOcclusion());
+        super(Properties.ofFullCopy(material));
     }
 
     protected BlockBNPot(Properties settings) {
-        super(settings.noOcclusion());
+        super(settings);
     }
 
     public boolean useShapeForLightOcclusion(BlockState state) {

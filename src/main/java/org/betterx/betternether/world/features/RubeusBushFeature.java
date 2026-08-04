@@ -1,10 +1,13 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.block.api.BlockProperties.TripleShape;
+import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -58,20 +61,20 @@ public class RubeusBushFeature extends ContextFeature<NoneFeatureConfiguration> 
                         setIfAir(
                                 world,
                                 context.POS,
-                                NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)
+                                NetherLeavesBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)
                         );
                     }
                 }
             }
         }
 
-        BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_RUBEUS.getBark().defaultBlockState().setValue(
+        BlocksHelper.setWithoutUpdate(world, pos, NetherWoodBlocks.MAT_RUBEUS.getBark().defaultBlockState().setValue(
                 RubeusLog.SHAPE, TripleShape.MIDDLE));
-        setIfAir(world, pos.above(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world, pos.north(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world, pos.south(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world, pos.east(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world, pos.west(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+        setIfAir(world, pos.above(), NetherLeavesBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+        setIfAir(world, pos.north(), NetherLeavesBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+        setIfAir(world, pos.south(), NetherLeavesBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+        setIfAir(world, pos.east(), NetherLeavesBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+        setIfAir(world, pos.west(), NetherLeavesBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
 
         return true;
     }

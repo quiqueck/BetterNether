@@ -5,8 +5,8 @@ import org.betterx.betternether.registry.features.placed.NetherOresPlaced;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityStructure;
-import org.betterx.wover.events.api.WorldLifecycle;
-import org.betterx.wover.feature.api.FeatureManager;
+import de.ambertation.wover.events.api.WorldLifecycle;
+import de.ambertation.wover.feature.api.FeatureManager;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;

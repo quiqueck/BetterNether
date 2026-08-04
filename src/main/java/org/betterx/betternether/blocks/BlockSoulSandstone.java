@@ -13,7 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockSoulSandstone extends BlockBase {
+public class BlockSoulSandstone extends Block {
     public static final BooleanProperty UP = BooleanProperty.create("up");
 
     public BlockSoulSandstone(BlockBehaviour.Properties settings) {

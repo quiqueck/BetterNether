@@ -2,7 +2,7 @@ package org.betterx.betternether.mixin.common;
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
-import org.betterx.wover.state.api.WorldState;
+import de.ambertation.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

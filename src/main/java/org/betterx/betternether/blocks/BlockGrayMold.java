@@ -7,7 +7,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -19,7 +18,7 @@ public class BlockGrayMold extends BlockMold {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 8, 12);
 
     public BlockGrayMold(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.makeNetherGrass(settings, MapColor.COLOR_GRAY).sound(net.minecraft.world.level.block.SoundType.CROP).randomTicks());
+        super(settings);
     }
 
     @Environment(EnvType.CLIENT)

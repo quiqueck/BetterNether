@@ -1,7 +1,7 @@
 package org.betterx.betternether.world;
 
-import org.betterx.wover.biome.api.data.BiomeGenerationDataContainer;
-import org.betterx.wover.generator.api.biomesource.WoverBiomeData;
+import de.ambertation.wover.biome.api.data.BiomeGenerationDataContainer;
+import de.ambertation.wover.generator.api.biomesource.WoverBiomeData;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceKey;

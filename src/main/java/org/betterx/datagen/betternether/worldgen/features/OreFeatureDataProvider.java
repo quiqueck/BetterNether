@@ -1,10 +1,12 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
+import org.betterx.betternether.registry.block.NetherOreBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.configured.NetherOres;
 import org.betterx.betternether.registry.features.placed.NetherOresPlaced;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
 
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -25,43 +27,43 @@ public class OreFeatureDataProvider extends WoverFeatureProvider {
     protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
         NetherOres.CINCINNASITE_ORE
                 .bootstrap(ctx)
-                .add(Blocks.NETHERRACK, NetherBlocks.CINCINNASITE_ORE)
+                .add(Blocks.NETHERRACK, NetherOreBlocks.CINCINNASITE_ORE)
                 .veinSize(8)
                 .discardChanceOnAirExposure(0.0f)
                 .register();
         NetherOres.NETHER_RUBY_ORE
                 .bootstrap(ctx)
-                .add(Blocks.NETHERRACK, NetherBlocks.NETHER_RUBY_ORE)
+                .add(Blocks.NETHERRACK, NetherOreBlocks.NETHER_RUBY_ORE)
                 .veinSize(8)
                 .discardChanceOnAirExposure((float) 0)
                 .register();
         NetherOres.NETHER_RUBY_ORE_SOUL
                 .bootstrap(ctx)
-                .add(Blocks.SOUL_SOIL, NetherBlocks.NETHER_RUBY_ORE)
+                .add(Blocks.SOUL_SOIL, NetherOreBlocks.NETHER_RUBY_ORE)
                 .veinSize(5)
                 .discardChanceOnAirExposure(0.1f)
                 .register();
         NetherOres.NETHER_RUBY_ORE_LARGE
                 .bootstrap(ctx)
-                .add(Blocks.NETHERRACK, NetherBlocks.NETHER_RUBY_ORE)
+                .add(Blocks.NETHERRACK, NetherOreBlocks.NETHER_RUBY_ORE)
                 .veinSize(5)
                 .discardChanceOnAirExposure(0.1f)
                 .register();
         NetherOres.NETHER_RUBY_ORE_RARE
                 .bootstrap(ctx)
-                .add(Blocks.NETHERRACK, NetherBlocks.NETHER_RUBY_ORE)
+                .add(Blocks.NETHERRACK, NetherOreBlocks.NETHER_RUBY_ORE)
                 .veinSize(12)
                 .discardChanceOnAirExposure(0.0f)
                 .register();
         NetherOres.NETHER_LAPIS_ORE
                 .bootstrap(ctx)
-                .add(Blocks.NETHERRACK, NetherBlocks.NETHER_LAPIS_ORE)
+                .add(Blocks.NETHERRACK, NetherOreBlocks.NETHER_LAPIS_ORE)
                 .veinSize(4)
                 .discardChanceOnAirExposure(0.0f)
                 .register();
         NetherOres.NETHER_REDSTONE_ORE
                 .bootstrap(ctx)
-                .add(Blocks.NETHERRACK, NetherBlocks.NETHER_REDSTONE_ORE)
+                .add(Blocks.NETHERRACK, NetherOreBlocks.NETHER_REDSTONE_ORE)
                 .veinSize(16)
                 .discardChanceOnAirExposure(0.3f)
                 .register();

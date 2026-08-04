@@ -10,8 +10,8 @@ import org.betterx.betternether.registry.*;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.tab.BECreativeTabs;
 import org.betterx.betternether.world.BNWorldGenerator;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.state.api.WorldConfig;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.state.api.WorldConfig;
 
 import net.minecraft.resources.ResourceLocation;
 

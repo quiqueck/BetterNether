@@ -1,9 +1,8 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.api.v3.bonemeal.BonemealAPI;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.world.features.DeferedSeedBlock;
-import org.betterx.wover.feature.api.FeatureUtils;
+import de.ambertation.wover.feature.api.FeatureUtils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,20 +12,24 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBlock {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. Both registrations (lumabus_seed, golden_lumabus_seed) always dropped themselves
+// unconditionally via BlockBase's inherited getDrops() override (no loot table json was generated for
+// either), reproduced explicitly as NetherLoot.dropSelfNoExplosion().
+public class BlockLumabusSeed extends Block implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
     private final BonemealAPI.FeatureProvider feature;
 
     public BlockLumabusSeed(Properties settings, DeferedSeedBlock parent, BonemealAPI.FeatureProvider feature) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_RED));
+        super(settings);
         this.feature = feature;
         parent.setSeed(this);
     }

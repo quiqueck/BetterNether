@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "betternether:cincinnasite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "betternether:cincinnasite"
+      }
+    ]
+  }
+}

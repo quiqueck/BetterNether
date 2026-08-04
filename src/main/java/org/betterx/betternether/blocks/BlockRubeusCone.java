@@ -1,27 +1,29 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockRubeusCone extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. Always dropped itself unconditionally via BlockBase's inherited getDrops() override
+// (no loot table json was generated for it), reproduced explicitly as NetherLoot.dropSelfNoExplosion() on
+// its RubeusMaterial CONE slot.
+public class BlockRubeusCone extends Block {
     private static final VoxelShape SHAPE = box(3, 3, 3, 13, 16, 13);
 
-    public BlockRubeusCone() {
-        super(Materials.makeNetherWood(MapColor.COLOR_CYAN).strength(0.5f).lightLevel(s -> 15).noOcclusion());
-    }
-
+    // The no-arg overload (building a fresh, id-less BlockBehaviour.Properties.of() via
+    // Materials.makeNetherWood(...)) was dead code - nothing in src called it, only the (Properties)
+    // overload below is ever used at registration (see complex/RubeusMaterial.java). Removed rather than
+    // ported (WP3.8).
     public BlockRubeusCone(BlockBehaviour.Properties properties) {
         super(properties);
     }

@@ -1,5 +1,7 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherObsidianBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -16,10 +18,10 @@ import net.minecraft.world.phys.Vec3;
 
 public class CrystalFeature extends NetherSurfaceFeature {
     private static final Block[] PALETTES = new Block[]{
-            NetherBlocks.OBSIDIAN_GLASS,
+            NetherObsidianBlocks.OBSIDIAN_GLASS,
             Blocks.OBSIDIAN,
-            NetherBlocks.BLUE_OBSIDIAN_GLASS,
-            NetherBlocks.BLUE_OBSIDIAN
+            NetherObsidianBlocks.BLUE_OBSIDIAN_GLASS,
+            NetherObsidianBlocks.BLUE_OBSIDIAN
     };
     private static final double SQRT05 = Math.sqrt(0.5);
     private static final float MAX_ANGLE_X = (float) Math.toRadians(45);
@@ -63,21 +65,21 @@ public class CrystalFeature extends NetherSurfaceFeature {
                         BlockState state;
                         if (d <= -0.3) {
                             state = random.nextInt(12) == 0 ? (isBlue
-                                    ? NetherBlocks.BLUE_WEEPING_OBSIDIAN
-                                    : NetherBlocks.WEEPING_OBSIDIAN).defaultBlockState() : getState(index, v);
+                                    ? NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN
+                                    : NetherObsidianBlocks.WEEPING_OBSIDIAN).defaultBlockState() : getState(index, v);
                         } else if (d <= -0.15) {
                             state = random.nextInt(9) == 0 ? (isBlue
-                                    ? NetherBlocks.BLUE_CRYING_OBSIDIAN
+                                    ? NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN
                                     : Blocks.CRYING_OBSIDIAN).defaultBlockState() : getState(index, v);
                         } else if (isNotEdge(v.x, v.y, v.z, radius)) {
                             state = random.nextInt(20) == 0 ? Blocks.GLOWSTONE.defaultBlockState() : getState(index, v);
                         } else if (random.nextInt(50) == 0) {
                             state = random.nextInt(4) == 0
                                     ? (isBlue
-                                    ? NetherBlocks.BLUE_WEEPING_OBSIDIAN
-                                    : NetherBlocks.WEEPING_OBSIDIAN).defaultBlockState()
+                                    ? NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN
+                                    : NetherObsidianBlocks.WEEPING_OBSIDIAN).defaultBlockState()
                                     : (isBlue
-                                            ? NetherBlocks.BLUE_CRYING_OBSIDIAN
+                                            ? NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN
                                             : Blocks.CRYING_OBSIDIAN).defaultBlockState();
                         } else {
                             state = getState(index, v);

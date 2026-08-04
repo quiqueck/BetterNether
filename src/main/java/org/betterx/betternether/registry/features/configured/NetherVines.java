@@ -3,13 +3,13 @@ package org.betterx.betternether.registry.features.configured;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.TwistedVinesFeature;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.feature.api.configured.ConfiguredFeatureKey;
-import org.betterx.wover.feature.api.configured.ConfiguredFeatureManager;
-import org.betterx.wover.feature.api.configured.configurators.AsBlockColumn;
-import org.betterx.wover.feature.api.configured.configurators.AsPillar;
-import org.betterx.wover.feature.api.configured.configurators.RandomPatch;
-import org.betterx.wover.feature.api.configured.configurators.WithConfiguration;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.feature.api.configured.ConfiguredFeatureKey;
+import de.ambertation.wover.feature.api.configured.ConfiguredFeatureManager;
+import de.ambertation.wover.feature.api.configured.configurators.AsBlockColumn;
+import de.ambertation.wover.feature.api.configured.configurators.AsPillar;
+import de.ambertation.wover.feature.api.configured.configurators.RandomPatch;
+import de.ambertation.wover.feature.api.configured.configurators.WithConfiguration;
 
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 

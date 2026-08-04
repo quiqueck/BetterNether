@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:willow_branch",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "shape": "end"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:willow_torch"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

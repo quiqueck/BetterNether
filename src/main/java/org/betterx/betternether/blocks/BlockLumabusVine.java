@@ -1,9 +1,8 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.betternether.world.features.DeferedSeedBlock;
-import org.betterx.wover.block.api.BlockProperties.TripleShape;
+import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -11,7 +10,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -26,11 +24,9 @@ public class BlockLumabusVine extends BaseVineBlock implements DeferedSeedBlock 
     static final VoxelShape BOTTOM_SHAPE = box(2, 4, 2, 14, 16, 14);
     private Block seed;
 
-    public BlockLumabusVine(Properties settings, MapColor color) {
+    public BlockLumabusVine(Properties settings) {
         super(
-                Materials
-                        .staticVine(settings, color)
-                        .lightLevel(getLuminance()),
+                settings,
                 9,
                 1
         );
@@ -46,7 +42,7 @@ public class BlockLumabusVine extends BaseVineBlock implements DeferedSeedBlock 
         return seed;
     }
 
-    private static ToIntFunction<BlockState> getLuminance() {
+    public static ToIntFunction<BlockState> getLuminance() {
         return (blockState) -> blockState.getOptionalValue(SHAPE).orElse(TripleShape.TOP) == TripleShape.BOTTOM
                 ? 15
                 : 0;

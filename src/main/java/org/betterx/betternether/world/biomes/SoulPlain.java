@@ -1,5 +1,7 @@
 package org.betterx.betternether.world.biomes;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
@@ -8,11 +10,11 @@ import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
-import org.betterx.wover.surface.api.Conditions;
-import org.betterx.wover.surface.impl.BaseSurfaceRuleBuilder;
-import org.betterx.wover.surface.impl.numeric.NetherNoiseCondition;
-import org.betterx.wover.surface.impl.rules.SwitchRuleSource;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.surface.api.Conditions;
+import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
+import de.ambertation.wover.surface.impl.numeric.NetherNoiseCondition;
+import de.ambertation.wover.surface.impl.rules.SwitchRuleSource;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
@@ -29,7 +31,7 @@ import java.util.List;
 public class SoulPlain extends NetherBiomeConfig {
     private static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
     private static final SurfaceRules.RuleSource SOUL_SOIL = SurfaceRules.state(Blocks.SOUL_SOIL.defaultBlockState());
-    private static final SurfaceRules.RuleSource SOUL_SANDSTONE = SurfaceRules.state(NetherBlocks.SOUL_SANDSTONE.defaultBlockState());
+    private static final SurfaceRules.RuleSource SOUL_SANDSTONE = SurfaceRules.state(NetherStoneBlocks.SOUL_SANDSTONE.defaultBlockState());
     private static final SurfaceRules.RuleSource LAVA = SurfaceRules.state(Blocks.MAGMA_BLOCK.defaultBlockState());
 
     @Override
@@ -81,7 +83,7 @@ public class SoulPlain extends NetherBiomeConfig {
                        SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, soilSandDist),
                        BaseSurfaceRuleBuilder.CEILING_PRIORITY + 1
                )
-               .ceil(NetherBlocks.SOUL_SANDSTONE.defaultBlockState())
+               .ceil(NetherStoneBlocks.SOUL_SANDSTONE.defaultBlockState())
                .rule(
                        SurfaceRules.ifTrue(SurfaceRules.UNDER_CEILING, soilStoneDist),
                        BaseSurfaceRuleBuilder.CEILING_PRIORITY - 1

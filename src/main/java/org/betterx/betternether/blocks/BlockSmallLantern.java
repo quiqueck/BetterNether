@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherLightBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -22,7 +24,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public abstract class BlockSmallLantern extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone; noOcclusion() moves to the registration site (NetherLightBlocks.CINCINNASITE_LANTERN_SMALL).
+// Always dropped itself unconditionally via BlockBase's inherited getDrops() override (no loot table json
+// was generated for it), reproduced explicitly as NetherLoot.dropSelfNoExplosion().
+public abstract class BlockSmallLantern extends Block {
     private static final VoxelShape SHAPE_NORTH = box(5, 0, 8, 11, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = box(5, 0, 0, 11, 16, 8);
     private static final VoxelShape SHAPE_WEST = box(8, 0, 5, 16, 16, 11);
@@ -33,7 +39,7 @@ public abstract class BlockSmallLantern extends BlockBaseNotFull {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
     protected BlockSmallLantern(Properties settings) {
-        super(settings.noOcclusion());
+        super(settings);
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
     }
 

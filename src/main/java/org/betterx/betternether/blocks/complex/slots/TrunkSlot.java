@@ -1,13 +1,13 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.wover.block.api.BlockDefinition;
-import org.betterx.wover.block.api.BlockRegistry;
-import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.trait.BlockTrait;
-import org.betterx.wover.block.api.trait.BlockTraitLookup;
-import org.betterx.wover.sets.api.blocks.BlockSet;
-import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
+import de.ambertation.wover.block.api.BlockDefinition;
+import de.ambertation.wover.block.api.BlockRegistry;
+import de.ambertation.wover.block.api.model.ModelTraitLibrary;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.sets.api.blocks.BlockSet;
+import de.ambertation.wover.sets.api.blocks.SlotFromDefinition;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -116,7 +116,7 @@ public class TrunkSlot extends SlotFromDefinition {
 
     @Environment(EnvType.CLIENT)
     @Override
-    protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+    protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return modelTraitOverride != null ? modelTraitOverride.get() : ModelTraitLibrary.externalModel();
     }
 }

@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -16,7 +17,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
@@ -25,7 +25,11 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockMushroomFir extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. setDropItself(false) is gone too - it only ever made the block fall through to the
+// vanilla loot-table-driven getDrops(), which is what happens by default once the class no longer extends
+// BlockBase.
+public class BlockMushroomFir extends Block {
     public static final EnumProperty<MushroomFirShape> SHAPE = EnumProperty.create("shape", MushroomFirShape.class);
 
     private static final VoxelShape BOTTOM_SHAPE = box(4, 0, 4, 12, 16, 12);
@@ -38,14 +42,11 @@ public class BlockMushroomFir extends BlockBaseNotFull {
     private static final VoxelShape SIDE_SMALL_W_SHAPE = box(0, 1, 4, 8, 8, 12);
     private static final VoxelShape END_SHAPE = box(0.01, 0, 0.01, 15.99, 15.99, 15.99);
 
-    public BlockMushroomFir() {
-        super(Materials.makeNetherWood(MapColor.COLOR_CYAN).noOcclusion());
-        this.setDropItself(false);
-    }
-
+    // The no-arg overload (building a fresh, id-less BlockBehaviour.Properties.of() via
+    // Materials.makeNetherWood(...)) was dead code - nothing in src called it, only the (Properties)
+    // overload below is ever used at registration. Removed rather than ported (WP3.8).
     public BlockMushroomFir(BlockBehaviour.Properties properties) {
         super(properties);
-        this.setDropItself(false);
     }
 
     @Override
@@ -108,8 +109,8 @@ public class BlockMushroomFir extends BlockBaseNotFull {
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         MushroomFirShape shape = state.getValue(SHAPE);
         return shape == MushroomFirShape.BOTTOM || shape == MushroomFirShape.MIDDLE
-                ? new ItemStack(NetherBlocks.MAT_MUSHROOM_FIR.getStem())
-                : new ItemStack(NetherBlocks.MAT_MUSHROOM_FIR.getSapling());
+                ? new ItemStack(NetherWoodBlocks.MAT_MUSHROOM_FIR.getStem())
+                : new ItemStack(NetherWoodBlocks.MAT_MUSHROOM_FIR.getSapling());
     }
 
     @Override

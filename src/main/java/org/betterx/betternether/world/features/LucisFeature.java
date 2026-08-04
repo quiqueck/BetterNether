@@ -1,12 +1,15 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockLucisMushroom;
 import org.betterx.betternether.blocks.BlockLucisSpore;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.feature.api.features.GrowableFeature;
+import de.ambertation.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,17 +21,17 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 
 public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> implements GrowableFeature<NoneFeatureConfiguration> {
 
-    private static final BlockState CENTER = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState()
+    private static final BlockState CENTER = NetherMushroomBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                         .setValue(
                                                                                 BlockLucisMushroom.SHAPE,
                                                                                 BNBlockProperties.EnumLucisShape.CENTER
                                                                         );
-    private static final BlockState SIDE = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState()
+    private static final BlockState SIDE = NetherMushroomBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                       .setValue(
                                                                               BlockLucisMushroom.SHAPE,
                                                                               BNBlockProperties.EnumLucisShape.SIDE
                                                                       );
-    private static final BlockState CORNER = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState()
+    private static final BlockState CORNER = NetherMushroomBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                         .setValue(
                                                                                 BlockLucisMushroom.SHAPE,
                                                                                 BNBlockProperties.EnumLucisShape.CORNER
@@ -112,7 +115,7 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> imple
                     );
             } else {
                 BlockState state = world.getBlockState(pos);
-                if (state.getBlock() == NetherBlocks.LUCIS_SPORE) {
+                if (state.getBlock() == NetherMushroomBlocks.LUCIS_SPORE) {
                     if (state.getValue(BlockLucisSpore.FACING) == Direction.SOUTH) pos = pos.north();
                     else if (state.getValue(BlockLucisSpore.FACING) == Direction.WEST) pos = pos.east();
                 } else {
@@ -156,13 +159,13 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> imple
     }
 
     private boolean canReplace(BlockState state) {
-        return state.getBlock() == NetherBlocks.LUCIS_SPORE || state.canBeReplaced();
+        return state.getBlock() == NetherMushroomBlocks.LUCIS_SPORE || state.canBeReplaced();
     }
 
     private boolean canGenerate(ServerLevelAccessor world, BlockPos pos) {
         BlockState state;
         for (Direction dir : HorizontalDirectionalBlock.FACING.getPossibleValues())
-            if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.relative(dir))) || NetherBlocks.MAT_ANCHOR_TREE.isTreeLog(
+            if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.relative(dir))) || NetherWoodBlocks.MAT_ANCHOR_TREE.isTreeLog(
                     state.getBlock()))
                 return true;
         return false;

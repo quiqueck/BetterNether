@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "betternether:item/basalt_bricks"
+    "model": "betternether:block/basalt_bricks"
   }
 }

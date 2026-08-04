@@ -2,9 +2,8 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
-import org.betterx.wover.state.api.WorldState;
+import de.ambertation.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -31,7 +29,12 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. The block always dropped itself unconditionally via BlockBase's inherited getDrops()
+// override, which shadowed the already-wired-up BlockTraits.LOOT_TABLE.dropSelf() trait (AbstractSeed's
+// addSlotSpecificDefinitions) that produced the committed wart_seed.json - that trait now becomes live and
+// reproduces the same table, so no loot change is needed here.
+public class BlockWartSeed extends Block implements BonemealableBlock {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(Direction.class);
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
@@ -42,15 +45,6 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
         BOUNDING_SHAPES.put(Direction.SOUTH, Shapes.box(0.25, 0.25, 0.0, 0.75, 0.75, 0.5));
         BOUNDING_SHAPES.put(Direction.WEST, Shapes.box(0.5, 0.25, 0.25, 1.0, 0.75, 0.75));
         BOUNDING_SHAPES.put(Direction.EAST, Shapes.box(0.0, 0.25, 0.25, 0.5, 0.75, 0.75));
-    }
-
-    public BlockWartSeed() {
-        super(Materials.NETHER_SAPLING
-                .mapColor(MapColor.TERRACOTTA_RED)
-                .sound(SoundType.WART_BLOCK)
-                .strength(1F)
-        );
-        this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.UP));
     }
 
     public BlockWartSeed(BlockBehaviour.Properties properties) {

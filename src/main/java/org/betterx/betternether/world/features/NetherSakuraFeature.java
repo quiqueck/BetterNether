@@ -1,10 +1,13 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.feature.api.features.GrowableFeature;
+import de.ambertation.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -75,13 +78,13 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
                                 BlocksHelper.setWithUpdate(
                                         world,
                                         context.POS,
-                                        NetherBlocks.MAT_NETHER_SAKURA.getLog().defaultBlockState()
+                                        NetherWoodBlocks.MAT_NETHER_SAKURA.getLog().defaultBlockState()
                                 );
                                 updateSDFFrom(context.POS, context);
                             }
                         }
-                        if (NetherBlocks.MAT_NETHER_SAKURA.isTreeLog(world.getBlockState(context.POS).getBlock())) {
-                            BlocksHelper.setWithUpdate(world, context.POS, NetherBlocks.MAT_NETHER_SAKURA.getBark()
+                        if (NetherWoodBlocks.MAT_NETHER_SAKURA.isTreeLog(world.getBlockState(context.POS).getBlock())) {
+                            BlocksHelper.setWithUpdate(world, context.POS, NetherWoodBlocks.MAT_NETHER_SAKURA.getBark()
                                                                                                          .defaultBlockState());
                             updateSDFFrom(context.POS, context);
                         }
@@ -148,7 +151,7 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
             double height,
             StructureGeneratorThreadContext context
     ) {
-        BlockState leaves = NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState()
+        BlockState leaves = NetherLeavesBlocks.NETHER_SAKURA_LEAVES.defaultBlockState()
                                                              .setValue(LeavesBlock.PERSISTENT, true);
         double r2 = radius * radius;
         int start = (int) Math.floor(-radius);
@@ -176,7 +179,7 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
             context.POS2.setX(pos.getX());
             context.POS2.setZ(pos.getZ());
             context.POS2.setY(pos.getY() - cy);
-            if (!(state = world.getBlockState(context.POS2)).canBeReplaced() && !NetherBlocks.MAT_NETHER_SAKURA.isTreeLog(
+            if (!(state = world.getBlockState(context.POS2)).canBeReplaced() && !NetherWoodBlocks.MAT_NETHER_SAKURA.isTreeLog(
                     state.getBlock())) return;
             for (int cx = start; cx <= radius; cx++) {
                 int cx2 = cx * cx;

@@ -1,5 +1,7 @@
 package org.betterx.betternether.mixin.common;
 
+import org.betterx.betternether.registry.block.NetherObsidianBlocks;
+
 import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -31,7 +33,7 @@ public abstract class LiquidBlockMixin {
 //		if (blockState.is(Blocks.OBSIDIAN)){
 //			final BlockState belowState = level.getBlockState(blockPos.below());
 //			if (belowState.is(Blocks.SOUL_SOIL) ||belowState.is(Blocks.SOUL_SAND)) {
-//				blockState = NetherBlocks.BLUE_OBSIDIAN.defaultBlockState();
+//				blockState = NetherObsidianBlocks.BLUE_OBSIDIAN.defaultBlockState();
 //
 //				final int x = blockPos.getX();
 //				final int y = blockPos.getY();
@@ -68,7 +70,7 @@ public abstract class LiquidBlockMixin {
         if (block == Blocks.OBSIDIAN) {
             final BlockState belowState = level.getBlockState(blockPos.below());
             if (belowState.is(Blocks.SOUL_SOIL) || belowState.is(Blocks.SOUL_SAND)) {
-                level.setBlockAndUpdate(blockPos, NetherBlocks.BLUE_OBSIDIAN.defaultBlockState());
+                level.setBlockAndUpdate(blockPos, NetherObsidianBlocks.BLUE_OBSIDIAN.defaultBlockState());
                 this.fizz(level, blockPos);
 
                 final int x = blockPos.getX();
@@ -99,7 +101,7 @@ public abstract class LiquidBlockMixin {
 //		if (block == Blocks.OBSIDIAN){
 //			final BlockState belowState = level.getBlockState(blockPos.below());
 //			if (belowState.is(Blocks.SOUL_SOIL) ||belowState.is(Blocks.SOUL_SAND)) {
-//				level.setBlockAndUpdate(blockPos, NetherBlocks.BLUE_OBSIDIAN.defaultBlockState());
+//				level.setBlockAndUpdate(blockPos, NetherObsidianBlocks.BLUE_OBSIDIAN.defaultBlockState());
 //
 //				final int x = blockPos.getX();
 //				final int y = blockPos.getY();
@@ -131,7 +133,7 @@ public abstract class LiquidBlockMixin {
 //		if (level != null && blockState.is(Blocks.OBSIDIAN)){
 //			final BlockState belowState = level.getBlockState(blockPos.below());
 //			if (belowState.is(Blocks.SOUL_SOIL) ||belowState.is(Blocks.SOUL_SAND)) {
-//				blockState = NetherBlocks.BLUE_OBSIDIAN.defaultBlockState();
+//				blockState = NetherObsidianBlocks.BLUE_OBSIDIAN.defaultBlockState();
 //
 //				final int x = blockPos.getX();
 //				final int y = blockPos.getY();

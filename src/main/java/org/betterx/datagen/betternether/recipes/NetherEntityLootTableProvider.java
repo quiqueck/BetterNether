@@ -1,8 +1,8 @@
 package org.betterx.datagen.betternether.recipes;
 
 import org.betterx.betternether.loot.BNLoot;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.WoverLootTableProvider;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.WoverLootTableProvider;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;

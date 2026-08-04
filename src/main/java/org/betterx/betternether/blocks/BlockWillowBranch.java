@@ -1,7 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.blocks.BNBlockProperties.WillowBranchShape;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -15,8 +17,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
@@ -25,26 +25,21 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import com.google.common.collect.Lists;
-
-import java.util.List;
-
-public class BlockWillowBranch extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. setDropItself(false) is gone too - it only ever made the block fall through to the
+// vanilla loot-table-driven getDrops(), which is what happens by default once the class no longer extends
+// BlockBase. The class's own getDrops() override is gone as well: the end-segment-drops-a-torch rule it
+// held is now NetherLoot.willowBranch(), wired in at the registration site (complex/WillowMaterial.java).
+public class BlockWillowBranch extends Block {
     private static final VoxelShape V_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
     public static final EnumProperty<WillowBranchShape> SHAPE = BNBlockProperties.WILLOW_SHAPE;
 
-    public BlockWillowBranch() {
-        super(Materials.makeNetherWood(MapColor.TERRACOTTA_RED)
-                       .noOcclusion()
-                       .noCollission()
-                       .lightLevel(BlockWillowBranch::getLuminance));
-        this.setDropItself(false);
-        this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, WillowBranchShape.MIDDLE));
-    }
-
+    // The no-arg overload (building a fresh, id-less BlockBehaviour.Properties.of() via
+    // Materials.makeNetherWood(...)) was dead code - nothing in src called it, only the (Properties)
+    // overload below is ever used at registration (see complex/WillowMaterial.java). Removed rather than
+    // ported (WP3.8).
     public BlockWillowBranch(BlockBehaviour.Properties properties) {
         super(properties);
-        this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, WillowBranchShape.MIDDLE));
     }
 
@@ -78,26 +73,24 @@ public class BlockWillowBranch extends BlockBaseNotFull {
             BlockState neighborState,
             RandomSource randomSource
     ) {
-        if (world.isEmptyBlock(pos.above()))
-            return Blocks.AIR.defaultBlockState();
-        else
+        BlockPos abovePos = pos.above();
+        BlockState above = world.getBlockState(abovePos);
+        // Decoration rule (superset of the old "anything above" for the worldgen anchors): a branch hangs
+        // from another branch (self-chaining) or any solid/leaves ceiling. Willow worldgen anchors every
+        // branch column under WILLOW_LEAVES (in minecraft:leaves), so generation is unaffected.
+        if (above.is(this) || org.betterx.bclib.util.BlocksHelper.isDecorationSupport(
+                world, abovePos, above, Direction.DOWN))
             return state;
+        else
+            return Blocks.AIR.defaultBlockState();
     }
 
     @Override
     @Environment(EnvType.CLIENT)
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(state.getValue(SHAPE) == WillowBranchShape.END
-                ? NetherBlocks.MAT_WILLOW.getTorch()
-                : NetherBlocks.WILLOW_LEAVES);
+                ? NetherWoodBlocks.MAT_WILLOW.getTorch()
+                : NetherLeavesBlocks.WILLOW_LEAVES);
     }
 
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        if (state.getValue(SHAPE) == WillowBranchShape.END) {
-            return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_WILLOW.getTorch()));
-        } else {
-            return Lists.newArrayList();
-        }
-    }
 }

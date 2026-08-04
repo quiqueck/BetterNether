@@ -2,13 +2,15 @@ package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.bclib.trait.block.TemplateModelTrait;
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.trait.BlockTraitLookup;
-import org.betterx.wover.sets.api.blocks.BlockSet;
+import de.ambertation.wover.block.api.model.ModelTraitLibrary;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.sets.api.blocks.BlockSet;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.world.level.block.Block;
 
 /**
  * The wover wood slots whose blockstate, block model and item model BetterNether hand-authors in
@@ -34,10 +36,10 @@ public class NetherWoodSlots {
      * template parent. Used for every wood set except nether_reed itself, whose own ladder model
      * <em>is</em> the template (see {@code LadderExternal}).
      */
-    public static class Ladder extends org.betterx.wover.sets.api.blocks.types.Ladder {
+    public static class Ladder extends de.ambertation.wover.sets.api.blocks.types.Ladder {
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return TemplateModelTrait.ladder(LADDER_TEMPLATE);
         }
     }
@@ -47,10 +49,10 @@ public class NetherWoodSlots {
      * doubles as the shared ladder template ({@link #LADDER_TEMPLATE}) and so cannot be generated as a child
      * of itself.
      */
-    public static class LadderExternal extends org.betterx.wover.sets.api.blocks.types.Ladder {
+    public static class LadderExternal extends de.ambertation.wover.sets.api.blocks.types.Ladder {
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return ModelTraitLibrary.externalModel();
         }
     }
@@ -68,10 +70,10 @@ public class NetherWoodSlots {
      * they stay hand-authored. The no-{@code #side} sets (mushroom_fir/anchor_tree/nether_reed) instead use
      * {@link TrapdoorTemplate}, which shares stalagnate's mesh via {@link #TRAPDOOR_TEMPLATE}.
      */
-    public static class Trapdoor extends org.betterx.wover.sets.api.blocks.types.Trapdoor {
+    public static class Trapdoor extends de.ambertation.wover.sets.api.blocks.types.Trapdoor {
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return ModelTraitLibrary.externalModel();
         }
     }
@@ -81,10 +83,10 @@ public class NetherWoodSlots {
      * (stalagnate's no-{@code #side} trapdoor mesh). Used by the wood sets whose trapdoor is exactly that
      * shared shape (mushroom_fir, anchor_tree, nether_reed).
      */
-    public static class TrapdoorTemplate extends org.betterx.wover.sets.api.blocks.types.Trapdoor {
+    public static class TrapdoorTemplate extends de.ambertation.wover.sets.api.blocks.types.Trapdoor {
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return TemplateModelTrait.trapdoor(TRAPDOOR_TEMPLATE, false);
         }
     }
@@ -105,7 +107,7 @@ public class NetherWoodSlots {
      * {@code wart_planks}, willow's {@code willow_planks}), so the generic {@code withSide} suffix rule cannot
      * derive it and it is passed explicitly.
      */
-    public static class TrapdoorSideTemplate extends org.betterx.wover.sets.api.blocks.types.Trapdoor {
+    public static class TrapdoorSideTemplate extends de.ambertation.wover.sets.api.blocks.types.Trapdoor {
         private final net.minecraft.resources.ResourceLocation sideTexture;
 
         public TrapdoorSideTemplate(net.minecraft.resources.ResourceLocation sideTexture) {
@@ -114,25 +116,25 @@ public class NetherWoodSlots {
 
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return TemplateModelTrait.trapdoor(TRAPDOOR_SIDE_TEMPLATE, sideTexture);
         }
     }
 
     /** A fence gate with hand-authored models. */
-    public static class Gate extends org.betterx.wover.sets.api.blocks.types.Gate {
+    public static class Gate extends de.ambertation.wover.sets.api.blocks.types.Gate {
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return ModelTraitLibrary.externalModel();
         }
     }
 
     /** A fence with hand-authored models. */
-    public static class Fence extends org.betterx.wover.sets.api.blocks.types.Fence {
+    public static class Fence extends de.ambertation.wover.sets.api.blocks.types.Fence {
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return ModelTraitLibrary.externalModel();
         }
     }
@@ -152,7 +154,7 @@ public class NetherWoodSlots {
      * post/side are exactly texture-swap children of those templates. The block's own {@code _side}/{@code _top}
      * fence textures feed the post/side; the item model uses a separate {@code _planks} inventory texture.
      */
-    public static class FenceTemplate extends org.betterx.wover.sets.api.blocks.types.Fence {
+    public static class FenceTemplate extends de.ambertation.wover.sets.api.blocks.types.Fence {
         private final net.minecraft.resources.ResourceLocation sideTexture;
         private final net.minecraft.resources.ResourceLocation topTexture;
         private final net.minecraft.resources.ResourceLocation inventoryTexture;
@@ -169,43 +171,43 @@ public class NetherWoodSlots {
 
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return TemplateModelTrait.fence(
                     FENCE_POST_TEMPLATE, FENCE_SIDE_TEMPLATE, sideTexture, topTexture, inventoryTexture);
         }
     }
 
     /** A slab with hand-authored models. */
-    public static class Slab extends org.betterx.wover.sets.api.blocks.types.Slab {
+    public static class Slab extends de.ambertation.wover.sets.api.blocks.types.Slab {
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return ModelTraitLibrary.externalModel();
         }
     }
 
     /** A log (or stripped log, for {@code stripable == false}) with hand-authored models. */
-    public static class Log extends org.betterx.wover.sets.api.blocks.types.Log {
+    public static class Log extends de.ambertation.wover.sets.api.blocks.types.Log {
         public Log(boolean stripable) {
             super(stripable);
         }
 
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return ModelTraitLibrary.externalModel();
         }
     }
 
     /** A bark (or stripped bark, for {@code stripable == false}) with hand-authored models. */
-    public static class Bark extends org.betterx.wover.sets.api.blocks.types.Bark {
+    public static class Bark extends de.ambertation.wover.sets.api.blocks.types.Bark {
         public Bark(boolean stripable) {
             super(stripable);
         }
 
         @Environment(EnvType.CLIENT)
         @Override
-        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
             return ModelTraitLibrary.externalModel();
         }
     }

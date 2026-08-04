@@ -3,18 +3,27 @@ package org.betterx.betternether.blocks.complex;
 import org.betterx.bclib.furniture.slots.BarStool;
 import org.betterx.bclib.furniture.slots.Chair;
 import org.betterx.bclib.furniture.slots.Taburet;
+import org.betterx.bclib.trait.block.FuelBlockTrait;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
-import org.betterx.wover.block.api.BlockDefinition;
-import org.betterx.wover.block.api.trait.BlockTraits;
-import org.betterx.wover.sets.api.blocks.SlotMap;
-import org.betterx.wover.sets.api.blocks.SlotType;
-import org.betterx.wover.sets.api.blocks.WoodenBlockSet;
-import org.betterx.wover.sets.api.blocks.slots.WoodSlots;
+import de.ambertation.wover.block.api.BlockDefinition;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockTraits;
+import de.ambertation.wover.block.api.trait.behaviour.MineableWithTagTrait;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.SlotType;
+import de.ambertation.wover.sets.api.blocks.WoodenBlockSet;
+import de.ambertation.wover.sets.api.blocks.slots.WoodSlots;
+import de.ambertation.wover.tag.api.predefined.MineableTags;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Base wooden material for BetterNether, on top of the wover-sets-api {@link WoodenBlockSet}.
@@ -24,11 +33,49 @@ import net.minecraft.world.level.material.MapColor;
  * furniture slots (see {@link #addFurniture}).
  */
 public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends WoodenBlockSet<T> {
+    /**
+     * Furnace-fuel burn times (ticks) per slot, per the WP8.3 fuel policy (decision 6 + user's "include
+     * derived" scope choice): bark/log/stem/trunk stay non-fuel (absent from this map - {@link #fuelTrait}
+     * returns {@code null}), planks/stripped variants/plank-derived building blocks/furniture all become
+     * furnace fuel. Values match vanilla's {@code FuelValues#vanillaBurnTimes} table (base tier
+     * {@code i = 200}: planks/logs/stairs/fences/... = {@code i*3/2 = 300}, slabs = {@code i*3/4 = 150},
+     * doors/signs = {@code i = 200}, buttons = {@code i/2 = 100}, hanging signs = {@code i*4 = 800}) rather
+     * than BetterNether's legacy hard-coded {@code 40} (that value was the old {@code addFuel} helper's
+     * bowl-tier constant, never a real per-type burn time). {@code WALL} and the furniture slots
+     * (taburet/chair/bar stool) have no vanilla analog - they're wooden building blocks built from planks, so
+     * they're given the general 300-tick building-block tier.
+     */
+    private static final Map<SlotType, Integer> FUEL_TICKS = Map.ofEntries(
+            Map.entry(SlotType.PLANKS, 300),
+            Map.entry(SlotType.STRIPPED_LOG, 300),
+            Map.entry(SlotType.STRIPPED_BARK, 300),
+            Map.entry(SlotType.SLAB, 150),
+            Map.entry(SlotType.STAIRS, 300),
+            Map.entry(SlotType.FENCE, 300),
+            Map.entry(SlotType.GATE, 300),
+            Map.entry(SlotType.WALL, 300),
+            Map.entry(SlotType.BUTTON, 100),
+            Map.entry(SlotType.PRESSURE_PLATE, 300),
+            Map.entry(SlotType.TRAPDOOR, 300),
+            Map.entry(SlotType.DOOR, 200),
+            Map.entry(SlotType.LADDER, 300),
+            Map.entry(SlotType.SIGN, 200),
+            Map.entry(SlotType.HANGING_SIGN, 800),
+            Map.entry(SlotType.CHEST, 300),
+            Map.entry(SlotType.BARREL, 300),
+            Map.entry(SlotType.CRAFTING_TABLE, 300),
+            Map.entry(SlotType.BOOKSHELF, 300),
+            Map.entry(SlotType.COMPOSTER, 300),
+            Map.entry(SlotType.TABURET, 300),
+            Map.entry(SlotType.CHAIR, 300),
+            Map.entry(SlotType.BAR_STOOL, 300)
+    );
+
     protected final MapColor plankColor;
     protected Block furnitureCloth = Blocks.RED_WOOL;
 
     public NetherWoodenMaterial(String name, MapColor woodColor, MapColor planksColor) {
-        super(BetterNether.C, name, woodColor);
+        super(BetterNether.C, name, woodColor, SlotType.PLANKS, true);
         setPlanksColor(planksColor);
         this.plankColor = planksColor;
     }
@@ -71,11 +118,39 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
     @Override
     protected void addCommonBlockDefinitions(SlotType slot, BlockDefinition<?, ?> blockDefinition) {
         // Deliberately NOT calling super: the base adds BlockTraits.FLAMMABLE, but nothing burns in the Nether.
-        // withFireResistance() is withDefault() minus FLAMMABLE. Nothing burns in the nether: the wood sets
+        // netherWood() is withDefault() minus FLAMMABLE. Nothing burns in the nether: the wood sets
         // used to say so through initFlammable(), which was a deliberate no-op, and that hook is gone -
         // WOOD_BLOCK.withDefault() would silently make every nether wood flammable. Datagen output is the
         // same either way; both variants still declare MINEABLE_WITH.needsAxe().
-        blockDefinition.addTrait(BlockTraits.WOOD_BLOCK.withFireResistance());
+        //
+        // Sapling/seed slots are the exception (WP: mineable-audit §B): they are plants, not wood, and their
+        // own slot config (NetherSlots's Sapling class) already adds mineable/hoe - keeping WOOD_BLOCK's axe
+        // tag on top double-tags them (axe+hoe), whereas BetterEnd's saplings are hoe-only. Filter the axe
+        // trait back out for those two slots while keeping the rest of netherWood()'s bundle (mapColor/
+        // instrument/strength/sound) untouched.
+        boolean isSaplingLike = slot.equals(NetherSlots.SAPLING) || slot.equals(NetherSlots.SEED);
+        List<BlockTrait<?, ?>> woodTraits = BlockTraits.WOOD_BLOCK.netherWood();
+        if (woodTraits != null) {
+            for (BlockTrait<?, ?> trait : woodTraits) {
+                if (isSaplingLike
+                        && trait instanceof MineableWithTagTrait mineableTrait
+                        && mineableTrait.mineableTag().equals(MineableTags.AXE)) {
+                    continue;
+                }
+                blockDefinition.addTrait(trait);
+            }
+        }
+        // WP8.3 (REVIEWED): WOOD_BLOCK's Trait.configure() sets sound(SoundType.WOOD) unconditionally; a
+        // chained sound(...) call queued after it (BlockDefinition interleaves traits/setters in call order -
+        // see BlockDefinition#addTrait) wins. soundOverride(slot) returns null for {@link
+        // org.betterx.betternether.blocks.complex.slots.VanillaFallback} sets (vanilla-wood furniture, out of
+        // this review's scope), so the sound(...) call is skipped there and those blocks keep whatever
+        // sound their copied/trait-default properties already carry.
+        SoundType sound = soundOverride(slot);
+        if (sound != null) blockDefinition.sound(sound);
+        // addTrait(null) is a documented no-op (BlockDefinition#addTrait): bark/log/stem/trunk slots (absent
+        // from FUEL_TICKS) get no fuel trait at all, matching decision 6.
+        blockDefinition.addTrait(fuelTrait(slot));
         if (slot == SlotType.PLANKS || isFurniture(slot)) {
             // The furniture is made of (and pre-migration copied its properties from) the planks/slab, so it
             // takes the plank color rather than the log's.
@@ -87,6 +162,61 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
 
     private static boolean isFurniture(SlotType slot) {
         return slot == SlotType.TABURET || slot == SlotType.CHAIR || slot == SlotType.BAR_STOOL;
+    }
+
+    /**
+     * The stem/hyphae-family slots (log/bark, stripped or not) - the vanilla-analogous {@code SoundType.STEM}
+     * group. Every other slot in the set is a planks-derived part and uses {@code SoundType.NETHER_WOOD}.
+     */
+    private static boolean isStemSlot(SlotType slot) {
+        return slot == SlotType.LOG
+                || slot == SlotType.BARK
+                || slot == SlotType.STRIPPED_LOG
+                || slot == SlotType.STRIPPED_BARK;
+    }
+
+    /**
+     * WP8.3 (REVIEWED): the {@code sound(...)} override applied for the given slot, or {@code null} to leave
+     * whatever sound the block already has (from {@code WOOD_BLOCK}'s trait default or a copied source
+     * block's properties) untouched. Matches vanilla's crimson/warped split: the stem/hyphae-family blocks
+     * (log/bark, stripped or not) use {@code SoundType.STEM}, every planks-derived part (including this set's
+     * wall/furniture, which have no direct vanilla analog but are built from planks) uses
+     * {@code SoundType.NETHER_WOOD} - see {@code BlockSetType.CRIMSON}/{@code WARPED.soundType()} and
+     * {@code Blocks.CRIMSON_STEM}/{@code CRIMSON_PLANKS} in vanilla.
+     * <p>
+     * Overridden to {@code null} (no override) by
+     * {@link org.betterx.betternether.blocks.complex.slots.VanillaFallback}: the vanilla-alignment review's
+     * wood-sound scope is this mod's own 9 nether-wood species, not the vanilla-wood-fallback furniture sets
+     * (overworld wood taburets/chairs/bar-stools, or the crimson/warped furniture built on vanilla nether
+     * wood), which are left exactly as they were.
+     *
+     * @param slot the slot being configured
+     * @return the sound to apply, or {@code null} to leave the current sound untouched
+     */
+    protected SoundType soundOverride(SlotType slot) {
+        return isStemSlot(slot) ? SoundType.STEM : SoundType.NETHER_WOOD;
+    }
+
+    /**
+     * WP8.3 (REVIEWED): door/trapdoor/button/pressure-plate (via {@code BlockSetType.soundType()}) and fence
+     * gate/sign (via {@code WoodType.soundType()}) all bake their sound into this set's derived
+     * set-type/wood-type rather than reading the block's own {@code sound(...)} - see
+     * {@link de.ambertation.wover.sets.api.blocks.WoodenBlockSet#setTypeSound()}. Every one of those slots is
+     * planks-derived, so {@code NETHER_WOOD} (never {@code STEM}) is correct here unconditionally.
+     */
+    @Override
+    protected SoundType setTypeSound() {
+        return SoundType.NETHER_WOOD;
+    }
+
+    /**
+     * WP8.3 fuel policy (decision 6): every slot in {@link #FUEL_TICKS} becomes furnace fuel at its
+     * vanilla-equivalent tick count; bark/log/stem/trunk (not in the map) stay non-fuel.
+     */
+    @Override
+    protected BlockTrait<?, ?> fuelTrait(SlotType slot) {
+        Integer ticks = FUEL_TICKS.get(slot);
+        return ticks == null ? null : FuelBlockTrait.withTicks(ticks);
     }
 
     @Override

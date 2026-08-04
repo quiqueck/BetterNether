@@ -1,31 +1,22 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.MHelper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
-
-import com.google.common.collect.Lists;
-
-import java.util.List;
 
 public class BlockBarrelCactus extends BlockCommonPlant {
     private static final VoxelShape EMPTY = Block.box(0, 0, 0, 0, 0, 0);
@@ -37,11 +28,7 @@ public class BlockBarrelCactus extends BlockCommonPlant {
     };
 
     public BlockBarrelCactus(Properties settings) {
-        super(Materials
-                .cactus(settings, MapColor.TERRACOTTA_ORANGE, false)
-                .dynamicShape()
-                .offsetType(Block.OffsetType.XZ)
-        );
+        super(settings);
     }
 
     @Override
@@ -84,11 +71,4 @@ public class BlockBarrelCactus extends BlockCommonPlant {
         return SHAPES[state.getValue(BlockCommonPlant.AGE)].move(vec3d.x, vec3d.y, vec3d.z);
     }
 
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        if (state.getValue(BlockCommonPlant.AGE) == 3) {
-            return Lists.newArrayList(new ItemStack(this, MHelper.randRange(1, 3, MHelper.RANDOM)));
-        }
-        return Lists.newArrayList(new ItemStack(this));
-    }
 }

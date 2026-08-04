@@ -1,8 +1,8 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.item.api.SmithingTemplateDefinition;
-import org.betterx.wover.item.api.smithing.SmithingTemplates;
+import de.ambertation.wover.item.api.SmithingTemplateDefinition;
+import de.ambertation.wover.item.api.smithing.SmithingTemplates;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.SmithingTemplateItem;

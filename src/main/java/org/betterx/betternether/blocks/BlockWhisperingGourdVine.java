@@ -1,11 +1,12 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.block.NetherCropBlocks;
+
 import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.block.api.BlockProperties;
+import de.ambertation.wover.block.api.BlockProperties;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -15,16 +16,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 
 
 public class BlockWhisperingGourdVine extends BaseVineBlock.Growing {
     public BlockWhisperingGourdVine(Properties settings) {
         super(
-                Materials
-                        .staticVine(settings, MapColor.COLOR_RED)
-                        .randomTicks(),
+                settings,
                 6,
                 1,
                 16
@@ -51,7 +49,7 @@ public class BlockWhisperingGourdVine extends BaseVineBlock.Growing {
                         pos.getY() + 0.5,
                         pos.getZ() + 0.5,
                         new ItemStack(
-                                NetherBlocks.WHISPERING_GOURD)
+                                NetherCropBlocks.WHISPERING_GOURD)
                 ));
                 if (world.random.nextBoolean()) {
                     world.addFreshEntity(new ItemEntity(
@@ -59,7 +57,7 @@ public class BlockWhisperingGourdVine extends BaseVineBlock.Growing {
                             pos.getX() + 0.5,
                             pos.getY() + 0.5,
                             pos.getZ() + 0.5,
-                            new ItemStack(NetherBlocks.WHISPERING_GOURD)
+                            new ItemStack(NetherCropBlocks.WHISPERING_GOURD)
                     ));
                 }
             }

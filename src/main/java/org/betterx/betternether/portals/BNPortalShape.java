@@ -111,7 +111,7 @@ public class BNPortalShape {
     }
 
     private static boolean isFrame(BlockState blockState) {
-        return blockState.is(Blocks.OBSIDIAN) || blockState.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHER_PORTAL_FRAME);
+        return blockState.is(Blocks.OBSIDIAN) || blockState.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.NETHER_PORTAL_FRAME);
     }
 
     private static boolean isEmpty(BlockState blockState) {

@@ -1,16 +1,17 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 
 public class BlockSoulLilySapling extends BaseBlockCommonSapling {
     public BlockSoulLilySapling(Properties settings) {
-        super(NetherBlocks.SOUL_LILY, org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_ORANGE).noLootTable());
+        super(NetherPlantBlocks.SOUL_LILY, settings);
     }
 
     @Override

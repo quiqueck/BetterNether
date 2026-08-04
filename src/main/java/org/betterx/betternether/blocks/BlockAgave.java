@@ -1,47 +1,28 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.LegacyRandomSource;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-import com.google.common.collect.Lists;
-
-import java.util.List;
-
 public class BlockAgave extends BlockCommonPlant {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 14, 14);
-    private static final RandomSource RANDOM = new LegacyRandomSource(030620222201l);
 
     public BlockAgave(Properties settings) {
-        super(Materials
-                .cactus(settings, MapColor.TERRACOTTA_ORANGE, false)
-                .requiresCorrectToolForDrops()
-                .noCollission()
-                .destroyTime(0.4F)
-                .instabreak()
-                .offsetType(Block.OffsetType.XZ)
-        );
+        super(settings);
     }
 
     @Override
@@ -70,15 +51,6 @@ public class BlockAgave extends BlockCommonPlant {
     @Override
     public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier) {
         if (state.getValue(BlockCommonPlant.AGE) > 1) entity.hurt(world.damageSources().cactus(), 1.0F);
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        if (state.getValue(BlockCommonPlant.AGE) == 3) {
-            return Lists.newArrayList(new ItemStack(this, MHelper.randRange(1, 2, RANDOM)), new ItemStack(
-                    NetherItems.AGAVE_LEAF, MHelper.randRange(2, 5, RANDOM)));
-        }
-        return Lists.newArrayList(new ItemStack(this));
     }
 
     @Override

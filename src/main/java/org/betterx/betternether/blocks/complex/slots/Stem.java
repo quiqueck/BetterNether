@@ -1,17 +1,19 @@
 package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.betternether.blocks.BlockStem;
-import org.betterx.wover.block.api.BlockDefinition;
-import org.betterx.wover.block.api.BlockRegistry;
-import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.trait.BlockRecipeTrait;
-import org.betterx.wover.block.api.trait.BlockTraitLookup;
-import org.betterx.wover.block.api.trait.BlockTraits;
-import org.betterx.wover.recipe.api.RecipeBuilder;
-import org.betterx.wover.sets.api.blocks.BlockSet;
-import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
-import org.betterx.wover.sets.api.blocks.SlotType;
+import org.betterx.betternether.blocks.NetherLoot;
+import de.ambertation.wover.block.api.BlockDefinition;
+import de.ambertation.wover.block.api.BlockRegistry;
+import de.ambertation.wover.block.api.model.ModelTraitLibrary;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockRecipeTrait;
+import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.block.api.trait.BlockTraits;
+import de.ambertation.wover.recipe.api.RecipeBuilder;
+import de.ambertation.wover.sets.api.blocks.BlockSet;
+import de.ambertation.wover.sets.api.blocks.SlotFromDefinition;
+import de.ambertation.wover.sets.api.blocks.SlotType;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
@@ -20,6 +22,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.block.Block;
 
 /**
  * The thin axis-aligned "stem" of a Nether tree. Four stems craft into a log.
@@ -43,7 +46,12 @@ public class Stem extends SlotFromDefinition {
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
         super.addSlotSpecificDefinitions(set, def);
-        def.strength(0.5f).noOcclusion().addTags(BlockTags.MINEABLE_WITH_AXE);
+        // BlockStem (WP6.12): reparented off BlockBaseNotFull, whose dead canSuffocate/isSimpleFullBlock/
+        // allowsSpawning overrides are gone. Every stem always dropped itself unconditionally via
+        // BlockBase's inherited getDrops() override (no loot table json was generated for any of them -
+        // StalagnateMaterial/NetherMushroomMaterial/MushroomFirMaterial each add a Stem), reproduced
+        // explicitly as NetherLoot.dropSelfNoExplosion() here so all three stay in sync.
+        def.strength(0.5f).noOcclusion().addTags(BlockTags.MINEABLE_WITH_AXE).addTrait(NetherLoot.dropSelfNoExplosion());
     }
 
     @Override
@@ -60,7 +68,7 @@ public class Stem extends SlotFromDefinition {
 
     @Environment(EnvType.CLIENT)
     @Override
-    protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+    protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return ModelTraitLibrary.pillar();
     }
 }

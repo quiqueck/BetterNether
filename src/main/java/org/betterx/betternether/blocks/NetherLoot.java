@@ -1,14 +1,29 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherCropBlocks;
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherSaplingBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
+import org.betterx.betternether.registry.item.NetherResourceItems;
+
 import org.betterx.bclib.blocks.BaseVineBlock;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.wover.block.api.BlockProperties;
-import org.betterx.wover.block.api.trait.BlockTraits;
-import org.betterx.wover.block.api.trait.behaviour.LootTableTrait;
-import org.betterx.wover.loot.api.LootLookupProvider;
+import de.ambertation.wover.block.api.BlockProperties;
+import de.ambertation.wover.block.api.trait.BlockTraits;
+import de.ambertation.wover.block.api.trait.behaviour.LootTableTrait;
+import de.ambertation.wover.loot.api.LootLookupProvider;
+import de.ambertation.wover.tag.api.predefined.ToolTags;
 
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -16,9 +31,12 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 
 import java.util.List;
@@ -83,8 +101,8 @@ public class NetherLoot {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> provider.dropWithSilkTouch(
                 block,
                 List.of(
-                        new LootLookupProvider.DropInfo(NetherBlocks.LUCIS_SPORE, UniformGenerator.between(0, 1)),
-                        new LootLookupProvider.DropInfo(NetherItems.GLOWSTONE_PILE, UniformGenerator.between(0, 2))
+                        new LootLookupProvider.DropInfo(NetherMushroomBlocks.LUCIS_SPORE, UniformGenerator.between(0, 1)),
+                        new LootLookupProvider.DropInfo(NetherResourceItems.GLOWSTONE_PILE, UniformGenerator.between(0, 2))
                 )
         ));
     }
@@ -127,7 +145,7 @@ public class NetherLoot {
             return LootTable.lootTable().withPool(LootPool
                     .lootPool()
                     .setRolls(ConstantValue.exactly(1.0F))
-                    .add(LootItem.lootTableItem(NetherBlocks.WHISPERING_GOURD.asItem())
+                    .add(LootItem.lootTableItem(NetherCropBlocks.WHISPERING_GOURD.asItem())
                                  .when(fruityState.and(provider.shearsOrSilkTouchCondition()))
                                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
                                  .otherwise(LootItem.lootTableItem(block.asItem())
@@ -176,11 +194,227 @@ public class NetherLoot {
                     .withPool(LootPool
                             .lootPool()
                             .setRolls(ConstantValue.exactly(1.0F))
-                            .add(LootItem.lootTableItem(NetherItems.GLOWSTONE_PILE)
+                            .add(LootItem.lootTableItem(NetherResourceItems.GLOWSTONE_PILE)
                                          .when(fruityState.and(provider.shearsOrHoeSilkTouchCondition()))
                                          .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                             )
                     );
         });
+    }
+
+    // ------------------------------------------------------------------------------------------------------
+    // Recovered getDrops() overrides.
+    //
+    // The tables below replace getDrops(BlockState, LootParams.Builder) overrides in blocks/*.java, which
+    // bypassed the loot table entirely at runtime and so were the last second loot path in the mod (see the
+    // class javadoc). None of those overrides consulted survives_explosion - most never called
+    // super.getDrops() at all - so none of these tables carry it either: the drops are reproduced exactly,
+    // including that oddity. MHelper.randRange(min, max) is inclusive at both ends, so it maps onto
+    // UniformGenerator.between(min, max) unchanged, and a rolled count of 0 yields an empty stack that both
+    // paths discard.
+    // ------------------------------------------------------------------------------------------------------
+
+    /**
+     * {@code minecraft:block_state_property} on a single enum/{@link StringRepresentable} state property.
+     */
+    private static <T extends Comparable<T> & StringRepresentable> LootItemCondition.Builder stateIs(
+            Block block, Property<T> property, T value
+    ) {
+        return LootItemBlockStatePropertyCondition
+                .hasBlockStateProperties(block)
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, value));
+    }
+
+    /** {@link #stateIs} for an {@code age}-style integer property. */
+    private static LootItemCondition.Builder stateIs(Block block, Property<Integer> property, int value) {
+        return LootItemBlockStatePropertyCondition
+                .hasBlockStateProperties(block)
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, value));
+    }
+
+    /** {@link #stateIs} widened to a set of values for one property, as {@code minecraft:any_of}. */
+    @SafeVarargs
+    private static <T extends Comparable<T> & StringRepresentable> LootItemCondition.Builder stateIsAnyOf(
+            Block block, Property<T> property, T first, T... rest
+    ) {
+        LootItemCondition.Builder condition = stateIs(block, property, first);
+        for (T value : rest) {
+            condition = condition.or(stateIs(block, property, value));
+        }
+        return condition;
+    }
+
+    /** {@code minecraft:match_tool} against an item tag. */
+    private static LootItemCondition.Builder toolIsIn(LootLookupProvider provider, TagKey<Item> tag) {
+        return MatchTool.toolMatches(ItemPredicate.Builder.item().of(provider.itemLookup(), tag));
+    }
+
+    /** Lucis mushroom: one lucis spore and 2-4 glowstone piles, unconditionally. */
+    public static LootTableTrait lucisMushroom() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
+                .lootTable()
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(NetherMushroomBlocks.LUCIS_SPORE)))
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(NetherResourceItems.GLOWSTONE_PILE)
+                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4))))));
+    }
+
+    /** Barrel cactus: a ripe ({@code age=3}) one yields 1-3 of itself, any other age exactly one. */
+    public static LootTableTrait barrelCactus() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
+                .lootTable()
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(block)
+                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                                     .when(stateIs(block, BlockCommonPlant.AGE, 3))
+                                     .otherwise(LootItem.lootTableItem(block)))));
+    }
+
+    /**
+     * Agave: a ripe ({@code age=3}) plant yields 1-2 of itself plus 2-5 agave leaves, any other age exactly
+     * one plant and no leaves.
+     */
+    public static LootTableTrait agave() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
+            final LootItemCondition.Builder ripe = stateIs(block, BlockCommonPlant.AGE, 3);
+            return LootTable
+                    .lootTable()
+                    .withPool(LootPool
+                            .lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(LootItem.lootTableItem(block)
+                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+                                         .when(ripe)
+                                         .otherwise(LootItem.lootTableItem(block))))
+                    .withPool(LootPool
+                            .lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .when(ripe)
+                            .add(LootItem.lootTableItem(NetherResourceItems.AGAVE_LEAF)
+                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 5)))));
+        });
+    }
+
+    /**
+     * Jellyfish mushroom: the {@code top} cap yields 1-2 saplings, 0-2 glowstone piles and 0-1 slime balls,
+     * the {@code bottom} only the 1-2 saplings, and the {@code middle} a single nether mushroom stem.
+     */
+    public static LootTableTrait jellyfishMushroom() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
+            final var shape = BlockJellyfishMushroom.SHAPE;
+            final LootItemCondition.Builder top =
+                    stateIs(block, shape, BlockProperties.TripleShape.TOP);
+            final LootItemCondition.Builder bottom =
+                    stateIs(block, shape, BlockProperties.TripleShape.BOTTOM);
+            final LootItemCondition.Builder middle =
+                    stateIs(block, shape, BlockProperties.TripleShape.MIDDLE);
+
+            return LootTable
+                    .lootTable()
+                    .withPool(LootPool
+                            .lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .when(top.or(bottom))
+                            .add(LootItem.lootTableItem(NetherSaplingBlocks.JELLYFISH_MUSHROOM_SAPLING)
+                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))))
+                    .withPool(LootPool
+                            .lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .when(top)
+                            .add(LootItem.lootTableItem(NetherResourceItems.GLOWSTONE_PILE)
+                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))))
+                    .withPool(LootPool
+                            .lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .when(top)
+                            .add(LootItem.lootTableItem(Items.SLIME_BALL)
+                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))))
+                    .withPool(LootPool
+                            .lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .when(middle)
+                            .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_NETHER_MUSHROOM.getStem())));
+        });
+    }
+
+    /** Willow branch: only the {@code end} segment drops anything, a single willow torch. */
+    public static LootTableTrait willowBranch() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
+                .lootTable()
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .when(stateIs(
+                                block,
+                                BlockWillowBranch.SHAPE, BNBlockProperties.WillowBranchShape.END))
+                        .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_WILLOW.getTorch()))));
+    }
+
+    /**
+     * Soul lily: every segment yields one nether mushroom stem, and the crown yields a sapling on top -
+     * always one for {@code small}, {@code medium_top} and {@code big_top_center}, and 0-1 for the four
+     * {@code big_top_side_*}. The stalk shapes ({@code medium_bottom}, {@code big_bottom},
+     * {@code big_middle}) yield no sapling at all.
+     */
+    public static LootTableTrait soulLily() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
+            final var shape = BlockSoulLily.SHAPE;
+            final var sapling = NetherSaplingBlocks.SOUL_LILY_SAPLING;
+            return LootTable
+                    .lootTable()
+                    .withPool(LootPool
+                            .lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_NETHER_MUSHROOM.getStem())))
+                    .withPool(LootPool
+                            .lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(LootItem.lootTableItem(sapling)
+                                         .when(stateIsAnyOf(
+                                                 block, shape,
+                                                 BlockSoulLily.SoulLilyShape.SMALL,
+                                                 BlockSoulLily.SoulLilyShape.MEDIUM_TOP,
+                                                 BlockSoulLily.SoulLilyShape.BIG_TOP_CENTER))
+                                         .otherwise(LootItem
+                                                 .lootTableItem(sapling)
+                                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(
+                                                         0,
+                                                         1
+                                                 )))
+                                                 .when(stateIsAnyOf(
+                                                         block, shape,
+                                                         BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_N,
+                                                         BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_S,
+                                                         BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_E,
+                                                         BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_W)))));
+        });
+    }
+
+    /**
+     * Cincinnasite anvil: itself, but only to a pickaxe.
+     * <p>
+     * The override this replaces gated on {@code LootUtil.isCorrectTool}, i.e. "correct for drops, or any
+     * item in the block's mineable tag" - which for this block (METAL_BLOCK, so mineable/pickaxe) is the
+     * pickaxe tags below. The condition is not redundant with the block's own
+     * {@code requiresCorrectToolForDrops()}: that only gates <i>player</i> mining, and the override
+     * deliberately dropped nothing when destroyed with no tool at all, i.e. by an explosion, a piston, or
+     * {@code /setblock destroy}.
+     */
+    public static LootTableTrait cincinnasiteAnvil() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
+                .lootTable()
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .when(toolIsIn(provider, ItemTags.PICKAXES)
+                                .or(toolIsIn(provider, ToolTags.FABRIC_PICKAXES)))
+                        .add(LootItem.lootTableItem(block))));
     }
 }

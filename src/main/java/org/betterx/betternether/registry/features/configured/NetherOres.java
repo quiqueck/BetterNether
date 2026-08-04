@@ -1,10 +1,10 @@
 package org.betterx.betternether.registry.features.configured;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.feature.api.configured.ConfiguredFeatureKey;
-import org.betterx.wover.feature.api.configured.ConfiguredFeatureManager;
-import org.betterx.wover.feature.api.configured.configurators.AsOre;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.feature.api.configured.ConfiguredFeatureKey;
+import de.ambertation.wover.feature.api.configured.ConfiguredFeatureManager;
+import de.ambertation.wover.feature.api.configured.configurators.AsOre;
 
 public class NetherOres {
     private static final ModCore C = BetterNether.C;

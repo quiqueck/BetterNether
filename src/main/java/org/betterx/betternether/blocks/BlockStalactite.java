@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.bclib.blocks.BlockProperties;
 
 import net.minecraft.core.BlockPos;
@@ -20,13 +22,18 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class BlockStalactite extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12, KEEP per plan - deferred from the BCLib StalactiteBlockTrait
+// hoist, genuine behaviour, not dissolved): its dead canSuffocate/isSimpleFullBlock/allowsSpawning overrides
+// are gone; noOcclusion() moves to each registration site (NetherStoneBlocks.NETHERRACK_STALACTITE and its four
+// siblings). Always dropped itself unconditionally via BlockBase's inherited getDrops() override (no loot
+// table json was generated for any of the five), reproduced explicitly as NetherLoot.dropSelfNoExplosion().
+public class BlockStalactite extends Block {
 
     public static final IntegerProperty SIZE = BlockProperties.SIZE;
     private static final VoxelShape[] SHAPES;
 
     public BlockStalactite(Properties settings) {
-        super(settings.noOcclusion());
+        super(settings);
         this.registerDefaultState(getStateDefinition().any().setValue(SIZE, 0));
     }
 

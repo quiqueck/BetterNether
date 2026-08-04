@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.BlocksHelper;
 
 import net.minecraft.core.BlockPos;
@@ -17,13 +16,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockWillowTorch extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. Always dropped itself unconditionally via BlockBase's inherited getDrops() override
+// (no loot table json was generated for it), reproduced explicitly as NetherLoot.dropSelfNoExplosion() on
+// its WillowMaterial TORCH slot.
+public class BlockWillowTorch extends Block {
     private static final VoxelShape SHAPE_NORTH = Block.box(5, 0, 8, 11, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = Block.box(5, 0, 0, 11, 16, 8);
     private static final VoxelShape SHAPE_WEST = Block.box(8, 0, 5, 16, 16, 11);
@@ -33,15 +35,9 @@ public class BlockWillowTorch extends BlockBaseNotFull {
 
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
-    public BlockWillowTorch() {
-        super(Materials.wood(MapColor.COLOR_LIGHT_BLUE, false)
-                               .lightLevel(s -> 15)
-                               .strength(0.3f)
-                               .noCollission()
-                               .noOcclusion());
-        this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
-    }
-
+    // The no-arg overload (building a fresh, id-less BlockBehaviour.Properties.of() via Materials.wood(...))
+    // was dead code - nothing in src called it, only the (Properties) overload below is ever used at
+    // registration (see complex/WillowMaterial.java). Removed rather than ported (WP3.8).
     public BlockWillowTorch(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));

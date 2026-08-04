@@ -1,65 +1,25 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
-
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.material.MapColor;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public abstract class BNPillar extends RotatedPillarBlock {
-    protected BNPillar(Properties settings) {
+// The nested Wood/Stone/Metal shims (WP6.14 sweep) are gone: they added nothing beyond BNPillar itself
+// (pure passthrough constructors, needed only because this class used to be abstract). Every direct
+// BNPillar.Wood/.Stone/.Metal registration/subclass site is now plain BNPillar (material is carried by the
+// registration's traits, not the class).
+public class BNPillar extends RotatedPillarBlock {
+    public BNPillar(Properties settings) {
         super(settings);
     }
 
-    protected BNPillar(Block block) {
+    public BNPillar(Block block) {
         super(BlockBehaviour.Properties.ofFullCopy(block));
     }
 
-    protected BNPillar(MapColor color) {
-        super(Materials.makeNetherWood(color));
-    }
-
-    public static class Wood extends BNPillar {
-        public Wood(Properties settings) {
-            super(settings);
-        }
-
-        public Wood(Block block) {
-            super(block);
-        }
-
-        public Wood(MapColor color) {
-            super(color);
-        }
-    }
-
-    public static class Stone extends BNPillar {
-        public Stone(Properties settings) {
-            super(settings);
-        }
-
-        public Stone(Block block) {
-            super(block);
-        }
-
-        public Stone(MapColor color) {
-            super(color);
-        }
-    }
-
-    public static class Metal extends BNPillar {
-        public Metal(Properties settings) {
-            super(settings);
-        }
-
-        public Metal(Block block) {
-            super(block);
-        }
-
-        public Metal(MapColor color) {
-            super(color);
-        }
-    }
+    // The (MapColor)-only constructors below (this class + the three former nested subclasses) built a
+    // fresh, id-less BlockBehaviour.Properties.of() via Materials.makeNetherWood(color) - dead code, since
+    // nothing in src ever called `new BNPillar(MapColor...)`/`new BNPillar.Wood(MapColor...)`/etc.; every
+    // live registration site uses the (Properties) constructor. Removed rather than ported (WP3.8).
 }

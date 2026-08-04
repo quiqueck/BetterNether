@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "betternether:nether_ruby"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "betternether:nether_ruby"
+      }
+    ]
+  }
+}

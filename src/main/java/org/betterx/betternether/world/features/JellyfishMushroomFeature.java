@@ -1,12 +1,15 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockJellyfishMushroom;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.block.api.BlockProperties.TripleShape;
-import org.betterx.wover.feature.api.features.GrowableFeature;
+import de.ambertation.wover.block.api.BlockProperties.TripleShape;
+import de.ambertation.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -45,12 +48,12 @@ public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfigur
 
     public void growSmall(ServerLevelAccessor world, BlockPos pos) {
         Block down = world.getBlockState(pos.below()).getBlock();
-        BNBlockProperties.JellyShape visual = down == NetherBlocks.MUSHROOM_GRASS
+        BNBlockProperties.JellyShape visual = down == NetherTerrainBlocks.MUSHROOM_GRASS
                 ? BNBlockProperties.JellyShape.NORMAL
-                : down == NetherBlocks.SEPIA_MUSHROOM_GRASS
+                : down == NetherTerrainBlocks.SEPIA_MUSHROOM_GRASS
                         ? BNBlockProperties.JellyShape.SEPIA
                         : BNBlockProperties.JellyShape.POOR;
-        BlocksHelper.setWithUpdate(world, pos, NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
+        BlocksHelper.setWithUpdate(world, pos, NetherMushroomBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
                                                                               .setValue(
                                                                                       BlockJellyfishMushroom.SHAPE,
                                                                                       TripleShape.BOTTOM
@@ -63,15 +66,15 @@ public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfigur
 
     public void growMedium(ServerLevelAccessor world, BlockPos pos) {
         Block down = world.getBlockState(pos.below()).getBlock();
-        BNBlockProperties.JellyShape visual = down == NetherBlocks.MUSHROOM_GRASS
+        BNBlockProperties.JellyShape visual = down == NetherTerrainBlocks.MUSHROOM_GRASS
                 ? BNBlockProperties.JellyShape.NORMAL
-                : down == NetherBlocks.SEPIA_MUSHROOM_GRASS
+                : down == NetherTerrainBlocks.SEPIA_MUSHROOM_GRASS
                         ? BNBlockProperties.JellyShape.SEPIA
                         : BNBlockProperties.JellyShape.POOR;
         BlocksHelper.setWithUpdate(
                 world,
                 pos,
-                NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
+                NetherMushroomBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
                                                .setValue(
                                                        BlockJellyfishMushroom.SHAPE,
                                                        TripleShape.MIDDLE
@@ -81,7 +84,7 @@ public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfigur
         BlocksHelper.setWithUpdate(
                 world,
                 pos.above(),
-                NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
+                NetherMushroomBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
                                                .setValue(
                                                        BlockJellyfishMushroom.SHAPE,
                                                        TripleShape.TOP

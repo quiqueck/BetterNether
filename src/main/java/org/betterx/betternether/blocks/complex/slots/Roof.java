@@ -1,19 +1,21 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.trait.BlockRecipeTrait;
-import org.betterx.wover.block.api.trait.BlockTraitLookup;
-import org.betterx.wover.block.api.trait.BlockTraits;
-import org.betterx.wover.recipe.api.RecipeBuilder;
-import org.betterx.wover.sets.api.blocks.BlockSet;
-import org.betterx.wover.sets.api.blocks.SlotFromDefinition;
-import org.betterx.wover.sets.api.blocks.SlotType;
+import de.ambertation.wover.block.api.model.ModelTraitLibrary;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockRecipeTrait;
+import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.block.api.trait.BlockTraits;
+import de.ambertation.wover.recipe.api.RecipeBuilder;
+import de.ambertation.wover.sets.api.blocks.BlockSet;
+import de.ambertation.wover.sets.api.blocks.SlotFromDefinition;
+import de.ambertation.wover.sets.api.blocks.SlotType;
 
 import net.minecraft.data.recipes.RecipeCategory;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.world.level.block.Block;
 
 /**
  * A full "roof" block crafted from planks; a plain wood cube (behaviour supplied by the set's
@@ -27,7 +29,7 @@ public class Roof extends SlotFromDefinition {
     }
 
     @Override
-    protected void addSlotSpecificDefinitions(BlockSet<?> set, org.betterx.wover.block.api.BlockDefinition<?, ?> def) {
+    protected void addSlotSpecificDefinitions(BlockSet<?> set, de.ambertation.wover.block.api.BlockDefinition<?, ?> def) {
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
     }
 
@@ -45,7 +47,7 @@ public class Roof extends SlotFromDefinition {
 
     @Environment(EnvType.CLIENT)
     @Override
-    protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+    protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return ModelTraitLibrary.cube();
     }
 }

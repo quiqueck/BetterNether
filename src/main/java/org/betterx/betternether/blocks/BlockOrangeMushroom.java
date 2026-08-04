@@ -1,13 +1,11 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -21,10 +19,7 @@ public class BlockOrangeMushroom extends BlockCommonPlant {
     };
 
     public BlockOrangeMushroom(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
-                .mapColor(MapColor.COLOR_ORANGE)
-                .destroyTime(0.5F)
-        );
+        super(settings);
     }
 
     @Override

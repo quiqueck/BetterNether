@@ -1,6 +1,9 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.wover.sets.api.blocks.SlotType;
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
+import de.ambertation.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockNetherGrass;
 import org.betterx.betternether.blocks.BlockWillowLeaves;
@@ -84,7 +87,7 @@ public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> 
                                             ? Direction.AxisDirection.POSITIVE
                                             : Direction.AxisDirection.NEGATIVE
                             );
-                        setIfAir(world, context.POS, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(
+                        setIfAir(world, context.POS, NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState().setValue(
                                 BlockWillowLeaves.FACING, dir).setValue(LeavesBlock.PERSISTENT, true));
                     }
                 }
@@ -94,40 +97,40 @@ public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> 
         BlocksHelper.setWithoutUpdate(
                 world,
                 pos,
-                NetherBlocks.MAT_WILLOW.getBlock(SlotType.BARK).defaultBlockState()
+                NetherWoodBlocks.MAT_WILLOW.getBlock(SlotType.BARK).defaultBlockState()
         );
         setIfAir(
                 world,
                 pos.above(),
-                NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.UP)
                                           .setValue(LeavesBlock.DISTANCE, 1)
         );
         setIfAir(
                 world,
                 pos.north(),
-                NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.NORTH)
                                           .setValue(LeavesBlock.DISTANCE, 1)
         );
         setIfAir(
                 world,
                 pos.south(),
-                NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.SOUTH)
                                           .setValue(LeavesBlock.DISTANCE, 1)
         );
         setIfAir(
                 world,
                 pos.east(),
-                NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.EAST)
                                           .setValue(LeavesBlock.DISTANCE, 1)
         );
         setIfAir(
                 world,
                 pos.west(),
-                NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.WEST)
                                           .setValue(LeavesBlock.DISTANCE, 1)
         );

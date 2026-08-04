@@ -6,12 +6,12 @@
     "lakes": false,
     "layers": [
       {
-        "block": "minecraft:bedrock",
-        "height": 1
-      },
-      {
         "block": "minecraft:netherrack",
         "height": 63
+      },
+      {
+        "block": "minecraft:bedrock",
+        "height": 1
       }
     ],
     "structure_overrides": []

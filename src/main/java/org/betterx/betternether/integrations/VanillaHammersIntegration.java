@@ -1,7 +1,7 @@
 package org.betterx.betternether.integrations;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.core.api.ModCore;
+import de.ambertation.wover.core.api.ModCore;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;

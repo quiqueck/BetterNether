@@ -2,7 +2,7 @@ package org.betterx.betternether.config;
 
 import de.ambertation.wunderlib.configs.ConfigFile;
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.config.api.MainConfig;
+import de.ambertation.wover.config.api.MainConfig;
 
 public class WorldConfig extends ConfigFile {
     public final BooleanValue addNetherCityToOverworld = new BooleanValue(

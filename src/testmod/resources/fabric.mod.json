@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "betternether-testmod",
+  "version": "1.0.0",
+  "name": "BetterNether (TestMod)",
+  "description": "Headless GameTest suite for BetterNether. Never shipped.",
+  "authors": [
+    "Quiqueck"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "org.betterx.betternether.testmod.gametest.ObsidianBreakerGameTest",
+      "org.betterx.betternether.testmod.gametest.RubyFireGameTest",
+      "org.betterx.betternether.testmod.gametest.DefaultEnchantmentGameTest",
+      "org.betterx.betternether.testmod.gametest.ObsidianAdvancementGameTest"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "betternether": "*"
+  }
+}

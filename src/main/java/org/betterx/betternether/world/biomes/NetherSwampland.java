@@ -1,14 +1,16 @@
 package org.betterx.betternether.world.biomes;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
-import org.betterx.wover.surface.api.Conditions;
-import org.betterx.wover.surface.impl.BaseSurfaceRuleBuilder;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.surface.api.Conditions;
+import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
@@ -69,7 +71,7 @@ public class NetherSwampland extends NetherBiomeConfig {
                                 SurfaceRules.ON_FLOOR,
                                 SurfaceRules.ifTrue(
                                         Conditions.roughNoise(Noises.NETHERRACK, 0.14),
-                                        SurfaceRules.state(NetherBlocks.SWAMPLAND_GRASS.defaultBlockState())
+                                        SurfaceRules.state(NetherTerrainBlocks.SWAMPLAND_GRASS.defaultBlockState())
                                 )
                         ),
                         SurfaceRules.ifTrue(

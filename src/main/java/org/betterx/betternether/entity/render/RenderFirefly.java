@@ -7,8 +7,10 @@ import org.betterx.betternether.registry.EntityRenderRegistry;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -82,19 +84,17 @@ class FireflyGlowFeatureRenderer extends RenderLayer<FireflyRenderState, ModelEn
     ) {
         matrices.pushPose();
 
-			/* //Original transform
-			matrixStack.translate(0, 0.125, 0);
-			matrixStack.multiply(this.dispatcher.getRotation());
-			matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F));*/
-
         matrices.translate(0, 1.25, 0);
 
-        //Get inverse rotation to make view-aligned
-        Matrix3f normalMatrix = matrices.last().normal();
-        normalMatrix.transpose();
-//        Triple<Quaternion, Vector3f, Quaternion> trip = normalMatrix.svdDecompose();
-//        matrices.mulPose(trip.getLeft());
-        matrices.mulPose(normalMatrix.transpose(new Matrix3f()).getNormalizedRotation(new Quaternionf()));
+        // The incoming pose already carries the firefly's own facing rotation (applied by
+        // MobRenderer). Cancel it out first - for a pure rotation the normal matrix equals
+        // the rotation itself, so its transpose is the inverse - then rotate by the camera's
+        // orientation so the quad billboards to the viewer regardless of how the firefly is facing.
+        Matrix3f entityRotation = new Matrix3f(matrices.last().normal());
+        matrices.mulPose(entityRotation.transpose().getNormalizedRotation(new Quaternionf()));
+
+        matrices.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        matrices.mulPose(Axis.YP.rotationDegrees(180.0F));
 
         PoseStack.Pose entry = matrices.last();
         Matrix4f matrix4f = entry.pose();

@@ -1,5 +1,7 @@
 package org.betterx.betternether.mixin.common;
 
+import org.betterx.betternether.registry.block.NetherObsidianBlocks;
+
 import org.betterx.betternether.blocks.BNObsidian;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -38,7 +40,7 @@ public class LightningRodBlockMixin {
             if (state.is(Blocks.OBSIDIAN)) {
                 BNObsidian.onLightningUpdate(level, mutableBlockPos, Blocks.CRYING_OBSIDIAN);
             } else if (state.is(Blocks.CRYING_OBSIDIAN)) {
-                BNObsidian.onLightningUpdate(level, mutableBlockPos, NetherBlocks.WEEPING_OBSIDIAN);
+                BNObsidian.onLightningUpdate(level, mutableBlockPos, NetherObsidianBlocks.WEEPING_OBSIDIAN);
             }
         }
     }

@@ -2,6 +2,8 @@ package org.betterx.betternether;
 
 import org.betterx.betternether.blocks.BlockFarmland;
 
+import de.ambertation.wover.feature.api.WriteZone;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -71,23 +73,61 @@ public class BlocksHelper {
         return decorationBounds(world, pos, minBuildHeight, maxBuildHeight);
     }
 
+    /**
+     * The horizontal box a feature decorating {@code world} may currently touch, clamped to the given build
+     * heights.
+     * <p>
+     * Delegates to {@link WriteZone#of(LevelAccessor)} rather than assuming a write radius of 1 around
+     * {@code pos}' own chunk. Two differences follow, both in the direction of being more correct:
+     * <ul>
+     *     <li>the box is anchored on the chunk the region is actually decorating, not on whichever chunk a
+     *     placement modifier happened to emit {@code pos} into - those are the same chunk in the normal
+     *     case, and where they are not, the old box permitted writes the world was silently dropping;</li>
+     *     <li>outside a {@code WorldGenRegion} - a sapling grown by a player in a live {@code ServerLevel} -
+     *     there is no write restriction at all, so nothing is clipped. The old box cut such a tree off at a
+     *     48-block wall for no reason.</li>
+     * </ul>
+     */
     public static BoundingBox decorationBounds(LevelAccessor world, BlockPos pos, int minY, int maxY) {
-        final int chunkStartX = (pos.getX() >> 4) << 4;
-        final int chunkStartZ = (pos.getZ() >> 4) << 4;
+        return WriteZone.of(world).toBoundingBox(minY, maxY);
+    }
 
-        return new BoundingBox(chunkStartX - 16, minY, chunkStartZ - 16, chunkStartX + 31, maxY, chunkStartZ + 31);
+    /**
+     * Tests {@code x}/{@code z} against {@code bounds} while ignoring the Y axis.
+     * <p>
+     * A feature may only touch the 3x3 chunks around the one being decorated, and that limit is purely
+     * horizontal - walking up or down inside a legal column never leaves the write zone. Reading past it is
+     * not merely untidy: beyond the write radius the region only guarantees {@code structure_starts}, so the
+     * neighbouring chunk may still be empty and what the feature decides from that read depends on how far
+     * that chunk happened to get. (26.3 logs such reads; this version does not, which makes them quieter
+     * rather than less wrong.) Guarding a read with the full {@link BoundingBox#isInside} would also cut it
+     * off at {@link #decorationBounds(LevelAccessor, BlockPos) decorationBounds}' build-height clamp, which
+     * changes what a feature generates near the ceiling; this rejects only the horizontal escape.
+     * <p>
+     * Same semantics as {@link WriteZone#contains(int, int)}, kept as a {@link BoundingBox} overload for the
+     * call sites that already hold a box.
+     */
+    public static boolean isInsideHorizontally(BoundingBox bounds, int x, int z) {
+        return x >= bounds.minX() && x <= bounds.maxX() && z >= bounds.minZ() && z <= bounds.maxZ();
+    }
+
+    /**
+     * @see #isInsideHorizontally(BoundingBox, int, int)
+     */
+    public static boolean isInsideHorizontally(BoundingBox bounds, BlockPos pos) {
+        return isInsideHorizontally(bounds, pos.getX(), pos.getZ());
     }
 
     public static boolean isNetherrack(BlockState state) {
-        return state.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHERRACK);
+        return state.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.NETHERRACK);
     }
 
     public static boolean isSoulSand(BlockState state) {
-        return state.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.SOUL_GROUND);
+        return state.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.SOUL_GROUND);
     }
 
     public static boolean isNetherGround(BlockState state) {
-        return state.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHER_STONES) || isSoulSand(state) || isNetherMycelium(
+        return state.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.NETHER_STONES) || isSoulSand(state) || isNetherMycelium(
                 state) || isNylium(state);
     }
 
@@ -96,7 +136,7 @@ public class BlocksHelper {
     }
 
     public static boolean isNetherMycelium(BlockState state) {
-        return state.is(org.betterx.wover.tag.api.predefined.CommonBlockTags.NETHER_MYCELIUM);
+        return state.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.NETHER_MYCELIUM);
     }
 
     public static void setWithUpdate(LevelAccessor world, BlockPos pos, BlockState state, BoundingBox bounds) {

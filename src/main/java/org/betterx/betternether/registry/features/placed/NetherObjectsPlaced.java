@@ -1,9 +1,9 @@
 package org.betterx.betternether.registry.features.placed;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.feature.api.placed.PlacedFeatureKey;
-import org.betterx.wover.feature.api.placed.PlacedFeatureManager;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.feature.api.placed.PlacedFeatureKey;
+import de.ambertation.wover.feature.api.placed.PlacedFeatureManager;
 
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.SURFACE_STRUCTURES;
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;

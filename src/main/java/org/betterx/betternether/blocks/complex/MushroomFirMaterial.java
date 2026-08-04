@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.betternether.blocks.BlockMushroomFir;
 import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.betternether.blocks.NetherSurvival;
@@ -10,22 +12,23 @@ import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.trait.BlockTraitLookup;
-import org.betterx.wover.sets.api.blocks.BlockSet;
+import de.ambertation.wover.block.api.model.ModelTraitLibrary;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.sets.api.blocks.BlockSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMaterial> {
     public MushroomFirMaterial() {
         super("mushroom_fir", MapColor.COLOR_BLUE, MapColor.COLOR_BLUE);
-        this.setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
+        this.setFurnitureCloth(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMateria
                     .add(new Stem() {
                         @Environment(EnvType.CLIENT)
                         @Override
-                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
                             return ModelTraitLibrary.externalModelDelegatedItem(
                                     () -> BetterNether.C.mk("block/mushroom_fir_trunk_middle")
                             );

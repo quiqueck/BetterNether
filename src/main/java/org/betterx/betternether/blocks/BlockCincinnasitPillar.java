@@ -14,7 +14,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockCincinnasitPillar extends BlockBase {
+public class BlockCincinnasitPillar extends Block {
     public static final EnumProperty<CincinnasitPillarShape> SHAPE = BNBlockProperties.PILLAR_SHAPE;
 
     public BlockCincinnasitPillar(Properties settings) {

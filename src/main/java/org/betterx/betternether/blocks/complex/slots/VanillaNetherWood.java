@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.wover.sets.api.blocks.SlotMap;
-import org.betterx.wover.sets.api.blocks.slots.WoodSlots;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.slots.WoodSlots;
 
 import net.minecraft.world.level.material.MapColor;
 

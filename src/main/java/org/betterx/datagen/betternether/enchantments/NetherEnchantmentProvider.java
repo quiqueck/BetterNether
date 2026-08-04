@@ -2,8 +2,8 @@ package org.betterx.datagen.betternether.enchantments;
 
 import org.betterx.betternether.registry.NetherEnchantments;
 import org.betterx.betternether.registry.NetherTags;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.WoverEnchantmentProvider;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.WoverEnchantmentProvider;
 
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;

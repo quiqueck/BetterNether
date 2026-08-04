@@ -4,11 +4,11 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.registry.features.placed.NetherOresPlaced;
-import org.betterx.wover.biome.api.modification.BiomeModification;
-import org.betterx.wover.biome.api.modification.BiomeModificationRegistry;
-import org.betterx.wover.biome.api.modification.predicates.BiomePredicate;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.WoverRegistryContentProvider;
+import de.ambertation.wover.biome.api.modification.BiomeModification;
+import de.ambertation.wover.biome.api.modification.BiomeModificationRegistry;
+import de.ambertation.wover.biome.api.modification.predicates.BiomePredicate;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.WoverRegistryContentProvider;
 
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.biome.Biomes;

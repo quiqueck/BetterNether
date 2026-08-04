@@ -1,10 +1,12 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockTrait;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTags;
-import org.betterx.wover.tag.api.predefined.CommonBlockTags;
+import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
@@ -96,6 +98,6 @@ public class NetherSurvival {
     }
 
     public static List<BlockTrait<?, ?>> boneBlocks() {
-        return List.of(SurvivesOnBlockTrait.withBlocks(Blocks.BONE_BLOCK, NetherBlocks.BONE_BLOCK));
+        return List.of(SurvivesOnBlockTrait.withBlocks(Blocks.BONE_BLOCK, NetherStoneBlocks.BONE_BLOCK));
     }
 }

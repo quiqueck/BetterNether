@@ -1,0 +1,108 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:nether_mushroom_stem"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:any_of",
+                  "terms": [
+                    {
+                      "block": "betternether:soul_lily",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "shape": "small"
+                      }
+                    },
+                    {
+                      "block": "betternether:soul_lily",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "shape": "medium_top"
+                      }
+                    },
+                    {
+                      "block": "betternether:soul_lily",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "shape": "big_top_center"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "betternether:soul_lily_sapling"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:any_of",
+                  "terms": [
+                    {
+                      "block": "betternether:soul_lily",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "shape": "big_top_side_n"
+                      }
+                    },
+                    {
+                      "block": "betternether:soul_lily",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "shape": "big_top_side_s"
+                      }
+                    },
+                    {
+                      "block": "betternether:soul_lily",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "shape": "big_top_side_e"
+                      }
+                    },
+                    {
+                      "block": "betternether:soul_lily",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "shape": "big_top_side_w"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 1.0,
+                    "min": 0.0
+                  },
+                  "function": "minecraft:set_count"
+                }
+              ],
+              "name": "betternether:soul_lily_sapling"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

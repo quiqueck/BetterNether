@@ -1,7 +1,6 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -10,21 +9,14 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public class BlockEyeball extends BlockEyeBase {
     public BlockEyeball(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
-                .mapColor(MapColor.COLOR_BROWN)
-                .sound(SoundType.SLIME_BLOCK)
-                .strength(0.5F, 0.5F)
-                .randomTicks()
-        );
+        super(settings);
     }
 
     @Environment(EnvType.CLIENT)

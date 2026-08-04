@@ -1,14 +1,17 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+import org.betterx.betternether.registry.block.NetherVineBlocks;
+
 import org.betterx.betternether.blocks.BlockNeonEquisetum;
 import org.betterx.betternether.blocks.BlockWhisperingGourdVine;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
-import org.betterx.wover.block.api.BlockProperties;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
-import org.betterx.wover.feature.api.features.config.PillarFeatureConfig;
+import de.ambertation.wover.block.api.BlockProperties;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
+import de.ambertation.wover.feature.api.features.config.PillarFeatureConfig;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -31,7 +34,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
                 .prioritizeTip()
-                .addTripleShapeUpsideDown(NetherBlocks.LUMABUS_VINE.defaultBlockState(), ClampedNormalInt.of(10, 3, 3, 21))
+                .addTripleShapeUpsideDown(NetherVineBlocks.LUMABUS_VINE.defaultBlockState(), ClampedNormalInt.of(10, 3, 3, 21))
                 .register();
         NetherVines.PATCH_LUMABUS_VINE
                 .bootstrap(ctx)
@@ -43,7 +46,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
                 .prioritizeTip()
-                .addTripleShapeUpsideDown(NetherBlocks.GOLDEN_LUMABUS_VINE.defaultBlockState(), ClampedNormalInt.of(12, 3.3f, 2, 23))
+                .addTripleShapeUpsideDown(NetherVineBlocks.GOLDEN_LUMABUS_VINE.defaultBlockState(), ClampedNormalInt.of(12, 3.3f, 2, 23))
                 .register();
         NetherVines.PATCH_GOLDEN_LUMABUS_VINE
                 .bootstrap(ctx)
@@ -55,7 +58,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
                 .prioritizeTip()
-                .addBottomShapeUpsideDown(NetherBlocks.GOLDEN_VINE.defaultBlockState(), ClampedNormalInt.of(12, 3, 3, 23))
+                .addBottomShapeUpsideDown(NetherVineBlocks.GOLDEN_VINE.defaultBlockState(), ClampedNormalInt.of(12, 3, 3, 23))
                 .inlinePlace()
                 .isEmptyAndUnderNetherGround()
                 .inRandomPatch()
@@ -65,7 +68,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
         NetherVines.PATCH_GOLDEN_VINE_SPARSE
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
-                .addBottomShapeUpsideDown(NetherBlocks.GOLDEN_VINE.defaultBlockState(), ClampedNormalInt.of(12, 3, 3, 23))
+                .addBottomShapeUpsideDown(NetherVineBlocks.GOLDEN_VINE.defaultBlockState(), ClampedNormalInt.of(12, 3, 3, 23))
                 .inlinePlace()
                 .isEmptyAndUnderNetherGround()
                 .inRandomPatch()
@@ -76,8 +79,8 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .prioritizeTip()
                 .direction(Direction.DOWN)
-                .add(ClampedNormalInt.of(6, 3, 3, 16), NetherBlocks.EYE_VINE.defaultBlockState())
-                .addRandom(1, NetherBlocks.EYEBALL.defaultBlockState(), NetherBlocks.EYEBALL_SMALL.defaultBlockState())
+                .add(ClampedNormalInt.of(6, 3, 3, 16), NetherVineBlocks.EYE_VINE.defaultBlockState())
+                .addRandom(1, NetherPlantBlocks.EYEBALL.defaultBlockState(), NetherPlantBlocks.EYEBALL_SMALL.defaultBlockState())
                 .register();
         NetherVines.PATCH_EYE_VINE
                 .bootstrap(ctx)
@@ -89,7 +92,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .transformer(PillarFeatureConfig.KnownTransformers.BOTTOM_GROW)
                 .direction(Direction.DOWN)
-                .blockState(NetherBlocks.BLACK_VINE)
+                .blockState(NetherVineBlocks.BLACK_VINE)
                 .minHeight(3)
                 .maxHeight(ClampedNormalInt.of(12, 2.3f, 3, 16))
                 .inlinePlace()
@@ -110,7 +113,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .transformer(PillarFeatureConfig.KnownTransformers.BOTTOM_GROW)
                 .direction(Direction.DOWN)
-                .blockState(NetherBlocks.BLOOMING_VINE)
+                .blockState(NetherVineBlocks.BLOOMING_VINE)
                 .minHeight(3)
                 .maxHeight(ClampedNormalInt.of(14, 2, 3, 21))
                 .inlinePlace()
@@ -122,13 +125,13 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
         NetherVines.NEON_EQUISETUM
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
-                .add(BiasedToBottomInt.of(1, 21), NetherBlocks.NEON_EQUISETUM
+                .add(BiasedToBottomInt.of(1, 21), NetherPlantBlocks.NEON_EQUISETUM
                         .defaultBlockState()
                         .setValue(BlockNeonEquisetum.SHAPE, BlockProperties.TripleShape.TOP))
-                .add(1, NetherBlocks.NEON_EQUISETUM
+                .add(1, NetherPlantBlocks.NEON_EQUISETUM
                         .defaultBlockState()
                         .setValue(BlockNeonEquisetum.SHAPE, BlockProperties.TripleShape.MIDDLE))
-                .add(1, NetherBlocks.NEON_EQUISETUM
+                .add(1, NetherPlantBlocks.NEON_EQUISETUM
                         .defaultBlockState()
                         .setValue(BlockNeonEquisetum.SHAPE, BlockProperties.TripleShape.BOTTOM))
                 .prioritizeTip()
@@ -142,15 +145,15 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
         NetherVines.WHISPERING_GOURD_VINE
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
-                .add(1, NetherBlocks.WHISPERING_GOURD_VINE
+                .add(1, NetherVineBlocks.WHISPERING_GOURD_VINE
                         .defaultBlockState()
                         .setValue(BlockWhisperingGourdVine.SHAPE, BlockProperties.TripleShape.BOTTOM))
                 .add(BiasedToBottomInt.of(1, 5), new WeightedStateProvider(WeightedList
                         .<BlockState>builder()
-                        .add(NetherBlocks.WHISPERING_GOURD_VINE
+                        .add(NetherVineBlocks.WHISPERING_GOURD_VINE
                                 .defaultBlockState()
                                 .setValue(BlockWhisperingGourdVine.SHAPE, BlockProperties.TripleShape.TOP), 5)
-                        .add(NetherBlocks.WHISPERING_GOURD_VINE
+                        .add(NetherVineBlocks.WHISPERING_GOURD_VINE
                                 .defaultBlockState()
                                 .setValue(BlockWhisperingGourdVine.SHAPE, BlockProperties.TripleShape.MIDDLE), 5)))
                 .prioritizeTip()

@@ -1,11 +1,11 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.block.NetherCropBlocks;
 
-import net.minecraft.world.level.material.MapColor;
+import org.betterx.betternether.registry.NetherBlocks;
 
 public class BlockBlackAppleSeed extends BlockCommonSapling {
     public BlockBlackAppleSeed(Properties settings) {
-        super(NetherBlocks.BLACK_APPLE, org.betterx.betternether.blocks.materials.Materials.netherSapling(settings).mapColor(MapColor.COLOR_ORANGE).noLootTable());
+        super(NetherCropBlocks.BLACK_APPLE, settings);
     }
 }

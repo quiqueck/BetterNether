@@ -1,5 +1,11 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+import org.betterx.betternether.registry.block.NetherWallPlantBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockPlantWall;
@@ -31,10 +37,10 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
 
     protected static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);
     public static final Block[] wallPlants = {
-            NetherBlocks.JUNGLE_MOSS,
-            NetherBlocks.JUNGLE_MOSS,
-            NetherBlocks.WALL_MUSHROOM_BROWN,
-            NetherBlocks.WALL_MUSHROOM_RED
+            NetherPlantBlocks.JUNGLE_MOSS,
+            NetherPlantBlocks.JUNGLE_MOSS,
+            NetherWallPlantBlocks.WALL_MUSHROOM_BROWN,
+            NetherWallPlantBlocks.WALL_MUSHROOM_RED
     };
     final private LegacyStructureAnchorTree legacyStructure;
 
@@ -89,7 +95,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         int pd = BlocksHelper.downRay(level, down, MAX_HEIGHT) + 1;
         for (int i = 0; i < 5; i++) {
             Block block = level.getBlockState(down.below(pd + i)).getBlock();
-            if (block == Blocks.NETHER_BRICKS || block == NetherBlocks.NETHER_BRICK_TILE_LARGE || block == NetherBlocks.NETHER_BRICK_TILE_SMALL)
+            if (block == Blocks.NETHER_BRICKS || block == NetherStoneBlocks.NETHER_BRICK_TILE_LARGE || block == NetherStoneBlocks.NETHER_BRICK_TILE_SMALL)
                 return;
         }
 
@@ -150,9 +156,9 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 continue;
             boolean blockUp = true;
             if ((blockUp = context.BLOCKS.contains(bpos.above())) && context.BLOCKS.contains(bpos.below()))
-                BlocksHelper.setWithoutUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
+                BlocksHelper.setWithoutUpdate(level, bpos, NetherWoodBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
             else
-                BlocksHelper.setWithoutUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
+                BlocksHelper.setWithoutUpdate(level, bpos, NetherWoodBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
             if (bpos.getY() > HEIGHT_45 && bpos.getY() < HEIGHT_90 && (bpos.getY() & 3) == offset && NOISE.eval(
                     bpos.getX() * 0.1,
@@ -171,7 +177,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
 
             if (bpos.getY() > HEIGHT_64) {
                 if (!blockUp && level.getBlockState(bpos.above()).canBeReplaced()) {
-                    BlocksHelper.setWithoutUpdate(level, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
+                    BlocksHelper.setWithoutUpdate(level, bpos.above(), NetherPlantBlocks.MOSS_COVER.defaultBlockState());
                 }
 
                 if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
@@ -426,11 +432,11 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         }
 
         for (BlockPos p : placed) {
-            boolean north = world.getBlockState(p.north()).getBlock() != NetherBlocks.GIANT_LUCIS;
-            boolean south = world.getBlockState(p.south()).getBlock() != NetherBlocks.GIANT_LUCIS;
-            boolean east = world.getBlockState(p.east()).getBlock() != NetherBlocks.GIANT_LUCIS;
-            boolean west = world.getBlockState(p.west()).getBlock() != NetherBlocks.GIANT_LUCIS;
-            BlockState state = NetherBlocks.GIANT_LUCIS.defaultBlockState();
+            boolean north = world.getBlockState(p.north()).getBlock() != NetherMushroomBlocks.GIANT_LUCIS;
+            boolean south = world.getBlockState(p.south()).getBlock() != NetherMushroomBlocks.GIANT_LUCIS;
+            boolean east = world.getBlockState(p.east()).getBlock() != NetherMushroomBlocks.GIANT_LUCIS;
+            boolean west = world.getBlockState(p.west()).getBlock() != NetherMushroomBlocks.GIANT_LUCIS;
+            BlockState state = NetherMushroomBlocks.GIANT_LUCIS.defaultBlockState();
             BlocksHelper.setWithoutUpdate(world, p, state
                     .setValue(HugeMushroomBlock.NORTH, north)
                     .setValue(HugeMushroomBlock.SOUTH, south)

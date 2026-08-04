@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
+
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.util.LootUtil;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
@@ -15,26 +15,23 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-import java.util.Collections;
-import java.util.List;
-
-public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. The class already carries its own getDrops() override (falls through to
+// super.getDrops() - now Block's, not BlockBase's - when the tool check fails), so BlockBase's dropItself
+// mechanism was never really in play for the common case either.
+public class BlockSoulVein extends Block implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 1, 16);
 
     public BlockSoulVein(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings)
-                .mapColor(MapColor.COLOR_PURPLE)
-                .randomTicks());
+        super(settings);
     }
 
     @Override
@@ -81,16 +78,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
 
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         if (world.getBlockState(pos.below()).getBlock() == Blocks.SOUL_SAND)
-            world.setBlockAndUpdate(pos.below(), NetherBlocks.VEINED_SAND.defaultBlockState());
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (LootUtil.isCorrectTool(this, state, tool))
-            return Collections.singletonList(new ItemStack(this.asItem()));
-        else
-            return super.getDrops(state, builder);
+            world.setBlockAndUpdate(pos.below(), NetherTerrainBlocks.VEINED_SAND.defaultBlockState());
     }
 
 }

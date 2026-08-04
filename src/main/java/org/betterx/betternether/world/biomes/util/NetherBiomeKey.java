@@ -1,8 +1,8 @@
 package org.betterx.betternether.world.biomes.util;
 
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.wover.biome.api.BiomeKey;
-import org.betterx.wover.biome.api.builder.BiomeBootstrapContext;
+import de.ambertation.wover.biome.api.BiomeKey;
+import de.ambertation.wover.biome.api.builder.BiomeBootstrapContext;
 
 import net.minecraft.resources.ResourceLocation;
 

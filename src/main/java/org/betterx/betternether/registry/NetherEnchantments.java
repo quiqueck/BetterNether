@@ -1,9 +1,9 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.data_components.DataComponentManager;
-import org.betterx.wover.enchantment.api.EnchantmentKey;
-import org.betterx.wover.enchantment.api.EnchantmentManager;
+import de.ambertation.wover.data_components.DataComponentManager;
+import de.ambertation.wover.enchantment.api.EnchantmentKey;
+import de.ambertation.wover.enchantment.api.EnchantmentManager;
 
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.attributes.Attribute;

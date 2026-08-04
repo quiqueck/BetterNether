@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherFunctionalBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -35,7 +37,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
 
-public class BlockStatueRespawner extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12, KEEP per plan - genuine behaviour, not dissolved): its dead
+// canSuffocate/isSimpleFullBlock/allowsSpawning overrides are gone; lightLevel()/noOcclusion() move to the
+// registration site (NetherFunctionalBlocks.PIG_STATUE_RESPAWNER). setDropItself(false) is gone too - it only ever
+// made the block fall through to the vanilla loot-table-driven getDrops(), which is what happens by default
+// once the class no longer extends BlockBase.
+public class BlockStatueRespawner extends Block {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 16, 15);
     private static final VoxelShape CULL_SHAPE = Shapes.or(
             box(9, 0, 4, 13, 12, 8),
@@ -49,9 +56,8 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
     private final ItemStack requiredItem;
 
     public BlockStatueRespawner(BlockBehaviour.Properties settings) {
-        super(settings.lightLevel(state -> 15).noOcclusion());
+        super(settings);
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
-        this.setDropItself(false);
 
         Item item = BuiltInRegistries.ITEM.getOptional(BuiltInRegistries.ITEM.getKey(Items.GLOWSTONE))
                                           .orElse(Items.GLOWSTONE);

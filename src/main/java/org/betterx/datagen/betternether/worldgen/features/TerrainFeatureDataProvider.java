@@ -1,15 +1,17 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.configured.NetherTerrain;
 import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
-import org.betterx.wover.block.api.predicate.BlockPredicates;
-import org.betterx.wover.block.api.predicate.IsFullShape;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
-import org.betterx.wover.feature.api.Features;
-import org.betterx.wover.feature.api.features.config.ConditionFeatureConfig;
-import org.betterx.wover.feature.api.placed.modifiers.IsBasin;
+import de.ambertation.wover.block.api.predicate.BlockPredicates;
+import de.ambertation.wover.block.api.predicate.IsFullShape;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
+import de.ambertation.wover.feature.api.Features;
+import de.ambertation.wover.feature.api.features.config.ConditionFeatureConfig;
+import de.ambertation.wover.feature.api.placed.modifiers.IsBasin;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -156,7 +158,7 @@ public class TerrainFeatureDataProvider extends WoverFeatureProvider {
                 .onEveryLayerMin4()
                 .onlyInBiome()
                 .offset(Direction.DOWN)
-                .is(BlockPredicate.matchesBlocks(NetherBlocks.SOUL_SANDSTONE))
+                .is(BlockPredicate.matchesBlocks(NetherStoneBlocks.SOUL_SANDSTONE))
                 .register();
     }
 }

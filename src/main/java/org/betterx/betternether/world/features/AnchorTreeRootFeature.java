@@ -1,12 +1,17 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+import org.betterx.betternether.registry.block.NetherVineBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.blocks.BlockPlantWall;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.block.api.BlockProperties;
+import de.ambertation.wover.block.api.BlockProperties;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -57,7 +62,7 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
         buildLine(blocks, 1.3 + random.nextDouble(), context);
 
         BlockState state;
-        BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
+        BlockState vine = NetherVineBlocks.ANCHOR_TREE_VINE.defaultBlockState();
         final int minBuildHeight = world.getMinY() + 1;
         final BoundingBox blockBox = BlocksHelper.decorationBounds(world, pos, minBuildHeight, MAX_HEIGHT - 2);
         for (BlockPos bpos : context.BLOCKS) {
@@ -67,12 +72,12 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
             boolean blockUp;
             boolean blockDown = true;
             if ((blockUp = context.BLOCKS.contains(bpos.above())) && (blockDown = context.BLOCKS.contains(bpos.below())))
-                BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
+                BlocksHelper.setWithoutUpdate(world, bpos, NetherWoodBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
             else
-                BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
+                BlocksHelper.setWithoutUpdate(world, bpos, NetherWoodBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
             if (!blockUp && world.getBlockState(bpos.above()).canBeReplaced()) {
-                BlocksHelper.setWithoutUpdate(world, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
+                BlocksHelper.setWithoutUpdate(world, bpos.above(), NetherPlantBlocks.MOSS_COVER.defaultBlockState());
             }
 
             if ((bpos.getY() & 3) == 0 && AnchorTreeFeature.NOISE.eval(
@@ -152,8 +157,8 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
 
     private boolean canReplace(BlockState state) {
         return state.canBeReplaced()
-                || state.getBlock() == NetherBlocks.GIANT_LUCIS
-                || state.getBlock() == NetherBlocks.LUCIS_MUSHROOM
+                || state.getBlock() == NetherMushroomBlocks.GIANT_LUCIS
+                || state.getBlock() == NetherMushroomBlocks.LUCIS_MUSHROOM
                 || state.getBlock() instanceof BlockPlantWall;
     }
 

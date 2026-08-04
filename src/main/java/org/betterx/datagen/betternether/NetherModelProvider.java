@@ -2,15 +2,15 @@ package org.betterx.datagen.betternether;
 
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.block.api.BlockRegistry;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
-import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.WoverModelProvider;
-import org.betterx.wover.item.api.ItemRegistry;
-import org.betterx.wover.item.api.client.trait.ClientItemTraits;
-import org.betterx.wover.item.api.client.trait.ItemModelTrait;
+import de.ambertation.wover.block.api.BlockRegistry;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import de.ambertation.wover.block.api.model.WoverBlockModelGenerators;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.WoverModelProvider;
+import de.ambertation.wover.item.api.ItemRegistry;
+import de.ambertation.wover.item.api.client.trait.ClientItemTraits;
+import de.ambertation.wover.item.api.client.trait.ItemModelTrait;
 
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
@@ -117,9 +117,9 @@ public class NetherModelProvider extends WoverModelProvider {
         BlockModelTrait.bootstrapModels(modCore, generator, (key, block) -> !overrides.contain(block));
 
         // Blocks with an explicit ClientBlockTraits.MODEL trait are now fully handled above - skip the
-        // legacy BlockModelProvider-interface fallback in addFromRegistry() for them, since BaseBlock
-        // implements that interface unconditionally (defaulting to a plain cube model) and running both
-        // would register the same model twice.
+        // legacy BlockModelProvider-interface fallback in addFromRegistry() for them, so a block carrying
+        // a MODEL trait does not also get a plain cube model registered by the fallback (which would
+        // register the same model twice).
         registry.allBlocks().forEach(block -> {
             if (!overrides.contain(block) && ClientBlockTraits.MODEL.getRuntimeTraits(block) != null) {
                 overrides.ignore(block);

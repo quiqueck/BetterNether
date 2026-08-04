@@ -1,13 +1,13 @@
 package org.betterx.betternether.blocks.complex.slots;
 
-import org.betterx.wover.sets.api.blocks.SlotType;
+import de.ambertation.wover.sets.api.blocks.SlotType;
 
 /**
  * BetterNether-specific {@link SlotType}s used by the wover-sets-api wooden material sets
  * (see {@link org.betterx.betternether.blocks.complex.NetherWoodenMaterial} and subclasses).
  * <p>
  * The standard log/bark/plank/... slots come from
- * {@link org.betterx.wover.sets.api.blocks.slots.WoodSlots}; only the Nether-only extras live here.
+ * {@link de.ambertation.wover.sets.api.blocks.slots.WoodSlots}; only the Nether-only extras live here.
  */
 public class NetherSlots {
     public static final SlotType STEM = new SlotType("stem");

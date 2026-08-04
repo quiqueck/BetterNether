@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
@@ -40,7 +39,7 @@ public class BlockEggPlant extends BlockCommonPlant {
     private boolean enablePlayerDamage = true;
 
     public BlockEggPlant(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherPlant(settings).mapColor(MapColor.TERRACOTTA_WHITE));
+        super(settings);
         enableModDamage = Configs.GAME_RULES.eggPlantMobDamage.get();
         enablePlayerDamage = Configs.GAME_RULES.eggPlantPlayerDamage.get();
         this.registerDefaultState(getStateDefinition().any().setValue(DESTRUCTED, false));

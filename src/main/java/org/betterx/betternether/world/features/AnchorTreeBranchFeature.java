@@ -1,12 +1,17 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+import org.betterx.betternether.registry.block.NetherVineBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.block.api.BlockProperties;
-import org.betterx.wover.feature.api.features.GrowableFeature;
+import de.ambertation.wover.block.api.BlockProperties;
+import de.ambertation.wover.feature.api.WriteZone;
+import de.ambertation.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -54,12 +59,13 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
     ) {
         context.clear();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
+        final WriteZone zone = WriteZone.of(world);
         float scale = MHelper.randRange(0.5F, 1F, random);
         int minCount = scale < 0.75 ? 3 : 4;
         int maxCount = scale < 0.75 ? 5 : 7;
         int count = MHelper.randRange(minCount, maxCount, random);
 
-        final BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState()
+        final BlockState leaves = NetherLeavesBlocks.ANCHOR_TREE_LEAVES.defaultBlockState()
                                                                  .setValue(LeavesBlock.PERSISTENT, true);
         final Direction[] directions = {
                 Direction.NORTH,
@@ -88,7 +94,20 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
             float crownR = 9 * branchSize;
             if (crownR < 1.5F)
                 crownR = 1.5F;
-            crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, scale_factor, context);
+            // Size the crown to the room it has. At the stock Nether height this changes nothing - the
+            // feature's reach is (9*sf + 2)*bs + 9*bs = 16.0 with sf = 1, exactly the room a feature is
+            // guaranteed, and 200k sampled trees clip 0 % of the time. It stops being a no-op under a
+            // taller-Nether datapack: MAX_HEIGHT scales CURVE_X[0] (through scale_factor) but not the
+            // crown radius, so at MAX_HEIGHT = 256 the reach grows to 23.2 and about one branch in eighty
+            // is cut off, silently. Unlike willow's, this crown tests plain cx^2 + cz^2, so its horizontal
+            // reach is the full radius and headroom converts one for one.
+            // Below the feature's own minimum of 1.5 the honest answer is no crown rather than a one-block
+            // leaf blob; the branch itself is still drawn.
+            final float fittedR = zone.fitRadius(x1, z1, crownR, 1.5F);
+            if (fittedR >= 0) {
+                crownR = Math.min(crownR, fittedR);
+                crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, scale_factor, context);
+            }
 
             int middle = Math.round(pos.getY() + (MIDDLE_Y + MHelper.randRange(-2, 2, random)) * branchSize);
             boolean generate = true;
@@ -161,9 +180,9 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
 
         for (BlockPos bpos : context.POINTS) {
             if (context.POINTS.contains(bpos.above()) && context.POINTS.contains(bpos.below()))
-                state = NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState();
+                state = NetherWoodBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState();
             else
-                state = NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState();
+                state = NetherWoodBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState();
 
             BlocksHelper.setWithUpdate(world, bpos, state);
 
@@ -191,7 +210,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
                 for (int i = 1; i < max; i++) {
                     context.POS.setWithOffset(bpos, d.getStepX() * i, d.getStepY() * i, d.getStepZ() * i);
                     BlockState currentState = world.getBlockState(context.POS);
-                    if (currentState.is(NetherBlocks.ANCHOR_TREE_VINE) || currentState.is(Blocks.AIR)) {
+                    if (currentState.is(NetherVineBlocks.ANCHOR_TREE_VINE) || currentState.is(Blocks.AIR)) {
                         BlocksHelper.setWithUpdate(world, context.POS, leaves);
                         //safeSet(world, mutableBlockPos, Blocks.WHITE_CONCRETE.defaultBlockState());
 
@@ -199,7 +218,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
                         BlockPos vpos = context.POS.above();
                         currentState = world.getBlockState(vpos);
 
-                        while (currentState.is(NetherBlocks.ANCHOR_TREE_VINE)) {
+                        while (currentState.is(NetherVineBlocks.ANCHOR_TREE_VINE)) {
                             safeSet(world, vpos, leaves);
                             //safeSet(world, vpos, Blocks.YELLOW_WOOL.defaultBlockState());
                             vpos = vpos.above();
@@ -266,7 +285,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
                     BlockPos pos = logPos.below();
                     currentState = world.getBlockState(pos);
 
-                    while (currentState.is(NetherBlocks.ANCHOR_TREE_VINE)) {
+                    while (currentState.is(NetherVineBlocks.ANCHOR_TREE_VINE)) {
                         safeSet(world, pos, Blocks.AIR.defaultBlockState());
                         //safeSet(world, pos, Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState());
                         pos = pos.below();
@@ -366,8 +385,8 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
         HEIGHT_15 = (int) (15 * scale_factor + rnd);
         HEIGHT_17 = (int) (17 * scale_factor + rnd);
 
-        BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
-        BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
+        BlockState leaves = NetherLeavesBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
+        BlockState vine = NetherVineBlocks.ANCHOR_TREE_VINE.defaultBlockState();
 
         final float halfR = radius * 0.5F;
         final float r2 = radius * radius;

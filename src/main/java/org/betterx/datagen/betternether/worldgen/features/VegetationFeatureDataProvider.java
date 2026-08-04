@@ -1,13 +1,21 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
+import org.betterx.betternether.registry.block.NetherCropBlocks;
+import org.betterx.betternether.registry.block.NetherDecorBlocks;
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+import org.betterx.betternether.registry.block.NetherPlantBlocks;
+import org.betterx.betternether.registry.block.NetherVineBlocks;
+import org.betterx.betternether.registry.block.NetherWallPlantBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
-import org.betterx.wover.block.api.predicate.BlockPredicates;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.multi.WoverFeatureProvider;
+import de.ambertation.wover.block.api.predicate.BlockPredicates;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -41,18 +49,18 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                         .inlinePlace()
                         .directHolder()
                 )
-                .add(NetherBlocks.GRAY_MOLD, 200, GRAY_MOLD_ID)
-                .add(NetherBlocks.RED_MOLD, 180)
-                .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 100)
+                .add(NetherMushroomBlocks.GRAY_MOLD, 200, GRAY_MOLD_ID)
+                .add(NetherMushroomBlocks.RED_MOLD, 180)
+                .addAllStatesFor(BlockCommonPlant.AGE, NetherMushroomBlocks.ORANGE_MUSHROOM, 100)
                 .addAll(60, MUSHROOM_ID, Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM)
                 .add(Blocks.CRIMSON_FUNGUS, 80, MUSHROOM_ID)
                 .add(Blocks.WARPED_FUNGUS, 80, MUSHROOM_ID)
                 .addAll(
                         30,
                         MUSHROOM_ID,
-                        NetherBlocks.SEPIA_BONE_GRASS,
-                        NetherBlocks.BONE_GRASS,
-                        NetherBlocks.JUNGLE_PLANT
+                        NetherPlantBlocks.SEPIA_BONE_GRASS,
+                        NetherPlantBlocks.BONE_GRASS,
+                        NetherPlantBlocks.JUNGLE_PLANT
                 )
                 .register();
 
@@ -69,7 +77,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
 
         NetherVegetation.PATCH_BLACK_BUSH
                 .bootstrap(ctx)
-                .block(NetherBlocks.BLACK_BUSH)
+                .block(NetherPlantBlocks.BLACK_BUSH)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
@@ -78,45 +86,45 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
 
         NetherVegetation.BONEMEAL_SOUL_SOIL
                 .bootstrap(ctx)
-                .add(NetherBlocks.SOUL_VEIN, 150)
-                .add(NetherBlocks.SOUL_GRASS, 200)
+                .add(NetherVineBlocks.SOUL_VEIN, 150)
+                .add(NetherPlantBlocks.SOUL_GRASS, 200)
                 .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
                 .register();
 
         NetherVegetation.VEGETATION_MAGMA_LAND
                 .bootstrap(ctx)
-                .add(NetherBlocks.GEYSER, 40)
-                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 120)
+                .add(NetherDecorBlocks.GEYSER, 40)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherPlantBlocks.MAGMA_FLOWER, 120)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
                 .register();
         NetherVegetation.VEGETATION_GRASSLANDS
                 .bootstrap(ctx)
-                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
-                .addAllStatesFor(BlockInkBush.AGE, NetherBlocks.INK_BUSH, 80)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherPlantBlocks.MAGMA_FLOWER, 30)
+                .addAllStatesFor(BlockInkBush.AGE, NetherPlantBlocks.INK_BUSH, 80)
                 .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 40)
-                .add(NetherBlocks.NETHER_GRASS, 200)
-                .addAllStatesFor(BlockBlackApple.AGE, NetherBlocks.BLACK_APPLE, 50)
-                .add(NetherBlocks.MAT_WART.getSeed(), 60)
+                .add(NetherPlantBlocks.NETHER_GRASS, 200)
+                .addAllStatesFor(BlockBlackApple.AGE, NetherCropBlocks.BLACK_APPLE, 50)
+                .add(NetherWoodBlocks.MAT_WART.getSeed(), 60)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
                 .register();
         NetherVegetation.VEGETATION_GRAVEL_DESERT
                 .bootstrap(ctx)
-                .addAllStatesFor(BlockAgave.AGE, NetherBlocks.AGAVE, 80)
-                .addAllStatesFor(BlockBarrelCactus.AGE, NetherBlocks.BARREL_CACTUS, 20)
+                .addAllStatesFor(BlockAgave.AGE, NetherPlantBlocks.AGAVE, 80)
+                .addAllStatesFor(BlockBarrelCactus.AGE, NetherPlantBlocks.BARREL_CACTUS, 20)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
                 .register();
         NetherVegetation.VEGETATION_JUNGLE
                 .bootstrap(ctx)
-                .addAllStatesFor(BlockEggPlant.AGE, NetherBlocks.EGG_PLANT, 80)
-                .add(NetherBlocks.JUNGLE_PLANT, 80)
-                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
-                .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
+                .addAllStatesFor(BlockEggPlant.AGE, NetherPlantBlocks.EGG_PLANT, 80)
+                .add(NetherPlantBlocks.JUNGLE_PLANT, 80)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherPlantBlocks.MAGMA_FLOWER, 30)
+                .addAllStatesFor(BlockFeatherFern.AGE, NetherPlantBlocks.FEATHER_FERN, 20)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
@@ -130,16 +138,16 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                         .directHolder()
                 )
                 .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 40)
-                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 120)
-                .add(NetherBlocks.NETHER_GRASS, 200)
-                .addAllStatesFor(BlockInkBush.AGE, NetherBlocks.INK_BUSH, 80)
-                .addAllStatesFor(BlockBlackApple.AGE, NetherBlocks.BLACK_APPLE, 50)
-                .add(NetherBlocks.MAT_WART.getSeed(), 80)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherPlantBlocks.MAGMA_FLOWER, 120)
+                .add(NetherPlantBlocks.NETHER_GRASS, 200)
+                .addAllStatesFor(BlockInkBush.AGE, NetherPlantBlocks.INK_BUSH, 80)
+                .addAllStatesFor(BlockBlackApple.AGE, NetherCropBlocks.BLACK_APPLE, 50)
+                .add(NetherWoodBlocks.MAT_WART.getSeed(), 80)
                 .register();
         NetherVegetation.VEGETATION_SOUL_PLAIN
                 .bootstrap(ctx)
-                .add(NetherBlocks.SOUL_VEIN, 80)
-                .add(NetherBlocks.SOUL_GRASS, 200)
+                .add(NetherVineBlocks.SOUL_VEIN, 80)
+                .add(NetherPlantBlocks.SOUL_GRASS, 200)
                 .inlinePlace()
                 .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
                 .inRandomPatch()
@@ -147,7 +155,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
         NetherVegetation.VEGETATION_WART_FOREST
                 .bootstrap(ctx)
                 .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 120)
-                .add(NetherBlocks.MAT_WART.getSeed(), 60)
+                .add(NetherWoodBlocks.MAT_WART.getSeed(), 60)
                 .inlinePlace()
                 .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
                 .inRandomPatch()
@@ -155,27 +163,27 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
         NetherVegetation.VEGETATION_WART_FOREST_EDGE
                 .bootstrap(ctx)
                 .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 120)
-                .add(NetherBlocks.MAT_WART.getSeed(), 60)
-                .add(NetherBlocks.SOUL_GRASS, 200)
+                .add(NetherWoodBlocks.MAT_WART.getSeed(), 60)
+                .add(NetherPlantBlocks.SOUL_GRASS, 200)
                 .inlinePlace()
                 .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
                 .inRandomPatch()
                 .register();
         NetherVegetation.VEGETATION_SWAMPLAND
                 .bootstrap(ctx)
-                .add(NetherBlocks.SOUL_VEIN, 80)
-                .add(NetherBlocks.SWAMP_GRASS, 200)
-                .add(NetherBlocks.FEATHER_FERN, 80)
+                .add(NetherVineBlocks.SOUL_VEIN, 80)
+                .add(NetherPlantBlocks.SWAMP_GRASS, 200)
+                .add(NetherPlantBlocks.FEATHER_FERN, 80)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
                 .register();
         NetherVegetation.VEGETATION_OLD_SWAMPLAND
                 .bootstrap(ctx)
-                .add(NetherBlocks.SOUL_VEIN, 80)
-                .add(NetherBlocks.SWAMP_GRASS, 100)
+                .add(NetherVineBlocks.SOUL_VEIN, 80)
+                .add(NetherPlantBlocks.SWAMP_GRASS, 100)
                 .add(Blocks.SCULK_VEIN, 40)
-                .add(NetherBlocks.FEATHER_FERN, 80)
+                .add(NetherPlantBlocks.FEATHER_FERN, 80)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
@@ -193,7 +201,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .direction(Direction.UP)
                 .prioritizeTip()
-                .addTopShape(NetherBlocks.NETHER_CACTUS.defaultBlockState(), BiasedToBottomInt.of(1, 4))
+                .addTopShape(NetherPlantBlocks.NETHER_CACTUS.defaultBlockState(), BiasedToBottomInt.of(1, 4))
                 .inlinePlace()
                 .isEmptyAndOn(BlockPredicates.ONLY_GRAVEL_OR_SAND)
                 .inRandomPatch()
@@ -202,8 +210,8 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
 
         NetherVegetation.WALL_MUSHROOM_RED_WITH_MOSS
                 .bootstrap(ctx)
-                .add(NetherBlocks.WALL_MUSHROOM_RED, 40)
-                .add(NetherBlocks.WALL_MOSS, 20)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_RED, 40)
+                .add(NetherWallPlantBlocks.WALL_MOSS, 20)
                 .allHorizontal()
                 .inlinePlace()
                 .is(BlockPredicate.solid())
@@ -214,9 +222,9 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .register();
         NetherVegetation.WALL_MUSHROOMS_WITH_MOSS
                 .bootstrap(ctx)
-                .add(NetherBlocks.WALL_MUSHROOM_RED, 40)
-                .add(NetherBlocks.WALL_MUSHROOM_BROWN, 35)
-                .add(NetherBlocks.WALL_MOSS, 20)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_RED, 40)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_BROWN, 35)
+                .add(NetherWallPlantBlocks.WALL_MOSS, 20)
                 .allHorizontal()
                 .inlinePlace()
                 .is(BlockPredicate.solid())
@@ -227,8 +235,8 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .register();
         NetherVegetation.WALL_MUSHROOMS
                 .bootstrap(ctx)
-                .add(NetherBlocks.WALL_MUSHROOM_RED, 40)
-                .add(NetherBlocks.WALL_MUSHROOM_BROWN, 35)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_RED, 40)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_BROWN, 35)
                 .allHorizontal()
                 .inlinePlace()
                 .is(BlockPredicate.solid())
@@ -239,10 +247,10 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .register();
         NetherVegetation.WALL_JUNGLE
                 .bootstrap(ctx)
-                .add(NetherBlocks.WALL_MUSHROOM_RED, 20)
-                .add(NetherBlocks.WALL_MUSHROOM_BROWN, 15)
-                .add(NetherBlocks.JUNGLE_MOSS, 40)
-                .add(NetherBlocks.WALL_MOSS, 40)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_RED, 20)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_BROWN, 15)
+                .add(NetherPlantBlocks.JUNGLE_MOSS, 40)
+                .add(NetherWallPlantBlocks.WALL_MOSS, 40)
                 .allHorizontal()
                 .inlinePlace()
                 .inRandomPatch()
@@ -252,9 +260,9 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .register();
         NetherVegetation.WALL_UPSIDE_DOWN
                 .bootstrap(ctx)
-                .add(NetherBlocks.WALL_MUSHROOM_RED, 20)
-                .add(NetherBlocks.WALL_MUSHROOM_BROWN, 15)
-                .add(NetherBlocks.JUNGLE_MOSS, 90)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_RED, 20)
+                .add(NetherWallPlantBlocks.WALL_MUSHROOM_BROWN, 15)
+                .add(NetherPlantBlocks.JUNGLE_MOSS, 90)
                 .allHorizontal()
                 .inlinePlace()
                 .is(BlockPredicate.solid())
@@ -267,7 +275,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .bootstrap(ctx)
                 .direction(Direction.UP)
                 .prioritizeTip()
-                .addTopShape(NetherBlocks.MAT_REED.getStem().defaultBlockState(), BiasedToBottomInt.of(0, 3))
+                .addTopShape(NetherWoodBlocks.MAT_REED.getStem().defaultBlockState(), BiasedToBottomInt.of(0, 3))
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .belowIsNextTo(BlockPredicates.ONLY_LAVA)
@@ -303,15 +311,15 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .register();
         NetherVegetation.SCULK_VEGETATION
                 .bootstrap(ctx)
-                .add(NetherBlocks.SWAMP_GRASS, 200)
-                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 80)
+                .add(NetherPlantBlocks.SWAMP_GRASS, 200)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherPlantBlocks.MAGMA_FLOWER, 80)
                 .inlinePlace()
                 .isEmptyAndOn(BlockPredicate.matchesBlocks(Blocks.SCULK))
                 .inRandomPatch()
                 .register();
         NetherVegetation.HOOK_MUSHROOM
                 .bootstrap(ctx)
-                .block(NetherBlocks.HOOK_MUSHROOM)
+                .block(NetherMushroomBlocks.HOOK_MUSHROOM)
                 .inlinePlace()
                 .isEmptyAndUnderNetherGround()
                 .inRandomPatch()
@@ -319,7 +327,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .register();
         NetherVegetation.MOSS_COVER
                 .bootstrap(ctx)
-                .block(NetherBlocks.MOSS_COVER)
+                .block(NetherPlantBlocks.MOSS_COVER)
                 .inlinePlace()
                 .isEmptyAndOnNetherGround()
                 .inRandomPatch()
@@ -329,52 +337,52 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
 
         NetherVegetation.BONEMEAL_NETHERRACK_MOSS
                 .bootstrap(ctx)
-                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
-                .addAllStatesFor(BlockInkBush.AGE, NetherBlocks.INK_BUSH, 80)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherPlantBlocks.MAGMA_FLOWER, 30)
+                .addAllStatesFor(BlockInkBush.AGE, NetherPlantBlocks.INK_BUSH, 80)
                 .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 40)
-                .add(NetherBlocks.NETHER_GRASS, 200)
-                .addAllStatesFor(BlockBlackApple.AGE, NetherBlocks.BLACK_APPLE, 50)
-                .add(NetherBlocks.MAT_WART.getSeed(), 60)
+                .add(NetherPlantBlocks.NETHER_GRASS, 200)
+                .addAllStatesFor(BlockBlackApple.AGE, NetherCropBlocks.BLACK_APPLE, 50)
+                .add(NetherWoodBlocks.MAT_WART.getSeed(), 60)
                 .register();
         NetherVegetation.BONEMEAL_NETHER_MYCELIUM
                 .bootstrap(ctx)
-                .add(NetherBlocks.GRAY_MOLD, 200)
-                .add(NetherBlocks.RED_MOLD, 180)
-                .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 40)
+                .add(NetherMushroomBlocks.GRAY_MOLD, 200)
+                .add(NetherMushroomBlocks.RED_MOLD, 180)
+                .addAllStatesFor(BlockCommonPlant.AGE, NetherMushroomBlocks.ORANGE_MUSHROOM, 40)
                 .add(Blocks.RED_MUSHROOM, 60)
                 .add(Blocks.BROWN_MUSHROOM, 60)
                 .add(Blocks.CRIMSON_FUNGUS, 80)
                 .add(Blocks.WARPED_FUNGUS, 80)
-                .add(NetherBlocks.SEPIA_BONE_GRASS, 30)
-                .add(NetherBlocks.BONE_GRASS, 30)
-                .add(NetherBlocks.JUNGLE_PLANT, 30)
+                .add(NetherPlantBlocks.SEPIA_BONE_GRASS, 30)
+                .add(NetherPlantBlocks.BONE_GRASS, 30)
+                .add(NetherPlantBlocks.JUNGLE_PLANT, 30)
                 .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
                 .register();
         NetherVegetation.BONEMEAL_JUNGLE_GRASS
                 .bootstrap(ctx)
-                .addAllStatesFor(BlockEggPlant.AGE, NetherBlocks.EGG_PLANT, 80)
-                .add(NetherBlocks.JUNGLE_PLANT, 80)
-                .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
-                .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
+                .addAllStatesFor(BlockEggPlant.AGE, NetherPlantBlocks.EGG_PLANT, 80)
+                .add(NetherPlantBlocks.JUNGLE_PLANT, 80)
+                .addAllStatesFor(BlockMagmaFlower.AGE, NetherPlantBlocks.MAGMA_FLOWER, 30)
+                .addAllStatesFor(BlockFeatherFern.AGE, NetherPlantBlocks.FEATHER_FERN, 20)
                 .register();
         NetherVegetation.BONEMEAL_MUSHROOM_GRASS
                 .bootstrap(ctx)
-                .add(NetherBlocks.BONE_GRASS, 180)
-                .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
+                .add(NetherPlantBlocks.BONE_GRASS, 180)
+                .addAllStatesFor(BlockFeatherFern.AGE, NetherPlantBlocks.FEATHER_FERN, 20)
                 .register();
         NetherVegetation.BONEMEAL_SEPIA_MUSHROOM_GRASS
                 .bootstrap(ctx)
-                .add(NetherBlocks.SEPIA_BONE_GRASS, 180)
+                .add(NetherPlantBlocks.SEPIA_BONE_GRASS, 180)
                 .register();
         NetherVegetation.BONEMEAL_SWAMPLAND_GRASS
                 .bootstrap(ctx)
-                .add(NetherBlocks.SOUL_VEIN, 80)
-                .add(NetherBlocks.SWAMP_GRASS, 200)
-                .add(NetherBlocks.FEATHER_FERN, 80)
+                .add(NetherVineBlocks.SOUL_VEIN, 80)
+                .add(NetherPlantBlocks.SWAMP_GRASS, 200)
+                .add(NetherPlantBlocks.FEATHER_FERN, 80)
                 .register();
         NetherVegetation.BONEMEAL_CEILING_MUSHROOMS
                 .bootstrap(ctx)
-                .add(NetherBlocks.NETHER_GRASS, 80)
+                .add(NetherPlantBlocks.NETHER_GRASS, 80)
                 .register();
     }
 
@@ -438,8 +446,8 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
         NetherVegetationPlaced.VEGETATION_BONE_REEF
                 .inlineConfiguration(ctx)
                 .netherForrestVegetation()
-                .add(NetherBlocks.BONE_GRASS, 180)
-                .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
+                .add(NetherPlantBlocks.BONE_GRASS, 180)
+                .addAllStatesFor(BlockFeatherFern.AGE, NetherPlantBlocks.FEATHER_FERN, 20)
                 .inlinePlace()
                 .vanillaNetherGround(24)
                 .register();
@@ -447,7 +455,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
         NetherVegetationPlaced.VEGETATION_SULFURIC_BONE_REEF
                 .inlineConfiguration(ctx)
                 .netherForrestVegetation()
-                .add(NetherBlocks.SEPIA_BONE_GRASS, 180)
+                .add(NetherPlantBlocks.SEPIA_BONE_GRASS, 180)
                 .inlinePlace()
                 .vanillaNetherGround(8)
                 .register();
@@ -461,7 +469,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .netherForrestVegetation()
                 .add(Blocks.CRIMSON_ROOTS, 120)
                 .add(Blocks.CRIMSON_FUNGUS, 80)
-                .add(NetherBlocks.MAT_WART.getSeed(), 80)
+                .add(NetherWoodBlocks.MAT_WART.getSeed(), 80)
                 .inlinePlace()
                 .betterNetherGround(12)
                 .isEmptyAndOnNetherGround()

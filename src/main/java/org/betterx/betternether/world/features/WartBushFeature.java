@@ -1,5 +1,7 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockWartSeed;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -47,7 +49,7 @@ public class WartBushFeature extends ContextFeature<NoneFeatureConfiguration> {
     private void setSeed(ServerLevelAccessor world, BlockPos pos, Direction dir) {
         BlockPos p = pos.relative(dir);
         if (world.isEmptyBlock(p))
-            BlocksHelper.setWithoutUpdate(world, p, NetherBlocks.MAT_WART.getSeed().defaultBlockState().setValue(
+            BlocksHelper.setWithoutUpdate(world, p, NetherWoodBlocks.MAT_WART.getSeed().defaultBlockState().setValue(
                     BlockWartSeed.FACING, dir));
     }
 }

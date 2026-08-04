@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherSaplingBlocks;
+
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.SoulLilyFeature;
 
@@ -23,8 +23,6 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
@@ -32,11 +30,10 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import com.google.common.collect.Lists;
-
-import java.util.List;
-
-public class BlockSoulLily extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. The class carried its own getDrops() override, so BlockBase's dropItself mechanism was
+// never in play; that override has since been replaced by a NetherLoot.soulLily() trait on the registration.
+public class BlockSoulLily extends Block {
     public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.create("shape", SoulLilyShape.class);
 
     private static final VoxelShape SHAPE_SMALL = box(6, 0, 6, 10, 16, 10);
@@ -60,7 +57,7 @@ public class BlockSoulLily extends BlockBaseNotFull {
     };
 
     public BlockSoulLily(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_ORANGE).strength(1).noOcclusion().randomTicks());
+        super(settings);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, SoulLilyShape.SMALL));
     }
 
@@ -202,7 +199,7 @@ public class BlockSoulLily extends BlockBaseNotFull {
     @Override
     @Environment(EnvType.CLIENT)
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
-        return new ItemStack(NetherBlocks.SOUL_LILY_SAPLING);
+        return new ItemStack(NetherSaplingBlocks.SOUL_LILY_SAPLING);
     }
 
     @Override
@@ -237,37 +234,4 @@ public class BlockSoulLily extends BlockBaseNotFull {
         return canSurvive(state, world, pos) ? state : Blocks.AIR.defaultBlockState();
     }
 
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        switch (state.getValue(SHAPE)) {
-            case BIG_BOTTOM:
-            case BIG_MIDDLE:
-                return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
-            case BIG_TOP_CENTER:
-                return Lists.newArrayList(
-                        new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()),
-                        new ItemStack(NetherBlocks.SOUL_LILY_SAPLING)
-                );
-            case MEDIUM_BOTTOM:
-                return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
-            case BIG_TOP_SIDE_N:
-            case BIG_TOP_SIDE_S:
-            case BIG_TOP_SIDE_E:
-            case BIG_TOP_SIDE_W:
-                return Lists.newArrayList(
-                        new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()),
-                        new ItemStack(
-                                NetherBlocks.SOUL_LILY_SAPLING,
-                                MHelper.randRange(0, 1, MHelper.RANDOM)
-                        )
-                );
-            case SMALL:
-            case MEDIUM_TOP:
-            default:
-                return Lists.newArrayList(
-                        new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()),
-                        new ItemStack(NetherBlocks.SOUL_LILY_SAPLING)
-                );
-        }
-    }
 }

@@ -1,22 +1,26 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.blocks.BlockReedsBlock;
 import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.block.api.BlockDefinition;
-import org.betterx.wover.block.api.BlockRegistry;
-import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.trait.BlockRecipeTrait;
-import org.betterx.wover.block.api.trait.BlockTraitLookup;
-import org.betterx.wover.block.api.trait.BlockTraits;
-import org.betterx.wover.recipe.api.RecipeBuilder;
-import org.betterx.wover.sets.api.blocks.BlockSet;
-import org.betterx.wover.sets.api.blocks.SlotMap;
-import org.betterx.wover.sets.api.blocks.SlotType;
-import org.betterx.wover.sets.api.blocks.WoodenBlockSet;
-import org.betterx.wover.sets.api.blocks.slots.WoodSlots;
-import org.betterx.wover.sets.api.blocks.types.Planks;
+import de.ambertation.wover.block.api.BlockDefinition;
+import de.ambertation.wover.block.api.BlockRegistry;
+import de.ambertation.wover.block.api.model.ModelTraitLibrary;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockRecipeTrait;
+import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.block.api.trait.BlockTraits;
+import de.ambertation.wover.recipe.api.RecipeBuilder;
+import de.ambertation.wover.sets.api.blocks.BlockSet;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.SlotType;
+import de.ambertation.wover.sets.api.blocks.WoodenBlockSet;
+import de.ambertation.wover.sets.api.blocks.slots.WoodSlots;
+import de.ambertation.wover.sets.api.blocks.types.Planks;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.level.block.Block;
@@ -28,12 +32,12 @@ import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.betterx.betternether.blocks.NetherModels;
-import org.betterx.wover.sets.api.blocks.types.Stairs;
+import de.ambertation.wover.sets.api.blocks.types.Stairs;
 
 public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
     public NetherReedMaterial() {
         super("nether_reed", MapColor.COLOR_CYAN, MapColor.COLOR_CYAN);
-        this.setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
+        this.setFurnitureCloth(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override
@@ -89,7 +93,7 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                         // WoodenSlotFromDefinition's buildWoodModel() hook - this has to override buildModel.
                         @Environment(EnvType.CLIENT)
                         @Override
-                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
                             return ModelTraitLibrary.externalModelDelegatedItem();
                         }
                     })
@@ -97,7 +101,7 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
                     .replace(new Stairs() {
                         @Environment(EnvType.CLIENT)
                         @Override
-                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
                             return NetherModels.reedStairs();
                         }
                     });
@@ -112,6 +116,6 @@ public class NetherReedMaterial extends RoofMaterial<NetherReedMaterial> {
     }
 
     public Block getStem() {
-        return NetherBlocks.NETHER_REED_STEM;
+        return NetherWoodBlocks.NETHER_REED_STEM;
     }
 }

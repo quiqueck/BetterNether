@@ -1,5 +1,8 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.betternether.registry.block.NetherFunctionalBlocks;
+import org.betterx.betternether.registry.block.NetherFurnitureBlocks;
+
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blockentities.BNBrewingStandBlockEntity;
 import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
@@ -21,7 +24,7 @@ import java.util.List;
 public class BlockEntitiesRegistry {
     public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = FabricBlockEntityTypeBuilder.create(
             BlockEntityForge::new,
-            NetherBlocks.CINCINNASITE_FORGE
+            NetherFunctionalBlocks.CINCINNASITE_FORGE
     ).build(null);
     public static final BlockEntityType<BlockEntityFurnace> NETHERRACK_FURNACE = FabricBlockEntityTypeBuilder.create(
             BlockEntityFurnace::new,
@@ -29,11 +32,11 @@ public class BlockEntitiesRegistry {
     ).build(null);
     public static final BlockEntityType<BlockEntityChestOfDrawers> CHEST_OF_DRAWERS = FabricBlockEntityTypeBuilder.create(
             BlockEntityChestOfDrawers::new,
-            NetherBlocks.CHEST_OF_DRAWERS
+            NetherFurnitureBlocks.CHEST_OF_DRAWERS
     ).build(null);
     public static final BlockEntityType<BNBrewingStandBlockEntity> NETHER_BREWING_STAND = FabricBlockEntityTypeBuilder.create(
             BNBrewingStandBlockEntity::new,
-            NetherBlocks.NETHER_BREWING_STAND
+            NetherFunctionalBlocks.NETHER_BREWING_STAND
     ).build(null);
 
     public static void register() {

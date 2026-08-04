@@ -1,6 +1,9 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.betternether.blocks.BlockRubeusCone;
+import org.betterx.betternether.blocks.NetherLoot;
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockRubeusSapling;
 import org.betterx.betternether.blocks.RubeusBark;
@@ -10,16 +13,18 @@ import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.bclib.trait.TraitLists;
 import org.betterx.bclib.trait.block.TripleShapePillarModelTrait;
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.block.api.BlockDefinition;
-import org.betterx.wover.block.api.BlockRegistry;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.trait.BlockTraitLookup;
-import org.betterx.wover.sets.api.blocks.BlockSet;
-import org.betterx.wover.sets.api.blocks.SlotMap;
-import org.betterx.wover.sets.api.blocks.types.Bark;
-import org.betterx.wover.sets.api.blocks.types.Log;
+import de.ambertation.wover.block.api.BlockDefinition;
+import de.ambertation.wover.block.api.BlockRegistry;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.sets.api.blocks.BlockSet;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.types.Bark;
+import de.ambertation.wover.sets.api.blocks.types.Log;
 
 import net.minecraft.world.level.block.Block;
 
@@ -33,14 +38,21 @@ import org.jetbrains.annotations.NotNull;
 public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
     public RubeusMaterial() {
         super("rubeus", MapColor.COLOR_MAGENTA, MapColor.COLOR_MAGENTA);
-        setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
+        setFurnitureCloth(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
                     .add(Sapling.create(BlockRubeusSapling::new, NetherSurvival.netherGround()))
-                    .add(SimpleBlockSlot.withItem(NetherSlots.CONE, (set, props) -> new BlockRubeusCone(props)))
+                    // BlockRubeusCone (WP6.12): always dropped itself unconditionally via BlockBase's
+                    // inherited getDrops() override (no loot table json was generated for it), reproduced
+                    // explicitly as NetherLoot.dropSelfNoExplosion().
+                    .add(SimpleBlockSlot.withItem(
+                            NetherSlots.CONE,
+                            (set, props) -> new BlockRubeusCone(props),
+                            TraitLists.of(NetherLoot.dropSelfNoExplosion())
+                    ))
                     .replace(new NetherWoodSlots.Log(true) {
                         @Override
                         protected BlockDefinition<?, ?> startBlockDefinition(
@@ -53,7 +65,7 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
 
                         @Environment(EnvType.CLIENT)
                         @Override
-                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
                             // shape=bottom/middle/top blend pillar: all three shape models are plain vanilla-template
                             // children (cube_column / cube_bottom_top), so the whole blockstate is generated.
                             return TripleShapePillarModelTrait.log(
@@ -80,7 +92,7 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
 
                         @Environment(EnvType.CLIENT)
                         @Override
-                        protected BlockModelTrait buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
+                        protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
                             return TripleShapePillarModelTrait.bark(
                                     RubeusLog.SHAPE,
                                     BetterNether.C.mk("block/rubeus_log_side"),

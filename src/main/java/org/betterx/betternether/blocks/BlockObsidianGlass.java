@@ -1,9 +1,12 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherObsidianBlocks;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -11,16 +14,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class BlockObsidianGlass extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone; noOcclusion()/isSuffocating()/isViewBlocking() move to the registration sites
+// (NetherObsidianBlocks.OBSIDIAN_GLASS, BLUE_OBSIDIAN_GLASS). Both always dropped themselves unconditionally via
+// BlockBase's inherited getDrops() override (no loot table json was generated for either), reproduced
+// explicitly as NetherLoot.dropSelfNoExplosion().
+public class BlockObsidianGlass extends Block {
     public BlockObsidianGlass(BlockBehaviour.Properties settings) {
-        super(settings
-                .noOcclusion()
-                .isSuffocating((arg1, arg2, arg3) -> {
-                    return false;
-                })
-                .isViewBlocking((arg1, arg2, arg3) -> {
-                    return false;
-                }));
+        super(settings);
     }
 
     @Environment(EnvType.CLIENT)

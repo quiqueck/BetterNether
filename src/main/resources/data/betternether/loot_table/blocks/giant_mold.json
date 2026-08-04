@@ -34,7 +34,12 @@
 						},
 						{
 							"type": "minecraft:item",
-							"name": "betternether:nether_mushroom_stem"
+							"name": "betternether:nether_mushroom_stem",
+							"conditions": [
+								{
+									"condition": "minecraft:survives_explosion"
+								}
+							]
 						}
 					]
 				}

@@ -1,5 +1,7 @@
 package org.betterx.betternether.mixin.common.piglin;
 
+import org.betterx.betternether.registry.item.NetherEquipmentItems;
+
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherItems;
 
@@ -41,9 +43,9 @@ public class PiglinAiMixin {
         Set<Item> armor = bn_netherArmor;
         if (armor == null) {
             armor = new HashSet<>();
-            Collections.addAll(armor, NetherItems.CINCINNASITE_SET.getArmorPieces());
-            Collections.addAll(armor, NetherItems.NETHER_RUBY_SET.getArmorPieces());
-            Collections.addAll(armor, NetherItems.FLAMING_RUBY_SET.getArmorPieces());
+            Collections.addAll(armor, NetherEquipmentItems.CINCINNASITE_SET.getArmorPieces());
+            Collections.addAll(armor, NetherEquipmentItems.NETHER_RUBY_SET.getArmorPieces());
+            Collections.addAll(armor, NetherEquipmentItems.FLAMING_RUBY_SET.getArmorPieces());
             bn_netherArmor = armor;
         }
         return armor.contains(item);

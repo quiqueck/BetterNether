@@ -17,6 +17,99 @@ public class Patcher {
         DataFixerAPI.registerPatch(Patcher_001::new);
         DataFixerAPI.registerPatch(Patcher_002::new);
         DataFixerAPI.registerPatch(Patcher_003::new);
+        DataFixerAPI.registerPatch(Patcher_004::new);
+    }
+}
+
+class Patcher_004 extends Patch {
+    public Patcher_004() {
+        super(BetterNether.C, new Version(21, 8, 6));
+    }
+
+    @Override
+    public Map<String, String> getIDReplacements() {
+        return Map.<String, String>ofEntries(
+                // Hanging signs were renamed to match vanilla's <wood>_hanging_wall_sign order.
+                Map.entry("betternether:anchor_tree_wall_hanging_sign", "betternether:anchor_tree_hanging_wall_sign"),
+                Map.entry("betternether:mushroom_fir_wall_hanging_sign", "betternether:mushroom_fir_hanging_wall_sign"),
+                Map.entry(
+                        "betternether:nether_mushroom_wall_hanging_sign",
+                        "betternether:nether_mushroom_hanging_wall_sign"
+                ),
+                Map.entry("betternether:nether_reed_wall_hanging_sign", "betternether:nether_reed_hanging_wall_sign"),
+                Map.entry(
+                        "betternether:nether_sakura_wall_hanging_sign",
+                        "betternether:nether_sakura_hanging_wall_sign"
+                ),
+                Map.entry("betternether:rubeus_wall_hanging_sign", "betternether:rubeus_hanging_wall_sign"),
+                Map.entry("betternether:stalagnate_wall_hanging_sign", "betternether:stalagnate_hanging_wall_sign"),
+                Map.entry("betternether:wart_wall_hanging_sign", "betternether:wart_hanging_wall_sign"),
+                Map.entry("betternether:willow_wall_hanging_sign", "betternether:willow_hanging_wall_sign"),
+
+                // "striped" was aligned with vanilla's "stripped" wording.
+                Map.entry("betternether:common_bark_striped", "betternether:common_bark_stripped"),
+                Map.entry("betternether:common_log_striped", "betternether:common_log_stripped"),
+                Map.entry("betternether:stalagnate_striped_bark", "betternether:stalagnate_stripped_bark"),
+                Map.entry("betternether:stalagnate_striped_log", "betternether:stalagnate_stripped_log"),
+                Map.entry("betternether:striped_wood_mushroom_fir", "betternether:mushroom_fir_stripped_bark"),
+
+                // Nether reed floats, so its boats became rafts.
+                Map.entry("betternether:nether_reed_boat", "betternether:nether_reed_raft"),
+                Map.entry("betternether:nether_reed_chest_boat", "betternether:nether_reed_chest_raft"),
+
+                // Individual renames
+                Map.entry("betternether:spawn_naga", "betternether:spawn_egg_naga")
+
+                // nether_brick_tile_slab_double and stalagnate_seed_bottom are deliberately absent:
+                // they did not just get renamed, they were folded into a block state of another
+                // block. A plain ID replacement would silently drop that state, so they are handled
+                // in getBlockStatePatcher() below, where the properties can be rewritten too. Both
+                // are block-only (no item model, no loot table), so nothing is lost by keeping them
+                // out of the ID map.
+        );
+    }
+
+    @Override
+    public PatchBiFunction<ListTag, ListTag, Boolean> getBlockStatePatcher() {
+        return Patcher_004::patchBlockState;
+    }
+
+    /**
+     * Converts the two blocks that became a state of another block.
+     * <p>
+     * This runs after {@link #getIDReplacements()} has been applied to the palette, which is why
+     * neither ID may appear in that map &mdash; the old name has to survive until here for the
+     * matching state to be recoverable.
+     * <ul>
+     *     <li>{@code nether_brick_tile_slab_double} was its own block carrying a {@code half}
+     *     property; double slabs are now {@code nether_brick_tile_slab} with {@code type=double}.
+     *     A bare rename would have produced a single bottom slab, losing half the block.</li>
+     *     <li>{@code stalagnate_seed_bottom} was its own, property-less block; the lower half is
+     *     now {@code stalagnate_seed} with {@code top=false}.</li>
+     * </ul>
+     */
+    private static boolean patchBlockState(ListTag palette, ListTag states, MigrationProfile profile) {
+        boolean[] changed = {false};
+        palette.forEach((blockTag) -> {
+            final CompoundTag block = (CompoundTag) blockTag;
+            final String id = block.getStringOr("Name", "");
+
+            if ("betternether:nether_brick_tile_slab_double".equals(id)) {
+                final CompoundTag props = block.getCompound("Properties").orElseGet(CompoundTag::new);
+                props.remove("half");
+                props.putString("type", "double");
+                block.putString("Name", "betternether:nether_brick_tile_slab");
+                block.put("Properties", props);
+                changed[0] = true;
+            } else if ("betternether:stalagnate_seed_bottom".equals(id)) {
+                final CompoundTag props = block.getCompound("Properties").orElseGet(CompoundTag::new);
+                props.putString("top", "false");
+                block.putString("Name", "betternether:stalagnate_seed");
+                block.put("Properties", props);
+                changed[0] = true;
+            }
+        });
+        return changed[0];
     }
 }
 

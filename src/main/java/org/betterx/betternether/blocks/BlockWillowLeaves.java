@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.BlocksHelper;
 
 import net.minecraft.core.BlockPos;
@@ -17,7 +16,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
@@ -32,7 +30,7 @@ public class BlockWillowLeaves extends BNLeaves {
     public static final BooleanProperty NATURAL = BooleanProperty.create("natural");
 
     public BlockWillowLeaves(Block sapling, Properties settings) {
-        super(sapling, Materials.staticLeaves(settings, MapColor.TERRACOTTA_RED, false).noOcclusion());
+        super(sapling, settings);
 
         //this.setDropItself(false);
         this.registerDefaultState(getStateDefinition()

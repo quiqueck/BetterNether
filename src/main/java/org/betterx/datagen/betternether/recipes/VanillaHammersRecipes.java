@@ -1,12 +1,18 @@
 package org.betterx.datagen.betternether.recipes;
 
+import org.betterx.betternether.registry.block.NetherMetalBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
+import org.betterx.betternether.registry.item.NetherEquipmentItems;
+import org.betterx.betternether.registry.item.NetherResourceItems;
+
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
-import org.betterx.wover.recipe.api.RecipeBuilder;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.WoverRecipeProvider;
+import de.ambertation.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -28,7 +34,7 @@ public class VanillaHammersRecipes extends WoverRecipeProvider {
                 .shape("#I#", " S ", " S ")
                 .addMaterial('#', block)
                 .addMaterial('I', item)
-                .addMaterial('S', NetherBlocks.MAT_REED.getStem())
+                .addMaterial('S', NetherWoodBlocks.MAT_REED.getStem())
                 .category(RecipeCategory.TOOLS)
                 .build(context);
 
@@ -36,14 +42,14 @@ public class VanillaHammersRecipes extends WoverRecipeProvider {
 
     @Override
     protected void bootstrap(RecipeBuilder.Context context) {
-        makeHammerRecipe(context, NetherItems.CINCINNASITE_HAMMER, NetherBlocks.CINCINNASITE_FORGED, NetherItems.CINCINNASITE_INGOT);
-        makeHammerRecipe(context, NetherItems.NETHER_RUBY_HAMMER, NetherBlocks.NETHER_RUBY_BLOCK, NetherItems.NETHER_RUBY);
+        makeHammerRecipe(context, NetherEquipmentItems.CINCINNASITE_HAMMER, NetherMetalBlocks.CINCINNASITE_FORGED, NetherResourceItems.CINCINNASITE_INGOT);
+        makeHammerRecipe(context, NetherEquipmentItems.NETHER_RUBY_HAMMER, NetherMetalBlocks.NETHER_RUBY_BLOCK, NetherResourceItems.NETHER_RUBY);
 
         RecipeBuilder
-                .crafting(BN.id("cincinnasite_hammer_diamond"), NetherItems.CINCINNASITE_HAMMER_DIAMOND)
+                .crafting(BN.id("cincinnasite_hammer_diamond"), NetherEquipmentItems.CINCINNASITE_HAMMER_DIAMOND)
                 .shape("#I#")
                 .addMaterial('#', Items.DIAMOND)
-                .addMaterial('I', NetherItems.CINCINNASITE_HAMMER)
+                .addMaterial('I', NetherEquipmentItems.CINCINNASITE_HAMMER)
                 .category(RecipeCategory.TOOLS)
                 .build(context);
 

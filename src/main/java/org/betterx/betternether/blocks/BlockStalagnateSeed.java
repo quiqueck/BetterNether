@@ -4,8 +4,8 @@ import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
-import org.betterx.wover.feature.api.configured.ConfiguredFeatureKey;
-import org.betterx.wover.state.api.WorldState;
+import de.ambertation.wover.feature.api.configured.ConfiguredFeatureKey;
+import de.ambertation.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,13 +34,6 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     protected static final VoxelShape SHAPE_BOTTOM = Block.box(4, 0, 4, 12, 12, 12);
 
     public static final BooleanProperty TOP = BooleanProperty.create("top");
-
-    public BlockStalagnateSeed() {
-        super((level, pos, state, rnd) -> growsDownward(state)
-                ? NetherTrees.STALAGNATE_DOWN.placeInWorld(WorldState.registryAccess(), level, pos, rnd)
-                : NetherTrees.STALAGNATE.placeInWorld(WorldState.registryAccess(), level, pos, rnd));
-        this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
-    }
 
     public BlockStalagnateSeed(BlockBehaviour.Properties properties) {
         super(properties, (level, pos, state, rnd) -> growsDownward(state)

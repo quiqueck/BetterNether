@@ -5,8 +5,8 @@ import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
-import org.betterx.wover.surface.api.Conditions;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.surface.api.Conditions;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;

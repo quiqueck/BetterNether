@@ -1,11 +1,14 @@
 package org.betterx.datagen.betternether;
 
+import org.betterx.betternether.registry.item.NetherEquipmentItems;
+import org.betterx.betternether.registry.item.NetherResourceItems;
+
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherItems;
 import org.betterx.betternether.registry.NetherTags;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.WoverTagProvider;
-import org.betterx.wover.tag.api.event.context.ItemTagBootstrapContext;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.WoverTagProvider;
+import de.ambertation.wover.tag.api.event.context.ItemTagBootstrapContext;
 
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -23,7 +26,7 @@ public class NetherItemTagDataProvider extends WoverTagProvider.ForItems {
     public void prepareTags(ItemTagBootstrapContext context) {
         context.add(
                 NetherTags.FLAMING_RUBY_ENCHANTABLE,
-                NetherItems.FLAMING_RUBY_SET.getAll()
+                NetherEquipmentItems.FLAMING_RUBY_SET.getAll()
         );
 
         context.add(
@@ -33,9 +36,9 @@ public class NetherItemTagDataProvider extends WoverTagProvider.ForItems {
 
         // Repair-ingredient tags referenced by the tool/armor recipes (ToolMaterial.repairItems()).
         // Without these the smithing/crafting recipes fail to load ("Missing tag <name>/repair").
-        context.add(BNToolMaterial.CINCINNASITE.repairItems(), NetherItems.CINCINNASITE_INGOT);
+        context.add(BNToolMaterial.CINCINNASITE.repairItems(), NetherResourceItems.CINCINNASITE_INGOT);
         context.add(BNToolMaterial.CINCINNASITE_DIAMOND.repairItems(), Items.DIAMOND);
-        context.add(BNToolMaterial.NETHER_RUBY.repairItems(), NetherItems.NETHER_RUBY);
+        context.add(BNToolMaterial.NETHER_RUBY.repairItems(), NetherResourceItems.NETHER_RUBY);
         context.add(BNToolMaterial.FLAMING_RUBY.repairItems(), Blocks.SCULK_CATALYST.asItem());
     }
 }

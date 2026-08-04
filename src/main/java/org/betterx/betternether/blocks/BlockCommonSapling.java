@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
@@ -24,11 +22,6 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import org.jetbrains.annotations.NotNull;
 
 public class BlockCommonSapling extends BaseBlockCommonSapling {
-
-
-    public BlockCommonSapling(@NotNull Block plant, MapColor color) {
-        super(plant, color);
-    }
 
     public BlockCommonSapling(@NotNull Block plant, Properties settings) {
         super(plant, settings);
@@ -40,17 +33,15 @@ public class BlockCommonSapling extends BaseBlockCommonSapling {
     }
 }
 
-abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements BonemealableBlock {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. Neither this class nor its BlockInkBushSeed/BlockBlackAppleSeed subclasses override
+// getDrops() or call setDropItself(false), so they relied on BlockBase's inherited unconditional self-drop;
+// see the ink_bush_seed/black_apple_seed registrations in NetherBlocks.java for the reproduction (their
+// noLootTable() had to come out too - noLootTable() and a LOOT_TABLE trait are independent mechanisms, and
+// noLootTable() alone would leave the block with no drops once the getDrops() override is gone).
+abstract class BaseBlockCommonSapling extends Block implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
     private final Block plant;
-
-    public BaseBlockCommonSapling(@NotNull Block plant, MapColor color) {
-        super(Materials.NETHER_SAPLING
-                .mapColor(color)
-                .noLootTable()
-        );
-        this.plant = plant;
-    }
 
     public BaseBlockCommonSapling(@NotNull Block plant, Properties settings) {
         super(settings);

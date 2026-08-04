@@ -2,8 +2,8 @@ package org.betterx.betternether.world;
 
 import org.betterx.betternether.registry.NetherEntities.KnownSpawnTypes;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
-import org.betterx.wover.surface.impl.BaseSurfaceRuleBuilder;
+import de.ambertation.wover.biome.api.builder.BiomeSurfaceRuleBuilder;
+import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Mob;

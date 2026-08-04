@@ -4,14 +4,20 @@ import org.betterx.bclib.client.models.BCLModels;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.client.block.BNModels;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.block.api.client.model.ModelTraitLibrary;
-import org.betterx.wover.block.api.client.trait.BlockModelTrait;
-import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
-import org.betterx.wover.block.api.model.WoverBlockModelGenerators;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.item.api.client.trait.ItemModelTrait;
+import org.betterx.betternether.registry.block.NetherMetalBlocks;
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
+import de.ambertation.wover.block.api.BlockProperties;
+import de.ambertation.wover.block.api.model.ModelTraitLibrary;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
+import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import de.ambertation.wover.block.api.model.WoverBlockModelGenerators;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.item.api.client.trait.ItemModelTrait;
+import de.ambertation.wover.item.api.trait.ItemTrait;
 
-import org.betterx.wover.sets.api.blocks.SlotType;
+import de.ambertation.wover.sets.api.blocks.SlotType;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
@@ -185,13 +191,95 @@ public class NetherModels {
      *
      * @param icon supplies the item whose texture stands in for the debug item
      */
-    public static ItemModelTrait debugItem(Supplier<Item> icon) {
+    public static ItemTrait<Item, ?> debugItem(Supplier<Item> icon) {
         return ModCore.isDatagen() ? Impl.debugItem(icon) : null;
+    }
+
+    /**
+     * The lumabus-vine blockstate is dispatched over the {@code shape} (top/middle/bottom) property. Its {@code
+     * bottom} state is a four-entry weighted list of bulb models where {@code <prefix>_bulb_2/_3/_4} are already
+     * texture-swap children (particle+texture) of the hand-authored {@code <prefix>_bulb_1} mesh - those three
+     * are generated; {@code bulb_1} stays the kept template. The {@code top} ({@code <prefix>_roots}) and {@code
+     * middle} ({@code <prefix>_vine} plus the {@code _vine_mirrored} variant, whose UVs differ in the mesh and so
+     * is a kept sibling) models stay hand-authored and are referenced directly. No item ({@code registerBlockNI}).
+     * <p>
+     * Relocated from {@code NetherBlocks} (WP7.6-7.8, docs/registry-split-map.md section 4): needs no
+     * {@code ModCore.isDatagen()}/{@link Impl} gating since it never references client-only datagen types.
+     */
+    public static BlockModelTrait lumabusVineModelTrait(String prefix) {
+        final var roots = BetterNether.C.mk("block/" + prefix + "_roots");
+        final var vine = BetterNether.C.mk("block/" + prefix + "_vine");
+        final var mirrored = BetterNether.C.mk("block/" + prefix + "_vine_mirrored");
+        final var bulb1 = BetterNether.C.mk("block/" + prefix + "_bulb_1");
+        final java.util.function.Function<Integer, WeightedTemplateModelTrait.Layer> bulb = i -> {
+            final var tex = BetterNether.C.mk("block/" + prefix + "_bulb_" + i);
+            return WeightedTemplateModelTrait.child(bulb1, java.util.Map.of("particle", tex, "texture", tex));
+        };
+        return WeightedTemplateModelTrait.propertyDispatch(
+                BlockProperties.TRIPLE_SHAPE,
+                java.util.List.of(
+                        WeightedTemplateModelTrait.Case.of(
+                                BlockProperties.TripleShape.TOP,
+                                java.util.List.of(WeightedTemplateModelTrait.model(roots))),
+                        WeightedTemplateModelTrait.Case.of(
+                                BlockProperties.TripleShape.MIDDLE,
+                                java.util.List.of(
+                                        WeightedTemplateModelTrait.model(vine),
+                                        WeightedTemplateModelTrait.model(mirrored))),
+                        WeightedTemplateModelTrait.Case.of(
+                                BlockProperties.TripleShape.BOTTOM,
+                                java.util.List.of(
+                                        WeightedTemplateModelTrait.model(bulb1),
+                                        bulb.apply(2), bulb.apply(3), bulb.apply(4)))
+                ),
+                WeightedTemplateModelTrait.Item.none());
+    }
+
+    /**
+     * The nether-sakura-leaves blockstate is a 28-entry weighted variant list (equal weight): a base leaf model
+     * plus six flower-overlay members, each placed at the four Y rotations. The six flower members are
+     * texture-permutation children of just two hand-authored geometry templates - {@code
+     * nether_sakura_leaves_flowers_3} (flower box UV {@code [0,0,16,16]}) parents {@code _flowers_1}/{@code _2};
+     * {@code nether_sakura_leaves_flowers_6} (flower box UV {@code [16,16,0,0]}) parents {@code _flowers_4}/{@code
+     * _5}. The base leaf model, the two flower templates and the custom-display item model stay hand-authored;
+     * the four sibling children and the blockstate are generated. Item is kept ({@link
+     * WeightedTemplateModelTrait.Item#none()}) because {@code item/nether_sakura_leaves} carries a bespoke display
+     * transform the default item fallback preserves.
+     * <p>
+     * Relocated from {@code NetherBlocks} (WP7.6-7.8, docs/registry-split-map.md section 4).
+     */
+    public static BlockModelTrait netherSakuraLeavesModelTrait() {
+        final var base = BetterNether.C.mk("block/nether_sakura_leaves");
+        final var tmplP = BetterNether.C.mk("block/nether_sakura_leaves_flowers_3");
+        final var tmplM = BetterNether.C.mk("block/nether_sakura_leaves_flowers_6");
+        final var nsf1 = BetterNether.C.mk("block/nether_sakura_flowers_1");
+        final var nsf2 = BetterNether.C.mk("block/nether_sakura_flowers_2");
+        final var nsf3 = BetterNether.C.mk("block/nether_sakura_flowers_3");
+        // permutation A (flowers_1 / flowers_4): flowers1=nsf3, flowers2=nsf1, flowers3=nsf2
+        final var permA = java.util.Map.of("flowers1", nsf3, "flowers2", nsf1, "flowers3", nsf2);
+        // permutation B (flowers_2 / flowers_5): flowers1=nsf2, flowers2=nsf3, flowers3=nsf1
+        final var permB = java.util.Map.of("flowers1", nsf2, "flowers2", nsf3, "flowers3", nsf1);
+        final java.util.List<WeightedTemplateModelTrait.Layer> members = java.util.List.of(
+                WeightedTemplateModelTrait.model(base),
+                WeightedTemplateModelTrait.child(tmplP, permA),
+                WeightedTemplateModelTrait.child(tmplP, permB),
+                WeightedTemplateModelTrait.model(tmplP),
+                WeightedTemplateModelTrait.child(tmplM, permA),
+                WeightedTemplateModelTrait.child(tmplM, permB),
+                WeightedTemplateModelTrait.model(tmplM)
+        );
+        final java.util.List<WeightedTemplateModelTrait.Layer> variants = new java.util.ArrayList<>();
+        for (WeightedTemplateModelTrait.Layer m : members) {
+            for (int y : new int[]{0, 90, 180, 270}) {
+                variants.add(m.rotated(0, y));
+            }
+        }
+        return WeightedTemplateModelTrait.simple(variants, WeightedTemplateModelTrait.Item.none());
     }
 
     @Environment(EnvType.CLIENT)
     private static class Impl {
-        private static ItemModelTrait debugItem(Supplier<Item> icon) {
+        private static ItemTrait<Item, ?> debugItem(Supplier<Item> icon) {
             return ModelTraitLibrary.itemModel(icon);
         }
 
@@ -426,7 +514,7 @@ public class NetherModels {
         private static BlockModelTrait reedStairs() {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> {
                 final ResourceLocation planks = TextureMapping.getBlockTexture(
-                        NetherBlocks.MAT_REED.getBlock(SlotType.PLANKS)
+                        NetherWoodBlocks.MAT_REED.getBlock(SlotType.PLANKS)
                 );
                 generator.createStairs(block, planks, planks, BetterNether.C.mk("block/nether_reed_planks_top"));
             });
@@ -474,8 +562,8 @@ public class NetherModels {
                 BCLModels.createChairBlockModel(
                         generator,
                         block,
-                        NetherBlocks.CINCINNASITE_FORGED,
-                        NetherBlocks.NETHER_BRICK_TILE_LARGE
+                        NetherMetalBlocks.CINCINNASITE_FORGED,
+                        NetherStoneBlocks.NETHER_BRICK_TILE_LARGE
                 );
             });
         }
@@ -484,8 +572,8 @@ public class NetherModels {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> BCLModels.createBarStoolBlockModel(
                     generator,
                     block,
-                    NetherBlocks.CINCINNASITE_FORGED,
-                    NetherBlocks.NETHER_BRICK_TILE_LARGE
+                    NetherMetalBlocks.CINCINNASITE_FORGED,
+                    NetherStoneBlocks.NETHER_BRICK_TILE_LARGE
             ));
         }
 
@@ -493,7 +581,7 @@ public class NetherModels {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> BCLModels.createTaburetBlockModel(
                     generator,
                     block,
-                    NetherBlocks.CINCINNASITE_FORGED
+                    NetherMetalBlocks.CINCINNASITE_FORGED
             ));
         }
 

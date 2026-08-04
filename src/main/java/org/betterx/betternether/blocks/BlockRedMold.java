@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -14,7 +13,7 @@ public class BlockRedMold extends BlockMold {
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
     public BlockRedMold(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.makeNetherGrass(settings, MapColor.TERRACOTTA_RED).sound(net.minecraft.world.level.block.SoundType.CROP).randomTicks());
+        super(settings);
     }
 
     @Override

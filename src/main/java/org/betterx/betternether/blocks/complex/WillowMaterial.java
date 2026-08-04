@@ -1,6 +1,9 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.betternether.registry.block.NetherStoneBlocks;
+
 import org.betterx.betternether.blocks.BlockWillowBranch;
+import org.betterx.betternether.blocks.NetherLoot;
 import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.NetherTraits;
@@ -13,10 +16,11 @@ import org.betterx.betternether.blocks.complex.slots.SimpleBlockSlot;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.bclib.trait.TraitLists;
 import org.betterx.bclib.trait.block.WeightedBark;
 import org.betterx.bclib.trait.block.WeightedLog;
 import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
-import org.betterx.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -24,7 +28,7 @@ import net.minecraft.world.level.material.MapColor;
 public class WillowMaterial extends RoofMaterial<WillowMaterial> {
     public WillowMaterial() {
         super("willow", MapColor.TERRACOTTA_RED, MapColor.TERRACOTTA_RED);
-        setFurnitureCloth(NetherBlocks.NETHER_BRICK_TILE_LARGE);
+        setFurnitureCloth(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE);
     }
 
     @Override
@@ -53,14 +57,17 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                     .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.BRANCH,
                             (set, props) -> new BlockWillowBranch(props),
-                            NetherRender.cutout()
+                            TraitLists.and(NetherRender.cutout(), NetherLoot.willowBranch())
                     ))
+                    // BlockWillowTorch (WP6.12): always dropped itself unconditionally via BlockBase's
+                    // inherited getDrops() override (no loot table json was generated for it), reproduced
+                    // explicitly as NetherLoot.dropSelfNoExplosion().
                     .add(SimpleBlockSlot.withItem(
                             NetherSlots.TORCH,
                             (set, props) -> new BlockWillowTorch(props),
                             // Replaces BlockWillowTorch's BehaviourCompostable marker, which only tagged the
                             // item and never registered a composter entry.
-                            NetherTraits.compostable(NetherRender.cutout())
+                            TraitLists.and(NetherTraits.compostable(NetherRender.cutout()), NetherLoot.dropSelfNoExplosion())
                     ));
     }
 
@@ -72,7 +79,7 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
      * templates and are referenced directly. Trunk has no item ({@code noBlockItem}).
      */
     @org.jetbrains.annotations.Nullable
-    private static org.betterx.wover.block.api.client.trait.BlockModelTrait willowTrunkModelTrait() {
+    private static de.ambertation.wover.block.api.client.trait.BlockModelTrait willowTrunkModelTrait() {
         final var mossy = BetterNether.C.mk("block/willow_bark_mossy");
         final var swap = java.util.Map.of("particle", mossy, "texture", mossy);
         final var bottom = BetterNether.C.mk("block/willow_trunk_bottom");
@@ -82,15 +89,15 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                 BlockWillowTrunk.SHAPE,
                 java.util.List.of(
                         WeightedTemplateModelTrait.Case.of(
-                                org.betterx.wover.block.api.BlockProperties.TripleShape.BOTTOM,
+                                de.ambertation.wover.block.api.BlockProperties.TripleShape.BOTTOM,
                                 java.util.List.of(WeightedTemplateModelTrait.model(bottom))),
                         WeightedTemplateModelTrait.Case.of(
-                                org.betterx.wover.block.api.BlockProperties.TripleShape.MIDDLE,
+                                de.ambertation.wover.block.api.BlockProperties.TripleShape.MIDDLE,
                                 java.util.List.of(
                                         WeightedTemplateModelTrait.model(middle),
                                         WeightedTemplateModelTrait.child(middle, swap))),
                         WeightedTemplateModelTrait.Case.of(
-                                org.betterx.wover.block.api.BlockProperties.TripleShape.TOP,
+                                de.ambertation.wover.block.api.BlockProperties.TripleShape.TOP,
                                 java.util.List.of(
                                         WeightedTemplateModelTrait.model(top),
                                         WeightedTemplateModelTrait.child(top, swap)))

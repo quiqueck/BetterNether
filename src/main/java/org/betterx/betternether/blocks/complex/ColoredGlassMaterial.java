@@ -1,16 +1,18 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.betternether.blocks.BNGlass;
+import org.betterx.bclib.blocks.BaseGlassBlock;
+import org.betterx.bclib.trait.TraitLists;
+import org.betterx.bclib.trait.block.GlassBlockTrait;
 import org.betterx.betternether.blocks.BNPane;
 import org.betterx.betternether.blocks.NetherModels;
 import org.betterx.betternether.blocks.NetherRender;
-import org.betterx.betternether.blocks.NetherTraits;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.wover.block.api.client.trait.ClientBlockTraits;
-import org.betterx.wover.block.api.trait.BlockTrait;
-import org.betterx.wover.block.api.trait.BlockTraits;
-import org.betterx.wover.core.api.ModCore;
+import de.ambertation.wover.block.api.BlockDefinition;
+import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockTraits;
+import de.ambertation.wover.core.api.ModCore;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.DyeItem;
@@ -20,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class ColoredGlassMaterial {
@@ -70,20 +73,30 @@ public class ColoredGlassMaterial {
      *
      * @param name        - base name of block (prefix) and it's group
      * @param base        - block base for material properties and crafting
-     * @param paneFactory - builds the coloured pane, e.g. {@code p -> new BNPane.Glass(p, false)}. This
-     *                    used to be inferred from {@code base} by {@code BehaviourHelper.from}, which
-     *                    picked the material by testing marker interfaces and, failing those, the
-     *                    note-block instrument - so a BNGlass base fell through to the *wood* branch. The
-     *                    material and the drop-itself flag are both known here, so they are passed
-     *                    directly instead.
+     * @param paneFactory - builds the coloured pane, e.g. {@code p -> new BNPane(p)}. This
+     *                    used to be inferred from {@code base} by the retired material-dispatch helper,
+     *                    which picked the material by testing marker interfaces and, failing those, the
+     *                    note-block instrument - so a BaseGlassBlock base fell through to the *wood* branch. The
+     *                    material is known here, so it is passed directly instead. (BNPane also took a
+     *                    drop-itself flag until its getDrops() override was dropped; the loot now comes
+     *                    entirely from {@code paneTraits}.)
+     * @param paneProperties - chained property setters applied to each colored pane's definition (e.g.
+     *                       {@code def -> { def.strength(0.3F, 0.3F); def.noOcclusion(); }}), applied once per
+     *                       dye color inside {@link #makeInstance}. There is no single {@code BlockDefinition}
+     *                       at this call site (one gets built per color), so - unlike a one-shot registration -
+     *                       the override can't be written as a chained setter here directly; this callback is
+     *                       the visible equivalent, applied at the same call-order position every trait bundle
+     *                       used to occupy via {@code NetherProps}. May be {@code null} for no extra properties.
      */
     public <T extends Block> ColoredGlassMaterial(
             String name,
             Block base,
             Function<BlockBehaviour.Properties, BNPane> paneFactory,
-            List<BlockTrait<?, ?>> paneTraits
+            List<BlockTrait<?, ?>> paneTraits,
+            Consumer<BlockDefinition<?, ?>> paneProperties
     ) {
         this.paneTraits = paneTraits;
+        this.paneProperties = paneProperties;
         white = makeInstance(name, base, Items.WHITE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
         orange = makeInstance(name, base, Items.ORANGE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
         magenta = makeInstance(name, base, Items.MAGENTA_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
@@ -104,6 +117,8 @@ public class ColoredGlassMaterial {
 
     /** The material traits for the pane variant (see {@link NetherMaterial}); empty for the full block. */
     private List<BlockTrait<?, ?>> paneTraits = List.of();
+    /** Chained property setters for the pane variant (see the pane constructor); {@code null} for the full block. */
+    private Consumer<BlockDefinition<?, ?>> paneProperties = null;
 
     private Block makeInstance(
             String group,
@@ -115,26 +130,32 @@ public class ColoredGlassMaterial {
     ) {
         String name = group + "_" + ((DyeItem) dye).getDyeColor().getSerializedName();
 
-        // Both the full-block variant (BNGlass) and the pane variant render translucent. Only the
+        // Both the full-block variant (BaseGlassBlock) and the pane variant render translucent. Only the
         // full block carries the glass model trait - the panes get theirs from BNPane's own provider.
-        Block block = NetherBlocks.registerBlock(
-                name,
-                base,
-                isFullBlock
-                        // BNGlass (BaseGlassBlock) used to drop itself only when silk-touched through the
-                        // retired BlockLootProvider interface; that loot is now a wover trait. The translucent
-                        // render layer used to come from BaseGlassBlock's RenderLayerProvider interface; it is
-                        // now the RENDER_LAYER trait.
-                        ? NetherTraits.of(
-                        ClientBlockTraits.RENDER_LAYER.translucent(),
-                        NetherModels.quartzGlass(),
-                        BlockTraits.LOOT_TABLE.silkTouchSelf(),
-                        // BNGlass (BaseGlassBlock) used to get mineable/pickaxe from the retired AddMineablePickaxe marker.
-                        BlockTraits.MINEABLE_WITH.needsPickAxe()
-                )
-                        : NetherTraits.concat(NetherRender.translucent(), paneTraits),
-                p -> isFullBlock ? new BNGlass(p) : paneFactory.apply(p)
-        );
+        var definition = NetherBlocks
+                .defineBlock(name, p -> isFullBlock ? new BaseGlassBlock(p) : paneFactory.apply(p))
+                .replacePropertiesWithCopy(base);
+        if (isFullBlock) {
+            // BaseGlassBlock used to drop itself only when silk-touched through the retired
+            // BlockLootProvider interface; that loot is now a wover trait. The translucent render layer
+            // used to come from BaseGlassBlock's RenderLayerProvider interface; it is now the
+            // RENDER_LAYER trait.
+            definition
+                    .addTrait(ClientBlockTraits.RENDER_LAYER.translucent())
+                    .addTrait(NetherModels.quartzGlass())
+                    .addTrait(BlockTraits.LOOT_TABLE.silkTouchSelf())
+                    // BaseGlassBlock used to get mineable/pickaxe from the retired AddMineablePickaxe marker.
+                    .addTrait(BlockTraits.MINEABLE_WITH.needsPickAxe())
+                    // noOcclusion()/explosionResistance(0.3)/isSuffocating/isViewBlocking moved out of the
+                    // BaseGlassBlock constructor (R1). The base copied here is quartz_glass_framed, whose
+                    // own properties descend from opaque CINCINNASITE_BLOCK, so all 16 colours inherited
+                    // its redstone conduction and mob spawning until this trait set the missing two calls.
+                    .addTrait(GlassBlockTrait.glass(0.3f));
+        } else {
+            definition.addTrait(NetherRender.translucent()).addTrait(paneTraits);
+            if (paneProperties != null) paneProperties.accept(definition);
+        }
+        Block block = definition.buildAndRegister();
         if (ModCore.isDatagen())
             RecipesHelper.makeColoringRecipe(base, block, dye, group, category);
 

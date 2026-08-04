@@ -1,11 +1,7 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
-
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.MapColor;
 
 public class BlockOre extends DropExperienceBlock {
     /**
@@ -28,11 +24,7 @@ public class BlockOre extends DropExperienceBlock {
     ) {
         super(
                 UniformInt.of(experience > 0 ? 1 : 0, experience),
-                Materials
-                        .stone(settings, MapColor.COLOR_RED)
-                        .strength(3, 5)
-                        .requiresCorrectToolForDrops()
-                        .sound(SoundType.NETHERRACK)
+                settings
         );
         this.fireproof = fireproof;
     }

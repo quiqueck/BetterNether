@@ -1,5 +1,8 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherLeavesBlocks;
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockWillowBranch;
@@ -7,8 +10,8 @@ import org.betterx.betternether.blocks.BlockWillowLeaves;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.wover.block.api.BlockProperties;
-import org.betterx.wover.feature.api.features.GrowableFeature;
+import de.ambertation.wover.block.api.BlockProperties;
+import de.ambertation.wover.feature.api.features.GrowableFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -56,7 +59,7 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
 
         h2 = Math.min(h2, mh);
 
-        final Block trunk = NetherBlocks.MAT_WILLOW.getTrunk();
+        final Block trunk = NetherWoodBlocks.MAT_WILLOW.getTrunk();
         BlocksHelper.setWithUpdate(
                 world,
                 pos,
@@ -82,13 +85,13 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         for (int i = 0; i < 4; i++)
             branch(world, pos.above(h2).relative(HOR[i]), 3 + random.nextInt(2), random, HOR[i], pos.above(h2), 0);
 
-        BlocksHelper.setWithUpdate(world, pos.above(h2 + 1), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(
+        BlocksHelper.setWithUpdate(world, pos.above(h2 + 1), NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState().setValue(
                 BlockWillowLeaves.FACING, Direction.UP).setValue(LeavesBlock.PERSISTENT, true));
         for (int i = 0; i < 4; i++)
             BlocksHelper.setWithUpdate(
                     world,
                     pos.above(h2 + 1).relative(HOR[i]),
-                    NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                    NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                               .setValue(BlockWillowLeaves.FACING, HOR[i])
                                               .setValue(LeavesBlock.PERSISTENT, true)
             );
@@ -111,7 +114,7 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         BlocksHelper.setWithUpdate(
                 world,
                 bpos,
-                NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, direction)
                                           .setValue(LeavesBlock.PERSISTENT, true)
         );
@@ -132,7 +135,7 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 BlocksHelper.setWithUpdate(
                         world,
                         bpos,
-                        NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                        NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                                   .setValue(BlockWillowLeaves.FACING, dir)
                                                   .setValue(LeavesBlock.PERSISTENT, true)
                 );
@@ -141,7 +144,7 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                     BlocksHelper.setWithUpdate(
                             world,
                             bpos.above(),
-                            NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                            NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                                       .setValue(
                                                               BlockWillowLeaves.FACING,
                                                               Direction.UP
@@ -155,7 +158,7 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                     BlocksHelper.setWithUpdate(
                             world,
                             bpos,
-                            NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                            NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                                       .setValue(
                                                               BlockWillowLeaves.FACING,
                                                               Direction.DOWN
@@ -184,7 +187,7 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                     BlocksHelper.setWithUpdate(
                             world,
                             p2,
-                            NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                            NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                                       .setValue(BlockWillowLeaves.FACING, dir2)
                                                       .setValue(LeavesBlock.PERSISTENT, true)
                     );
@@ -198,7 +201,7 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 BlocksHelper.setWithUpdate(
                         world,
                         bpos,
-                        NetherBlocks.WILLOW_LEAVES.defaultBlockState()
+                        NetherLeavesBlocks.WILLOW_LEAVES.defaultBlockState()
                                                   .setValue(BlockWillowLeaves.FACING, preDir)
                 );
         }
@@ -208,7 +211,7 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         if (!world.isEmptyBlock(pos))
             return;
 
-        final Block branch = NetherBlocks.MAT_WILLOW.getBranch();
+        final Block branch = NetherWoodBlocks.MAT_WILLOW.getBranch();
         for (int i = 0; i < length; i++) {
             BlockPos p = pos.below(i);
             if (world.isEmptyBlock(p.below()))

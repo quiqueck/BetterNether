@@ -1,7 +1,7 @@
 package org.betterx.betternether.items.materials;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.wover.item.api.armor.CustomArmorMaterial;
+import de.ambertation.wover.item.api.armor.CustomArmorMaterial;
 
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
@@ -17,6 +17,7 @@ class BNArmorMaterials {
             .toughness(1.0f)
             .knockbackResistance(0.05f)
             .createRepairIngredient()
+            .humanoidEquipmentAsset()
             .buildAndRegister();
 
     public static final Holder<ArmorMaterial> NETHER_RUBY = CustomArmorMaterial
@@ -28,6 +29,7 @@ class BNArmorMaterials {
             .toughness(1.4f)
             .knockbackResistance(0.2f)
             .createRepairIngredient()
+            .humanoidEquipmentAsset()
             .buildAndRegister();
 
     public static final Holder<ArmorMaterial> FLAMING_RUBY = CustomArmorMaterial
@@ -39,5 +41,6 @@ class BNArmorMaterials {
             .toughness(2.6f)
             .knockbackResistance(0.3f)
             .createRepairIngredient()
+            .humanoidEquipmentAsset()
             .buildAndRegister();
 }

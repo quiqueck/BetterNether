@@ -1,30 +1,26 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.block.NetherSaplingBlocks;
+
 import org.betterx.betternether.blocks.BNBlockProperties.JellyShape;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
-import org.betterx.wover.block.api.BlockProperties;
-import org.betterx.wover.block.api.BlockProperties.TripleShape;
+import de.ambertation.wover.block.api.BlockProperties;
+import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,23 +30,17 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import com.google.common.collect.Lists;
-
-import java.util.List;
-
-public class BlockJellyfishMushroom extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. The class carried its own getDrops() override, so BlockBase's dropItself mechanism was
+// never in play; that override has since been replaced by a NetherLoot.jellyfishMushroom() trait on the registration.
+public class BlockJellyfishMushroom extends Block {
     private static final VoxelShape TOP_SHAPE = box(1, 0, 1, 15, 16, 15);
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
     public static final EnumProperty<JellyShape> VISUAL = BNBlockProperties.JELLY_MUSHROOM_VISUAL;
 
     public BlockJellyfishMushroom(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.makeNetherWood(settings, MapColor.COLOR_CYAN)
-                       .lightLevel(s -> 13)
-                       .destroyTime(0.1F)
-                       .sound(SoundType.FUNGUS)
-                       .strength(1)
-                       .noOcclusion());
+        super(settings);
     }
 
     @Override
@@ -66,7 +56,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
     @Override
     @Environment(EnvType.CLIENT)
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
-        return new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING);
+        return new ItemStack(NetherSaplingBlocks.JELLYFISH_MUSHROOM_SAPLING);
     }
 
     @Environment(EnvType.CLIENT)
@@ -151,26 +141,4 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
         super.stepOn(world, pos, state, entity);
     }
 
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        if (state.getValue(SHAPE) == TripleShape.TOP) {
-            return Lists.newArrayList(
-                    new ItemStack(
-                            NetherBlocks.JELLYFISH_MUSHROOM_SAPLING,
-                            MHelper.randRange(1, 2, MHelper.RANDOM)
-                    ),
-                    new ItemStack(
-                            NetherItems.GLOWSTONE_PILE,
-                            MHelper.randRange(0, 2, MHelper.RANDOM)
-                    ),
-                    new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, MHelper.RANDOM))
-            );
-        } else if (state.getValue(SHAPE) == TripleShape.BOTTOM)
-            return Lists.newArrayList(new ItemStack(
-                    NetherBlocks.JELLYFISH_MUSHROOM_SAPLING,
-                    MHelper.randRange(1, 2, MHelper.RANDOM)
-            ));
-        else
-            return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
-    }
 }

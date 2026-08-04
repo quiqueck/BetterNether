@@ -1,5 +1,7 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.registry.block.NetherMushroomBlocks;
+
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockBrownLargeMushroom;
@@ -14,37 +16,37 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public class BigBrownMushroomFeature extends ContextFeature<NoneFeatureConfiguration> {
-    private static final BlockState MIDDLE = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState MIDDLE = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.MIDDLE);
-    private static final BlockState BOTTOM = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState BOTTOM = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.BOTTOM);
-    private static final BlockState TOP = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState TOP = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.TOP);
-    private static final BlockState SIDE_N = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState SIDE_N = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_N);
-    private static final BlockState SIDE_S = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState SIDE_S = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_S);
-    private static final BlockState SIDE_E = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState SIDE_E = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_E);
-    private static final BlockState SIDE_W = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState SIDE_W = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_W);
-    private static final BlockState CORNER_N = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState CORNER_N = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_N);
-    private static final BlockState CORNER_W = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState CORNER_W = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_W);
-    private static final BlockState CORNER_E = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState CORNER_E = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_E);
-    private static final BlockState CORNER_S = NetherBlocks.BROWN_LARGE_MUSHROOM
+    private static final BlockState CORNER_S = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_S);
 

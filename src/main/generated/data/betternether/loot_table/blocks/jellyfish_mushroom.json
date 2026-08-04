@@ -1,0 +1,126 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:any_of",
+          "terms": [
+            {
+              "block": "betternether:jellyfish_mushroom",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "shape": "top"
+              }
+            },
+            {
+              "block": "betternether:jellyfish_mushroom",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "shape": "bottom"
+              }
+            }
+          ]
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "betternether:jellyfish_mushroom_sapling"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:jellyfish_mushroom",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "shape": "top"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "betternether:glowstone_pile"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:jellyfish_mushroom",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "shape": "top"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:slime_ball"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:jellyfish_mushroom",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "shape": "middle"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:nether_mushroom_stem"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

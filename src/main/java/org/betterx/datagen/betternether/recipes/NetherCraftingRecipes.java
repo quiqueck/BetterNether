@@ -1,12 +1,12 @@
 package org.betterx.datagen.betternether.recipes;
 
 import org.betterx.bclib.BCLib;
-import org.betterx.wover.core.api.ModCore;
-import org.betterx.wover.datagen.api.provider.WoverRecipeProvider;
-import org.betterx.wover.recipe.api.BaseRecipeBuilder;
-import org.betterx.wover.recipe.api.CraftingRecipeBuilder;
-import org.betterx.wover.recipe.api.RecipeBuilder;
-import org.betterx.wover.tag.api.predefined.CommonItemTags;
+import de.ambertation.wover.core.api.ModCore;
+import de.ambertation.wover.datagen.api.provider.WoverRecipeProvider;
+import de.ambertation.wover.recipe.api.BaseRecipeBuilder;
+import de.ambertation.wover.recipe.api.CraftingRecipeBuilder;
+import de.ambertation.wover.recipe.api.RecipeBuilder;
+import de.ambertation.wover.tag.api.predefined.CommonItemTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.ItemTags;

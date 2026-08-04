@@ -1,10 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.block.NetherWoodBlocks;
+
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
-import org.betterx.wover.state.api.WorldState;
+import de.ambertation.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,7 +20,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
@@ -29,7 +29,11 @@ import com.google.common.collect.Maps;
 
 import java.util.EnumMap;
 
-public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlock {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. Always dropped itself unconditionally via BlockBase's inherited getDrops() override
+// (no loot table json was generated for it), reproduced explicitly as NetherLoot.dropSelfNoExplosion() on
+// the registration.
+public class BlockLucisSpore extends Block implements BonemealableBlock {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, box(4, 4, 8, 12, 12, 16),
             Direction.SOUTH, box(4, 4, 0, 12, 12, 8),
@@ -39,10 +43,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockLucisSpore(Properties settings) {
-        super(org.betterx.betternether.blocks.materials.Materials.netherSapling(settings)
-                .mapColor(MapColor.COLOR_LIGHT_GREEN)
-                .lightLevel((bs) -> 7)
-        );
+        super(settings);
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
@@ -111,7 +112,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
         Direction direction = state.getValue(FACING);
         BlockPos blockPos = pos.relative(direction.getOpposite());
         BlockState blockState = world.getBlockState(blockPos);
-        return BlocksHelper.isNetherrack(blockState) || NetherBlocks.MAT_ANCHOR_TREE.isTreeLog(blockState.getBlock());
+        return BlocksHelper.isNetherrack(blockState) || NetherWoodBlocks.MAT_ANCHOR_TREE.isTreeLog(blockState.getBlock());
     }
 
     @Override

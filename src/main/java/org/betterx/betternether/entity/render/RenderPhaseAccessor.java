@@ -4,8 +4,6 @@ import org.betterx.betternether.BetterNether;
 
 import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.DestFactor;
-import com.mojang.blaze3d.platform.SourceFactor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.Util;
@@ -28,27 +26,18 @@ import java.util.function.Function;
 @Environment(EnvType.CLIENT)
 public abstract class RenderPhaseAccessor {
     /**
-     * The blend function of the pre-1.21.5 firefly {@code RenderType}, reproduced exactly.
-     * <p>
-     * The old shard was <em>named</em> {@code ALPHA_ADD_TRANSPARENCY}, but the name is a misnomer: it has
-     * called {@code blendFuncSeparate(SRC_ALPHA, ONE_MINUS_SRC_ALPHA, ONE, ZERO)} ever since it was
-     * introduced in 2021 — a regular alpha blend whose only quirk is that it writes the source alpha
-     * straight through ({@code ONE, ZERO}) instead of compositing it. It has never been additive
-     * ({@code dst = ONE}). The originally additive-ish look came from {@code RENDERTYPE_EYES_SHADER}, which
-     * was deliberately swapped for {@code RENDERTYPE_TRANSLUCENT_SHADER} in 2022 to fix rendering under the
+     * The old shard was <em>named</em> {@code ALPHA_ADD_TRANSPARENCY}, but historically it called
+     * {@code blendFuncSeparate(SRC_ALPHA, ONE_MINUS_SRC_ALPHA, ONE, ZERO)} — a regular alpha blend, never
+     * actually additive. The originally additive-ish look came from {@code RENDERTYPE_EYES_SHADER}, which
+     * was swapped for {@code RENDERTYPE_TRANSLUCENT_SHADER} in 2022 to fix rendering under the
      * Iris/Complementary shader packs.
      * <p>
-     * No vanilla {@link BlendFunction} constant matches: {@code TRANSLUCENT} differs in {@code dstAlpha}
-     * and {@code OVERLAY} differs in {@code dstColor}. Switching to {@link BlendFunction#LIGHTNING}
-     * ({@code SRC_ALPHA, ONE}) would make the glow genuinely additive — a deliberate visual change, not a
-     * restoration.
+     * We deliberately use {@link BlendFunction#LIGHTNING} ({@code SRC_ALPHA, ONE}) instead: a genuinely
+     * additive glow (unlike the historical blend above), but scaled by the fragment's alpha first (unlike
+     * plain {@code ADDITIVE}, {@code ONE, ONE}, which ignores alpha and flattens the texture's soft
+     * circular falloff into a hard-edged bright disc).
      */
-    private static final BlendFunction FIREFLY_BLEND = new BlendFunction(
-            SourceFactor.SRC_ALPHA,
-            DestFactor.ONE_MINUS_SRC_ALPHA,
-            SourceFactor.ONE,
-            DestFactor.ZERO
-    );
+    private static final BlendFunction FIREFLY_BLEND = BlendFunction.LIGHTNING;
 
     /**
      * Modelled on vanilla's {@code RenderPipelines.ENTITY_TRANSLUCENT}, which is the closest match to the

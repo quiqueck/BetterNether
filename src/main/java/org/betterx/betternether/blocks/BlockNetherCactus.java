@@ -1,9 +1,8 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.wover.block.api.BlockProperties;
+import de.ambertation.wover.block.api.BlockProperties;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,19 +18,22 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 
-public class BlockNetherCactus extends BlockBaseNotFull {
+// Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
+// overrides are gone. Always dropped itself unconditionally via BlockBase's inherited getDrops() override
+// (no loot table json was generated for it), reproduced explicitly as NetherLoot.dropSelfNoExplosion() on
+// the registration.
+public class BlockNetherCactus extends Block {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
     private static final VoxelShape SIDE_SHAPE = box(5, 0, 5, 11, 16, 11);
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherCactus(Properties settings) {
-        super(Materials.cactus(settings, MapColor.TERRACOTTA_ORANGE, false));
+        super(settings);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }
 

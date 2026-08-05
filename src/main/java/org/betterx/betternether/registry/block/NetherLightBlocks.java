@@ -39,7 +39,7 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;

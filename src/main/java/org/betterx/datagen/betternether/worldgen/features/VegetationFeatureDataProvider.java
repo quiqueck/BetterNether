@@ -1,25 +1,21 @@
 package org.betterx.datagen.betternether.worldgen.features;
 
-import org.betterx.betternether.registry.block.NetherCropBlocks;
-import org.betterx.betternether.registry.block.NetherDecorBlocks;
-import org.betterx.betternether.registry.block.NetherMushroomBlocks;
-import org.betterx.betternether.registry.block.NetherPlantBlocks;
-import org.betterx.betternether.registry.block.NetherVineBlocks;
-import org.betterx.betternether.registry.block.NetherWallPlantBlocks;
-import org.betterx.betternether.registry.block.NetherWoodBlocks;
-
-import org.betterx.betternether.blocks.*;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.features.configured.NetherVegetation;
-import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.predicate.BlockPredicates;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
+import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
+import org.betterx.betternether.blocks.*;
+import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.block.*;
+import org.betterx.betternether.registry.features.configured.NetherVegetation;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -91,6 +87,17 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
                 .register();
 
+        // The two gloomgrasses share one patch feature, so a tuft comes out mixed rather than in
+        // single-colour clumps. Weights inside a weighted_state_provider are relative, so the pair is
+        // written out of 200 - the total the pale grass had on its own - as 70% dark to 30% pale.
+        NetherVegetation.VEGETATION_GLOOMWOOD
+                .bootstrap(ctx)
+                .add(NetherPlantBlocks.GLOOMGRASS, 140)
+                .add(NetherPlantBlocks.PALE_GLOOMGRASS, 60)
+                .inlinePlace()
+                .isEmptyAndOn(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                .inRandomPatch()
+                .register();
         NetherVegetation.VEGETATION_MAGMA_LAND
                 .bootstrap(ctx)
                 .add(NetherDecorBlocks.GEYSER, 40)
@@ -271,6 +278,71 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .spreadXZ(4)
                 .spreadY(7)
                 .register();
+        // A wisp is always placed at its full three blocks: BOTTOM carries the dark half of the stalk
+        // gradient and MIDDLE the bright half, so a short column would put the dark stalk directly under
+        // the head and lose the gradient the two stalk textures exist for.
+        NetherVegetation.GLOOMWISP_VINE
+                .bootstrap(ctx)
+                .direction(Direction.UP)
+                .prioritizeTip()
+                // Built explicitly rather than with addTripleShape(): that emits BOTTOM, MIDDLE x n, TOP,
+                // and repeating MIDDLE would repeat the bright half of the stalk gradient. The block's own
+                // shapeAt() says MIDDLE is only ever the one segment under the head, so the column is
+                // BOTTOM x n, MIDDLE, TOP - which also lets the height vary without breaking the gradient.
+                .add(
+                        UniformInt.of(0, BlockGloomwispVine.MAX_HEIGHT - 2),
+                        NetherVineBlocks.GLOOMWISP_VINE.defaultBlockState()
+                                                       .setValue(
+                                                               BlockGloomwispVine.SHAPE,
+                                                               BlockProperties.TripleShape.BOTTOM
+                                                       )
+                )
+                .add(
+                        ConstantInt.of(1),
+                        NetherVineBlocks.GLOOMWISP_VINE.defaultBlockState()
+                                                       .setValue(
+                                                               BlockGloomwispVine.SHAPE,
+                                                               BlockProperties.TripleShape.MIDDLE
+                                                       )
+                )
+                .add(
+                        ConstantInt.of(1),
+                        NetherVineBlocks.GLOOMWISP_VINE.defaultBlockState()
+                                                       .setValue(
+                                                               BlockGloomwispVine.SHAPE,
+                                                               BlockProperties.TripleShape.TOP
+                                                       )
+                )
+                .inlinePlace()
+                .isEmptyAndOn(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                // a stand rather than a clump: 32 tries over an eight-block spread
+                .inRandomPatch()
+                .tries(32)
+                .spreadXZ(8)
+                .register();
+
+        // The shortest wisp is head-only, and has to be its own column - see the key's doc-comment.
+        NetherVegetation.GLOOMWISP_VINE_HEAD
+                .bootstrap(ctx)
+                .direction(Direction.UP)
+                .prioritizeTip()
+                .add(
+                        ConstantInt.of(1),
+                        NetherVineBlocks.GLOOMWISP_VINE.defaultBlockState()
+                                                       .setValue(
+                                                               BlockGloomwispVine.SHAPE,
+                                                               BlockProperties.TripleShape.TOP
+                                                       )
+                )
+                .inlinePlace()
+                .isEmptyAndOn(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                // inRandomPatch() is what gives the inline placement a key; without it registration
+                // fails with "A ResourceKey for a Feature can not be null"
+                .inRandomPatch()
+                .tries(12)
+                .spreadXZ(8)
+                .register();
+
         NetherVegetation.NETHER_REED
                 .bootstrap(ctx)
                 .direction(Direction.UP)
@@ -450,6 +522,29 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .addAllStatesFor(BlockFeatherFern.AGE, NetherPlantBlocks.FEATHER_FERN, 20)
                 .inlinePlace()
                 .vanillaNetherGround(24)
+                .register();
+
+        NetherVegetationPlaced.VEGETATION_GLOOMWOOD
+                .place(ctx, NetherVegetation.VEGETATION_GLOOMWOOD)
+                .betterNetherGround(10)
+                .isEmptyAndOn(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                .register();
+
+        // Heights one to four, as two columns behind a weighted pick: a lone head, or a head over one
+        // bright stalk and up to two dark ones. One in four is the bare head.
+        // Heights one to four, as two features the biome runs side by side rather than one weighted
+        // pick. A random-select would be the tidier shape, but it has to name a configured feature and
+        // an inline one has no key to give it; two placed features cost nothing and are plainly readable.
+        NetherVegetationPlaced.GLOOMWISP_VINE_HEAD
+                .place(ctx, NetherVegetation.GLOOMWISP_VINE_HEAD)
+                .vanillaNetherGround(1)
+                .onceEvery(3)
+                .register();
+
+        NetherVegetationPlaced.GLOOMWISP_VINE
+                .place(ctx, NetherVegetation.GLOOMWISP_VINE)
+                .vanillaNetherGround(2)
+                .onceEvery(2)
                 .register();
 
         NetherVegetationPlaced.VEGETATION_SULFURIC_BONE_REEF

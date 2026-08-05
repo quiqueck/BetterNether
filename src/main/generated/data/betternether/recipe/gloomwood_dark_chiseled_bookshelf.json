@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chiseled_bookshelf",
+  "key": {
+    "#": "betternether:gloomwood_dark_planks",
+    "S": "betternether:gloomwood_dark_slab"
+  },
+  "pattern": [
+    "###",
+    "SSS",
+    "###"
+  ],
+  "result": {
+    "id": "betternether:gloomwood_dark_chiseled_bookshelf"
+  }
+}

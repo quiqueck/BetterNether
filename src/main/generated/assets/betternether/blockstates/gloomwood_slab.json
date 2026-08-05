@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betternether:block/gloomwood_slab"
+    },
+    "type=double": {
+      "model": "betternether:block/gloomwood_planks"
+    },
+    "type=top": {
+      "model": "betternether:block/gloomwood_slab_top"
+    }
+  }
+}

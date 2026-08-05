@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chiseled_bookshelf",
+  "key": {
+    "#": "betternether:rubeus_planks",
+    "S": "betternether:rubeus_slab"
+  },
+  "pattern": [
+    "###",
+    "SSS",
+    "###"
+  ],
+  "result": {
+    "id": "betternether:rubeus_chiseled_bookshelf"
+  }
+}

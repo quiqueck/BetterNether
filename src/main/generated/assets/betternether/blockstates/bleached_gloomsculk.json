@@ -1,0 +1,51 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "betternether:block/bleached_gloomsculk_t0"
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t0",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t0",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t0",
+        "y": 270
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t1"
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t1",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t1",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t1",
+        "y": 270
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t2"
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t2",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t2",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/bleached_gloomsculk_t2",
+        "y": 270
+      }
+    ]
+  }
+}

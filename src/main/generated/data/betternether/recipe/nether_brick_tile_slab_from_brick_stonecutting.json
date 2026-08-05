@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "nether_brick",
   "ingredient": "minecraft:nether_bricks",
   "result": {
     "count": 2,

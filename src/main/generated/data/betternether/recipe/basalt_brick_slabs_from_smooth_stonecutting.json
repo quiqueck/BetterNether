@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "basalt",
   "ingredient": "minecraft:smooth_basalt",
   "result": {
     "count": 2,

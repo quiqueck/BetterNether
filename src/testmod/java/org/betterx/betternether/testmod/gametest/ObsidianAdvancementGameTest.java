@@ -7,7 +7,7 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -37,7 +37,7 @@ public class ObsidianAdvancementGameTest {
         return helper.getLevel()
                      .getServer()
                      .getAdvancements()
-                     .get(ResourceLocation.parse("betternether:" + path));
+                     .get(Identifier.parse("betternether:" + path));
     }
 
     /**

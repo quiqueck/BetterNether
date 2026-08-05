@@ -1,0 +1,24 @@
+{
+  "parent": "betternether:enter_nether",
+  "criteria": {
+    "disturbed_wisp": {
+      "trigger": "betternether:disturbed_wisp"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.disturbed_wisp.description"
+    },
+    "icon": {
+      "id": "betternether:gloomwisp_vine"
+    },
+    "title": {
+      "translate": "advancements.betternether.disturbed_wisp.title"
+    }
+  },
+  "requirements": [
+    [
+      "disturbed_wisp"
+    ]
+  ]
+}

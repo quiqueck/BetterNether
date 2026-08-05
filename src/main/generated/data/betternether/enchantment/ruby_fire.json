@@ -35,6 +35,24 @@
             {
               "type": "minecraft:ignite",
               "duration": 100.0
+            },
+            {
+              "type": "minecraft:apply_impulse",
+              "coordinate_scale": [
+                1.0,
+                0.0,
+                1.0
+              ],
+              "direction": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "magnitude": {
+                "type": "minecraft:linear",
+                "base": 0.6,
+                "per_level_above_first": 0.3
+              }
             }
           ]
         },
@@ -44,8 +62,8 @@
             "type": "minecraft:enchantment_level",
             "amount": {
               "type": "minecraft:linear",
-              "base": 0.25,
-              "per_level_above_first": 0.25
+              "base": 0.5,
+              "per_level_above_first": 0.5
             }
           },
           "condition": "minecraft:random_chance"

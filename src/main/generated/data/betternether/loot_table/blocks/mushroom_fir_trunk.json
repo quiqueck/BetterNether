@@ -1,0 +1,79 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "betternether:mushroom_fir_trunk",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "shape": "bottom"
+                  }
+                },
+                {
+                  "condition": "minecraft:survives_explosion"
+                }
+              ],
+              "name": "betternether:mushroom_fir_stem"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "betternether:mushroom_fir_trunk",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "shape": "middle"
+                  }
+                },
+                {
+                  "condition": "minecraft:survives_explosion"
+                }
+              ],
+              "name": "betternether:mushroom_fir_stem"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "betternether:mushroom_fir_trunk",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "shape": "top"
+                  }
+                },
+                {
+                  "condition": "minecraft:survives_explosion"
+                }
+              ],
+              "name": "betternether:mushroom_fir_stem"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 2.0,
+                    "min": 0.0
+                  },
+                  "function": "minecraft:set_count"
+                }
+              ],
+              "name": "betternether:mushroom_fir_sapling"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

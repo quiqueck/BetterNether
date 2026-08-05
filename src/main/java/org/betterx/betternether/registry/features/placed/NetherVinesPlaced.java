@@ -31,6 +31,9 @@ public class NetherVinesPlaced {
     public static final PlacedConfiguredFeatureKey EYE_VINE = PlacedFeatureManager
             .createKey(NetherVines.PATCH_EYE_VINE)
             .setDecoration(GenerationStep.Decoration.VEGETAL_DECORATION);
+    public static final PlacedConfiguredFeatureKey GLOOMSCULK_VINE = PlacedFeatureManager
+            .createKey(NetherVines.PATCH_GLOOMSCULK_VINE)
+            .setDecoration(GenerationStep.Decoration.VEGETAL_DECORATION);
     public static final PlacedConfiguredFeatureKey BLACK_VINE = PlacedFeatureManager
             .createKey(NetherVines.PATCH_BLACK_VINE)
             .setDecoration(GenerationStep.Decoration.VEGETAL_DECORATION);

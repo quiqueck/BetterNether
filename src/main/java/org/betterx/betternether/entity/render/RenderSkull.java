@@ -7,18 +7,19 @@ import org.betterx.betternether.registry.EntityRenderRegistry;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
 public class RenderSkull extends MobRenderer<EntitySkull, SkullRenderState, ModelSkull> {
-    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
+    private static final Identifier TEXTURE = BetterNether.C.mk(
             "textures/entity/skull.png"
     );
 
@@ -40,12 +41,12 @@ public class RenderSkull extends MobRenderer<EntitySkull, SkullRenderState, Mode
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SkullRenderState state) {
+    public Identifier getTextureLocation(SkullRenderState state) {
         return TEXTURE;
     }
 
     static class GlowFeatureRenderer extends EyesLayer<SkullRenderState, ModelSkull> {
-        private static final RenderType SKIN = RenderType.entityTranslucent(BetterNether.C.mk(
+        private static final RenderType SKIN = RenderTypes.entityTranslucent(BetterNether.C.mk(
                 "textures/entity/skull_glow.png"
         ));
 

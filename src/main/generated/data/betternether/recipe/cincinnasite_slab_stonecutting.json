@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "slabs",
   "ingredient": "betternether:cincinnasite_forged",
   "result": {
     "count": 2,

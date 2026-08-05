@@ -126,9 +126,34 @@ public class BlocksHelper {
         return state.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.SOUL_GROUND);
     }
 
+    /**
+     * The ground anything in the nether may stand on or grow out of.
+     * <p>
+     * It is the runtime counterpart of
+     * {@link de.ambertation.wover.tag.api.predefined.CommonBlockTags#NETHER_TERRAIN} and of the traits in
+     * {@link org.betterx.betternether.blocks.NetherSurvival#netherGround()}; the three are meant to agree, so
+     * a block added to one belongs in all three.
+     * <p>
+     * {@code SCULK_LIKE} is <b>not</b> among them. It is a material family rather than a terrain one - it
+     * holds vanilla sculk and decorative pieces such as the gloomsculk geode - and the gloomwood's floor
+     * blocks earn their place here by carrying NETHER_TERRAIN themselves.
+     * <p>
+     * The gloomwood's own species are the exception: a plant native to that floor merely stands on it, so
+     * the gloomwood sapling takes {@link org.betterx.betternether.blocks.NetherSurvival#netherGroundAndSculk()} -
+     * this set plus the whole sculk family - and its ground cover takes the wider
+     * {@link org.betterx.bclib.trait.block.SurvivesOnSolidTrait}. Anything else that wants the family says so with
+     * {@link #isSculkLike} alongside this - see
+     * {@link org.betterx.betternether.world.features.GloomwoodTreeFeature}.
+     */
     public static boolean isNetherGround(BlockState state) {
-        return state.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.NETHER_STONES) || isSoulSand(state) || isNetherMycelium(
-                state) || isNylium(state);
+        return state.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.NETHER_STONES)
+                || isSoulSand(state)
+                || isNetherMycelium(state)
+                || isNylium(state);
+    }
+
+    public static boolean isSculkLike(BlockState state) {
+        return state.is(de.ambertation.wover.tag.api.predefined.CommonBlockTags.SCULK_LIKE);
     }
 
     public static boolean isNetherGroundMagma(BlockState state) {

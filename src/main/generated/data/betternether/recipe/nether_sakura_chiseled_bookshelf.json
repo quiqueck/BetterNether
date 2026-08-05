@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chiseled_bookshelf",
+  "key": {
+    "#": "betternether:nether_sakura_planks",
+    "S": "betternether:nether_sakura_slab"
+  },
+  "pattern": [
+    "###",
+    "SSS",
+    "###"
+  ],
+  "result": {
+    "id": "betternether:nether_sakura_chiseled_bookshelf"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "betternether:item/gloomwood_dark_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "betternether:gloomwood_dark_chest"
+    }
+  }
+}

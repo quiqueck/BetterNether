@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gloomwood_dark_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:gloomwood_dark_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gloomwood_transition_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:gloomwood_transition_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:gloomwood_transition_planks_to_dark"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gloomwood_dark_planks",
+      "has_gloomwood_transition_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:gloomwood_transition_planks_to_dark"
+    ]
+  }
+}

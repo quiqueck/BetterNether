@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "nether_brick",
   "ingredient": "betternether:nether_brick_tile_large",
   "result": {
-    "count": 1,
     "id": "betternether:nether_brick_wall"
   }
 }

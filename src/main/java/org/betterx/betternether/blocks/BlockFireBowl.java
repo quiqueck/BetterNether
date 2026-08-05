@@ -99,7 +99,7 @@ public abstract class BlockFireBowl extends Block {
                         SoundEvents.FLINTANDSTEEL_USE,
                         SoundSource.BLOCKS,
                         1.0F,
-                        world.random.nextFloat() * 0.4F + 0.8F
+                        world.getRandom().nextFloat() * 0.4F + 0.8F
                 );
                 return InteractionResult.SUCCESS;
             } else if (player.getMainHandItem().isEmpty() && state.getValue(FIRE)) {
@@ -110,7 +110,7 @@ public abstract class BlockFireBowl extends Block {
                         SoundEvents.FIRE_EXTINGUISH,
                         SoundSource.BLOCKS,
                         1.0F,
-                        world.random.nextFloat() * 0.4F + 0.8F
+                        world.getRandom().nextFloat() * 0.4F + 0.8F
                 );
                 return InteractionResult.SUCCESS;
             }

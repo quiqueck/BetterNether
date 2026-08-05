@@ -1,0 +1,305 @@
+{
+    "parent": "block/block",
+    "__comment": "The wisp in the hand: the block's own head mesh, so the icon shows the shell, the discs and the crossed fire rather than a flat slab. Everything animated is swapped for a still - the face for the unblinking frame, the soul fire for a single lifted frame - because an inventory icon that blinks and burns is a distraction. The wisp's head. Built from four zero-thickness walls rather than one box: a box's faces always wind outwards, so with the top open you looked straight through the head - the far wall's inner side was culled. Each wall here declares both of its opposing faces, which is the only way to get a surface that renders from inside as well as out. Only the outer north face carries the face texture; the blockstate's four y-rotations decide which way a wisp looks. Inside sit two dark radial discs spanning the full inner width so they meet the walls with no gap (the texture fades to nothing at its own rim, which is what blends the join) and a campfire-style cross fire rising out of the top one. UVs sample rows 1-14 / columns 3-12, which is exactly the ghost drawn there. shade:false keeps it evenly lit, so it reads as something glowing rather than a solid lump.",
+    "textures": {
+        "particle": "betternether:block/gloomwisp_vine_head_still",
+        "face": "betternether:block/gloomwisp_vine_head_still",
+        "side": "betternether:block/gloomwisp_vine_head_side",
+        "glow": "betternether:block/gloomwisp_vine_glow",
+        "fire": "betternether:block/gloomwisp_vine_fire_still"
+    },
+    "elements": [
+        {
+            "__comment": "north wall - the one that carries the face",
+            "from": [
+                3,
+                0,
+                3
+            ],
+            "to": [
+                13,
+                14,
+                3
+            ],
+            "shade": false,
+            "faces": {
+                "north": {
+                    "uv": [
+                        3,
+                        1,
+                        13,
+                        15
+                    ],
+                    "texture": "#face"
+                },
+                "south": {
+                    "uv": [
+                        3,
+                        1,
+                        13,
+                        15
+                    ],
+                    "texture": "#side"
+                }
+            }
+        },
+        {
+            "__comment": "south wall",
+            "from": [
+                3,
+                0,
+                13
+            ],
+            "to": [
+                13,
+                14,
+                13
+            ],
+            "shade": false,
+            "faces": {
+                "south": {
+                    "uv": [
+                        3,
+                        1,
+                        13,
+                        15
+                    ],
+                    "texture": "#side"
+                },
+                "north": {
+                    "uv": [
+                        3,
+                        1,
+                        13,
+                        15
+                    ],
+                    "texture": "#side"
+                }
+            }
+        },
+        {
+            "__comment": "west wall",
+            "from": [
+                3,
+                0,
+                3
+            ],
+            "to": [
+                3,
+                14,
+                13
+            ],
+            "shade": false,
+            "faces": {
+                "west": {
+                    "uv": [
+                        3,
+                        1,
+                        13,
+                        15
+                    ],
+                    "texture": "#side"
+                },
+                "east": {
+                    "uv": [
+                        3,
+                        1,
+                        13,
+                        15
+                    ],
+                    "texture": "#side"
+                }
+            }
+        },
+        {
+            "__comment": "east wall",
+            "from": [
+                13,
+                0,
+                3
+            ],
+            "to": [
+                13,
+                14,
+                13
+            ],
+            "shade": false,
+            "faces": {
+                "east": {
+                    "uv": [
+                        3,
+                        1,
+                        13,
+                        15
+                    ],
+                    "texture": "#side"
+                },
+                "west": {
+                    "uv": [
+                        3,
+                        1,
+                        13,
+                        15
+                    ],
+                    "texture": "#side"
+                }
+            }
+        },
+        {
+            "__comment": "dark disc, inset below the open top",
+            "from": [
+                3,
+                11,
+                3
+            ],
+            "to": [
+                13,
+                11,
+                13
+            ],
+            "shade": false,
+            "faces": {
+                "up": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#glow"
+                },
+                "down": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#glow"
+                }
+            }
+        },
+        {
+            "__comment": "dark disc, inset above the transparent hem",
+            "from": [
+                3,
+                2,
+                3
+            ],
+            "to": [
+                13,
+                2,
+                13
+            ],
+            "shade": false,
+            "faces": {
+                "up": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#glow"
+                },
+                "down": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#glow"
+                }
+            }
+        },
+        {
+            "__comment": "soul fire, crossed like a campfire's",
+            "from": [
+                4.5,
+                11,
+                8
+            ],
+            "to": [
+                11.5,
+                19,
+                8
+            ],
+            "rotation": {
+                "origin": [
+                    8,
+                    8,
+                    8
+                ],
+                "axis": "y",
+                "angle": 45,
+                "rescale": true
+            },
+            "shade": false,
+            "faces": {
+                "north": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#fire"
+                },
+                "south": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#fire"
+                }
+            }
+        },
+        {
+            "__comment": "soul fire, the crossing plane",
+            "from": [
+                8,
+                11,
+                4.5
+            ],
+            "to": [
+                8,
+                19,
+                11.5
+            ],
+            "rotation": {
+                "origin": [
+                    8,
+                    8,
+                    8
+                ],
+                "axis": "y",
+                "angle": 45,
+                "rescale": true
+            },
+            "shade": false,
+            "faces": {
+                "west": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#fire"
+                },
+                "east": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#fire"
+                }
+            }
+        }
+    ]
+}

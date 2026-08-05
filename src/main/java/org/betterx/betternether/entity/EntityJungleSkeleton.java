@@ -1,12 +1,13 @@
 package org.betterx.betternether.entity;
 
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.skeleton.Skeleton;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -27,6 +28,19 @@ public class EntityJungleSkeleton extends Skeleton {
         super.aiStep();
     }
 
+    @Override
+    public void checkDespawn() {
+        // 26.1 removed the virtual Mob.shouldDespawnInPeaceful() hook; vanilla Skeleton's own EntityType
+        // opts out of Peaceful via EntityType.Builder.notInPeaceful(), but that flag lives on the
+        // EntityType instance (not inherited via Java subclassing) so betternether:jungle_skeleton's own
+        // registration needs the same behaviour replicated here.
+        if (this.level().getDifficulty() == Difficulty.PEACEFUL) {
+            this.discard();
+            return;
+        }
+        super.checkDespawn();
+    }
+
     @org.jetbrains.annotations.Nullable
     @Override
     public SpawnGroupData finalizeSpawn(
@@ -44,15 +58,15 @@ public class EntityJungleSkeleton extends Skeleton {
 
         this.populateDefaultEquipmentEnchantments(level, randomSource, difficulty);
         this.reassessWeaponGoal();
-        this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier());
+        this.setCanPickUpLoot(this.getRandom().nextFloat() < 0.55F * difficulty.getSpecialMultiplier());
         if (this.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
             LocalDate localDate = LocalDate.now();
             int i = localDate.get(ChronoField.DAY_OF_MONTH);
             int j = localDate.get(ChronoField.MONTH_OF_YEAR);
-            if (j == 10 && i == 31 && this.random.nextFloat() < 0.25F) {
+            if (j == 10 && i == 31 && this.getRandom().nextFloat() < 0.25F) {
                 this.setItemSlot(
                         EquipmentSlot.HEAD,
-                        new ItemStack(this.random.nextFloat() < 0.1F
+                        new ItemStack(this.getRandom().nextFloat() < 0.1F
                                 ? Blocks.JACK_O_LANTERN
                                 : Blocks.CARVED_PUMPKIN)
                 );
@@ -64,11 +78,11 @@ public class EntityJungleSkeleton extends Skeleton {
     }
 
     private ItemStack getHandItem() {
-        int n = this.random.nextInt(3);
+        int n = this.getRandom().nextInt(3);
         switch (n) {
             case 0:
             default:
-                return new ItemStack(this.random.nextBoolean() ? Items.WOODEN_SWORD : Items.STONE_SWORD);
+                return new ItemStack(this.getRandom().nextBoolean() ? Items.WOODEN_SWORD : Items.STONE_SWORD);
             case 1:
                 return new ItemStack(Items.BOW);
             case 2:
@@ -77,6 +91,6 @@ public class EntityJungleSkeleton extends Skeleton {
     }
 
     private ItemStack getRandomOffhandItem() {
-        return this.random.nextInt(8) == 0 ? new ItemStack(Items.SHIELD) : new ItemStack(Items.AIR);
+        return this.getRandom().nextInt(8) == 0 ? new ItemStack(Items.SHIELD) : new ItemStack(Items.AIR);
     }
 }

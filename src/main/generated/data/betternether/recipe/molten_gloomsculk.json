@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "minecraft:redstone",
+    "minecraft:sculk"
+  ],
+  "result": {
+    "id": "betternether:molten_gloomsculk"
+  }
+}

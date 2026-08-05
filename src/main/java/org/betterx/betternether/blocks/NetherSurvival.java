@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
+import org.betterx.bclib.trait.TraitLists;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -30,6 +31,14 @@ public class NetherSurvival {
      * Nether ground in the broad sense - the old {@code SurvivesOnNetherGround}, which tested
      * {@code BlocksHelper.isNetherGround(state) || RED_SAND || SAND}, with isNetherGround expanding to
      * NETHER_STONES, SOUL_GROUND (isSoulSand), NETHER_MYCELIUM and NYLIUM.
+     * <p>
+     * This is the trait-side mirror of {@link org.betterx.betternether.BlocksHelper#isNetherGround}: whatever
+     * counts as ground for a feature counts as ground for a plant, so the two lists are kept identical.
+     * <p>
+     * SCULK_LIKE is deliberately not part of it. This mirrors what counts as <em>terrain</em>, and sculk is
+     * a material family rather than a terrain one - it holds vanilla sculk and decorative pieces such as the
+     * gloomsculk geode. Vegetation wants a wider rule than terrain does and takes
+     * {@link #netherGroundAndSculk()} instead; this one is the terrain half of it.
      */
     public static List<BlockTrait<?, ?>> netherGround() {
         return List.of(
@@ -39,6 +48,39 @@ public class NetherSurvival {
                 SurvivesOnBlockTrait.withTag(BlockTags.NYLIUM),
                 SurvivesOnBlockTrait.withBlocks(Blocks.RED_SAND, Blocks.SAND)
         );
+    }
+
+    /**
+     * The gloomwood's floor: the gloomsculk blocks and the vanilla sculk they are derived from.
+     * <p>
+     * Meant to be combined with another rule rather than used alone - {@code survivesOn} accepts the ground
+     * if any attached trait does, so {@code TraitLists.concat(netherGround(), sculkLike())} reads as
+     * "ordinary nether ground, or the sculk floor". That particular pair is {@link #netherGroundAndSculk()}.
+     */
+    public static List<BlockTrait<?, ?>> sculkLike() {
+        return List.of(SurvivesOnBlockTrait.withTag(CommonBlockTags.SCULK_LIKE));
+    }
+
+    /**
+     * What the gloomwood's sapling grows on: {@link #netherGround()} plus {@link #sculkLike()}.
+     * <p>
+     * Sculk is not nether terrain - it is out of {@code NETHER_TERRAIN} and out of
+     * {@link org.betterx.betternether.BlocksHelper#isNetherGround}, so nothing that shapes the world treats
+     * the gloomwood's floor as ground to build on. A plant native to that floor is the exception: it merely
+     * stands on the stuff, and it has to accept both the floor it grew up on and ordinary nether ground for
+     * a player who digs one up and replants it elsewhere.
+     * <p>
+     * Deliberately only the gloomwood species. The nether's other vegetation keeps the rule it had -
+     * a swamp grass gains nothing from being plantable in a biome it never appears in, and every plant
+     * accepting every floor is how ground rules stop meaning anything.
+     * <p>
+     * The gloomwood's ground cover - the two gloomgrasses and the gloomwisp - has since moved off this
+     * rule onto {@link org.betterx.bclib.trait.block.SurvivesOnSolidTrait}: they are decoration a player
+     * places anywhere, and their worldgen is pinned to the sculk floor by the placed feature rather than
+     * by what the block will tolerate. A tree is not, so the sapling keeps a real ground list.
+     */
+    public static List<BlockTrait<?, ?>> netherGroundAndSculk() {
+        return TraitLists.concat(netherGround(), sculkLike());
     }
 
     public static List<BlockTrait<?, ?>> netherrack() {

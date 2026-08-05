@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "soul_sandstone",
   "ingredient": "betternether:soul_sandstone_smooth",
   "result": {
-    "count": 1,
     "id": "betternether:soul_sandstone_chiseled"
   }
 }

@@ -3,7 +3,7 @@ package org.betterx.betternether.world.structures;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureNBT;
 import org.betterx.betternether.BetterNether;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 
@@ -15,7 +15,7 @@ public class NetherStructureNBT extends StructureNBT {
     protected Rotation rotation = Rotation.NONE;
     protected Mirror mirror = Mirror.NONE;
 
-    protected NetherStructureNBT(ResourceLocation location) {
+    protected NetherStructureNBT(Identifier location) {
         super(location);
     }
 

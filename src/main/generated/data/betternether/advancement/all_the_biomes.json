@@ -65,6 +65,22 @@
       },
       "trigger": "minecraft:location"
     },
+    "betternether:gloomwood": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "betternether:gloomwood"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "betternether:gravel_desert": {
       "conditions": {
         "player": [
@@ -360,7 +376,6 @@
     },
     "frame": "challenge",
     "icon": {
-      "count": 1,
       "id": "betternether:nether_ruby_boots"
     },
     "title": {
@@ -379,6 +394,9 @@
     ],
     [
       "betternether:flooded_deltas"
+    ],
+    [
+      "betternether:gloomwood"
     ],
     [
       "betternether:gravel_desert"

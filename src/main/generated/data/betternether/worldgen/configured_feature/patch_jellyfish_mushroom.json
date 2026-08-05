@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "wover:random_patch",
   "config": {
     "feature": "betternether:jellyfish_mushroom",
     "tries": 6,

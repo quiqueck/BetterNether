@@ -28,7 +28,7 @@ import net.minecraft.world.level.block.Block;
  */
 public class NetherWoodSlots {
     /** The shared, hand-authored ladder template every BetterNether ladder child model parents from. */
-    public static final net.minecraft.resources.ResourceLocation LADDER_TEMPLATE =
+    public static final net.minecraft.resources.Identifier LADDER_TEMPLATE =
             BetterNether.C.mk("block/nether_reed_ladder");
 
     /**
@@ -61,7 +61,7 @@ public class NetherWoodSlots {
      * The shared, hand-authored trapdoor template (the no-{@code #side} shape) that {@link TrapdoorTemplate}
      * children parent from. stalagnate's own {@code stalagnate_trapdoor} model doubles as this template.
      */
-    public static final net.minecraft.resources.ResourceLocation TRAPDOOR_TEMPLATE =
+    public static final net.minecraft.resources.Identifier TRAPDOOR_TEMPLATE =
             BetterNether.C.mk("block/stalagnate_trapdoor");
 
     /**
@@ -97,7 +97,7 @@ public class NetherWoodSlots {
      * mesh) doubles as this template; wart and willow reuse the identical geometry with only a different
      * {@code #side} (planks) texture, so they no longer need their own hand-authored trapdoor model.
      */
-    public static final net.minecraft.resources.ResourceLocation TRAPDOOR_SIDE_TEMPLATE =
+    public static final net.minecraft.resources.Identifier TRAPDOOR_SIDE_TEMPLATE =
             BetterNether.C.mk("block/nether_sakura_trapdoor");
 
     /**
@@ -108,9 +108,9 @@ public class NetherWoodSlots {
      * derive it and it is passed explicitly.
      */
     public static class TrapdoorSideTemplate extends de.ambertation.wover.sets.api.blocks.types.Trapdoor {
-        private final net.minecraft.resources.ResourceLocation sideTexture;
+        private final net.minecraft.resources.Identifier sideTexture;
 
-        public TrapdoorSideTemplate(net.minecraft.resources.ResourceLocation sideTexture) {
+        public TrapdoorSideTemplate(net.minecraft.resources.Identifier sideTexture) {
             this.sideTexture = sideTexture;
         }
 
@@ -143,9 +143,9 @@ public class NetherWoodSlots {
      * The shared, hand-authored fence templates (bespoke top/lower-bar geometry) that {@link FenceTemplate}
      * children parent from. nether_reed's own fence post/side models double as these templates.
      */
-    public static final net.minecraft.resources.ResourceLocation FENCE_POST_TEMPLATE =
+    public static final net.minecraft.resources.Identifier FENCE_POST_TEMPLATE =
             BetterNether.C.mk("block/nether_reed_fence_post");
-    public static final net.minecraft.resources.ResourceLocation FENCE_SIDE_TEMPLATE =
+    public static final net.minecraft.resources.Identifier FENCE_SIDE_TEMPLATE =
             BetterNether.C.mk("block/nether_reed_fence_side");
 
     /**
@@ -155,14 +155,14 @@ public class NetherWoodSlots {
      * fence textures feed the post/side; the item model uses a separate {@code _planks} inventory texture.
      */
     public static class FenceTemplate extends de.ambertation.wover.sets.api.blocks.types.Fence {
-        private final net.minecraft.resources.ResourceLocation sideTexture;
-        private final net.minecraft.resources.ResourceLocation topTexture;
-        private final net.minecraft.resources.ResourceLocation inventoryTexture;
+        private final net.minecraft.resources.Identifier sideTexture;
+        private final net.minecraft.resources.Identifier topTexture;
+        private final net.minecraft.resources.Identifier inventoryTexture;
 
         public FenceTemplate(
-                net.minecraft.resources.ResourceLocation sideTexture,
-                net.minecraft.resources.ResourceLocation topTexture,
-                net.minecraft.resources.ResourceLocation inventoryTexture
+                net.minecraft.resources.Identifier sideTexture,
+                net.minecraft.resources.Identifier topTexture,
+                net.minecraft.resources.Identifier inventoryTexture
         ) {
             this.sideTexture = sideTexture;
             this.topTexture = topTexture;

@@ -19,6 +19,7 @@ import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.item.enchantment.effects.*;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.EnchantmentLevelProvider;
 
@@ -59,10 +60,25 @@ public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
                                 new ChangeItemDamage(
                                         LevelBasedValue.constant(1.0F)
                                 ),
-                                new Ignite(LevelBasedValue.constant(100.0F))
+                                new Ignite(LevelBasedValue.constant(100.0F)),
+                                // Knock the attacker away as well. minecraft:knockback, further down,
+                                // only boosts the knockback the holder *deals* when attacking - it does
+                                // nothing for someone attacking the holder - so the retaliation needs
+                                // its own impulse. ApplyEntityImpulse pushes along the affected
+                                // entity's own look vector, and the attacker is looking at whoever it
+                                // just hit, so a negative Z sends it backwards.
+                                new ApplyEntityImpulse(
+                                        new Vec3(0.0, 0.0, -1.0),
+                                        new Vec3(1.0, 0.0, 1.0),
+                                        LevelBasedValue.perLevel(0.6F, 0.3F)
+                                )
                         ),
+                        // Half of all hits. At the old quarter a short fight often produced nothing at
+                        // all - four hits miss entirely about a third of the time - which read as the
+                        // enchantment being broken rather than unlucky. At a half, four hits leave a
+                        // 94% chance of at least one proc.
                         LootItemRandomChanceCondition.randomChance(
-                                EnchantmentLevelProvider.forEnchantmentLevel(LevelBasedValue.perLevel(0.25F))
+                                EnchantmentLevelProvider.forEnchantmentLevel(LevelBasedValue.perLevel(0.5F))
                         )
                 )
                 .withEffect(
@@ -85,7 +101,7 @@ public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
                 .withEffect(
                         EnchantmentEffectComponents.ATTRIBUTES,
                         new EnchantmentAttributeEffect(
-                                NetherEnchantments.OBSIDIAN_BLOCK_BREAK_SPEED.unwrapKey().orElseThrow().location(),
+                                NetherEnchantments.OBSIDIAN_BLOCK_BREAK_SPEED.unwrapKey().orElseThrow().identifier(),
                                 NetherEnchantments.OBSIDIAN_BLOCK_BREAK_SPEED,
                                 new LevelBasedValue.Lookup(List.of(6f, 12f, 18f), new LevelBasedValue.LevelsSquared(9.0F)),
                                 AttributeModifier.Operation.ADD_VALUE

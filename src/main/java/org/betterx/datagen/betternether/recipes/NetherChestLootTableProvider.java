@@ -6,6 +6,7 @@ import org.betterx.betternether.registry.block.NetherObsidianBlocks;
 
 import org.betterx.betternether.registry.item.NetherEquipmentItems;
 import org.betterx.betternether.registry.item.NetherFoodItems;
+import org.betterx.betternether.registry.item.NetherMusicDiscItems;
 import org.betterx.betternether.registry.item.NetherResourceItems;
 
 import org.betterx.betternether.loot.BNLoot;
@@ -57,6 +58,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                          .withPool(simpleCityLoot())
                          .withPool(simpleOreLoot())
                          .withPool(simpleTemplates(1, 0.2f))
+                         .withPool(musicDiscs(0.15f))
                          .withPool(netherFiller())
         );
 
@@ -68,6 +70,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                          .withPool(netherObsidian())
                          .withPool(simpleOreLoot().when(LootItemRandomChanceCondition.randomChance(0.4f)))
                          .withPool(simpleTemplates(1, 0.1f))
+                         .withPool(musicDiscs(0.07f))
         );
 
         biConsumer.accept(
@@ -77,6 +80,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                          .withPool(netherFiller())
                          .withPool(netherObsidian())
                          .withPool(simpleOreLoot().when(LootItemRandomChanceCondition.randomChance(0.4f)))
+                         .withPool(musicDiscs(0.25f))
                          .withPool(surpriseItem())
         );
 
@@ -122,6 +126,29 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 LootTable.lootTable()
                          .withPool(ghastHive())
         );
+    }
+
+    /**
+     * A single gloomwood music disc, gated behind {@code chance} so a city chest hands one out rarely
+     * rather than as part of its regular contents. All three discs are equally likely.
+     */
+    private LootPool.Builder musicDiscs(float chance) {
+        return LootPool
+                .lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .add(LootItem
+                        .lootTableItem(NetherMusicDiscItems.MUSIC_DISC_GLOOM_WOODS)
+                        .setWeight(1)
+                )
+                .add(LootItem
+                        .lootTableItem(NetherMusicDiscItems.MUSIC_DISC_GLOOM_WISPS)
+                        .setWeight(1)
+                )
+                .add(LootItem
+                        .lootTableItem(NetherMusicDiscItems.MUSIC_DISC_GLOOMSCULK)
+                        .setWeight(1)
+                )
+                .when(LootItemRandomChanceCondition.randomChance(chance));
     }
 
     private LootPool.Builder surpriseItem() {

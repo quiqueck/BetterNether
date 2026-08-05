@@ -2,8 +2,9 @@ package org.betterx.betternether.mixin.client;
 
 import org.betterx.betternether.config.Configs;
 
-import net.minecraft.client.model.ArmorStandArmorModel;
 import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.model.object.armorstand.ArmorStandArmorModel;
+import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -41,8 +42,7 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, A
                     0,
                     new HumanoidArmorLayer<>(
                             this,
-                            new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
-                            new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR)),
+                            ArmorModelSet.bake(ModelLayers.PLAYER_SLIM_ARMOR, ctx.getModelSet(), ArmorStandArmorModel::new),
                             ctx.getEquipmentRenderer()
                     )
             );

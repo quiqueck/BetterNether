@@ -19,7 +19,6 @@ import org.betterx.bclib.furniture.block.BaseChair;
 import org.betterx.bclib.furniture.block.BaseTaburet;
 import de.ambertation.wover.sets.api.blocks.SlotType;
 import de.ambertation.wover.sets.api.blocks.slots.WoodSlots;
-import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
 import org.betterx.betternether.blocks.complex.slots.VanillaNetherWood;
@@ -40,7 +39,7 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -51,6 +50,7 @@ import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TintedParticleLeavesBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -120,6 +120,39 @@ public class NetherLeavesBlocks {
                     false, true, false, false
             ))
             .addTrait(NetherModels.netherSakuraLeavesModelTrait())
+            .buildAndRegister();
+
+    // --- gloomwood -------------------------------------------------------------------------------
+    // Unlike every leaf block above, these two are plain TintedParticleLeavesBlocks rather than
+    // BNLeaves. That is the point: BNLeaves overrides isRandomlyTicking to false and empties both
+    // randomTick and tick, which switches vanilla leaf decay off entirely - the reason no BetterNether
+    // canopy has ever decayed. The gloomwood tree is built through
+    // org.betterx.betternether.world.tree, which guarantees every leaf it places is inside the vanilla
+    // decay budget, so these blocks can keep the vanilla behaviour and behave like real leaves when the
+    // tree is felled.
+    public static final Block GLOOMWOOD_LEAVES = NetherBlocks.defineBlock(
+            "gloomwood_leaves",
+            p -> new TintedParticleLeavesBlock(0.01F, p)
+    )
+            .addTrait(LeavesBlockTrait.withColor(
+                    MapColor.TERRACOTTA_WHITE, 0, false, -1, NetherWoodBlocks.MAT_GLOOMWOOD.getSapling(),
+                    true, true, false, true
+            ))
+            .buildAndRegister();
+
+    /**
+     * The pale variant, used by the gloomwood canopy for the "eyes" of the ghost silhouette. A separate
+     * block rather than a model variant of {@link #GLOOMWOOD_LEAVES} so that it drops, stacks and builds
+     * on its own - the marking is a material, not a random texture roll.
+     */
+    public static final Block GLOOMWOOD_BLEACHED_LEAVES = NetherBlocks.defineBlock(
+            "gloomwood_bleached_leaves",
+            p -> new TintedParticleLeavesBlock(0.02F, p)
+    )
+            .addTrait(LeavesBlockTrait.withColor(
+                    MapColor.TERRACOTTA_WHITE, 7, false, -1, NetherWoodBlocks.MAT_GLOOMWOOD.getSapling(),
+                    true, true, false, true
+            ))
             .buildAndRegister();
 
     public static void ensureLoaded() {}

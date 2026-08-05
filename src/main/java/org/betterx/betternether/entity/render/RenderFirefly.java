@@ -11,15 +11,16 @@ import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -29,7 +30,7 @@ import org.joml.Quaternionf;
 @Environment(EnvType.CLIENT)
 class FireflyGlowFeatureRenderer extends RenderLayer<FireflyRenderState, ModelEntityFirefly> {
     private static final int LIT = 15728880;
-    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
+    private static final Identifier TEXTURE = BetterNether.C.mk(
             "textures/entity/firefly.png"
     );
 
@@ -38,48 +39,42 @@ class FireflyGlowFeatureRenderer extends RenderLayer<FireflyRenderState, ModelEn
     }
 
     @Override
-    public void render(
-            PoseStack matrices,
-            MultiBufferSource vertices,
-            int light,
+    public void submit(
+            PoseStack poseStack,
+            SubmitNodeCollector submitNodeCollector,
+            int lightCoords,
             FireflyRenderState state,
-            float headYaw,
-            float headPitch
+            float yRot,
+            float xRot
     ) {
         ModelEntityFirefly model = this.getParentModel();
 
         RenderType renderLayer = RenderPhaseAccessor.getFirefly(TEXTURE);
-        VertexConsumer vertexConsumer = vertices.getBuffer(renderLayer);
-
         int color = state.color;
 
-        addViewAlignedGlow(matrices, vertexConsumer, color);
+        // 1) view-aligned billboard glow halo
+        submitViewAlignedGlow(poseStack, submitNodeCollector, renderLayer, color);
 
-        // Temporarily make the glow part visible while this feature layer draws it;
-        // it stays hidden in the main model pass.
-        model.getGlowPart().visible = true;
-        model.getGlowPart()
-             .render(
-                     matrices,
-                     vertexConsumer,
-                     light,
-                     OverlayTexture.NO_OVERLAY,
-                     color
-             );
-        model.getGlowPart()
-             .render(
-                     matrices,
-                     vertexConsumer,
-                     light,
-                     OverlayTexture.NO_OVERLAY,
-                     color
-             );
-        model.getGlowPart().visible = false;
+        // 2) the (slightly inflated) glow cube, drawn emissively. The part is hidden in the main
+        //    model pass (glow.visible == false) and the visibility flag is only read at draw time
+        //    in the new deferred submit pipeline, so we flip it *inside* the draw-time lambda: the
+        //    main pass (a different render batch) never observes it as visible.
+        final ModelPart glowPart = model.getGlowPart();
+        submitNodeCollector.submitCustomGeometry(poseStack, renderLayer, (pose, buffer) -> {
+            PoseStack local = new PoseStack();
+            local.mulPose(pose.pose());
+            final boolean wasVisible = glowPart.visible;
+            glowPart.visible = true;
+            glowPart.render(local, buffer, lightCoords, OverlayTexture.NO_OVERLAY, color);
+            glowPart.render(local, buffer, lightCoords, OverlayTexture.NO_OVERLAY, color);
+            glowPart.visible = wasVisible;
+        });
     }
 
-    private void addViewAlignedGlow(
+    private void submitViewAlignedGlow(
             PoseStack matrices,
-            VertexConsumer vertexConsumer,
+            SubmitNodeCollector submitNodeCollector,
+            RenderType renderType,
             int color
     ) {
         matrices.pushPose();
@@ -93,18 +88,18 @@ class FireflyGlowFeatureRenderer extends RenderLayer<FireflyRenderState, ModelEn
         Matrix3f entityRotation = new Matrix3f(matrices.last().normal());
         matrices.mulPose(entityRotation.transpose().getNormalizedRotation(new Quaternionf()));
 
-        matrices.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        matrices.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation());
         matrices.mulPose(Axis.YP.rotationDegrees(180.0F));
 
-        PoseStack.Pose entry = matrices.last();
-        Matrix4f matrix4f = entry.pose();
+        // The collector snapshots a copy of matrices.last(), so popping afterwards is safe.
+        submitNodeCollector.submitCustomGeometry(matrices, renderType, (pose, buffer) -> {
+            Matrix4f matrix4f = pose.pose();
+            addVertex(matrix4f, pose, buffer, -1, -1, 0F, 0.5F, color);
+            addVertex(matrix4f, pose, buffer, 1, -1, 1F, 0.5F, color);
+            addVertex(matrix4f, pose, buffer, 1, 1, 1F, 1F, color);
+            addVertex(matrix4f, pose, buffer, -1, 1, 0F, 1F, color);
+        });
 
-        addVertex(matrix4f, entry, vertexConsumer, -1, -1, 0F, 0.5F, color);
-        addVertex(matrix4f, entry, vertexConsumer, 1, -1, 1F, 0.5F, color);
-        addVertex(matrix4f, entry, vertexConsumer, 1, 1, 1F, 1F, color);
-        addVertex(matrix4f, entry, vertexConsumer, -1, 1, 0F, 1F, color);
-
-        //emptyModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue,  1f);
         matrices.popPose();
     }
 
@@ -130,7 +125,7 @@ class FireflyGlowFeatureRenderer extends RenderLayer<FireflyRenderState, ModelEn
 
 @Environment(EnvType.CLIENT)
 public class RenderFirefly extends MobRenderer<EntityFirefly, FireflyRenderState, ModelEntityFirefly> {
-    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
+    private static final Identifier TEXTURE = BetterNether.C.mk(
             "textures/entity/firefly.png"
     );
 
@@ -152,7 +147,7 @@ public class RenderFirefly extends MobRenderer<EntityFirefly, FireflyRenderState
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FireflyRenderState state) {
+    public Identifier getTextureLocation(FireflyRenderState state) {
         return TEXTURE;
     }
 

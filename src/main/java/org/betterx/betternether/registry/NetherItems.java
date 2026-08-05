@@ -27,7 +27,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.FloatTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -50,6 +50,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.betterx.betternether.registry.item.NetherFoodItems;
 import org.betterx.betternether.registry.item.NetherEquipmentItems;
+import org.betterx.betternether.registry.item.NetherMusicDiscItems;
 import org.betterx.betternether.registry.item.NetherResourceItems;
 
 /**
@@ -204,7 +205,7 @@ public class NetherItems {
     }
 
     private static CompoundTag buildItem(int count, Item item, ResourceKey<Enchantment>... enchantments) {
-        ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+        Identifier id = BuiltInRegistries.ITEM.getKey(item);
         CompoundTag tag = new CompoundTag();
         tag.putString("id", id.toString());
         tag.putByte("Count", (byte) count);
@@ -217,7 +218,7 @@ public class NetherItems {
                 final var ench = enchReg.getValue(e);
                 final var eTag = new CompoundTag();
                 eTag.putInt("lvl", ench.getMaxLevel());
-                eTag.putString("id", e.location().toString());
+                eTag.putString("id", e.identifier().toString());
                 chants.add(eTag);
             }
         }
@@ -305,5 +306,6 @@ public class NetherItems {
         NetherFoodItems.ensureLoaded();
         NetherEquipmentItems.ensureLoaded();
         NetherResourceItems.ensureLoaded();
+        NetherMusicDiscItems.ensureLoaded();
     }
 }

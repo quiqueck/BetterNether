@@ -39,7 +39,7 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -80,6 +80,8 @@ public class NetherCropBlocks {
             .addTrait(NetherMaterial.plant(MapColor.TERRACOTTA_ORANGE))
             .randomTicks()
             .addTrait(NetherTraits.plant())
+            // Was the hand-authored loot_table/blocks/black_apple.json; block loot is trait-only here.
+            .addTrait(NetherLoot.blackApple())
             .buildAndRegister();
     // BlockBlackAppleSeed (WP6.12): same reproduction as BlockInkBushSeed above.
     // Former Materials.netherSapling() preset, folded onto NetherMaterial.sapling().

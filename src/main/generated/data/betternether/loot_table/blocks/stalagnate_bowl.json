@@ -1,0 +1,81 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:stalagnate_bowl",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "food": "none"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:stalagnate_bowl"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:stalagnate_bowl",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "food": "wart"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:stalagnate_bowl_wart"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:stalagnate_bowl",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "food": "mushroom"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:stalagnate_bowl_mushroom"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:stalagnate_bowl",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "food": "apple"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:stalagnate_bowl_apple"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

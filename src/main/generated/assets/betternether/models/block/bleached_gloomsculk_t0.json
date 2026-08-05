@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/sculk",
+    "side": "betternether:block/bleached_gloomsculk_side",
+    "top": "betternether:block/bleached_gloomsculk_top"
+  }
+}

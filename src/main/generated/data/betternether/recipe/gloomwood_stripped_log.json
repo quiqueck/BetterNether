@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "log",
+  "key": {
+    "#": "betternether:gloomwood_stripped_bark"
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 3,
+    "id": "betternether:gloomwood_stripped_log"
+  }
+}

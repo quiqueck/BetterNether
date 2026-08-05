@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.betternether.gloom_woods"
+  },
+  "length_in_seconds": 125.0,
+  "sound_event": "betternether:betternether.music_disc.gloom_woods"
+}

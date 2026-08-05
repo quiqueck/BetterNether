@@ -16,7 +16,7 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -87,29 +87,29 @@ public class CommandRegistry {
             Commands.CommandSelection commandSelection
     ) {
         LiteralArgumentBuilder<CommandSourceStack> bnContext = Commands.literal("bn")
-                                                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS));
+                                                                       .requires(Commands.hasPermission(Commands.LEVEL_OWNERS));
 
         bnContext = PlaceCommand.register(bnContext);
         dispatcher.register(
                 bnContext
                         .then(Commands.literal("test_place")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
+                                      .requires(Commands.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> testPlace(ctx))
                         )
                         .then(Commands.literal("find_surface")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
+                                      .requires(Commands.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> findSurface(ctx))
                         )
                         .then(Commands.literal("tpnext")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
+                                      .requires(Commands.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> teleportToNextBiome(ctx))
                         )
                         .then(Commands.literal("place_all")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
+                                      .requires(Commands.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> placeAllBlocks(ctx))
                         )
                         .then(Commands.literal("place_matching")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
+                                      .requires(Commands.hasPermission(Commands.LEVEL_OWNERS))
                                       .then(Commands.argument("type", StringArgumentType.string())
                                                     .executes(ctx -> placeMatchingBlocks(
                                                             ctx,
@@ -157,8 +157,8 @@ public class CommandRegistry {
                                                      b -> b
                                                              .unwrapKey()
                                                              .orElseThrow()
-                                                             .location()
-                                                             .equals(biome.location()),
+                                                             .identifier()
+                                                             .equals(biome.identifier()),
                                                      currentPosition,
                                                      MAX_SEARCH_RADIUS,
                                                      SAMPLE_RESOLUTION_HORIZONTAL,

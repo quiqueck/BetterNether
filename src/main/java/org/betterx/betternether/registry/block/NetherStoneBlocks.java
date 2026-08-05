@@ -39,7 +39,7 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -357,9 +357,9 @@ public class NetherStoneBlocks {
             .addTrait(BlockTraits.SLAB_BLOCK.withDefault())
             .addTrait(NetherModels.slab(
                     () -> Blocks.BASALT,
-                    ResourceLocation.withDefaultNamespace("block/basalt_top"),
-                    ResourceLocation.withDefaultNamespace("block/basalt_top"),
-                    ResourceLocation.withDefaultNamespace("block/basalt_side")
+                    Identifier.withDefaultNamespace("block/basalt_top"),
+                    Identifier.withDefaultNamespace("block/basalt_top"),
+                    Identifier.withDefaultNamespace("block/basalt_side")
             ))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(Blocks.BASALT))

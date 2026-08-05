@@ -1,0 +1,461 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "agave"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:agave"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "barrel_cactus"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:barrel_cactus"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "black_apple"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:black_apple_seed"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "black_bush"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:black_bush"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "egg_plant"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:egg_plant"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "ink_bush"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:ink_bush_seed"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "reeds"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:nether_reed_stem"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "nether_cactus"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:nether_cactus"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "nether_grass"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:nether_grass"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "orange_mushroom"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:orange_mushroom"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "red_mold"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:red_mold"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "gray_mold"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:gray_mold"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "magma_flower"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:magma_flower"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "nether_wart"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:wart_seed"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "willow"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:willow_sapling"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "smoker"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:smoker"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "wart"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_wart"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "jungle_plant"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:jungle_plant"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "jellyfish_mushroom"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:jellyfish_mushroom_sapling"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "swamp_grass"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:swamp_grass"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "soul_grass"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:soul_grass"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "bone_grass"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:bone_grass"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "bone_mushroom"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:bone_mushroom"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:potted_plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "plant": "gloomwood"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:gloomwood_sapling"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

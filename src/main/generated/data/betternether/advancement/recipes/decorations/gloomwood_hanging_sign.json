@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gloomwood_stripped_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:gloomwood_stripped_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_chain": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_chain"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:gloomwood_hanging_sign"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_iron_chain",
+      "has_gloomwood_stripped_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:gloomwood_hanging_sign"
+    ]
+  }
+}

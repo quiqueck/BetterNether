@@ -39,7 +39,7 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -85,14 +85,16 @@ public class NetherFunctionalBlocks {
             .buildAndRegister();
     // Decorations //
     // BlockStatueRespawner (WP6.12): lightLevel(15)/noOcclusion() moved out of its constructor (R1); it
-    // called setDropItself(false), i.e. it already fell through to the vanilla loot-table-driven getDrops()
-    // (no loot table json exists for it either - it drops nothing), so no extra loot trait is needed.
+    // called setDropItself(false), i.e. it falls through to the vanilla loot-table-driven getDrops().
+    // (The earlier claim here that no loot table json existed for it was wrong - a hand-authored
+    // loot_table/blocks/pig_statue_respawner.json did exist; it is now NetherLoot.pigStatueRespawner().)
     public static final Block PIG_STATUE_RESPAWNER = NetherBlocks.defineBlock("pig_statue_respawner", BlockStatueRespawner::new)
             .replacePropertiesWithCopy(NetherMetalBlocks.CINCINNASITE_BLOCK)
             .addTrait(NetherRender.cutout())
             .addTrait(NetherMaterial.metal())
             .lightLevel(state -> 15)
             .noOcclusion()
+            .addTrait(NetherLoot.pigStatueRespawner())
             .buildAndRegister();
     // Craft Stations //
     // Former registerFurnace bundle, inlined at the registration site (WP5.11): BlockNetherFurnace dropped

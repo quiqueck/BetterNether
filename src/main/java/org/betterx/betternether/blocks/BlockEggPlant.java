@@ -75,7 +75,7 @@ public class BlockEggPlant extends BlockCommonPlant {
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier, boolean isPrecise) {
         if (!state.getValue(DESTRUCTED)) {
             if (enableModDamage && entity instanceof LivingEntity && !((LivingEntity) entity).hasEffect(MobEffects.POISON)) {
                 if (!NetherEntities.isNetherEntity(entity))
@@ -86,10 +86,10 @@ public class BlockEggPlant extends BlockCommonPlant {
             double px = pos.getX() + 0.5;
             double py = pos.getY() + 0.125;
             double pz = pos.getZ() + 0.5;
-            if (world.isClientSide) {
+            if (world.isClientSide()) {
                 world.playLocalSound(px, py, pz, SoundType.WART_BLOCK.getBreakSound(), SoundSource.BLOCKS, 1, 1, false);
                 BlockParticleOption effect = new BlockParticleOption(ParticleTypes.BLOCK, state);
-                RandomSource random = world.random;
+                RandomSource random = world.getRandom();
                 for (int i = 0; i < 24; i++)
                     world.addParticle(
                             effect,

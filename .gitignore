@@ -5,6 +5,11 @@ build/
 out/
 classes/
 
+# ... but a java package may legitimately be called `build`, and an unanchored `build/` swallows it
+# silently: org.betterx.betternether.world.tree.build went untracked this way, and a fresh clone of
+# the repo did not compile.
+!src/*/java/**/build/
+
 # idea
 
 .idea/
@@ -47,3 +52,7 @@ CurseForge/
 /tools/biomes.js
 /tools/samples.json
 .DS_Store
+
+# python bytecode from tools/
+__pycache__/
+*.pyc

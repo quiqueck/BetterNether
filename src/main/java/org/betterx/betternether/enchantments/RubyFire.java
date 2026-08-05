@@ -17,7 +17,7 @@ import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -63,8 +63,7 @@ public class RubyFire {
                     if (result != null) {
                         didConvert = true;
                         final ItemStack resultStack = result.assemble(
-                                new SingleRecipeInput(stack),
-                                level.registryAccess()
+                                new SingleRecipeInput(stack)
                         );
                         xpDrop += result.experience();
                         convertedDrops.get()
@@ -96,7 +95,7 @@ public class RubyFire {
     }
 
     private static void popExperience(ServerLevel level, BlockPos blockPos, int amount) {
-        if (level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+        if (level.getGameRules().get(GameRules.BLOCK_DROPS)) {
             ExperienceOrb.award(level, Vec3.atCenterOf(blockPos), amount);
         }
     }

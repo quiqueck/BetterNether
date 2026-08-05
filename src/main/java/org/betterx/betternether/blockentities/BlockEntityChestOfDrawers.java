@@ -12,6 +12,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.ContainerUser;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -92,8 +94,9 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
     }
 
     @Override
-    public void stopOpen(Player player) {
-        if (!player.isSpectator()) {
+    public void stopOpen(ContainerUser player) {
+        LivingEntity entity = player.getLivingEntity();
+        if (entity == null || !entity.isSpectator()) {
             --this.watchers;
             this.onInvOpenOrClose();
         }
@@ -102,7 +105,7 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
     protected void onInvOpenOrClose() {
         BlockState state = this.getBlockState();
         Block block = state.getBlock();
-        if (block instanceof BlockChestOfDrawers && !level.isClientSide) {
+        if (block instanceof BlockChestOfDrawers && !level.isClientSide()) {
             if (watchers > 0 && !state.getValue(BlockChestOfDrawers.OPEN)) {
                 BlocksHelper.setWithoutUpdate(
                         level,
@@ -132,7 +135,7 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
                 soundEvent,
                 SoundSource.BLOCKS,
                 0.5F,
-                this.level.random.nextFloat() * 0.1F + 0.9F
+                this.level.getRandom().nextFloat() * 0.1F + 0.9F
         );
     }
 

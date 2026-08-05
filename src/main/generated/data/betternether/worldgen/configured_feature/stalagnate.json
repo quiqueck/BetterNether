@@ -2,8 +2,8 @@
   "type": "wover:pillar",
   "config": {
     "allowed_placement": {
-      "type": "minecraft:matching_blocks",
-      "blocks": "minecraft:air"
+      "type": "minecraft:matching_block_tag",
+      "tag": "minecraft:air"
     },
     "direction": "up",
     "max_height": 64,

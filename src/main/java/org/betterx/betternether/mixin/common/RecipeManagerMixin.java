@@ -25,8 +25,8 @@ public class RecipeManagerMixin {
             HolderLookup.Provider provider,
             CallbackInfoReturnable<RecipeHolder<?>> info
     ) {
-        if (id.location().getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn")) {
-            info.setReturnValue(new RecipeHolder<>(id, BNRecipeManager.makeEmptyRecipe(id.location())));
+        if (id.identifier().getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn")) {
+            info.setReturnValue(new RecipeHolder<>(id, BNRecipeManager.makeEmptyRecipe(id.identifier())));
             info.cancel();
         }
     }

@@ -1,0 +1,74 @@
+{
+  "feature": {
+    "type": "minecraft:simple_block",
+    "config": {
+      "to_place": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "betternether:molten_gloomsculk"
+        }
+      }
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 4,
+        "min_inclusive": 2
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:clamped_normal",
+        "deviation": 3.0,
+        "max_inclusive": 5,
+        "mean": 0.0,
+        "min_inclusive": -5
+      },
+      "y_spread": 0
+    },
+    {
+      "type": "wover:all"
+    },
+    {
+      "type": "wover:every_layer"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "wover:offset",
+      "blocks": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "wover:surfaces/terrain"
+      }
+    },
+    {
+      "type": "wover:is_next_to",
+      "predicate": {
+        "type": "minecraft:matching_fluids",
+        "fluids": "minecraft:lava"
+      }
+    },
+    {
+      "type": "wover:extend",
+      "direction": "down",
+      "length": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 3,
+        "min_inclusive": 0
+      }
+    }
+  ]
+}

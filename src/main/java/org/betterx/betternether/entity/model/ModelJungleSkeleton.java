@@ -6,7 +6,7 @@ import org.betterx.betternether.mixin.client.TexturedModelDataMixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.SkeletonModel;
+import net.minecraft.client.model.monster.skeleton.SkeletonModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;

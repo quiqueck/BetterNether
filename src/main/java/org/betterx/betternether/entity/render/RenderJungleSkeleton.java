@@ -10,19 +10,18 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class RenderJungleSkeleton extends AbstractSkeletonRenderer<EntityJungleSkeleton, JungleSkeletonRenderState> {
-    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
+    private static final Identifier TEXTURE = BetterNether.C.mk(
             "textures/entity/jungle_skeleton.png"
     );
 
     public RenderJungleSkeleton(EntityRendererProvider.Context ctx) {
         super(
                 ctx,
-                ModelLayers.SKELETON_INNER_ARMOR,
-                ModelLayers.SKELETON_OUTER_ARMOR,
+                ModelLayers.SKELETON_ARMOR,
                 new ModelJungleSkeleton(ctx.bakeLayer(EntityRenderRegistry.JUNGLE_SKELETON_MODEL))
         );
     }
@@ -33,7 +32,7 @@ public class RenderJungleSkeleton extends AbstractSkeletonRenderer<EntityJungleS
     }
 
     @Override
-    public ResourceLocation getTextureLocation(JungleSkeletonRenderState state) {
+    public Identifier getTextureLocation(JungleSkeletonRenderState state) {
         return TEXTURE;
     }
 }

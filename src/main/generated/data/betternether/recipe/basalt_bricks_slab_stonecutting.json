@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "slabs",
   "ingredient": "betternether:basalt_bricks",
   "result": {
     "count": 2,

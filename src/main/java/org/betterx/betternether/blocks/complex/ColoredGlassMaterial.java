@@ -14,8 +14,9 @@ import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.core.api.ModCore;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -128,7 +129,16 @@ public class ColoredGlassMaterial {
             Function<BlockBehaviour.Properties, BNPane> paneFactory,
             RecipeCategory category
     ) {
-        String name = group + "_" + ((DyeItem) dye).getDyeColor().getSerializedName();
+        // dye.components() is not safe here: this runs during block/item registration at mod
+        // bootstrap, well before item data components are bound (they bind only after the datapack/
+        // recipe reload) - reading them this early throws "Components not bound yet". DyeItem no
+        // longer carries a per-instance color field either (26.1 expresses it purely via the
+        // DataComponents.DYE default component), so derive the color from the item's registry name
+        // instead, which - unlike its components - is populated during vanilla bootstrap already.
+        String dyePath = BuiltInRegistries.ITEM.getKey(dye).getPath();
+        String dyeName = dyePath.endsWith("_dye") ? dyePath.substring(0, dyePath.length() - 4) : dyePath;
+        DyeColor dyeColor = DyeColor.byName(dyeName, DyeColor.WHITE);
+        String name = group + "_" + dyeColor.getSerializedName();
 
         // Both the full-block variant (BaseGlassBlock) and the pane variant render translucent. Only the
         // full block carries the glass model trait - the panes get theirs from BNPane's own provider.

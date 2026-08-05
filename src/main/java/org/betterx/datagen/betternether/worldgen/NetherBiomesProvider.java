@@ -25,6 +25,7 @@ public class NetherBiomesProvider extends WoverBiomeProvider {
         register(context, NetherBiomes.CRIMSON_GLOWING_WOODS, new CrimsonGlowingWoods());
         register(context, NetherBiomes.CRIMSON_PINEWOOD, new CrimsonPinewood());
         register(context, NetherBiomes.FLOODED_DELTAS, new FloodedDeltas());
+        register(context, NetherBiomes.GLOOMWOOD, new Gloomwood());
         register(context, NetherBiomes.GRAVEL_DESERT, new GravelDesert());
         register(context, NetherBiomes.MAGMA_LAND, new MagmaLand());
         register(context, NetherBiomes.NETHER_GRASSLANDS, new NetherGrasslands());

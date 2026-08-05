@@ -336,6 +336,30 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.07,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:music_disc_gloom_woods"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "betternether:music_disc_gloom_wisps"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "betternether:music_disc_gloomsculk"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

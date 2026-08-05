@@ -1,0 +1,25 @@
+{
+  "parent": "betternether:disturbed_wisp",
+  "criteria": {
+    "burned_crystal": {
+      "trigger": "betternether:burned_gloomsculk_crystal"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.burned_gloomsculk_crystal.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "betternether:gloomsculk_geode_crystal"
+    },
+    "title": {
+      "translate": "advancements.betternether.burned_gloomsculk_crystal.title"
+    }
+  },
+  "requirements": [
+    [
+      "burned_crystal"
+    ]
+  ]
+}

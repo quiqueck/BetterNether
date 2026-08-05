@@ -92,7 +92,7 @@ public class NetherCompositeTraits {
         return TraitLists.and(
                 TraitLists.concat(BlockTraits.WOOD_BLOCK.netherWood(), BlockTraits.CHEST_BLOCK.withDefault()),
                 BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
-                        .crafting(key.location(), block)
+                        .crafting(key.identifier(), block)
                         .shapeless()
                         .addMaterial('C', chest)
                         .addMaterial('#', trim)

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "category": "blocks",
+  "category": "misc",
   "cookingtime": 100,
   "experience": 0.0,
   "ingredient": "betternether:cincinnasite_block",

@@ -23,6 +23,9 @@ public class NetherBiomes {
     public static final NetherBiomeKey<FloodedDeltas> FLOODED_DELTAS
             = NetherBiomeBuilder.createKey("Flooded Deltas");
 
+    public static final NetherBiomeKey<Gloomwood> GLOOMWOOD
+            = NetherBiomeBuilder.createKey("Gloomwood");
+
     public static final NetherBiomeKey<GravelDesert> GRAVEL_DESERT
             = NetherBiomeBuilder.createKey("Gravel Desert");
 

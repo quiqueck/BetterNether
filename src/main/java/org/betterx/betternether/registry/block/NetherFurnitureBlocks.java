@@ -39,7 +39,8 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -115,7 +116,7 @@ public class NetherFurnitureBlocks {
     // unchanged, per WP4.9's note - the decision-6 nether-wood fire policy is a separate REVIEWED step.
     public static final Block TRIMMED_MUSHROOM_FIR_CHEST = NetherBlocks.defineBlock(
             "mushroom_fir_trimmed_chest",
-            p -> new ChestBlock(() -> BlockEntityType.CHEST, p)
+            p -> new ChestBlock(() -> BlockEntityType.CHEST, SoundEvents.CHEST_OPEN, SoundEvents.CHEST_CLOSE, p)
     )
             .replacePropertiesWithCopy(NetherWoodBlocks.MAT_MUSHROOM_FIR.getPlanks())
             .addTrait(NetherCompositeTraits.trimmedChest(

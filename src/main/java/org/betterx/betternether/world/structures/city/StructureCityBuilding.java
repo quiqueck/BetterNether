@@ -6,7 +6,7 @@ import org.betterx.betternether.world.structures.NetherStructureNBT;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -41,7 +41,7 @@ public class StructureCityBuilding extends NetherStructureNBT {
         init();
     }
 
-    protected StructureCityBuilding(ResourceLocation location, StructureTemplate structure) {
+    protected StructureCityBuilding(Identifier location, StructureTemplate structure) {
         super(location);
         this.structure = structure;
         init();

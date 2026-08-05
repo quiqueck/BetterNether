@@ -99,7 +99,7 @@ public class CityPiece extends CustomPiece {
 
         building.placeInChunk(world, pos, clamped, paletteProcessor);
 
-        ChunkAccess chunk = world.getChunk(chunkPos.x, chunkPos.z);
+        ChunkAccess chunk = world.getChunk(chunkPos.x(), chunkPos.z());
 
         BlockState state;
         for (int x = clamped.minX(); x <= clamped.maxX(); x++)

@@ -42,13 +42,13 @@ public abstract class PlayerEntityMixin {
         final ServerPlayer.RespawnConfig respawnConfig = self.getRespawnConfig();
         if (respawnConfig == null) return;
 
-        final MinecraftServer server = self.getServer();
+        final MinecraftServer server = self.level().getServer();
         if (server == null) return;
 
-        final ServerLevel level = server.getLevel(respawnConfig.dimension());
+        final ServerLevel level = server.getLevel(respawnConfig.respawnData().dimension());
         if (level == null) return;
 
-        final BlockPos pos = respawnConfig.pos();
+        final BlockPos pos = respawnConfig.respawnData().pos();
         final BlockState blockState = level.getBlockState(pos);
         if (!(blockState.getBlock() instanceof BlockStatueRespawner)) return;
 
@@ -61,7 +61,7 @@ public abstract class PlayerEntityMixin {
                 level,
                 op.get(),
                 Vec3.ZERO,
-                respawnConfig.angle(),
+                respawnConfig.respawnData().yaw(),
                 0.0F,
                 postTeleportTransition
         ));

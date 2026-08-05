@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "stairs",
   "ingredient": "betternether:bone_block",
   "result": {
-    "count": 1,
     "id": "betternether:bone_stairs"
   }
 }

@@ -40,7 +40,7 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -90,6 +90,8 @@ public class NetherMushroomBlocks {
             .randomTicks()
             .destroyTime(0.5F)
             .addTrait(NetherTraits.plant())
+            // Was the hand-authored loot_table/blocks/orange_mushroom.json; block loot is trait-only here.
+            .addTrait(NetherLoot.orangeMushroom())
             .buildAndRegister();
     // Former Materials.makeNetherGrass() preset, folded (category-traits Batch 3) onto PlantBlockTrait
     // directly (not the NetherMaterial.grass() GRASS-sound alias) - this block's sound(CROP) deviation must
@@ -147,6 +149,8 @@ public class NetherMushroomBlocks {
             .addTrait(NetherMaterial.plant(MapColor.COLOR_LIGHT_GREEN))
             .randomTicks()
             .addTrait(NetherTraits.plant())
+            // Was the hand-authored loot_table/blocks/bone_mushroom.json; block loot is trait-only here.
+            .addTrait(NetherLoot.boneMushroom())
             .buildAndRegister();
     // BlockSmoker (WP6.12): always dropped itself unconditionally via BlockBase's inherited getDrops()
     // override (no loot table json was generated for it), reproduced explicitly as
@@ -179,6 +183,8 @@ public class NetherMushroomBlocks {
             .addTrait(BlockTraits.MINEABLE_WITH.needsAxe())
             .addTrait(NetherMaterial.mushroomStem(MapColor.COLOR_RED))
             .noOcclusion()
+            // Was the hand-authored loot_table/blocks/red_large_mushroom.json; block loot is trait-only here.
+            .addTrait(NetherLoot.redLargeMushroom())
             .buildAndRegister();
     // stays inline: this block's final strength is 1, but NetherMaterial.mushroomStem()'s trait forces
     // strength(2.0F) unconditionally in its configure(), which always runs after any chained setter -
@@ -192,6 +198,8 @@ public class NetherMushroomBlocks {
             .requiresCorrectToolForDrops()
             .strength(1)
             .noOcclusion()
+            // Was the hand-authored loot_table/blocks/brown_large_mushroom.json; block loot is trait-only here.
+            .addTrait(NetherLoot.brownLargeMushroom())
             .buildAndRegister();
     // Lucis //
     // Former Materials.walkablePlant(COLOR_YELLOW) preset (+ the ctor's own lightLevel()/
@@ -224,6 +232,8 @@ public class NetherMushroomBlocks {
             .requiresCorrectToolForDrops()
             .noOcclusion()
             .strength(1)
+            // Was the hand-authored loot_table/blocks/giant_mold.json; block loot is trait-only here.
+            .addTrait(NetherLoot.giantMold())
             .buildAndRegister();
     // Sodium renders the translucent variant with artefacts, so under Sodium this falls back to cutout.
     // The conditional moved here verbatim from the old BlockJellyfishMushroom constructor.

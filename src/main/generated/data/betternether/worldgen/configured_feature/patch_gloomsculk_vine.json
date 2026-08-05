@@ -1,0 +1,59 @@
+{
+  "type": "wover:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "wover:pillar",
+        "config": {
+          "allowed_placement": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
+          },
+          "direction": "down",
+          "max_height": {
+            "type": "minecraft:clamped_normal",
+            "deviation": 2.0,
+            "max_inclusive": 11,
+            "mean": 7.0,
+            "min_inclusive": 2
+          },
+          "min_height": 2,
+          "state": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "betternether:gloomsculk_vine",
+              "Properties": {
+                "bottom": "true"
+              }
+            }
+          },
+          "transform": "bottom_grow"
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
+          }
+        },
+        {
+          "type": "wover:is",
+          "offset": [
+            0,
+            1,
+            0
+          ],
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "wover:surfaces/sculk_like"
+          }
+        }
+      ]
+    },
+    "tries": 20,
+    "xz_spread": 5,
+    "y_spread": 3
+  }
+}

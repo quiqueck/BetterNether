@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_left",
+  "textures": {
+    "all": "betternether:block/willow_shelf",
+    "particle": "betternether:block/willow_planks"
+  }
+}

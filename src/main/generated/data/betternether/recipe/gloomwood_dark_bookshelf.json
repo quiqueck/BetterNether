@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "bookshelf",
+  "key": {
+    "#": "betternether:gloomwood_dark_planks",
+    "P": "minecraft:book"
+  },
+  "pattern": [
+    "###",
+    "PPP",
+    "###"
+  ],
+  "result": {
+    "id": "betternether:gloomwood_dark_bookshelf"
+  }
+}

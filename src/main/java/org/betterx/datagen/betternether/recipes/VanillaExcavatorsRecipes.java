@@ -15,7 +15,7 @@ import de.ambertation.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -26,7 +26,7 @@ public class VanillaExcavatorsRecipes extends WoverRecipeProvider {
     }
 
     private static void makeExcavatorRecipe(RecipeBuilder.Context context, Item excavator, Block block, Item item) {
-        final ResourceLocation id = BuiltInRegistries.ITEM.getKey(excavator);
+        final Identifier id = BuiltInRegistries.ITEM.getKey(excavator);
         RecipeBuilder
                 .crafting(BetterNether.C.id(id.getPath()), excavator)
                 .shape(" I ", "#S#", " S ")

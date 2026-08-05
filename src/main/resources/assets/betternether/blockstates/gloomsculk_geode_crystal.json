@@ -1,0 +1,94 @@
+{
+    "variants": {
+        "facing=up": [
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal"
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_b"
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_c"
+            }
+        ],
+        "facing=down": [
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal",
+                "x": 180
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_b",
+                "x": 180
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_c",
+                "x": 180
+            }
+        ],
+        "facing=north": [
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal",
+                "x": 90
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_b",
+                "x": 90
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_c",
+                "x": 90
+            }
+        ],
+        "facing=south": [
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal",
+                "x": 90,
+                "y": 180
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_b",
+                "x": 90,
+                "y": 180
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_c",
+                "x": 90,
+                "y": 180
+            }
+        ],
+        "facing=west": [
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal",
+                "x": 90,
+                "y": 270
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_b",
+                "x": 90,
+                "y": 270
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_c",
+                "x": 90,
+                "y": 270
+            }
+        ],
+        "facing=east": [
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal",
+                "x": 90,
+                "y": 90
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_b",
+                "x": 90,
+                "y": 90
+            },
+            {
+                "model": "betternether:block/gloomsculk_geode_crystal_c",
+                "x": 90,
+                "y": 90
+            }
+        ]
+    }
+}

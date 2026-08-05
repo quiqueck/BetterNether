@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gloomsculk_geode": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:gloomsculk_geode"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gloomsculk_geode_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betternether:gloomsculk_geode_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betternether:gloomsculk_lamp"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gloomsculk_geode_crystal",
+      "has_gloomsculk_geode"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betternether:gloomsculk_lamp"
+    ]
+  }
+}

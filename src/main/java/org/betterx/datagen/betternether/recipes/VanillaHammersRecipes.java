@@ -16,7 +16,7 @@ import de.ambertation.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -27,7 +27,7 @@ public class VanillaHammersRecipes extends WoverRecipeProvider {
     }
 
     private static void makeHammerRecipe(RecipeBuilder.Context context, Item hammer, Block block, Item item) {
-        ResourceLocation id = BuiltInRegistries.ITEM.getKey(hammer);
+        Identifier id = BuiltInRegistries.ITEM.getKey(hammer);
 
         RecipeBuilder
                 .crafting(BetterNether.C.mk(id.getPath()), hammer)

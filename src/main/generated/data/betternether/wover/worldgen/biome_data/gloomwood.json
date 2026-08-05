@@ -1,0 +1,19 @@
+{
+  "type": "betternether:biome",
+  "biome": "betternether:gloomwood",
+  "genChance": 0.3,
+  "generation_data": {
+    "intended_placement": "minecraft:is_nether",
+    "parameter_points": [
+      {
+        "continentalness": 0.0,
+        "depth": 0.0,
+        "erosion": 0.0,
+        "humidity": -0.35,
+        "offset": 0.0,
+        "temperature": -0.25,
+        "weirdness": 0.0
+      }
+    ]
+  }
+}

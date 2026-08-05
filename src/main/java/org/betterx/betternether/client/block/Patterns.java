@@ -2,8 +2,8 @@ package org.betterx.betternether.client.block;
 
 import org.betterx.betternether.BetterNether;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class Patterns {
-    public final static ResourceLocation REED_BLOCK_BOOKSHELF = BetterNether.C.id("patterns/block/reed_bookshelf.json");
+    public final static Identifier REED_BLOCK_BOOKSHELF = BetterNether.C.id("patterns/block/reed_bookshelf.json");
 }

@@ -38,12 +38,14 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.entity.animal.pig.PigSoundVariant;
+import net.minecraft.world.entity.animal.pig.PigSoundVariants;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -165,19 +167,23 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
         return MHelper.randRange(0.3F, 0.4F, random);
     }
 
+    private static PigSoundVariant.PigSoundSet classicPigSounds() {
+        return SoundEvents.PIG_SOUNDS.get(PigSoundVariants.SoundSet.CLASSIC).adultSounds();
+    }
+
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.PIG_HURT;
+        return classicPigSounds().hurtSound().value();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.PIG_DEATH;
+        return classicPigSounds().deathSound().value();
     }
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundEvents.PIG_AMBIENT;
+        return classicPigSounds().ambientSound().value();
     }
 
     @Override
@@ -216,7 +222,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
     protected void tickDeath() {
         if (level() instanceof ServerLevel serverLevel && this.isWarted() && level().getServer()
                                                                                     .getGameRules()
-                                                                                    .getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                                                                                    .get(GameRules.ENTITY_DROPS)) {
             this.spawnAtLocation(serverLevel, new ItemStack(Items.NETHER_WART, MHelper.randRange(1, 3, random)));
         }
         super.tickDeath();
@@ -425,7 +431,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
             if (target.isAlive() && target.distanceTo(EntityFlyingPig.this) < 1.3) {
                 ItemStack stack = target.getItem();
 
-                ItemParticleOption effect = new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(stack.getItem()));
+                ItemParticleOption effect = new ItemParticleOption(ParticleTypes.ITEM, stack.getItem());
 
                 Iterator<?> var14 = level().players().iterator();
 

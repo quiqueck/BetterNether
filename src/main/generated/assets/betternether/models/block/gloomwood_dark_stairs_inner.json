@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "betternether:block/gloomwood_dark_planks",
+    "side": "betternether:block/gloomwood_dark_planks",
+    "top": "betternether:block/gloomwood_dark_planks"
+  }
+}

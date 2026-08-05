@@ -36,7 +36,7 @@ public class Roof extends SlotFromDefinition {
     @Override
     protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
-                .crafting(key.location(), block)
+                .crafting(key.identifier(), block)
                 .outputCount(4)
                 .shape("# #", "###", " # ")
                 .addMaterial('#', set.recipeMaterial(SlotType.PLANKS))

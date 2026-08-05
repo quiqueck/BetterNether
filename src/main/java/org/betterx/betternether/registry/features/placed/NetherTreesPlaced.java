@@ -14,6 +14,9 @@ public class NetherTreesPlaced {
     public static PlacedConfiguredFeatureKey RUBEUS_TREE = PlacedFeatureManager
             .createKey(NetherTrees.RUBEUS_TREE)
             .setDecoration(VEGETAL_DECORATION);
+    public static PlacedConfiguredFeatureKey GLOOMWOOD_TREE = PlacedFeatureManager
+            .createKey(NetherTrees.GLOOMWOOD_TREE)
+            .setDecoration(VEGETAL_DECORATION);
     public static PlacedConfiguredFeatureKey MUSHROOM_FIR = PlacedFeatureManager
             .createKey(NetherTrees.MUSHROOM_FIR)
             .setDecoration(VEGETAL_DECORATION);

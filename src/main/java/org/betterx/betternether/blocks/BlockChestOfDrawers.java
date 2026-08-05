@@ -85,7 +85,7 @@ public class BlockChestOfDrawers extends BaseEntityBlock {
             InteractionHand hand,
             BlockHitResult hit
     ) {
-        if (world.isClientSide) {
+        if (world.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);

@@ -1,0 +1,93 @@
+{
+  "type": "wover:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:block_column",
+        "config": {
+          "allowed_placement": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
+          },
+          "direction": "up",
+          "layers": [
+            {
+              "height": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 3,
+                "min_inclusive": 0
+              },
+              "provider": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "betternether:gloomwisp_vine",
+                  "Properties": {
+                    "offset": "true",
+                    "persistent": "false",
+                    "rotation": "random",
+                    "shape": "bottom"
+                  }
+                }
+              }
+            },
+            {
+              "height": 1,
+              "provider": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "betternether:gloomwisp_vine",
+                  "Properties": {
+                    "offset": "true",
+                    "persistent": "false",
+                    "rotation": "random",
+                    "shape": "middle"
+                  }
+                }
+              }
+            },
+            {
+              "height": 1,
+              "provider": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "betternether:gloomwisp_vine",
+                  "Properties": {
+                    "offset": "true",
+                    "persistent": "false",
+                    "rotation": "random",
+                    "shape": "top"
+                  }
+                }
+              }
+            }
+          ],
+          "prioritize_tip": true
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
+          }
+        },
+        {
+          "type": "wover:is",
+          "offset": [
+            0,
+            -1,
+            0
+          ],
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "wover:surfaces/sculk_like"
+          }
+        }
+      ]
+    },
+    "tries": 32,
+    "xz_spread": 8,
+    "y_spread": 3
+  }
+}

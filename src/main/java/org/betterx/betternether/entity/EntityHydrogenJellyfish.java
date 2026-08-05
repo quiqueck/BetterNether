@@ -138,7 +138,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     @Override
     public void die(DamageSource source) {
         super.die(source);
-        if (level().isClientSide) {
+        if (level().isClientSide()) {
             float scale = getScale() * 3;
             for (int i = 0; i < 20; i++)
                 this.level().addParticle(ParticleTypes.EXPLOSION,

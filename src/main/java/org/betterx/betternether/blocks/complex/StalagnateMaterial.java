@@ -4,7 +4,9 @@ import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
 import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
+import org.betterx.betternether.blocks.NetherLoot;
 import org.betterx.betternether.blocks.NetherRender;
+import org.betterx.bclib.trait.TraitLists;
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.complex.slots.AbstractSeed;
@@ -53,7 +55,12 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                             );
                         }
                     })
-                    .add(TrunkSlot.createClimbable(BlockStalagnate::new, NetherRender.cutout()))
+                    // The trunk's loot was the hand-authored loot_table/blocks/stalagnate_trunk.json (a
+                    // stem plus a 25%-chance seed); block loot is trait-only here.
+                    .add(TrunkSlot.createClimbable(
+                            BlockStalagnate::new,
+                            TraitLists.and(NetherRender.cutout(), NetherLoot.stalagnateTrunk())
+                    ))
                     .add(AbstractSeed.create(
                             BlockStalagnateSeed::new,
                             NetherSurvival.netherrack(),
@@ -74,13 +81,13 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                             NetherSlots.BOWL,
                             (set, props) -> new BlockStalagnateBowl(props),
                             NetherRender.cutout(),
-                            def -> def.noOcclusion()
+                            def -> def.noOcclusion().addTrait(NetherLoot.stalagnateBowl())
                     ))
                     .replace(new NetherWoodSlots.Log(true) {
                         @Override
                         protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
                             return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
-                                    .crafting(key.location(), block)
+                                    .crafting(key.identifier(), block)
                                     .outputCount(1)
                                     .shape("##", "##")
                                     .addMaterial('#', set.recipeMaterial(NetherSlots.STEM))

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_unconnected",
+  "textures": {
+    "all": "betternether:block/nether_sakura_shelf",
+    "particle": "betternether:block/nether_sakura_planks"
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "variants": {
+        "": [
+            { "model": "betternether:block/gloomsculk_geode", "weight": 20 },
+            { "model": "betternether:block/gloomsculk_geode", "y": 90, "weight": 20 },
+            { "model": "betternether:block/gloomsculk_geode", "y": 180, "weight": 20 },
+            { "model": "betternether:block/gloomsculk_geode", "y": 270, "weight": 20 },
+
+            { "model": "betternether:block/gloomsculk_geode_alt", "weight": 1 },
+            { "model": "betternether:block/gloomsculk_geode_alt", "y": 90, "weight": 1 },
+            { "model": "betternether:block/gloomsculk_geode_alt", "y": 180, "weight": 1 },
+            { "model": "betternether:block/gloomsculk_geode_alt", "y": 270, "weight": 1 }
+        ]
+    }
+}

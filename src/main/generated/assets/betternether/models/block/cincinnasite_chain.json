@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/chain",
+  "parent": "minecraft:block/template_chain",
   "textures": {
-    "all": "betternether:block/cincinnasite_chain"
+    "texture": "betternether:block/cincinnasite_chain"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "betternether:block/gloomwisp_vine_stem_lower",
+    "particle": "betternether:block/gloomwisp_vine_stem_lower"
+  }
+}

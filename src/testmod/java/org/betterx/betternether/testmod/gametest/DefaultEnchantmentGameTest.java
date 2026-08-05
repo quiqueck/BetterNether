@@ -10,7 +10,6 @@ import de.ambertation.wover.item.api.ItemStackHelper;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -90,7 +89,7 @@ public class DefaultEnchantmentGameTest {
             );
             if (level != expected.level()) {
                 failures.add(expected.name() + ": expected "
-                        + expected.enchantment().location() + " " + expected.level()
+                        + expected.enchantment().identifier() + " " + expected.level()
                         + " but the stack had level " + level);
             }
         }
@@ -110,34 +109,27 @@ public class DefaultEnchantmentGameTest {
         final Item base = NetherEquipmentItems.NETHER_RUBY_SET.<Item>get(ToolSlot.PICKAXE_SLOT);
         final Item result = NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ToolSlot.PICKAXE_SLOT);
 
-        // Look the recipe up by id rather than by assembling every smithing recipe and comparing the
-        // result: SmithingTransformRecipe#assemble derives its output from the base stack on this
-        // branch, so assembling with an empty input yields an empty stack and matches nothing.
-        final ResourceLocation recipeId = ResourceLocation.parse("betternether:flaming_ruby_pickaxe");
         final RecipeHolder<?> holder = helper.getLevel()
                                              .recipeAccess()
                                              .getRecipes()
                                              .stream()
-                                             .filter(r -> r.id().location().equals(recipeId))
+                                             .filter(r -> r.value() instanceof SmithingTransformRecipe)
+                                             .filter(r -> ((SmithingRecipe) r.value())
+                                                     .assemble(emptyInput())
+                                                     .is(result))
                                              .findFirst()
                                              .orElse(null);
 
         if (holder == null) {
             helper.fail(Component.literal(
-                    recipeId + " is not registered - Fireruby gear cannot be crafted at all"
-            ));
-            return;
-        }
-        if (!(holder.value() instanceof SmithingTransformRecipe)) {
-            helper.fail(Component.literal(
-                    recipeId + " is no longer a smithing_transform recipe: " + holder.value().getClass()
+                    "no smithing_transform recipe produces " + result
+                            + " - Fireruby gear cannot be crafted at all"
             ));
             return;
         }
 
         final ItemStack assembled = ((SmithingRecipe) holder.value())
-                .assemble(new SmithingRecipeInput(ItemStack.EMPTY, new ItemStack(base), ItemStack.EMPTY),
-                        helper.getLevel().registryAccess());
+                .assemble(new SmithingRecipeInput(ItemStack.EMPTY, new ItemStack(base), ItemStack.EMPTY));
 
         if (!assembled.is(result)) {
             failures.add("the smithing recipe produced " + assembled + " instead of " + result);
@@ -151,6 +143,10 @@ public class DefaultEnchantmentGameTest {
         helper.succeed();
     }
 
+    private static SmithingRecipeInput emptyInput() {
+        return new SmithingRecipeInput(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY);
+    }
+
     private static void requireEnchantment(
             GameTestHelper helper,
             ItemStack stack,
@@ -160,7 +156,7 @@ public class DefaultEnchantmentGameTest {
     ) {
         final int level = EnchantmentUtils.getItemEnchantmentLevel(helper.getLevel(), enchantment, stack);
         if (level != expected) {
-            failures.add("smithing result: expected " + enchantment.location() + " " + expected
+            failures.add("smithing result: expected " + enchantment.identifier() + " " + expected
                     + " but had level " + level);
         }
     }

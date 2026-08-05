@@ -5,7 +5,7 @@ import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.sets.api.blocks.SlotType;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
@@ -63,7 +63,7 @@ public class VanillaFallback<T extends NetherWoodenMaterial<T>> extends NetherWo
     }
 
     public static Block getVanillaBlock(String baseName, String key) {
-        var vanillaID = ResourceLocation.withDefaultNamespace(baseName + "_" + key);
+        var vanillaID = Identifier.withDefaultNamespace(baseName + "_" + key);
         // BLOCK is a defaulted registry: getValue returns AIR for a missing key. Return null instead so
         // callers (e.g. BlockSet#recipeMaterial) fall through to the item slot for item-only slots like BOAT.
         if (!BuiltInRegistries.BLOCK.containsKey(vanillaID)) return null;

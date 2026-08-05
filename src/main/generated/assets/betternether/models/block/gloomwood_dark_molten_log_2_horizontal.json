@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "betternether:block/gloomwood_dark_molten_log_top",
+    "side": "betternether:block/gloomwood_dark_molten_log_side_c"
+  }
+}

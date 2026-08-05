@@ -9,11 +9,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class RenderNaga extends MobRenderer<EntityNaga, NagaRenderState, ModelNaga> {
-    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
+    private static final Identifier TEXTURE = BetterNether.C.mk(
             "textures/entity/naga.png"
     );
 
@@ -38,7 +38,7 @@ public class RenderNaga extends MobRenderer<EntityNaga, NagaRenderState, ModelNa
     }
 
     @Override
-    public ResourceLocation getTextureLocation(NagaRenderState state) {
+    public Identifier getTextureLocation(NagaRenderState state) {
         return TEXTURE;
     }
 }

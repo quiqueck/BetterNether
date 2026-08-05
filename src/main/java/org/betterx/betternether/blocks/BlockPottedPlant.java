@@ -27,8 +27,8 @@ import java.util.Collections;
 import java.util.List;
 
 // Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
-// overrides are gone. setDropItself(false) is gone too - the class's own getDrops() override below is
-// unaffected either way.
+// overrides are gone, and so is setDropItself(false). What this drops is decided by
+// NetherLoot.pottedPlant() - one pool per PLANT value - rather than by a getDrops override.
 public class BlockPottedPlant extends Block {
     public static final EnumProperty<PottedPlantShape> PLANT = BNBlockProperties.PLANT;
 
@@ -85,11 +85,6 @@ public class BlockPottedPlant extends Block {
             return state;
     }
 
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        Block block = state.getValue(PLANT).getBlock();
-        return Collections.singletonList(new ItemStack(block.asItem()));
-    }
 
     public static BlockState getPlant(Item item) {
         for (PottedPlantShape shape : PottedPlantShape.values()) {

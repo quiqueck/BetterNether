@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_body",
+  "textures": {
+    "all": "betternether:block/mushroom_fir_shelf",
+    "particle": "betternether:block/mushroom_fir_planks"
+  }
+}

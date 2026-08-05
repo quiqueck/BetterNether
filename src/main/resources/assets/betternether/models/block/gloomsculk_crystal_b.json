@@ -1,0 +1,7 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "particle": "betternether:block/gloomsculk_crystal_b",
+        "cross": "betternether:block/gloomsculk_crystal_b"
+    }
+}

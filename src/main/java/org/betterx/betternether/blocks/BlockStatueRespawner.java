@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -53,7 +54,12 @@ public class BlockStatueRespawner extends Block {
     private static final DustParticleOptions EFFECT = new DustParticleOptions(0xFF0000, 1.0F);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty TOP = BooleanProperty.create("top");
-    private final ItemStack requiredItem;
+    // Stored as Item + count, not a pre-built ItemStack: this constructor runs during block
+    // registration at mod bootstrap, well before item data components are bound (they bind only
+    // after the datapack/recipe reload) - constructing an ItemStack that early throws "Components
+    // not bound yet". The stack is materialized lazily at actual use time in useWithoutItem() below.
+    private final Item requiredItemType;
+    private final int requiredItemCount;
 
     public BlockStatueRespawner(BlockBehaviour.Properties settings) {
         super(settings);
@@ -63,8 +69,8 @@ public class BlockStatueRespawner extends Block {
                                           .orElse(Items.GLOWSTONE);
         if (item == Items.AIR)
             item = Items.GLOWSTONE;
-        int count = 4;
-        requiredItem = new ItemStack(item, count);
+        requiredItemType = item;
+        requiredItemCount = 4;
     }
 
     @Override
@@ -97,28 +103,34 @@ public class BlockStatueRespawner extends Block {
             BlockHitResult hit
     ) {
         ItemStack stack = player.getMainHandItem();
-        if (stack.getItem() == requiredItem.getItem() && stack.getCount() >= requiredItem.getCount()) {
+        if (stack.getItem() == requiredItemType && stack.getCount() >= requiredItemCount) {
             float y = state.getValue(TOP) ? 0.4F : 1.4F;
             if (!player.isCreative()) {
-                player.getMainHandItem().shrink(requiredItem.getCount());
+                player.getMainHandItem().shrink(requiredItemCount);
             }
             for (int i = 0; i < 50; i++)
                 world.addParticle(EFFECT,
-                        pos.getX() + world.random.nextFloat(),
-                        pos.getY() + y + world.random.nextFloat() * 0.2,
-                        pos.getZ() + world.random.nextFloat(), 0, 0, 0
+                        pos.getX() + world.getRandom().nextFloat(),
+                        pos.getY() + y + world.getRandom().nextFloat() * 0.2,
+                        pos.getZ() + world.getRandom().nextFloat(), 0, 0, 0
                 );
-            player.displayClientMessage(Component.translatable("message.spawn_set", new Object[0]), true);
-            if (!world.isClientSide) {
+            player.sendOverlayMessage(Component.translatable("message.spawn_set", new Object[0]));
+            if (!world.isClientSide()) {
                 ((ServerPlayer) player).setRespawnPosition(
-                        new ServerPlayer.RespawnConfig(world.dimension(), pos, player.getYHeadRot(), false),
+                        new ServerPlayer.RespawnConfig(
+                                LevelData.RespawnData.of(world.dimension(), pos, player.getYHeadRot(), 0.0F),
+                                false
+                        ),
                         true
                 );
             }
             player.playSound(SoundEvents.TOTEM_USE, 0.7F, 1.0F);
             return InteractionResult.SUCCESS;
         } else {
-            player.displayClientMessage(Component.translatable("message.spawn_help", requiredItem), true);
+            player.sendOverlayMessage(Component.translatable(
+                    "message.spawn_help",
+                    new ItemStack(requiredItemType, requiredItemCount)
+            ));
         }
         return InteractionResult.SUCCESS;
     }

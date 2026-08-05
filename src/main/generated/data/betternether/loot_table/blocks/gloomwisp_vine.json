@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "betternether:gloomwisp_vine",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "shape": "top"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:gloomwisp_vine"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

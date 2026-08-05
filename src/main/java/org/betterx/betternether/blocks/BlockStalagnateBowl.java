@@ -24,8 +24,9 @@ import java.util.Collections;
 import java.util.List;
 
 // Reparented off BlockBaseNotFull (WP6.12): its dead canSuffocate/isSimpleFullBlock/allowsSpawning
-// overrides are gone; noOcclusion() moves to the registration site (StalagnateMaterial's BOWL slot). The
-// class already carries its own getDrops() override, so BlockBase's dropItself mechanism was never in play.
+// overrides are gone; noOcclusion() moves to the registration site (StalagnateMaterial's BOWL slot), which
+// is also where NetherLoot.stalagnateBowl() now says what this drops - one pool per FOOD value, replacing
+// the getDrops override this class used to carry.
 public class BlockStalagnateBowl extends Block {
     private static final VoxelShape SHAPE = box(5, 0, 5, 11, 3, 11);
     public static final EnumProperty<FoodShape> FOOD = BNBlockProperties.FOOD;
@@ -48,11 +49,6 @@ public class BlockStalagnateBowl extends Block {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
         return SHAPE;
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        return Collections.singletonList(new ItemStack(state.getValue(FOOD).getItem()));
     }
 
     @Override

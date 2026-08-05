@@ -66,6 +66,12 @@
 		"plant=swamp_grass": { "model": "betternether:block/potted_swamp_grass" },
 		"plant=soul_grass": { "model": "betternether:block/potted_soul_grass" },
 		"plant=bone_grass": { "model": "betternether:block/potted_bone_grass" },
-		"plant=bone_mushroom": { "model": "betternether:block/potted_bone_mushroom" }
+		"plant=bone_mushroom": { "model": "betternether:block/potted_bone_mushroom" },
+		"plant=gloomwood": [
+			{ "model": "betternether:block/potted_gloomwood" },
+			{ "model": "betternether:block/potted_gloomwood", "y": 90 },
+			{ "model": "betternether:block/potted_gloomwood", "y": 180 },
+			{ "model": "betternether:block/potted_gloomwood", "y": 270 }
+		]
     }
 }

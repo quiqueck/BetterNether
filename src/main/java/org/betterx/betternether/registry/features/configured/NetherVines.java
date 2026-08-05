@@ -32,6 +32,8 @@ public class NetherVines {
             ConfiguredFeatureManager.blockColumn(C.id("patch_golden_vine_sparse"));
     public static final ConfiguredFeatureKey<RandomPatch> PATCH_EYE_VINE =
             ConfiguredFeatureManager.randomPatch(C.id("patch_eye_vine"));
+    public static final ConfiguredFeatureKey<AsPillar> PATCH_GLOOMSCULK_VINE =
+            ConfiguredFeatureManager.pillar(C.id("patch_gloomsculk_vine"));
     public static final ConfiguredFeatureKey<AsPillar> PATCH_BLACK_VINE =
             ConfiguredFeatureManager.pillar(C.id("patch_black_vine"));
     public static final ConfiguredFeatureKey<WithConfiguration<TwistedVinesFeature, NoneFeatureConfiguration>> PATCH_TWISTING_VINES =

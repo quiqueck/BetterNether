@@ -9,7 +9,7 @@ import de.ambertation.wover.item.api.ItemStackHelper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -104,7 +104,7 @@ public class ObsidianBreakerGameTest {
         final List<String> failures = new ArrayList<>();
 
         BuiltInRegistries.BLOCK.entrySet().forEach(entry -> {
-            final ResourceLocation id = entry.getKey().location();
+            final Identifier id = entry.getKey().identifier();
             if (!id.getNamespace().equals("betternether")) return;
             if (!id.getPath().contains("obsidian")) return;
             if (id.getPath().endsWith("glass_pane")) return;

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest_boat",
+  "ingredients": [
+    "#c:chests",
+    "betternether:gloomwood_boat"
+  ],
+  "result": {
+    "id": "betternether:gloomwood_chest_boat"
+  }
+}

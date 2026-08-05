@@ -32,6 +32,10 @@ public class NetherFeatures {
             BN.id("rubeus_tree"),
             new RubeusTreeFeature()
     );
+    public static final GloomwoodTreeFeature GLOOMWOOD_TREE = FeatureManager.register(
+            BN.id("gloomwood_tree"),
+            new GloomwoodTreeFeature()
+    );
     public static final MushroomFirFeature MUSHROOM_FIR = FeatureManager.register(
             BN.id("mushroom_fir"),
             new MushroomFirFeature()

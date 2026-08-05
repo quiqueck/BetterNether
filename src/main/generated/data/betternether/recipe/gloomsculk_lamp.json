@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "betternether:gloomsculk_geode_crystal",
+    "betternether:gloomsculk_geode_crystal",
+    "betternether:gloomsculk_geode"
+  ],
+  "result": {
+    "id": "betternether:gloomsculk_lamp"
+  }
+}

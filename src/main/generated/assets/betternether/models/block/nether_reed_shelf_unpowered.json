@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_unpowered",
+  "textures": {
+    "all": "betternether:block/nether_reed_shelf",
+    "particle": "betternether:block/nether_reed_planks"
+  }
+}

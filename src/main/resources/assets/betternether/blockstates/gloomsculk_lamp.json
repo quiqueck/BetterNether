@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "": [
+            {
+                "model": "betternether:block/gloomsculk_lamp"
+            },
+            {
+                "model": "betternether:block/gloomsculk_lamp",
+                "y": 90
+            },
+            {
+                "model": "betternether:block/gloomsculk_lamp",
+                "y": 180
+            },
+            {
+                "model": "betternether:block/gloomsculk_lamp",
+                "y": 270
+            }
+        ]
+    }
+}

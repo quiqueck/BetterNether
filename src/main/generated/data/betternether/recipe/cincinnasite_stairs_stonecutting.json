@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "stairs",
   "ingredient": "betternether:cincinnasite_forged",
   "result": {
-    "count": 1,
     "id": "betternether:cincinnasite_stairs"
   }
 }

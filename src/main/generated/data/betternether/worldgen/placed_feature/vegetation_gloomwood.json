@@ -1,0 +1,50 @@
+{
+  "feature": "betternether:vegetation_gloomwood",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 4
+        },
+        "min_inclusive": {
+          "above_bottom": 4
+        }
+      }
+    },
+    {
+      "type": "minecraft:count",
+      "count": 10
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "wover:every_layer",
+      "min": 4
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "minecraft:air"
+      }
+    },
+    {
+      "type": "wover:is",
+      "offset": [
+        0,
+        -1,
+        0
+      ],
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "wover:surfaces/sculk_like"
+      }
+    }
+  ]
+}

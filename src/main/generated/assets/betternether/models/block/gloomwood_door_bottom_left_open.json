@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "textures": {
+    "bottom": "betternether:block/gloomwood_door_bottom",
+    "top": "betternether:block/gloomwood_door_top"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "betternether:block/stalagnate_trapdoor",
+  "textures": {
+    "particle": "betternether:block/gloomwood_dark_trapdoor",
+    "texture": "betternether:block/gloomwood_dark_trapdoor"
+  }
+}

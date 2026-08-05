@@ -85,7 +85,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomM
                         @Override
                         protected BlockRecipeTrait buildWoodRecipe(WoodenBlockSet<?> set, BlockTraitLookup traitLookup) {
                             return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
-                                    .crafting(key.location(), block)
+                                    .crafting(key.identifier(), block)
                                     .outputCount(4)
                                     .shapeless()
                                     .addMaterial('#', set.recipeMaterial(NetherSlots.STEM))

@@ -19,6 +19,9 @@ public class NetherTrees {
     public static final ConfiguredFeatureKey<WithConfiguration<RubeusTreeFeature, NaturalTreeConfiguration>> RUBEUS_TREE
             = ConfiguredFeatureManager.configuration(C.id("tree_rubeus"), NetherFeatures.RUBEUS_TREE);
 
+    public static final ConfiguredFeatureKey<WithConfiguration<GloomwoodTreeFeature, NaturalTreeConfiguration>> GLOOMWOOD_TREE
+            = ConfiguredFeatureManager.configuration(C.id("tree_gloomwood"), NetherFeatures.GLOOMWOOD_TREE);
+
     public static final ConfiguredFeatureKey<WithConfiguration<MushroomFirFeature, NoneFeatureConfiguration>> MUSHROOM_FIR
             = ConfiguredFeatureManager.configuration(C.id("tree_mushroom_fir"), NetherFeatures.MUSHROOM_FIR);
 

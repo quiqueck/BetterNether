@@ -8,7 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainer;
@@ -19,6 +19,7 @@ import net.minecraft.world.inventory.BrewingStandMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.level.Level;
@@ -140,7 +141,7 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
             setChanged(world, pos, state);
         }
 
-        if (!blockEntity.level.isClientSide) {
+        if (!blockEntity.level.isClientSide()) {
             boolean[] bls = blockEntity.getSlotsEmpty();
             if (!Arrays.equals(bls, blockEntity.slotsEmptyLastTick)) {
                 blockEntity.slotsEmptyLastTick = bls;
@@ -212,11 +213,12 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
         }
 
         source.shrink(1);
-        ItemStack itemStack2 = source.getItem().getCraftingRemainder();
+        ItemStackTemplate remainderTemplate = source.getItem().getCraftingRemainder();
+        ItemStack itemStack2 = remainderTemplate != null ? remainderTemplate.create() : ItemStack.EMPTY;
         if (!itemStack2.isEmpty()) {
             if (source.isEmpty()) {
                 source = itemStack2;
-            } else if (!world.isClientSide) {
+            } else if (!world.isClientSide()) {
                 Containers.dropItemStack(world, blockPos.getX(), blockPos.getY(),
                         blockPos.getZ(), itemStack2
                 );
@@ -285,7 +287,7 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
                 if (item == Items.BLAZE_POWDER) {
                     return true;
                 }
-                ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+                Identifier id = BuiltInRegistries.ITEM.getKey(item);
                 return id.getNamespace().equals("biomemakeover") && id.getPath().equals("soul_embers");
             } else {
                 return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION || item == Items.GLASS_BOTTLE) && this

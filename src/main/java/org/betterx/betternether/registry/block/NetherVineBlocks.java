@@ -6,10 +6,12 @@ import org.betterx.bclib.api.v3.tag.BCLBlockTags;
 import org.betterx.bclib.trait.TraitLists;
 import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.bclib.trait.block.FurnitureTraits;
 import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
 import org.betterx.bclib.trait.block.RecipeTraits;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
+import org.betterx.bclib.trait.block.SurvivesOnSolidTrait;
 import org.betterx.bclib.trait.block.VegetationTagTrait;
 import org.betterx.bclib.trait.block.WeightedCrossModelTrait;
 import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
@@ -39,7 +41,7 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -171,6 +173,62 @@ public class NetherVineBlocks {
             .strength(0.2f)
             .lightLevel(BlockLumabusVine.getLuminance())
             .addTrait(NetherTraits.vine())
+            .buildAndRegister();
+
+    /**
+     * The vine that hangs off the gloomwood's sculk ceiling: a dark stem in the sculk tones with leaves
+     * shading out to the pale bark, and the odd leaf finishing on a hot orange tip.
+     */
+    public static final Block GLOOMSCULK_VINE = NetherBlocks.defineBlock("gloomsculk_vine", BlockBlackVine::new)
+            .addTrait(NetherRender.cutout())
+            .addTrait(WeightedCrossModelTrait.booleanDispatch(
+                    BaseSimpleVineBlock.BOTTOM,
+                    List.of(
+                            WeightedCrossModelTrait.cross(BetterNether.C.mk("block/gloomsculk_vine")),
+                            WeightedCrossModelTrait.crossParent(BetterNether.C.mk("block/cross_inverted"), BetterNether.C.mk("block/gloomsculk_vine"))
+                    ),
+                    List.of(
+                            WeightedCrossModelTrait.cross(BetterNether.C.mk("block/gloomsculk_vine_bottom")),
+                            WeightedCrossModelTrait.crossParent(BetterNether.C.mk("block/cross_inverted"), BetterNether.C.mk("block/gloomsculk_vine_bottom"))
+                    ),
+                    WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("block/gloomsculk_vine"))
+            ))
+            .addTrait(NetherLoot.blackVine())
+            .addTrait(NetherMaterial.staticVine(MapColor.COLOR_GRAY))
+            .instabreak()
+            .lightLevel(bs -> 3)
+            .addTrait(NetherTraits.vine())
+            .buildAndRegister();
+
+    // A gloomwisp: thin stalk, one elongated head with a small face on it. Grows upward off gloomsculk
+    // (or any other sculk-like ground) rather than hanging, so it stacks like the nether cactus instead
+    // of using the BOTTOM dispatch the vines above share.
+    // Stands on anything solid. Worldgen still only grows it on the sculk floor - its placed feature
+    // filters on SCULK_LIKE - so this only governs where a player may replant one.
+    public static final BlockGloomwispVine GLOOMWISP_VINE = NetherBlocks
+            .defineBlock("gloomwisp_vine", BlockGloomwispVine::new)
+            .addTrait(NetherRender.cutout())
+            .addTrait(SurvivesOnSolidTrait.DEFAULT)
+            // The two things about a wisp that are not visible on the block: PERSISTENT, set by shearing
+            // the head, and OFFSET, cleared by placing while sneaking. Both are decisions a builder makes
+            // before placing one, so they belong on the item rather than in an advancement.
+            .addTrait(DescriptionBlockTrait.of(
+                    "tooltip.betternether.gloomwisp_vine.shear",
+                    "tooltip.betternether.gloomwisp_vine.center"
+            ))
+            .addTrait(NetherModels.gloomwispVineModelTrait())
+            .addTrait(NetherLoot.onlyTopDrops())
+            .addTrait(NetherMaterial.plant(MapColor.COLOR_LIGHT_GRAY))
+            // NetherMaterial.plant() is OffsetType.NONE; wisps want the grass-style random horizontal
+            // offset so a stand of them does not sit on a visible grid
+            .offsetType(BlockBehaviour.OffsetType.XZ)
+            // Lit from the head, not along the whole plant: the stalk keeps a dim glow from the
+            // gradient in its texture, and the soul fire in the head does the actual lighting.
+            .lightLevel(bs -> bs.getValue(BlockGloomwispVine.SHAPE) == BlockProperties.TripleShape.TOP
+                    ? 12
+                    : 5)
+            .randomTicks()
+            .addTrait(NetherTraits.plant())
             .buildAndRegister();
 
     // Small Plants

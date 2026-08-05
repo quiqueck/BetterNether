@@ -89,8 +89,15 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
+    public void checkDespawn() {
+        // 26.1 removed the virtual Mob.shouldDespawnInPeaceful() hook this used to override (peaceful
+        // despawn is now driven by an EntityType.Builder-time flag that Fabric's EntityType builder
+        // doesn't expose) - replicate the old "always despawn on Peaceful" behaviour here instead.
+        if (this.level().getDifficulty() == Difficulty.PEACEFUL) {
+            this.discard();
+            return;
+        }
+        super.checkDespawn();
     }
 
     @Override

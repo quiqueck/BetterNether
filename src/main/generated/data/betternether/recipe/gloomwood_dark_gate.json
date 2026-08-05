@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "gate",
+  "key": {
+    "#": "betternether:gloomwood_dark_planks",
+    "I": "minecraft:stick"
+  },
+  "pattern": [
+    "I#I",
+    "I#I"
+  ],
+  "result": {
+    "id": "betternether:gloomwood_dark_gate"
+  }
+}

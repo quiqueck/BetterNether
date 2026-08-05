@@ -3,7 +3,7 @@
   "config": {
     "default": {
       "feature": {
-        "type": "minecraft:random_patch",
+        "type": "wover:random_patch",
         "config": {
           "feature": {
             "feature": {
@@ -24,8 +24,8 @@
               {
                 "type": "minecraft:block_predicate_filter",
                 "predicate": {
-                  "type": "minecraft:matching_blocks",
-                  "blocks": "minecraft:air"
+                  "type": "minecraft:matching_block_tag",
+                  "tag": "minecraft:air"
                 }
               },
               {
@@ -54,7 +54,7 @@
         "chance": 0.07017544,
         "feature": {
           "feature": {
-            "type": "minecraft:random_patch",
+            "type": "wover:random_patch",
             "config": {
               "feature": {
                 "feature": {
@@ -107,8 +107,8 @@
                   {
                     "type": "minecraft:block_predicate_filter",
                     "predicate": {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air"
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "minecraft:air"
                     }
                   },
                   {
@@ -137,7 +137,7 @@
         "chance": 0.21052632,
         "feature": {
           "feature": {
-            "type": "minecraft:random_patch",
+            "type": "wover:random_patch",
             "config": {
               "feature": {
                 "feature": {
@@ -190,8 +190,8 @@
                   {
                     "type": "minecraft:block_predicate_filter",
                     "predicate": {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air"
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "minecraft:air"
                     }
                   },
                   {
@@ -220,7 +220,7 @@
         "chance": 0.3508772,
         "feature": {
           "feature": {
-            "type": "minecraft:random_patch",
+            "type": "wover:random_patch",
             "config": {
               "feature": {
                 "feature": {
@@ -238,8 +238,8 @@
                   {
                     "type": "minecraft:block_predicate_filter",
                     "predicate": {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air"
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "minecraft:air"
                     }
                   },
                   {
@@ -268,7 +268,7 @@
         "chance": 0.14035088,
         "feature": {
           "feature": {
-            "type": "minecraft:random_patch",
+            "type": "wover:random_patch",
             "config": {
               "feature": {
                 "feature": {
@@ -321,8 +321,8 @@
                   {
                     "type": "minecraft:block_predicate_filter",
                     "predicate": {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air"
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "minecraft:air"
                     }
                   },
                   {
@@ -351,7 +351,7 @@
         "chance": 0.0877193,
         "feature": {
           "feature": {
-            "type": "minecraft:random_patch",
+            "type": "wover:random_patch",
             "config": {
               "feature": {
                 "feature": {
@@ -404,8 +404,8 @@
                   {
                     "type": "minecraft:block_predicate_filter",
                     "predicate": {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air"
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "minecraft:air"
                     }
                   },
                   {

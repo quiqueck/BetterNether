@@ -1,0 +1,24 @@
+{
+  "parent": "betternether:disturbed_wisp",
+  "criteria": {
+    "wisp_shed_experience": {
+      "trigger": "betternether:wisp_shed_experience"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.betternether.wisp_shed_experience.description"
+    },
+    "icon": {
+      "id": "minecraft:experience_bottle"
+    },
+    "title": {
+      "translate": "advancements.betternether.wisp_shed_experience.title"
+    }
+  },
+  "requirements": [
+    [
+      "wisp_shed_experience"
+    ]
+  ]
+}

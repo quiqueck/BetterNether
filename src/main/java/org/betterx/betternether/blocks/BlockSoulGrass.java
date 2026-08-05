@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockSoulGrass extends BaseBlockNetherGrass.OnEverything {
+public class BlockSoulGrass extends BaseBlockNetherGrass {
     public BlockSoulGrass(BlockBehaviour.Properties settings) {
         super(settings);
     }

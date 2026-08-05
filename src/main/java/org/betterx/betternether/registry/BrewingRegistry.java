@@ -14,19 +14,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrewingRegistry {
-    private static final List<BrewingRecipe> RECIPES = new ArrayList<BrewingRecipe>();
+    // Built lazily on first actual use (a real brewing-stand interaction, well after mod bootstrap
+    // completes) rather than eagerly from register(): both the plain ItemStack ctor and
+    // PotionContents.createItemStack read item/potion data components, which are not bound yet
+    // during BetterNether.onInitialize()'s registration chain ("Components not bound yet").
+    private static List<BrewingRecipe> recipes = null;
 
     public static void register() {
-        register(
-                new ItemStack(NetherPlantBlocks.BARREL_CACTUS),
-                new ItemStack(Items.GLASS_BOTTLE),
-                makePotion(Potions.WATER)
-        );
-        register(new ItemStack(NetherMushroomBlocks.HOOK_MUSHROOM), makePotion(Potions.AWKWARD), makePotion(Potions.HEALING));
+        // Kept as a no-op call site for BetterNether.onInitialize() - recipe construction is
+        // deferred to getRecipes() below.
     }
 
-    private static void register(ItemStack source, ItemStack bottle, ItemStack result) {
-        RECIPES.add(new BrewingRecipe(source, bottle, result));
+    private static List<BrewingRecipe> getRecipes() {
+        if (recipes == null) {
+            recipes = new ArrayList<>();
+            recipes.add(new BrewingRecipe(
+                    new ItemStack(NetherPlantBlocks.BARREL_CACTUS),
+                    new ItemStack(Items.GLASS_BOTTLE),
+                    makePotion(Potions.WATER)
+            ));
+            recipes.add(new BrewingRecipe(
+                    new ItemStack(NetherMushroomBlocks.HOOK_MUSHROOM),
+                    makePotion(Potions.AWKWARD),
+                    makePotion(Potions.HEALING)
+            ));
+        }
+        return recipes;
     }
 
     private static ItemStack makePotion(Holder<Potion> potion) {
@@ -58,14 +71,14 @@ public class BrewingRegistry {
     }
 
     public static ItemStack getResult(ItemStack source, ItemStack bottle) {
-        for (BrewingRecipe recipe : RECIPES)
+        for (BrewingRecipe recipe : getRecipes())
             if (recipe.isValid(source, bottle))
                 return recipe.getResult();
         return null;
     }
 
     public static boolean isValidIngridient(ItemStack source) {
-        for (BrewingRecipe recipe : RECIPES)
+        for (BrewingRecipe recipe : getRecipes())
             if (recipe.isValid(source))
                 return true;
         return false;

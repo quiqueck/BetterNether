@@ -1,0 +1,40 @@
+{
+	"__comment": "Same two-cube arrangement as vanilla's slime block: an inner cube seen through a translucent outer one. Here the outer shell is only translucent on its upper half - the sides carry sculk from the jagged rim down and frost above it, the top face is frost and the bottom is plain sculk - so the core reads as lava trapped under the frosted cap and is hidden by the shell from below. The core sits at y 3-13 so it straddles the rim: buried in shell at the bottom, glowing through the frost at the top. shade:false on the core because it is a light source, not a lit surface.",
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/gloomsculk_geode_side",
+		"side": "betternether:block/gloomsculk_geode_side",
+		"top": "betternether:block/gloomsculk_geode_top",
+		"bottom": "minecraft:block/sculk",
+		"core": "betternether:block/gloomsculk_geode_core"
+	},
+	"elements": [
+		{
+			"__comment": "the lava inside",
+			"from": [ 3, 3, 3 ],
+			"to": [ 13, 13, 13 ],
+			"shade": false,
+			"faces": {
+				"down":  { "uv": [ 3, 3, 13, 13 ], "texture": "#core" },
+				"up":    { "uv": [ 3, 3, 13, 13 ], "texture": "#core" },
+				"north": { "uv": [ 3, 3, 13, 13 ], "texture": "#core" },
+				"south": { "uv": [ 3, 3, 13, 13 ], "texture": "#core" },
+				"west":  { "uv": [ 3, 3, 13, 13 ], "texture": "#core" },
+				"east":  { "uv": [ 3, 3, 13, 13 ], "texture": "#core" }
+			}
+		},
+		{
+			"__comment": "the shell",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom", "cullface": "down" },
+				"up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#top", "cullface": "up" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "north" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "south" },
+				"west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "west" },
+				"east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "east" }
+			}
+		}
+	]
+}

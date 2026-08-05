@@ -36,7 +36,7 @@ public class BNBrewingStand extends BrewingStandBlock {
             BlockState state,
             BlockEntityType<T> type
     ) {
-        return world.isClientSide
+        return world.isClientSide()
                 ? null
                 : createTickerHelper(type, BlockEntitiesRegistry.NETHER_BREWING_STAND, BNBrewingStandBlockEntity::tick);
     }
@@ -56,7 +56,7 @@ public class BNBrewingStand extends BrewingStandBlock {
             InteractionHand hand,
             BlockHitResult hit
     ) {
-        if (world.isClientSide) {
+        if (world.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);

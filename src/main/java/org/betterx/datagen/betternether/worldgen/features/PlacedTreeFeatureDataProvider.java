@@ -10,6 +10,7 @@ import org.betterx.betternether.registry.features.configured.NetherTrees;
 import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import de.ambertation.wover.block.api.predicate.BlockPredicates;
+import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
 import de.ambertation.wover.feature.api.features.config.PillarFeatureConfig;
@@ -17,6 +18,7 @@ import de.ambertation.wover.feature.api.features.config.PillarFeatureConfig;
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -28,6 +30,11 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
     @Override
     protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
         NetherTrees.RUBEUS_TREE
+                .bootstrap(ctx)
+                .configuration(NaturalTreeConfiguration.natural())
+                .register();
+
+        NetherTrees.GLOOMWOOD_TREE
                 .bootstrap(ctx)
                 .configuration(NaturalTreeConfiguration.natural())
                 .register();
@@ -129,6 +136,14 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
                 .place(ctx)
                 .vanillaNetherGround(14)
                 .isEmptyAndOnNetherGround()
+                .register();
+
+        // Gloomwood grows on the sculk floor rather than on nether ground, so the usual
+        // isEmptyAndOnNetherGround() filter would reject every position in its own biome.
+        NetherTreesPlaced.GLOOMWOOD_TREE
+                .place(ctx)
+                .vanillaNetherGround(10)
+                .isEmptyAndOn(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
                 .register();
 
         NetherTreesPlaced.STALAGNATE

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "slabs",
   "ingredient": "betternether:soul_sandstone_smooth",
   "result": {
     "count": 2,

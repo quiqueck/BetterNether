@@ -107,6 +107,17 @@ public class NetherVegetationPlaced {
             .createKey(C.id("patch_upside_down"))
             .setDecoration(VEGETAL_DECORATION);
 
+    public static final PlacedFeatureKey VEGETATION_GLOOMWOOD = PlacedFeatureManager
+            .createKey(C.id("vegetation_gloomwood"))
+            .setDecoration(VEGETAL_DECORATION);
+
+    public static final PlacedFeatureKey GLOOMWISP_VINE_HEAD = PlacedFeatureManager
+            .createKey(C.id("patch_gloomwisp_vine_head"))
+            .setDecoration(VEGETAL_DECORATION);
+    public static final PlacedFeatureKey GLOOMWISP_VINE = PlacedFeatureManager
+            .createKey(C.id("patch_gloomwisp_vine"))
+            .setDecoration(VEGETAL_DECORATION);
+
     public static final PlacedFeatureKey NETHER_REED = PlacedFeatureManager
             .createKey(C.id("patch_nether_reed"))
             .setDecoration(VEGETAL_DECORATION);

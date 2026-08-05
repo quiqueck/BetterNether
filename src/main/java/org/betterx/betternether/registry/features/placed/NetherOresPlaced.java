@@ -13,6 +13,9 @@ public class NetherOresPlaced {
     public static final PlacedConfiguredFeatureKey CINCINNASITE_ORE = PlacedFeatureManager
             .createKey(NetherOres.CINCINNASITE_ORE)
             .setDecoration(GenerationStep.Decoration.UNDERGROUND_DECORATION);
+    public static final PlacedConfiguredFeatureKey GLOOMWOOD_CEILING_DEBRIS = PlacedFeatureManager
+            .createKey(NetherOres.GLOOMWOOD_CEILING_DEBRIS)
+            .setDecoration(GenerationStep.Decoration.UNDERGROUND_DECORATION);
     public static final PlacedConfiguredFeatureKey NETHER_RUBY_ORE = PlacedFeatureManager
             .createKey(NetherOres.NETHER_RUBY_ORE)
             .setDecoration(GenerationStep.Decoration.UNDERGROUND_DECORATION);

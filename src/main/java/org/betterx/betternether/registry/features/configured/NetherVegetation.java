@@ -46,6 +46,14 @@ public class NetherVegetation {
             ConfiguredFeatureManager.configuration(C.id("patch_lucis"), NetherFeatures.LUCIS);
     public static final ConfiguredFeatureKey<WeightedBlockPatch> BONEMEAL_SOUL_SOIL =
             ConfiguredFeatureManager.bonemeal(C.id("bonemeal_soul_soil"));
+    /**
+     * Gloomwood ground cover. A random block patch rather than
+     * {@code netherForrestVegetation()}: that wraps vanilla's nether-forest-vegetation feature, which
+     * refuses to place unless the block below is {@code #minecraft:nylium}, and the gloomwood floor is
+     * sculk. Same reason {@code VEGETATION_MAGMA_LAND} below is built this way.
+     */
+    public static final ConfiguredFeatureKey<WeightedBlock> VEGETATION_GLOOMWOOD =
+            ConfiguredFeatureManager.randomBlock(C.id("vegetation_gloomwood"));
     public static final ConfiguredFeatureKey<WeightedBlock> VEGETATION_MAGMA_LAND =
             ConfiguredFeatureManager.randomBlock(C.id("vegetation_magma_land"));
     public static final ConfiguredFeatureKey<WeightedBlock> VEGETATION_GRASSLANDS =
@@ -80,6 +88,17 @@ public class NetherVegetation {
             ConfiguredFeatureManager.facingBlock(C.id("patch_wall_jungle"));
     public static final ConfiguredFeatureKey<FacingBlock> WALL_UPSIDE_DOWN =
             ConfiguredFeatureManager.facingBlock(C.id("patch_upside_down"));
+    /**
+     * A lone wisp head, for the shortest of the four heights.
+     * <p>
+     * Its own column because the block-column feature draws each layer independently: asking one column
+     * for 0-2 stalk segments and 0-1 bright ones would produce a dark segment directly under the head a
+     * third of the time, which is the join the two stalk textures exist to avoid.
+     */
+    public static final ConfiguredFeatureKey<AsBlockColumn> GLOOMWISP_VINE_HEAD =
+            ConfiguredFeatureManager.blockColumn(C.id("patch_gloomwisp_vine_head"));
+    public static final ConfiguredFeatureKey<AsBlockColumn> GLOOMWISP_VINE =
+            ConfiguredFeatureManager.blockColumn(C.id("patch_gloomwisp_vine"));
     public static final ConfiguredFeatureKey<AsBlockColumn> NETHER_REED =
             ConfiguredFeatureManager.blockColumn(C.id("patch_nether_reed"));
     public static final ConfiguredFeatureKey<WithConfiguration<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration>> WART_BUSH =

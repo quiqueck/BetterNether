@@ -1,0 +1,7 @@
+{
+  "parent": "betternether:block/gloomwisp_vine_head",
+  "textures": {
+    "face": "betternether:block/gloomwisp_vine_head_d",
+    "particle": "betternether:block/gloomwisp_vine_head_d"
+  }
+}

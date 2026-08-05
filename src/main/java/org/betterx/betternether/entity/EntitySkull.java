@@ -46,7 +46,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
         this.lookControl = new SkullLookControl(this);
         this.setPathfindingMalus(PathType.LAVA, -1.0F);
         this.setPathfindingMalus(PathType.WATER, -1.0F);
-        this.setPathfindingMalus(PathType.DANGER_FIRE, 0.0F);
+        this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, 0.0F);
         this.xpReward = 1;
     }
 
@@ -99,6 +99,19 @@ public class EntitySkull extends Monster implements FlyingAnimal {
             if (random.nextInt(16) == 0)
                 player.igniteForSeconds(3);
         }
+    }
+
+    @Override
+    public void checkDespawn() {
+        // 26.1 removed the virtual Mob.shouldDespawnInPeaceful() hook; vanilla hostile mobs now opt out
+        // of Peaceful via an EntityType.Builder-time flag that lives on the EntityType instance (not
+        // inherited via Java subclassing), so betternether:skull's own registration needs the old
+        // Monster-family "always despawn on Peaceful" behaviour replicated here.
+        if (this.level().getDifficulty() == Difficulty.PEACEFUL) {
+            this.discard();
+            return;
+        }
+        super.checkDespawn();
     }
 
     @Override

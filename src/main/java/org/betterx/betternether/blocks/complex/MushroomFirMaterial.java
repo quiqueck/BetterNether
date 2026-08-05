@@ -3,7 +3,9 @@ package org.betterx.betternether.blocks.complex;
 import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
 import org.betterx.betternether.blocks.BlockMushroomFir;
+import org.betterx.betternether.blocks.NetherLoot;
 import org.betterx.betternether.blocks.NetherRender;
+import org.betterx.bclib.trait.TraitLists;
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockMushroomFirSapling;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
@@ -12,7 +14,9 @@ import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import org.betterx.betternether.registry.NetherBlocks;
+import de.ambertation.wover.pottable.api.trait.PottablePlantBlockTrait;
 import de.ambertation.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -37,8 +41,19 @@ public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMateria
                     // mushroom_fir's trapdoor is exactly stalagnate's shared (no-side) trapdoor mesh -
                     // generate its child model/blockstate/item from the template instead of hand-authoring.
                     .replace(new NetherWoodSlots.TrapdoorTemplate())
-                    .add(TrunkSlot.create(BlockMushroomFir::new, NetherRender.cutout()))
-                    .add(Sapling.create(BlockMushroomFirSapling::new, NetherSurvival.netherMycelium()))
+                    // The trunk's loot was the hand-authored loot_table/blocks/mushroom_fir_trunk.json;
+                    // block loot is trait-only here.
+                    .add(TrunkSlot.create(
+                            BlockMushroomFir::new,
+                            TraitLists.and(NetherRender.cutout(), NetherLoot.mushroomFirTrunk())
+                    ))
+                    .add(Sapling.create(
+                            BlockMushroomFirSapling::new,
+                            TraitLists.and(
+                                    NetherSurvival.netherMycelium(),
+                                    PottablePlantBlockTrait.withSoils(CommonBlockTags.NETHER_MYCELIUM)
+                            )
+                    ))
                     // The stem delegates its item model to the dedicated trunk model; its blockstate and
                     // block model are hand-authored.
                     .add(new Stem() {

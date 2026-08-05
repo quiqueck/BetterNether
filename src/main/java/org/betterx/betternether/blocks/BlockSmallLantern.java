@@ -69,10 +69,9 @@ public abstract class BlockSmallLantern extends Block {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        var _facing = state.getValues().get(FACING);
-        if (_facing == null) return false;
-        final var shape = FACING.getValueClass().cast(_facing);
-        Direction direction = shape.getOpposite();
+        var _facing = state.getOptionalValue(FACING);
+        if (_facing.isEmpty()) return false;
+        Direction direction = _facing.get().getOpposite();
         return canSupportCenter(world, pos.relative(direction), direction.getOpposite());
     }
 

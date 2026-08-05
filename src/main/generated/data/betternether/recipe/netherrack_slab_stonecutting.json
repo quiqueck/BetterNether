@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "slabs",
   "ingredient": "minecraft:netherrack",
   "result": {
     "count": 2,

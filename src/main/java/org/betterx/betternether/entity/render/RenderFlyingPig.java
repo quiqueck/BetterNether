@@ -9,14 +9,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class RenderFlyingPig extends MobRenderer<EntityFlyingPig, FlyingPigRenderState, ModelEntityFlyingPig> {
-    private static final ResourceLocation TEXTURE = BetterNether.C.mk(
+    private static final Identifier TEXTURE = BetterNether.C.mk(
             "textures/entity/flying_pig.png"
     );
-    private static final ResourceLocation TEXTURE_WARTED = BetterNether.C.mk(
+    private static final Identifier TEXTURE_WARTED = BetterNether.C.mk(
             "textures/entity/flying_pig_warted.png"
     );
 
@@ -37,7 +37,7 @@ public class RenderFlyingPig extends MobRenderer<EntityFlyingPig, FlyingPigRende
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FlyingPigRenderState state) {
+    public Identifier getTextureLocation(FlyingPigRenderState state) {
         return state.isWarted ? TEXTURE_WARTED : TEXTURE;
     }
 }

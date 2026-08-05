@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/netherrack",
+    "side": "betternether:block/veined_gloomsculk_side",
+    "top": "betternether:block/veined_gloomsculk_top"
+  }
+}

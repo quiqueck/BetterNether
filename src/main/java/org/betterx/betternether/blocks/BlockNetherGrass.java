@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.blocks.BasePlantBlock;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -25,17 +24,6 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass {
         super(settings);
     }
 
-
-    @Override
-    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return SurvivesOnBlockTrait.survivesOn(this, level.getBlockState(pos.below()));
-    }
-
-    @Override
-    public boolean isTerrain(BlockState state) {
-        return SurvivesOnBlockTrait.survivesOn(this, state);
-    }
-
     public static class JunglePlant extends BlockNetherGrass {
         public JunglePlant(BlockBehaviour.Properties settings) {
             super(settings);
@@ -51,14 +39,14 @@ public abstract class BlockNetherGrass extends BaseBlockNetherGrass {
 
     }
 
-    public static class BoneGrass extends BaseBlockNetherGrass.OnEverything {
+    public static class BoneGrass extends BaseBlockNetherGrass {
         public BoneGrass(BlockBehaviour.Properties settings) {
             super(settings);
         }
 
     }
 
-    public static class SepiaBoneGrass extends BaseBlockNetherGrass.OnEverything {
+    public static class SepiaBoneGrass extends BaseBlockNetherGrass {
         public SepiaBoneGrass(BlockBehaviour.Properties settings) {
             super(settings);
         }
@@ -106,22 +94,5 @@ abstract class BaseBlockNetherGrass extends BasePlantBlock {
             return Blocks.AIR.defaultBlockState();
         else
             return state;
-    }
-
-
-    public static class OnEverything extends BaseBlockNetherGrass {
-        public OnEverything(BlockBehaviour.Properties settings) {
-            super(settings);
-        }
-
-        @Override
-        public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-            return SurvivesOnBlockTrait.survivesOn(this, level.getBlockState(pos.below()));
-        }
-
-        @Override
-        public boolean isTerrain(BlockState state) {
-            return SurvivesOnBlockTrait.survivesOn(this, state);
-        }
     }
 }

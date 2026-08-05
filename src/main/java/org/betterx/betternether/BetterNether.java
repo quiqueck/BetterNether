@@ -5,7 +5,6 @@ import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
 import org.betterx.betternether.config.Config;
 import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.loot.BNLoot;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.tab.BECreativeTabs;
@@ -13,7 +12,7 @@ import org.betterx.betternether.world.BNWorldGenerator;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.state.api.WorldConfig;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import net.fabricmc.api.ModInitializer;
 
@@ -22,8 +21,8 @@ public class BetterNether implements ModInitializer {
     public static final ModCore VANILLA_HAMMERS = ModCore.create("vanilla-hammers");
     public static final ModCore VANILLA_EXCAVATORS = ModCore.create("vanillaexcavators");
 
-    public static final ResourceLocation VANILLA_HAMMERS_PACK = C.addDatapack(VANILLA_HAMMERS);
-    public static final ResourceLocation VANILLA_EXCAVATORS_PACK = C.addDatapack(VANILLA_EXCAVATORS);
+    public static final Identifier VANILLA_HAMMERS_PACK = C.addDatapack(VANILLA_HAMMERS);
+    public static final Identifier VANILLA_EXCAVATORS_PACK = C.addDatapack(VANILLA_EXCAVATORS);
 
     private static boolean lavafallParticles = true;
     private static float fogStart = 0.05F;
@@ -40,6 +39,7 @@ public class BetterNether implements ModInitializer {
 
         initOptions();
         SoundsRegistry.ensureStaticallyLoaded();
+        NetherGameRules.ensureStaticallyLoaded();
         NetherEnchantments.ensureStaticallyLoaded();
         NetherBlocks.register();
         BlockEntitiesRegistry.register();
@@ -56,7 +56,6 @@ public class BetterNether implements ModInitializer {
         Config.save();
 
         NetherTags.register();
-        BNLoot.register();
         BNCriterion.register();
         NetherVegetation.setupBonemealFeatures();
 

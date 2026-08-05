@@ -10,6 +10,7 @@
     "betternether:basalt_stalactite",
     "betternether:blackstone_furnace",
     "betternether:blackstone_stalactite",
+    "betternether:bleached_gloomsculk",
     "betternether:blue_crying_obsidian",
     "betternether:blue_obsidian",
     "betternether:blue_obsidian_bricks",
@@ -62,8 +63,13 @@
     "betternether:cincinnasite_tile_small",
     "betternether:cincinnasite_wall",
     "betternether:geyser",
+    "betternether:gloomsculk_crystal",
+    "betternether:gloomsculk_geode",
+    "betternether:gloomsculk_geode_crystal",
+    "betternether:gloomsculk_lamp",
     "betternether:glowstone_stalactite",
     "betternether:jungle_grass",
+    "betternether:molten_gloomsculk",
     "betternether:mushroom_grass",
     "betternether:nether_brewing_stand",
     "betternether:nether_brick_tile_large",
@@ -184,6 +190,7 @@
     "betternether:soul_sandstone_stairs",
     "betternether:soul_sandstone_wall",
     "betternether:swampland_grass",
+    "betternether:veined_gloomsculk",
     "betternether:weeping_obsidian"
   ]
 }

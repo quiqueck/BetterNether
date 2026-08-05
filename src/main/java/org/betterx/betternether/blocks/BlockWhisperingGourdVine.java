@@ -41,7 +41,7 @@ public class BlockWhisperingGourdVine extends BaseVineBlock.Growing {
     ) {
         ItemStack tool = player.getItemInHand(hand);
         if (LootUtil.isShear(tool) && state.getValue(SHAPE) == BlockProperties.TripleShape.MIDDLE) {
-            if (!world.isClientSide) {
+            if (!world.isClientSide()) {
                 BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, BlockProperties.TripleShape.BOTTOM));
                 world.addFreshEntity(new ItemEntity(
                         world,
@@ -51,7 +51,7 @@ public class BlockWhisperingGourdVine extends BaseVineBlock.Growing {
                         new ItemStack(
                                 NetherCropBlocks.WHISPERING_GOURD)
                 ));
-                if (world.random.nextBoolean()) {
+                if (world.getRandom().nextBoolean()) {
                     world.addFreshEntity(new ItemEntity(
                             world,
                             pos.getX() + 0.5,

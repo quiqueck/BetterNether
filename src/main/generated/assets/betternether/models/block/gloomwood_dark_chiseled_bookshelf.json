@@ -1,0 +1,7 @@
+{
+  "parent": "wover:block/chiseled_bookshelf",
+  "textures": {
+    "side": "betternether:block/gloomwood_dark_chiseled_bookshelf_side",
+    "top": "betternether:block/gloomwood_dark_chiseled_bookshelf_top"
+  }
+}

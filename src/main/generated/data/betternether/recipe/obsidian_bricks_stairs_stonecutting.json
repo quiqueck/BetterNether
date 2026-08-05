@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "stairs",
   "ingredient": "betternether:obsidian_bricks",
   "result": {
-    "count": 1,
     "id": "betternether:obsidian_bricks_stairs"
   }
 }

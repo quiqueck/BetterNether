@@ -31,6 +31,15 @@ public class OreFeatureDataProvider extends WoverFeatureProvider {
                 .veinSize(8)
                 .discardChanceOnAirExposure(0.0f)
                 .register();
+        NetherOres.GLOOMWOOD_CEILING_DEBRIS
+                .bootstrap(ctx)
+                .add(Blocks.SCULK, Blocks.ANCIENT_DEBRIS)
+                .add(Blocks.NETHERRACK, Blocks.ANCIENT_DEBRIS)
+                // no air-exposure discard: a vein in the ceiling is meant to be visible from below,
+                // which is the whole reason for putting it there
+                .veinSize(2)
+                .discardChanceOnAirExposure(0f)
+                .register();
         NetherOres.NETHER_RUBY_ORE
                 .bootstrap(ctx)
                 .add(Blocks.NETHERRACK, NetherOreBlocks.NETHER_RUBY_ORE)
@@ -75,6 +84,11 @@ public class OreFeatureDataProvider extends WoverFeatureProvider {
                 .place(ctx)
                 .count(10)
                 .modifier(PlacementUtils.RANGE_10_10).squarePlacement().onlyInBiome()
+                .register();
+        NetherOresPlaced.GLOOMWOOD_CEILING_DEBRIS
+                .place(ctx)
+                .betterNetherCeiling(1)
+                .onceEvery(5)
                 .register();
         NetherOresPlaced.NETHER_RUBY_ORE
                 .place(ctx)

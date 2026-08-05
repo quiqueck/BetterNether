@@ -4,7 +4,7 @@
   "group": "hanging_sign",
   "key": {
     "#": "betternether:nether_reed_stem",
-    "I": "minecraft:chain"
+    "I": "minecraft:iron_chain"
   },
   "pattern": [
     "I I",

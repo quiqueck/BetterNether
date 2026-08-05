@@ -57,7 +57,7 @@ public class Stem extends SlotFromDefinition {
     @Override
     protected BlockRecipeTrait buildRecipe(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return BlockTraits.RECIPE.with((key, block, context) -> RecipeBuilder
-                .crafting(key.location().withSuffix("_to_log"), set.getBlock(SlotType.LOG))
+                .crafting(key.identifier().withSuffix("_to_log"), set.getBlock(SlotType.LOG))
                 .outputCount(1)
                 .shape("##", "##")
                 .addMaterial('#', set.recipeMaterial(NetherSlots.STEM))

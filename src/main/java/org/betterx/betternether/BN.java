@@ -1,9 +1,9 @@
 package org.betterx.betternether;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class BN {
-    public static ResourceLocation id(String path) {
+    public static Identifier id(String path) {
         return BetterNether.C.id(path);
     }
 }

@@ -190,7 +190,8 @@ public class BNBlockProperties {
         SWAMP_GRASS("swamp_grass", () -> NetherPlantBlocks.SWAMP_GRASS),
         SOUL_GRASS("soul_grass", () -> NetherPlantBlocks.SOUL_GRASS),
         BONE_GRASS("bone_grass", () -> NetherPlantBlocks.BONE_GRASS),
-        BONE_MUSHROOM("bone_mushroom", () -> NetherMushroomBlocks.BONE_MUSHROOM);
+        BONE_MUSHROOM("bone_mushroom", () -> NetherMushroomBlocks.BONE_MUSHROOM),
+        GLOOMWOOD("gloomwood", () -> NetherWoodBlocks.MAT_GLOOMWOOD.getSapling());
 
         private final Supplier<Block> block;
         private final String name;

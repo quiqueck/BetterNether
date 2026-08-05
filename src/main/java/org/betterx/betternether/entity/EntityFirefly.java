@@ -73,7 +73,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         this.lookControl = new FreflyLookControl(this);
         this.setPathfindingMalus(PathType.LAVA, -1.0F);
         this.setPathfindingMalus(PathType.WATER, -1.0F);
-        this.setPathfindingMalus(PathType.DANGER_FIRE, 0.0F);
+        this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, 0.0F);
         this.xpReward = 1;
     }
 

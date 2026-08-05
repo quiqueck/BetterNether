@@ -16,7 +16,7 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 
 import java.nio.file.Files;
@@ -51,7 +51,7 @@ public class NetherModelProvider extends WoverModelProvider {
      * {@link ItemModelGenerators} will happily emit a model over a hand-authored file of the same name and
      * only the resource-pack merge (where source-dir order decides the winner) would notice.
      */
-    private static boolean shipsHandAuthoredModel(ResourceLocation model) {
+    private static boolean shipsHandAuthoredModel(Identifier model) {
         if (HAND_AUTHORED_ROOT == null) {
             throw new IllegalStateException(
                     "fabric-api.datagen.output-dir is not set, so hand-authored models cannot be detected " +
@@ -76,7 +76,7 @@ public class NetherModelProvider extends WoverModelProvider {
             if (item instanceof BlockItem blockItem && generator.hasItemModel(blockItem.getBlock())) return;
             if (ClientItemTraits.MODEL.getRuntimeTraits(item) != null) return;
 
-            final ResourceLocation model = ModelLocationUtils.getModelLocation(item);
+            final Identifier model = ModelLocationUtils.getModelLocation(item);
             if (!shipsHandAuthoredModel(model) && item instanceof BlockItem blockItem) {
                 // A block item whose block generated (or hand-authors) a model, but did not register an item
                 // model for it - e.g. the blocks handled by a ModelOverides entry. Delegate to the block

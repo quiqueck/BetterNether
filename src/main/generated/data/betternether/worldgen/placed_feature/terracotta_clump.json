@@ -21,7 +21,6 @@
         "max_exclusive": 0.3,
         "min_inclusive": 0.1
       },
-      "center_density": 1.0,
       "height": {
         "type": "minecraft:uniform",
         "max_exclusive": 1.5,

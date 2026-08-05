@@ -45,6 +45,76 @@
 			}
 		]
 	},
+	"betternether.music.gloomwood": {
+		"category": "music",
+		"sounds": [
+			{
+				"name": "betternether:music/gloom_woods",
+				"volume": 0.2,
+				"stream": true
+			},
+			{
+				"name": "betternether:music/gloom_wisps",
+				"volume": 0.2,
+				"stream": true
+			},
+			{
+				"name": "betternether:music/gloomsculk",
+				"volume": 0.2,
+				"stream": true
+			}
+		]
+	},
+	"betternether.music_disc.gloom_woods": {
+		"category": "record",
+		"subtitle": "subtitles.betternether.music_disc.gloom_woods",
+		"sounds": [
+			{
+				"name": "betternether:music/gloom_woods",
+				"stream": true
+			}
+		]
+	},
+	"betternether.music_disc.gloom_wisps": {
+		"category": "record",
+		"subtitle": "subtitles.betternether.music_disc.gloom_wisps",
+		"sounds": [
+			{
+				"name": "betternether:music/gloom_wisps",
+				"stream": true
+			}
+		]
+	},
+	"betternether.music_disc.gloomsculk": {
+		"category": "record",
+		"subtitle": "subtitles.betternether.music_disc.gloomsculk",
+		"sounds": [
+			{
+				"name": "betternether:music/gloomsculk",
+				"stream": true
+			}
+		]
+	},
+	"betternether.block.gloomwisp_chime": {
+		"category": "block",
+		"subtitle": "subtitles.betternether.block.gloomwisp_chime",
+		"sounds": [
+			{
+				"name": "betternether:block/gloomwisp_chime",
+				"attenuation_distance": 12
+			}
+		]
+	},
+	"betternether.block.gloomwisp_boon": {
+		"category": "block",
+		"subtitle": "subtitles.betternether.block.gloomwisp_boon",
+		"sounds": [
+			{
+				"name": "betternether:block/gloomwisp_boon",
+				"attenuation_distance": 12
+			}
+		]
+	},
 	"betternether.mob.jellyfish": {
 		"category": "neutral",
 		"sounds": [

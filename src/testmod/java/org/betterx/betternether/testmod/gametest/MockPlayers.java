@@ -3,8 +3,14 @@ package org.betterx.betternether.testmod.gametest;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import io.netty.channel.embedded.EmbeddedChannel;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.server.level.ClientInformation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.GameType;
@@ -36,13 +42,43 @@ import java.util.UUID;
 public final class MockPlayers {
     private MockPlayers() {}
 
-    /** A survival-mode player standing at {@code relativePos} within the test structure. */
+    /**
+     * A survival-mode player standing at {@code relativePos} within the test structure.
+     * <p>
+     * Registered with the {@code PlayerList} over an embedded connection, the way
+     * {@code makeMockServerPlayerInLevel} does it, but with a subclass whose {@code gameMode()} is
+     * survival. Without a connection anything that reaches {@code ServerPlayer#isInvulnerableTo} NPEs
+     * on {@code connection.hasClientLoaded()} - which is on the path of every hit the player takes, so
+     * a connection-less player cannot be used as an attack target at all.
+     */
     public static ServerPlayer survival(GameTestHelper helper, BlockPos relativePos) {
-        final ServerPlayer player = new SurvivalTestPlayer(helper);
+        final GameProfile profile = new GameProfile(UUID.randomUUID(), "test-survival-player");
+        final SurvivalTestPlayer player = new SurvivalTestPlayer(helper, profile);
+
+        // Adding the Connection to an EmbeddedChannel's pipeline fires channelActive, which is what
+        // binds Connection#channel. Without it every packet send NPEs on a null channel.
+        final Connection connection = new Connection(PacketFlow.SERVERBOUND);
+        new EmbeddedChannel(connection);
+
+        helper.getLevel()
+              .getServer()
+              .getPlayerList()
+              .placeNewPlayer(
+                      connection,
+                      player,
+                      CommonListenerCookie.createInitial(profile, false)
+              );
         GameType.SURVIVAL.updatePlayerAbilities(player.getAbilities());
+        player.onUpdateAbilities();
 
         final BlockPos abs = helper.absolutePos(relativePos);
-        player.snapTo(abs.getX() + 0.5, abs.getY(), abs.getZ() + 0.5, 0.0f, 0.0f);
+        player.teleportTo(
+                helper.getLevel(),
+                abs.getX() + 0.5, abs.getY(), abs.getZ() + 0.5,
+                java.util.Set.of(),
+                0.0f, 0.0f,
+                false
+        );
         return player;
     }
 
@@ -73,11 +109,11 @@ public final class MockPlayers {
     }
 
     private static final class SurvivalTestPlayer extends ServerPlayer {
-        private SurvivalTestPlayer(GameTestHelper helper) {
+        private SurvivalTestPlayer(GameTestHelper helper, GameProfile profile) {
             super(
                     helper.getLevel().getServer(),
                     helper.getLevel(),
-                    new GameProfile(UUID.randomUUID(), "test-survival-player"),
+                    profile,
                     ClientInformation.createDefault()
             );
         }
@@ -85,6 +121,17 @@ public final class MockPlayers {
         @Override
         public GameType gameMode() {
             return GameType.SURVIVAL;
+        }
+
+        /**
+         * A mock player's client never finishes loading, and {@code ServerPlayer#isInvulnerableTo}
+         * treats a not-yet-loaded client as invulnerable. That makes the player silently untargetable:
+         * {@code hurtServer} returns false, so an attack on it does nothing at all and no post-attack
+         * enchantment effect ever runs. Delegating to the LivingEntity behaviour keeps it hittable.
+         */
+        @Override
+        public boolean isInvulnerableTo(ServerLevel level, DamageSource source) {
+            return false;
         }
 
         @Override

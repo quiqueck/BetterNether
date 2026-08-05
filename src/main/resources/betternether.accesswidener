@@ -1,17 +1,11 @@
-accessWidener   v1  named
+accessWidener   v1  official
 
 # Classes
-# NOTE: RenderStateShard$TransparencyStateShard/WriteMaskStateShard/DepthTestStateShard were removed in the
-# 1.21.5 render-pipeline overhaul; those states now live on the RenderPipeline. The custom firefly RenderType
-# (see RenderPhaseAccessor) needs no widening — RenderPipeline, BlendFunction, RenderPipelines.ENTITY_SNIPPET,
-# RenderType.create and the RenderStateShard LIGHTMAP/OVERLAY/TextureStateShard members are all public.
-accessible    class    net/minecraft/client/renderer/RenderStateShard$LayeringStateShard
-accessible    class    net/minecraft/client/renderer/RenderStateShard$OutputStateShard
-accessible    class    net/minecraft/client/renderer/RenderType$CompositeState
-accessible    class    net/minecraft/client/renderer/RenderType$CompositeRenderType
 accessible    class    net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
 extendable    class    net/minecraft/world/level/levelgen/structure/StructureStart
 accessible    class    net/minecraft/client/particle/DripParticle$DripHangParticle
+accessible    class    net/minecraft/client/particle/DripParticle$FallAndLandParticle
+accessible    class    net/minecraft/client/particle/DripParticle$DripLandParticle
 accessible    class    net/minecraft/world/level/levelgen/SurfaceRules$VerticalGradientConditionSource
 accessible    class    net/minecraft/world/level/levelgen/flat/FlatLevelGeneratorPresets$Bootstrap
 
@@ -23,7 +17,7 @@ accessible method net/minecraft/world/level/block/state/BlockBehaviour getShape 
 extendable method net/minecraft/world/entity/Entity getEyeHeight (Lnet/minecraft/world/entity/Pose;)F
 
 # Constructors
-accessible method net/minecraft/client/particle/DripParticle$DripHangParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
-accessible method net/minecraft/client/particle/DripParticle$FallAndLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
-accessible method net/minecraft/client/particle/DripParticle$DripLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;)V
-accessible method net/minecraft/world/level/levelgen/SurfaceRules$VerticalGradientConditionSource <init> (Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/world/level/levelgen/VerticalAnchor;Lnet/minecraft/world/level/levelgen/VerticalAnchor;)V
+accessible method net/minecraft/client/particle/DripParticle$DripHangParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+accessible method net/minecraft/client/particle/DripParticle$FallAndLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+accessible method net/minecraft/client/particle/DripParticle$DripLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+accessible method net/minecraft/world/level/levelgen/SurfaceRules$VerticalGradientConditionSource <init> (Lnet/minecraft/resources/Identifier;Lnet/minecraft/world/level/levelgen/VerticalAnchor;Lnet/minecraft/world/level/levelgen/VerticalAnchor;)V

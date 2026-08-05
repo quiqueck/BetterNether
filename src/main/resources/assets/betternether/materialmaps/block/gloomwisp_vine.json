@@ -1,0 +1,38 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/gloomwisp_vine_head",
+				"material": "betternether:glow_33"
+			},
+			{
+				"sprite": "betternether:block/gloomwisp_vine_head_b",
+				"material": "betternether:glow_33"
+			},
+			{
+				"sprite": "betternether:block/gloomwisp_vine_head_c",
+				"material": "betternether:glow_33"
+			},
+			{
+				"sprite": "betternether:block/gloomwisp_vine_head_d",
+				"material": "betternether:glow_33"
+			},
+			{
+				"sprite": "betternether:block/gloomwisp_vine_head_side",
+				"material": "betternether:glow_33"
+			},
+			{
+				"sprite": "betternether:block/gloomwisp_vine_glow",
+				"material": "betternether:noshade"
+			},
+			{
+				"sprite": "betternether:block/gloomwisp_vine_stem",
+				"material": "betternether:waving"
+			},
+			{
+				"sprite": "betternether:block/gloomwisp_vine_stem_lower",
+				"material": "betternether:waving"
+			}
+		]
+	}
+}

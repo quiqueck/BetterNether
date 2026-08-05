@@ -23,7 +23,6 @@
                 "max_exclusive": 0.3,
                 "min_inclusive": 0.1
               },
-              "center_density": 1.0,
               "height": {
                 "type": "minecraft:uniform",
                 "max_exclusive": 1.5,
@@ -47,15 +46,15 @@
         },
         {
           "feature": {
-            "type": "minecraft:random_patch",
+            "type": "wover:random_patch",
             "config": {
               "feature": {
                 "feature": {
                   "type": "wover:pillar",
                   "config": {
                     "allowed_placement": {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air"
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "minecraft:air"
                     },
                     "direction": "up",
                     "max_height": {
@@ -80,8 +79,8 @@
                   {
                     "type": "minecraft:block_predicate_filter",
                     "predicate": {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air"
+                      "type": "minecraft:matching_block_tag",
+                      "tag": "minecraft:air"
                     }
                   },
                   {

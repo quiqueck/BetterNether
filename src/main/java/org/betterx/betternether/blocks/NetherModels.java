@@ -26,7 +26,8 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.random.Weighted;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -40,6 +41,7 @@ import com.google.gson.JsonObject;
 import com.mojang.math.Quadrant;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -78,9 +80,9 @@ public class NetherModels {
      */
     public static BlockModelTrait slab(
             Supplier<Block> source,
-            ResourceLocation top,
-            ResourceLocation bottom,
-            ResourceLocation side
+            Identifier top,
+            Identifier bottom,
+            Identifier side
     ) {
         return ModCore.isDatagen() ? Impl.slab(source, top, bottom, side) : null;
     }
@@ -94,8 +96,8 @@ public class NetherModels {
      * carries the same slab seam texture as the half slab).
      */
     public static BlockModelTrait slabColumnDouble(
-            ResourceLocation topBottom,
-            ResourceLocation side
+            Identifier topBottom,
+            Identifier side
     ) {
         return ModCore.isDatagen() ? Impl.slabColumnDouble(topBottom, side) : null;
     }
@@ -161,6 +163,72 @@ public class NetherModels {
         return ModCore.isDatagen() ? Impl.netherGrass() : null;
     }
 
+    /**
+     * A terrain cover block: {@code <name>_top} / {@code <name>_side} over the given block's texture on the
+     * bottom face, with the top randomly rotated in four directions to break up the repeat.
+     * <p>
+     * The older terrain blocks here ({@code netherrack_moss}, {@code nether_mycelium}, ...) still carry
+     * hand-authored blockstate and model json in resources; this is the generated equivalent, and new
+     * terrain should use it.
+     *
+     * @param bottom supplies the block whose texture covers the bottom face - a supplier because the
+     *               bottom is usually another registered block, which may not exist yet when the trait is
+     *               built at class-init time
+     */
+    public static BlockModelTrait terrainCover(Supplier<Block> bottom) {
+        return ModCore.isDatagen() ? Impl.terrainCover(bottom) : null;
+    }
+
+    /**
+     * A terrain cover block with several interchangeable texture sets, each emitted in the same four
+     * rotations {@link #terrainCover(Supplier)} uses.
+     * <p>
+     * Rotating one texture only moves a pattern around; every block still animates off the same sprite, so
+     * an animated cover pulses in lockstep across the whole floor. Separate sprites per variant give the
+     * animation somewhere to differ - {@code bleached_gloomsculk} puts its glimmers on different pixels and
+     * a different phase in each one.
+     *
+     * @param name     the block's texture base name; variants read {@code <name>_top<suffix>} and
+     *                 {@code <name>_side<suffix>}
+     * @param bottom   the texture for the bottom face
+     * @param suffixes one per variant, in order; {@code ""} for the unsuffixed base pair
+     */
+    public static BlockModelTrait terrainCoverVariants(String name, Identifier bottom, List<String> suffixes) {
+        final List<WeightedTemplateModelTrait.Layer> variants = new java.util.ArrayList<>();
+        for (String suffix : suffixes) {
+            final var layer = WeightedTemplateModelTrait.child(
+                    Identifier.withDefaultNamespace("block/cube_bottom_top"),
+                    Map.of(
+                            "top", BetterNether.C.mk("block/" + name + "_top" + suffix),
+                            "side", BetterNether.C.mk("block/" + name + "_side" + suffix),
+                            "bottom", bottom
+                    )
+            );
+            for (int y : new int[]{0, 90, 180, 270}) variants.add(layer.rotated(0, y));
+        }
+        // The item shows the first variant: child models are named <block>_t0, _t1, ... in first-seen order.
+        return WeightedTemplateModelTrait.simple(
+                variants,
+                WeightedTemplateModelTrait.Item.delegatedTo(BetterNether.C.mk("block/" + name + "_t0"))
+        );
+    }
+
+    /**
+     * A cube whose four side faces carry the block's own texture while the top and bottom faces are borrowed
+     * from two other blocks.
+     * <p>
+     * For a block whose own texture is a vertical gradient between two materials: the gradient belongs on the
+     * sides, where it is read as a transition, but on the top and bottom faces it is seen end-on and reads as
+     * a smear. Those two faces get the flat texture of whichever material the gradient arrives at - which also
+     * means a stack of them tiles, the light top of one meeting the dark bottom of the next.
+     *
+     * @param top    supplies the block whose texture covers the top face
+     * @param bottom supplies the block whose texture covers the bottom face
+     */
+    public static BlockModelTrait cubeWithBorrowedTopAndBottom(Supplier<Block> top, Supplier<Block> bottom) {
+        return ModCore.isDatagen() ? Impl.cubeWithBorrowedTopAndBottom(top, bottom) : null;
+    }
+
     /** Jungle plant: a weighted mix of two crosses, a crop model and a 4-way-rotated jungle-plant model. */
     public static BlockModelTrait junglePlant() {
         return ModCore.isDatagen() ? Impl.junglePlant() : null;
@@ -206,6 +274,87 @@ public class NetherModels {
      * Relocated from {@code NetherBlocks} (WP7.6-7.8, docs/registry-split-map.md section 4): needs no
      * {@code ModCore.isDatagen()}/{@link Impl} gating since it never references client-only datagen types.
      */
+    /**
+     * The gloomwisp blockstate, dispatched over {@link BlockGloomwispVine#SHAPE}: the wisp's head at the
+     * tip, and a generated {@code block/cross} child on one of two stalk textures below it. The stalk
+     * directly under the head carries the bright half of the gloomwood gradient and the one below it the
+     * dark half, so a full-height wisp reads as a single gradient running down to the ground rather than
+     * as the same stalk repeated.
+     * <p>
+     * Only {@code block/gloomwisp_vine_head} is hand-authored, and for the same reason as the lumabus bulb
+     * above - it is a mesh (an upright 10x14x10 box with its own UVs), which no model generator can express.
+     * Both stalk models, the four-way rotation and the item model are generated.
+     */
+    public static BlockModelTrait gloomwispVineModelTrait() {
+        final var head = BetterNether.C.mk("block/gloomwisp_vine_head");
+        // spelled out rather than WoverBlockModelGenerators.CROSS: that class is @Environment(CLIENT),
+        // and this method is not behind the isDatagen() gate, so touching its constant would make a
+        // dedicated server resolve a client-only type
+        final var cross = Identifier.withDefaultNamespace("block/cross");
+        final java.util.function.Function<String, WeightedTemplateModelTrait.Layer> stalk = name -> {
+            final var tex = BetterNether.C.mk("block/" + name);
+            return WeightedTemplateModelTrait.child(cross, Map.of("cross", tex, "particle", tex));
+        };
+        // Four blink phases times four rotations.
+        //
+        // The rotation is what decides which way a wisp looks. The phase is a separate problem with the
+        // same cause as the molten log's: a texture animates per sprite, so a single head sprite had
+        // every wisp in a stand blinking on the same beat. The four sprites are pixel-identical and
+        // differ only in their mcmeta, which is enough - the animation state is per sprite, not per
+        // texture content. Each non-default one is a texture-override child of the hand-authored head,
+        // so the mesh itself is still declared once.
+        //
+        // The dispatch is over SHAPE and ROTATION together. ROTATION.RANDOM keeps the whole sixteen-entry list, so
+        // a worldgen wisp is still the client picking a rotation off the block position exactly as it did before
+        // the property existed; each compass value narrows the list to that one rotation's four phases, which is
+        // what makes a hand-placed wisp stay where it was aimed. Only the head turns - the stalks are a plain
+        // cross, and rotating one would be four identical models - so their cases ignore ROTATION entirely.
+        final java.util.function.Function<Integer, List<WeightedTemplateModelTrait.Layer>> tipAt = rot -> {
+            final java.util.List<WeightedTemplateModelTrait.Layer> layers = new java.util.ArrayList<>();
+            for (String suffix : List.of("", "_b", "_c", "_d")) {
+                final var face = BetterNether.C.mk("block/gloomwisp_vine_head" + suffix);
+                final var layer = suffix.isEmpty()
+                        ? WeightedTemplateModelTrait.model(head)
+                        : WeightedTemplateModelTrait.child(head, Map.of("face", face, "particle", face));
+                if (rot == null) {
+                    for (int y : new int[]{0, 90, 180, 270}) layers.add(layer.rotated(0, y));
+                } else {
+                    layers.add(layer.rotated(0, rot));
+                }
+            }
+            return layers;
+        };
+
+        final var cases = new java.util.ArrayList<WeightedTemplateModelTrait.Case2<BlockProperties.TripleShape, WispRotation>>();
+        for (WispRotation rotation : WispRotation.values()) {
+            cases.add(WeightedTemplateModelTrait.Case2.of(
+                    BlockProperties.TripleShape.TOP,
+                    rotation,
+                    tipAt.apply(rotation == WispRotation.RANDOM ? null : rotation.yRotation())
+            ));
+            cases.add(WeightedTemplateModelTrait.Case2.of(
+                    BlockProperties.TripleShape.MIDDLE,
+                    rotation,
+                    List.of(stalk.apply("gloomwisp_vine_stem"))
+            ));
+            cases.add(WeightedTemplateModelTrait.Case2.of(
+                    BlockProperties.TripleShape.BOTTOM,
+                    rotation,
+                    List.of(stalk.apply("gloomwisp_vine_stem_lower"))
+            ));
+        }
+
+        return WeightedTemplateModelTrait.propertyDispatch(
+                BlockGloomwispVine.SHAPE,
+                BlockGloomwispVine.ROTATION,
+                cases,
+                // A hand-authored still of the head: the block model's head texture blinks and its soul
+                // fire is animated, neither of which belongs on an inventory icon, and the fire sat in
+                // front of the face the icon exists to show.
+                WeightedTemplateModelTrait.Item.delegatedTo(BetterNether.C.mk("item/gloomwisp_vine"))
+        );
+    }
+
     public static BlockModelTrait lumabusVineModelTrait(String prefix) {
         final var roots = BetterNether.C.mk("block/" + prefix + "_roots");
         final var vine = BetterNether.C.mk("block/" + prefix + "_vine");
@@ -248,6 +397,41 @@ public class NetherModels {
      * <p>
      * Relocated from {@code NetherBlocks} (WP7.6-7.8, docs/registry-split-map.md section 4).
      */
+    /**
+     * A plain cube blockstate, model and flat item for a block whose texture is not named after it.
+     * <p>
+     * Pair it with {@code generateModel = false} on the {@code LeavesBlockTrait} so the default cube
+     * model does not also get emitted.
+     * <p>
+     * Currently unused. It was written for {@code gloomwood_bleached_leaves} back when that block borrowed
+     * {@code gloomwood_leaves_alt}'s texture; the two have since been split into their own files, so the
+     * bleached leaves now follow the model generator's block-name convention and need no override. Kept
+     * because the situation it solves - a block whose texture is not named after it - is a general one.
+     */
+    public static BlockModelTrait cubeFromTexture(Identifier texture) {
+        // Same shape as LeavesBlockTrait.ClientModel, and for the same reason: the lambda below takes a
+        // WoverBlockModelGenerators, so merely *creating* it makes the JVM resolve that client-only type
+        // at the invokedynamic bootstrap - which throws on a dedicated server before the lambda is ever
+        // called. It has to live in a separate @Environment(CLIENT) class that the server never reaches,
+        // and the isDatagen() gate is what stops the server executing the bootstrap instruction at all.
+        // Models are only ever needed while datagen is running; they ship pre-generated otherwise.
+        return ModCore.isDatagen() ? ClientCubeModel.build(texture) : null;
+    }
+
+    @Environment(EnvType.CLIENT)
+    private static class ClientCubeModel {
+        private static BlockModelTrait build(Identifier texture) {
+            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+                generator.createSimpleTemplatedBlock(
+                        block,
+                        ModelTemplates.CUBE_ALL,
+                        TextureMapping.cube(new Material(texture))
+                );
+                generator.createFlatItem(block, texture);
+            });
+        }
+    }
+
     public static BlockModelTrait netherSakuraLeavesModelTrait() {
         final var base = BetterNether.C.mk("block/nether_sakura_leaves");
         final var tmplP = BetterNether.C.mk("block/nether_sakura_leaves_flowers_3");
@@ -288,11 +472,34 @@ public class NetherModels {
                     BNModels.provideGrassBlockModels(generator, block, name, variants));
         }
 
+        private static BlockModelTrait terrainCover(Supplier<Block> bottom) {
+            return ClientBlockTraits.MODEL.with((key, block, generator) ->
+                    generator.createBlockTopSideBottom(bottom.get(), block, true));
+        }
+
+        private static BlockModelTrait cubeWithBorrowedTopAndBottom(Supplier<Block> top, Supplier<Block> bottom) {
+            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+                // The suppliers are resolved here rather than when the trait is built: the blocks they point at
+                // are usually siblings that have not been registered yet at class-init time.
+                final Identifier model = generator.createSimpleTemplatedBlock(
+                        block,
+                        ModelTemplates.CUBE_BOTTOM_TOP,
+                        new TextureMapping()
+                                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top.get()))
+                                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom.get()))
+                                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block))
+                );
+                // block/cube_bottom_top already binds particle to #side, so the item model only has to point
+                // at the block model - the same delegation ModelTraitLibrary.planks() does.
+                generator.delegateItemModel(block, model);
+            });
+        }
+
         private static BlockModelTrait netherGrass() {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> {
-                final ResourceLocation T1 = BetterNether.C.mk("block/ngrass_1");
-                final ResourceLocation T2 = BetterNether.C.mk("block/ngrass_2");
-                final ResourceLocation T3 = BetterNether.C.mk("block/ngrass_3");
+                final Identifier T1 = BetterNether.C.mk("block/ngrass_1");
+                final Identifier T2 = BetterNether.C.mk("block/ngrass_2");
+                final Identifier T3 = BetterNether.C.mk("block/ngrass_3");
 
                 BNModels.createComplex(
                         generator,
@@ -323,9 +530,9 @@ public class NetherModels {
 
         private static BlockModelTrait junglePlant() {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> {
-                final ResourceLocation JP1 = BetterNether.C.mk("block/jungle_plant_1");
-                final ResourceLocation JP2 = BetterNether.C.mk("block/jungle_plant_2");
-                final ResourceLocation JP3 = BetterNether.C.mk("block/jungle_plant_3");
+                final Identifier JP1 = BetterNether.C.mk("block/jungle_plant_1");
+                final Identifier JP2 = BetterNether.C.mk("block/jungle_plant_2");
+                final Identifier JP3 = BetterNether.C.mk("block/jungle_plant_3");
                 BNModels.createComplex(
                         generator,
                         block,
@@ -385,15 +592,15 @@ public class NetherModels {
 
         private static BlockModelTrait quartzGlass() {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> {
-                final ResourceLocation resource = TextureMapping.getBlockTexture(block);
-                if (!resource.getPath().equals("block/quartz_glass")
-                        && !resource.getPath().equals("block/quartz_glass_framed")) {
+                final Material resource = TextureMapping.getBlockTexture(block);
+                if (!resource.sprite().getPath().equals("block/quartz_glass")
+                        && !resource.sprite().getPath().equals("block/quartz_glass_framed")) {
                     final var model = TexturedModel.CUBE.get(block);
                     final var mapping = WoverBlockModelGenerators.textureMappingOf(
                             TextureSlot.ALL,
-                            ResourceLocation.fromNamespaceAndPath(
-                                    resource.getNamespace(),
-                                    resource.getPath().replace("quartz_glass_", "quartz_stained_glass_")
+                            Identifier.fromNamespaceAndPath(
+                                    resource.sprite().getNamespace(),
+                                    resource.sprite().getPath().replace("quartz_glass_", "quartz_stained_glass_")
                             )
                     );
 
@@ -410,7 +617,7 @@ public class NetherModels {
                     generator.modelFor(TexturedModel.CUBE.get(block)).createFullBlock(block);
                 }
 
-                if (resource.getPath().equals("block/quartz_glass")) {
+                if (resource.sprite().getPath().equals("block/quartz_glass")) {
                     final var mapping = WoverBlockModelGenerators.textureMappingOf(
                             TextureSlot.ALL,
                             BetterNether.C.mk("item/quartz_glass")
@@ -421,7 +628,7 @@ public class NetherModels {
                             TextureSlot.ALL
                     );
 
-                    final ResourceLocation itemModel = ModelLocationUtils.getModelLocation(block.asItem());
+                    final Identifier itemModel = ModelLocationUtils.getModelLocation(block.asItem());
                     template.create(itemModel, mapping, generator.vanillaGenerator.modelOutput);
                     // The template.create above only writes the item MODEL (models/item/quartz_glass.json)
                     // through modelOutput. Register the item-model DEFINITION (items/quartz_glass.json)
@@ -445,39 +652,39 @@ public class NetherModels {
 
         private static BlockModelTrait slab(
                 Supplier<Block> source,
-                ResourceLocation top,
-                ResourceLocation bottom,
-                ResourceLocation side
+                Identifier top,
+                Identifier bottom,
+                Identifier side
         ) {
             return ClientBlockTraits.MODEL.with((key, block, generator) ->
                     generator.createSlab(block, source.get(), new TextureMapping()
-                            .put(TextureSlot.TOP, top)
-                            .put(TextureSlot.BOTTOM, bottom)
-                            .put(TextureSlot.SIDE, side)));
+                            .put(TextureSlot.TOP, new Material(top))
+                            .put(TextureSlot.BOTTOM, new Material(bottom))
+                            .put(TextureSlot.SIDE, new Material(side))));
         }
 
         private static BlockModelTrait slabColumnDouble(
-                ResourceLocation topBottom,
-                ResourceLocation side
+                Identifier topBottom,
+                Identifier side
         ) {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> {
                 final TextureMapping halfMapping = new TextureMapping()
-                        .put(TextureSlot.TOP, topBottom)
-                        .put(TextureSlot.BOTTOM, topBottom)
-                        .put(TextureSlot.SIDE, side);
-                final ResourceLocation bottomModel = ModelTemplates.SLAB_BOTTOM.create(
+                        .put(TextureSlot.TOP, new Material(topBottom))
+                        .put(TextureSlot.BOTTOM, new Material(topBottom))
+                        .put(TextureSlot.SIDE, new Material(side));
+                final Identifier bottomModel = ModelTemplates.SLAB_BOTTOM.create(
                         block, halfMapping, generator.vanillaGenerator.modelOutput);
-                final ResourceLocation topModel = ModelTemplates.SLAB_TOP.create(
+                final Identifier topModel = ModelTemplates.SLAB_TOP.create(
                         block, halfMapping, generator.vanillaGenerator.modelOutput);
                 // The doubled block reuses the slab's own textures (up/down = topBottom, sides = side), so it
                 // cannot delegate to the source block's model the way ModelTraitLibrary.slab does. cube_column
                 // (parent block/cube) binds up/down to #end and the four sides to #side, reproducing the
                 // hand-authored block/cube double model's faces exactly.
-                final ResourceLocation doubleModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(
+                final Identifier doubleModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(
                         block, "_double",
                         new TextureMapping()
-                                .put(TextureSlot.END, topBottom)
-                                .put(TextureSlot.SIDE, side),
+                                .put(TextureSlot.END, new Material(topBottom))
+                                .put(TextureSlot.SIDE, new Material(side)),
                         generator.vanillaGenerator.modelOutput);
                 generator.acceptBlockState(BlockModelGenerators.createSlab(
                         block,
@@ -499,23 +706,23 @@ public class NetherModels {
 
         private static BlockModelTrait soulSandstoneSmoothStairs() {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> {
-                final ResourceLocation top = BetterNether.C.mk("block/soul_sandstone_top");
+                final Identifier top = BetterNether.C.mk("block/soul_sandstone_top");
                 generator.createStairs(block, top, top, top);
             });
         }
 
         private static BlockModelTrait soulSandstoneCutStairs() {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> {
-                final ResourceLocation top = BetterNether.C.mk("block/soul_sandstone_top");
+                final Identifier top = BetterNether.C.mk("block/soul_sandstone_top");
                 generator.createStairs(block, top, BetterNether.C.mk("block/soul_sandstone_cut_slabs"), top);
             });
         }
 
         private static BlockModelTrait reedStairs() {
             return ClientBlockTraits.MODEL.with((key, block, generator) -> {
-                final ResourceLocation planks = TextureMapping.getBlockTexture(
+                final Identifier planks = TextureMapping.getBlockTexture(
                         NetherWoodBlocks.MAT_REED.getBlock(SlotType.PLANKS)
-                );
+                ).sprite();
                 generator.createStairs(block, planks, planks, BetterNether.C.mk("block/nether_reed_planks_top"));
             });
         }

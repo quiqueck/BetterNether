@@ -21,6 +21,8 @@ import de.ambertation.wover.datagen.api.provider.WoverBlockRegistrationsProvider
 import de.ambertation.wover.datagen.api.provider.WoverBlockShapesProvider;
 import de.ambertation.wover.datagen.api.provider.WoverEquipmentAssetProvider;
 import de.ambertation.wover.datagen.api.provider.WoverItemRegistrationsProvider;
+import de.ambertation.wover.pottable.api.datagen.WoverPottablePlantRegistryProvider;
+import de.ambertation.wover.pottable.api.datagen.WoverPottableSoilRegistryProvider;
 
 import net.minecraft.core.RegistrySetBuilder;
 
@@ -40,9 +42,16 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.addMultiProvider(StructureDataProvider::new);
         globalPack.addRegistryProvider(NetherBiomeModificationProvider::new);
         globalPack.addRegistryProvider(FlatLevelPresetsDataProvider::new);
+        // No BetterNether blocks have vanilla-namespace counterparts to add by hand, unlike
+        // BetterEnd's EndPottablePlantProvider/EndPottableSoilProvider - the generic trait-driven
+        // providers are enough on their own.
+        globalPack.addRegistryProvider(WoverPottablePlantRegistryProvider::new);
+        globalPack.addRegistryProvider(WoverPottableSoilRegistryProvider::new);
         globalPack.addProvider(NetherChestLootTableProvider::new);
         globalPack.addProvider(NetherEntityLootTableProvider::new);
+        globalPack.addProvider(NetherLootAdditionProvider::new);
         globalPack.addProvider(NetherEnchantmentProvider::new);
+        globalPack.addProvider(NetherJukeboxSongProvider::new);
         globalPack.addProvider(NetherBlockTagDataProvider::new);
         globalPack.addProvider(NetherItemTagDataProvider::new);
         globalPack.addProvider(NetherEnchantmentTagProvider::new);
@@ -61,7 +70,6 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.callOnInitializeDatapack((generator, pack, location) -> {
             if (location == null) {
                 pack.addProvider(NetherAdvancementDataProvider::new);
-                pack.addProvider(NetherBlockLootTableProvider::new);
             }
         });
 

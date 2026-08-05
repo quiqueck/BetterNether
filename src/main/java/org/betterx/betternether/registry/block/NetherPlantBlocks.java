@@ -11,6 +11,7 @@ import org.betterx.bclib.trait.block.PlantBlockTrait;
 import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
 import org.betterx.bclib.trait.block.RecipeTraits;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
+import org.betterx.bclib.trait.block.SurvivesOnSolidTrait;
 import org.betterx.bclib.trait.block.VegetationTagTrait;
 import org.betterx.bclib.trait.block.WeightedCrossModelTrait;
 import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
@@ -40,7 +41,7 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.tag.api.predefined.CommonPoiTags;
 
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -125,6 +126,30 @@ public class NetherPlantBlocks {
             .addTrait(NetherMaterial.grass(MapColor.TERRACOTTA_GRAY))
             .addTrait(NetherTraits.plant())
             .buildAndRegister();
+    // Pale gloomgrass: the bone-grass silhouette in the gloomwood's dark-to-bright transition palette.
+    // Same block shape and traits as the bone grasses either side of it, so it reuses BoneGrass rather
+    // than adding a class that would only differ by its textures.
+    // Survives on anything solid rather than on a ground list: worldgen only ever puts it on the sculk
+    // floor (its placed feature filters on SCULK_LIKE), so the rule here is purely about where a player
+    // may replant one, and a decorative tuft is not worth a lookup table for that.
+    public static final Block PALE_GLOOMGRASS = NetherBlocks.defineBlock("pale_gloomgrass", BlockNetherGrass.BoneGrass::new)
+            .addTrait(NetherRender.cutout())
+            .addTrait(SurvivesOnSolidTrait.DEFAULT)
+            .addTrait(NetherModels.grass("pale_gloomgrass", 3))
+            .addTrait(NetherLoot.netherGrass())
+            .addTrait(NetherMaterial.grass(MapColor.TERRACOTTA_WHITE))
+            .addTrait(NetherTraits.plant())
+            .buildAndRegister();
+    // Gloomgrass: the same tuft on sculk's own palette, growing mixed in with the pale one rather
+    // than anywhere of its own - see VEGETATION_GLOOMWOOD, where it takes the larger share.
+    public static final Block GLOOMGRASS = NetherBlocks.defineBlock("gloomgrass", BlockNetherGrass.BoneGrass::new)
+            .addTrait(NetherRender.cutout())
+            .addTrait(SurvivesOnSolidTrait.DEFAULT)
+            .addTrait(NetherModels.grass("gloomgrass", 3))
+            .addTrait(NetherLoot.netherGrass())
+            .addTrait(NetherMaterial.grass(MapColor.COLOR_BLACK))
+            .addTrait(NetherTraits.plant())
+            .buildAndRegister();
     public static final Block SEPIA_BONE_GRASS = NetherBlocks.defineBlock("sepia_bone_grass", BlockNetherGrass.SepiaBoneGrass::new)
             .addTrait(NetherRender.cutout())
             .addTrait(NetherSurvival.soilOrLogs())
@@ -149,6 +174,8 @@ public class NetherPlantBlocks {
             .addTrait(NetherMaterial.plant(MapColor.COLOR_BLACK))
             .randomTicks()
             .addTrait(NetherTraits.plant())
+            // Was the hand-authored loot_table/blocks/ink_bush.json; block loot is trait-only here.
+            .addTrait(NetherLoot.inkBush())
             .buildAndRegister();
     // BlockInkBushSeed (WP6.12): always dropped itself unconditionally via BlockBase's inherited getDrops()
     // override (no committed loot table json). noLootTable() is removed - it and a LOOT_TABLE trait are
@@ -184,6 +211,8 @@ public class NetherPlantBlocks {
             .addTrait(BlockTraits.MINEABLE_WITH.needsHoe())
             .addTrait(NetherMaterial.plant(MapColor.TERRACOTTA_ORANGE))
             .randomTicks()
+            // Was the hand-authored loot_table/blocks/magma_flower.json; block loot is trait-only here.
+            .addTrait(NetherLoot.magmaFlower())
             .buildAndRegister();
     // Former Materials.netherPlant() preset, folded onto PlantBlockTrait directly (not the
     // NetherMaterial.plant() NONE-offset alias) since this block's own offsetType(XZ) override must
@@ -197,6 +226,8 @@ public class NetherPlantBlocks {
             ))
             .randomTicks()
             .addTrait(NetherTraits.plant())
+            // Was the hand-authored loot_table/blocks/feather_fern.json; block loot is trait-only here.
+            .addTrait(NetherLoot.featherFern())
             .buildAndRegister();
     // Former Materials.makeNetherGrass(COLOR_GREEN) preset, folded onto PlantBlockTrait directly (not the
     // NetherMaterial.grass() GRASS/XZ alias): the ctor's own sound(CROP)/offsetType(NONE) overrides replace
@@ -338,6 +369,8 @@ public class NetherPlantBlocks {
             .pushReaction(PushReaction.DESTROY)
             .strength(0.5F, 0.5F)
             .randomTicks()
+            // Was the hand-authored loot_table/blocks/eyeball.json; block loot is trait-only here.
+            .addTrait(NetherLoot.eyeball())
             .buildAndRegister();
     // stays inline: same ordering hazard as EYEBALL above.
     public static final Block EYEBALL_SMALL = NetherBlocks.defineBlock("eyeball_small", BlockEyeballSmall::new)
@@ -349,6 +382,8 @@ public class NetherPlantBlocks {
             .sound(SoundType.SLIME_BLOCK)
             .pushReaction(PushReaction.DESTROY)
             .strength(0.5F, 0.5F)
+            // Was the hand-authored loot_table/blocks/eyeball_small.json; block loot is trait-only here.
+            .addTrait(NetherLoot.eyeballSmall())
             .buildAndRegister();
 
     // Former Materials.netherPlant() preset, folded onto NetherMaterial.plant() - the trailing lightLevel
@@ -358,6 +393,7 @@ public class NetherPlantBlocks {
             .addTrait(NetherRender.cutout())
             .addTrait(BlockTraits.MINEABLE_WITH.needsHoe())
             .addTrait(NetherMaterial.plant(MapColor.COLOR_BLACK))
+            .addTrait(NetherLoot.pottedPlant())
             .lightLevel(BlockPottedPlant::getLuminance)
             .buildAndRegister();
 

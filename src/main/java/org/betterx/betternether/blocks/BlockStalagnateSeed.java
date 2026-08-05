@@ -85,7 +85,7 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
 
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        if (blockState.getValues().get(TOP) == null) {
+        if (!blockState.hasProperty(TOP)) {
             return false;
         }
         final BlockPos target;

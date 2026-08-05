@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "betternether:block/veined_gloomsculk"
+      },
+      {
+        "model": "betternether:block/veined_gloomsculk",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/veined_gloomsculk",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/veined_gloomsculk",
+        "y": 270
+      }
+    ]
+  }
+}

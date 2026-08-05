@@ -26,7 +26,7 @@ public class PlaceCommand {
     public static LiteralArgumentBuilder<CommandSourceStack> register(LiteralArgumentBuilder<CommandSourceStack> bnContext) {
         return bnContext.then(Commands
                 .literal("place")
-                .requires(commandSourceStack -> commandSourceStack.hasPermission(2))
+                .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .then(Commands
                         .literal("structure")
                         .then(Commands.argument(

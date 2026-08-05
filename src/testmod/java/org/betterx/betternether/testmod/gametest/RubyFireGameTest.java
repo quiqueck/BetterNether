@@ -11,7 +11,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.zombie.Zombie;
+import net.minecraft.world.entity.projectile.arrow.Arrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.registries.Registries;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +143,145 @@ public class RubyFireGameTest {
         failIfAny(helper, "Ruby Fire retaliation regression", failures);
         helper.succeed();
     }
+
+    /**
+     * The same retaliation, but with a player swinging instead of a mob, and asserting the knockback
+     * as well as the fire. Ruby Fire is supposed to hit whoever attacks the wearer, and a player is an
+     * attacker like any other.
+     * <p>
+     * The knockback comes from an ApplyEntityImpulse in the post-attack effect rather than from the
+     * enchantment's minecraft:knockback component: that component only boosts the knockback the holder
+     * deals when attacking, so it does nothing for someone attacking the holder.
+     */
+    @GameTest(maxTicks = 400)
+    public void rubyFireBurnsAndShovesAPlayerAttacker(GameTestHelper helper) {
+        final ServerPlayer attacker = MockPlayers.survival(helper, ATTACKER_POS);
+        final float fullHealth = attacker.getHealth();
+
+        boolean burned = false;
+        boolean shoved = false;
+
+        for (int attempt = 0; attempt < ATTEMPTS && !(burned && shoved); attempt++) {
+            final Zombie victim = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, VICTIM_POS);
+            victim.setItemSlot(EquipmentSlot.CHEST, gameReady(
+                    helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ArmorSlot.CHESTPLATE_SLOT)
+            ));
+
+            attacker.setRemainingFireTicks(0);
+            attacker.setHealth(fullHealth);
+            attacker.setDeltaMovement(Vec3.ZERO);
+
+            attacker.attack(victim);
+
+            if (attacker.getRemainingFireTicks() > 0) burned = true;
+            if (attacker.getDeltaMovement().lengthSqr() > 1.0E-4) shoved = true;
+            victim.discard();
+        }
+
+        final List<String> failures = new ArrayList<>();
+        if (!burned) {
+            failures.add(ATTEMPTS + " player hits never set the player on fire");
+        }
+        if (!shoved) {
+            failures.add(ATTEMPTS + " player hits never knocked the player back");
+        }
+
+        failIfAny(helper, "Ruby Fire player-attacker regression", failures);
+        helper.succeed();
+    }
+
+    /**
+     * The wearer being a player rather than a mob must not change anything. This is the combination the
+     * effect is actually for - a player in Fireruby armour being attacked.
+     */
+    @GameTest(maxTicks = 400)
+    public void rubyFireRetaliatesWhenTheWearerIsAPlayer(GameTestHelper helper) {
+        final Zombie attacker = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, ATTACKER_POS);
+        final ServerPlayer wearer = MockPlayers.survival(helper, VICTIM_POS);
+        wearer.setItemSlot(EquipmentSlot.CHEST, gameReady(
+                helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ArmorSlot.CHESTPLATE_SLOT)
+        ));
+
+        boolean attackerAffected = false;
+        for (int attempt = 0; attempt < ATTEMPTS && !attackerAffected; attempt++) {
+            attacker.setRemainingFireTicks(0);
+            wearer.setHealth(wearer.getMaxHealth());
+            wearer.invulnerableTime = 0;
+
+            attacker.doHurtTarget(helper.getLevel(), wearer);
+
+            if (attacker.getRemainingFireTicks() > 0) attackerAffected = true;
+        }
+
+        if (!attackerAffected) {
+            helper.fail(Component.literal(
+                    ATTEMPTS + " hits on a Fireruby-armoured player never set the attacker on fire"
+            ));
+            return;
+        }
+        helper.succeed();
+    }
+
+    /**
+     * An arrow counts as an attack too, and a bow is the obvious way to fight a player wearing this.
+     * <p>
+     * The arrow really has to fly: {@code LivingEntity#hurtServer} does not run post-attack enchantment
+     * effects at all, so calling it with an arrow damage source proves nothing. The effects come from
+     * {@code AbstractArrow#onHitEntity}, which only happens on a genuine hit - the earlier version of
+     * this check called hurtServer directly and reported a flat zero for exactly that reason.
+     */
+    @GameTest(maxTicks = 600)
+    public void rubyFireRetaliatesAgainstArrows(GameTestHelper helper) {
+        final ServerPlayer shooter = MockPlayers.survival(helper, ATTACKER_POS);
+        final boolean[] burned = {false};
+        final int[] landed = {0};
+        final Zombie[] target = new Zombie[1];
+
+        var seq = helper.startSequence();
+        for (int i = 0; i < ARROW_ATTEMPTS; i++) {
+            seq = seq.thenExecute(() -> {
+                         final Zombie victim = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, VICTIM_POS);
+                         victim.setItemSlot(EquipmentSlot.CHEST, gameReady(
+                                 helper,
+                                 NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ArmorSlot.CHESTPLATE_SLOT)
+                         ));
+                         target[0] = victim;
+                         shooter.setRemainingFireTicks(0);
+
+                         final Arrow arrow = new Arrow(
+                                 helper.getLevel(), shooter,
+                                 new ItemStack(Items.ARROW), new ItemStack(Items.BOW)
+                         );
+                         arrow.snapTo(victim.getX(), victim.getY() + 0.6, victim.getZ() - 1.5, 0.0f, 0.0f);
+                         arrow.setBaseDamage(4.0);
+                         arrow.shoot(0.0, 0.0, 1.0, 1.5f, 0.0f);
+                         helper.getLevel().addFreshEntity(arrow);
+                     })
+                     .thenIdle(5)
+                     .thenExecute(() -> {
+                         if (shooter.getRemainingFireTicks() > 0) burned[0] = true;
+                         final Zombie victim = target[0];
+                         if (victim != null) {
+                             if (victim.getHealth() < victim.getMaxHealth()) landed[0]++;
+                             victim.discard();
+                         }
+                     });
+        }
+
+        seq.thenExecute(() -> {
+               final List<String> failures = new ArrayList<>();
+               if (landed[0] == 0) {
+                   failures.add("no arrow ever hit - the test never exercised the effect");
+               } else if (!burned[0]) {
+                   failures.add(landed[0] + " arrow hits never set the shooter on fire");
+               }
+               failIfAny(helper, "Ruby Fire arrow regression", failures);
+           })
+           .thenSucceed();
+    }
+
+    /** At a 50% proc, 20 arrow hits miss entirely about once in a million. */
+    private static final int ARROW_ATTEMPTS = 20;
 
     /** The effect fires on a roll, so one attempt proves nothing; 30 make a false negative remote. */
     private static final int ATTEMPTS = 30;

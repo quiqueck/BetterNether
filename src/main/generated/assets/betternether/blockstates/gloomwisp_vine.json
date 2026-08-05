@@ -1,0 +1,164 @@
+{
+  "variants": {
+    "rotation=east,shape=bottom": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=east,shape=middle": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=east,shape=top": [
+      {
+        "model": "betternether:block/gloomwisp_vine_head",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t0",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t1",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t2",
+        "y": 90
+      }
+    ],
+    "rotation=north,shape=bottom": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=north,shape=middle": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=north,shape=top": [
+      {
+        "model": "betternether:block/gloomwisp_vine_head"
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t0"
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t1"
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t2"
+      }
+    ],
+    "rotation=random,shape=bottom": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=random,shape=middle": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=random,shape=top": [
+      {
+        "model": "betternether:block/gloomwisp_vine_head"
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_head",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_head",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_head",
+        "y": 270
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t0"
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t0",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t0",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t0",
+        "y": 270
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t1"
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t1",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t1",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t1",
+        "y": 270
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t2"
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t2",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t2",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t2",
+        "y": 270
+      }
+    ],
+    "rotation=south,shape=bottom": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=south,shape=middle": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=south,shape=top": [
+      {
+        "model": "betternether:block/gloomwisp_vine_head",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t0",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t1",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t2",
+        "y": 180
+      }
+    ],
+    "rotation=west,shape=bottom": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=west,shape=middle": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=west,shape=top": [
+      {
+        "model": "betternether:block/gloomwisp_vine_head",
+        "y": 270
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t0",
+        "y": 270
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t1",
+        "y": 270
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t2",
+        "y": 270
+      }
+    ]
+  }
+}

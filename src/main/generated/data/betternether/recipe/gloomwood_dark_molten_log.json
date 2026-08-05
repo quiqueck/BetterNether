@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "minecraft:redstone",
+    "betternether:gloomwood_dark_log"
+  ],
+  "result": {
+    "id": "betternether:gloomwood_dark_molten_log"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "betternether:block/gloomwood_dark_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "betternether:block/gloomwood_dark_log"
+    },
+    "axis=z": {
+      "model": "betternether:block/gloomwood_dark_log_horizontal",
+      "x": 90
+    }
+  }
+}

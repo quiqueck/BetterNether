@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_wall_sign",
+  "textures": {
+    "all": "betternether:block/stalagnate_sign",
+    "particle": "betternether:block/stalagnate_planks"
+  }
+}

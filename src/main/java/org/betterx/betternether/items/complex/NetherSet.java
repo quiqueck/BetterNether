@@ -86,6 +86,13 @@ public class NetherSet extends EquipmentSet {
                             commonToolProperties(definition.getProperties())
                     )
             );
+            add(
+                    ToolSlot.SPEAR_SLOT,
+                    (definition, values) -> new NetherSpear(
+                            toolTier.toolMaterial,
+                            commonToolProperties(definition.getProperties())
+                    )
+            );
 
             if (withShears) {
                 add(

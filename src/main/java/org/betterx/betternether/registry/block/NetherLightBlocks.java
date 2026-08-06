@@ -97,6 +97,8 @@ public class NetherLightBlocks {
             .sound(SoundType.IRON)
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Plant-derived light block, shroomlight-archetype (REVIEWED): a gourd-derived lantern is closer to
     // shroomlight than to a nether-wood preset - was wrongly axe-mineable/tool-gated (Materials.makeNetherWood
@@ -123,6 +125,8 @@ public class NetherLightBlocks {
             .noOcclusion()
             .lightLevel(BlockFireBowl::getLuminance)
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BRICKS_FIRE_BOWL = NetherBlocks.defineBlock("bricks_fire_bowl", BlockFireBowl.Stone::new)
             .replacePropertiesWithCopy(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE)
@@ -131,6 +135,8 @@ public class NetherLightBlocks {
             .noOcclusion()
             .lightLevel(BlockFireBowl::getLuminance)
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block NETHERITE_FIRE_BOWL = NetherBlocks.defineBlock("netherite_fire_bowl", BlockFireBowl.Metal::new)
             .replacePropertiesWithCopy(Blocks.NETHERITE_BLOCK)
@@ -150,6 +156,8 @@ public class NetherLightBlocks {
             .noOcclusion()
             .lightLevel(BlockFireBowl::getLuminance)
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BRICKS_FIRE_BOWL_SOUL = NetherBlocks.defineBlock("bricks_fire_bowl_soul", BlockFireBowl.Stone::new)
             .replacePropertiesWithCopy(NetherStoneBlocks.NETHER_BRICK_TILE_LARGE)
@@ -158,6 +166,8 @@ public class NetherLightBlocks {
             .noOcclusion()
             .lightLevel(BlockFireBowl::getLuminance)
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block NETHERITE_FIRE_BOWL_SOUL = NetherBlocks.defineBlock("netherite_fire_bowl_soul", BlockFireBowl.Metal::new)
             .replacePropertiesWithCopy(Blocks.NETHERITE_BLOCK)

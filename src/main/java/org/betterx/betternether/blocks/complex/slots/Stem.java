@@ -71,4 +71,11 @@ public class Stem extends SlotFromDefinition {
     protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return ModelTraitLibrary.pillar();
     }
+
+    @Override
+    protected void finalizeDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        // Not a full cube (a 6x16x6 post), so it must not inherit the set material's sulfur cube archetype
+        // - a cube renders what it swallowed as a block model, and a stem inside one reads as a bug.
+        def.addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable());
+    }
 }

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "nether_stick",
   "key": {
     "#": "betternether:nether_reed_stem"

@@ -21,3 +21,12 @@ accessible method net/minecraft/client/particle/DripParticle$DripHangParticle <i
 accessible method net/minecraft/client/particle/DripParticle$FallAndLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
 accessible method net/minecraft/client/particle/DripParticle$DripLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
 accessible method net/minecraft/world/level/levelgen/SurfaceRules$VerticalGradientConditionSource <init> (Lnet/minecraft/resources/Identifier;Lnet/minecraft/world/level/levelgen/VerticalAnchor;Lnet/minecraft/world/level/levelgen/VerticalAnchor;)V
+
+# Fields
+# EntityType.Builder#sized always stores EntityDimensions.scalable and the field itself is private;
+# up to 26.1 the fixed variant reached the builder only through FabricEntityTypeBuilder#dimensions,
+# which 26.2's fabric-object-builder-api-v1 dropped. Without this, every entity registered with
+# fixedSize=true silently gains an age-scaled hitbox, which halves the box for baby fireflies and
+# baby flying pigs (LivingEntity#getDefaultDimensions multiplies by getAgeScale(), and
+# EntityDimensions#scale only short-circuits when the dimensions are fixed).
+accessible field net/minecraft/world/entity/EntityType$Builder dimensions Lnet/minecraft/world/entity/EntityDimensions;

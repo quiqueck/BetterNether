@@ -2,6 +2,8 @@ package org.betterx.betternether.testmod.gametest;
 
 import org.betterx.betternether.registry.block.NetherObsidianBlocks;
 
+import de.ambertation.wover.test.api.gametest.MockPlayers;
+
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;
@@ -9,10 +11,11 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +91,9 @@ public class ObsidianAdvancementGameTest {
         final BlockPos blueObsidian = new BlockPos(4, 2, 5);
         final BlockPos blueCrying = new BlockPos(4, 2, 3);
 
-        helper.setBlock(rod, Blocks.LIGHTNING_ROD);
+        // 26.2: lightning rods weather like copper, so Blocks.LIGHTNING_ROD is a collection of eight
+        // blocks. The unaffected (unwaxed) variant is the plain rod a player crafts.
+        helper.setBlock(rod, Blocks.LIGHTNING_ROD.weathering().pick(WeatheringCopper.WeatherState.UNAFFECTED));
         helper.setBlock(obsidian, Blocks.OBSIDIAN);
         helper.setBlock(crying, Blocks.CRYING_OBSIDIAN);
         helper.setBlock(blueObsidian, NetherObsidianBlocks.BLUE_OBSIDIAN);
@@ -99,7 +104,7 @@ public class ObsidianAdvancementGameTest {
               .thenExecute(() -> {
                   // A bolt strikes the block below its own position, so it has to be summoned one above
                   // the rod for LightningRodBlock#onLightningStrike to run.
-                  final LightningBolt bolt = helper.spawn(EntityType.LIGHTNING_BOLT, rod.above());
+                  final LightningBolt bolt = helper.spawn(EntityTypes.LIGHTNING_BOLT, rod.above());
                   bolt.setVisualOnly(false);
               })
               .thenIdle(40)

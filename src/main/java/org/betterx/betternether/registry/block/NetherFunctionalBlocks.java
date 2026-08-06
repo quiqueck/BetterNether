@@ -82,6 +82,8 @@ public class NetherFunctionalBlocks {
             .sound(SoundType.IRON)
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Decorations //
     // BlockStatueRespawner (WP6.12): lightLevel(15)/noOcclusion() moved out of its constructor (R1); it
@@ -95,6 +97,8 @@ public class NetherFunctionalBlocks {
             .lightLevel(state -> 15)
             .noOcclusion()
             .addTrait(NetherLoot.pigStatueRespawner())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Craft Stations //
     // Former registerFurnace bundle, inlined at the registration site (WP5.11): BlockNetherFurnace dropped
@@ -137,7 +141,9 @@ public class NetherFunctionalBlocks {
             Blocks.NETHER_BRICKS,
             TraitLists.and(
                     TraitLists.concat(NetherRender.cutout(), NetherMaterial.stone()),
-                    BlockTraits.LOOT_TABLE.dropSelfCopyName()
+                    BlockTraits.LOOT_TABLE.dropSelfCopyName(),
+                    // Not a full cube, and vanilla tags no workstation.
+                    BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable()
             ),
             BNBrewingStand::new,
             CommonPoiTags.CLERIC_WORKSTATION
@@ -149,6 +155,8 @@ public class NetherFunctionalBlocks {
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
             .addTags(BlockTags.ANVIL)
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
 
     public static void ensureLoaded() {}

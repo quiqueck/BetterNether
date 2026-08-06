@@ -6,6 +6,7 @@ import org.betterx.betternether.registry.block.NetherObsidianBlocks;
 import org.betterx.betternether.registry.item.NetherEquipmentItems;
 import de.ambertation.wover.complex.api.equipment.ToolSlot;
 import de.ambertation.wover.item.api.ItemStackHelper;
+import de.ambertation.wover.test.api.gametest.MockPlayers;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;

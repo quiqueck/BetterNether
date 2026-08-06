@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_sign_rot_2",
+  "textures": {
+    "all": "betternether:block/wart_sign",
+    "particle": "betternether:block/wart_planks"
+  }
+}

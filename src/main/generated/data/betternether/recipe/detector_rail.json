@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "nether_detector_rail",
   "key": {
     "#": "minecraft:stone_pressure_plate",

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#betternether:cincinnasite_diamond/repair",
+  "base": "betternether:cincinnasite_spear",
+  "result": {
+    "id": "betternether:cincinnasite_spear_diamond"
+  },
+  "template": "betternether:cincinnasite_diamond_upgrade_smithing_template"
+}

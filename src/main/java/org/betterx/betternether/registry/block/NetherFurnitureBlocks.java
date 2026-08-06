@@ -52,7 +52,7 @@ import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -107,7 +107,8 @@ public class NetherFurnitureBlocks {
     public static final Block CHEST_OF_DRAWERS = NetherBlocks.registerBlock(
             "chest_of_drawers",
             NetherMetalBlocks.CINCINNASITE_BLOCK,
-            NetherMaterial.metal(),
+            // Not a full cube, and vanilla tags no storage block anyway.
+            TraitLists.and(NetherMaterial.metal(), BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable()),
             BlockChestOfDrawers::new
     );
     // Former registerTrimmedChest bundle, inlined at the registration site (WP5.11): wood + chest
@@ -116,7 +117,7 @@ public class NetherFurnitureBlocks {
     // unchanged, per WP4.9's note - the decision-6 nether-wood fire policy is a separate REVIEWED step.
     public static final Block TRIMMED_MUSHROOM_FIR_CHEST = NetherBlocks.defineBlock(
             "mushroom_fir_trimmed_chest",
-            p -> new ChestBlock(() -> BlockEntityType.CHEST, SoundEvents.CHEST_OPEN, SoundEvents.CHEST_CLOSE, p)
+            p -> new ChestBlock(() -> BlockEntityTypes.CHEST, SoundEvents.CHEST_OPEN, SoundEvents.CHEST_CLOSE, p)
     )
             .replacePropertiesWithCopy(NetherWoodBlocks.MAT_MUSHROOM_FIR.getPlanks())
             .addTrait(NetherCompositeTraits.trimmedChest(
@@ -124,6 +125,8 @@ public class NetherFurnitureBlocks {
                     NetherWoodBlocks.MAT_MUSHROOM_FIR.getBlock(SlotType.CHEST),
                     NetherWoodBlocks.MAT_MUSHROOM_FIR.getStrippedLog()
             ))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
 
     public static void ensureLoaded() {}

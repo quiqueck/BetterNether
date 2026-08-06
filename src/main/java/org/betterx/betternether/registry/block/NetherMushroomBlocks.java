@@ -141,6 +141,8 @@ public class NetherMushroomBlocks {
             .lightLevel(bs -> 15)
             .sound(SoundType.WOOD)
             .strength(1F)
+            // Vanilla groups the mushroom blocks, mushroom_stem and mycelium in slow_sliding.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowSliding())
             .buildAndRegister();
     // Former Materials.netherPlant() preset, folded onto NetherMaterial.plant().
     public static final Block BONE_MUSHROOM = NetherBlocks.defineBlock("bone_mushroom", BlockBoneMushroom::new)

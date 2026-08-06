@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "nether_obsidian_glass_pane",
   "key": {
     "#": "betternether:obsidian_glass"

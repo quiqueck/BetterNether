@@ -34,7 +34,7 @@ import de.ambertation.wover.sets.api.blocks.types.PressurePlate;
 public class NetherMushroomMaterial extends NetherWoodenMaterial<NetherMushroomMaterial> {
     public NetherMushroomMaterial() {
         super("nether_mushroom", MapColor.TERRACOTTA_WHITE, MapColor.COLOR_LIGHT_GRAY);
-        setFurnitureCloth(Blocks.RED_WOOL);
+        setFurnitureCloth(Blocks.WOOL.red());
     }
 
     @Override

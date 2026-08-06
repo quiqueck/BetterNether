@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "shelf",
   "key": {
     "#": "betternether:gloomwood_dark_stripped_log"

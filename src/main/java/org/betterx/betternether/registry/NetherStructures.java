@@ -2,6 +2,7 @@ package org.betterx.betternether.registry;
 
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.world.structures.city.CityStructure;
+import org.betterx.betternether.world.structures.lake.MegaLavaLakeStructure;
 import org.betterx.betternether.world.structures.templates.*;
 import de.ambertation.wover.structure.api.StructureKey;
 import de.ambertation.wover.structure.api.StructureManager;
@@ -54,6 +55,22 @@ public class NetherStructures {
 
     public static final StructureKey.Simple<JungleTemples> JUNGLE_TEMPLES = StructureManager
             .structure(BetterNether.C.id("jungle_temples"), JungleTemples::new, JungleTemples.CODEC)
+            .step(GenerationStep.Decoration.SURFACE_STRUCTURES);
+
+    /**
+     * The gloomwood's mega lava lake.
+     * <p>
+     * SURFACE_STRUCTURES rather than the LAKES step BetterEnd's megalake uses: the gloomwood puts its own
+     * lava pits and its molten gloomsculk in LAKES, and structures run ahead of the features of the same
+     * step, so a lake generated there would have pits cut into the shore it had just built. From
+     * SURFACE_STRUCTURES it lands after all of that and still comfortably before VEGETAL_DECORATION, which
+     * is what lets the biome's gloomgrass grow over the outer shore and tie it back into the floor.
+     * <p>
+     * The biome is attached in {@link org.betterx.betternether.world.biomes.Gloomwood}; no other biome
+     * carries the tag, so a placement attempt that lands anywhere else simply fails.
+     */
+    public static final StructureKey.Simple<MegaLavaLakeStructure> MEGA_LAVA_LAKE = StructureManager
+            .structure(BetterNether.C.id("mega_lava_lake"), MegaLavaLakeStructure::new)
             .step(GenerationStep.Decoration.SURFACE_STRUCTURES);
 
 

@@ -129,12 +129,16 @@ public class NetherGlassBlocks {
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .strength(0.3F, 0.3F)
             .noOcclusion()
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial(
             "quartz_glass_framed_pane",
             QUARTZ_GLASS_FRAMED_PANE,
             p -> new BNPane(p),
-            TraitLists.and(NetherMaterial.metal(), NetherLoot.dropSelfNoExplosion()),
+            TraitLists.and(NetherMaterial.metal(), NetherLoot.dropSelfNoExplosion(),
+                           // A pane, not a cube - see the uncoloured pane above.
+                           BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable()),
             def -> {
                 def.strength(0.3F, 0.3F);
                 def.noOcclusion();

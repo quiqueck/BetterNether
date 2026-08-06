@@ -119,10 +119,10 @@ public class StructurePath implements IStructure {
 
         BlockPos p = pos.above(3);
         BlocksHelper.setWithoutUpdate(world, p, Blocks.NETHER_BRICK_FENCE.defaultBlockState());
-        world.getChunk(p).markPosForPostprocessing(new BlockPos(p.getX() & 15, p.getY(), p.getZ() & 15));
+        world.getChunk(p).markPosForPostProcessing(new BlockPos(p.getX() & 15, p.getY(), p.getZ() & 15));
         p = p.relative(dir.getOpposite());
         BlocksHelper.setWithoutUpdate(world, p, Blocks.NETHER_BRICK_FENCE.defaultBlockState());
-        world.getChunk(p).markPosForPostprocessing(new BlockPos(p.getX() & 15, p.getY(), p.getZ() & 15));
+        world.getChunk(p).markPosForPostProcessing(new BlockPos(p.getX() & 15, p.getY(), p.getZ() & 15));
         BlocksHelper.setWithoutUpdate(
                 world,
                 p.below(),

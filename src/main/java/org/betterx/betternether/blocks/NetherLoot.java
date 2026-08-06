@@ -42,8 +42,10 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+// 26.2 split net.minecraft.advancements.criterion into .predicates (ItemPredicate,
+// StatePropertiesPredicate, ...) and .triggers (every *Trigger).
+import net.minecraft.advancements.predicates.ItemPredicate;
+import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -406,7 +408,7 @@ public class NetherLoot {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
                 block, BlockCommonPlant.AGE, 3,
                 UniformGenerator.between(1, 2),
-                List.of(new LootLookupProvider.DropInfo(Items.ORANGE_DYE, UniformGenerator.between(1, 3)))
+                List.of(new LootLookupProvider.DropInfo(Items.DYE.orange(), UniformGenerator.between(1, 3)))
         ));
     }
 

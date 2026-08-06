@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_hanging_sign_rot_2",
+  "textures": {
+    "all": "betternether:block/wart_hanging_sign",
+    "particle": "betternether:block/wart_stripped_log_side"
+  }
+}

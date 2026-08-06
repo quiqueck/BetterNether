@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "seeds",
   "key": {
     "#": "betternether:whispering_gourd"

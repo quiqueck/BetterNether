@@ -24,8 +24,15 @@ import net.minecraft.util.RandomSource;
  * the {@code silkTouchSelf} loot table on the registration; this class only handles what is left behind.
  */
 public class BlockGloomsculkGeode extends Block {
-    /** One random tick in this many buds a crystal, if there is a free face to grow it on. */
-    private static final int BUD_CHANCE = 6;
+    /**
+     * One random tick in this many buds a crystal, if there is a free face to grow it on.
+     * <p>
+     * Deliberately well below budding amethyst's one in five. A geode has six faces to fill against a
+     * single amethyst face, so the same per-tick chance fills a geode several times faster than the
+     * block it was modelled on - and the crystals are decorative rather than a resource, which is not
+     * something a player should be waiting on.
+     */
+    private static final int BUD_CHANCE = 18;
 
     public BlockGloomsculkGeode(Properties settings) {
         super(settings);

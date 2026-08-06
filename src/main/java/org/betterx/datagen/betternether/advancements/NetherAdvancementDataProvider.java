@@ -23,9 +23,11 @@ import org.betterx.betternether.registry.NetherTemplates;
 import de.ambertation.wover.complex.api.equipment.ArmorSlot;
 import de.ambertation.wover.complex.api.equipment.ToolSlot;
 
-import net.minecraft.advancements.criterion.ChangeDimensionTrigger;
-import net.minecraft.advancements.criterion.LocationPredicate;
-import net.minecraft.advancements.criterion.PlayerTrigger;
+// 26.2 split net.minecraft.advancements.criterion into .predicates (LocationPredicate, ...) and
+// .triggers (every *Trigger).
+import net.minecraft.advancements.predicates.LocationPredicate;
+import net.minecraft.advancements.triggers.ChangeDimensionTrigger;
+import net.minecraft.advancements.triggers.PlayerTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;

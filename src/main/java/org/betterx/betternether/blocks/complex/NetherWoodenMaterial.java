@@ -34,7 +34,7 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
 
 
     protected final MapColor plankColor;
-    protected Block furnitureCloth = Blocks.RED_WOOL;
+    protected Block furnitureCloth = Blocks.WOOL.red();
 
     public NetherWoodenMaterial(String name, MapColor woodColor, MapColor planksColor) {
         super(BetterNether.C, name, woodColor, SlotType.PLANKS, true);

@@ -207,7 +207,7 @@ public class NetherPlantBlocks {
     // Former Materials.netherPlant() preset, folded onto NetherMaterial.plant().
     public static final Block MAGMA_FLOWER = NetherBlocks.defineBlock("magma_flower", BlockMagmaFlower::new)
             .addTrait(NetherRender.cutout())
-            .addTrait(NetherSurvival.magmaBlockOrSand())
+            .addTrait(NetherSurvival.magmaSandOrSculk())
             .addTrait(BlockTraits.MINEABLE_WITH.needsHoe())
             .addTrait(NetherMaterial.plant(MapColor.TERRACOTTA_ORANGE))
             .randomTicks()

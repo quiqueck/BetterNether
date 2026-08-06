@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "betternether:block/nether_reed_stem_particles"
+    "facing=east": {
+      "model": "betternether:block/nether_reed_hanging_wall_sign",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "betternether:block/nether_reed_hanging_wall_sign",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "betternether:block/nether_reed_hanging_wall_sign"
+    },
+    "facing=west": {
+      "model": "betternether:block/nether_reed_hanging_wall_sign",
+      "y": 90
     }
   }
 }

@@ -5,6 +5,7 @@ import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
 import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
 import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTraitLookup;
 import de.ambertation.wover.sets.api.blocks.BlockSet;
 import de.ambertation.wover.sets.api.blocks.SlotFromDefinition;
@@ -31,6 +32,7 @@ public class SimpleBlockSlot extends SlotFromDefinition {
     private final boolean blockOnly;
     private final List<BlockTrait<?, ?>> extraTraits;
     private final Consumer<BlockDefinition<?, ?>> extraProperties;
+    private final boolean notFullCube;
 
     private SimpleBlockSlot(
             SlotType type,
@@ -39,11 +41,23 @@ public class SimpleBlockSlot extends SlotFromDefinition {
             List<BlockTrait<?, ?>> extraTraits,
             Consumer<BlockDefinition<?, ?>> extraProperties
     ) {
+        this(type, maker, blockOnly, extraTraits, extraProperties, false);
+    }
+
+    private SimpleBlockSlot(
+            SlotType type,
+            BiFunction<BlockSet<?>, BlockBehaviour.Properties, Block> maker,
+            boolean blockOnly,
+            List<BlockTrait<?, ?>> extraTraits,
+            Consumer<BlockDefinition<?, ?>> extraProperties,
+            boolean notFullCube
+    ) {
         super(type);
         this.maker = maker;
         this.blockOnly = blockOnly;
         this.extraTraits = extraTraits;
         this.extraProperties = extraProperties;
+        this.notFullCube = notFullCube;
     }
 
     public static SimpleBlockSlot blockOnly(
@@ -99,11 +113,35 @@ public class SimpleBlockSlot extends SlotFromDefinition {
         return new SimpleBlockSlot(type, maker, false, extraTraits, null);
     }
 
+    /**
+     * A {@code withItem} slot that is <b>not</b> a full cube (the rubeus cone, the willow torch, ...), so a
+     * sulfur cube must not be able to swallow it. {@code extraTraits} alone cannot express that: they are
+     * applied in {@link #addSlotSpecificDefinitions}, which runs before the set's material classification
+     * hands the block its archetype, and the archetype trait is keepLatestOnly. This variant re-states it from
+     * {@link #finalizeDefinitions} instead, which runs last.
+     *
+     * @param extraTraits e.g. a {@link org.betterx.betternether.blocks.NetherRender} layer
+     */
+    public static SimpleBlockSlot withItemNotFullCube(
+            SlotType type,
+            BiFunction<BlockSet<?>, BlockBehaviour.Properties, Block> maker,
+            List<BlockTrait<?, ?>> extraTraits
+    ) {
+        return new SimpleBlockSlot(type, maker, false, extraTraits, null, true);
+    }
+
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
         super.addSlotSpecificDefinitions(set, def);
         def.addTrait(extraTraits);
         if (extraProperties != null) extraProperties.accept(def);
+    }
+
+    @Override
+    protected void finalizeDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        if (notFullCube) {
+            def.addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable());
+        }
     }
 
     @Override

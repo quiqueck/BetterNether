@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "fire_bowl",
   "key": {
     "#": "betternether:cincinnasite_forged",

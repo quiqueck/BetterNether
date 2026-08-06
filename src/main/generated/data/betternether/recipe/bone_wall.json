@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "walls",
   "key": {
     "#": "betternether:bone_block"

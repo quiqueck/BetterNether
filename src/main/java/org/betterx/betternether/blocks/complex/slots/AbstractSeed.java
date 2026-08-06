@@ -97,4 +97,11 @@ public class AbstractSeed extends SlotFromDefinition {
     protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return modelTrait != null ? modelTrait.get() : ModelTraitLibrary.externalModel();
     }
+
+    @Override
+    protected void finalizeDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        // Not a full cube (a plant), so it must not inherit the set material's sulfur cube archetype - a
+        // cube renders what it swallowed as a block model, and a seed inside one reads as a bug.
+        def.addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable());
+    }
 }

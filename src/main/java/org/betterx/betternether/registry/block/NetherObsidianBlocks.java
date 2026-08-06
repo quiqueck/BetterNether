@@ -81,18 +81,24 @@ public class NetherObsidianBlocks {
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(NetherModels.obsidianVariants())
             .addTrait(NetherMaterial.obsidian())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block WEEPING_OBSIDIAN = NetherBlocks.defineBlock("weeping_obsidian", VanillaWeepingObsidianBlock::new)
             .replacePropertiesWithCopy(Blocks.CRYING_OBSIDIAN)
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(NetherModels.obsidianVariants())
             .addTrait(NetherMaterial.obsidian())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block BLUE_CRYING_OBSIDIAN = NetherBlocks.defineBlock("blue_crying_obsidian", BlueCryingObsidianBlock::new)
             .replacePropertiesWithCopy(Blocks.CRYING_OBSIDIAN)
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(NetherModels.obsidianVariants())
             .addTrait(NetherMaterial.obsidian())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     // Former registerObsidianCube bundle, inlined at the registration site (WP5.7): copy obsidian's
     // properties, self-drop loot, cube model, and the obsidian-portal-frame classification.
@@ -101,6 +107,8 @@ public class NetherObsidianBlocks {
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block OBSIDIAN_BRICKS_STAIRS = NetherBlocks.defineBlock(
             "obsidian_bricks_stairs",
@@ -124,12 +132,16 @@ public class NetherObsidianBlocks {
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block OBSIDIAN_TILE_SMALL = NetherBlocks.defineBlock("obsidian_tile_small", p -> new BNObsidian(p, null))
             .replacePropertiesWithCopy(Blocks.OBSIDIAN)
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block OBSIDIAN_TILE_STAIRS = NetherBlocks.defineBlock(
             "obsidian_tile_stairs",
@@ -153,6 +165,8 @@ public class NetherObsidianBlocks {
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     // BlockObsidianGlass (WP6.12): noOcclusion()/isSuffocating(false)/isViewBlocking(false) moved out of
     // its constructor (R1); it always dropped itself unconditionally via BlockBase's inherited getDrops()
@@ -186,12 +200,16 @@ public class NetherObsidianBlocks {
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block BLUE_OBSIDIAN_BRICKS = NetherBlocks.defineBlock("blue_obsidian_bricks", p -> new BNObsidian(p, null))
             .replacePropertiesWithCopy(Blocks.OBSIDIAN)
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = NetherBlocks.defineBlock(
             "blue_obsidian_bricks_stairs",
@@ -215,12 +233,16 @@ public class NetherObsidianBlocks {
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block BLUE_OBSIDIAN_TILE_SMALL = NetherBlocks.defineBlock("blue_obsidian_tile_small", p -> new BNObsidian(p, null))
             .replacePropertiesWithCopy(Blocks.OBSIDIAN)
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     public static final Block BLUE_OBSIDIAN_TILE_STAIRS = NetherBlocks.defineBlock(
             "blue_obsidian_tile_stairs",
@@ -244,6 +266,8 @@ public class NetherObsidianBlocks {
             .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .addTrait(ModelTraitLibrary.cube())
             .addTrait(NetherMaterial.obsidianPortalFrame())
+            // Vanilla puts obsidian, crying_obsidian, amethyst_block and the whole stone family in slow_bouncy.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy())
             .buildAndRegister();
     // BlockObsidianGlass (WP6.12): same reproduction as OBSIDIAN_GLASS above, GlassBlockTrait included.
     public static final Block BLUE_OBSIDIAN_GLASS = NetherBlocks.defineBlock("blue_obsidian_glass", BlockObsidianGlass::new)

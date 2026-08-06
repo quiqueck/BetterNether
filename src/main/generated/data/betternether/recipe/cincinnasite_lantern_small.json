@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "nether_cincinnasite_lantern_small",
   "key": {
     "I": "betternether:cincinnasite_ingot",

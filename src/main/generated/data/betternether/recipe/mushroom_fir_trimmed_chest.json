@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "chest",
   "ingredients": [
     "betternether:mushroom_fir_chest",

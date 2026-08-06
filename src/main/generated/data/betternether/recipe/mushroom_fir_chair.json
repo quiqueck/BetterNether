@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "chair",
   "key": {
     "#": "betternether:mushroom_fir_slab",

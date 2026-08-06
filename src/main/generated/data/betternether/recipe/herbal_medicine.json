@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "nether_herbal_medicine",
   "ingredients": [
     "betternether:agave_leaf",

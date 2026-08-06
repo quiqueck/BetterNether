@@ -68,4 +68,12 @@ public class RoofStairs extends SlotFromDefinition {
     protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return ModelTraitLibrary.stairs(() -> set.getBlock(NetherSlots.ROOF));
     }
+
+    @Override
+    protected void finalizeDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        // Not a full cube (a stepped block), so it must not inherit the set material's sulfur cube
+        // archetype - a cube renders what it swallowed as a block model, and a stairs inside one reads as a
+        // bug.
+        def.addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable());
+    }
 }

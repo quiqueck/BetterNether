@@ -51,22 +51,22 @@ public class ColoredGlassMaterial {
      * @param base - block base for material properties and crafting
      */
     public <T extends Block> ColoredGlassMaterial(String name, Block base) {
-        white = makeInstance(name, base, Items.WHITE_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        orange = makeInstance(name, base, Items.ORANGE_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        magenta = makeInstance(name, base, Items.MAGENTA_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        light_blue = makeInstance(name, base, Items.LIGHT_BLUE_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        yellow = makeInstance(name, base, Items.YELLOW_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        lime = makeInstance(name, base, Items.LIME_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        pink = makeInstance(name, base, Items.PINK_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        gray = makeInstance(name, base, Items.GRAY_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        light_gray = makeInstance(name, base, Items.LIGHT_GRAY_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        cyan = makeInstance(name, base, Items.CYAN_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        purple = makeInstance(name, base, Items.PURPLE_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        blue = makeInstance(name, base, Items.BLUE_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        brown = makeInstance(name, base, Items.BROWN_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        green = makeInstance(name, base, Items.GREEN_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        red = makeInstance(name, base, Items.RED_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
-        black = makeInstance(name, base, Items.BLACK_DYE, true, null, RecipeCategory.BUILDING_BLOCKS);
+        white = makeInstance(name, base, Items.DYE.white(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        orange = makeInstance(name, base, Items.DYE.orange(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        magenta = makeInstance(name, base, Items.DYE.magenta(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        light_blue = makeInstance(name, base, Items.DYE.lightBlue(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        yellow = makeInstance(name, base, Items.DYE.yellow(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        lime = makeInstance(name, base, Items.DYE.lime(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        pink = makeInstance(name, base, Items.DYE.pink(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        gray = makeInstance(name, base, Items.DYE.gray(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        light_gray = makeInstance(name, base, Items.DYE.lightGray(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        cyan = makeInstance(name, base, Items.DYE.cyan(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        purple = makeInstance(name, base, Items.DYE.purple(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        blue = makeInstance(name, base, Items.DYE.blue(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        brown = makeInstance(name, base, Items.DYE.brown(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        green = makeInstance(name, base, Items.DYE.green(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        red = makeInstance(name, base, Items.DYE.red(), true, null, RecipeCategory.BUILDING_BLOCKS);
+        black = makeInstance(name, base, Items.DYE.black(), true, null, RecipeCategory.BUILDING_BLOCKS);
     }
 
     /**
@@ -98,22 +98,22 @@ public class ColoredGlassMaterial {
     ) {
         this.paneTraits = paneTraits;
         this.paneProperties = paneProperties;
-        white = makeInstance(name, base, Items.WHITE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        orange = makeInstance(name, base, Items.ORANGE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        magenta = makeInstance(name, base, Items.MAGENTA_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        light_blue = makeInstance(name, base, Items.LIGHT_BLUE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        yellow = makeInstance(name, base, Items.YELLOW_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        lime = makeInstance(name, base, Items.LIME_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        pink = makeInstance(name, base, Items.PINK_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        gray = makeInstance(name, base, Items.GRAY_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        light_gray = makeInstance(name, base, Items.LIGHT_GRAY_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        cyan = makeInstance(name, base, Items.CYAN_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        purple = makeInstance(name, base, Items.PURPLE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        blue = makeInstance(name, base, Items.BLUE_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        brown = makeInstance(name, base, Items.BROWN_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        green = makeInstance(name, base, Items.GREEN_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        red = makeInstance(name, base, Items.RED_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
-        black = makeInstance(name, base, Items.BLACK_DYE, false, paneFactory, RecipeCategory.DECORATIONS);
+        white = makeInstance(name, base, Items.DYE.white(), false, paneFactory, RecipeCategory.DECORATIONS);
+        orange = makeInstance(name, base, Items.DYE.orange(), false, paneFactory, RecipeCategory.DECORATIONS);
+        magenta = makeInstance(name, base, Items.DYE.magenta(), false, paneFactory, RecipeCategory.DECORATIONS);
+        light_blue = makeInstance(name, base, Items.DYE.lightBlue(), false, paneFactory, RecipeCategory.DECORATIONS);
+        yellow = makeInstance(name, base, Items.DYE.yellow(), false, paneFactory, RecipeCategory.DECORATIONS);
+        lime = makeInstance(name, base, Items.DYE.lime(), false, paneFactory, RecipeCategory.DECORATIONS);
+        pink = makeInstance(name, base, Items.DYE.pink(), false, paneFactory, RecipeCategory.DECORATIONS);
+        gray = makeInstance(name, base, Items.DYE.gray(), false, paneFactory, RecipeCategory.DECORATIONS);
+        light_gray = makeInstance(name, base, Items.DYE.lightGray(), false, paneFactory, RecipeCategory.DECORATIONS);
+        cyan = makeInstance(name, base, Items.DYE.cyan(), false, paneFactory, RecipeCategory.DECORATIONS);
+        purple = makeInstance(name, base, Items.DYE.purple(), false, paneFactory, RecipeCategory.DECORATIONS);
+        blue = makeInstance(name, base, Items.DYE.blue(), false, paneFactory, RecipeCategory.DECORATIONS);
+        brown = makeInstance(name, base, Items.DYE.brown(), false, paneFactory, RecipeCategory.DECORATIONS);
+        green = makeInstance(name, base, Items.DYE.green(), false, paneFactory, RecipeCategory.DECORATIONS);
+        red = makeInstance(name, base, Items.DYE.red(), false, paneFactory, RecipeCategory.DECORATIONS);
+        black = makeInstance(name, base, Items.DYE.black(), false, paneFactory, RecipeCategory.DECORATIONS);
     }
 
     /** The material traits for the pane variant (see {@link NetherMaterial}); empty for the full block. */

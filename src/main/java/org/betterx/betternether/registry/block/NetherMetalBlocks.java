@@ -93,6 +93,8 @@ public class NetherMetalBlocks {
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
             .addTrait(RecipeTraits.stairsFrom(CINCINNASITE_FORGED))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block CINCINNASITE_SLAB = NetherBlocks
             .defineBlock("cincinnasite_slab", SlabBlock::new)
@@ -106,6 +108,8 @@ public class NetherMetalBlocks {
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
             .addTrait(RecipeTraits.slabFrom(CINCINNASITE_FORGED))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Former registerBlockDropSelf bundle, inlined at the registration site (WP5.12): the
     // BlockTraits.LOOT_TABLE.dropSelf() the helper baked in unconditionally, made visible.
@@ -121,6 +125,8 @@ public class NetherMetalBlocks {
             .addTrait(NetherMaterial.cincinnasite())
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Dispatch-helper branch resolution (WP5.6): BlockSetType.GOLD.soundType() == SoundType.METAL, so
     // the old dispatch's isMetal(GOLD) was true -> registerPlate's `wooden` was false -> the non-wooden
@@ -174,6 +180,8 @@ public class NetherMetalBlocks {
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
             .addTrait(RecipeTraits.wallFrom(CINCINNASITE_FORGED))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // BNPillar.Metal (WP6.14 sweep) dissolved to plain BNPillar::new - the nested Wood/Stone/Metal shims
     // added nothing beyond BNPillar itself. class= changes Metal -> BNPillar (CLASS-ONLY).
@@ -203,6 +211,8 @@ public class NetherMetalBlocks {
             .addTrait(NetherMaterial.cincinnasite())
             .sound(SoundType.IRON)
             .strength(3.0F, 10.0F)
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
 
     public static final Block CINCINNASITE_CHAIN = NetherBlocks
@@ -212,6 +222,8 @@ public class NetherMetalBlocks {
             .addTrait(ModelTraitLibrary.chain())
             .addTrait(NetherMaterial.cincinnasite())
             .strength(3.0F, 10.0F)
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // BlockNetherRuby (a BlockBase shim) always dropped itself unconditionally via the inherited getDrops()
     // override - no loot table json was generated for it. Reproduced explicitly (WP6.11) as
@@ -239,6 +251,8 @@ public class NetherMetalBlocks {
             .addTrait(ModelTraitLibrary.stairs(() -> NETHER_RUBY_BLOCK))
             .addTrait(NetherMaterial.metal())
             .addTrait(RecipeTraits.stairsFrom(NETHER_RUBY_BLOCK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block NETHER_RUBY_SLAB = NetherBlocks
             .defineBlock("nether_ruby_slab", SlabBlock::new)
@@ -251,6 +265,8 @@ public class NetherMetalBlocks {
             ))
             .addTrait(NetherMaterial.metal())
             .addTrait(RecipeTraits.slabFrom(NETHER_RUBY_BLOCK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
 
     public static void ensureLoaded() {

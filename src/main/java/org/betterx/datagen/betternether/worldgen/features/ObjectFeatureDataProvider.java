@@ -76,7 +76,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
         NetherObjectsPlaced.PATCH_TERRACOTTA_CLUMP
                 .inlineConfiguration(ctx)
                 .simple()
-                .block(Blocks.BLACK_GLAZED_TERRACOTTA)
+                .block(Blocks.GLAZED_TERRACOTTA.black())
                 .inlinePlace()
                 .extendXYZ(
                         UniformInt.of(3, 4), ConstantFloat.of(1.0f), UniformFloat.of(0.1f, 0.3f),
@@ -214,7 +214,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                         .blockState(NetherStoneBlocks.BLACKSTONE_STALACTITE)
                         .maxHeight(BiasedToBottomInt.of(3, 9))
                         .inlinePlace()
-                        .isOn(BlockPredicate.matchesBlocks(Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BASALT))
+                        .isOn(BlockPredicate.matchesBlocks(Blocks.GLAZED_TERRACOTTA.black(), Blocks.BASALT))
                         .inRandomPatch()
                         .inlinePlace()
                         .directHolder()
@@ -234,7 +234,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                         .blockState(NetherStoneBlocks.BLACKSTONE_STALACTITE)
                         .maxHeight(BiasedToBottomInt.of(3, 8))
                         .inlinePlace()
-                        .isOn(BlockPredicate.matchesBlocks(Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BASALT))
+                        .isOn(BlockPredicate.matchesBlocks(Blocks.GLAZED_TERRACOTTA.black(), Blocks.BASALT))
                         .inRandomPatch()
                         .inlinePlace()
                         .directHolder()

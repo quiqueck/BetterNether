@@ -24,6 +24,8 @@ import de.ambertation.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.ItemTags;
+// 26.2 folded the sixteen dye items into the Items.DYE ColorCollection, so Items.DYE.yellow() is now
+// Items.DYE.yellow() (and so on). Same items, same ids - no generated-JSON change.
 import net.minecraft.world.item.Items;
 
 public class NetherItemRecipeProvider extends WoverRecipeProvider {
@@ -54,7 +56,7 @@ public class NetherItemRecipeProvider extends WoverRecipeProvider {
                 .build(context);
 
         RecipeBuilder
-                .crafting(BN.id("bn_yellow_dye"), Items.YELLOW_DYE)
+                .crafting(BN.id("bn_yellow_dye"), Items.DYE.yellow())
                 .outputCount(2)
                 .shapeless()
                 .addMaterial('#', NetherVineBlocks.BLOOMING_VINE)
@@ -117,7 +119,7 @@ public class NetherItemRecipeProvider extends WoverRecipeProvider {
                      .group("nether_glass_bottle")
                      .outputCount(3)
                      .build(context);
-        RecipeBuilder.crafting(BetterNether.C.id("gray_dye"), Items.GRAY_DYE)
+        RecipeBuilder.crafting(BetterNether.C.id("gray_dye"), Items.DYE.gray())
                      .shapeless()
                      .addMaterial('#', NetherMushroomBlocks.GRAY_MOLD)
                      .group("nether_gray_dye")
@@ -143,7 +145,7 @@ public class NetherItemRecipeProvider extends WoverRecipeProvider {
                      .outputCount(16)
                      .category(RecipeCategory.TRANSPORTATION)
                      .build(context);
-        RecipeBuilder.crafting(BetterNether.C.id("red_dye"), Items.RED_DYE)
+        RecipeBuilder.crafting(BetterNether.C.id("red_dye"), Items.DYE.red())
                      .shapeless()
                      .addMaterial('#', NetherMushroomBlocks.RED_MOLD)
                      .group("nether_red_dye")
@@ -264,7 +266,7 @@ public class NetherItemRecipeProvider extends WoverRecipeProvider {
     }
 
     private static void registerSmelting(RecipeBuilder.Context context) {
-        RecipeBuilder.smelting(BetterNether.C.id("black_dye"), Items.BLACK_DYE)
+        RecipeBuilder.smelting(BetterNether.C.id("black_dye"), Items.DYE.black())
                      .input(NetherPlantBlocks.INK_BUSH_SEED)
                      .cookingTime(200)
                      .build(context);

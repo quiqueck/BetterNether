@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "wooden_wall",
   "key": {
     "*": "betternether:gloomwood_dark_planks",

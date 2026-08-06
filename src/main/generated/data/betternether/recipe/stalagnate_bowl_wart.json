@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "nether_stalagnate_bowl_wart",
   "ingredients": [
     "minecraft:nether_wart",

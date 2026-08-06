@@ -32,6 +32,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -107,8 +108,13 @@ public class NetherItems {
                                 @Override
                                 public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
                                     if (stack.getCount() == 1) {
+                                        // super.finishUsingItem() -> Consumable#onConsume shrinks stack
+                                        // in place (to empty, since count was 1), so it must not be read
+                                        // again afterwards - the replacement bowl is always a single
+                                        // item regardless, matching the count this branch was entered
+                                        // with.
                                         super.finishUsingItem(stack, world, user);
-                                        return new ItemStack(NetherFoodItems.STALAGNATE_BOWL, stack.getCount());
+                                        return new ItemStack(NetherFoodItems.STALAGNATE_BOWL, 1);
                                     } else {
                                         if (user instanceof Player player) {
                                             if (!player.isCreative())
@@ -266,7 +272,7 @@ public class NetherItems {
 
 
         CompoundTag entity = new CompoundTag();
-        entity.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.WITHER_SKELETON).toString());
+        entity.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.WITHER_SKELETON).toString());
         entity.putBoolean("PersistenceRequired", true);
         entity.put("HandItems", handItems);
         entity.put("ArmorItems", armorItems);

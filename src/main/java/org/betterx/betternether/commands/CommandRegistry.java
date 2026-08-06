@@ -273,28 +273,28 @@ public class CommandRegistry {
 
     private static int placeMapIdx = 0;
     private static final BlockState[] states = {
-            Blocks.RED_STAINED_GLASS.defaultBlockState(),
-            Blocks.BLUE_STAINED_GLASS.defaultBlockState(),
-            Blocks.YELLOW_STAINED_GLASS.defaultBlockState(),
-            Blocks.LIME_STAINED_GLASS.defaultBlockState(),
-            Blocks.PINK_STAINED_GLASS.defaultBlockState(),
-            Blocks.GREEN_STAINED_GLASS.defaultBlockState(),
-            Blocks.WHITE_STAINED_GLASS.defaultBlockState(),
-            Blocks.BLACK_STAINED_GLASS.defaultBlockState(),
-            Blocks.ORANGE_STAINED_GLASS.defaultBlockState(),
-            Blocks.LIGHT_BLUE_STAINED_GLASS.defaultBlockState()
+            Blocks.STAINED_GLASS.red().defaultBlockState(),
+            Blocks.STAINED_GLASS.blue().defaultBlockState(),
+            Blocks.STAINED_GLASS.yellow().defaultBlockState(),
+            Blocks.STAINED_GLASS.lime().defaultBlockState(),
+            Blocks.STAINED_GLASS.pink().defaultBlockState(),
+            Blocks.STAINED_GLASS.green().defaultBlockState(),
+            Blocks.STAINED_GLASS.white().defaultBlockState(),
+            Blocks.STAINED_GLASS.black().defaultBlockState(),
+            Blocks.STAINED_GLASS.orange().defaultBlockState(),
+            Blocks.STAINED_GLASS.lightBlue().defaultBlockState()
     };
     private static final BlockState[] states2 = {
-            Blocks.RED_CONCRETE.defaultBlockState(),
-            Blocks.BLUE_CONCRETE.defaultBlockState(),
-            Blocks.YELLOW_CONCRETE.defaultBlockState(),
-            Blocks.LIME_CONCRETE.defaultBlockState(),
-            Blocks.PINK_CONCRETE.defaultBlockState(),
-            Blocks.GREEN_CONCRETE.defaultBlockState(),
-            Blocks.WHITE_CONCRETE.defaultBlockState(),
-            Blocks.BLACK_CONCRETE.defaultBlockState(),
-            Blocks.ORANGE_CONCRETE.defaultBlockState(),
-            Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState()
+            Blocks.CONCRETE.red().defaultBlockState(),
+            Blocks.CONCRETE.blue().defaultBlockState(),
+            Blocks.CONCRETE.yellow().defaultBlockState(),
+            Blocks.CONCRETE.lime().defaultBlockState(),
+            Blocks.CONCRETE.pink().defaultBlockState(),
+            Blocks.CONCRETE.green().defaultBlockState(),
+            Blocks.CONCRETE.white().defaultBlockState(),
+            Blocks.CONCRETE.black().defaultBlockState(),
+            Blocks.CONCRETE.orange().defaultBlockState(),
+            Blocks.CONCRETE.lightBlue().defaultBlockState()
     };
 
     private static int findSurface(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -316,9 +316,9 @@ public class CommandRegistry {
         org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(
                 level,
                 new BlockPos((int) pos.x, (int) pos.y, (int) pos.z),
-                Blocks.YELLOW_CONCRETE
+                Blocks.CONCRETE.yellow()
         );
-        org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, mPos, Blocks.LIGHT_BLUE_CONCRETE);
+        org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, mPos, Blocks.CONCRETE.lightBlue());
         return Command.SINGLE_SUCCESS;
     }
 

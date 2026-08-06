@@ -19,7 +19,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.control.LookControl;
-import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -32,7 +31,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class EntitySkull extends Monster implements FlyingAnimal {
+public class EntitySkull extends Monster {
     private static double particleX;
     private static double particleY;
     private static double particleZ;
@@ -66,7 +65,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
     }
 
     @Override
-    public boolean isFlying() {
+    protected boolean omnidirectionalAirMover() {
         return !this.onGround();
     }
 

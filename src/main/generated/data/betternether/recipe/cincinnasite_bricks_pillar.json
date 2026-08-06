@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "nether_cincinnasite_bricks_pillar",
   "key": {
     "#": "betternether:cincinnasite_bricks"

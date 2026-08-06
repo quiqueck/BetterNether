@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_wall_hanging_sign",
+  "textures": {
+    "all": "betternether:block/stalagnate_hanging_sign",
+    "particle": "betternether:block/stalagnate_stripped_log_side"
+  }
+}

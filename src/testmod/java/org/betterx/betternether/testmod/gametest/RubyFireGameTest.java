@@ -4,12 +4,13 @@ import org.betterx.betternether.registry.item.NetherEquipmentItems;
 import de.ambertation.wover.complex.api.equipment.ArmorSlot;
 import de.ambertation.wover.complex.api.equipment.ToolSlot;
 import de.ambertation.wover.item.api.ItemStackHelper;
+import de.ambertation.wover.test.api.gametest.MockPlayers;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.entity.projectile.arrow.Arrow;
@@ -162,7 +163,7 @@ public class RubyFireGameTest {
         boolean shoved = false;
 
         for (int attempt = 0; attempt < ATTEMPTS && !(burned && shoved); attempt++) {
-            final Zombie victim = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, VICTIM_POS);
+            final Zombie victim = helper.spawnWithNoFreeWill(EntityTypes.ZOMBIE, VICTIM_POS);
             victim.setItemSlot(EquipmentSlot.CHEST, gameReady(
                     helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ArmorSlot.CHESTPLATE_SLOT)
             ));
@@ -196,7 +197,7 @@ public class RubyFireGameTest {
      */
     @GameTest(maxTicks = 400)
     public void rubyFireRetaliatesWhenTheWearerIsAPlayer(GameTestHelper helper) {
-        final Zombie attacker = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, ATTACKER_POS);
+        final Zombie attacker = helper.spawnWithNoFreeWill(EntityTypes.ZOMBIE, ATTACKER_POS);
         final ServerPlayer wearer = MockPlayers.survival(helper, VICTIM_POS);
         wearer.setItemSlot(EquipmentSlot.CHEST, gameReady(
                 helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ArmorSlot.CHESTPLATE_SLOT)
@@ -240,7 +241,7 @@ public class RubyFireGameTest {
         var seq = helper.startSequence();
         for (int i = 0; i < ARROW_ATTEMPTS; i++) {
             seq = seq.thenExecute(() -> {
-                         final Zombie victim = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, VICTIM_POS);
+                         final Zombie victim = helper.spawnWithNoFreeWill(EntityTypes.ZOMBIE, VICTIM_POS);
                          victim.setItemSlot(EquipmentSlot.CHEST, gameReady(
                                  helper,
                                  NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ArmorSlot.CHESTPLATE_SLOT)
@@ -297,14 +298,14 @@ public class RubyFireGameTest {
      * would land exactly one real hit.
      */
     private static Outcome retaliate(GameTestHelper helper, Supplier<ItemStack> chestplate) {
-        final Zombie attacker = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, ATTACKER_POS);
+        final Zombie attacker = helper.spawnWithNoFreeWill(EntityTypes.ZOMBIE, ATTACKER_POS);
         final float attackerFullHealth = attacker.getHealth();
 
         boolean attackerAffected = false;
         boolean victimAffected = false;
 
         for (int attempt = 0; attempt < ATTEMPTS && !attackerAffected; attempt++) {
-            final Zombie victim = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, VICTIM_POS);
+            final Zombie victim = helper.spawnWithNoFreeWill(EntityTypes.ZOMBIE, VICTIM_POS);
             victim.setItemSlot(EquipmentSlot.CHEST, chestplate.get());
 
             attacker.setRemainingFireTicks(0);

@@ -64,4 +64,12 @@ public class RoofSlab extends SlotFromDefinition {
         // hand-authored blockstate/model in src/main/resources (was an addMaterialOverrides .ignore())
         return ModelTraitLibrary.externalModel();
     }
+
+    @Override
+    protected void finalizeDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        // Not a full cube (a half-height block), so it must not inherit the set material's sulfur cube
+        // archetype - a cube renders what it swallowed as a block model, and a slab inside one reads as a
+        // bug.
+        def.addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable());
+    }
 }

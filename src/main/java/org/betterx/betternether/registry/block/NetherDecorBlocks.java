@@ -101,12 +101,16 @@ public class NetherDecorBlocks {
             .sound(SoundType.IRON)
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BRICK_POT = NetherBlocks.defineBlock("brick_pot", p -> new BlockBNPot.Stone(p))
             .replacePropertiesWithCopy(Blocks.NETHER_BRICKS)
             .addTrait(NetherMaterial.stone())
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // BlockGeyser (WP6.12): lightLevel(10)/noOcclusion() moved out of its constructor (R1); it always
     // dropped itself unconditionally via BlockBase's inherited getDrops() override (no loot table json was
@@ -117,6 +121,8 @@ public class NetherDecorBlocks {
             .lightLevel(state -> 10)
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Roofs //
     // Former registerRoof bundle, inlined at the registration site (WP5.11): self-drop loot plus the
@@ -138,6 +144,8 @@ public class NetherDecorBlocks {
             .addTrait(ModelTraitLibrary.stairs(() -> ROOF_TILE_NETHER_BRICKS))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.stairsFrom(ROOF_TILE_NETHER_BRICKS))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block ROOF_TILE_NETHER_BRICKS_SLAB = NetherBlocks.defineBlock("roof_tile_nether_bricks_slab", SlabBlock::new)
             .replacePropertiesWithCopy(ROOF_TILE_NETHER_BRICKS)
@@ -145,6 +153,8 @@ public class NetherDecorBlocks {
             .addTrait(ModelTraitLibrary.slab(() -> ROOF_TILE_NETHER_BRICKS))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(ROOF_TILE_NETHER_BRICKS))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block ROOF_TILE_CINCINNASITE = NetherBlocks.defineBlock("roof_tile_cincinnasite", Block::new)
             .replacePropertiesWithCopy(NetherMetalBlocks.CINCINNASITE_FORGED)
@@ -164,6 +174,8 @@ public class NetherDecorBlocks {
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
             .addTrait(RecipeTraits.stairsFrom(ROOF_TILE_CINCINNASITE))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block ROOF_TILE_CINCINNASITE_SLAB = NetherBlocks.defineBlock("roof_tile_cincinnasite_slab", SlabBlock::new)
             .replacePropertiesWithCopy(ROOF_TILE_CINCINNASITE)
@@ -173,6 +185,8 @@ public class NetherDecorBlocks {
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
             .addTrait(RecipeTraits.slabFrom(ROOF_TILE_CINCINNASITE))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
 
     public static void ensureLoaded() {}

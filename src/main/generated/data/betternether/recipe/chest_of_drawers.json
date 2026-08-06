@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "nether_chest_of_drawers",
   "key": {
     "#": "betternether:nether_reed_planks",

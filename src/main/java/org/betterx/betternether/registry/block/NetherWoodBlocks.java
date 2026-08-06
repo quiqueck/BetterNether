@@ -128,23 +128,23 @@ public class NetherWoodBlocks {
             "warped",
             Blocks.WARPED_PLANKS.defaultMapColor(),
             MapColor.WARPED_STEM
-    ).setFurnitureCloth(Blocks.RED_WOOL).init();
+    ).setFurnitureCloth(Blocks.WOOL.red()).init();
 
     public static final VanillaNetherWood CRIMSON_WOOD = new VanillaNetherWood(
             "crimson",
             Blocks.CRIMSON_PLANKS.defaultMapColor(),
             MapColor.CRIMSON_STEM
-    ).setFurnitureCloth(Blocks.RED_WOOL).init();
+    ).setFurnitureCloth(Blocks.WOOL.red()).init();
 
-    public static final VanillaWood OAK_WOOD = VanillaWood.create("oak", Blocks.RED_WOOL);
-    public static final VanillaWood SPRUCE_WOOD = VanillaWood.create("spruce", Blocks.RED_WOOL);
-    public static final VanillaWood BIRCH_WOOD = VanillaWood.create("birch", Blocks.RED_WOOL);
-    public static final VanillaWood JUNGLE_WOOD = VanillaWood.create("jungle", Blocks.RED_WOOL);
-    public static final VanillaWood ACACIA_WOOD = VanillaWood.create("acacia", Blocks.BLACK_WOOL);
-    public static final VanillaWood DARK_OAK_WOOD = VanillaWood.create("dark_oak", Blocks.RED_WOOL);
-    public static final VanillaWood CHERRY_WOOD = VanillaWood.create("cherry", Blocks.WHITE_WOOL);
-    public static final VanillaWood BAMBOO_WOOD = VanillaWood.create("bamboo", Blocks.BROWN_WOOL);
-    public static final VanillaWood MANGROVE_WOOD = VanillaWood.create("mangrove", Blocks.BLACK_WOOL);
+    public static final VanillaWood OAK_WOOD = VanillaWood.create("oak", Blocks.WOOL.red());
+    public static final VanillaWood SPRUCE_WOOD = VanillaWood.create("spruce", Blocks.WOOL.red());
+    public static final VanillaWood BIRCH_WOOD = VanillaWood.create("birch", Blocks.WOOL.red());
+    public static final VanillaWood JUNGLE_WOOD = VanillaWood.create("jungle", Blocks.WOOL.red());
+    public static final VanillaWood ACACIA_WOOD = VanillaWood.create("acacia", Blocks.WOOL.black());
+    public static final VanillaWood DARK_OAK_WOOD = VanillaWood.create("dark_oak", Blocks.WOOL.red());
+    public static final VanillaWood CHERRY_WOOD = VanillaWood.create("cherry", Blocks.WOOL.white());
+    public static final VanillaWood BAMBOO_WOOD = VanillaWood.create("bamboo", Blocks.WOOL.brown());
+    public static final VanillaWood MANGROVE_WOOD = VanillaWood.create("mangrove", Blocks.WOOL.black());
     // Rubeus //
     public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
     // Mushroom Fir //
@@ -179,6 +179,8 @@ public class NetherWoodBlocks {
                     () -> MAT_GLOOMWOOD.getStrippedLog(),
                     () -> MAT_GLOOMWOOD_DARK.getStrippedLog()
             ))
+            // Vanilla's logs and planks are the bouncy archetype.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.bouncy())
             .buildAndRegister();
 
     public static final Block GLOOMWOOD_TRANSITION_LOG = NetherBlocks
@@ -200,6 +202,8 @@ public class NetherWoodBlocks {
                     () -> MAT_GLOOMWOOD.getLog(),
                     () -> MAT_GLOOMWOOD_DARK.getLog()
             ))
+            // Vanilla's logs and planks are the bouncy archetype.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.bouncy())
             .buildAndRegister();
 
     /**
@@ -230,6 +234,9 @@ public class NetherWoodBlocks {
             .addTags(BlockTags.LOGS)
             .addItemTags(ItemTags.LOGS)
             .addTrait(BlockTraits.MINEABLE_WITH.needsAxe())
+            // Hot rather than the bouncy an ordinary log would be: the lava is still in it, which is the
+            // whole point of the block.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.hot())
             .mapColor(MapColor.COLOR_BLUE)
             .sound(SoundType.STEM)
             .lightLevel(bs -> 7)
@@ -269,6 +276,8 @@ public class NetherWoodBlocks {
                     () -> MAT_GLOOMWOOD.getPlanks(),
                     () -> MAT_GLOOMWOOD_DARK.getPlanks()
             ))
+            // Vanilla's logs and planks are the bouncy archetype.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.bouncy())
             .buildAndRegister();
 
     /**

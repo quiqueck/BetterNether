@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "nether_stalagnate_bowl_apple",
   "key": {
     "#": "betternether:stalagnate_bowl",

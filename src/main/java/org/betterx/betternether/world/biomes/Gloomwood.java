@@ -5,6 +5,7 @@ import de.ambertation.wover.surface.api.Conditions;
 import de.ambertation.wover.surface.api.conditions.NoiseCondition;
 import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherEntities;
+import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.registry.block.NetherTerrainBlocks;
 import org.betterx.betternether.registry.features.placed.*;
@@ -56,6 +57,7 @@ public class Gloomwood extends NetherBiomeConfig {
                .music(SoundsRegistry.MUSIC_GLOOMWOOD, 1800, 7200, false)
                .particles(ParticleTypes.WARPED_SPORE, 0.015F)
                .structure(BiomeTags.HAS_NETHER_FORTRESS)
+               .structure(NetherStructures.MEGA_LAVA_LAKE)
                // Order matters inside a decoration step: the pits are cut first so the molten rock that
                // keys off them has something to find. Both sit in LAKES, ahead of everything vegetal.
                .feature(NetherTerrainPlaced.LAVA_PITS_SPARSE)
@@ -69,7 +71,12 @@ public class Gloomwood extends NetherBiomeConfig {
                .feature(NetherOresPlaced.GLOOMWOOD_CEILING_DEBRIS)
                .feature(NetherObjectsPlaced.BONES)
                .feature(NetherObjectsPlaced.BONE_STALAGMITE)
+               // The three grove densities. All three are needed: they take disjoint slices of one noise
+               // field, so leaving one out would leave that share of the biome treeless rather than
+               // thinner. See NetherTreesPlaced.GLOOMWOOD_TREE.
                .feature(NetherTreesPlaced.GLOOMWOOD_TREE)
+               .feature(NetherTreesPlaced.GLOOMWOOD_TREE_EDGE)
+               .feature(NetherTreesPlaced.GLOOMWOOD_TREE_SOLITARY)
                .feature(NetherVegetationPlaced.VEGETATION_GLOOMWOOD)
                // after the geodes, so the crystals have something to have grown out of
                .feature(NetherTerrainPlaced.GLOOMSCULK_CRYSTAL_FLOOR)
@@ -80,6 +87,10 @@ public class Gloomwood extends NetherBiomeConfig {
                .feature(NetherTerrainPlaced.SCULK_VEIN_WALL)
                .feature(NetherTerrainPlaced.SCULK_VEIN_CEILING)
                .feature(NetherVinesPlaced.GLOOMSCULK_VINE)
+               // A few strands of lumabus among the gloomsculk vine. Its cold blue-green glow is the one
+               // light in the biome that is not the gloomwisps' own, and it is deliberately well under
+               // them in frequency - a guest on the ceiling rather than a second cover.
+               .feature(NetherVinesPlaced.LUMABUS_VINE_SPARSE)
                .feature(NetherObjectsPlaced.STALACTITE)
                .addNetherClimate(-0.25f, -0.35f, 0.0f)
                .genChance(0.3f)

@@ -74,7 +74,7 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                     // BlockWillowTorch (WP6.12): always dropped itself unconditionally via BlockBase's
                     // inherited getDrops() override (no loot table json was generated for it), reproduced
                     // explicitly as NetherLoot.dropSelfNoExplosion().
-                    .add(SimpleBlockSlot.withItem(
+                    .add(SimpleBlockSlot.withItemNotFullCube(
                             NetherSlots.TORCH,
                             (set, props) -> new BlockWillowTorch(props),
                             // Replaces BlockWillowTorch's BehaviourCompostable marker, which only tagged the

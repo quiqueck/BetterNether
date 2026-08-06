@@ -8,7 +8,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:bone_reef"
               }
             }
@@ -24,7 +24,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:crimson_glowing_woods"
               }
             }
@@ -40,7 +40,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:crimson_pinewood"
               }
             }
@@ -56,7 +56,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:flooded_deltas"
               }
             }
@@ -72,7 +72,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:gloomwood"
               }
             }
@@ -88,7 +88,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:gravel_desert"
               }
             }
@@ -104,7 +104,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:magma_land"
               }
             }
@@ -120,7 +120,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:nether_grasslands"
               }
             }
@@ -136,7 +136,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:nether_jungle"
               }
             }
@@ -152,7 +152,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:nether_mushroom_forest"
               }
             }
@@ -168,7 +168,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:nether_mushroom_forest_edge"
               }
             }
@@ -184,7 +184,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:nether_swampland"
               }
             }
@@ -200,7 +200,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:nether_swampland_terraces"
               }
             }
@@ -216,7 +216,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:old_fungiwoods"
               }
             }
@@ -232,7 +232,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:old_swampland"
               }
             }
@@ -248,7 +248,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:old_warped_woods"
               }
             }
@@ -264,7 +264,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:poor_nether_grasslands"
               }
             }
@@ -280,7 +280,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:soul_plain"
               }
             }
@@ -296,7 +296,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:sulfuric_bone_reef"
               }
             }
@@ -312,7 +312,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:upside_down_forest"
               }
             }
@@ -328,7 +328,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:upside_down_forest_cleared"
               }
             }
@@ -344,7 +344,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:wart_forest"
               }
             }
@@ -360,7 +360,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "location": {
+              "minecraft:location": {
                 "biomes": "betternether:wart_forest_edge"
               }
             }

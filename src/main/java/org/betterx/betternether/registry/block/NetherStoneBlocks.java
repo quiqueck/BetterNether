@@ -95,6 +95,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.externalModel())
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.wallFrom(NETHER_BRICK_TILE_LARGE))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block NETHER_BRICK_TILE_SLAB = NetherBlocks.defineBlock("nether_brick_tile_slab", SlabBlock::new)
             .replacePropertiesWithCopy(NETHER_BRICK_TILE_SMALL)
@@ -105,6 +107,8 @@ public class NetherStoneBlocks {
             ))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(NETHER_BRICK_TILE_SMALL))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block NETHER_BRICK_TILE_STAIRS = NetherBlocks.defineBlock(
             "nether_brick_tile_stairs",
@@ -115,6 +119,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.stairs(() -> NETHER_BRICK_TILE_SMALL))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.stairsFrom(NETHER_BRICK_TILE_SMALL))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Bone //
     // BNBoneBlock's getDrops() override always dropped the block itself, unconditionally (no loot table
@@ -132,6 +138,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.stairs(() -> BONE_BLOCK))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.stairsFrom(BONE_BLOCK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BONE_SLAB = NetherBlocks.defineBlock("bone_slab", SlabBlock::new)
             .replacePropertiesWithCopy(BONE_BLOCK)
@@ -141,6 +149,8 @@ public class NetherStoneBlocks {
                     BetterNether.C.mk("block/bone_slab_side")))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(BONE_BLOCK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // registerButton never dispatched through the retired material-dispatch helper (unlike registerPlate
     // below) - it just built a plain ButtonBlock with the material list the call site passed explicitly,
@@ -156,6 +166,8 @@ public class NetherStoneBlocks {
             .addTrait(NetherModels.button("block/bone_button"))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.buttonFrom(BONE_BLOCK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Dispatch-helper branch resolution (WP5.6): BlockSetType.CRIMSON.soundType() == SoundType.NETHER_WOOD
     // (neither STONE nor METAL), so the old dispatch's isMetal(CRIMSON)/isStone(CRIMSON) were both false ->
@@ -182,6 +194,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.externalModel())
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.wallFrom(BONE_BLOCK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // See BONE_BLOCK above: BNBoneBlock's forced self-drop is now explicit (WP6.10).
     public static final Block BONE_TILE = NetherBlocks.registerBlock(
@@ -237,6 +251,8 @@ public class NetherStoneBlocks {
             .addTrait(NetherModels.soulSandstoneCutStairs())
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.stairsFrom(SOUL_SANDSTONE_CUT))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block SOUL_SANDSTONE_CUT_SLAB = NetherBlocks.defineBlock("soul_sandstone_cut_slab", SlabBlock::new)
             .replacePropertiesWithCopy(SOUL_SANDSTONE_CUT)
@@ -249,6 +265,8 @@ public class NetherStoneBlocks {
             ))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(SOUL_SANDSTONE_CUT))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block SOUL_SANDSTONE_WALL = NetherBlocks.defineBlock("soul_sandstone_wall", WallBlock::new)
             .replacePropertiesWithCopy(SOUL_SANDSTONE_CUT)
@@ -256,6 +274,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.externalModel())
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.wallFrom(SOUL_SANDSTONE_CUT))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Former registerSoulBlock bundle, inlined at the registration site (WP5.11): the stone classification
     // plus the two soul-fire tags, via NetherCompositeTraits.soulBlock() (WP4.9).
@@ -282,6 +302,8 @@ public class NetherStoneBlocks {
             .addTrait(NetherModels.soulSandstoneStairs())
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.stairsFrom(SOUL_SANDSTONE))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block SOUL_SANDSTONE_SMOOTH_STAIRS = NetherBlocks.defineBlock(
             "soul_sandstone_smooth_stairs",
@@ -293,6 +315,8 @@ public class NetherStoneBlocks {
             .addTrait(NetherModels.soulSandstoneSmoothStairs())
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.stairsFrom(SOUL_SANDSTONE_SMOOTH))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block SOUL_SANDSTONE_SLAB = NetherBlocks.defineBlock("soul_sandstone_slab", SlabBlock::new)
             .replacePropertiesWithCopy(SOUL_SANDSTONE)
@@ -305,6 +329,8 @@ public class NetherStoneBlocks {
             ))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(SOUL_SANDSTONE))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = NetherBlocks.defineBlock("soul_sandstone_smooth_slab", SlabBlock::new)
             .replacePropertiesWithCopy(SOUL_SANDSTONE_SMOOTH)
@@ -317,6 +343,8 @@ public class NetherStoneBlocks {
             ))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(SOUL_SANDSTONE_SMOOTH))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Basalt Bricks //
     // BlockBase.Stone's inherited getDrops() override always dropped the block itself unconditionally - no
@@ -337,6 +365,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.stairs(() -> BASALT_BRICKS))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.stairsFrom(BASALT_BRICKS))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BASALT_BRICKS_SLAB = NetherBlocks.defineBlock("basalt_bricks_slab", SlabBlock::new)
             .replacePropertiesWithCopy(BASALT_BRICKS)
@@ -344,6 +374,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.externalModel())
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(BASALT_BRICKS))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BASALT_BRICKS_WALL = NetherBlocks.defineBlock("basalt_bricks_wall", WallBlock::new)
             .replacePropertiesWithCopy(BASALT_BRICKS)
@@ -351,6 +383,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.externalModel())
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.wallFrom(BASALT_BRICKS))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BASALT_SLAB = NetherBlocks.defineBlock("basalt_slab", SlabBlock::new)
             .replacePropertiesWithCopy(Blocks.BASALT)
@@ -363,6 +397,8 @@ public class NetherStoneBlocks {
             ))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(Blocks.BASALT))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     // Former registerStalactite bundle, inlined at the registration site (WP5.9): BlockStalactite dropped
     // its BehaviourStone marker, so the pickaxe tool tag is restored via NetherMaterial.stone() (tag only,
@@ -376,6 +412,8 @@ public class NetherStoneBlocks {
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherRecipeTraits.stalactiteRecipe(Blocks.NETHERRACK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block GLOWSTONE_STALACTITE = NetherBlocks.defineBlock("glowstone_stalactite", BlockStalactite::new)
             .replacePropertiesWithCopy(Blocks.GLOWSTONE)
@@ -384,6 +422,8 @@ public class NetherStoneBlocks {
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .strength(0.3F, 0.3F)
             .addTrait(NetherRecipeTraits.stalactiteRecipe(Blocks.GLOWSTONE))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BLACKSTONE_STALACTITE = NetherBlocks.defineBlock("blackstone_stalactite", BlockStalactite::new)
             .replacePropertiesWithCopy(Blocks.BLACKSTONE)
@@ -391,6 +431,8 @@ public class NetherStoneBlocks {
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherRecipeTraits.stalactiteRecipe(Blocks.BLACKSTONE))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BASALT_STALACTITE = NetherBlocks.defineBlock("basalt_stalactite", BlockStalactite::new)
             .replacePropertiesWithCopy(Blocks.BASALT)
@@ -398,6 +440,8 @@ public class NetherStoneBlocks {
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherRecipeTraits.stalactiteRecipe(Blocks.BASALT))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block BONE_STALACTITE = NetherBlocks.defineBlock("bone_stalactite", BlockStalactite::new)
             .replacePropertiesWithCopy(BONE_BLOCK)
@@ -405,6 +449,8 @@ public class NetherStoneBlocks {
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherRecipeTraits.stalactiteRecipe(BONE_BLOCK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
 
     public static final Block NETHERRACK_SLAB = NetherBlocks.defineBlock("netherrack_slab", SlabBlock::new)
@@ -413,6 +459,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.slab(() -> Blocks.NETHERRACK))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(Blocks.NETHERRACK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block NETHERRACK_STAIR = NetherBlocks.defineBlock(
             "netherrack_stairs",
@@ -423,6 +471,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.stairs(() -> Blocks.NETHERRACK))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.stairsFrom(Blocks.NETHERRACK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
     public static final Block NETHERRACK_WALLS = NetherBlocks.defineBlock("netherrack_wall", WallBlock::new)
             .replacePropertiesWithCopy(Blocks.NETHERRACK)
@@ -430,6 +480,8 @@ public class NetherStoneBlocks {
             .addTrait(ModelTraitLibrary.wall(() -> Blocks.NETHERRACK))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.wallFrom(Blocks.NETHERRACK))
+            // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
             .buildAndRegister();
 
     public static void ensureLoaded() {}

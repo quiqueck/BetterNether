@@ -20,7 +20,10 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 public class UpsideDownForest extends NetherBiomeConfig {
     static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherTerrainBlocks.CEILING_MUSHROOMS.defaultBlockState());
     static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherTerrainBlocks.NETHERRACK_MOSS.defaultBlockState());
-    static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(
+    // 26.2 split SurfaceRules.noiseCondition into noiseCondition2d/noiseCondition3d. The 26.1
+    // method sampled NormalNoise.getValue(blockX, 0, blockZ) - i.e. 2d - and noiseCondition2d
+    // builds the very same NoiseThresholdConditionSource with 26.2's new 3d flag set to false.
+    static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition2d(
             Noises.NETHER_STATE_SELECTOR,
             0.0
     );

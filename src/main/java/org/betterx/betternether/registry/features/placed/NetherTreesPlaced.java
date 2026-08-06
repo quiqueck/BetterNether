@@ -14,8 +14,22 @@ public class NetherTreesPlaced {
     public static PlacedConfiguredFeatureKey RUBEUS_TREE = PlacedFeatureManager
             .createKey(NetherTrees.RUBEUS_TREE)
             .setDecoration(VEGETAL_DECORATION);
+    /**
+     * The gloomwood in three densities, forming groves instead of an even stand.
+     * <p>
+     * The three share one noise field (see {@code PlacedTreeFeatureDataProvider}) and take
+     * non-overlapping slices of it, so every column of the biome belongs to exactly one of them: the
+     * closed heart of a grove, its thinning edge, or the open sculk between them, where the occasional
+     * tree stands on its own.
+     */
     public static PlacedConfiguredFeatureKey GLOOMWOOD_TREE = PlacedFeatureManager
             .createKey(NetherTrees.GLOOMWOOD_TREE)
+            .setDecoration(VEGETAL_DECORATION);
+    public static PlacedConfiguredFeatureKey GLOOMWOOD_TREE_EDGE = PlacedFeatureManager
+            .createKey(C.id("tree_gloomwood_edge"), NetherTrees.GLOOMWOOD_TREE)
+            .setDecoration(VEGETAL_DECORATION);
+    public static PlacedConfiguredFeatureKey GLOOMWOOD_TREE_SOLITARY = PlacedFeatureManager
+            .createKey(NetherTrees.GLOOMWOOD_TREE_SOLITARY)
             .setDecoration(VEGETAL_DECORATION);
     public static PlacedConfiguredFeatureKey MUSHROOM_FIR = PlacedFeatureManager
             .createKey(NetherTrees.MUSHROOM_FIR)
@@ -65,8 +79,8 @@ public class NetherTreesPlaced {
     public static PlacedFeatureKey SOUL_LILY = PlacedFeatureManager
             .createKey(C.id("patch_soul_lily"))
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedFeatureKey OLD_WILLOW_TREE = PlacedFeatureManager
-            .createKey(C.id("tree_old_willow"))
+    public static PlacedConfiguredFeatureKey OLD_WILLOW_TREE = PlacedFeatureManager
+            .createKey(NetherTrees.OLD_WILLOW_TREE)
             .setDecoration(VEGETAL_DECORATION);
     public static PlacedConfiguredFeatureKey ANCHOR_TREE_SPARSE = PlacedFeatureManager
             .createKey(C.id("anchor_tree_sparse"), NetherTrees.ANCHOR_TREE)

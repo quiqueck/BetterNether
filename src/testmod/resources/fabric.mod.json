@@ -10,16 +10,37 @@
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
+    "main": [
+      "de.ambertation.wover.test.api.gametest.CompatWorldgenBootCheck"
+    ],
     "fabric-gametest": [
       "org.betterx.betternether.testmod.gametest.ObsidianBreakerGameTest",
       "org.betterx.betternether.testmod.gametest.RubyFireGameTest",
       "org.betterx.betternether.testmod.gametest.DefaultEnchantmentGameTest",
-      "org.betterx.betternether.testmod.gametest.ObsidianAdvancementGameTest"
+      "org.betterx.betternether.testmod.gametest.ObsidianAdvancementGameTest",
+      "org.betterx.betternether.testmod.gametest.MapColorGameTest",
+      "org.betterx.betternether.testmod.gametest.FurnitureParityGameTest",
+      "org.betterx.betternether.testmod.gametest.OreDropGameTest",
+      "org.betterx.betternether.testmod.gametest.PortalShapeGameTest",
+      "org.betterx.betternether.testmod.gametest.GameRuleGameTest",
+      "org.betterx.betternether.testmod.gametest.RecipeCoverageGameTest",
+      "org.betterx.betternether.testmod.gametest.AdvancementSweepGameTest",
+      "org.betterx.betternether.testmod.gametest.ChestOfDrawersGameTest",
+      "org.betterx.betternether.testmod.gametest.CincinnasiteAnvilGameTest",
+      "org.betterx.betternether.testmod.gametest.FireBowlGameTest",
+      "org.betterx.betternether.testmod.gametest.BowlGameTest",
+      "org.betterx.betternether.testmod.gametest.MedicineGameTest",
+      "org.betterx.betternether.testmod.gametest.CincinnasitePotGameTest",
+      "org.betterx.betternether.testmod.gametest.FlamingRubyUpgradeGameTest"
     ]
   },
   "depends": {
-    "fabricloader": ">=0.16.0",
-    "fabric-api": "*",
+    "fabricloader": ">=0.19.0",
+    "minecraft": [
+      "26.2"
+    ],
+    "java": ">=25",
+    "fabric-api": ">=0.155.0",
     "betternether": "*"
   }
 }

@@ -34,7 +34,7 @@ public class Sapling extends SlotFromDefinition {
     private final Function<BlockBehaviour.Properties, Block> maker;
     private final List<BlockTrait<?, ?>> survival;
 
-    private Sapling(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
+    protected Sapling(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
         super(NetherSlots.SAPLING);
         this.maker = maker;
         this.survival = survival;
@@ -80,5 +80,12 @@ public class Sapling extends SlotFromDefinition {
     @Override
     protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return ModelTraitLibrary.crossPlant();
+    }
+
+    @Override
+    protected void finalizeDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        // Not a full cube (a plant), so it must not inherit the set material's sulfur cube archetype - a
+        // cube renders what it swallowed as a block model, and a sapling inside one reads as a bug.
+        def.addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable());
     }
 }

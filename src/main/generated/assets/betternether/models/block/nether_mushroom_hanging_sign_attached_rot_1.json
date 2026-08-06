@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_attached_hanging_sign_rot_1",
+  "textures": {
+    "all": "betternether:block/nether_mushroom_hanging_sign",
+    "particle": "betternether:block/nether_mushroom_stem"
+  }
+}

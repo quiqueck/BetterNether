@@ -6,6 +6,7 @@ import org.betterx.betternether.advancements.BNCriterion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -50,7 +51,10 @@ class BNObsidianBase extends Block {
             for (Direction direction : Direction.values()) {
                 final BlockPos rodPos = blockPos.relative(direction);
                 final BlockState updaterState = level.getBlockState(rodPos);
-                if (updaterState.is(Blocks.LIGHTNING_ROD) && updaterState.getValue(LightningRodBlock.POWERED)) {
+                // 26.2: lightning rods weather like copper, so Blocks.LIGHTNING_ROD is a
+                // WeatheringCopperCollection of eight blocks rather than a single Block. The
+                // BlockTags.LIGHTNING_RODS tag covers exactly that collection.
+                if (updaterState.is(BlockTags.LIGHTNING_RODS) && updaterState.getValue(LightningRodBlock.POWERED)) {
                     BNObsidian.onLightningUpdate(level, blockPos, transformsTo);
                     return;
                 }

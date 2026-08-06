@@ -109,6 +109,8 @@ public class NetherCropBlocks {
             .requiresCorrectToolForDrops()
             .strength(0.5f)
             .addTrait(NetherLoot.dropSelfNoExplosion())
+            // Vanilla's soft organic cubes (moss, sponge, dried_kelp, melon, pumpkin) are fast_flat.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.fastFlat())
             .buildAndRegister();
 
     public static void ensureLoaded() {}

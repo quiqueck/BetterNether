@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_sign_rot_3",
+  "textures": {
+    "all": "betternether:block/rubeus_sign",
+    "particle": "betternether:block/rubeus_planks"
+  }
+}

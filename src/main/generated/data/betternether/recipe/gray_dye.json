@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "nether_gray_dye",
   "ingredients": [
     "betternether:gray_mold"

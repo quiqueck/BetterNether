@@ -4,6 +4,7 @@ import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
+import org.betterx.betternether.blocks.complex.slots.AnchorTreeSaplingSlot;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
 import org.betterx.betternether.blocks.complex.slots.Sapling;
@@ -38,7 +39,7 @@ public class AnchorTreeMaterial extends NetherWoodenMaterial<AnchorTreeMaterial>
                     // anchor_tree's trapdoor is exactly stalagnate's shared (no-side) trapdoor mesh - generate
                     // its child model/blockstate/item from the template instead of hand-authoring them.
                     .replace(new NetherWoodSlots.TrapdoorTemplate())
-                    .add(Sapling.create(
+                    .add(AnchorTreeSaplingSlot.create(
                             BlockAnchorTreeSapling::new,
                             TraitLists.and(
                                     NetherSurvival.netherrack(),

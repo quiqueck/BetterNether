@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_sign_rot_2",
+  "textures": {
+    "all": "betternether:block/willow_sign",
+    "particle": "betternether:block/willow_planks"
+  }
+}

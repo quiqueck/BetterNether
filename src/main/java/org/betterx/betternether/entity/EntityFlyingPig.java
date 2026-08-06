@@ -37,7 +37,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
-import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.animal.pig.PigSoundVariant;
 import net.minecraft.world.entity.animal.pig.PigSoundVariants;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -60,7 +59,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
-public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
+public class EntityFlyingPig extends DespawnableAnimal {
     private static final EntityDataAccessor<Byte> DATA_SHARED_FLAGS_ID;
     private static final int BIT_ROOSTING = 0;
     private static final int BIT_WARTED = 1;
@@ -239,7 +238,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
     }
 
     @Override
-    public boolean isFlying() {
+    protected boolean omnidirectionalAirMover() {
         return !this.onGround();
     }
 

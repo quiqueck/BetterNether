@@ -2,10 +2,14 @@ package org.betterx.betternether.advancements;
 
 import org.betterx.betternether.BetterNether;
 
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.CriterionTrigger;
+// 26.2 split net.minecraft.advancements.criterion into .predicates (ItemPredicate,
+// LocationPredicate, StatePropertiesPredicate, ...) and .triggers (Criterion, CriterionTrigger,
+// CriteriaTriggers and every *Trigger). Criterion and CriterionTrigger moved down out of
+// net.minecraft.advancements into .triggers as well; only CriterionTriggerInstance stayed put.
 import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.criterion.PlayerTrigger;
+import net.minecraft.advancements.triggers.Criterion;
+import net.minecraft.advancements.triggers.CriterionTrigger;
+import net.minecraft.advancements.triggers.PlayerTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;

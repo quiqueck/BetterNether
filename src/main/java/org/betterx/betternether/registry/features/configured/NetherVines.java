@@ -24,6 +24,14 @@ public class NetherVines {
             ConfiguredFeatureManager.blockColumn(C.id("eye_vine"));
     public static final ConfiguredFeatureKey<RandomPatch> PATCH_LUMABUS_VINE =
             ConfiguredFeatureManager.randomPatch(C.id("patch_lumabus_vine"));
+    /**
+     * The lumabus patch for the gloomwood: identical to {@link #PATCH_LUMABUS_VINE} except that the
+     * column it scatters may also hang from a sculk ceiling. The ordinary one asks for nether ground,
+     * which in the gloomwood is only the netherrack islands breaking up the sculk - it would have grown
+     * on those and nowhere else.
+     */
+    public static final ConfiguredFeatureKey<RandomPatch> PATCH_LUMABUS_VINE_GLOOM =
+            ConfiguredFeatureManager.randomPatch(C.id("patch_lumabus_vine_gloom"));
     public static final ConfiguredFeatureKey<RandomPatch> PATCH_GOLDEN_LUMABUS_VINE =
             ConfiguredFeatureManager.randomPatch(C.id("patch_golden_lumabus_vine"));
     public static final ConfiguredFeatureKey<AsBlockColumn> PATCH_GOLDEN_VINE =

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_sign_rot_2",
+  "textures": {
+    "all": "betternether:block/stalagnate_sign",
+    "particle": "betternether:block/stalagnate_planks"
+  }
+}

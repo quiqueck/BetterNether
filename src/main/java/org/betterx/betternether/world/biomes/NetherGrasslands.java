@@ -27,18 +27,21 @@ public class NetherGrasslands extends NetherBiomeConfig {
     static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
     static final SurfaceRules.RuleSource MOSS = SurfaceRules.state(NetherTerrainBlocks.NETHERRACK_MOSS.defaultBlockState());
 
-    private static final SurfaceRules.RuleSource BLUE = SurfaceRules.state(Blocks.BLUE_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource LIGHT_BLUE = SurfaceRules.state(Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource CYAN = SurfaceRules.state(Blocks.CYAN_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource GREEN = SurfaceRules.state(Blocks.GREEN_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource LIME_GREEN = SurfaceRules.state(Blocks.LIME_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource YELLOW = SurfaceRules.state(Blocks.YELLOW_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource ORANGE = SurfaceRules.state(Blocks.ORANGE_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource RED = SurfaceRules.state(Blocks.RED_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource PINK = SurfaceRules.state(Blocks.PINK_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource PURPLE = SurfaceRules.state(Blocks.PURPLE_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource MAGENTA = SurfaceRules.state(Blocks.MAGENTA_CONCRETE.defaultBlockState());
-    private static final SurfaceRules.RuleSource BLACK = SurfaceRules.state(Blocks.BLACK_CONCRETE.defaultBlockState());
+    // 26.2 folded the dyed blocks into ColorCollection records, so Blocks.BLUE_CONCRETE is now
+    // Blocks.CONCRETE.blue(). Note LIME_CONCRETE maps onto .lime(); the local constant keeps its
+    // old LIME_GREEN name so the commented-out palette below still reads.
+    private static final SurfaceRules.RuleSource BLUE = SurfaceRules.state(Blocks.CONCRETE.blue().defaultBlockState());
+    private static final SurfaceRules.RuleSource LIGHT_BLUE = SurfaceRules.state(Blocks.CONCRETE.lightBlue().defaultBlockState());
+    private static final SurfaceRules.RuleSource CYAN = SurfaceRules.state(Blocks.CONCRETE.cyan().defaultBlockState());
+    private static final SurfaceRules.RuleSource GREEN = SurfaceRules.state(Blocks.CONCRETE.green().defaultBlockState());
+    private static final SurfaceRules.RuleSource LIME_GREEN = SurfaceRules.state(Blocks.CONCRETE.lime().defaultBlockState());
+    private static final SurfaceRules.RuleSource YELLOW = SurfaceRules.state(Blocks.CONCRETE.yellow().defaultBlockState());
+    private static final SurfaceRules.RuleSource ORANGE = SurfaceRules.state(Blocks.CONCRETE.orange().defaultBlockState());
+    private static final SurfaceRules.RuleSource RED = SurfaceRules.state(Blocks.CONCRETE.red().defaultBlockState());
+    private static final SurfaceRules.RuleSource PINK = SurfaceRules.state(Blocks.CONCRETE.pink().defaultBlockState());
+    private static final SurfaceRules.RuleSource PURPLE = SurfaceRules.state(Blocks.CONCRETE.purple().defaultBlockState());
+    private static final SurfaceRules.RuleSource MAGENTA = SurfaceRules.state(Blocks.CONCRETE.magenta().defaultBlockState());
+    private static final SurfaceRules.RuleSource BLACK = SurfaceRules.state(Blocks.CONCRETE.black().defaultBlockState());
     //List.of(BLUE, LIGHT_BLUE, CYAN, GREEN, LIME_GREEN, YELLOW, ORANGE, RED, PINK, MAGENTA, PURPLE, BLACK)
 
 

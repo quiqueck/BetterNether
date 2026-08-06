@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "nether_wall_moss",
   "ingredients": [
     "betternether:nether_grass"

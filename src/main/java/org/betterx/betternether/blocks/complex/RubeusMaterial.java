@@ -55,7 +55,7 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
                     // BlockRubeusCone (WP6.12): always dropped itself unconditionally via BlockBase's
                     // inherited getDrops() override (no loot table json was generated for it), reproduced
                     // explicitly as NetherLoot.dropSelfNoExplosion().
-                    .add(SimpleBlockSlot.withItem(
+                    .add(SimpleBlockSlot.withItemNotFullCube(
                             NetherSlots.CONE,
                             (set, props) -> new BlockRubeusCone(props),
                             TraitLists.of(NetherLoot.dropSelfNoExplosion())

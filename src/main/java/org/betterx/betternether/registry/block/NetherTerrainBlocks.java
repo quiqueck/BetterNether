@@ -99,12 +99,11 @@ public class NetherTerrainBlocks {
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
             // netherTerrainTags() carries the SOIL tag, so this is also plantable ground - and so pottable
             // soil, mirroring bleached_gloomsculk below.
-            TraitLists.and(
-                    NetherMaterial.stoneTagOnly(),
-                    NetherLoot.terrain(),
-                    NetherMaterial.netherTerrainTags(),
-                    PottableSoilBlockTrait.DEFAULT
-            ),
+            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags(),
+                           // Netherrack with a cover grown on it, so it takes netherrack's archetype -
+                           // vanilla does the same for crimson_nylium and warped_nylium.
+                           BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy(),
+                           PottableSoilBlockTrait.DEFAULT),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
@@ -113,7 +112,10 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), PottableSoilBlockTrait.DEFAULT),
+            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(),
+                           // As above: netherrack underneath, so netherrack's archetype.
+                           BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy(),
+                           PottableSoilBlockTrait.DEFAULT),
             BlockNetherMycelium::new,
             CommonBlockTags.MYCELIUM,
             CommonBlockTags.NETHER_MYCELIUM,
@@ -127,12 +129,11 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(
-                    NetherMaterial.stoneTagOnly(),
-                    NetherLoot.terrain(),
-                    NetherMaterial.netherTerrainTags(),
-                    PottableSoilBlockTrait.DEFAULT
-            ),
+            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags(),
+                           // Netherrack with a cover grown on it, so it takes netherrack's archetype -
+                           // vanilla does the same for crimson_nylium and warped_nylium.
+                           BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy(),
+                           PottableSoilBlockTrait.DEFAULT),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -142,12 +143,11 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(
-                    NetherMaterial.stoneTagOnly(),
-                    NetherLoot.terrain(),
-                    NetherMaterial.netherTerrainTags(),
-                    PottableSoilBlockTrait.DEFAULT
-            ),
+            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags(),
+                           // Netherrack with a cover grown on it, so it takes netherrack's archetype -
+                           // vanilla does the same for crimson_nylium and warped_nylium.
+                           BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy(),
+                           PottableSoilBlockTrait.DEFAULT),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -157,12 +157,11 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(
-                    NetherMaterial.stoneTagOnly(),
-                    NetherLoot.terrain(),
-                    NetherMaterial.netherTerrainTags(),
-                    PottableSoilBlockTrait.DEFAULT
-            ),
+            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags(),
+                           // Netherrack with a cover grown on it, so it takes netherrack's archetype -
+                           // vanilla does the same for crimson_nylium and warped_nylium.
+                           BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy(),
+                           PottableSoilBlockTrait.DEFAULT),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -172,12 +171,11 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(
-                    NetherMaterial.stoneTagOnly(),
-                    NetherLoot.terrain(),
-                    NetherMaterial.netherTerrainTags(),
-                    PottableSoilBlockTrait.DEFAULT
-            ),
+            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags(),
+                           // Netherrack with a cover grown on it, so it takes netherrack's archetype -
+                           // vanilla does the same for crimson_nylium and warped_nylium.
+                           BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy(),
+                           PottableSoilBlockTrait.DEFAULT),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -203,7 +201,10 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
+            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags(),
+                           // Netherrack with a cover grown on it, so it takes netherrack's archetype -
+                           // vanilla does the same for crimson_nylium and warped_nylium.
+                           BlockTraits.SULFUR_CUBE_ARCHETYPE.slowBouncy()),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
@@ -245,6 +246,9 @@ public class NetherTerrainBlocks {
             .defineBlock("molten_gloomsculk", BlockMoltenGloomsculk::new)
             .replacePropertiesWithCopy(Blocks.SCULK)
             .addTrait(NetherMaterial.stoneTagOnly())
+            // Same reasoning as the geode: what a sulfur cube ends up carrying is the lava in the fissures,
+            // not the sculk around it.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.hot())
             .addTrait(NetherLoot.terrain(Blocks.SCULK))
             .addTrait(NetherModels.terrainCover(() -> Blocks.SCULK))
             .lightLevel(bs -> 5)
@@ -302,6 +306,10 @@ public class NetherTerrainBlocks {
             .replacePropertiesWithCopy(Blocks.SCULK)
             .addTrait(NetherRender.translucent())
             .addTrait(NetherMaterial.stoneTagOnly())
+            // A sulfur cube that swallows one is carrying the lava too, so this is the hot archetype
+            // rather than the slow_bouncy any other sculk-like shell would get. Not derivable from the
+            // material: it is the lava behind the cap, which only this block knows about.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.hot())
             // Silk touch takes the geode whole; anything else lets the lava out, which the block class
             // places. Deliberately no non-silk drop - what you get for breaking it is the lava.
             .addTrait(BlockTraits.LOOT_TABLE.silkTouchSelf())
@@ -359,6 +367,8 @@ public class NetherTerrainBlocks {
                                  .category(RecipeCategory.BUILDING_BLOCKS)
                                  .build(context)
             ))
+            // Molten gloom content is hot, like the geode and the molten log it is made from.
+            .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.hot())
             .buildAndRegister();
 
     /**

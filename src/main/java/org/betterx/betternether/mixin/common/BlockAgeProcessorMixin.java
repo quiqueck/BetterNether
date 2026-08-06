@@ -21,32 +21,47 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-//make some ruined portals blue
+/**
+ * Makes some ruined portals blue.
+ * <p>
+ * 26.2 changed {@code StructureProcessor#processBlock}: the fourth parameter used to be the <em>original</em>
+ * {@code StructureBlockInfo} and is now a {@code BlockPos templateRelativePos}. Verified with
+ * {@code javap -p -l net.minecraft.world.level.levelgen.structure.templatesystem.BlockAgeProcessor}:
+ * <pre>
+ * 26.1: (LevelReader level, BlockPos targetPosition, BlockPos referencePos,
+ *        StructureBlockInfo originalBlockInfo, StructureBlockInfo processedBlockInfo, StructurePlaceSettings settings)
+ * 26.2: (LevelReader level, BlockPos targetPosition, BlockPos referencePos,
+ *        BlockPos templateRelativePos, StructureBlockInfo processedBlockInfo, StructurePlaceSettings settings)
+ * </pre>
+ * Only the processed info was ever read here, so the fix is purely the parameter list. This build has no refmap
+ * and no mixin annotation processor, so the stale descriptor compiled but could not apply - and because
+ * {@code processBlock} is not overloaded, that is a hard failure at mixin-apply time, not a silent no-op.
+ */
 @Mixin(BlockAgeProcessor.class)
 public class BlockAgeProcessorMixin {
     @Inject(method = "processBlock", at = @At(value = "HEAD"), cancellable = true)
     void bn_processBlock(
             LevelReader levelReader,
-            BlockPos blockPos,
-            BlockPos blockPos2,
-            StructureBlockInfo structureBlockInfo,
-            StructureBlockInfo structureBlockInfo2,
+            BlockPos targetPosition,
+            BlockPos referencePos,
+            BlockPos templateRelativePos,
+            StructureBlockInfo processedBlockInfo,
             StructurePlaceSettings structurePlaceSettings,
             CallbackInfoReturnable<StructureBlockInfo> cir
     ) {
-        final boolean makeBlue = (blockPos.getX() + blockPos.getZ()) % 3 == 0;
+        final boolean makeBlue = (targetPosition.getX() + targetPosition.getZ()) % 3 == 0;
 
         if (makeBlue
-                && structureBlockInfo2.state().is(Blocks.OBSIDIAN)
+                && processedBlockInfo.state().is(Blocks.OBSIDIAN)
                 && bn_blueRuinedPortalsEnabled(levelReader)) {
-            final BlockPos structurePos = structureBlockInfo2.pos();
+            final BlockPos structurePos = processedBlockInfo.pos();
             final RandomSource random = structurePlaceSettings.getRandom(structurePos);
 
             Block block = random.nextFloat() < 0.15F ? NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN : NetherObsidianBlocks.BLUE_OBSIDIAN;
             cir.setReturnValue(new StructureTemplate.StructureBlockInfo(
                     structurePos,
                     block.defaultBlockState(),
-                    structureBlockInfo2.nbt()
+                    processedBlockInfo.nbt()
             ));
             cir.cancel();
         }

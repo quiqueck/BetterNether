@@ -19,7 +19,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -31,7 +30,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class EntityHydrogenJellyfish extends DespawnableAnimal implements FlyingAnimal {
+public class EntityHydrogenJellyfish extends DespawnableAnimal {
     private Vec3 preVelocity;
     private Vec3 newVelocity = new Vec3(0, 0, 0);
     private int timer;
@@ -214,7 +213,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     }
 
     @Override
-    public boolean isFlying() {
+    protected boolean omnidirectionalAirMover() {
         return !this.onGround();
     }
 }

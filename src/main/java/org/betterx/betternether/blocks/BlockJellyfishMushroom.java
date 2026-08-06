@@ -11,7 +11,6 @@ import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
@@ -40,7 +38,13 @@ public class BlockJellyfishMushroom extends Block {
     public static final EnumProperty<JellyShape> VISUAL = BNBlockProperties.JELLY_MUSHROOM_VISUAL;
 
     public BlockJellyfishMushroom(Properties settings) {
-        super(settings);
+        // 26.2 made bouncing data-driven: Block#updateEntityMovementAfterFallOn is gone and Entity
+        // now derives the rebound from Block#getBounceRestitution() (scaled by 0.8 for non-living
+        // entities) unless the entity is suppressing the bounce or the block is in
+        // BlockTags.SUPPRESSES_BOUNCE. Vanilla's slime block moved to bounceRestitution(1.0F) for
+        // exactly the "-y * (living ? 1.0 : 0.8)" this block used to apply by hand, so the old
+        // updateEntityMovementAfterFallOn/bounce pair is replaced by this property.
+        super(settings.bounceRestitution(1.0F));
     }
 
     @Override
@@ -108,22 +112,6 @@ public class BlockJellyfishMushroom extends Block {
             super.fallOn(world, state, pos, entity, fallDistance);
         else
             entity.causeFallDamage(fallDistance, 0.0F, world.damageSources().fall());
-    }
-
-    @Override
-    public void updateEntityMovementAfterFallOn(BlockGetter world, Entity entity) {
-        if (entity.isSuppressingBounce())
-            super.updateEntityMovementAfterFallOn(world, entity);
-        else
-            this.bounce(entity);
-    }
-
-    private void bounce(Entity entity) {
-        Vec3 vec3d = entity.getDeltaMovement();
-        if (vec3d.y < 0.0D) {
-            double d = entity instanceof LivingEntity ? 1.0D : 0.8D;
-            entity.setDeltaMovement(vec3d.x, -vec3d.y * d, vec3d.z);
-        }
     }
 
     @Override

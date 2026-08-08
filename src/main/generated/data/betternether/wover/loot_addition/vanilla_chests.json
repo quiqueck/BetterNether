@@ -1,0 +1,242 @@
+{
+  "additions": [
+    {
+      "operations": {
+        "type": "add_pool",
+        "pools": [
+          {
+            "bonus_rolls": 0.0,
+            "entries": [
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 2.0,
+                      "min": 1.0
+                    },
+                    "function": "minecraft:set_count"
+                  }
+                ],
+                "name": "betternether:blue_obsidian"
+              },
+              {
+                "type": "minecraft:empty",
+                "weight": 9
+              }
+            ],
+            "rolls": {
+              "type": "minecraft:uniform",
+              "max": 4.0,
+              "min": 0.0
+            }
+          },
+          {
+            "bonus_rolls": 0.0,
+            "entries": [
+              {
+                "type": "minecraft:empty",
+                "weight": 9
+              },
+              {
+                "type": "minecraft:item",
+                "name": "betternether:bowl_upgrade_smithing_template"
+              }
+            ],
+            "rolls": 1.0
+          }
+        ]
+      },
+      "target": [
+        "minecraft:chests/ruined_portal",
+        "minecraft:chests/nether_bridge"
+      ]
+    },
+    {
+      "operations": {
+        "type": "add_pool",
+        "pools": [
+          {
+            "bonus_rolls": 0.0,
+            "entries": [
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 8.0,
+                      "min": 3.0
+                    },
+                    "function": "minecraft:set_count"
+                  }
+                ],
+                "name": "betternether:blue_crying_obsidian",
+                "weight": 5
+              },
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 4.0,
+                      "min": 1.0
+                    },
+                    "function": "minecraft:set_count"
+                  }
+                ],
+                "name": "betternether:blue_weeping_obsidian"
+              },
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 4.0,
+                      "min": 1.0
+                    },
+                    "function": "minecraft:set_count"
+                  }
+                ],
+                "name": "betternether:weeping_obsidian"
+              },
+              {
+                "type": "minecraft:empty",
+                "weight": 50
+              }
+            ],
+            "rolls": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 1.0
+            }
+          },
+          {
+            "bonus_rolls": 0.0,
+            "entries": [
+              {
+                "type": "minecraft:empty",
+                "weight": 99
+              },
+              {
+                "type": "minecraft:item",
+                "name": "betternether:bowl_upgrade_smithing_template"
+              }
+            ],
+            "rolls": 1.0
+          }
+        ]
+      },
+      "target": [
+        "minecraft:chests/bastion_bridge",
+        "minecraft:chests/bastion_hoglin_stable",
+        "minecraft:chests/bastion_treasure"
+      ]
+    },
+    {
+      "operations": {
+        "type": "add_pool",
+        "pools": [
+          {
+            "bonus_rolls": 0.0,
+            "entries": [
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 6.0,
+                      "min": 4.0
+                    },
+                    "function": "minecraft:set_count"
+                  }
+                ],
+                "name": "betternether:blue_obsidian",
+                "weight": 10
+              },
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 5.0,
+                      "min": 1.0
+                    },
+                    "function": "minecraft:set_count"
+                  }
+                ],
+                "name": "betternether:blue_crying_obsidian",
+                "weight": 5
+              },
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 2.0,
+                      "min": 1.0
+                    },
+                    "function": "minecraft:set_count"
+                  }
+                ],
+                "name": "betternether:blue_weeping_obsidian"
+              },
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 2.0,
+                      "min": 1.0
+                    },
+                    "function": "minecraft:set_count"
+                  }
+                ],
+                "name": "betternether:weeping_obsidian"
+              },
+              {
+                "type": "minecraft:empty",
+                "weight": 50
+              }
+            ],
+            "rolls": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 1.0
+            }
+          },
+          {
+            "bonus_rolls": 0.0,
+            "entries": [
+              {
+                "type": "minecraft:empty",
+                "weight": 9
+              },
+              {
+                "type": "minecraft:item",
+                "name": "betternether:bowl_upgrade_smithing_template"
+              }
+            ],
+            "rolls": 1.0
+          }
+        ]
+      },
+      "target": "minecraft:chests/bastion_other"
+    }
+  ]
+}

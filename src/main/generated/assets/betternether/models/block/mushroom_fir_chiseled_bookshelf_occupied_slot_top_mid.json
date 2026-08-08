@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_chiseled_bookshelf_slot_top_mid",
+  "textures": {
+    "texture": "betternether:block/mushroom_fir_chiseled_bookshelf_occupied"
+  }
+}

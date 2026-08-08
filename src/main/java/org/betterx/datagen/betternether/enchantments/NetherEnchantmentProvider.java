@@ -61,8 +61,12 @@ public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
                                 ),
                                 new Ignite(LevelBasedValue.constant(100.0F))
                         ),
+                        // Half of all hits. At the old quarter a short fight often produced nothing at
+                        // all - four hits miss entirely about a third of the time - which read as the
+                        // enchantment being broken rather than unlucky. At a half, four hits leave a
+                        // 94% chance of at least one proc.
                         LootItemRandomChanceCondition.randomChance(
-                                EnchantmentLevelProvider.forEnchantmentLevel(LevelBasedValue.perLevel(0.25F))
+                                EnchantmentLevelProvider.forEnchantmentLevel(LevelBasedValue.perLevel(0.5F))
                         )
                 )
                 .withEffect(

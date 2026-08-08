@@ -34,7 +34,7 @@ public class Sapling extends SlotFromDefinition {
     private final Function<BlockBehaviour.Properties, Block> maker;
     private final List<BlockTrait<?, ?>> survival;
 
-    private Sapling(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
+    protected Sapling(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
         super(NetherSlots.SAPLING);
         this.maker = maker;
         this.survival = survival;

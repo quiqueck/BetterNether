@@ -106,8 +106,12 @@ public class NetherItems {
                                 @Override
                                 public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
                                     if (stack.getCount() == 1) {
+                                        // super.finishUsingItem() (vanilla's Consumable#onConsume) shrinks
+                                        // `stack` in place, so stack.getCount() would already read back 0
+                                        // (i.e. an empty stack) here - the count to use is always 1, since
+                                        // that's exactly the branch condition just checked above.
                                         super.finishUsingItem(stack, world, user);
-                                        return new ItemStack(NetherFoodItems.STALAGNATE_BOWL, stack.getCount());
+                                        return new ItemStack(NetherFoodItems.STALAGNATE_BOWL, 1);
                                     } else {
                                         if (user instanceof Player player) {
                                             if (!player.isCreative())

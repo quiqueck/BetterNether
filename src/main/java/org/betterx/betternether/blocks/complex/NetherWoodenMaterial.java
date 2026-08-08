@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks.complex;
 import org.betterx.bclib.furniture.slots.BarStool;
 import org.betterx.bclib.furniture.slots.Chair;
 import org.betterx.bclib.furniture.slots.Taburet;
-import org.betterx.bclib.trait.block.FuelBlockTrait;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
 import org.betterx.betternether.blocks.complex.slots.NetherWoodSlots;
@@ -23,7 +22,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Base wooden material for BetterNether, on top of the wover-sets-api {@link WoodenBlockSet}.
@@ -33,44 +31,6 @@ import java.util.Map;
  * furniture slots (see {@link #addFurniture}).
  */
 public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends WoodenBlockSet<T> {
-    /**
-     * Furnace-fuel burn times (ticks) per slot, per the WP8.3 fuel policy (decision 6 + user's "include
-     * derived" scope choice): bark/log/stem/trunk stay non-fuel (absent from this map - {@link #fuelTrait}
-     * returns {@code null}), planks/stripped variants/plank-derived building blocks/furniture all become
-     * furnace fuel. Values match vanilla's {@code FuelValues#vanillaBurnTimes} table (base tier
-     * {@code i = 200}: planks/logs/stairs/fences/... = {@code i*3/2 = 300}, slabs = {@code i*3/4 = 150},
-     * doors/signs = {@code i = 200}, buttons = {@code i/2 = 100}, hanging signs = {@code i*4 = 800}) rather
-     * than BetterNether's legacy hard-coded {@code 40} (that value was the old {@code addFuel} helper's
-     * bowl-tier constant, never a real per-type burn time). {@code WALL} and the furniture slots
-     * (taburet/chair/bar stool) have no vanilla analog - they're wooden building blocks built from planks, so
-     * they're given the general 300-tick building-block tier.
-     */
-    private static final Map<SlotType, Integer> FUEL_TICKS = Map.ofEntries(
-            Map.entry(SlotType.PLANKS, 300),
-            Map.entry(SlotType.STRIPPED_LOG, 300),
-            Map.entry(SlotType.STRIPPED_BARK, 300),
-            Map.entry(SlotType.SLAB, 150),
-            Map.entry(SlotType.STAIRS, 300),
-            Map.entry(SlotType.FENCE, 300),
-            Map.entry(SlotType.GATE, 300),
-            Map.entry(SlotType.WALL, 300),
-            Map.entry(SlotType.BUTTON, 100),
-            Map.entry(SlotType.PRESSURE_PLATE, 300),
-            Map.entry(SlotType.TRAPDOOR, 300),
-            Map.entry(SlotType.DOOR, 200),
-            Map.entry(SlotType.LADDER, 300),
-            Map.entry(SlotType.SIGN, 200),
-            Map.entry(SlotType.HANGING_SIGN, 800),
-            Map.entry(SlotType.CHEST, 300),
-            Map.entry(SlotType.BARREL, 300),
-            Map.entry(SlotType.CRAFTING_TABLE, 300),
-            Map.entry(SlotType.BOOKSHELF, 300),
-            Map.entry(SlotType.COMPOSTER, 300),
-            Map.entry(SlotType.TABURET, 300),
-            Map.entry(SlotType.CHAIR, 300),
-            Map.entry(SlotType.BAR_STOOL, 300)
-    );
-
     protected final MapColor plankColor;
     protected Block furnitureCloth = Blocks.RED_WOOL;
 
@@ -215,8 +175,8 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
      */
     @Override
     protected BlockTrait<?, ?> fuelTrait(SlotType slot) {
-        Integer ticks = FUEL_TICKS.get(slot);
-        return ticks == null ? null : FuelBlockTrait.withTicks(ticks);
+        if (slot == SlotType.LOG || slot == SlotType.BARK) return null;
+        return super.fuelTrait(slot);
     }
 
     @Override

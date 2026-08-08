@@ -21,6 +21,7 @@ import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraitLookup;
+import de.ambertation.wover.pottable.api.trait.PottablePlantBlockTrait;
 import de.ambertation.wover.sets.api.blocks.BlockSet;
 import de.ambertation.wover.sets.api.blocks.SlotMap;
 import de.ambertation.wover.sets.api.blocks.types.Bark;
@@ -44,7 +45,13 @@ public class RubeusMaterial extends NetherWoodenMaterial<RubeusMaterial> {
     @Override
     protected SlotMap createDefaultDefinitions() {
         return super.createDefaultDefinitions()
-                    .add(Sapling.create(BlockRubeusSapling::new, NetherSurvival.netherGround()))
+                    .add(Sapling.create(
+                            BlockRubeusSapling::new,
+                            // netherGround() is a 5-way union (no single existing tag covers it), so unlike
+                            // the single-tag saplings this is left unrestricted rather than picking one
+                            // arbitrary member of the union as the pot soil.
+                            TraitLists.and(NetherSurvival.netherGround(), PottablePlantBlockTrait.any())
+                    ))
                     // BlockRubeusCone (WP6.12): always dropped itself unconditionally via BlockBase's
                     // inherited getDrops() override (no loot table json was generated for it), reproduced
                     // explicitly as NetherLoot.dropSelfNoExplosion().

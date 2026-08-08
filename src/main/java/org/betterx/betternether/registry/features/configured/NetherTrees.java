@@ -43,6 +43,14 @@ public class NetherTrees {
     public static final ConfiguredFeatureKey<WithConfiguration<WillowTreeFeature, NoneFeatureConfiguration>> WILLOW_TREE
             = ConfiguredFeatureManager.configuration(C.id("tree_willow"), NetherFeatures.WILLOW_TREE);
 
+    /**
+     * The giant willow. Used both for the natural placement in the {@code OldSwampland} and as the 2x2
+     * variant of the willow sapling, which is why it is a named configured feature rather than the inline
+     * one the placement used to carry - the sapling needs something it can look up by key.
+     */
+    public static final ConfiguredFeatureKey<WithConfiguration<OldWillowTree, NaturalTreeConfiguration>> OLD_WILLOW_TREE
+            = ConfiguredFeatureManager.configuration(C.id("tree_old_willow"), NetherFeatures.OLD_WILLOW_TREE);
+
     public static final ConfiguredFeatureKey<WithConfiguration<AnchorTreeBranchFeature, NoneFeatureConfiguration>> ANCHOR_TREE_BRANCH
             = ConfiguredFeatureManager.configuration(C.id("anchor_tree_branch"), NetherFeatures.ANCHOR_TREE_BRANCH);
 

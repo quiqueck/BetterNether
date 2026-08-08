@@ -22,9 +22,10 @@ public class VanillaExcavatorsIntegration {
             Item.Properties properties
     ) {
         if (!hasExcavators) {
-            //make sure we generate an Item during datagen. When doing datagen it does not matter what type the item is,
-            //we just need to be able to reference it.
-            if (ModCore.isDatagen()) {
+            //make sure we generate an Item during datagen and GameTest runs. Datagen just needs something to
+            //reference; GameTest force-enables this item's recipe/advancement pack regardless of whether the
+            //compat mod is loaded (see ModCore#isGametest), so the id must resolve to a real, bound item there too.
+            if (ModCore.isDatagen() || ModCore.isGametest()) {
                 return new Item(properties);
             }
 

@@ -20,6 +20,7 @@ import org.betterx.bclib.trait.TraitLists;
 import org.betterx.bclib.trait.block.WeightedBark;
 import org.betterx.bclib.trait.block.WeightedLog;
 import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
+import de.ambertation.wover.pottable.api.trait.PottablePlantBlockTrait;
 import de.ambertation.wover.sets.api.blocks.SlotMap;
 
 import net.minecraft.world.level.block.Block;
@@ -53,7 +54,13 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                     ))
                     .add(TrunkSlot.create(BlockWillowTrunk::new)
                                   .withModelTrait(WillowMaterial::willowTrunkModelTrait))
-                    .add(Sapling.create(BlockWillowSapling::new, NetherSurvival.netherGround()))
+                    .add(Sapling.create(
+                            BlockWillowSapling::new,
+                            // netherGround() is a 5-way union (no single existing tag covers it), so unlike
+                            // the single-tag saplings this is left unrestricted rather than picking one
+                            // arbitrary member of the union as the pot soil.
+                            TraitLists.and(NetherSurvival.netherGround(), PottablePlantBlockTrait.any())
+                    ))
                     .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.BRANCH,
                             (set, props) -> new BlockWillowBranch(props),

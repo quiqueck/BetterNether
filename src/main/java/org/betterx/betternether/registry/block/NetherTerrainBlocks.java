@@ -33,6 +33,8 @@ import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
+import de.ambertation.wover.item.api.VanillaBlockItemDefinition;
+import de.ambertation.wover.pottable.api.trait.PottableSoilBlockTrait;
 import de.ambertation.wover.recipe.api.RecipeBuilder;
 import de.ambertation.wover.state.api.WorldState;
 import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
@@ -79,7 +81,14 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
+            // netherTerrainTags() carries the SOIL tag, so this is also plantable ground - and so pottable
+            // soil, mirroring bleached_gloomsculk below.
+            TraitLists.and(
+                    NetherMaterial.stoneTagOnly(),
+                    NetherLoot.terrain(),
+                    NetherMaterial.netherTerrainTags(),
+                    PottableSoilBlockTrait.DEFAULT
+            ),
             BlockTerrain::new,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
@@ -88,7 +97,7 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain()),
+            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), PottableSoilBlockTrait.DEFAULT),
             BlockNetherMycelium::new,
             CommonBlockTags.MYCELIUM,
             CommonBlockTags.NETHER_MYCELIUM,
@@ -102,7 +111,12 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
+            TraitLists.and(
+                    NetherMaterial.stoneTagOnly(),
+                    NetherLoot.terrain(),
+                    NetherMaterial.netherTerrainTags(),
+                    PottableSoilBlockTrait.DEFAULT
+            ),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -112,7 +126,12 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
+            TraitLists.and(
+                    NetherMaterial.stoneTagOnly(),
+                    NetherLoot.terrain(),
+                    NetherMaterial.netherTerrainTags(),
+                    PottableSoilBlockTrait.DEFAULT
+            ),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -122,7 +141,12 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
+            TraitLists.and(
+                    NetherMaterial.stoneTagOnly(),
+                    NetherLoot.terrain(),
+                    NetherMaterial.netherTerrainTags(),
+                    PottableSoilBlockTrait.DEFAULT
+            ),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
@@ -132,7 +156,12 @@ public class NetherTerrainBlocks {
             Blocks.NETHERRACK,
             // #32: nylium-like ground copies netherrack (0.4); STONE_BLOCK's 2/6 would over-harden natural
             // ground (cf. BetterEnd terrain, which keeps its base end_stone hardness rather than 2/6).
-            TraitLists.and(NetherMaterial.stoneTagOnly(), NetherLoot.terrain(), NetherMaterial.netherTerrainTags()),
+            TraitLists.and(
+                    NetherMaterial.stoneTagOnly(),
+                    NetherLoot.terrain(),
+                    NetherMaterial.netherTerrainTags(),
+                    PottableSoilBlockTrait.DEFAULT
+            ),
             BlockTerrain::new,
             BlockTags.NYLIUM,
             BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK

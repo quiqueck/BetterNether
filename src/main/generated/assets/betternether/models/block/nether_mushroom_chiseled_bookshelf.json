@@ -1,0 +1,7 @@
+{
+  "parent": "wover:block/chiseled_bookshelf",
+  "textures": {
+    "side": "betternether:block/nether_mushroom_chiseled_bookshelf_side",
+    "top": "betternether:block/nether_mushroom_chiseled_bookshelf_top"
+  }
+}

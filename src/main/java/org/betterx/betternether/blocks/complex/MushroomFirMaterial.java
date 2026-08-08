@@ -12,7 +12,10 @@ import org.betterx.betternether.blocks.complex.slots.Sapling;
 import org.betterx.betternether.blocks.complex.slots.Stem;
 import org.betterx.betternether.blocks.complex.slots.TrunkSlot;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.bclib.trait.TraitLists;
+import de.ambertation.wover.pottable.api.trait.PottablePlantBlockTrait;
 import de.ambertation.wover.sets.api.blocks.SlotMap;
+import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -38,7 +41,13 @@ public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMateria
                     // generate its child model/blockstate/item from the template instead of hand-authoring.
                     .replace(new NetherWoodSlots.TrapdoorTemplate())
                     .add(TrunkSlot.create(BlockMushroomFir::new, NetherRender.cutout()))
-                    .add(Sapling.create(BlockMushroomFirSapling::new, NetherSurvival.netherMycelium()))
+                    .add(Sapling.create(
+                            BlockMushroomFirSapling::new,
+                            TraitLists.and(
+                                    NetherSurvival.netherMycelium(),
+                                    PottablePlantBlockTrait.withSoils(CommonBlockTags.NETHER_MYCELIUM)
+                            )
+                    ))
                     // The stem delegates its item model to the dedicated trunk model; its blockstate and
                     // block model are hand-authored.
                     .add(new Stem() {

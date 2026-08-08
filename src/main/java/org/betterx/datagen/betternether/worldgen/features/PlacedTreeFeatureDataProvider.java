@@ -86,6 +86,12 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
                 .register();
 
         NetherTrees.WILLOW_TREE.bootstrap(ctx).register();
+
+        NetherTrees.OLD_WILLOW_TREE
+                .bootstrap(ctx)
+                .configuration(NaturalTreeConfiguration.naturalLarge())
+                .register();
+
         NetherTrees.ANCHOR_TREE_BRANCH.bootstrap(ctx).register();
         NetherTrees.ANCHOR_TREE.bootstrap(ctx).register();
         NetherTrees.ANCHOR_TREE_ROOT.bootstrap(ctx).register();
@@ -226,10 +232,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
                 .register();
 
         NetherTreesPlaced.OLD_WILLOW_TREE
-                .inlineConfiguration(ctx)
-                .withFeature(NetherFeatures.OLD_WILLOW_TREE)
-                .configuration(NaturalTreeConfiguration.naturalLarge())
-                .inlinePlace()
+                .place(ctx)
                 .vanillaNetherGround(14)
                 .onceEvery(16)
                 .isEmptyAndOnNetherGround()

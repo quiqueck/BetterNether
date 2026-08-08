@@ -5,7 +5,6 @@ import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
 import org.betterx.betternether.config.Config;
 import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.loot.BNLoot;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import org.betterx.betternether.tab.BECreativeTabs;
@@ -41,6 +40,7 @@ public class BetterNether implements ModInitializer {
         initOptions();
         SoundsRegistry.ensureStaticallyLoaded();
         NetherEnchantments.ensureStaticallyLoaded();
+        NetherGameRules.ensureStaticallyLoaded();
         NetherBlocks.register();
         BlockEntitiesRegistry.register();
         NetherItems.register();
@@ -56,7 +56,6 @@ public class BetterNether implements ModInitializer {
         Config.save();
 
         NetherTags.register();
-        BNLoot.register();
         BNCriterion.register();
         NetherVegetation.setupBonemealFeatures();
 

@@ -62,8 +62,8 @@ public class NetherTreesPlaced {
     public static PlacedFeatureKey SOUL_LILY = PlacedFeatureManager
             .createKey(C.id("patch_soul_lily"))
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedFeatureKey OLD_WILLOW_TREE = PlacedFeatureManager
-            .createKey(C.id("tree_old_willow"))
+    public static PlacedConfiguredFeatureKey OLD_WILLOW_TREE = PlacedFeatureManager
+            .createKey(NetherTrees.OLD_WILLOW_TREE)
             .setDecoration(VEGETAL_DECORATION);
     public static PlacedConfiguredFeatureKey ANCHOR_TREE_SPARSE = PlacedFeatureManager
             .createKey(C.id("anchor_tree_sparse"), NetherTrees.ANCHOR_TREE)

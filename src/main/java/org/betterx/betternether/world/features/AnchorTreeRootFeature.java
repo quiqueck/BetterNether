@@ -87,22 +87,22 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
             ) > 0) {
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.north()))
                     if (random.nextBoolean())
-                        AnchorTreeFeature.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox);
+                        AnchorTreeFeature.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox, false);
                     else
                         LUCIS.grow(world, bpos, random, false);
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.south()))
                     if (random.nextBoolean())
-                        AnchorTreeFeature.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5, blockBox);
+                        AnchorTreeFeature.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5, blockBox, false);
                     else
                         LUCIS.grow(world, bpos, random, false);
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.east()))
                     if (random.nextBoolean())
-                        AnchorTreeFeature.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5, blockBox);
+                        AnchorTreeFeature.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5, blockBox, false);
                     else
                         LUCIS.grow(world, bpos, random, false);
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.west()))
                     if (random.nextBoolean())
-                        AnchorTreeFeature.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5, blockBox);
+                        AnchorTreeFeature.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5, blockBox, false);
                     else
                         LUCIS.grow(world, bpos, random, false);
             }

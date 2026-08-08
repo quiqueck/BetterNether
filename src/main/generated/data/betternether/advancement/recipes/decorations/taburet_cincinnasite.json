@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:taburet_cincinnasite"
+        "recipes": "betternether:taburet_cincinnasite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

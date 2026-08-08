@@ -30,8 +30,8 @@ public class WartMaterial extends RoofMaterial<WartMaterial> {
                     .replace(new org.betterx.betternether.blocks.complex.slots.NetherWoodSlots.TrapdoorSideTemplate(
                             org.betterx.betternether.BetterNether.C.mk("block/wart_planks")))
                     .add(AbstractSeed.create(BlockWartSeed::new, NetherSurvival.soulSand()))
-                    // The roots' loot was the hand-authored loot_table/blocks/wart_roots.json (drops a
-                    // wart log); block loot is trait-only here.
+                    // The roots' loot was the hand-authored loot_table/blocks/wart_roots.json (drops a wart
+                    // log), whose 26.1-schema survives_explosion condition 26.3 silently dropped on load.
                     .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.ROOTS,
                             (set, props) -> new BlockWartRoots(props),

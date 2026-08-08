@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_forged_cincinnasite_stairs"
+        "recipes": "betternether:cincinnasite_forged_cincinnasite_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

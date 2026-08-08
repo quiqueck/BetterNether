@@ -27,7 +27,7 @@ public class NetherGrasslands extends NetherBiomeConfig {
     static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
     static final SurfaceRules.RuleSource MOSS = SurfaceRules.state(NetherTerrainBlocks.NETHERRACK_MOSS.defaultBlockState());
 
-    // 26.2 folded the dyed blocks into ColorCollection records, so Blocks.BLUE_CONCRETE is now
+    // 26.3 folded the dyed blocks into ColorCollection records, so Blocks.BLUE_CONCRETE is now
     // Blocks.CONCRETE.blue(). Note LIME_CONCRETE maps onto .lime(); the local constant keeps its
     // old LIME_GREEN name so the commented-out palette below still reads.
     private static final SurfaceRules.RuleSource BLUE = SurfaceRules.state(Blocks.CONCRETE.blue().defaultBlockState());
@@ -71,7 +71,7 @@ public class NetherGrasslands extends NetherBiomeConfig {
         builder.rule(
                 SurfaceRules.sequence(
                         SurfaceRules.ifTrue(
-                                SurfaceRules.ON_FLOOR,
+                                NetherBiomeBuilder.ON_FLOOR,
                                 new SwitchRuleSource(
                                         NetherGrasslandsNumericProvider.DEFAULT,
                                         List.of(SOUL_SOIL, SOUL_SAND, MOSS, NETHERRACK)

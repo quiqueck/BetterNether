@@ -394,8 +394,8 @@ public class NetherTerrainBlocks {
             .noCollission()
             .buildAndRegister();
 
-    // The loot was the hand-authored loot_table/blocks/veined_sand.json (drops plain soul sand); block
-    // loot is trait-only here.
+    // The loot was the hand-authored loot_table/blocks/veined_sand.json (drops plain soul sand), whose
+    // 26.1-schema survives_explosion condition 26.3 silently dropped on load.
     public static final Block VEINED_SAND = NetherBlocks.registerBlockNI(
             "veined_sand",
             Blocks.SAND,

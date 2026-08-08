@@ -18,6 +18,8 @@ import de.ambertation.wover.block.api.trait.behaviour.LootTableTrait;
 import de.ambertation.wover.loot.api.LootLookupProvider;
 import de.ambertation.wover.tag.api.predefined.ToolTags;
 
+import net.minecraft.advancements.predicates.ItemPredicate;
+import net.minecraft.core.Holder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
@@ -34,17 +36,14 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-// 26.2 split net.minecraft.advancements.criterion into .predicates (ItemPredicate,
-// StatePropertiesPredicate, ...) and .triggers (every *Trigger).
-import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 
 import java.util.List;
@@ -65,17 +64,15 @@ import java.util.function.Supplier;
  * {@link BlockTraits#LOOT_TABLE} returns {@code null} outside datagen, so these must be combined through
  * {@link NetherTraits}, which drops nulls, rather than {@link List#of}.
  * <p>
- * <b>A block must not carry both paths.</b> They are not mutually exclusive - wover runs
- * {@code AutoBlockLootProvider} (which scans for the deprecated {@code BlockLootProvider} interface) and
+ * <b>A block must not carry two loot paths.</b> Historically this meant the deprecated
+ * {@code BlockLootProvider} interface: wover ran {@code AutoBlockLootProvider} (which scanned for it) and
  * {@code AutoBlockTraitLootProvider} (which scans for this trait) independently, with no filter between them,
- * so a block carrying both generates its table twice, and the tree only looks clean while both happen to emit
- * the same bytes. A table therefore moves here only once its block has stopped inheriting the interface - for
- * the nether-grass family that meant dropping it from bclib's {@code BasePlantBlock} first.
- * <p>
- * The same applies to the third path, a hand-authored
- * {@code src/main/resources/data/betternether/loot_table/blocks/<id>.json}: that file must be deleted in the
- * same change that adds the block's trait, or {@code checkDuplicateAssets} fails on the regenerated copy in
- * {@code src/main/generated}.
+ * so a block carrying both generated its table twice. As of wover 26.300.0 {@code AutoBlockLootProvider} and
+ * the interface are gone and {@code AutoBlockTraitLootProvider} is the only registered loot auto-provider
+ * (see {@code LibWoverSets}), so the trait is now the single path. The remaining second path is a
+ * <b>hand-authored</b> {@code src/main/resources/data/betternether/loot_table/blocks/&lt;id&gt;.json}: that file
+ * must be deleted in the same change that adds the block's trait, or {@code checkDuplicateAssets} fails on the
+ * regenerated copy in {@code src/main/generated}.
  */
 public class NetherLoot {
     /**
@@ -135,14 +132,17 @@ public class NetherLoot {
                 .withPool(LootPool
                         .lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .when(LootItemBlockStatePropertyCondition
-                                .hasBlockStateProperties(block)
-                                .setProperties(StatePropertiesPredicate.Builder
+                        // See whisperingGourdVine(): LootItemBlockStatePropertyCondition -> MatchBlock.blockMatches.
+                        .when(MatchBlock.blockMatches(
+                                provider.blockLookup(),
+                                block,
+                                StatePropertiesPredicate.Builder
                                         .properties()
                                         .hasProperty(
                                                 BlockProperties.TRIPLE_SHAPE,
                                                 BlockProperties.TripleShape.TOP
-                                        )))
+                                        )
+                        ))
                         .add(LootItem.lootTableItem(block))));
     }
 
@@ -182,11 +182,19 @@ public class NetherLoot {
      */
     public static LootTableTrait whisperingGourdVine() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
-            final var fruityState = LootItemBlockStatePropertyCondition
-                    .hasBlockStateProperties(block)
-                    .setProperties(StatePropertiesPredicate.Builder
-                            .properties()
-                            .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.TOP))
+            // 26.3 removed LootItemBlockStatePropertyCondition and folded block matching into
+            // MatchBlock, which wraps an advancements BlockPredicate and therefore resolves the block
+            // into a HolderSet eagerly - hence the block lookup. Semantically identical, but it
+            // serializes as {"type": "minecraft:match_block", "blocks": ..., "state": {...}} instead of
+            // {"condition": "minecraft:block_state_property", "block": ..., "properties": {...}}.
+            final var fruityState = MatchBlock
+                    .blockMatches(
+                            provider.blockLookup(),
+                            block,
+                            StatePropertiesPredicate.Builder
+                                    .properties()
+                                    .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.TOP)
+                    )
                     .invert();
 
             return LootTable.lootTable().withPool(LootPool
@@ -215,11 +223,14 @@ public class NetherLoot {
     public static LootTableTrait lumabusVine() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
             final var seed = ((BlockLumabusVine) block).getSeed();
-            final var fruityState = LootItemBlockStatePropertyCondition
-                    .hasBlockStateProperties(block)
-                    .setProperties(StatePropertiesPredicate.Builder
+            // See whisperingGourdVine(): LootItemBlockStatePropertyCondition -> MatchBlock.blockMatches.
+            final var fruityState = MatchBlock.blockMatches(
+                    provider.blockLookup(),
+                    block,
+                    StatePropertiesPredicate.Builder
                             .properties()
-                            .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.BOTTOM));
+                            .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.BOTTOM)
+            );
 
             return LootTable
                     .lootTable()
@@ -253,39 +264,56 @@ public class NetherLoot {
     // Recovered hand-authored tables.
     //
     // The 17 tables below used to live as hand-written json under
-    // src/main/resources/data/betternether/loot_table/blocks/. They load and drop correctly on 26.1 - the
-    // schema they use is still the one datagen emits - so moving them here changes nothing about what the
-    // blocks drop (bar the three deliberate corrections called out in the javadoc below). The point is to
-    // remove the second path: block loot is generated from the trait, and a hand-maintained copy in a second
-    // schema is a bug waiting to happen. It duly happened on 26.3, where the loot-entry schema changed and
-    // the plural "conditions"/"functions" keys on these files became unknown map keys that the codec drops
-    // without an error - silently discarding every condition and every set_count on them.
+    // src/main/resources/data/betternether/loot_table/blocks/. 26.3 reshaped the loot-entry schema:
+    // LootPoolEntryContainer now carries a single Optional<Holder<LootItemCondition>> "condition" and a single
+    // Optional<Holder<LootItemFunction>> "modifier", both optionalFieldOf, and "condition"/"function" became
+    // "type". The 26.1 plural "conditions"/"functions" keys are therefore unknown map keys, which the codec
+    // drops without an error - so every condition and every set_count on those files was silently discarded at
+    // load (red_large_mushroom[shape=top] dropped 1 red mushroom instead of 2-4, and its shape-less first
+    // alternative always won). Those files were never regenerated because they were never generated in the
+    // first place.
+    //
+    // Reproducing them here fixes the schema and removes the second path in one move: the table is now emitted
+    // by AutoBlockTraitLootProvider into src/main/generated and the resources copy is deleted (see the class
+    // javadoc - checkDuplicateAssets fails if both exist).
     // ------------------------------------------------------------------------------------------------------
 
     /**
-     * {@code minecraft:block_state_property} on a single enum/{@link StringRepresentable} state property -
-     * the condition every one of these tables is built around.
+     * {@code minecraft:match_block} on a single enum/{@link StringRepresentable} state property - the 26.3
+     * replacement for the {@code minecraft:block_state_property} condition every one of these tables used.
+     * Resolves the block into a {@code HolderSet} eagerly, hence the {@code provider.blockLookup()}; see
+     * {@link #whisperingGourdVine()}.
      */
     private static <T extends Comparable<T> & StringRepresentable> LootItemCondition.Builder stateIs(
-            Block block, Property<T> property, T value
+            LootLookupProvider provider, Block block, Property<T> property, T value
     ) {
-        return LootItemBlockStatePropertyCondition
-                .hasBlockStateProperties(block)
-                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, value));
+        return MatchBlock.blockMatches(
+                provider.blockLookup(),
+                block,
+                StatePropertiesPredicate.Builder.properties().hasProperty(property, value)
+        );
     }
 
     /** {@link #stateIs} for an {@code age}-style integer property. */
-    private static LootItemCondition.Builder stateIs(Block block, Property<Integer> property, int value) {
-        return LootItemBlockStatePropertyCondition
-                .hasBlockStateProperties(block)
-                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, value));
+    private static LootItemCondition.Builder stateIs(
+            LootLookupProvider provider, Block block, Property<Integer> property, int value
+    ) {
+        return MatchBlock.blockMatches(
+                provider.blockLookup(),
+                block,
+                StatePropertiesPredicate.Builder.properties().hasProperty(property, value)
+        );
     }
 
     /** {@link #stateIs} for a boolean property. */
-    private static LootItemCondition.Builder stateIs(Block block, Property<Boolean> property, boolean value) {
-        return LootItemBlockStatePropertyCondition
-                .hasBlockStateProperties(block)
-                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, value));
+    private static LootItemCondition.Builder stateIs(
+            LootLookupProvider provider, Block block, Property<Boolean> property, boolean value
+    ) {
+        return MatchBlock.blockMatches(
+                provider.blockLookup(),
+                block,
+                StatePropertiesPredicate.Builder.properties().hasProperty(property, value)
+        );
     }
 
     /** A one-roll pool with a single entry, gated only on {@code survives_explosion}. */
@@ -302,16 +330,17 @@ public class NetherLoot {
      * {@code survives_explosion}. The count is an entry-level {@code set_count}, matching the source json.
      */
     private static LootPool.Builder ripePool(
+            LootLookupProvider provider,
             Block block,
             Property<Integer> age,
             int ripeAge,
             ItemLike drop,
-            NumberProvider count
+            Holder<NumberProvider> count
     ) {
         return LootPool
                 .lootPool()
                 .setRolls(ConstantValue.exactly(1.0F))
-                .when(stateIs(block, age, ripeAge))
+                .when(stateIs(provider, block, age, ripeAge))
                 .when(ExplosionCondition.survivesExplosion())
                 .add(LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(count)));
     }
@@ -323,18 +352,19 @@ public class NetherLoot {
      * carries {@code survives_explosion}, so a fully grown plant blown up by a ghast yields nothing.
      */
     private static LootTable.Builder ripePlant(
+            LootLookupProvider provider,
             Block block,
             Property<Integer> age,
             int ripeAge,
-            NumberProvider ripeSelfCount,
+            Holder<NumberProvider> ripeSelfCount,
             List<LootLookupProvider.DropInfo> ripeDrops
     ) {
         final LootTable.Builder table = LootTable.lootTable();
         for (LootLookupProvider.DropInfo drop : ripeDrops) {
-            table.withPool(ripePool(block, age, ripeAge, drop.item(), drop.numberProvider()));
+            table.withPool(ripePool(provider, block, age, ripeAge, drop.item(), drop.numberProvider()));
         }
         return table
-                .withPool(ripePool(block, age, ripeAge, block, ripeSelfCount))
+                .withPool(ripePool(provider, block, age, ripeAge, block, ripeSelfCount))
                 .withPool(survivingPool(block));
     }
 
@@ -362,7 +392,7 @@ public class NetherLoot {
                 .withPool(LootPool
                         .lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .when(stateIs(block, BlockCommonPlant.AGE, 3))
+                        .when(stateIs(provider, block, BlockCommonPlant.AGE, 3))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(NetherFoodItems.BLACK_APPLE)))
                 .withPool(survivingPool(NetherCropBlocks.BLACK_APPLE_SEED)));
@@ -374,7 +404,7 @@ public class NetherLoot {
      */
     public static LootTableTrait boneMushroom() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
-                block, BlockBoneMushroom.AGE, 2,
+                provider, block, BlockBoneMushroom.AGE, 2,
                 UniformGenerator.between(1, 2),
                 List.of(new LootLookupProvider.DropInfo(Items.BONE_MEAL, UniformGenerator.between(1, 3)))
         ));
@@ -383,7 +413,7 @@ public class NetherLoot {
     /** Feather fern: a ripe ({@code age=3}) fern adds 1-4 feathers and 1-2 extra ferns. */
     public static LootTableTrait featherFern() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
-                block, BlockCommonPlant.AGE, 3,
+                provider, block, BlockCommonPlant.AGE, 3,
                 UniformGenerator.between(1, 2),
                 List.of(new LootLookupProvider.DropInfo(Items.FEATHER, UniformGenerator.between(1, 4)))
         ));
@@ -392,7 +422,7 @@ public class NetherLoot {
     /** Magma flower: a ripe ({@code age=3}) flower adds 1-4 magma cream and 1-2 extra flowers. */
     public static LootTableTrait magmaFlower() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
-                block, BlockCommonPlant.AGE, 3,
+                provider, block, BlockCommonPlant.AGE, 3,
                 UniformGenerator.between(1, 2),
                 List.of(new LootLookupProvider.DropInfo(Items.MAGMA_CREAM, UniformGenerator.between(1, 4)))
         ));
@@ -406,7 +436,7 @@ public class NetherLoot {
      */
     public static LootTableTrait orangeMushroom() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
-                block, BlockCommonPlant.AGE, 3,
+                provider, block, BlockCommonPlant.AGE, 3,
                 UniformGenerator.between(1, 2),
                 List.of(new LootLookupProvider.DropInfo(Items.DYE.orange(), UniformGenerator.between(1, 3)))
         ));
@@ -420,7 +450,7 @@ public class NetherLoot {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
                 .lootTable()
                 .withPool(ripePool(
-                        block, BlockCommonPlant.AGE, 3,
+                        provider, block, BlockCommonPlant.AGE, 3,
                         NetherPlantBlocks.INK_BUSH_SEED, UniformGenerator.between(2, 4)))
                 .withPool(survivingPool(NetherPlantBlocks.INK_BUSH_SEED)));
     }
@@ -473,7 +503,7 @@ public class NetherLoot {
                         .add(LootItem.lootTableItem(Items.RED_MUSHROOM)
                                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
                                      .when(stateIs(
-                                             block,
+                                             provider, block,
                                              BlockRedLargeMushroom.SHAPE, BlockProperties.TripleShape.TOP))
                                      .when(ExplosionCondition.survivesExplosion())
                                      .otherwise(LootItem
@@ -497,12 +527,12 @@ public class NetherLoot {
                             .add(AlternativesEntry.alternatives(
                                     LootItem.lootTableItem(stem)
                                             .when(stateIs(
-                                                    block, BlockBrownLargeMushroom.SHAPE,
+                                                    provider, block, BlockBrownLargeMushroom.SHAPE,
                                                     BNBlockProperties.BrownMushroomShape.MIDDLE))
                                             .when(ExplosionCondition.survivesExplosion()),
                                     LootItem.lootTableItem(stem)
                                             .when(stateIs(
-                                                    block, BlockBrownLargeMushroom.SHAPE,
+                                                    provider, block, BlockBrownLargeMushroom.SHAPE,
                                                     BNBlockProperties.BrownMushroomShape.BOTTOM))
                                             .when(ExplosionCondition.survivesExplosion()),
                                     LootItem.lootTableItem(Items.BROWN_MUSHROOM)
@@ -528,7 +558,7 @@ public class NetherLoot {
                         .add(LootItem.lootTableItem(NetherSaplingBlocks.GIANT_MOLD_SAPLING)
                                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                                      .when(stateIs(
-                                             block,
+                                             provider, block,
                                              BlockGiantMold.SHAPE, BlockProperties.TripleShape.TOP))
                                      .when(ExplosionCondition.survivesExplosion())
                                      .otherwise(LootItem
@@ -540,7 +570,7 @@ public class NetherLoot {
                         .add(LootItem.lootTableItem(Items.STRING)
                                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 8)))
                                      .when(stateIs(
-                                             block,
+                                             provider, block,
                                              BlockGiantMold.SHAPE, BlockProperties.TripleShape.TOP))
                                      .when(ExplosionCondition.survivesExplosion()))));
     }
@@ -562,17 +592,17 @@ public class NetherLoot {
                             .add(AlternativesEntry.alternatives(
                                     LootItem.lootTableItem(stem)
                                             .when(stateIs(
-                                                    block, BlockMushroomFir.SHAPE,
+                                                    provider, block, BlockMushroomFir.SHAPE,
                                                     BlockMushroomFir.MushroomFirShape.BOTTOM))
                                             .when(ExplosionCondition.survivesExplosion()),
                                     LootItem.lootTableItem(stem)
                                             .when(stateIs(
-                                                    block, BlockMushroomFir.SHAPE,
+                                                    provider, block, BlockMushroomFir.SHAPE,
                                                     BlockMushroomFir.MushroomFirShape.MIDDLE))
                                             .when(ExplosionCondition.survivesExplosion()),
                                     LootItem.lootTableItem(stem)
                                             .when(stateIs(
-                                                    block, BlockMushroomFir.SHAPE,
+                                                    provider, block, BlockMushroomFir.SHAPE,
                                                     BlockMushroomFir.MushroomFirShape.TOP))
                                             .when(ExplosionCondition.survivesExplosion()),
                                     LootItem.lootTableItem(NetherWoodBlocks.MAT_MUSHROOM_FIR.getSapling())
@@ -607,7 +637,7 @@ public class NetherLoot {
                 .withPool(LootPool
                         .lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .when(stateIs(block, BlockStatueRespawner.TOP, false))
+                        .when(stateIs(provider, block, BlockStatueRespawner.TOP, false))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(block))));
     }
@@ -627,11 +657,11 @@ public class NetherLoot {
     /** {@link #stateIs} widened to a set of values for one property, as {@code minecraft:any_of}. */
     @SafeVarargs
     private static <T extends Comparable<T> & StringRepresentable> LootItemCondition.Builder stateIsAnyOf(
-            Block block, Property<T> property, T first, T... rest
+            LootLookupProvider provider, Block block, Property<T> property, T first, T... rest
     ) {
-        LootItemCondition.Builder condition = stateIs(block, property, first);
+        LootItemCondition.Builder condition = stateIs(provider, block, property, first);
         for (T value : rest) {
-            condition = condition.or(stateIs(block, property, value));
+            condition = condition.or(stateIs(provider, block, property, value));
         }
         return condition;
     }
@@ -665,7 +695,7 @@ public class NetherLoot {
                         .setRolls(ConstantValue.exactly(1.0F))
                         .add(LootItem.lootTableItem(block)
                                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
-                                     .when(stateIs(block, BlockCommonPlant.AGE, 3))
+                                     .when(stateIs(provider, block, BlockCommonPlant.AGE, 3))
                                      .otherwise(LootItem.lootTableItem(block)))));
     }
 
@@ -675,7 +705,7 @@ public class NetherLoot {
      */
     public static LootTableTrait agave() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
-            final LootItemCondition.Builder ripe = stateIs(block, BlockCommonPlant.AGE, 3);
+            final LootItemCondition.Builder ripe = stateIs(provider, block, BlockCommonPlant.AGE, 3);
             return LootTable
                     .lootTable()
                     .withPool(LootPool
@@ -702,11 +732,11 @@ public class NetherLoot {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
             final var shape = BlockJellyfishMushroom.SHAPE;
             final LootItemCondition.Builder top =
-                    stateIs(block, shape, BlockProperties.TripleShape.TOP);
+                    stateIs(provider, block, shape, BlockProperties.TripleShape.TOP);
             final LootItemCondition.Builder bottom =
-                    stateIs(block, shape, BlockProperties.TripleShape.BOTTOM);
+                    stateIs(provider, block, shape, BlockProperties.TripleShape.BOTTOM);
             final LootItemCondition.Builder middle =
-                    stateIs(block, shape, BlockProperties.TripleShape.MIDDLE);
+                    stateIs(provider, block, shape, BlockProperties.TripleShape.MIDDLE);
 
             return LootTable
                     .lootTable()
@@ -744,7 +774,7 @@ public class NetherLoot {
                         .lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
                         .when(stateIs(
-                                block,
+                                provider, block,
                                 BlockWillowBranch.SHAPE, BNBlockProperties.WillowBranchShape.END))
                         .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_WILLOW.getTorch()))));
     }
@@ -770,7 +800,7 @@ public class NetherLoot {
                             .setRolls(ConstantValue.exactly(1.0F))
                             .add(LootItem.lootTableItem(sapling)
                                          .when(stateIsAnyOf(
-                                                 block, shape,
+                                                 provider, block, shape,
                                                  BlockSoulLily.SoulLilyShape.SMALL,
                                                  BlockSoulLily.SoulLilyShape.MEDIUM_TOP,
                                                  BlockSoulLily.SoulLilyShape.BIG_TOP_CENTER))
@@ -781,7 +811,7 @@ public class NetherLoot {
                                                          1
                                                  )))
                                                  .when(stateIsAnyOf(
-                                                         block, shape,
+                                                         provider, block, shape,
                                                          BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_N,
                                                          BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_S,
                                                          BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_E,
@@ -828,7 +858,7 @@ public class NetherLoot {
                 table = table.withPool(LootPool
                         .lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .when(stateIs(block, BlockStalagnateBowl.FOOD, food))
+                        .when(stateIs(provider, block, BlockStalagnateBowl.FOOD, food))
                         .add(LootItem.lootTableItem(food.getItem())));
             }
             return table;
@@ -849,7 +879,7 @@ public class NetherLoot {
                 table = table.withPool(LootPool
                         .lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .when(stateIs(block, BlockPottedPlant.PLANT, plant))
+                        .when(stateIs(provider, block, BlockPottedPlant.PLANT, plant))
                         .add(LootItem.lootTableItem(plant.getBlock())));
             }
             return table;

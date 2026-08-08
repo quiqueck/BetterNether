@@ -56,7 +56,7 @@ public class PoorNetherGrasslands extends NetherBiomeConfig {
         builder.rule(
                 SurfaceRules.sequence(
                         SurfaceRules.ifTrue(
-                                SurfaceRules.ON_FLOOR,
+                                NetherBiomeBuilder.ON_FLOOR,
                                 new SwitchRuleSource(
                                         NetherNoiseCondition.INSTANCE,
                                         List.of(NetherGrasslands.MOSS, NetherGrasslands.SOUL_SOIL, NETHERRACK)

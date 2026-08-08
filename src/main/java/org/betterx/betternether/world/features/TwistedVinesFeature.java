@@ -3,17 +3,20 @@ package org.betterx.betternether.world.features;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class TwistedVinesFeature extends ContextFeature<NoneFeatureConfiguration> {
-    public TwistedVinesFeature() {
-        super(NoneFeatureConfiguration.CODEC);
+public class TwistedVinesFeature extends ContextFeature {
+    public static final MapCodec<TwistedVinesFeature> CODEC = MapCodec.unit(TwistedVinesFeature::new);
+
+    @Override
+    public MapCodec<TwistedVinesFeature> codec() {
+        return CODEC;
     }
 
     @Override
@@ -21,7 +24,6 @@ public class TwistedVinesFeature extends ContextFeature<NoneFeatureConfiguration
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {

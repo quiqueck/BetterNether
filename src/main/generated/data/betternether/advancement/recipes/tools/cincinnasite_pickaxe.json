@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_pickaxe"
+        "recipes": "betternether:cincinnasite_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

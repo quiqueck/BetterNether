@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:basalt_bricks_basalt_bricks_slab"
+        "recipes": "betternether:basalt_bricks_basalt_bricks_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

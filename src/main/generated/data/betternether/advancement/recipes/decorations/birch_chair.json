@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:birch_chair"
+        "recipes": "betternether:birch_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

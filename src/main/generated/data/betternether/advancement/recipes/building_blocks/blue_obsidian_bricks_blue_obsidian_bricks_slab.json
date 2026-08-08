@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:blue_obsidian_bricks_blue_obsidian_bricks_slab"
+        "recipes": "betternether:blue_obsidian_bricks_blue_obsidian_bricks_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:rubeus_composter"
+        "recipes": "betternether:rubeus_composter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

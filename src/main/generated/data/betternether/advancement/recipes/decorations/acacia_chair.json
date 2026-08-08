@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:acacia_chair"
+        "recipes": "betternether:acacia_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

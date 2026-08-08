@@ -3,16 +3,25 @@ package org.betterx.betternether.world.features;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class NonOverlappingFeature<FC extends NaturalTreeConfiguration> extends ContextFeature<FC> {
-    public NonOverlappingFeature(Codec<FC> codec) {
-        super(codec);
+/**
+ * 26.3 folded the configuration into the {@code Feature} itself, so the {@code <FC>} type parameter is gone
+ * and the {@link NaturalTreeConfiguration} that used to arrive through {@code FeaturePlaceContext#config()}
+ * is now a field of the feature instance. The protected {@code place}/{@code grow} pair keeps taking the
+ * configuration explicitly, because
+ * {@link de.ambertation.wover.feature.api.features.GrowableFeature#grow} overrides {@code natural} to
+ * {@code false} for user-grown trees.
+ */
+public abstract class NonOverlappingFeature extends ContextFeature {
+    public final NaturalTreeConfiguration config;
+
+    protected NonOverlappingFeature(NaturalTreeConfiguration config) {
+        this.config = config;
     }
 
     protected abstract boolean isStructure(BlockState state);
@@ -23,7 +32,6 @@ public abstract class NonOverlappingFeature<FC extends NaturalTreeConfiguration>
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            FC config,
             final int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
@@ -37,12 +45,11 @@ public abstract class NonOverlappingFeature<FC extends NaturalTreeConfiguration>
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            FC config,
+            NaturalTreeConfiguration config,
             StructureGeneratorThreadContext context
     );
 
-
-    private boolean noObjNear(LevelAccessor world, BlockPos pos, FC config) {
+    private boolean noObjNear(LevelAccessor world, BlockPos pos, NaturalTreeConfiguration config) {
         final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 
         int x1 = pos.getX() - config.distance;
@@ -61,7 +68,7 @@ public abstract class NonOverlappingFeature<FC extends NaturalTreeConfiguration>
         return true;
     }
 
-    private boolean isInside(int x, int z, FC config) {
+    private boolean isInside(int x, int z, NaturalTreeConfiguration config) {
         return (Math.abs(x) + Math.abs(z)) <= config.manDist;
     }
 

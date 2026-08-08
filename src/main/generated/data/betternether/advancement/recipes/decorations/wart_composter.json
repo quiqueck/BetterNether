@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_composter"
+        "recipes": "betternether:wart_composter"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -5,31 +5,27 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 12.0,
-                "min": 4.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 12.0,
+              "min": 4.0
             }
-          ],
+          },
           "name": "minecraft:netherrack",
           "weight": 12
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 8.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 8.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "minecraft:nether_wart",
           "weight": 3
         },
@@ -40,16 +36,14 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 12.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 12.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "minecraft:quartz",
           "weight": 8
         }
@@ -57,33 +51,27 @@
       "rolls": 2.0
     },
     {
-      "conditions": [
-        {
-          "chance": 0.3,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.3
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:flaming_ruby_sword"
         }
       ],
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "chance": 0.99,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.99
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -97,54 +85,44 @@
       }
     },
     {
-      "conditions": [
-        {
-          "chance": 0.6,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.6
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_helmet",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_chestplate",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_leggings",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_boots",
           "weight": 2
         }
@@ -156,54 +134,44 @@
       }
     },
     {
-      "conditions": [
-        {
-          "chance": 0.4,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.4
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:flaming_ruby_helmet",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:flaming_ruby_chestplate",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:flaming_ruby_leggings",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:flaming_ruby_boots",
           "weight": 2
         }
@@ -218,91 +186,79 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "minecraft:gold_block",
           "weight": 6
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 6.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 6.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "minecraft:gold_ingot",
           "weight": 8
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 8.0,
-                "min": 3.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 8.0,
+              "min": 3.0
             }
-          ],
+          },
           "name": "betternether:nether_ruby",
           "weight": 8
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 5.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 5.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "minecraft:netherite_scrap",
           "weight": 6
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 6.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 6.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "minecraft:sculk_catalyst",
           "weight": 5
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "minecraft:netherite_block",
           "weight": 4
         }

@@ -3,7 +3,7 @@ package org.betterx.betternether.registry.features.placed;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.features.configured.NetherTerrain;
 import de.ambertation.wover.core.api.ModCore;
-import de.ambertation.wover.feature.api.placed.PlacedConfiguredFeatureKey;
+import de.ambertation.wover.feature.api.placed.BoundPlacedFeatureKey;
 import de.ambertation.wover.feature.api.placed.PlacedFeatureKey;
 import de.ambertation.wover.feature.api.placed.PlacedFeatureManager;
 
@@ -14,7 +14,7 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.RAW_G
 
 public class NetherTerrainPlaced {
     private static final ModCore C = BetterNether.C;
-    public static final PlacedConfiguredFeatureKey LAVA_PIT = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey LAVA_PIT = PlacedFeatureManager
             .createKey(NetherTerrain.LAVA_PITS.key.identifier(), NetherTerrain.LAVA_PITS)
             .setDecoration(LAKES);
     public static final PlacedFeatureKey MAGMA_BLOBS = PlacedFeatureManager
@@ -30,17 +30,25 @@ public class NetherTerrainPlaced {
     public static final PlacedFeatureKey EXTEND_BASALT = PlacedFeatureManager
             .createKey(C.id("extend_basalt"))
             .setDecoration(LAKES);
-    public static final PlacedConfiguredFeatureKey LAVA_PITS_SPARSE = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey LAVA_PITS_SPARSE = PlacedFeatureManager
             .createKey(C.id("lava_pits_sparse"), NetherTerrain.LAVA_PITS)
             .setDecoration(LAKES);
-    public static final PlacedConfiguredFeatureKey LAVA_PITS_DENSE = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey LAVA_PITS_DENSE = PlacedFeatureManager
             .createKey(C.id("lava_pits_dense"), NetherTerrain.LAVA_PITS)
             .setDecoration(LAKES);
-    public static final PlacedConfiguredFeatureKey LAVA_SWAMP = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey LAVA_SWAMP = PlacedFeatureManager
             .createKey(C.id("lava_swamp"), NetherTerrain.LAVA_PITS)
             .setDecoration(LAKES);
-    public static final PlacedConfiguredFeatureKey LAVA_TERRACE = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey LAVA_TERRACE = PlacedFeatureManager
             .createKey(C.id("lava_terrace"), NetherTerrain.LAVA_PITS)
+            .setDecoration(LAKES);
+
+    public static final PlacedFeatureKey FLOODED_LAVA_PIT_SURFACE = PlacedFeatureManager
+            .createKey(C.id("flooded_lava_pit_surface"))
+            .setDecoration(LAKES);
+
+    public static final PlacedFeatureKey FLOODED_LAVA_PIT = PlacedFeatureManager
+            .createKey(C.id("flooded_lava_pit"))
             .setDecoration(LAKES);
 
     /**
@@ -86,23 +94,15 @@ public class NetherTerrainPlaced {
      * walks outwards from wherever it is dropped, so a floor-only set of origins leaves the ceiling of a
      * tall cavern untouched no matter how far it is allowed to search.
      */
-    public static final PlacedConfiguredFeatureKey SCULK_VEIN_FLOOR = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey SCULK_VEIN_FLOOR = PlacedFeatureManager
             .createKey(C.id("sculk_vein_floor"), NetherTerrain.SCULK_VEIN)
             .setDecoration(Decoration.VEGETAL_DECORATION);
-    public static final PlacedConfiguredFeatureKey SCULK_VEIN_WALL = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey SCULK_VEIN_WALL = PlacedFeatureManager
             .createKey(C.id("sculk_vein_wall"), NetherTerrain.SCULK_VEIN)
             .setDecoration(Decoration.VEGETAL_DECORATION);
-    public static final PlacedConfiguredFeatureKey SCULK_VEIN_CEILING = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey SCULK_VEIN_CEILING = PlacedFeatureManager
             .createKey(C.id("sculk_vein_ceiling"), NetherTerrain.SCULK_VEIN)
             .setDecoration(Decoration.VEGETAL_DECORATION);
-
-    public static final PlacedFeatureKey FLOODED_LAVA_PIT_SURFACE = PlacedFeatureManager
-            .createKey(C.id("flooded_lava_pit_surface"))
-            .setDecoration(LAKES);
-
-    public static final PlacedFeatureKey FLOODED_LAVA_PIT = PlacedFeatureManager
-            .createKey(C.id("flooded_lava_pit"))
-            .setDecoration(LAKES);
     public static final PlacedFeatureKey REPLACE_SOUL_SANDSTONE = PlacedFeatureManager
             .createKey(C.id("replace_soul_sandstone"))
             .setDecoration(RAW_GENERATION);

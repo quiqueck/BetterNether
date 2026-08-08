@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "output": {
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "minecraft:water"
+      }
+    },
+    "id": "minecraft:potion"
+  },
+  "reagent": {
+    "item": "betternether:barrel_cactus"
+  }
+}

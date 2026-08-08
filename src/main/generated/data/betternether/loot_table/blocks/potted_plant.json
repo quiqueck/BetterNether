@@ -2,15 +2,13 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "agave"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "agave"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -20,15 +18,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "barrel_cactus"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "barrel_cactus"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -38,15 +34,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "black_apple"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "black_apple"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -56,15 +50,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "black_bush"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "black_bush"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -74,15 +66,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "egg_plant"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "egg_plant"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -92,15 +82,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "ink_bush"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "ink_bush"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -110,15 +98,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "reeds"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "reeds"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -128,15 +114,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "nether_cactus"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "nether_cactus"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -146,15 +130,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "nether_grass"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "nether_grass"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -164,15 +146,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "orange_mushroom"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "orange_mushroom"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -182,15 +162,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "red_mold"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "red_mold"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -200,15 +178,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "gray_mold"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "gray_mold"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -218,15 +194,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "magma_flower"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "magma_flower"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -236,15 +210,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "nether_wart"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "nether_wart"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -254,15 +226,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "willow"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "willow"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -272,15 +242,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "smoker"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "smoker"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -290,15 +258,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "wart"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "wart"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -308,15 +274,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "jungle_plant"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "jungle_plant"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -326,15 +290,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "jellyfish_mushroom"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "jellyfish_mushroom"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -344,15 +306,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "swamp_grass"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "swamp_grass"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -362,15 +322,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "soul_grass"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "soul_grass"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -380,15 +338,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "bone_grass"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "bone_grass"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -398,15 +354,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "bone_mushroom"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "bone_mushroom"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -416,15 +370,13 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:potted_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "plant": "gloomwood"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:potted_plant",
+        "state": {
+          "plant": "gloomwood"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",

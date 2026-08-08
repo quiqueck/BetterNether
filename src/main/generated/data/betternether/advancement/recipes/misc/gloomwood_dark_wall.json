@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_wall"
+        "recipes": "betternether:gloomwood_dark_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

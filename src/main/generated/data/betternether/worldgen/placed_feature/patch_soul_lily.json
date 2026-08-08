@@ -1,38 +1,35 @@
 {
   "feature": {
     "type": "wover:random_patch",
-    "config": {
+    "feature": {
       "feature": {
-        "feature": {
-          "type": "betternether:soul_lily",
-          "config": {}
-        },
-        "placement": [
-          {
-            "type": "minecraft:block_predicate_filter",
-            "predicate": {
-              "type": "minecraft:matching_block_tag",
-              "tag": "minecraft:air"
-            }
-          },
-          {
-            "type": "wover:is",
-            "offset": [
-              0,
-              -1,
-              0
-            ],
-            "predicate": {
-              "type": "minecraft:matching_block_tag",
-              "tag": "wover:surfaces/nether/terrain"
-            }
-          }
-        ]
+        "type": "betternether:soul_lily"
       },
-      "tries": 96,
-      "xz_spread": 3,
-      "y_spread": 3
-    }
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
+          }
+        },
+        {
+          "type": "wover:is",
+          "offset": [
+            0,
+            -1,
+            0
+          ],
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "wover:surfaces/nether/terrain"
+          }
+        }
+      ]
+    },
+    "tries": 96,
+    "xz_spread": 3,
+    "y_spread": 3
   },
   "placement": [
     {

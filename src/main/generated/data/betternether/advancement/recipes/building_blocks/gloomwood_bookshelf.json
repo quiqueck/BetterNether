@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_bookshelf"
+        "recipes": "betternether:gloomwood_bookshelf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

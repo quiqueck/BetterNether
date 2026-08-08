@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_plate"
+        "recipes": "betternether:wart_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

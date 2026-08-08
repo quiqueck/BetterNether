@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_forged_from_ingot"
+        "recipes": "betternether:cincinnasite_forged_from_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

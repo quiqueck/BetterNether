@@ -12,16 +12,16 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
-import de.ambertation.wover.feature.api.features.config.PillarFeatureConfig;
+import de.ambertation.wover.feature.api.features.PillarFeature;
 
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -31,7 +31,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapFeatures(BootstrapContext<Feature> ctx) {
         NetherVines.LUMABUS_VINE
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
@@ -98,22 +98,9 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .tries(48)
                 .spreadXZ(5)
                 .register();
-        NetherVines.PATCH_GLOOMSCULK_VINE
-                .bootstrap(ctx)
-                .transformer(PillarFeatureConfig.KnownTransformers.BOTTOM_GROW)
-                .direction(Direction.DOWN)
-                .blockState(NetherVineBlocks.GLOOMSCULK_VINE)
-                .minHeight(2)
-                .maxHeight(ClampedNormalInt.of(7, 2.0f, 2, 11))
-                .inlinePlace()
-                .isEmptyAndUnder(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
-                .inRandomPatch()
-                .tries(20)
-                .spreadXZ(5)
-                .register();
         NetherVines.PATCH_BLACK_VINE
                 .bootstrap(ctx)
-                .transformer(PillarFeatureConfig.KnownTransformers.BOTTOM_GROW)
+                .transformer(PillarFeature.KnownTransformers.BOTTOM_GROW)
                 .direction(Direction.DOWN)
                 .blockState(NetherVineBlocks.BLACK_VINE)
                 .minHeight(3)
@@ -134,7 +121,7 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .register();
         NetherVines.PATCH_BLOOMING_VINE
                 .bootstrap(ctx)
-                .transformer(PillarFeatureConfig.KnownTransformers.BOTTOM_GROW)
+                .transformer(PillarFeature.KnownTransformers.BOTTOM_GROW)
                 .direction(Direction.DOWN)
                 .blockState(NetherVineBlocks.BLOOMING_VINE)
                 .minHeight(3)
@@ -187,10 +174,28 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .tries(16)
                 .spreadXZ(3)
                 .register();
+        NetherVines.PATCH_GLOOMSCULK_VINE
+                .bootstrap(ctx)
+                .transformer(PillarFeature.KnownTransformers.BOTTOM_GROW)
+                .direction(Direction.DOWN)
+                .blockState(NetherVineBlocks.GLOOMSCULK_VINE)
+                .minHeight(2)
+                .maxHeight(ClampedNormalInt.of(7, 2.0f, 2, 11))
+                .inlinePlace()
+                .isEmptyAndUnder(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                .inRandomPatch()
+                .tries(20)
+                .spreadXZ(5)
+                .register();
     }
 
     @Override
     protected void bootstrapPlaced(BootstrapContext<PlacedFeature> ctx) {
+        NetherVinesPlaced.GLOOMSCULK_VINE.place(ctx).betterNetherCeiling(6).register();
+        // A quarter of LUMABUS_VINE's count and twice its rarity - about an eighth of the gloomsculk vine
+        // above, which is what "a few, scattered" comes out as on a ceiling that already carries one vine.
+        NetherVinesPlaced.LUMABUS_VINE_SPARSE.place(ctx).betterNetherCeiling(3).onceEvery(4).register();
+
         NetherVinesPlaced.PLACED_LUMABUS_VINE.place(ctx).isEmptyAndUnderNetherGround().register();
         NetherVinesPlaced.PLACED_LUMABUS_VINE_GLOOM
                 .place(ctx)
@@ -205,10 +210,6 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
         NetherVinesPlaced.GOLDEN_VINE.place(ctx).betterNetherCeiling(4).onceEvery(2).register();
         NetherVinesPlaced.GOLDEN_VINE_SPARSE.place(ctx).betterNetherCeiling(4).onceEvery(3).register();
         NetherVinesPlaced.EYE_VINE.place(ctx).betterNetherCeiling(4).onceEvery(2).register();
-        NetherVinesPlaced.GLOOMSCULK_VINE.place(ctx).betterNetherCeiling(6).register();
-        // A quarter of LUMABUS_VINE's count and twice its rarity - about an eighth of the gloomsculk vine
-        // above, which is what "a few, scattered" comes out as on a ceiling that already carries one vine.
-        NetherVinesPlaced.LUMABUS_VINE_SPARSE.place(ctx).betterNetherCeiling(3).onceEvery(4).register();
         NetherVinesPlaced.BLACK_VINE.place(ctx).betterNetherCeiling(4).onceEvery(2).register();
         NetherVinesPlaced.BLOOMING_VINE.place(ctx).betterNetherCeiling(4).onceEvery(2).register();
         NetherVinesPlaced.TWISTING_VINES.place(ctx).vanillaNetherGround(12).onceEvery(2).register();

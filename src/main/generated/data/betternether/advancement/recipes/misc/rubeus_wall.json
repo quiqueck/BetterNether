@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:rubeus_wall"
+        "recipes": "betternether:rubeus_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

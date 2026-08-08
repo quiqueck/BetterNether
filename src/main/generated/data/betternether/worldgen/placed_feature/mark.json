@@ -1,7 +1,6 @@
 {
   "feature": {
-    "type": "wover:mark_postprocessing",
-    "config": {}
+    "type": "wover:mark_postprocessing"
   },
   "placement": [
     {

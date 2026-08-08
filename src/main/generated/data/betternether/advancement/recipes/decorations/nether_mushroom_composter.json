@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_mushroom_composter"
+        "recipes": "betternether:nether_mushroom_composter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

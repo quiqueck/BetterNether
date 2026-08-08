@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:oak_taburet"
+        "recipes": "betternether:oak_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

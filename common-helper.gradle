@@ -1,6 +1,6 @@
 // Shared publishing helper: changelog generation, version bumping, and
 // publishing to Modrinth + CurseForge (via mod-publish-plugin).
-// Copy-paste this file identically into every library/mod repo's 26.2
+// Copy-paste this file identically into every library/mod repo's 26.3
 // checkout. Everything here is driven by that repo's own gradle.properties.
 // Not interchangeable with the 1.21.6 copy: this Loom version has no
 // separate remap step, so the published artifact is `jar`, not `remapJar`.
@@ -351,7 +351,20 @@ task nextVersion() {
 
             def fabricJson = slurper.parseText(fabricFile.text)
             fabricJson.version = updatedVersion
-            fabricJson.depends.minecraft = slurper.parseText(modrinth_versions)
+            // modrinth_versions lists only the versions we publish FOR; depends.minecraft
+            // additionally carries the equivalent ids the loader may report for the same game
+            // build (e.g. "26.3" and "26.3-alpha.6" next to "26.3-snapshot-6"). Assigning
+            // modrinth_versions over it would drop those alternatives and silently narrow the
+            // range the mod loads on, so merge: publish targets are added, hand-written
+            // alternatives are kept.
+            def publishedVersions = slurper.parseText(modrinth_versions)
+            def declaredVersions = fabricJson.depends.minecraft
+            if (declaredVersions == null) {
+                declaredVersions = []
+            } else if (!(declaredVersions instanceof List)) {
+                declaredVersions = [declaredVersions]
+            }
+            fabricJson.depends.minecraft = (declaredVersions + publishedVersions).unique()
             fabricJson.depends.fabricloader = rootFabricFileJson.depends.fabricloader
             fabricJson.depends['fabric-api'] = rootFabricFileJson.depends['fabric-api']
             fabricJson.depends.java = rootFabricFileJson.depends.java

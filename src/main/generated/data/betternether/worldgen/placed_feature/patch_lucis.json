@@ -1,23 +1,21 @@
 {
   "feature": {
     "type": "wover:random_patch",
-    "config": {
-      "feature": {
-        "feature": "betternether:patch_lucis",
-        "placement": [
-          {
-            "type": "minecraft:block_predicate_filter",
-            "predicate": {
-              "type": "minecraft:matching_block_tag",
-              "tag": "minecraft:air"
-            }
+    "feature": {
+      "feature": "betternether:patch_lucis",
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
           }
-        ]
-      },
-      "tries": 120,
-      "xz_spread": 12,
-      "y_spread": 10
-    }
+        }
+      ]
+    },
+    "tries": 120,
+    "xz_spread": 12,
+    "y_spread": 10
   },
   "placement": [
     {

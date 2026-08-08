@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:rubeus_taburet"
+        "recipes": "betternether:rubeus_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

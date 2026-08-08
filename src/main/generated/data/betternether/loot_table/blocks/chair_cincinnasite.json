@@ -2,15 +2,13 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "block": "betternether:chair_cincinnasite",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "top": "false"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:chair_cincinnasite",
+        "state": {
+          "top": "false"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",

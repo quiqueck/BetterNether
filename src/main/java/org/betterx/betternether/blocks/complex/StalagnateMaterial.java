@@ -55,8 +55,9 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                             );
                         }
                     })
-                    // The trunk's loot was the hand-authored loot_table/blocks/stalagnate_trunk.json (a
-                    // stem plus a 25%-chance seed); block loot is trait-only here.
+                    // The trunk's loot was the hand-authored loot_table/blocks/stalagnate_trunk.json (a stem
+                    // plus a 25%-chance seed), whose 26.1-schema conditions 26.3 silently dropped on load -
+                    // which made the seed drop unconditional.
                     .add(TrunkSlot.createClimbable(
                             BlockStalagnate::new,
                             TraitLists.and(NetherRender.cutout(), NetherLoot.stalagnateTrunk())

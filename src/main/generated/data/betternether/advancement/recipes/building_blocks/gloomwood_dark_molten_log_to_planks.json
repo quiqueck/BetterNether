@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_molten_log_to_planks"
+        "recipes": "betternether:gloomwood_dark_molten_log_to_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

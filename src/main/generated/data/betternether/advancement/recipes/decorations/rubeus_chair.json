@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:rubeus_chair"
+        "recipes": "betternether:rubeus_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

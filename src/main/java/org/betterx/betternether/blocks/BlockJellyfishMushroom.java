@@ -38,7 +38,7 @@ public class BlockJellyfishMushroom extends Block {
     public static final EnumProperty<JellyShape> VISUAL = BNBlockProperties.JELLY_MUSHROOM_VISUAL;
 
     public BlockJellyfishMushroom(Properties settings) {
-        // 26.2 made bouncing data-driven: Block#updateEntityMovementAfterFallOn is gone and Entity
+        // 26.3 made bouncing data-driven: Block#updateEntityMovementAfterFallOn is gone and Entity
         // now derives the rebound from Block#getBounceRestitution() (scaled by 0.8 for non-living
         // entities) unless the entity is suppressing the bounce or the block is in
         // BlockTags.SUPPRESSES_BOUNCE. Vanilla's slime block moved to bounceRestitution(1.0F) for

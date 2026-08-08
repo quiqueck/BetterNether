@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:crimson_taburet"
+        "recipes": "betternether:crimson_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

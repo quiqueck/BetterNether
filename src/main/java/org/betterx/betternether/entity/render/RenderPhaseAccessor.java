@@ -2,16 +2,13 @@ package org.betterx.betternether.entity.render;
 
 import org.betterx.betternether.BetterNether;
 
-import com.mojang.blaze3d.PrimitiveTopology;
-import com.mojang.blaze3d.pipeline.BlendFunction;
-import com.mojang.blaze3d.pipeline.ColorTargetState;
-import com.mojang.blaze3d.pipeline.DepthStencilState;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.CompareOp;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.renderpearl.api.pipeline.BlendFunction;
+import com.mojang.renderpearl.api.pipeline.ColorTargetState;
+import com.mojang.renderpearl.api.pipeline.CompareOp;
+import com.mojang.renderpearl.api.pipeline.DepthStencilState;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.BindGroupLayouts;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderSetup.OutlineProperty;
@@ -24,24 +21,19 @@ import java.util.function.Function;
 /**
  * Client-only holder for the firefly glow {@link RenderType}.
  * <p>
- * Modelled directly on vanilla's {@code RenderPipelines.EYES}/{@code ENERGY_SWIRL}: both are built from
- * the public {@code RenderPipelines.MATRICES_FOG_SNIPPET} + the {@code core/entity} shader, not from the
- * private {@code ENTITY_SNIPPET} that the pre-1.21.5 firefly type used, so a full custom pipeline is
- * reachable with public API only - {@code RenderSetup.builder}/{@code RenderType.create(String, RenderSetup)}
- * are public too. {@code EMISSIVE} + {@code NO_OVERLAY} + {@code NO_CARDINAL_LIGHTING} give the same
- * full-bright "glow" shading as those two.
- * <p>
- * 26.2 reworked the pipeline builder: {@code withSampler(String)} became
- * {@code withBindGroupLayout(BindGroupLayout)} and {@code withVertexFormat(VertexFormat, Mode)} split into
- * {@code withVertexBinding(int, VertexFormat)} + {@code withPrimitiveTopology(PrimitiveTopology)}. The
- * replacements used here - {@code BindGroupLayouts.SAMPLER0}, binding 0 of {@code DefaultVertexFormat
- * .ENTITY}, {@code PrimitiveTopology.QUADS} - are exactly what 26.2's own {@code RenderPipelines.EYES}
- * passes, verified against {@code javap -c RenderPipelines}.
+ * Modelled directly on vanilla's {@code RenderPipelines.EYES}, which in 26.3 is
+ * {@code ENTITY_NO_LIGHTMAP_SNIPPET + EYES_SNIPPET} plus a colour-target and depth-stencil state. Both
+ * snippets are public in 26.3, so the hand-rolled snippet chain the 26.1 version needed
+ * ({@code MATRICES_FOG_SNIPPET} + {@code core/entity} + {@code Sampler0} + {@code ENTITY}/{@code QUADS} +
+ * {@code EMISSIVE}/{@code NO_OVERLAY}/{@code NO_CARDINAL_LIGHTING}) collapses into exactly those two -
+ * verified field-for-field against {@code javap -c RenderPipelines}. {@code RenderSetup.builder} /
+ * {@code RenderType.create(String, RenderSetup)} are still public.
  * <p>
  * The depth test is {@link CompareOp#GREATER_THAN_OR_EQUAL}, not the {@code LESS_THAN_OR_EQUAL} the 26.1
- * version used: 26.2 switched to a reversed-Z depth buffer, flipping both
- * {@code DepthStencilState.DEFAULT} (now {@code (GREATER_THAN_OR_EQUAL, true)}) and {@code EYES}. Like
- * vanilla {@code EYES} we keep the same test but do not write depth.
+ * version used: 26.3 switched to a reversed-Z depth buffer, and {@code LESS_THAN_OR_EQUAL} no longer
+ * appears anywhere in vanilla's {@code RenderPipelines}. {@code DepthStencilState.DEFAULT} is
+ * {@code (GREATER_THAN_OR_EQUAL, true)}; like vanilla {@code EYES} we keep the same test but do not write
+ * depth.
  * <p>
  * The blend is {@link BlendFunction#LIGHTNING} ({@code SRC_ALPHA, ONE}), not {@code ADDITIVE}
  * ({@code ONE, ONE}): {@code ADDITIVE} ignores the fragment's alpha entirely, so the soft circular falloff
@@ -54,18 +46,10 @@ import java.util.function.Function;
 @Environment(EnvType.CLIENT)
 public abstract class RenderPhaseAccessor {
     private static final RenderPipeline FIREFLY_PIPELINE = RenderPipeline
-            .builder(RenderPipelines.MATRICES_FOG_SNIPPET)
+            .builder(RenderPipelines.ENTITY_NO_LIGHTMAP_SNIPPET, RenderPipelines.EYES_SNIPPET)
             .withLocation(BetterNether.C.mk("pipeline/firefly"))
-            .withVertexShader("core/entity")
-            .withFragmentShader("core/entity")
-            .withShaderDefine("EMISSIVE")
-            .withShaderDefine("NO_OVERLAY")
-            .withShaderDefine("NO_CARDINAL_LIGHTING")
-            .withBindGroupLayout(BindGroupLayouts.SAMPLER0)
             .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
             .withCull(false)
-            .withVertexBinding(0, DefaultVertexFormat.ENTITY)
-            .withPrimitiveTopology(PrimitiveTopology.QUADS)
             .withDepthStencilState(new DepthStencilState(CompareOp.GREATER_THAN_OR_EQUAL, false))
             .build();
 

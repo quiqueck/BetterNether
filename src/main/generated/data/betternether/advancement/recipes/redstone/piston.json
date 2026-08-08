@@ -43,7 +43,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:piston"
+        "recipes": "betternether:piston"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

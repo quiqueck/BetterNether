@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:stalagnate_stripped_bark"
+        "recipes": "betternether:stalagnate_stripped_bark"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

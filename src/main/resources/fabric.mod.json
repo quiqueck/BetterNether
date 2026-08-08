@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "betternether",
-    "version": "26.201.1",
+    "version": "26.301.0",
     "name": "Better Nether",
     "description": "Mod that improves Nether",
     "authors": [
@@ -32,7 +32,7 @@
         "emi_disabled": [
             "org.betterx.betternether.integrations.emi.EMIPlugin"
         ],
-        "jei_mod_plugin": [
+        "jei_mod_plugin_disabled": [
             "org.betterx.betternether.integrations.jei.JeiPlugin"
         ]
     },
@@ -46,19 +46,19 @@
         "fabric-api": ">=0.155.0",
         "java": ">=25",
         "minecraft": [
-            "26.2"
+            "26.3",
+            "26.3-snapshot-5",
+            "26.3-alpha.6",
+            "26.3-snapshot-6"
         ],
-        "bclib": "26.201.x",
-        "wover": "26.201.x",
-        "wunderlib": "26.201.x"
+        "bclib": "26.301.x",
+        "wover": "26.301.x",
+        "wunderlib": "26.301.x"
     },
     "breaks": {
-        "bclib": "<26.201.1",
-        "wover": "<26.201.1",
-        "wunderlib": "<26.201.0"
-    },
-    "suggests": {
-        "jei": ">=29.0.0"
+        "bclib": "<26.301.0",
+        "wover": "<26.301.0",
+        "wunderlib": "<26.301.0"
     },
     "custom": {
         "wover": {

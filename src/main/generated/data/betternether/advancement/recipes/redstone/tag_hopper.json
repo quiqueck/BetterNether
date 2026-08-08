@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:tag_hopper"
+        "recipes": "betternether:tag_hopper"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

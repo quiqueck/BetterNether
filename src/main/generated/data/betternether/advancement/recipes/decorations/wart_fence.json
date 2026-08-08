@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_fence"
+        "recipes": "betternether:wart_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

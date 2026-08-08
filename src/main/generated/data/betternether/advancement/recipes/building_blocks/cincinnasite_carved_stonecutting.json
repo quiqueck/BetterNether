@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_carved_stonecutting"
+        "recipes": "betternether:cincinnasite_carved_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

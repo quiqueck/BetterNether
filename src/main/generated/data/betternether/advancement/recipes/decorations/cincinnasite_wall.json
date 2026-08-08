@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_wall"
+        "recipes": "betternether:cincinnasite_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

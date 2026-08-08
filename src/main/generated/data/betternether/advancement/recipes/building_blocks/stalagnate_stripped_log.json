@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:stalagnate_stripped_log"
+        "recipes": "betternether:stalagnate_stripped_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

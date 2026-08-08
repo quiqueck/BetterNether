@@ -24,13 +24,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /**
  * Makes some ruined portals blue.
  * <p>
- * 26.2 changed {@code StructureProcessor#processBlock}: the fourth parameter used to be the <em>original</em>
+ * 26.3 changed {@code StructureProcessor#processBlock}: the fourth parameter used to be the <em>original</em>
  * {@code StructureBlockInfo} and is now a {@code BlockPos templateRelativePos}. Verified with
  * {@code javap -p -l net.minecraft.world.level.levelgen.structure.templatesystem.BlockAgeProcessor}:
  * <pre>
  * 26.1: (LevelReader level, BlockPos targetPosition, BlockPos referencePos,
  *        StructureBlockInfo originalBlockInfo, StructureBlockInfo processedBlockInfo, StructurePlaceSettings settings)
- * 26.2: (LevelReader level, BlockPos targetPosition, BlockPos referencePos,
+ * 26.3: (LevelReader level, BlockPos targetPosition, BlockPos referencePos,
  *        BlockPos templateRelativePos, StructureBlockInfo processedBlockInfo, StructurePlaceSettings settings)
  * </pre>
  * Only the processed info was ever read here, so the fix is purely the parameter list. This build has no refmap

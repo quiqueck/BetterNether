@@ -4,7 +4,6 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
 import org.betterx.betternether.registry.NetherBlocks;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -34,12 +33,9 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class BlockChestOfDrawers extends BaseEntityBlock {
-    public static final MapCodec<BlockChestOfDrawers> CODEC = simpleCodec(BlockChestOfDrawers::new);
-
-    @Override
-    protected MapCodec<? extends BlockChestOfDrawers> codec() {
-        return CODEC;
-    }
+    // 26.3 removed block codecs entirely: Block#codec()/BlockBehaviour#simpleCodec no longer
+    // exist, because blocks are no longer described by a dispatch codec. The CODEC constant and
+    // the codec() override are dropped, not replaced.
 
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
             Direction.NORTH, Block.box(0, 0, 8, 16, 16, 16),

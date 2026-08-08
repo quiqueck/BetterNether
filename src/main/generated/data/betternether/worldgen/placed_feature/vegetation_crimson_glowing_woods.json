@@ -1,35 +1,82 @@
 {
   "feature": {
-    "type": "minecraft:nether_forest_vegetation",
-    "config": {
-      "spread_height": 4,
-      "spread_width": 8,
-      "state_provider": {
-        "type": "minecraft:weighted_state_provider",
-        "entries": [
-          {
-            "data": {
-              "Name": "minecraft:crimson_roots"
+    "type": "minecraft:overlay",
+    "features": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "to_place": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "minecraft:crimson_roots"
+              },
+              "weight": 120
             },
-            "weight": 120
-          },
-          {
-            "data": {
-              "Name": "minecraft:crimson_fungus"
+            {
+              "data": {
+                "Name": "minecraft:crimson_fungus"
+              },
+              "weight": 80
             },
-            "weight": 80
-          },
-          {
-            "data": {
-              "Name": "betternether:wart_seed",
-              "Properties": {
-                "facing": "up"
-              }
-            },
-            "weight": 80
+            {
+              "data": {
+                "Name": "betternether:wart_seed",
+                "Properties": {
+                  "facing": "up"
+                }
+              },
+              "weight": 80
+            }
+          ]
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "tag": "minecraft:nylium"
           }
-        ]
-      }
+        },
+        {
+          "type": "minecraft:count",
+          "count": 64
+        },
+        {
+          "type": "minecraft:offset",
+          "x": {
+            "type": "minecraft:trapezoid",
+            "max": 7,
+            "min": -7,
+            "plateau": 0
+          },
+          "y": {
+            "type": "minecraft:trapezoid",
+            "max": 3,
+            "min": -3,
+            "plateau": 0
+          },
+          "z": {
+            "type": "minecraft:trapezoid",
+            "max": 7,
+            "min": -7,
+            "plateau": 0
+          }
+        },
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
+          }
+        }
+      ]
     }
   },
   "placement": [

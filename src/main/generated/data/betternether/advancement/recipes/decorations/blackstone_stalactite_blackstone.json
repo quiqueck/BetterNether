@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:blackstone_stalactite_blackstone"
+        "recipes": "betternether:blackstone_stalactite_blackstone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

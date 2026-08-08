@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:quartz_glass_framed_white"
+        "recipes": "betternether:quartz_glass_framed_white"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

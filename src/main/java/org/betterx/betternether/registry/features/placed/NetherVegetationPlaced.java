@@ -3,7 +3,7 @@ package org.betterx.betternether.registry.features.placed;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import de.ambertation.wover.core.api.ModCore;
-import de.ambertation.wover.feature.api.placed.PlacedConfiguredFeatureKey;
+import de.ambertation.wover.feature.api.placed.BoundPlacedFeatureKey;
 import de.ambertation.wover.feature.api.placed.PlacedFeatureKey;
 import de.ambertation.wover.feature.api.placed.PlacedFeatureManager;
 
@@ -12,31 +12,31 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGET
 public class NetherVegetationPlaced {
     private static final ModCore C = BetterNether.C;
 
-    public static final PlacedConfiguredFeatureKey VEGETATION_MUSHROOM_FORREST_EDGE = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey VEGETATION_MUSHROOM_FORREST_EDGE = PlacedFeatureManager
             .createKey(C.id("vegetation_mushroom_forrest_edge"), NetherVegetation.VEGETATION_MUSHROOM_FORREST)
             .setDecoration(VEGETAL_DECORATION);
 
-    public static final PlacedConfiguredFeatureKey JELLYFISH_MUSHROOM = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey JELLYFISH_MUSHROOM = PlacedFeatureManager
             .createKey(NetherVegetation.JELLYFISH_MUSHROOM)
             .setDecoration(VEGETAL_DECORATION);
 
-    public static final PlacedConfiguredFeatureKey PATCH_JELLYFISH_MUSHROOM = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey PATCH_JELLYFISH_MUSHROOM = PlacedFeatureManager
             .createKey(NetherVegetation.PATCH_JELLYFISH_MUSHROOM)
             .setDecoration(VEGETAL_DECORATION);
 
-    public static final PlacedConfiguredFeatureKey JELLYFISH_MUSHROOM_DENSE = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey JELLYFISH_MUSHROOM_DENSE = PlacedFeatureManager
             .createKey(C.id("patch_jellyfish_mushroom_dense"), NetherVegetation.PATCH_JELLYFISH_MUSHROOM)
             .setDecoration(VEGETAL_DECORATION);
 
-    public static final PlacedConfiguredFeatureKey BLACK_BUSH = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey BLACK_BUSH = PlacedFeatureManager
             .createKey(NetherVegetation.PATCH_BLACK_BUSH)
             .setDecoration(VEGETAL_DECORATION);
 
-    public static final PlacedConfiguredFeatureKey BLACK_BUSH_SPARSE = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey BLACK_BUSH_SPARSE = PlacedFeatureManager
             .createKey(C.id("patch_black_bush_sparse"), NetherVegetation.PATCH_BLACK_BUSH)
             .setDecoration(VEGETAL_DECORATION);
 
-    public static final PlacedConfiguredFeatureKey WALL_LUCIS = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey WALL_LUCIS = PlacedFeatureManager
             .createKey(C.id("patch_lucis"), NetherVegetation.WALL_LUCIS)
             .setDecoration(VEGETAL_DECORATION);
 
@@ -63,7 +63,7 @@ public class NetherVegetationPlaced {
     public static final PlacedFeatureKey VEGETATION_JUNGLE = PlacedFeatureManager
             .createKey(C.id("vegetation_nether_jungle"))
             .setDecoration(VEGETAL_DECORATION);
-    public static final PlacedConfiguredFeatureKey VEGETATION_MUSHROOM_FORREST = PlacedFeatureManager
+    public static final BoundPlacedFeatureKey VEGETATION_MUSHROOM_FORREST = PlacedFeatureManager
             .createKey(NetherVegetation.VEGETATION_MUSHROOM_FORREST)
             .setDecoration(VEGETAL_DECORATION);
 

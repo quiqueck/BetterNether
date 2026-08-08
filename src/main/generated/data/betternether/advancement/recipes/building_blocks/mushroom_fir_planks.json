@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_planks"
+        "recipes": "betternether:mushroom_fir_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

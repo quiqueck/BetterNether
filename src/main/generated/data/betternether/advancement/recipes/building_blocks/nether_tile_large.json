@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_tile_large"
+        "recipes": "betternether:nether_tile_large"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

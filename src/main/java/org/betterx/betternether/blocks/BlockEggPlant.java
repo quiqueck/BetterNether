@@ -106,8 +106,14 @@ public class BlockEggPlant extends BlockCommonPlant {
         }
     }
 
+    /**
+     * An eggplant never ages on growth: growing it only repairs a destructed one. This overrides
+     * {@link BlockCommonPlant#grow} rather than {@code performBonemeal} so that both callers - a random tick
+     * and an actual bone-meal application - keep reaching it, exactly as they did when {@code randomTick}
+     * still went through the virtual {@code performBonemeal}.
+     */
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+    protected void grow(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
         if (state.getValue(DESTRUCTED))
             world.setBlockAndUpdate(pos, this.defaultBlockState());
     }

@@ -86,11 +86,12 @@ public class NetherMushroomBlocks {
             .noCollission()
             .instabreak()
             .sound(SoundType.CROP)
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .randomTicks()
             .destroyTime(0.5F)
             .addTrait(NetherTraits.plant())
-            // Was the hand-authored loot_table/blocks/orange_mushroom.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/orange_mushroom.json, whose 26.1-schema conditions/
+            // functions 26.3 silently dropped on load.
             .addTrait(NetherLoot.orangeMushroom())
             .buildAndRegister();
     // Former Materials.makeNetherGrass() preset, folded (category-traits Batch 3) onto PlantBlockTrait
@@ -136,7 +137,7 @@ public class NetherMushroomBlocks {
             .addTrait(NetherLoot.giantLucis())
             .mapColor(MapColor.COLOR_YELLOW)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .requiresCorrectToolForDrops()
             .lightLevel(bs -> 15)
             .sound(SoundType.WOOD)
@@ -151,7 +152,8 @@ public class NetherMushroomBlocks {
             .addTrait(NetherMaterial.plant(MapColor.COLOR_LIGHT_GREEN))
             .randomTicks()
             .addTrait(NetherTraits.plant())
-            // Was the hand-authored loot_table/blocks/bone_mushroom.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/bone_mushroom.json, whose 26.1-schema conditions/
+            // functions 26.3 silently dropped on load.
             .addTrait(NetherLoot.boneMushroom())
             .buildAndRegister();
     // BlockSmoker (WP6.12): always dropped itself unconditionally via BlockBase's inherited getDrops()
@@ -185,7 +187,9 @@ public class NetherMushroomBlocks {
             .addTrait(BlockTraits.MINEABLE_WITH.needsAxe())
             .addTrait(NetherMaterial.mushroomStem(MapColor.COLOR_RED))
             .noOcclusion()
-            // Was the hand-authored loot_table/blocks/red_large_mushroom.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/red_large_mushroom.json, whose 26.1-schema conditions/
+            // functions 26.3 silently dropped on load - which is why the cap dropped a single stem instead
+            // of 2-4 red mushrooms.
             .addTrait(NetherLoot.redLargeMushroom())
             .buildAndRegister();
     // stays inline: this block's final strength is 1, but NetherMaterial.mushroomStem()'s trait forces
@@ -200,7 +204,8 @@ public class NetherMushroomBlocks {
             .requiresCorrectToolForDrops()
             .strength(1)
             .noOcclusion()
-            // Was the hand-authored loot_table/blocks/brown_large_mushroom.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/brown_large_mushroom.json, whose 26.1-schema
+            // conditions/functions 26.3 silently dropped on load.
             .addTrait(NetherLoot.brownLargeMushroom())
             .buildAndRegister();
     // Lucis //
@@ -215,7 +220,7 @@ public class NetherMushroomBlocks {
             .addTrait(BlockTraits.MINEABLE_WITH.needsAxe())
             .mapColor(MapColor.COLOR_YELLOW)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .lightLevel(bs -> 15)
             .requiresCorrectToolForDrops()
             .sound(SoundType.WOOD)
@@ -234,7 +239,8 @@ public class NetherMushroomBlocks {
             .requiresCorrectToolForDrops()
             .noOcclusion()
             .strength(1)
-            // Was the hand-authored loot_table/blocks/giant_mold.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/giant_mold.json, whose 26.1-schema conditions/
+            // functions 26.3 silently dropped on load.
             .addTrait(NetherLoot.giantMold())
             .buildAndRegister();
     // Sodium renders the translucent variant with artefacts, so under Sodium this falls back to cutout.
@@ -248,8 +254,8 @@ public class NetherMushroomBlocks {
     // is correctly NOT reproduced here.
     public static final Block JELLYFISH_MUSHROOM = NetherBlocks.defineBlock("jellyfish_mushroom", BlockJellyfishMushroom::new)
             .withBlockItem((d, b) -> null)
-            .addTrait(NetherLoot.jellyfishMushroom())
             .addTrait(FabricLoader.getInstance().isModLoaded("sodium") ? NetherRender.cutout() : NetherRender.translucent())
+            .addTrait(NetherLoot.jellyfishMushroom())
             .addTrait(BlockTraits.MINEABLE_WITH.needsAxe())
             .mapColor(MapColor.COLOR_CYAN)
             .instrument(NoteBlockInstrument.BASS)

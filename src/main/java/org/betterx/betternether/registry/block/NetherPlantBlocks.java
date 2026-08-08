@@ -174,7 +174,8 @@ public class NetherPlantBlocks {
             .addTrait(NetherMaterial.plant(MapColor.COLOR_BLACK))
             .randomTicks()
             .addTrait(NetherTraits.plant())
-            // Was the hand-authored loot_table/blocks/ink_bush.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/ink_bush.json, whose 26.1-schema conditions/functions
+            // 26.3 silently dropped on load.
             .addTrait(NetherLoot.inkBush())
             .buildAndRegister();
     // BlockInkBushSeed (WP6.12): always dropped itself unconditionally via BlockBase's inherited getDrops()
@@ -211,7 +212,8 @@ public class NetherPlantBlocks {
             .addTrait(BlockTraits.MINEABLE_WITH.needsHoe())
             .addTrait(NetherMaterial.plant(MapColor.TERRACOTTA_ORANGE))
             .randomTicks()
-            // Was the hand-authored loot_table/blocks/magma_flower.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/magma_flower.json, whose 26.1-schema conditions/
+            // functions 26.3 silently dropped on load.
             .addTrait(NetherLoot.magmaFlower())
             .buildAndRegister();
     // Former Materials.netherPlant() preset, folded onto PlantBlockTrait directly (not the
@@ -226,7 +228,8 @@ public class NetherPlantBlocks {
             ))
             .randomTicks()
             .addTrait(NetherTraits.plant())
-            // Was the hand-authored loot_table/blocks/feather_fern.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/feather_fern.json, whose 26.1-schema conditions/
+            // functions 26.3 silently dropped on load.
             .addTrait(NetherLoot.featherFern())
             .buildAndRegister();
     // Former Materials.makeNetherGrass(COLOR_GREEN) preset, folded onto PlantBlockTrait directly (not the
@@ -282,7 +285,7 @@ public class NetherPlantBlocks {
             .mapColor(MapColor.TERRACOTTA_ORANGE)
             .randomTicks()
             .sound(SoundType.WOOL)
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .noOcclusion()
             .noCollission()
             .instabreak()
@@ -303,7 +306,7 @@ public class NetherPlantBlocks {
             .randomTicks()
             .strength(0.4F)
             .sound(SoundType.WOOL)
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .noOcclusion()
             .dynamicShape()
             .offsetType(BlockBehaviour.OffsetType.XZ)
@@ -321,7 +324,7 @@ public class NetherPlantBlocks {
             .randomTicks()
             .strength(0.4F)
             .sound(SoundType.WOOL)
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .noOcclusion()
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherTraits.plant())
@@ -343,8 +346,8 @@ public class NetherPlantBlocks {
     // folding would clobber it back to 2.0F. Same ordering hazard as NetherCropBlocks' WHISPERING_GOURD.
     public static final Block SOUL_LILY = NetherBlocks.defineBlock("soul_lily", BlockSoulLily::new)
             .withBlockItem((d, b) -> null)
-            .addTrait(NetherLoot.soulLily())
             .addTrait(NetherRender.cutout())
+            .addTrait(NetherLoot.soulLily())
             .addTrait(NetherSurvival.soulGround())
             .addTrait(BlockTraits.MINEABLE_WITH.needsAxe())
             .mapColor(MapColor.COLOR_ORANGE)
@@ -366,10 +369,11 @@ public class NetherPlantBlocks {
             .noOcclusion()
             .noCollission()
             .sound(SoundType.SLIME_BLOCK)
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .strength(0.5F, 0.5F)
             .randomTicks()
-            // Was the hand-authored loot_table/blocks/eyeball.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/eyeball.json, whose 26.1-schema functions 26.3
+            // silently dropped on load.
             .addTrait(NetherLoot.eyeball())
             .buildAndRegister();
     // stays inline: same ordering hazard as EYEBALL above.
@@ -380,9 +384,10 @@ public class NetherPlantBlocks {
             .noOcclusion()
             .noCollission()
             .sound(SoundType.SLIME_BLOCK)
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .strength(0.5F, 0.5F)
-            // Was the hand-authored loot_table/blocks/eyeball_small.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/eyeball_small.json, whose 26.1-schema functions 26.3
+            // silently dropped on load.
             .addTrait(NetherLoot.eyeballSmall())
             .buildAndRegister();
 

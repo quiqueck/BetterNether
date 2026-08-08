@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:tag_cauldron"
+        "recipes": "betternether:tag_cauldron"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

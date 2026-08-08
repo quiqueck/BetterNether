@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:quartz_glass_framed_orange"
+        "recipes": "betternether:quartz_glass_framed_orange"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

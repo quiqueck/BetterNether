@@ -5,91 +5,79 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "betternether:blue_crying_obsidian",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "betternether:blue_weeping_obsidian",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "minecraft:crying_obsidian",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "betternether:weeping_obsidian",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "betternether:blue_obsidian",
           "weight": 4
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "minecraft:obsidian",
           "weight": 4
         }
@@ -113,25 +101,21 @@
           "weight": 2
         }
       ],
-      "functions": [
-        {
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 6.0,
-            "min": 2.0
-          },
-          "function": "minecraft:set_count"
+      "modifier": {
+        "type": "minecraft:set_count",
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 6.0,
+          "min": 2.0
         }
-      ],
+      },
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "chance": 0.2,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.2
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -140,16 +124,14 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "betternether:cincinnasite_diamond_upgrade_smithing_template",
           "weight": 3
         },
@@ -162,12 +144,10 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "chance": 0.15,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.15
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -188,31 +168,27 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 12.0,
-                "min": 4.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 12.0,
+              "min": 4.0
             }
-          ],
+          },
           "name": "minecraft:netherrack",
           "weight": 12
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 8.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 8.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "minecraft:nether_wart",
           "weight": 3
         },
@@ -223,16 +199,14 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 12.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 12.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "minecraft:quartz",
           "weight": 8
         }

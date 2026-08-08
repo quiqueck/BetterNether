@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_boat"
+        "recipes": "betternether:mushroom_fir_boat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

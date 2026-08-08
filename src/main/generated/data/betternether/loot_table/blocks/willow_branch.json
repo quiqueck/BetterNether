@@ -2,15 +2,13 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "block": "betternether:willow_branch",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "shape": "end"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:willow_branch",
+        "state": {
+          "shape": "end"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",

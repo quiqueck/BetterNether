@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_mushroom_crafting_table"
+        "recipes": "betternether:nether_mushroom_crafting_table"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

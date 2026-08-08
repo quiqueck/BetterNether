@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:chest_of_drawers"
+        "recipes": "betternether:chest_of_drawers"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

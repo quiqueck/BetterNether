@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:obsidian_rod_tiles"
+        "recipes": "betternether:obsidian_rod_tiles"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

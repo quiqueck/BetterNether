@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_hoe"
+        "recipes": "betternether:cincinnasite_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

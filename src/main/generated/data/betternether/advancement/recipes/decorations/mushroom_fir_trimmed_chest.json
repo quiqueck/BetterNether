@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_trimmed_chest"
+        "recipes": "betternether:mushroom_fir_trimmed_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

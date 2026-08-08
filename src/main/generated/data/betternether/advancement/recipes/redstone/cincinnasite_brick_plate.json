@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_brick_plate"
+        "recipes": "betternether:cincinnasite_brick_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

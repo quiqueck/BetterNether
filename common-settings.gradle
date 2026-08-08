@@ -1,6 +1,6 @@
 // Shared settings-phase helper for local sibling library inclusion.
 // Copy-paste this file identically into every library/mod repo's settings.gradle
-// FOR THIS MINECRAFT VERSION (26.2). Not interchangeable with the 1.21.6 copy:
+// FOR THIS MINECRAFT VERSION (26.3). Not interchangeable with the 1.21.6 copy:
 // this Loom version (1.17.x) dropped the mod*-prefixed configurations
 // (modApi/modImplementation/...) in favor of plain configurations + an
 // explicit loom.mods{} block, so the Maven-fallback branch below uses 'api',

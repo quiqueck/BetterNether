@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_bark"
+        "recipes": "betternether:gloomwood_dark_bark"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

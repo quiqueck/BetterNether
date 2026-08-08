@@ -51,6 +51,7 @@ public class BlockStalagnateBowl extends Block {
         return SHAPE;
     }
 
+
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         BlockPos down = pos.below();

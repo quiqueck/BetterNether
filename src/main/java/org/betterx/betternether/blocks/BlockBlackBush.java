@@ -13,6 +13,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -59,17 +60,34 @@ public class BlockBlackBush extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(
+            LevelReader world,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         return true;
     }
 
     @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(
+            Level world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+    public void performBonemeal(
+            ServerLevel world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         popResource(world, pos, new ItemStack(this.asItem()));
     }
 }

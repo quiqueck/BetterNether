@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_ruby_excavator"
+        "recipes": "betternether:nether_ruby_excavator"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

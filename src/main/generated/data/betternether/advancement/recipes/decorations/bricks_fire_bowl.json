@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bricks_fire_bowl"
+        "recipes": "betternether:bricks_fire_bowl"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:roof_tile_nether_brick_stonecutting"
+        "recipes": "betternether:roof_tile_nether_brick_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

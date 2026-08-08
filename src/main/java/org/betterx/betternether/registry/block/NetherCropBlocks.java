@@ -80,7 +80,8 @@ public class NetherCropBlocks {
             .addTrait(NetherMaterial.plant(MapColor.TERRACOTTA_ORANGE))
             .randomTicks()
             .addTrait(NetherTraits.plant())
-            // Was the hand-authored loot_table/blocks/black_apple.json; block loot is trait-only here.
+            // Was the hand-authored loot_table/blocks/black_apple.json, whose 26.1-schema conditions/
+            // functions 26.3 silently dropped on load.
             .addTrait(NetherLoot.blackApple())
             .buildAndRegister();
     // BlockBlackAppleSeed (WP6.12): same reproduction as BlockInkBushSeed above.

@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:copy_flaming_ruby_upgrade"
+        "recipes": "betternether:copy_flaming_ruby_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

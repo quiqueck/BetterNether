@@ -23,7 +23,7 @@ import org.betterx.betternether.registry.NetherTemplates;
 import de.ambertation.wover.complex.api.equipment.ArmorSlot;
 import de.ambertation.wover.complex.api.equipment.ToolSlot;
 
-// 26.2 split net.minecraft.advancements.criterion into .predicates (LocationPredicate, ...) and
+// 26.3 split net.minecraft.advancements.criterion into .predicates (LocationPredicate, ...) and
 // .triggers (every *Trigger).
 import net.minecraft.advancements.predicates.LocationPredicate;
 import net.minecraft.advancements.triggers.ChangeDimensionTrigger;

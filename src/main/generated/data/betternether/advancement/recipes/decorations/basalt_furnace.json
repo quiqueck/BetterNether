@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:basalt_furnace"
+        "recipes": "betternether:basalt_furnace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

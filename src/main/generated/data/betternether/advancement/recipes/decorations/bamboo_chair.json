@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bamboo_chair"
+        "recipes": "betternether:bamboo_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

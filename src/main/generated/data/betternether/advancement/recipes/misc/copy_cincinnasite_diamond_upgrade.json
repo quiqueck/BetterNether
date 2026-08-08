@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:copy_cincinnasite_diamond_upgrade"
+        "recipes": "betternether:copy_cincinnasite_diamond_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

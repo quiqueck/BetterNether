@@ -13,6 +13,7 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.feature.api.WriteZone;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -22,26 +23,27 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Iterator;
 import java.util.Map;
 
-public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfiguration> implements GrowableFeature<NoneFeatureConfiguration> {
+public class AnchorTreeBranchFeature extends ContextFeature implements GrowableFeature {
+    public static final MapCodec<AnchorTreeBranchFeature> CODEC = MapCodec.unit(AnchorTreeBranchFeature::new);
+
+    @Override
+    public MapCodec<AnchorTreeBranchFeature> codec() {
+        return CODEC;
+    }
+
     private static final float[] CURVE_X = new float[]{9F, 7F, 1.5F, 0.5F, 3F, 7F};
     private static final float[] CURVE_Y = new float[]{-20F, -17F, -12F, -4F, 0F, 2F};
     private static final int MIDDLE_Y = 10;
-
-    public AnchorTreeBranchFeature() {
-        super(NoneFeatureConfiguration.CODEC);
-    }
 
     @Override
     protected boolean place(
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
@@ -177,7 +179,6 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
             } else
                 iterator.remove();
         }
-
 
         for (BlockPos bpos : context.POINTS) {
             if (context.POINTS.contains(bpos.above()) && context.POINTS.contains(bpos.below()))
@@ -459,7 +460,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
     }
 
     @Override
-    public boolean grow(ServerLevelAccessor level, BlockPos pos, RandomSource random, NoneFeatureConfiguration cfg) {
+    public boolean grow(ServerLevelAccessor level, BlockPos pos, RandomSource random) {
         return grow(level, pos, random, 1, NetherThreadDataStorage.generatorForThread().context, true);
     }
 }

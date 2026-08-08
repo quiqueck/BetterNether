@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -28,12 +29,21 @@ public abstract class MushroomMixin {
             info.setReturnValue(true);
     }
 
+    /**
+     * 26.3 added a trailing {@link BonemealSource} to all three {@code BonemealableBlock} methods, so the
+     * injector has to carry it too. Verified with {@code javap -p net.minecraft.world.level.block.MushroomBlock}:
+     * {@code public void performBonemeal(ServerLevel, RandomSource, BlockPos, BlockState, BonemealSource)}.
+     * This build has no refmap and no mixin annotation processor, and {@code performBonemeal} is not
+     * overloaded, so the old four-argument descriptor compiled but would have failed to apply at
+     * mixin-apply time (single target => {@code CallbackInjector} throws instead of skipping).
+     */
     @Inject(method = "performBonemeal", at = @At(value = "HEAD"), cancellable = true)
     private void growStructure(
             ServerLevel world,
             RandomSource random,
             BlockPos pos,
             BlockState state,
+            BonemealSource bonemealSource,
             CallbackInfo info
     ) {
         if (BlocksHelper.isNetherMycelium(world.getBlockState(pos.below()))) {

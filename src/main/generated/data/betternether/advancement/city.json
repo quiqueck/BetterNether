@@ -3,17 +3,15 @@
   "criteria": {
     "ncity": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "structures": "betternether:nether_city"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "betternether:nether_city"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_chair"
+        "recipes": "betternether:wart_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_ruby_leggings"
+        "recipes": "betternether:nether_ruby_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

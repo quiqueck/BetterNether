@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_hammer_diamond"
+        "recipes": "betternether:cincinnasite_hammer_diamond"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

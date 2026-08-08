@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:glass_bottle"
+        "recipes": "betternether:glass_bottle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

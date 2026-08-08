@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:activator_rail"
+        "recipes": "betternether:activator_rail"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

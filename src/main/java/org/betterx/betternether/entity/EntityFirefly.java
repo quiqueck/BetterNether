@@ -100,9 +100,14 @@ public class EntityFirefly extends DespawnableAnimal {
                 boolean valid = !state.isAir() && !world.getFluidState(pos.below()).is(FluidTags.LAVA);
                 if (valid) {
                     state = this.level.getBlockState(pos);
-                    valid = state.isAir() || !state.blocksMotion();
+                    // 26.3 removed BlockState.blocksMotion(); it was
+                    //   block != COBWEB && block != BAMBOO_SAPLING && isSolid()
+                    // and isSolid() (shape-derived, unchanged in 26.3) is what we want here. The other
+                    // 26.3 replacement, BlockTags.BLOCKS_MOTION, is a vanilla-blocks-only data tag and
+                    // would silently stop treating every BetterNether block as an obstacle.
+                    valid = state.isAir() || !state.isSolid();
                     valid = valid && state.getBlock() != NetherPlantBlocks.EGG_PLANT;
-                    valid = valid && !state.blocksMotion();
+                    valid = valid && !state.isSolid();
                 }
                 return valid;
             }
@@ -313,7 +318,8 @@ public class EntityFirefly extends DespawnableAnimal {
         public void start() {
             BlockPos pos = this.getFlowerLocation();
             if (pos != null) {
-                Path path = EntityFirefly.this.navigation.createPath(new BlockPos(pos), 1);
+                // 26.3 removed the BlockPos(Vec3i) copy ctor; pos is already a BlockPos.
+                Path path = EntityFirefly.this.navigation.createPath(pos, 1);
                 EntityFirefly.this.navigation.moveTo(path, 1.0D);
             }
             super.start();

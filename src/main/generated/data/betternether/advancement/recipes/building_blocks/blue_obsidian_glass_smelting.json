@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:blue_obsidian_glass_smelting"
+        "recipes": "betternether:blue_obsidian_glass_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

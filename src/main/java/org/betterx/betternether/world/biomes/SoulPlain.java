@@ -80,12 +80,12 @@ public class SoulPlain extends NetherBiomeConfig {
         );
 
         builder.rule(
-                       SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, soilSandDist),
+                       SurfaceRules.ifTrue(NetherBiomeBuilder.ON_FLOOR, soilSandDist),
                        BaseSurfaceRuleBuilder.CEILING_PRIORITY + 1
                )
                .ceil(NetherStoneBlocks.SOUL_SANDSTONE.defaultBlockState())
                .rule(
-                       SurfaceRules.ifTrue(SurfaceRules.UNDER_CEILING, soilStoneDist),
+                       SurfaceRules.ifTrue(NetherBiomeBuilder.UNDER_CEILING, soilStoneDist),
                        BaseSurfaceRuleBuilder.CEILING_PRIORITY - 1
                )
                .rule(soilSandStoneDist, BaseSurfaceRuleBuilder.CEILING_PRIORITY - 2);

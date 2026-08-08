@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_chair"
+        "recipes": "betternether:gloomwood_dark_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

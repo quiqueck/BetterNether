@@ -11,46 +11,40 @@
           },
           {
             "type": "minecraft:item",
-            "functions": [
-              {
-                "count": {
-                  "type": "minecraft:uniform",
-                  "max": 3.0,
-                  "min": 1.0
-                },
-                "function": "minecraft:set_count"
+            "modifier": {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
               }
-            ],
+            },
             "name": "betternether:blue_crying_obsidian",
             "weight": 40
           },
           {
             "type": "minecraft:item",
-            "functions": [
-              {
-                "count": {
-                  "type": "minecraft:uniform",
-                  "max": 2.0,
-                  "min": 1.0
-                },
-                "function": "minecraft:set_count"
+            "modifier": {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
               }
-            ],
+            },
             "name": "betternether:blue_weeping_obsidian",
             "weight": 20
           },
           {
             "type": "minecraft:item",
-            "functions": [
-              {
-                "count": {
-                  "type": "minecraft:uniform",
-                  "max": 2.0,
-                  "min": 1.0
-                },
-                "function": "minecraft:set_count"
+            "modifier": {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
               }
-            ],
+            },
             "name": "betternether:weeping_obsidian",
             "weight": 20
           },

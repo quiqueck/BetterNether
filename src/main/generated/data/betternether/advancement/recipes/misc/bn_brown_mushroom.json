@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bn_brown_mushroom"
+        "recipes": "betternether:bn_brown_mushroom"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

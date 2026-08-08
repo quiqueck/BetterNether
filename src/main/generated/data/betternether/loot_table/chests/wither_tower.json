@@ -5,31 +5,27 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 12.0,
-                "min": 4.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 12.0,
+              "min": 4.0
             }
-          ],
+          },
           "name": "minecraft:netherrack",
           "weight": 12
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 8.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 8.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "minecraft:nether_wart",
           "weight": 3
         },
@@ -40,16 +36,14 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 12.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 12.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "minecraft:quartz",
           "weight": 8
         }
@@ -57,12 +51,10 @@
       "rolls": 2.0
     },
     {
-      "conditions": [
-        {
-          "chance": 0.3,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.3
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -71,16 +63,14 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "betternether:cincinnasite_diamond_upgrade_smithing_template",
           "weight": 9
         },
@@ -96,46 +86,40 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "minecraft:diamond",
           "weight": 15
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "betternether:nether_ruby",
           "weight": 12
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 1.0
             }
-          ],
+          },
           "name": "minecraft:netherite_scrap",
           "weight": 8
         }
@@ -147,74 +131,60 @@
       }
     },
     {
-      "conditions": [
-        {
-          "chance": 0.2,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.2
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_sword"
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:cincinnasite_sword"
         }
       ],
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "chance": 0.4,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.4
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:unbreaking"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:unbreaking"
+          },
           "name": "betternether:nether_ruby_hoe"
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:unbreaking"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:unbreaking"
+          },
           "name": "betternether:cincinnasite_hoe"
         }
       ],
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "chance": 0.2,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.2
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -228,54 +198,44 @@
       }
     },
     {
-      "conditions": [
-        {
-          "chance": 0.2,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.2
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_helmet",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_chestplate",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_leggings",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:nether_ruby_boots",
           "weight": 2
         }
@@ -287,54 +247,44 @@
       }
     },
     {
-      "conditions": [
-        {
-          "chance": 0.2,
-          "condition": "minecraft:random_chance"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.2
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:cincinnasite_helmet",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:cincinnasite_chestplate",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:cincinnasite_leggings",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "minecraft:mending"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "minecraft:mending"
+          },
           "name": "betternether:cincinnasite_boots",
           "weight": 2
         }

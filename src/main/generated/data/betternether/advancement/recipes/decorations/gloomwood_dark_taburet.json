@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_taburet"
+        "recipes": "betternether:gloomwood_dark_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

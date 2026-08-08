@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_mushroom_bookshelf"
+        "recipes": "betternether:nether_mushroom_bookshelf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,0 +1,7 @@
+{
+  "type": "wover:random_patch",
+  "feature": "betternether:jellyfish_mushroom",
+  "tries": 6,
+  "xz_spread": 6,
+  "y_spread": 4
+}

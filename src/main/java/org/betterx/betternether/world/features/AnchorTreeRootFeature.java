@@ -13,31 +13,33 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import de.ambertation.wover.block.api.BlockProperties;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfiguration> {
-    private static final LucisFeature LUCIS = new LucisFeature();
+public class AnchorTreeRootFeature extends ContextFeature {
+    public static final MapCodec<AnchorTreeRootFeature> CODEC = MapCodec.unit(AnchorTreeRootFeature::new);
 
-    public AnchorTreeRootFeature() {
-        super(NoneFeatureConfiguration.CODEC);
+    @Override
+    public MapCodec<AnchorTreeRootFeature> codec() {
+        return CODEC;
     }
+
+    private static final LucisFeature LUCIS = new LucisFeature();
 
     @Override
     protected boolean place(
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {

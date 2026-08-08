@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_chiseled_bookshelf"
+        "recipes": "betternether:mushroom_fir_chiseled_bookshelf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

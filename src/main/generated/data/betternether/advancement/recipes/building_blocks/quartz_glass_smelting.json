@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:quartz_glass_smelting"
+        "recipes": "betternether:quartz_glass_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

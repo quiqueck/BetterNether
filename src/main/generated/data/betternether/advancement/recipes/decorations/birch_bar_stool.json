@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:birch_bar_stool"
+        "recipes": "betternether:birch_bar_stool"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

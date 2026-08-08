@@ -1,12 +1,10 @@
 {
   "feature": {
     "type": "minecraft:simple_block",
-    "config": {
-      "to_place": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "betternether:molten_gloomsculk"
-        }
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "betternether:molten_gloomsculk"
       }
     }
   },
@@ -20,15 +18,22 @@
       }
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:clamped_normal",
         "deviation": 3.0,
         "max_inclusive": 5,
         "mean": 0.0,
         "min_inclusive": -5
       },
-      "y_spread": 0
+      "y": 0,
+      "z": {
+        "type": "minecraft:clamped_normal",
+        "deviation": 3.0,
+        "max_inclusive": 5,
+        "mean": 0.0,
+        "min_inclusive": -5
+      }
     },
     {
       "type": "wover:all"

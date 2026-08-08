@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_fire_bowl"
+        "recipes": "betternether:cincinnasite_fire_bowl"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

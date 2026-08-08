@@ -51,7 +51,7 @@ class BNObsidianBase extends Block {
             for (Direction direction : Direction.values()) {
                 final BlockPos rodPos = blockPos.relative(direction);
                 final BlockState updaterState = level.getBlockState(rodPos);
-                // 26.2: lightning rods weather like copper, so Blocks.LIGHTNING_ROD is a
+                // 26.3: lightning rods weather like copper, so Blocks.LIGHTNING_ROD is a
                 // WeatheringCopperCollection of eight blocks rather than a single Block. The
                 // BlockTags.LIGHTNING_RODS tag covers exactly that collection.
                 if (updaterState.is(BlockTags.LIGHTNING_RODS) && updaterState.getValue(LightningRodBlock.POWERED)) {

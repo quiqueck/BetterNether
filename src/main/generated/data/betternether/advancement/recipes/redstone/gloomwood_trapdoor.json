@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_trapdoor"
+        "recipes": "betternether:gloomwood_trapdoor"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

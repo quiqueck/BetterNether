@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_sakura_taburet"
+        "recipes": "betternether:nether_sakura_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -11,15 +11,21 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> implements GrowableFeature<NoneFeatureConfiguration> {
+public class LucisFeature extends ContextFeature implements GrowableFeature {
+    public static final MapCodec<LucisFeature> CODEC = MapCodec.unit(LucisFeature::new);
+
+    @Override
+    public MapCodec<LucisFeature> codec() {
+        return CODEC;
+    }
 
     private static final BlockState CENTER = NetherMushroomBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                         .setValue(
@@ -37,16 +43,11 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> imple
                                                                                 BNBlockProperties.EnumLucisShape.CORNER
                                                                         );
 
-    public LucisFeature() {
-        super(NoneFeatureConfiguration.CODEC);
-    }
-
     @Override
     protected boolean place(
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
@@ -175,8 +176,7 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> imple
     public boolean grow(
             ServerLevelAccessor level,
             BlockPos pos,
-            RandomSource random,
-            NoneFeatureConfiguration configuration
+            RandomSource random
     ) {
         return grow(level, pos, random, true);
     }

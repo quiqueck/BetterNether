@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mangrove_taburet"
+        "recipes": "betternether:mangrove_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

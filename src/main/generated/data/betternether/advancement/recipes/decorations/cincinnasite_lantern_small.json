@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_lantern_small"
+        "recipes": "betternether:cincinnasite_lantern_small"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

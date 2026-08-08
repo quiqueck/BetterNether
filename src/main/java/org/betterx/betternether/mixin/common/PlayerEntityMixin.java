@@ -73,7 +73,15 @@ public abstract class PlayerEntityMixin {
             pos = pos.below();
         pos = pos.relative(state.getValue(BlockStatueRespawner.FACING));
         BlockState state2 = world.getBlockState(pos);
-        if (!state2.blocksMotion() && state2.getCollisionShape(world, pos).isEmpty())
+        // 26.3 removed BlockState.blocksMotion(); it was
+        //   block != COBWEB && block != BAMBOO_SAPLING && isSolid()
+        // and isSolid() (still derived from the collision shape in 26.3) is what "can the player stand
+        // here" wants. The other candidate replacement, BlockTags.BLOCKS_MOTION, is a hand-written
+        // vanilla-only data tag and would silently stop treating BetterNether blocks as obstructions -
+        // the same reasoning applied to EntityFirefly. The two dropped special cases cost nothing here:
+        // cobweb and bamboo sapling both have an empty collision shape, so isSolid() is false for them
+        // anyway, and the getCollisionShape().isEmpty() half of this test is unchanged.
+        if (!state2.isSolid() && state2.getCollisionShape(world, pos).isEmpty())
             return Optional.of(Vec3.atLowerCornerOf(pos).add(0.5, 0, 0.5));
         else
             return Optional.empty();

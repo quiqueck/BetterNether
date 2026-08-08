@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_planks"
+        "recipes": "betternether:gloomwood_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

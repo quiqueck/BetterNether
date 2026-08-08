@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:soul_sandstone_cut_soul_sandstone_cut_stairs"
+        "recipes": "betternether:soul_sandstone_cut_soul_sandstone_cut_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

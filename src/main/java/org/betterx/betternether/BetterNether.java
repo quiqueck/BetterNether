@@ -51,7 +51,6 @@ public class BetterNether implements ModInitializer {
         NetherFeatures.register();
         NetherStructures.register();
         NetherBiomes.register();
-        BrewingRegistry.register();
         CommandRegistry.register();
         Config.save();
 

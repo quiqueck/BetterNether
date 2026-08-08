@@ -3,369 +3,323 @@
   "criteria": {
     "betternether:bone_reef": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:bone_reef"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:bone_reef"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:crimson_glowing_woods": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:crimson_glowing_woods"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:crimson_glowing_woods"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:crimson_pinewood": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:crimson_pinewood"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:crimson_pinewood"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:flooded_deltas": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:flooded_deltas"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:flooded_deltas"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:gloomwood": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:gloomwood"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:gloomwood"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:gravel_desert": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:gravel_desert"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:gravel_desert"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:magma_land": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:magma_land"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:magma_land"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:nether_grasslands": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:nether_grasslands"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:nether_grasslands"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:nether_jungle": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:nether_jungle"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:nether_jungle"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:nether_mushroom_forest": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:nether_mushroom_forest"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:nether_mushroom_forest"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:nether_mushroom_forest_edge": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:nether_mushroom_forest_edge"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:nether_mushroom_forest_edge"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:nether_swampland": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:nether_swampland"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:nether_swampland"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:nether_swampland_terraces": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:nether_swampland_terraces"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:nether_swampland_terraces"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:old_fungiwoods": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:old_fungiwoods"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:old_fungiwoods"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:old_swampland": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:old_swampland"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:old_swampland"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:old_warped_woods": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:old_warped_woods"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:old_warped_woods"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:poor_nether_grasslands": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:poor_nether_grasslands"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:poor_nether_grasslands"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:soul_plain": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:soul_plain"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:soul_plain"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:sulfuric_bone_reef": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:sulfuric_bone_reef"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:sulfuric_bone_reef"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:upside_down_forest": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:upside_down_forest"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:upside_down_forest"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:upside_down_forest_cleared": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:upside_down_forest_cleared"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:upside_down_forest_cleared"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:wart_forest": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:wart_forest"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:wart_forest"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     },
     "betternether:wart_forest_edge": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "betternether:wart_forest_edge"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "betternether:wart_forest_edge"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     }

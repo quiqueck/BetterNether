@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:willow_ladder"
+        "recipes": "betternether:willow_ladder"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

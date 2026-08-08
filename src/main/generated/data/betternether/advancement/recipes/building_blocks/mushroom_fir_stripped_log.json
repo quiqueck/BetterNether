@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_stripped_log"
+        "recipes": "betternether:mushroom_fir_stripped_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

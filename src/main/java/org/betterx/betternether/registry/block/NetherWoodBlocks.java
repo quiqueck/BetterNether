@@ -58,6 +58,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.levelgen.feature.stateproviders.CopyPropertiesProvider;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -105,7 +106,7 @@ public class NetherWoodBlocks {
             .noCollission()
             .instabreak()
             .sound(SoundType.CROP)
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .randomTicks()
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .buildAndRegister();
@@ -185,13 +186,11 @@ public class NetherWoodBlocks {
 
     public static final Block GLOOMWOOD_TRANSITION_LOG = NetherBlocks
             .defineBlock("gloomwood_transition_log", RotatedPillarBlock::new)
-            // Carry the axis over, like the molten log below does: without it, stripping a sideways
-            // transition log stood the stripped one upright.
-            .addTrait(BlockTraits.LOG_BLOCK.with(
-                    (oldState) -> GLOOMWOOD_TRANSITION_STRIPPED_LOG
-                            .defaultBlockState()
-                            .setValue(RotatedPillarBlock.AXIS, oldState.getValue(RotatedPillarBlock.AXIS))
-            ))
+            // Deferred: the stripped variant is declared below this one, so it is not there yet.
+            // CopyPropertiesProvider carries the pillar axis over, which is what 26.1 spelled out by hand.
+            .addTrait(BlockTraits.LOG_BLOCK.withDeferred(() -> new CopyPropertiesProvider(
+                    GLOOMWOOD_TRANSITION_STRIPPED_LOG
+            )))
             .addTrait(ModelTraitLibrary.log(false))
             .addTags(BlockTags.LOGS)
             .addItemTags(ItemTags.LOGS)
@@ -219,12 +218,10 @@ public class NetherWoodBlocks {
      */
     public static final Block GLOOMWOOD_DARK_MOLTEN_LOG = NetherBlocks
             .defineBlock("gloomwood_dark_molten_log", BlockMoltenGloomwoodLog::new)
-            .addTrait(BlockTraits.LOG_BLOCK.with(
-                    (oldState) -> MAT_GLOOMWOOD_DARK
-                            .getStrippedLog()
-                            .defaultBlockState()
-                            .setValue(RotatedPillarBlock.AXIS, oldState.getValue(RotatedPillarBlock.AXIS))
-            ))
+            // CopyPropertiesProvider carries the pillar axis over, which is what 26.1 spelled out by hand.
+            .addTrait(BlockTraits.LOG_BLOCK.withDeferred(() -> new CopyPropertiesProvider(
+                    MAT_GLOOMWOOD_DARK.getStrippedLog()
+            )))
             // Four weighted variants over the phase-shifted side sprites. A texture animates per sprite,
             // so a single one would have every molten log in a forest pulsing on the same beat; the
             // sprites are the same fissures rolled to four points in the cycle and the model picks one

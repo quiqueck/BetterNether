@@ -2,7 +2,6 @@ package org.betterx.betternether.blocks;
 
 import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -16,18 +15,15 @@ import net.minecraft.world.level.block.state.StateDefinition;
  * {@link RotatedPillarBlock} directly and reuses {@link RubeusLog#SHAPE}.
  */
 public class RubeusBark extends RotatedPillarBlock {
-    public static final MapCodec<RubeusBark> CODEC = simpleCodec(RubeusBark::new);
+    // 26.3 removed block codecs entirely: Block#codec()/BlockBehaviour#simpleCodec no longer
+    // exist, because blocks are no longer described by a dispatch codec. The CODEC constant and
+    // the codec() override are dropped, not replaced.
 
     public RubeusBark(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState()
                                       .setValue(AXIS, Direction.Axis.Y)
                                       .setValue(RubeusLog.SHAPE, TripleShape.BOTTOM));
-    }
-
-    @Override
-    public MapCodec<? extends RotatedPillarBlock> codec() {
-        return CODEC;
     }
 
     @Override

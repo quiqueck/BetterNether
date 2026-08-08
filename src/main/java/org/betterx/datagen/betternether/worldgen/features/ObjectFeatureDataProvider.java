@@ -12,8 +12,8 @@ import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import de.ambertation.wover.block.api.predicate.BlockPredicates;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
-import de.ambertation.wover.feature.api.configured.ConfiguredFeatureManager;
-import de.ambertation.wover.feature.api.features.config.PillarFeatureConfig;
+import de.ambertation.wover.feature.api.configured.FeatureContentManager;
+import de.ambertation.wover.feature.api.features.PillarFeature;
 import de.ambertation.wover.feature.api.placed.modifiers.ExtendXYZ;
 
 import net.minecraft.core.Direction;
@@ -25,7 +25,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkShriekerBlock;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class ObjectFeatureDataProvider extends WoverFeatureProvider {
@@ -34,10 +34,10 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapFeatures(BootstrapContext<Feature> ctx) {
         NetherObjects.PATCH_BASALT_STALACTITE
                 .bootstrap(ctx)
-                .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                .transformer(PillarFeature.KnownTransformers.SIZE_DECREASE)
                 .direction(Direction.DOWN)
                 .blockState(NetherStoneBlocks.BASALT_STALACTITE)
                 .maxHeight(BiasedToBottomInt.of(4, 11))
@@ -48,7 +48,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
 
         NetherObjects.PATCH_BASALT_STALAGMITE
                 .bootstrap(ctx)
-                .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                .transformer(PillarFeature.KnownTransformers.SIZE_DECREASE)
                 .direction(Direction.UP)
                 .blockState(NetherStoneBlocks.BASALT_STALACTITE)
                 .maxHeight(BiasedToBottomInt.of(3, 9))
@@ -119,7 +119,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
         NetherObjectsPlaced.BONE_STALAGMITE
                 .inlineConfiguration(ctx)
                 .sequence()
-                .add(ConfiguredFeatureManager.INLINE_BUILDER
+                .add(FeatureContentManager.INLINE_BUILDER
                         .simple()
                         .block(NetherStoneBlocks.BONE_BLOCK)
                         .inlinePlace()
@@ -131,9 +131,9 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                         .is(BlockPredicates.ONLY_NETHER_GROUND)
                         .directHolder()
                 )
-                .add(ConfiguredFeatureManager.INLINE_BUILDER
+                .add(FeatureContentManager.INLINE_BUILDER
                         .pillar()
-                        .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                        .transformer(PillarFeature.KnownTransformers.SIZE_DECREASE)
                         .direction(Direction.UP)
                         .blockState(NetherStoneBlocks.BONE_STALACTITE)
                         .maxHeight(BiasedToBottomInt.of(2, 7))
@@ -153,7 +153,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
         NetherObjectsPlaced.STALACTITE
                 .inlineConfiguration(ctx)
                 .pillar()
-                .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                .transformer(PillarFeature.KnownTransformers.SIZE_DECREASE)
                 .direction(Direction.DOWN)
                 .blockState(NetherStoneBlocks.NETHERRACK_STALACTITE)
                 .maxHeight(BiasedToBottomInt.of(2, 7))
@@ -168,7 +168,7 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
         NetherObjectsPlaced.STALAGMITE
                 .inlineConfiguration(ctx)
                 .pillar()
-                .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                .transformer(PillarFeature.KnownTransformers.SIZE_DECREASE)
                 .direction(Direction.UP)
                 .blockState(NetherStoneBlocks.NETHERRACK_STALACTITE)
                 .maxHeight(BiasedToBottomInt.of(2, 7))
@@ -207,9 +207,9 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                 .inlineConfiguration(ctx)
                 .sequence()
                 .add(NetherObjectsPlaced.PATCH_TERRACOTTA_CLUMP)
-                .add(ConfiguredFeatureManager.INLINE_BUILDER
+                .add(FeatureContentManager.INLINE_BUILDER
                         .pillar()
-                        .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                        .transformer(PillarFeature.KnownTransformers.SIZE_DECREASE)
                         .direction(Direction.DOWN)
                         .blockState(NetherStoneBlocks.BLACKSTONE_STALACTITE)
                         .maxHeight(BiasedToBottomInt.of(3, 9))
@@ -227,9 +227,9 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                 .inlineConfiguration(ctx)
                 .sequence()
                 .add(NetherObjectsPlaced.PATCH_TERRACOTTA_CLUMP)
-                .add(ConfiguredFeatureManager.INLINE_BUILDER
+                .add(FeatureContentManager.INLINE_BUILDER
                         .pillar()
-                        .transformer(PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+                        .transformer(PillarFeature.KnownTransformers.SIZE_DECREASE)
                         .direction(Direction.UP)
                         .blockState(NetherStoneBlocks.BLACKSTONE_STALACTITE)
                         .maxHeight(BiasedToBottomInt.of(3, 8))

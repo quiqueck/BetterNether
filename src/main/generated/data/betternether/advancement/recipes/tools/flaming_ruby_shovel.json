@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:flaming_ruby_shovel"
+        "recipes": "betternether:flaming_ruby_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

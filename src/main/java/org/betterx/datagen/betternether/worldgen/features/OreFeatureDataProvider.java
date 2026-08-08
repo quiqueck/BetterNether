@@ -12,7 +12,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -24,7 +24,7 @@ public class OreFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapFeatures(BootstrapContext<Feature> ctx) {
         NetherOres.CINCINNASITE_ORE
                 .bootstrap(ctx)
                 .add(Blocks.NETHERRACK, NetherOreBlocks.CINCINNASITE_ORE)

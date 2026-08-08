@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bar_stool_cincinnasite"
+        "recipes": "betternether:bar_stool_cincinnasite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -11,10 +11,10 @@ import net.minecraft.world.level.storage.loot.LootTable;
  * The keys of the loot tables BetterNether owns.
  * <p>
  * BetterNether's additions to <em>vanilla</em> tables (ruined portal, nether bridge, the four bastion chests
- * and piglin bartering) used to be registered here as Java appenders against {@code LootTableEvents.MODIFY}.
- * They now live in data, emitted by {@code org.betterx.datagen.betternether.recipes.NetherLootAdditionProvider}
- * into {@code data/betternether/wover/loot_addition/}, which {@code wover-loot-api} applies while the
- * reloadable loot table registry is being rebuilt. The behaviour is unchanged; the additions are just
+ * and piglin bartering) used to be registered here as Java {@code LootTableAppenders}. They now live in data,
+ * emitted by {@code org.betterx.datagen.betternether.recipes.NetherLootAdditionProvider} into
+ * {@code data/betternether/wover/loot_addition/}, which the {@code wover-loot-api} applies while the
+ * {@code minecraft:loot_table} registry is being built. The behaviour is unchanged; the additions are just
  * inspectable and overridable now.
  */
 public class BNLoot {

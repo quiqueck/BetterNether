@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:anchor_tree_gate"
+        "recipes": "betternether:anchor_tree_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

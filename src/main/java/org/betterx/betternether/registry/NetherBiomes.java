@@ -82,7 +82,8 @@ public class NetherBiomes {
 
 
     public static void register() {
-        BiomeCodecRegistry.register(BetterNether.C.id("biome"), NetherBiome.KEY_CODEC);
+        // 26.3: BiomeCodecRegistry.register takes the MapCodec directly (KeyDispatchDataCodec is gone).
+        BiomeCodecRegistry.register(BetterNether.C.id("biome"), NetherBiome.CODEC);
         registerNumericProviders();
     }
 

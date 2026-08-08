@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_planks"
+        "recipes": "betternether:wart_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

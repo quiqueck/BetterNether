@@ -1,14 +1,12 @@
 {
   "feature": {
     "type": "minecraft:simple_block",
-    "config": {
-      "to_place": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "minecraft:black_glazed_terracotta",
-          "Properties": {
-            "facing": "north"
-          }
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:black_glazed_terracotta",
+        "Properties": {
+          "facing": "north"
         }
       }
     }

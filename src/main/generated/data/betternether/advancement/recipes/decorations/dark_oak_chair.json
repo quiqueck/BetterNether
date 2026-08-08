@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:dark_oak_chair"
+        "recipes": "betternether:dark_oak_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

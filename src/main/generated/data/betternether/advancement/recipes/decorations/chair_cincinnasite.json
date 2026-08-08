@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:chair_cincinnasite"
+        "recipes": "betternether:chair_cincinnasite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

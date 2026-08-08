@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bone_block_bone_slab"
+        "recipes": "betternether:bone_block_bone_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -95,14 +95,11 @@ public class BlocksHelper {
     /**
      * Tests {@code x}/{@code z} against {@code bounds} while ignoring the Y axis.
      * <p>
-     * A feature may only touch the 3x3 chunks around the one being decorated, and that limit is purely
-     * horizontal - walking up or down inside a legal column never leaves the write zone. Reading past it is
-     * not merely untidy: beyond the write radius the region only guarantees {@code structure_starts}, so the
-     * neighbouring chunk may still be empty and what the feature decides from that read depends on how far
-     * that chunk happened to get. (26.3 logs such reads; this version does not, which makes them quieter
-     * rather than less wrong.) Guarding a read with the full {@link BoundingBox#isInside} would also cut it
-     * off at {@link #decorationBounds(LevelAccessor, BlockPos) decorationBounds}' build-height clamp, which
-     * changes what a feature generates near the ceiling; this rejects only the horizontal escape.
+     * 26.3 rejects terrain reads outside the 3x3 chunks a feature is allowed to write to, and that limit is
+     * purely horizontal - walking up or down inside a legal column never leaves the write zone. Guarding a
+     * read with the full {@link BoundingBox#isInside} would also cut it off at
+     * {@link #decorationBounds(LevelAccessor, BlockPos) decorationBounds}' build-height clamp, which changes
+     * what a feature generates near the ceiling; this only rejects what the game actually complains about.
      * <p>
      * Same semantics as {@link WriteZone#contains(int, int)}, kept as a {@link BoundingBox} overload for the
      * call sites that already hold a box.

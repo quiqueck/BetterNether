@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:spruce_taburet"
+        "recipes": "betternether:spruce_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

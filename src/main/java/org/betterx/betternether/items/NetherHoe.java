@@ -6,16 +6,21 @@ import de.ambertation.wover.common.item.api.ItemWithCustomStack;
 import de.ambertation.wover.enchantment.api.EnchantmentUtils;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 
-public class NetherHoe extends HoeItem implements ItemWithCustomStack {
+/**
+ * 26.3 deleted {@code HoeItem}. Its constructor was already nothing more than
+ * {@code super(properties.hoe(material, damage, speed))}, and its {@code useOn} override - tilling and
+ * the dirt/rooted-dirt conversions - became the data-driven {@code minecraft:block_transformer} item
+ * component that {@link Item.Properties#hoe} attaches. See {@link NetherAxe} for the full reasoning.
+ */
+public class NetherHoe extends Item implements ItemWithCustomStack {
     private final ToolMaterial material;
 
     public NetherHoe(ToolMaterial material, float attackDamage, float attackSpeed, Item.Properties settings) {
-        super(material, attackDamage, attackSpeed, settings);
+        super(settings.hoe(material, attackDamage, attackSpeed));
         this.material = material;
     }
 

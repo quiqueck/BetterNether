@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:stalagnate_plate"
+        "recipes": "betternether:stalagnate_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

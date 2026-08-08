@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_chair"
+        "recipes": "betternether:mushroom_fir_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

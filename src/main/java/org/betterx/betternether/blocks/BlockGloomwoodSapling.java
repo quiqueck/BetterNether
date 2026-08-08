@@ -12,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,13 +40,24 @@ public class BlockGloomwoodSapling extends FeatureSaplingBlock implements Boneme
      * That is most of its own biome, so this is the common case rather than a corner of it.
      */
     @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
-        return super.isValidBonemealTarget(level, pos, state)
+    public boolean isValidBonemealTarget(
+            LevelReader level,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
+        return super.isValidBonemealTarget(level, pos, state, bonemealSource)
                 && GloomwoodTreeFeature.hasRoomToGrow(level, pos);
     }
 
     @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(
+            Level world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         return BlocksHelper.isFertile(world.getBlockState(pos.below()))
                 ? (random.nextInt(8) == 0)
                 : (random.nextInt(16) == 0);

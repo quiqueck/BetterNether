@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:obsidian_tile_slab_from_tile_stonecutter"
+        "recipes": "betternether:obsidian_tile_slab_from_tile_stonecutter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:agave_medicine"
+        "recipes": "betternether:agave_medicine"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

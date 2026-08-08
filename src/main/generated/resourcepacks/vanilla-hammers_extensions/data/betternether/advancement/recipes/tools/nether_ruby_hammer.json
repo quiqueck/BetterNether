@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_ruby_hammer"
+        "recipes": "betternether:nether_ruby_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

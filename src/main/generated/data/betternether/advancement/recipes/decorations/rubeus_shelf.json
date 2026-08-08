@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:rubeus_shelf"
+        "recipes": "betternether:rubeus_shelf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

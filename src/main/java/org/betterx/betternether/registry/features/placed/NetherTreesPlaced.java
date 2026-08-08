@@ -3,7 +3,7 @@ package org.betterx.betternether.registry.features.placed;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 import de.ambertation.wover.core.api.ModCore;
-import de.ambertation.wover.feature.api.placed.PlacedConfiguredFeatureKey;
+import de.ambertation.wover.feature.api.placed.BoundPlacedFeatureKey;
 import de.ambertation.wover.feature.api.placed.PlacedFeatureKey;
 import de.ambertation.wover.feature.api.placed.PlacedFeatureManager;
 
@@ -11,7 +11,7 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGET
 
 public class NetherTreesPlaced {
     private static final ModCore C = BetterNether.C;
-    public static PlacedConfiguredFeatureKey RUBEUS_TREE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey RUBEUS_TREE = PlacedFeatureManager
             .createKey(NetherTrees.RUBEUS_TREE)
             .setDecoration(VEGETAL_DECORATION);
     /**
@@ -22,40 +22,40 @@ public class NetherTreesPlaced {
      * closed heart of a grove, its thinning edge, or the open sculk between them, where the occasional
      * tree stands on its own.
      */
-    public static PlacedConfiguredFeatureKey GLOOMWOOD_TREE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey GLOOMWOOD_TREE = PlacedFeatureManager
             .createKey(NetherTrees.GLOOMWOOD_TREE)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey GLOOMWOOD_TREE_EDGE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey GLOOMWOOD_TREE_EDGE = PlacedFeatureManager
             .createKey(C.id("tree_gloomwood_edge"), NetherTrees.GLOOMWOOD_TREE)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey GLOOMWOOD_TREE_SOLITARY = PlacedFeatureManager
+    public static BoundPlacedFeatureKey GLOOMWOOD_TREE_SOLITARY = PlacedFeatureManager
             .createKey(NetherTrees.GLOOMWOOD_TREE_SOLITARY)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey MUSHROOM_FIR = PlacedFeatureManager
+    public static BoundPlacedFeatureKey MUSHROOM_FIR = PlacedFeatureManager
             .createKey(NetherTrees.MUSHROOM_FIR)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey BIG_RED_MUSHROOM = PlacedFeatureManager
+    public static BoundPlacedFeatureKey BIG_RED_MUSHROOM = PlacedFeatureManager
             .createKey(NetherTrees.PATCH_BIG_RED_MUSHROOM)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey BIG_BROWN_MUSHROOM = PlacedFeatureManager
+    public static BoundPlacedFeatureKey BIG_BROWN_MUSHROOM = PlacedFeatureManager
             .createKey(NetherTrees.PATCH_BIG_BROWN_MUSHROOM)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey WART_TREE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey WART_TREE = PlacedFeatureManager
             .createKey(NetherTrees.WART_TREE)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey WILLOW_TREE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey WILLOW_TREE = PlacedFeatureManager
             .createKey(NetherTrees.WILLOW_TREE)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey SAKURA_TREE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey SAKURA_TREE = PlacedFeatureManager
             .createKey(NetherTrees.SAKURA_TREE)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey ANCHOR_TREE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey ANCHOR_TREE = PlacedFeatureManager
             .createKey(NetherTrees.ANCHOR_TREE)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey ANCHOR_TREE_BRANCH = PlacedFeatureManager
+    public static BoundPlacedFeatureKey ANCHOR_TREE_BRANCH = PlacedFeatureManager
             .createKey(NetherTrees.ANCHOR_TREE_BRANCH)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey ANCHOR_TREE_ROOT = PlacedFeatureManager
+    public static BoundPlacedFeatureKey ANCHOR_TREE_ROOT = PlacedFeatureManager
             .createKey(NetherTrees.ANCHOR_TREE_ROOT)
             .setDecoration(VEGETAL_DECORATION);
     public static PlacedFeatureKey CRIMSON_GLOWING_TREE = PlacedFeatureManager
@@ -79,10 +79,10 @@ public class NetherTreesPlaced {
     public static PlacedFeatureKey SOUL_LILY = PlacedFeatureManager
             .createKey(C.id("patch_soul_lily"))
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey OLD_WILLOW_TREE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey OLD_WILLOW_TREE = PlacedFeatureManager
             .createKey(NetherTrees.OLD_WILLOW_TREE)
             .setDecoration(VEGETAL_DECORATION);
-    public static PlacedConfiguredFeatureKey ANCHOR_TREE_SPARSE = PlacedFeatureManager
+    public static BoundPlacedFeatureKey ANCHOR_TREE_SPARSE = PlacedFeatureManager
             .createKey(C.id("anchor_tree_sparse"), NetherTrees.ANCHOR_TREE)
             .setDecoration(VEGETAL_DECORATION);
     public static PlacedFeatureKey BIG_WARPED_TREE = PlacedFeatureManager

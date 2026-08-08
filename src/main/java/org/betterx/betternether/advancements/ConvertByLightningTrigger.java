@@ -4,19 +4,20 @@ import org.betterx.betternether.BetterNether;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-// 26.2 split net.minecraft.advancements.criterion into .predicates and .triggers. Unlike 26.3,
-// SimpleCriterionTrigger.SimpleInstance#player() still returns Optional<ContextAwarePredicate>
-// here, so only the package of that type changed.
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
+// 26.3 split net.minecraft.advancements.criterion into .predicates and .triggers, and replaced
+// ContextAwarePredicate with a plain Optional<Holder<LootItemCondition>> on
+// SimpleCriterionTrigger.SimpleInstance#player() (loot conditions became a datapack registry).
 import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.ValidationContextSource;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.Optional;
 
@@ -72,7 +73,7 @@ public class ConvertByLightningTrigger
         }
 
         @Override
-        public Optional<ContextAwarePredicate> player() {
+        public Optional<Holder<LootItemCondition>> player() {
             return Optional.empty();
         }
     }

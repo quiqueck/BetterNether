@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_mushroom_trapdoor"
+        "recipes": "betternether:nether_mushroom_trapdoor"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

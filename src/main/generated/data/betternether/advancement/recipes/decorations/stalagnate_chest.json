@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:stalagnate_chest"
+        "recipes": "betternether:stalagnate_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

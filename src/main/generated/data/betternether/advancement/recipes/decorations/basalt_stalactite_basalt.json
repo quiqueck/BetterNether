@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:basalt_stalactite_basalt"
+        "recipes": "betternether:basalt_stalactite_basalt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

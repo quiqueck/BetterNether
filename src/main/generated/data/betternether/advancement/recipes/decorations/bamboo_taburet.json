@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bamboo_taburet"
+        "recipes": "betternether:bamboo_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

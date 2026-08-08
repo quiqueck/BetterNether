@@ -1,35 +1,33 @@
 {
   "feature": {
     "type": "wover:random_patch",
-    "config": {
-      "feature": {
-        "feature": "betternether:giant_mold",
-        "placement": [
-          {
-            "type": "minecraft:block_predicate_filter",
-            "predicate": {
-              "type": "minecraft:matching_block_tag",
-              "tag": "minecraft:air"
-            }
-          },
-          {
-            "type": "wover:is",
-            "offset": [
-              0,
-              -1,
-              0
-            ],
-            "predicate": {
-              "type": "minecraft:matching_block_tag",
-              "tag": "wover:surfaces/mycelium"
-            }
+    "feature": {
+      "feature": "betternether:giant_mold",
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
           }
-        ]
-      },
-      "tries": 30,
-      "xz_spread": 6,
-      "y_spread": 3
-    }
+        },
+        {
+          "type": "wover:is",
+          "offset": [
+            0,
+            -1,
+            0
+          ],
+          "predicate": {
+            "type": "minecraft:matching_block_tag",
+            "tag": "wover:surfaces/mycelium"
+          }
+        }
+      ]
+    },
+    "tries": 30,
+    "xz_spread": 6,
+    "y_spread": 3
   },
   "placement": [
     {

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_composter"
+        "recipes": "betternether:gloomwood_composter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

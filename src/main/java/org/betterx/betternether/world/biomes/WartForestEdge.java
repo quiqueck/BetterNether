@@ -43,7 +43,7 @@ public class WartForestEdge extends NetherBiomeConfig {
         builder.rule(
                 SurfaceRules.sequence(
                         SurfaceRules.ifTrue(
-                                SurfaceRules.ON_FLOOR,
+                                NetherBiomeBuilder.ON_FLOOR,
                                 new SwitchRuleSource(
                                         NetherNoiseCondition.INSTANCE,
                                         List.of(

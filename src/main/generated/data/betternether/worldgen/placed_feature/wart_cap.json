@@ -1,7 +1,6 @@
 {
   "feature": {
-    "type": "betternether:wart_cap",
-    "config": {}
+    "type": "betternether:wart_cap"
   },
   "placement": [
     {

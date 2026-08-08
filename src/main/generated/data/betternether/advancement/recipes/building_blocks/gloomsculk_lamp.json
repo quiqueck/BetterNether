@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomsculk_lamp"
+        "recipes": "betternether:gloomsculk_lamp"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

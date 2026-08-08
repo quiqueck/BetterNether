@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:glowstone_stalactite_glowstone"
+        "recipes": "betternether:glowstone_stalactite_glowstone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

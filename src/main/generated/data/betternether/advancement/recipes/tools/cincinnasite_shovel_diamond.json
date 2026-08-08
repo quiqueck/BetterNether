@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_shovel_diamond"
+        "recipes": "betternether:cincinnasite_shovel_diamond"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

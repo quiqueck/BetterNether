@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bone_cin_door"
+        "recipes": "betternether:bone_cin_door"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

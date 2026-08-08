@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:tag_shulker_box"
+        "recipes": "betternether:tag_shulker_box"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

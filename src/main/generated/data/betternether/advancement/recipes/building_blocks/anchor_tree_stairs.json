@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:anchor_tree_stairs"
+        "recipes": "betternether:anchor_tree_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

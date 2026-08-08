@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:crimson_bookshelf"
+        "recipes": "betternether:crimson_bookshelf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

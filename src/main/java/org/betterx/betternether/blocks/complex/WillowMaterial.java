@@ -53,7 +53,8 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                             null
                     ))
                     // The trunk's loot was the hand-authored loot_table/blocks/willow_trunk.json (drops a
-                    // willow log); block loot is trait-only here.
+                    // willow log), whose 26.1-schema survives_explosion condition 26.3 silently dropped on
+                    // load.
                     .add(TrunkSlot.create(
                                  BlockWillowTrunk::new,
                                  TraitLists.of(NetherLoot.dropOther(this::getLog))
@@ -66,6 +67,8 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                             // arbitrary member of the union as the pot soil.
                             TraitLists.and(NetherSurvival.netherGround(), PottablePlantBlockTrait.any())
                     ))
+                    // The branch's loot was a getDrops() override: only the `end` segment drops anything,
+                    // a single willow torch.
                     .add(SimpleBlockSlot.blockOnly(
                             NetherSlots.BRANCH,
                             (set, props) -> new BlockWillowBranch(props),

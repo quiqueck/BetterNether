@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_forged_smelting"
+        "recipes": "betternether:cincinnasite_forged_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

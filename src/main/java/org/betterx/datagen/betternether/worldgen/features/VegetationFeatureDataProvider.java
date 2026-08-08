@@ -19,7 +19,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class VegetationFeatureDataProvider extends WoverFeatureProvider {
@@ -30,7 +30,7 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapFeatures(BootstrapContext<Feature> ctx) {
         final int GRAY_MOLD_ID = 42;
         final int MUSHROOM_ID = 23;
 

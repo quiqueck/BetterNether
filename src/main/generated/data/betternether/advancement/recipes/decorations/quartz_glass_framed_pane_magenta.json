@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:quartz_glass_framed_pane_magenta"
+        "recipes": "betternether:quartz_glass_framed_pane_magenta"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

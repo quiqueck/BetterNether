@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:tag_stonecutter"
+        "recipes": "betternether:tag_stonecutter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

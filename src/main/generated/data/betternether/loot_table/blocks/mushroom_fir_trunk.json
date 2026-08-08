@@ -8,64 +8,71 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betternether:mushroom_fir_trunk",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "shape": "bottom"
-                  }
-                },
-                {
-                  "condition": "minecraft:survives_explosion"
-                }
-              ],
-              "name": "betternether:mushroom_fir_stem"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betternether:mushroom_fir_trunk",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "shape": "middle"
-                  }
-                },
-                {
-                  "condition": "minecraft:survives_explosion"
-                }
-              ],
-              "name": "betternether:mushroom_fir_stem"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betternether:mushroom_fir_trunk",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "shape": "top"
-                  }
-                },
-                {
-                  "condition": "minecraft:survives_explosion"
-                }
-              ],
-              "name": "betternether:mushroom_fir_stem"
-            },
-            {
-              "type": "minecraft:item",
-              "functions": [
-                {
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 2.0,
-                    "min": 0.0
+              "condition": {
+                "type": "minecraft:all_of",
+                "terms": [
+                  {
+                    "type": "minecraft:match_block",
+                    "blocks": "betternether:mushroom_fir_trunk",
+                    "state": {
+                      "shape": "bottom"
+                    }
                   },
-                  "function": "minecraft:set_count"
+                  {
+                    "type": "minecraft:survives_explosion"
+                  }
+                ]
+              },
+              "name": "betternether:mushroom_fir_stem"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:all_of",
+                "terms": [
+                  {
+                    "type": "minecraft:match_block",
+                    "blocks": "betternether:mushroom_fir_trunk",
+                    "state": {
+                      "shape": "middle"
+                    }
+                  },
+                  {
+                    "type": "minecraft:survives_explosion"
+                  }
+                ]
+              },
+              "name": "betternether:mushroom_fir_stem"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:all_of",
+                "terms": [
+                  {
+                    "type": "minecraft:match_block",
+                    "blocks": "betternether:mushroom_fir_trunk",
+                    "state": {
+                      "shape": "top"
+                    }
+                  },
+                  {
+                    "type": "minecraft:survives_explosion"
+                  }
+                ]
+              },
+              "name": "betternether:mushroom_fir_stem"
+            },
+            {
+              "type": "minecraft:item",
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 2.0,
+                  "min": 0.0
                 }
-              ],
+              },
               "name": "betternether:mushroom_fir_sapling"
             }
           ]

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_gate"
+        "recipes": "betternether:gloomwood_dark_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

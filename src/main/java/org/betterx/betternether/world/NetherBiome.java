@@ -5,15 +5,16 @@ import de.ambertation.wover.generator.api.biomesource.WoverBiomeData;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.biome.Biome;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class NetherBiome extends WoverBiomeData {
+    // 26.3 removed KeyDispatchDataCodec, which was only ever a wrapper around a MapCodec. WoVer's
+    // BiomeData#codec() and BiomeCodecRegistry#register now take/return the MapCodec directly, so the
+    // KEY_CODEC constant is gone rather than replaced.
     public static final MapCodec<NetherBiome> CODEC = codec(NetherBiome::new);
-    public static final KeyDispatchDataCodec<NetherBiome> KEY_CODEC = KeyDispatchDataCodec.of(CODEC);
 
     public NetherBiome(
             float fogDensity,
@@ -33,7 +34,7 @@ public class NetherBiome extends WoverBiomeData {
     }
 
     @Override
-    public KeyDispatchDataCodec<? extends WoverBiomeData> codec() {
-        return KEY_CODEC;
+    public MapCodec<? extends WoverBiomeData> codec() {
+        return CODEC;
     }
 }

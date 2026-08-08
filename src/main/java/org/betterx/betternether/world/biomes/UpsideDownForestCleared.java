@@ -60,7 +60,7 @@ public class UpsideDownForestCleared extends NetherBiomeConfig {
         super.surface(builder);
         builder.rule(
                        SurfaceRules.ifTrue(
-                               SurfaceRules.ON_FLOOR,
+                               NetherBiomeBuilder.ON_FLOOR,
                                SurfaceRules.sequence(
                                        SurfaceRules.ifTrue(
                                                Conditions.roughNoise(Noises.NETHERRACK, 0.221),
@@ -74,7 +74,7 @@ public class UpsideDownForestCleared extends NetherBiomeConfig {
                )
                .rule(
                        SurfaceRules.ifTrue(
-                               SurfaceRules.ON_CEILING,
+                               NetherBiomeBuilder.ON_CEILING,
                                SurfaceRules.sequence(
                                        SurfaceRules.ifTrue(
                                                UpsideDownForest.NOISE_CEIL_LAYER,

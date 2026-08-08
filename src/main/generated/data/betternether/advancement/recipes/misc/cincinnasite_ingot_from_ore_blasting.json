@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_ingot_from_ore_blasting"
+        "recipes": "betternether:cincinnasite_ingot_from_ore_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

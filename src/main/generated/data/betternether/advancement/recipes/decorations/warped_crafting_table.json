@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:warped_crafting_table"
+        "recipes": "betternether:warped_crafting_table"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

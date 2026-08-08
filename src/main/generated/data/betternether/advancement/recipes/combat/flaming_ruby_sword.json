@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:flaming_ruby_sword"
+        "recipes": "betternether:flaming_ruby_sword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

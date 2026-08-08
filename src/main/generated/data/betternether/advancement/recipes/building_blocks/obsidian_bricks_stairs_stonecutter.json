@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:obsidian_bricks_stairs_stonecutter"
+        "recipes": "betternether:obsidian_bricks_stairs_stonecutter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

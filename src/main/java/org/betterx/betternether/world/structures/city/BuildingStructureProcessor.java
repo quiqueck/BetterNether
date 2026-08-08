@@ -23,11 +23,11 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
  * Rewrites the blocks of a placed city building so that they match the {@link CityPalette} rolled
  * for it.
  * <p>
- * Minecraft 26.2 changes reflected here:
+ * Minecraft 26.3 changes reflected here:
  * <ul>
  * <li>{@code StructureProcessor} became an <b>interface</b>, so this class implements it.</li>
- * <li>{@code getType()} is gone; a processor now returns its {@link MapCodec} directly from
- * {@code codec()} instead of wrapping it in a {@code KeyDispatchDataCodec}. Up to 26.1 this returned
+ * <li>{@code getType()} is gone; a processor now returns its {@link MapCodec} from {@code codec()},
+ * because 26.3 removed {@code KeyDispatchDataCodec} throughout. Up to 26.1 this returned
  * {@code StructureProcessorType.NOP}, which was only ever a placeholder - this processor is built
  * directly in Java by {@code CityPiece}, is never serialized, and is not registered in
  * {@code BuiltInRegistries.STRUCTURE_PROCESSOR}. A real codec over the palette name is supplied
@@ -63,7 +63,7 @@ public class BuildingStructureProcessor implements StructureProcessor {
     }
 
     /**
-     * 26.2 replaced the original {@code StructureBlockInfo} parameter with just its position, so the
+     * 26.3 replaced the original {@code StructureBlockInfo} parameter with just its position, so the
      * original {@code BlockState} is no longer handed to processors. Both uses of it are preserved:
      * <ul>
      * <li>the state is now read from {@code structureBlockInfo2}. {@code StructureTemplate
@@ -71,9 +71,9 @@ public class BuildingStructureProcessor implements StructureProcessor {
      * original.nbt().copy())} and only overwrites it with the result of the <i>previous</i>
      * processor - and {@code StructureCityBuilding.placeInChunk} installs this processor as the only
      * one - so for every block it sees {@code structureBlockInfo2.state()} is the original state.
-     * Verified against the 26.1 and 26.2 bytecode of {@code processBlockInfos}.</li>
+     * Verified against the 26.1 and 26.3 bytecode of {@code processBlockInfos}.</li>
      * <li>the template-local position used for the {@code isCollisionShapeFullBlock} probe below is
-     * exactly what 26.2 now passes as {@code originalPos}.</li>
+     * exactly what 26.3 now passes as {@code originalPos}.</li>
      * </ul>
      * If a second processor is ever chained ahead of this one the first bullet stops holding, and
      * this processor would start palettizing that processor's output rather than the template's.

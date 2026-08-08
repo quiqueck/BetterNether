@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_brick_wall_from_brick_stonecutting"
+        "recipes": "betternether:nether_brick_wall_from_brick_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

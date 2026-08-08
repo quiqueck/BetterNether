@@ -1,12 +1,10 @@
 {
   "feature": {
     "type": "minecraft:simple_block",
-    "config": {
-      "to_place": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "minecraft:magma_block"
-        }
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:magma_block"
       }
     }
   },
@@ -20,15 +18,22 @@
       }
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:clamped_normal",
         "deviation": 2.0,
         "max_inclusive": -4,
         "mean": 0.0,
         "min_inclusive": -4
       },
-      "y_spread": 0
+      "y": 0,
+      "z": {
+        "type": "minecraft:clamped_normal",
+        "deviation": 2.0,
+        "max_inclusive": -4,
+        "mean": 0.0,
+        "min_inclusive": -4
+      }
     },
     {
       "type": "wover:stencil",

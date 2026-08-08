@@ -1,0 +1,32 @@
+{
+  "type": "wover:random_patch",
+  "feature": {
+    "feature": {
+      "type": "betternether:twisting_vines"
+    },
+    "placement": [
+      {
+        "type": "minecraft:block_predicate_filter",
+        "predicate": {
+          "type": "minecraft:matching_block_tag",
+          "tag": "minecraft:air"
+        }
+      },
+      {
+        "type": "wover:is",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "predicate": {
+          "type": "minecraft:matching_block_tag",
+          "tag": "wover:surfaces/nether/terrain"
+        }
+      }
+    ]
+  },
+  "tries": 10,
+  "xz_spread": 5,
+  "y_spread": 3
+}

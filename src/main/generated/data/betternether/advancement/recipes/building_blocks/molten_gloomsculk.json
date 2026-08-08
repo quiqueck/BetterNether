@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:molten_gloomsculk"
+        "recipes": "betternether:molten_gloomsculk"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

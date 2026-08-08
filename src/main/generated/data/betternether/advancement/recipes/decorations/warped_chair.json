@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:warped_chair"
+        "recipes": "betternether:warped_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

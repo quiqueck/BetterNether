@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mangrove_chair"
+        "recipes": "betternether:mangrove_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

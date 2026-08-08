@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_sakura_chest"
+        "recipes": "betternether:nether_sakura_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_sakura_wall"
+        "recipes": "betternether:nether_sakura_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

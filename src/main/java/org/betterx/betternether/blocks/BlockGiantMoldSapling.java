@@ -15,6 +15,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -60,26 +61,51 @@ public class BlockGiantMoldSapling extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(
+            LevelReader world,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         return true;
     }
 
-    @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    private boolean canGrowRandomly(Level world, RandomSource random, BlockPos pos, BlockState state) {
         return BlocksHelper.isFertile(world.getBlockState(pos.below()))
                 ? (random.nextInt(8) == 0)
                 : (random.nextInt(16) == 0);
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(
+            Level world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
+        return canGrowRandomly(world, random, pos, state);
+    }
+
+    private void grow(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
         NetherTrees.GIANT_MOLD.placeInWorld(WorldState.registryAccess(), world, pos, random);
+    }
+
+    @Override
+    public void performBonemeal(
+            ServerLevel world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
+        grow(world, random, pos, state);
     }
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         super.randomTick(state, world, pos, random);
-        if (isBonemealSuccess(world, random, pos, state))
-            performBonemeal(world, random, pos, state);
+        if (canGrowRandomly(world, random, pos, state))
+            grow(world, random, pos, state);
     }
 }

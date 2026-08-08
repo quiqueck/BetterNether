@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:tag_shield"
+        "recipes": "betternether:tag_shield"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

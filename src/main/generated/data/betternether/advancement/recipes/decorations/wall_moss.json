@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wall_moss"
+        "recipes": "betternether:wall_moss"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

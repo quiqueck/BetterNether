@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:hook_mushroom_cooked_smelting"
+        "recipes": "betternether:hook_mushroom_cooked_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

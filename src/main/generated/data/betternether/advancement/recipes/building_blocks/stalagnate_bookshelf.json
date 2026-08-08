@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:stalagnate_bookshelf"
+        "recipes": "betternether:stalagnate_bookshelf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

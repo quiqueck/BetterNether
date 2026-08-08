@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_fence"
+        "recipes": "betternether:gloomwood_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

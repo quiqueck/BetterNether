@@ -8,14 +8,21 @@ import org.betterx.betternether.blocks.BlockBrownLargeMushroom;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class BigBrownMushroomFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class BigBrownMushroomFeature extends ContextFeature {
+    public static final MapCodec<BigBrownMushroomFeature> CODEC = MapCodec.unit(BigBrownMushroomFeature::new);
+
+    @Override
+    public MapCodec<BigBrownMushroomFeature> codec() {
+        return CODEC;
+    }
+
     private static final BlockState MIDDLE = NetherMushroomBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.MIDDLE);
@@ -50,16 +57,11 @@ public class BigBrownMushroomFeature extends ContextFeature<NoneFeatureConfigura
             .defaultBlockState()
             .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_S);
 
-    public BigBrownMushroomFeature() {
-        super(NoneFeatureConfiguration.CODEC);
-    }
-
     @Override
     protected boolean place(
             ServerLevelAccessor level,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {

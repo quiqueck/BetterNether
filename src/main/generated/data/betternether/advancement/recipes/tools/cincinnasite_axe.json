@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_axe"
+        "recipes": "betternether:cincinnasite_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

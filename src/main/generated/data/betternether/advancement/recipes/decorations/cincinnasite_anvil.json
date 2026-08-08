@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_anvil"
+        "recipes": "betternether:cincinnasite_anvil"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:acacia_taburet"
+        "recipes": "betternether:acacia_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bone_stairs_stonecutting"
+        "recipes": "betternether:bone_stairs_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

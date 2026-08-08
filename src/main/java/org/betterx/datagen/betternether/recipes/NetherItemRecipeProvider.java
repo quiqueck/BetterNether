@@ -24,7 +24,7 @@ import de.ambertation.wover.recipe.api.RecipeBuilder;
 
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.ItemTags;
-// 26.2 folded the sixteen dye items into the Items.DYE ColorCollection, so Items.DYE.yellow() is now
+// 26.3 folded the sixteen dye items into the Items.DYE ColorCollection, so Items.YELLOW_DYE is now
 // Items.DYE.yellow() (and so on). Same items, same ids - no generated-JSON change.
 import net.minecraft.world.item.Items;
 

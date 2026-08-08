@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -58,6 +59,48 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
     }
 
     public static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
+
+    /**
+     * Replacement for {@code SurfaceRules.ON_FLOOR}, which Minecraft 26.3 deleted.
+     * <p>
+     * 26.3 moved these four constants out of Java and into the new
+     * {@code minecraft:worldgen/material_condition} <b>datapack</b> registry (see
+     * {@code net.minecraft.data.worldgen.material.VanillaMaterialConditions}). We deliberately do
+     * <b>not</b> go through {@link SurfaceRules#getCondition(net.minecraft.core.HolderGetter,
+     * net.minecraft.resources.ResourceKey)} for them, for the same two reasons WoVer's
+     * {@code SurfaceRuleBuilderImpl} inlines them:
+     * <ul>
+     * <li>resolving the key needs a {@code HolderGetter<ConditionSource>}, and the biome configs
+     * build their rules eagerly - in static initialisers and in {@code surface(...)} - outside any
+     * registry bootstrap;</li>
+     * <li>a holder reference would make every rule BetterNether emits depend on a vanilla data file
+     * that a datapack could override or remove, silently changing our surfaces.</li>
+     * </ul>
+     * The inline forms are value-identical to the deleted constants; verified against the 26.1 jar,
+     * whose {@code SurfaceRules.<clinit>} built them as {@code stoneDepthCheck(0, false, FLOOR)},
+     * {@code stoneDepthCheck(0, true, FLOOR)}, {@code stoneDepthCheck(0, false, CEILING)} and
+     * {@code stoneDepthCheck(0, true, CEILING)} respectively.
+     */
+    public static final SurfaceRules.ConditionSource ON_FLOOR
+            = SurfaceRules.stoneDepthCheck(0, false, CaveSurface.FLOOR);
+
+    /**
+     * Replacement for the deleted {@code SurfaceRules.UNDER_FLOOR}. See {@link #ON_FLOOR}.
+     */
+    public static final SurfaceRules.ConditionSource UNDER_FLOOR
+            = SurfaceRules.stoneDepthCheck(0, true, CaveSurface.FLOOR);
+
+    /**
+     * Replacement for the deleted {@code SurfaceRules.ON_CEILING}. See {@link #ON_FLOOR}.
+     */
+    public static final SurfaceRules.ConditionSource ON_CEILING
+            = SurfaceRules.stoneDepthCheck(0, false, CaveSurface.CEILING);
+
+    /**
+     * Replacement for the deleted {@code SurfaceRules.UNDER_CEILING}. See {@link #ON_FLOOR}.
+     */
+    public static final SurfaceRules.ConditionSource UNDER_CEILING
+            = SurfaceRules.stoneDepthCheck(0, true, CaveSurface.CEILING);
 
     public static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM
             = new SurfaceRules.VerticalGradientConditionSource(

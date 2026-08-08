@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:willow_stripped_bark"
+        "recipes": "betternether:willow_stripped_bark"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_fence"
+        "recipes": "betternether:mushroom_fir_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_spear_diamond"
+        "recipes": "betternether:cincinnasite_spear_diamond"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_mushroom_hanging_sign"
+        "recipes": "betternether:nether_mushroom_hanging_sign"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:roof_tile_cincinnasite_roof_tile_cincinnasite_stairs"
+        "recipes": "betternether:roof_tile_cincinnasite_roof_tile_cincinnasite_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

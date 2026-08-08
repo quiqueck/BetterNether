@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wall_red_brown"
+        "recipes": "betternether:wall_red_brown"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

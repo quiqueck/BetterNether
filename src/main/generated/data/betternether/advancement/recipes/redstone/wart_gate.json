@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_gate"
+        "recipes": "betternether:wart_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

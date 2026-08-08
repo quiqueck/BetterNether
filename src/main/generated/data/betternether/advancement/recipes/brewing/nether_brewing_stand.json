@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_brewing_stand"
+        "recipes": "betternether:nether_brewing_stand"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

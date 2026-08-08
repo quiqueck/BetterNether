@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:copy_bowl_upgrade"
+        "recipes": "betternether:copy_bowl_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -8,19 +8,17 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
-import org.betterx.betternether.world.features.configs.GloomwoodTreeConfiguration;
-import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import de.ambertation.wover.block.api.predicate.BlockPredicates;
-import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
-import de.ambertation.wover.feature.api.features.config.PillarFeatureConfig;
+import de.ambertation.wover.feature.api.features.PillarFeature;
+import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
@@ -55,46 +53,23 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
     private static final double GROVE_CORE = 0.25;
     private static final double GROVE_EDGE = 0.05;
 
-    /**
-     * How often a solitary gloomwood comes out bleached - aimed at one bleached tree per biome.
-     * <p>
-     * Measured rather than guessed, and not from counting bleached trees: with the chance forced to 1.0
-     * in a test datapack every solitary tree buries a debris pocket, and those pockets are compact and
-     * one per tree, so counting them counts the solitary trees exactly. That came to 12 across two
-     * gloomwood patches, or six per biome. A third of six is two, which is where this is aimed: one per
-     * biome was the original target, but at that rate a player crossing several gloomwoods was finding
-     * none at all - the average is over biomes, and half of them round down to zero. Two is the smallest
-     * number that makes the pale tree something you actually meet. (Counting bleached crowns instead of
-     * pockets does not work: neighbouring canopies merge into one blob and undercount badly.)
-     */
-    private static final float BLEACHED_GLOOMWOOD_CHANCE = 0.33F;
-
     public PlacedTreeFeatureDataProvider(ModCore modCore) {
         super(modCore, modCore.id("trees"));
     }
 
     @Override
-    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
-        NetherTrees.RUBEUS_TREE
-                .bootstrap(ctx)
-                .configuration(NaturalTreeConfiguration.natural())
-                .register();
+    protected void bootstrapFeatures(BootstrapContext<Feature> ctx) {
+        NetherTrees.RUBEUS_TREE.bootstrap(ctx).register();
 
-        NetherTrees.GLOOMWOOD_TREE
-                .bootstrap(ctx)
-                .configuration(GloomwoodTreeConfiguration.natural())
-                .register();
+        NetherTrees.GLOOMWOOD_TREE.bootstrap(ctx).register();
 
-        NetherTrees.GLOOMWOOD_TREE_SOLITARY
-                .bootstrap(ctx)
-                .configuration(GloomwoodTreeConfiguration.bleachedSometimes(BLEACHED_GLOOMWOOD_CHANCE))
-                .register();
+        NetherTrees.GLOOMWOOD_TREE_SOLITARY.bootstrap(ctx).register();
 
         NetherTrees.MUSHROOM_FIR.bootstrap(ctx).register();
 
         NetherTrees.STALAGNATE
                 .bootstrap(ctx)
-                .transformer(PillarFeatureConfig.KnownTransformers.TRIPLE_SHAPE_FILL)
+                .transformer(PillarFeature.KnownTransformers.TRIPLE_SHAPE_FILL)
                 .direction(Direction.UP)
                 .blockState(NetherWoodBlocks.MAT_STALAGNATE.getTrunk())
                 .minHeight(3)
@@ -103,7 +78,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
 
         NetherTrees.STALAGNATE_DOWN
                 .bootstrap(ctx)
-                .transformer(PillarFeatureConfig.KnownTransformers.TRIPLE_SHAPE_FILL)
+                .transformer(PillarFeature.KnownTransformers.TRIPLE_SHAPE_FILL)
                 .direction(Direction.DOWN)
                 .blockState(NetherWoodBlocks.MAT_STALAGNATE.getTrunk())
                 .minHeight(3)
@@ -138,17 +113,11 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
                 .spreadXZ(7)
                 .register();
 
-        NetherTrees.WART_TREE
-                .bootstrap(ctx)
-                .configuration(NaturalTreeConfiguration.natural())
-                .register();
+        NetherTrees.WART_TREE.bootstrap(ctx).register();
 
         NetherTrees.WILLOW_TREE.bootstrap(ctx).register();
 
-        NetherTrees.OLD_WILLOW_TREE
-                .bootstrap(ctx)
-                .configuration(NaturalTreeConfiguration.naturalLarge())
-                .register();
+        NetherTrees.OLD_WILLOW_TREE.bootstrap(ctx).register();
 
         NetherTrees.ANCHOR_TREE_BRANCH.bootstrap(ctx).register();
         NetherTrees.ANCHOR_TREE.bootstrap(ctx).register();
@@ -189,12 +158,6 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
                 .isEmptyAndOnNetherGround()
                 .register();
 
-        NetherTreesPlaced.MUSHROOM_FIR
-                .place(ctx)
-                .vanillaNetherGround(14)
-                .isEmptyAndOnNetherGround()
-                .register();
-
         // Gloomwood grows on the sculk floor rather than on nether ground, so the usual
         // isEmptyAndOnNetherGround() filter would reject every position in its own biome.
         //
@@ -203,6 +166,7 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
         // and covers the biome wall to wall, which is what it used to do. What makes a grove is the field
         // deciding *where* the count is allowed to apply, and the three slices below are disjoint - a
         // given column feeds exactly one of them.
+        //
         // The count no longer saturates the spacing on purpose. GloomwoodTreeConfiguration.SPACING keeps
         // the trees 9 blocks apart now, and a count high enough to fill that everywhere gave a closed
         // canopy - so this is deliberately short of it, and a grove comes out as a stand with gaps in it
@@ -233,6 +197,12 @@ public class PlacedTreeFeatureDataProvider extends WoverFeatureProvider {
                 .noiseBelow(GROVE_EDGE, GROVE_SCALE_XZ, GROVE_SCALE_Y)
                 .onceEvery(3)
                 .isEmptyAndOn(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                .register();
+
+        NetherTreesPlaced.MUSHROOM_FIR
+                .place(ctx)
+                .vanillaNetherGround(14)
+                .isEmptyAndOnNetherGround()
                 .register();
 
         NetherTreesPlaced.STALAGNATE

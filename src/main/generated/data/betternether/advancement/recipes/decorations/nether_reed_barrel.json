@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_reed_barrel"
+        "recipes": "betternether:nether_reed_barrel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

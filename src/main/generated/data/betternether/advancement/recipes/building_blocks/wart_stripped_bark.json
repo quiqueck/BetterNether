@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_stripped_bark"
+        "recipes": "betternether:wart_stripped_bark"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

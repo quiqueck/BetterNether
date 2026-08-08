@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_reed_slab"
+        "recipes": "betternether:nether_reed_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

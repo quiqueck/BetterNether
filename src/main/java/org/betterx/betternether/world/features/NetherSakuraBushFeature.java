@@ -7,18 +7,20 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class NetherSakuraBushFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class NetherSakuraBushFeature extends ContextFeature {
+    public static final MapCodec<NetherSakuraBushFeature> CODEC = MapCodec.unit(NetherSakuraBushFeature::new);
 
-    public NetherSakuraBushFeature() {
-        super(NoneFeatureConfiguration.CODEC);
+    @Override
+    public MapCodec<NetherSakuraBushFeature> codec() {
+        return CODEC;
     }
 
     @Override
@@ -26,7 +28,6 @@ public class NetherSakuraBushFeature extends ContextFeature<NoneFeatureConfigura
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {

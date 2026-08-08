@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:polished_basalt_basalt_bricks"
+        "recipes": "betternether:polished_basalt_basalt_bricks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

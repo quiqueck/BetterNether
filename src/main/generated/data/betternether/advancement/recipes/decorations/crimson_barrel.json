@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:crimson_barrel"
+        "recipes": "betternether:crimson_barrel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

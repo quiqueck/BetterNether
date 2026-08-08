@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_taburet"
+        "recipes": "betternether:wart_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

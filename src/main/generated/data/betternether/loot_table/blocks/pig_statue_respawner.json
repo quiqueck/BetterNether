@@ -2,18 +2,21 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "block": "betternether:pig_statue_respawner",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "top": "false"
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:match_block",
+            "blocks": "betternether:pig_statue_respawner",
+            "state": {
+              "top": "false"
+            }
+          },
+          {
+            "type": "minecraft:survives_explosion"
           }
-        },
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",

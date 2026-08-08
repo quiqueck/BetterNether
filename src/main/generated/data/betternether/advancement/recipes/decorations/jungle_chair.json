@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:jungle_chair"
+        "recipes": "betternether:jungle_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

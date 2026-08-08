@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:basalt_bricks_wall"
+        "recipes": "betternether:basalt_bricks_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

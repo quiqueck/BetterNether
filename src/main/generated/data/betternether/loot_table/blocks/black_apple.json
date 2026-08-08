@@ -2,18 +2,21 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "block": "betternether:black_apple",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "age": "3"
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:match_block",
+            "blocks": "betternether:black_apple",
+            "state": {
+              "age": "3"
+            }
+          },
+          {
+            "type": "minecraft:survives_explosion"
           }
-        },
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -23,11 +26,9 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
       "entries": [
         {
           "type": "minecraft:item",

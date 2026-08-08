@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_door"
+        "recipes": "betternether:wart_door"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

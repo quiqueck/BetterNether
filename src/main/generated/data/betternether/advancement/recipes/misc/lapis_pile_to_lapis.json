@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:lapis_pile_to_lapis"
+        "recipes": "betternether:lapis_pile_to_lapis"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

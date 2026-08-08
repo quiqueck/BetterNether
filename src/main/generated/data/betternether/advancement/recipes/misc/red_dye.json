@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:red_dye"
+        "recipes": "betternether:red_dye"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

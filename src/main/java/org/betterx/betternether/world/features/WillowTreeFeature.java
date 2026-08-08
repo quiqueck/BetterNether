@@ -13,6 +13,7 @@ import org.betterx.betternether.world.structures.StructureGeneratorThreadContext
 import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -20,24 +21,25 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> implements GrowableFeature<NoneFeatureConfiguration> {
+public class WillowTreeFeature extends ContextFeature implements GrowableFeature {
+    public static final MapCodec<WillowTreeFeature> CODEC = MapCodec.unit(WillowTreeFeature::new);
+
+    @Override
+    public MapCodec<WillowTreeFeature> codec() {
+        return CODEC;
+    }
+
     private static final Direction[] HOR = HorizontalDirectionalBlock
             .FACING
             .getPossibleValues()
             .toArray(new Direction[]{});
-
-    public WillowTreeFeature() {
-        super(NoneFeatureConfiguration.CODEC);
-    }
 
     @Override
     protected boolean place(
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
@@ -46,7 +48,13 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         return grow(world, pos, random);
     }
 
-    protected boolean grow(
+    /**
+     * 26.3's {@code GrowableFeature#grow} lost its trailing configuration parameter, which makes it
+     * identical to this pre-existing helper - the separate one-line bridge that used to forward to it is
+     * therefore gone and this method <em>is</em> the implementation.
+     */
+    @Override
+    public boolean grow(
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random
@@ -243,15 +251,5 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 branch.defaultBlockState()
                       .setValue(BlockWillowBranch.SHAPE, BNBlockProperties.WillowBranchShape.END)
         );
-    }
-
-    @Override
-    public boolean grow(
-            ServerLevelAccessor level,
-            BlockPos pos,
-            RandomSource random,
-            NoneFeatureConfiguration configuration
-    ) {
-        return grow(level, pos, random);
     }
 }

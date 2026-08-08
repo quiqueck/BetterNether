@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:willow_button"
+        "recipes": "betternether:willow_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

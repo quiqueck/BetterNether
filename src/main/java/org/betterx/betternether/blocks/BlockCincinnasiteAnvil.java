@@ -8,5 +8,4 @@ public class BlockCincinnasiteAnvil extends AnvilBlock {
     public BlockCincinnasiteAnvil(Properties settings) {
         super(settings.noOcclusion());
     }
-
 }

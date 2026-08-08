@@ -12,8 +12,8 @@ import de.ambertation.wover.tag.api.predefined.CommonBlockTags;
 import de.ambertation.wover.block.api.predicate.IsFullShape;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
-import de.ambertation.wover.feature.api.Features;
-import de.ambertation.wover.feature.api.features.config.ConditionFeatureConfig;
+import de.ambertation.wover.feature.api.features.ConditionFeature;
+import de.ambertation.wover.feature.api.features.MarkPostProcessingFeature;
 import de.ambertation.wover.feature.api.placed.modifiers.IsBasin;
 
 import net.minecraft.core.Direction;
@@ -23,8 +23,7 @@ import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceSpreadeableBlock;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.MultifaceGrowthConfiguration;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class TerrainFeatureDataProvider extends WoverFeatureProvider {
@@ -33,7 +32,7 @@ public class TerrainFeatureDataProvider extends WoverFeatureProvider {
     }
 
     @Override
-    protected void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
+    protected void bootstrapFeatures(BootstrapContext<Feature> ctx) {
         NetherTerrain.LAVA_PITS
                 .bootstrap(ctx)
                 .block(Blocks.LAVA)
@@ -48,17 +47,7 @@ public class TerrainFeatureDataProvider extends WoverFeatureProvider {
         // them, which is exactly the surface the veins should be creeping over.
         NetherTerrain.SCULK_VEIN
                 .bootstrap(ctx)
-                .configuration(new MultifaceGrowthConfiguration(
-                        (MultifaceSpreadeableBlock) Blocks.SCULK_VEIN,
-                        // Half vanilla's 20. The gloomwood is not the deep dark: the veins are meant to
-                        // read as patches on the sculk, not as a continuous skin over the whole cavern.
-                        10,
-                        true,
-                        true,
-                        true,
-                        // The spread is what turns a single attached face into a patch, and it is the
-                        // block's own spreader doing it, so it follows the surface it is on.
-                        0.75F,
+                .feature(NetherTerrain.sculkVein(
                         ctx.lookup(Registries.BLOCK).getOrThrow(CommonBlockTags.SCULK_LIKE)
                 ))
                 .register();
@@ -273,15 +262,14 @@ public class TerrainFeatureDataProvider extends WoverFeatureProvider {
 
         NetherTerrainPlaced.MARK
                 .inlineConfiguration(ctx)
-                .withFeature(Features.MARK_POSTPROCESSING)
+                .withFeature(new MarkPostProcessingFeature())
                 .inlinePlace()
                 .is(BlockPredicate.matchesBlocks(Blocks.LAVA))
                 .register();
 
         NetherTerrainPlaced.FLOODED_LAVA_PIT_SURFACE
                 .inlineConfiguration(ctx)
-                .withFeature(Features.CONDITION)
-                .configuration(new ConditionFeatureConfig(
+                .withFeature(new ConditionFeature(
                         IsBasin.simple(
                                 BlockPredicate.anyOf(
                                         BlockPredicate.matchesBlocks(Blocks.LAVA),

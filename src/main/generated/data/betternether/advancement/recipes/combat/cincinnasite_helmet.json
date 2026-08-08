@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_helmet"
+        "recipes": "betternether:cincinnasite_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -41,8 +41,8 @@ public class MushroomFirMaterial extends NetherWoodenMaterial<MushroomFirMateria
                     // mushroom_fir's trapdoor is exactly stalagnate's shared (no-side) trapdoor mesh -
                     // generate its child model/blockstate/item from the template instead of hand-authoring.
                     .replace(new NetherWoodSlots.TrapdoorTemplate())
-                    // The trunk's loot was the hand-authored loot_table/blocks/mushroom_fir_trunk.json;
-                    // block loot is trait-only here.
+                    // The trunk's loot was the hand-authored loot_table/blocks/mushroom_fir_trunk.json,
+                    // whose 26.1-schema conditions/functions 26.3 silently dropped on load.
                     .add(TrunkSlot.create(
                             BlockMushroomFir::new,
                             TraitLists.and(NetherRender.cutout(), NetherLoot.mushroomFirTrunk())

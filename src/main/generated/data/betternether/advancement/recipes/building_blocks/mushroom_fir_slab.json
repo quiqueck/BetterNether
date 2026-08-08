@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_slab"
+        "recipes": "betternether:mushroom_fir_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

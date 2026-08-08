@@ -319,7 +319,7 @@ public class NetherMaterial {
                       .noOcclusion()
                       .noCollission()
                       .sound(SoundType.VINE)
-                      .pushReaction(PushReaction.DESTROY)
+                      .pushReaction(PushReaction.POPPED)
                       .replaceable();
         }
     }
@@ -344,7 +344,7 @@ public class NetherMaterial {
             definition.mapColor(color)
                       .randomTicks()
                       .sound(SoundType.WOOL)
-                      .pushReaction(PushReaction.DESTROY)
+                      .pushReaction(PushReaction.POPPED)
                       .noOcclusion()
                       .requiresCorrectToolForDrops()
                       .noCollission()

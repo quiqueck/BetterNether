@@ -68,6 +68,14 @@ public class StructureCityBuilding extends NetherStructureNBT {
         rotation = Rotation.NONE;
     }
 
+    /**
+     * 26.3 removed the {@code BlockPos(Vec3i)} copy constructor, so the structure size has to be
+     * unpacked by hand. Component-wise identical to what the old constructor did.
+     */
+    private static BlockPos asBlockPos(Vec3i vec) {
+        return new BlockPos(vec.getX(), vec.getY(), vec.getZ());
+    }
+
     private Direction getDir(BlockPos pos) {
         int ax = Math.abs(pos.getX());
         int az = Math.abs(pos.getZ());
@@ -133,7 +141,7 @@ public class StructureCityBuilding extends NetherStructureNBT {
     public StructureCityBuilding getRotated(Rotation rotation) {
         StructureCityBuilding building = this.clone();
         building.rotation = rotation;
-        building.rotationOffset = new BlockPos(building.structure.getSize()).rotate(rotation);
+        building.rotationOffset = asBlockPos(building.structure.getSize()).rotate(rotation);
         int x = building.rotationOffset.getX();
         int z = building.rotationOffset.getZ();
         if (x < 0)
@@ -206,7 +214,7 @@ public class StructureCityBuilding extends NetherStructureNBT {
     @Override
     public StructureCityBuilding setRotation(Rotation rotation) {
         this.rotation = rotation;
-        rotationOffset = new BlockPos(structure.getSize()).rotate(rotation);
+        rotationOffset = asBlockPos(structure.getSize()).rotate(rotation);
         return this;
     }
 }

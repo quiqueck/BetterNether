@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:crimson_ladder"
+        "recipes": "betternether:crimson_ladder"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

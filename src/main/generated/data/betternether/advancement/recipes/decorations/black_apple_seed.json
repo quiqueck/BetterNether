@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:black_apple_seed"
+        "recipes": "betternether:black_apple_seed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

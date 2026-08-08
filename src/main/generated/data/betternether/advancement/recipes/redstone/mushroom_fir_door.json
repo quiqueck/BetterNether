@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_door"
+        "recipes": "betternether:mushroom_fir_door"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

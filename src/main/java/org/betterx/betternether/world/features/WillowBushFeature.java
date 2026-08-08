@@ -10,6 +10,7 @@ import org.betterx.betternether.blocks.BlockWillowLeaves;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -17,11 +18,13 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> {
-    public WillowBushFeature() {
-        super(NoneFeatureConfiguration.CODEC);
+public class WillowBushFeature extends ContextFeature {
+    public static final MapCodec<WillowBushFeature> CODEC = MapCodec.unit(WillowBushFeature::new);
+
+    @Override
+    public MapCodec<WillowBushFeature> codec() {
+        return CODEC;
     }
 
     @Override
@@ -29,7 +32,6 @@ public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> 
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {

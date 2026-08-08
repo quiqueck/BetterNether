@@ -24,6 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.BonemealSource;
 
 import com.google.common.collect.Maps;
 
@@ -87,18 +88,35 @@ public class BlockWartSeed extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(
+            LevelReader world,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         Direction direction = state.getValue(FACING);
         return direction == Direction.UP && BlocksHelper.isSoulSand(world.getBlockState(pos.below()));
     }
 
     @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(
+            Level world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         return random.nextInt(8) == 0;
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+    public void performBonemeal(
+            ServerLevel world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         NetherTrees.WART_TREE.placeInWorld(WorldState.registryAccess(), world, pos, random);
     }
 

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_boots"
+        "recipes": "betternether:cincinnasite_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -92,5 +92,4 @@ public class BlockWillowBranch extends Block {
                 ? NetherWoodBlocks.MAT_WILLOW.getTorch()
                 : NetherLeavesBlocks.WILLOW_LEAVES);
     }
-
 }

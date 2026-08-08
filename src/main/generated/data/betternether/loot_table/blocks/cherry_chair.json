@@ -2,15 +2,13 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "block": "betternether:cherry_chair",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "top": "false"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:cherry_chair",
+        "state": {
+          "top": "false"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",

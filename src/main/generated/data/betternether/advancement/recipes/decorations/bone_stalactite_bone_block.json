@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bone_stalactite_bone_block"
+        "recipes": "betternether:bone_stalactite_bone_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

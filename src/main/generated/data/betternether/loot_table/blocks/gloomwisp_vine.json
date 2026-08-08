@@ -2,15 +2,13 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "block": "betternether:gloomwisp_vine",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "shape": "top"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:gloomwisp_vine",
+        "state": {
+          "shape": "top"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",

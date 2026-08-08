@@ -45,7 +45,7 @@ public class GravelDesert extends NetherBiomeConfig {
 
         builder.ceil(Blocks.NETHERRACK.defaultBlockState())
                .floor(Blocks.GRAVEL.defaultBlockState())
-               .rule(SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, GRAVEL), BaseSurfaceRuleBuilder.FLOOR_PRIORITY + 1)
+               .rule(SurfaceRules.ifTrue(NetherBiomeBuilder.UNDER_FLOOR, GRAVEL), BaseSurfaceRuleBuilder.FLOOR_PRIORITY + 1)
                .belowFloor(Blocks.GRAVEL.defaultBlockState(), 4, Conditions.NETHER_VOLUME_NOISE)
         ;
     }

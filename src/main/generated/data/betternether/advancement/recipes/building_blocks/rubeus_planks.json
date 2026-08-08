@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:rubeus_planks"
+        "recipes": "betternether:rubeus_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

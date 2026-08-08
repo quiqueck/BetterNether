@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:blue_obsidian_tile_small_blue_obsidian_tile_slab"
+        "recipes": "betternether:blue_obsidian_tile_small_blue_obsidian_tile_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

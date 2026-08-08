@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bone_reed_door"
+        "recipes": "betternether:bone_reed_door"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.BonemealSource;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -58,18 +59,43 @@ public class BlockLucisSpore extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(
+            LevelReader world,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         return true;
     }
 
-    @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    private boolean canGrowRandomly(Level world, RandomSource random, BlockPos pos, BlockState state) {
         return random.nextInt(16) == 0;
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(
+            Level world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
+        return canGrowRandomly(world, random, pos, state);
+    }
+
+    private void grow(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
         NetherVegetation.WALL_LUCIS.placeInWorld(WorldState.registryAccess(), world, pos, random);
+    }
+
+    @Override
+    public void performBonemeal(
+            ServerLevel world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
+        grow(world, random, pos, state);
     }
 
     @Override
@@ -92,8 +118,8 @@ public class BlockLucisSpore extends Block implements BonemealableBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         super.randomTick(state, world, pos, random);
-        if (isBonemealSuccess(world, random, pos, state)) {
-            performBonemeal(world, random, pos, state);
+        if (canGrowRandomly(world, random, pos, state)) {
+            grow(world, random, pos, state);
         }
     }
 

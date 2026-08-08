@@ -9,17 +9,20 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class RubeusBushFeature extends ContextFeature<NoneFeatureConfiguration> {
-    public RubeusBushFeature() {
-        super(NoneFeatureConfiguration.CODEC);
+public class RubeusBushFeature extends ContextFeature {
+    public static final MapCodec<RubeusBushFeature> CODEC = MapCodec.unit(RubeusBushFeature::new);
+
+    @Override
+    public MapCodec<RubeusBushFeature> codec() {
+        return CODEC;
     }
 
     @Override
@@ -27,7 +30,6 @@ public class RubeusBushFeature extends ContextFeature<NoneFeatureConfiguration> 
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {

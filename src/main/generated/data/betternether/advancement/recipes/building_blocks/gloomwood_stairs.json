@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_stairs"
+        "recipes": "betternether:gloomwood_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

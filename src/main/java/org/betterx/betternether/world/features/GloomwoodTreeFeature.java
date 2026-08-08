@@ -5,6 +5,7 @@ import org.betterx.betternether.registry.block.NetherWoodBlocks;
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.world.features.configs.GloomwoodTreeConfiguration;
+import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import org.betterx.betternether.world.tree.TreeSpace;
 import org.betterx.betternether.world.tree.build.TreeBuilder;
@@ -18,6 +19,7 @@ import org.betterx.betternether.world.tree.palette.TreePalette;
 import org.betterx.betternether.world.tree.skeleton.ForkingTrunk;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
@@ -45,19 +47,37 @@ import net.minecraft.world.level.block.state.BlockState;
  *
  * <h2>Bleached trees</h2>
  * {@link GloomwoodTreeConfiguration#bleachedChance} inverts the canopy palette on a fraction of the
- * trees - see {@link #palette}. Only the solitary placement sets it, so the pale specimens are the ones
- * standing on their own.
+ * trees - see {@link #palette}. Only the solitary content entry sets it, so the pale specimens are the
+ * ones standing on their own.
  * <p>
  * The palette is not only a marking: a bleached tree has ancient debris buried under its roots
  * ({@link #ancientDebrisRoots}). That makes the pale crown a landmark worth crossing a biome for, and it
  * is why the variant is confined to the lone trees in the open - one standing clear of a grove can be
  * seen and walked to, where the same tree inside a stand would be a thing you found by accident.
  */
-public class GloomwoodTreeFeature extends NonOverlappingFeature<GloomwoodTreeConfiguration>
-        implements GrowableFeature<GloomwoodTreeConfiguration> {
+public class GloomwoodTreeFeature extends NonOverlappingFeature implements GrowableFeature {
+    public static final MapCodec<GloomwoodTreeFeature> CODEC =
+            GloomwoodTreeConfiguration.codecFor(GloomwoodTreeFeature::new);
 
-    public GloomwoodTreeFeature() {
-        super(GloomwoodTreeConfiguration.CODEC);
+    /**
+     * The gloomwood's own configuration, kept alongside the {@code config} the base class holds: that
+     * field is typed to {@link NaturalTreeConfiguration} and the bleached chance is not part of it.
+     */
+    private final GloomwoodTreeConfiguration gloomwoodConfig;
+
+    public GloomwoodTreeFeature(GloomwoodTreeConfiguration config) {
+        super(config);
+        this.gloomwoodConfig = config;
+    }
+
+    /** For the codec - see {@link GloomwoodTreeConfiguration#mapCodecFor}. */
+    public float bleachedChance() {
+        return gloomwoodConfig.bleachedChance;
+    }
+
+    @Override
+    public MapCodec<GloomwoodTreeFeature> codec() {
+        return CODEC;
     }
 
     @Override
@@ -221,14 +241,14 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<GloomwoodTreeCon
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            GloomwoodTreeConfiguration config,
+            NaturalTreeConfiguration config,
             StructureGeneratorThreadContext context
     ) {
         final int headroom = clearanceAbove(world, pos);
         final Size[] sizes = Size.values();
         // Rolled once, before the size loop: a tree that is rebuilt a size down is the same tree, and
         // re-rolling per attempt would quietly raise the real chance above the configured one.
-        final boolean bleached = config.bleachedChance > 0 && random.nextFloat() < config.bleachedChance;
+        final boolean bleached = bleachedChance() > 0 && random.nextFloat() < bleachedChance();
         // One in three is a small gloomwood whatever the room available - the fallback below only ever
         // makes a tree smaller, so without this the small variant would exist solely under low ceilings
         // and an open cavern would fill with identical full-size trees.
@@ -305,9 +325,9 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<GloomwoodTreeCon
      * and none of it is visible from the surface - the tree has to be felled and dug out, which is the
      * point of tying it to a marking rather than to an ore distribution.
      * <p>
-     * The depth is drawn per column and before the tests, for the same reason
-     * {@link #moltenRoot} draws its own roll there: the pocket's shape is then the tree's, and does not
-     * change with where the chunk's write zone or the terrain happens to fall.
+     * The depth is drawn per column and before the tests, for the same reason {@link #moltenRoot} draws
+     * its own roll there: the pocket's shape is then the tree's, and does not change with where the
+     * chunk's write zone or the terrain happens to fall.
      * <p>
      * Only ground is replaced, using the same {@link #isGround} test that decided the tree could stand
      * here, and a column stops at the first block that is not - so a root over a cave hangs its debris
@@ -380,14 +400,13 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<GloomwoodTreeCon
     public boolean grow(
             ServerLevelAccessor level,
             BlockPos pos,
-            RandomSource random,
-            GloomwoodTreeConfiguration configuration
+            RandomSource random
     ) {
         return grow(
                 level,
                 pos,
                 random,
-                new GloomwoodTreeConfiguration(false, configuration.distance, configuration.bleachedChance),
+                new GloomwoodTreeConfiguration(false, config.distance, gloomwoodConfig.bleachedChance),
                 NetherThreadDataStorage.generatorForThread().context
         );
     }

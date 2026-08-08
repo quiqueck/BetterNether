@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_sakura_chiseled_bookshelf"
+        "recipes": "betternether:nether_sakura_chiseled_bookshelf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

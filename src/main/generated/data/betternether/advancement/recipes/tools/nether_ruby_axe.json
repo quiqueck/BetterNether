@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_ruby_axe"
+        "recipes": "betternether:nether_ruby_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

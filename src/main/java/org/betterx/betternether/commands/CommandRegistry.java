@@ -49,13 +49,12 @@ import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
+import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.collect.ImmutableList;
 import org.joml.Vector3d;
 
 import java.util.Collections;
@@ -322,7 +321,9 @@ public class CommandRegistry {
         return Command.SINGLE_SUCCESS;
     }
 
-    public static final PerlinSimplexNoise BIOME_INFO_NOISE = new PerlinSimplexNoise((RandomSource) new WorldgenRandom(new LegacyRandomSource(2345L)), ImmutableList.of(Integer.valueOf(0)));
+    // 26.3 removed PerlinSimplexNoise; the old call site used a single octave (List.of(0)), which is exactly
+    // what the plain single-octave PerlinNoise is.
+    public static final PerlinNoise BIOME_INFO_NOISE = new PerlinNoise((RandomSource) new WorldgenRandom(new LegacyRandomSource(2345L)));
 
     private static int testPlace(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
 
@@ -334,10 +335,9 @@ public class CommandRegistry {
         double max = Double.NEGATIVE_INFINITY;
         for (int x = -16; x <= 16; x++) {
             for (int y = -16; y <= 16; y++) {
-                double v = BIOME_INFO_NOISE.getValue(
+                double v = BIOME_INFO_NOISE.get(
                         (x + pos.x) / 200.0,
-                        (y + pos.z) / 200.0,
-                        false
+                        (y + pos.z) / 200.0
                 );
                 if (v < min) min = v;
                 if (v > max) max = v;
@@ -361,7 +361,13 @@ public class CommandRegistry {
         placeMapIdx = 0;
         List<Pair<BlockPos, BlockState>> posStates = new LinkedList<>();
         for (PlacementModifier p : placements) {
-            s = s.flatMap(bp -> p.getPositions(pctx, rnd, bp));
+            // 26.3 replaced PlacementModifier#getPositions(ctx, rnd, pos) -> Stream<BlockPos> with
+            // modify(ctx, rnd, pos, Consumer<BlockPos>); collect into a list to keep the stream chain.
+            s = s.flatMap(bp -> {
+                final List<BlockPos> modified = new LinkedList<>();
+                p.modify(pctx, rnd, bp, modified::add);
+                return modified.stream();
+            });
             var list = s.toList();
             placeMapIdx = (placeMapIdx + 1) % states.length;
             BlockState state1 = states[placeMapIdx];

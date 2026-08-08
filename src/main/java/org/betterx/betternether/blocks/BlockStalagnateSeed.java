@@ -4,7 +4,7 @@ import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
-import de.ambertation.wover.feature.api.configured.ConfiguredFeatureKey;
+import de.ambertation.wover.feature.api.configured.FeatureKey;
 import de.ambertation.wover.state.api.WorldState;
 
 import net.minecraft.core.BlockPos;
@@ -16,6 +16,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -68,8 +69,14 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     }
 
     @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
-        if (super.isBonemealSuccess(world, random, pos, state)) {
+    public boolean isBonemealSuccess(
+            Level world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
+        if (super.isBonemealSuccess(world, random, pos, state, bonemealSource)) {
             if (growsDownward(state))
                 return BlocksHelper.downRay(world, pos, MIN_LENGTH) > 0;
             else
@@ -106,7 +113,7 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
             @NotNull RandomSource random
     ) {
         if (WorldState.registryAccess() == null) return false;
-        final ConfiguredFeatureKey<?> featureHolder;
+        final FeatureKey<?> featureHolder;
         if (growsDownward(state)) {
             featureHolder = NetherTrees.STALAGNATE_DOWN;
         } else {

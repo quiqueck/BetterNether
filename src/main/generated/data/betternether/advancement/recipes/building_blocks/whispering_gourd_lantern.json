@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:whispering_gourd_lantern"
+        "recipes": "betternether:whispering_gourd_lantern"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

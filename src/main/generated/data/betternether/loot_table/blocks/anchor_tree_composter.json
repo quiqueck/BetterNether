@@ -5,26 +5,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:explosion_decay"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:explosion_decay"
+          },
           "name": "betternether:anchor_tree_composter"
         }
       ],
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:anchor_tree_composter",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "level": "8"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:anchor_tree_composter",
+        "state": {
+          "level": "8"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",

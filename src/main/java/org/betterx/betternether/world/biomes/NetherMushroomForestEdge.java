@@ -39,7 +39,7 @@ public class NetherMushroomForestEdge extends NetherBiomeConfig {
         super.surface(builder);
         builder.rule(
                 SurfaceRules.ifTrue(
-                        SurfaceRules.ON_FLOOR,
+                        NetherBiomeBuilder.ON_FLOOR,
                         new SwitchRuleSource(
                                 NetherMushroomForestEdgeNumericProvider.DEFAULT,
                                 List.of(

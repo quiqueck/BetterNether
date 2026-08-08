@@ -8,25 +8,21 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betternether:agave",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "age": "3"
-                  }
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betternether:agave",
+                "state": {
+                  "age": "3"
                 }
-              ],
-              "functions": [
-                {
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 2.0,
-                    "min": 1.0
-                  },
-                  "function": "minecraft:set_count"
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 2.0,
+                  "min": 1.0
                 }
-              ],
+              },
               "name": "betternether:agave"
             },
             {
@@ -39,28 +35,24 @@
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:agave",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "age": "3"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:agave",
+        "state": {
+          "age": "3"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 5.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 5.0,
+              "min": 2.0
             }
-          ],
+          },
           "name": "betternether:agave_leaf"
         }
       ],

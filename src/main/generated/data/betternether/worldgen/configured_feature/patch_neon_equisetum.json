@@ -1,9 +1,0 @@
-{
-  "type": "wover:random_patch",
-  "config": {
-    "feature": "betternether:neon_equisetum",
-    "tries": 32,
-    "xz_spread": 5,
-    "y_spread": 3
-  }
-}

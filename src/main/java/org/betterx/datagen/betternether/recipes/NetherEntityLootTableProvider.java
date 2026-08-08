@@ -4,9 +4,12 @@ import org.betterx.betternether.loot.BNLoot;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.WoverLootTableProvider;
 
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -73,6 +76,15 @@ public class NetherEntityLootTableProvider extends WoverLootTableProvider {
         );
     }
 
+    /**
+     * 26.3 narrowed {@code randomChanceAndLootingBoost} and {@code lootingMultiplier} from a whole
+     * {@link HolderLookup.Provider} to just the enchantment {@link HolderGetter} they actually need
+     * (both resolve {@code minecraft:looting} eagerly). Same registry, same result.
+     */
+    private static HolderGetter<Enchantment> enchantments(HolderLookup.@NotNull Provider lookup) {
+        return lookup.lookupOrThrow(Registries.ENCHANTMENT);
+    }
+
     private LootPool.Builder nagaPlayerKill(HolderLookup.@NotNull Provider lookup) {
         return LootPool
                 .lootPool()
@@ -80,7 +92,11 @@ public class NetherEntityLootTableProvider extends WoverLootTableProvider {
                 .add(LootItem
                         .lootTableItem(Blocks.WITHER_SKELETON_SKULL)
                         .when(LootItemKilledByPlayerCondition.killedByPlayer())
-                        .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(lookup, 0.05f, 0.01f))
+                        .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(
+                                enchantments(lookup),
+                                0.05f,
+                                0.01f
+                        ))
                 );
     }
 
@@ -96,7 +112,10 @@ public class NetherEntityLootTableProvider extends WoverLootTableProvider {
                 .add(LootItem
                         .lootTableItem(drop)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, maxDrop)))
-                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup, UniformGenerator.between(0, maxLootingDrop)))
+                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(
+                                enchantments(lookup),
+                                UniformGenerator.between(0, maxLootingDrop)
+                        ))
                 );
 
     }

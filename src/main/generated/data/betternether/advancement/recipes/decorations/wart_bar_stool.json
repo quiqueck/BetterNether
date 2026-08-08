@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:wart_bar_stool"
+        "recipes": "betternether:wart_bar_stool"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

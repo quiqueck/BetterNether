@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_molten_log"
+        "recipes": "betternether:gloomwood_dark_molten_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

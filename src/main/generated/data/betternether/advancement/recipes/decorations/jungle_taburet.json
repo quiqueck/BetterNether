@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:jungle_taburet"
+        "recipes": "betternether:jungle_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_shelf"
+        "recipes": "betternether:gloomwood_dark_shelf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

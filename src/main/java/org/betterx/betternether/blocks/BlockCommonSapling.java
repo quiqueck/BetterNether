@@ -13,6 +13,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -72,12 +73,23 @@ abstract class BaseBlockCommonSapling extends Block implements BonemealableBlock
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(
+            LevelReader world,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         return true;
     }
 
     @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(
+            Level world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
         return BlocksHelper.isFertile(world.getBlockState(pos.below()))
                 ? (random.nextBoolean())
                 : (random.nextInt(4) == 0);
@@ -89,15 +101,25 @@ abstract class BaseBlockCommonSapling extends Block implements BonemealableBlock
                 : (random.nextInt(16) == 0);
     }
 
-    @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+    private void grow(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
         world.setBlockAndUpdate(pos, plant.defaultBlockState());
+    }
+
+    @Override
+    public void performBonemeal(
+            ServerLevel world,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource bonemealSource
+    ) {
+        grow(world, random, pos, state);
     }
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         super.randomTick(state, world, pos, random);
         if (canGrowTerrain(world, random, pos, state))
-            performBonemeal(world, random, pos, state);
+            grow(world, random, pos, state);
     }
 }

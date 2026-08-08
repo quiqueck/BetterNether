@@ -10,13 +10,19 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration> implements GrowableFeature<NoneFeatureConfiguration> {
+public class MushroomFirFeature extends ContextFeature implements GrowableFeature {
+    public static final MapCodec<MushroomFirFeature> CODEC = MapCodec.unit(MushroomFirFeature::new);
+
+    @Override
+    public MapCodec<MushroomFirFeature> codec() {
+        return CODEC;
+    }
 
     private static final BlockState SIDE_BIG_N = NetherWoodBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                               .defaultBlockState()
@@ -96,16 +102,11 @@ public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration>
                                                                                   BlockMushroomFir.MushroomFirShape.BOTTOM
                                                                           );
 
-    public MushroomFirFeature() {
-        super(NoneFeatureConfiguration.CODEC);
-    }
-
     @Override
     protected boolean place(
             ServerLevelAccessor level,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
@@ -219,8 +220,7 @@ public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration>
     public boolean grow(
             ServerLevelAccessor level,
             BlockPos pos,
-            RandomSource random,
-            NoneFeatureConfiguration configuration
+            RandomSource random
     ) {
         return grow(level, pos, random, 1, NetherThreadDataStorage.generatorForThread().context);
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_forged_roof_tile_cincinnasite"
+        "recipes": "betternether:cincinnasite_forged_roof_tile_cincinnasite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

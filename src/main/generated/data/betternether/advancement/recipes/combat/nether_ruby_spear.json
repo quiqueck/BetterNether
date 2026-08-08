@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_ruby_spear"
+        "recipes": "betternether:nether_ruby_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

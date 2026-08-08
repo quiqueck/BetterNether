@@ -2,7 +2,7 @@ package org.betterx.betternether.advancements;
 
 import org.betterx.betternether.BetterNether;
 
-// 26.2 split net.minecraft.advancements.criterion into .predicates (ItemPredicate,
+// 26.3 split net.minecraft.advancements.criterion into .predicates (ItemPredicate,
 // LocationPredicate, StatePropertiesPredicate, ...) and .triggers (Criterion, CriterionTrigger,
 // CriteriaTriggers and every *Trigger). Criterion and CriterionTrigger moved down out of
 // net.minecraft.advancements into .triggers as well; only CriterionTriggerInstance stayed put.

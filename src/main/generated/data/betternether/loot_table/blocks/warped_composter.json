@@ -5,26 +5,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:explosion_decay"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:explosion_decay"
+          },
           "name": "betternether:warped_composter"
         }
       ],
       "rolls": 1.0
     },
     {
-      "conditions": [
-        {
-          "block": "betternether:warped_composter",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "level": "8"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "betternether:warped_composter",
+        "state": {
+          "level": "8"
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",

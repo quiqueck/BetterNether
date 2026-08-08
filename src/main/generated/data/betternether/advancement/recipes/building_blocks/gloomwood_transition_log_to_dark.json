@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_transition_log_to_dark"
+        "recipes": "betternether:gloomwood_transition_log_to_dark"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

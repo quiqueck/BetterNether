@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:tag_compass"
+        "recipes": "betternether:tag_compass"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -7,6 +7,7 @@ import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -17,6 +18,13 @@ import net.minecraft.world.level.dimension.DimensionDefaults;
 import net.minecraft.world.phys.Vec3;
 
 public class CrystalFeature extends NetherSurfaceFeature {
+    public static final MapCodec<CrystalFeature> CODEC = MapCodec.unit(CrystalFeature::new);
+
+    @Override
+    public MapCodec<CrystalFeature> codec() {
+        return CODEC;
+    }
+
     private static final Block[] PALETTES = new Block[]{
             NetherObsidianBlocks.OBSIDIAN_GLASS,
             Blocks.OBSIDIAN,

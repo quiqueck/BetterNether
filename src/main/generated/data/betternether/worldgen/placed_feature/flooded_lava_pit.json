@@ -1,13 +1,11 @@
 {
   "feature": {
     "type": "wover:sequence",
-    "config": {
-      "features": [
-        "betternether:extend_basalt",
-        "betternether:flooded_lava_pit_surface",
-        "betternether:mark"
-      ]
-    }
+    "features": [
+      "betternether:extend_basalt",
+      "betternether:flooded_lava_pit_surface",
+      "betternether:mark"
+    ]
   },
   "placement": [
     {

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:crimson_boat"
+        "recipes": "betternether:crimson_boat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

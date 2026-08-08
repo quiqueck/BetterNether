@@ -1,4 +1,5 @@
 package org.betterx.betternether.integrations.wthit;
+/*
 
 import org.betterx.betternether.blocks.BlockCommonPlant;
 
@@ -39,3 +40,4 @@ public enum NetherPlantProvider implements IBlockComponentProvider {
     }
 
 }
+*/

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:willow_roof_stairs"
+        "recipes": "betternether:willow_roof_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks;
 import org.betterx.betternether.blockentities.BlockEntityFurnace;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -29,18 +28,15 @@ import net.fabricmc.api.Environment;
 import javax.annotation.Nullable;
 
 public class BlockNetherFurnace extends AbstractFurnaceBlock {
-    public static final MapCodec<BlockNetherFurnace> CODEC = simpleCodec(BlockNetherFurnace::new);
+    // 26.3 removed block codecs entirely: Block#codec()/BlockBehaviour#simpleCodec no longer
+    // exist, because blocks are no longer described by a dispatch codec. The CODEC constant and
+    // the codec() override are dropped, not replaced.
 
     public BlockNetherFurnace(Properties settings) {
         super(settings
                 .requiresCorrectToolForDrops()
                 .lightLevel(BlockNetherFurnace::getLuminance)
         );
-    }
-
-    @Override
-    protected MapCodec<? extends AbstractFurnaceBlock> codec() {
-        return CODEC;
     }
 
     private static int getLuminance(BlockState blockState) {

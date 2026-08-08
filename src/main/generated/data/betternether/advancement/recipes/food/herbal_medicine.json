@@ -53,7 +53,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:herbal_medicine"
+        "recipes": "betternether:herbal_medicine"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

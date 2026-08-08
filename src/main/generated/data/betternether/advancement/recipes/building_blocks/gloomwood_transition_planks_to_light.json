@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_transition_planks_to_light"
+        "recipes": "betternether:gloomwood_transition_planks_to_light"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

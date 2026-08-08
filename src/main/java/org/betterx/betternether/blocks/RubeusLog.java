@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks;
 import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockProperties.TripleShape;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -18,7 +17,10 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
  * {@code BaseStripableLogBlock} was removed in 21.7).
  */
 public class RubeusLog extends RotatedPillarBlock {
-    public static final MapCodec<RubeusLog> CODEC = simpleCodec(RubeusLog::new);
+    // 26.3 removed block codecs entirely: Block#codec()/BlockBehaviour#simpleCodec no longer
+    // exist, because blocks are no longer described by a dispatch codec. The CODEC constant and
+    // the codec() override are dropped, not replaced.
+
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public RubeusLog(BlockBehaviour.Properties properties) {
@@ -26,11 +28,6 @@ public class RubeusLog extends RotatedPillarBlock {
         this.registerDefaultState(this.defaultBlockState()
                                       .setValue(AXIS, Direction.Axis.Y)
                                       .setValue(SHAPE, TripleShape.BOTTOM));
-    }
-
-    @Override
-    public MapCodec<? extends RotatedPillarBlock> codec() {
-        return CODEC;
     }
 
     @Override

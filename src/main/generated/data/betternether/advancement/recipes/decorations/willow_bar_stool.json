@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:willow_bar_stool"
+        "recipes": "betternether:willow_bar_stool"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

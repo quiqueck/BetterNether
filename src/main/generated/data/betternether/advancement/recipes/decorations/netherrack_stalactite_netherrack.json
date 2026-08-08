@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:netherrack_stalactite_netherrack"
+        "recipes": "betternether:netherrack_stalactite_netherrack"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

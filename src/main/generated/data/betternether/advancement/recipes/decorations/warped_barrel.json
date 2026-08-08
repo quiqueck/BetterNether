@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:warped_barrel"
+        "recipes": "betternether:warped_barrel"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

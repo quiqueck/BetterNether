@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_pedestal"
+        "recipes": "betternether:cincinnasite_pedestal"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

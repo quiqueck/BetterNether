@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:roof_tile_cincinnasite_slab_stonecutting"
+        "recipes": "betternether:roof_tile_cincinnasite_slab_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:mushroom_fir_taburet"
+        "recipes": "betternether:mushroom_fir_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

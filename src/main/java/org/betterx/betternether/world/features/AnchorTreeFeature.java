@@ -15,6 +15,7 @@ import org.betterx.betternether.world.structures.StructureGeneratorThreadContext
 import org.betterx.betternether.world.structures.plants.LegacyStructureAnchorTree;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -24,15 +25,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> implements GrowableFeature<NoneFeatureConfiguration> {
+public class AnchorTreeFeature extends ContextFeature implements GrowableFeature {
+    public static final MapCodec<AnchorTreeFeature> CODEC = MapCodec.unit(AnchorTreeFeature::new);
+
+    @Override
+    public MapCodec<AnchorTreeFeature> codec() {
+        return CODEC;
+    }
+
     public AnchorTreeFeature() {
-        super(NoneFeatureConfiguration.CODEC);
         legacyStructure = new LegacyStructureAnchorTree();
     }
 
@@ -79,7 +85,6 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
@@ -119,8 +124,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
     public boolean grow(
             ServerLevelAccessor level,
             BlockPos pos,
-            RandomSource random,
-            NoneFeatureConfiguration configuration
+            RandomSource random
     ) {
         final int maxHeight = level.getLevel().getChunkSource().getGenerator().getGenDepth();
         // All the way to the next ceiling, or to the build limit when there is none. Capping this at a
@@ -199,7 +203,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                     }
                 }
                 if (at == null) continue;
-                FOLIAGE.grow(level, at, random, NoneFeatureConfiguration.INSTANCE);
+                FOLIAGE.grow(level, at, random);
                 break;
             }
         }
@@ -264,7 +268,6 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         List<BlockPos> blocks = line(trunkBottom, trunkTop, count, random, 2.5);
 
         context.BLOCKS.clear();
-
 
         count = Math.min(7, Math.max(3, (up.getY() - down.getY()) / (int) (10 * scale_factor) - 1));
         double radius = Math.min(7, Math.max(3.5, (up.getY() - down.getY()) / 15));

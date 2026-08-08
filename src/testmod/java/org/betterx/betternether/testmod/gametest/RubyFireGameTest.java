@@ -198,20 +198,23 @@ public class RubyFireGameTest {
     @GameTest(maxTicks = 400)
     public void rubyFireRetaliatesWhenTheWearerIsAPlayer(GameTestHelper helper) {
         final Zombie attacker = helper.spawnWithNoFreeWill(EntityTypes.ZOMBIE, ATTACKER_POS);
-        final ServerPlayer wearer = MockPlayers.survival(helper, VICTIM_POS);
-        wearer.setItemSlot(EquipmentSlot.CHEST, gameReady(
-                helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ArmorSlot.CHESTPLATE_SLOT)
-        ));
 
         boolean attackerAffected = false;
+        // Entity#invulnerableTime is private on this branch, so the damage cooldown cannot be cleared
+        // between attempts; each attempt gets a fresh wearer instead, exactly as the mob-victim test
+        // does.
         for (int attempt = 0; attempt < ATTEMPTS && !attackerAffected; attempt++) {
+            final ServerPlayer wearer = MockPlayers.survival(helper, VICTIM_POS);
+            wearer.setItemSlot(EquipmentSlot.CHEST, gameReady(
+                    helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ArmorSlot.CHESTPLATE_SLOT)
+            ));
+
             attacker.setRemainingFireTicks(0);
-            wearer.setHealth(wearer.getMaxHealth());
-            wearer.invulnerableTime = 0;
 
             attacker.doHurtTarget(helper.getLevel(), wearer);
 
             if (attacker.getRemainingFireTicks() > 0) attackerAffected = true;
+            wearer.discard();
         }
 
         if (!attackerAffected) {
@@ -310,7 +313,6 @@ public class RubyFireGameTest {
 
             attacker.setRemainingFireTicks(0);
             attacker.setHealth(attackerFullHealth);
-            attacker.invulnerableTime = 0;
             victim.setRemainingFireTicks(0);
 
             attacker.doHurtTarget(helper.getLevel(), victim);

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_pillar"
+        "recipes": "betternether:cincinnasite_pillar"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

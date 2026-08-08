@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_excavator"
+        "recipes": "betternether:cincinnasite_excavator"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

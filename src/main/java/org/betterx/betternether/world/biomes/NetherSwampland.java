@@ -68,7 +68,7 @@ public class NetherSwampland extends NetherBiomeConfig {
         builder.rule(
                 SurfaceRules.sequence(
                         SurfaceRules.ifTrue(
-                                SurfaceRules.ON_FLOOR,
+                                NetherBiomeBuilder.ON_FLOOR,
                                 SurfaceRules.ifTrue(
                                         Conditions.roughNoise(Noises.NETHERRACK, 0.14),
                                         SurfaceRules.state(NetherTerrainBlocks.SWAMPLAND_GRASS.defaultBlockState())

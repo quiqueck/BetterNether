@@ -9,6 +9,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
@@ -17,14 +18,15 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Map;
 
-public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration> implements GrowableFeature<NoneFeatureConfiguration> {
+public class NetherSakuraFeature extends ContextFeature implements GrowableFeature {
+    public static final MapCodec<NetherSakuraFeature> CODEC = MapCodec.unit(NetherSakuraFeature::new);
 
-    public NetherSakuraFeature() {
-        super(NoneFeatureConfiguration.CODEC);
+    @Override
+    public MapCodec<NetherSakuraFeature> codec() {
+        return CODEC;
     }
 
     @Override
@@ -32,7 +34,6 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
@@ -204,8 +205,7 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
     public boolean grow(
             ServerLevelAccessor level,
             BlockPos pos,
-            RandomSource random,
-            NoneFeatureConfiguration configuration
+            RandomSource random
     ) {
         return grow(level, pos, random, 128, NetherThreadDataStorage.generatorForThread().context);
     }

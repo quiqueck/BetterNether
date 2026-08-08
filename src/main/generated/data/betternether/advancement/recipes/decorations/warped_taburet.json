@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:warped_taburet"
+        "recipes": "betternether:warped_taburet"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

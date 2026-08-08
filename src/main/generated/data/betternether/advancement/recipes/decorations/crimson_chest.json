@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:crimson_chest"
+        "recipes": "betternether:crimson_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

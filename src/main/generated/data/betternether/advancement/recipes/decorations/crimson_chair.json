@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:crimson_chair"
+        "recipes": "betternether:crimson_chair"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

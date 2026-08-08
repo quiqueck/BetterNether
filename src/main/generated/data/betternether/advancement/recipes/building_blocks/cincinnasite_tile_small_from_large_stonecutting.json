@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_tile_small_from_large_stonecutting"
+        "recipes": "betternether:cincinnasite_tile_small_from_large_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

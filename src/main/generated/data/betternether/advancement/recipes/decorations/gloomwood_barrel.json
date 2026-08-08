@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_barrel"
+        "recipes": "betternether:gloomwood_barrel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

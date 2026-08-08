@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:brick_pot"
+        "recipes": "betternether:brick_pot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

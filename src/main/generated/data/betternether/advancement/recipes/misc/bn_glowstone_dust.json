@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:bn_glowstone_dust"
+        "recipes": "betternether:bn_glowstone_dust"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

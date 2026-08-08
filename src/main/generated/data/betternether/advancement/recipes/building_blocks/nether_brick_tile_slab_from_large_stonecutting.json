@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_brick_tile_slab_from_large_stonecutting"
+        "recipes": "betternether:nether_brick_tile_slab_from_large_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:cincinnasite_pot"
+        "recipes": "betternether:cincinnasite_pot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

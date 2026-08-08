@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_mushroom_door"
+        "recipes": "betternether:nether_mushroom_door"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

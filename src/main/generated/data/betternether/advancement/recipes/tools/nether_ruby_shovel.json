@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_ruby_shovel"
+        "recipes": "betternether:nether_ruby_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

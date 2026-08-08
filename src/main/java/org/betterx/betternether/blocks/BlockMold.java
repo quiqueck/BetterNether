@@ -70,7 +70,9 @@ class BaseBlockMold extends Block {
             c = world.getBlockState(pos.east()).getBlock() == this ? c++ : c;
             c = world.getBlockState(pos.west()).getBlock() == this ? c++ : c;
             if (c < 2) {
-                BlockPos npos = new BlockPos(pos);
+                // 26.3 removed the BlockPos(Vec3i) copy constructor; immutable() is the equivalent
+                // (it returns this for an already-immutable BlockPos and copies a MutableBlockPos).
+                BlockPos npos = pos.immutable();
                 switch (random.nextInt(4)) {
                     case 0:
                         npos = npos.offset(-1, 0, 0);

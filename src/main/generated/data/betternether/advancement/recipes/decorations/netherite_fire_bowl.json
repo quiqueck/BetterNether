@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:netherite_fire_bowl"
+        "recipes": "betternether:netherite_fire_bowl"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

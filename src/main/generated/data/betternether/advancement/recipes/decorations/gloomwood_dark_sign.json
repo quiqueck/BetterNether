@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:gloomwood_dark_sign"
+        "recipes": "betternether:gloomwood_dark_sign"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

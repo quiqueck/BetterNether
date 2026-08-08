@@ -7,14 +7,20 @@ import org.betterx.betternether.blocks.BlockWartSeed;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class WartBushFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class WartBushFeature extends ContextFeature {
+    public static final MapCodec<WartBushFeature> CODEC = MapCodec.unit(WartBushFeature::new);
+
+    @Override
+    public MapCodec<WartBushFeature> codec() {
+        return CODEC;
+    }
 
     private static final Direction[] DIRS = new Direction[]{
             Direction.UP,
@@ -24,16 +30,11 @@ public class WartBushFeature extends ContextFeature<NoneFeatureConfiguration> {
             Direction.WEST
     };
 
-    public WartBushFeature() {
-        super(NoneFeatureConfiguration.CODEC);
-    }
-
     @Override
     protected boolean place(
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             final int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {

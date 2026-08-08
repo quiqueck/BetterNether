@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_reed_trapdoor"
+        "recipes": "betternether:nether_reed_trapdoor"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

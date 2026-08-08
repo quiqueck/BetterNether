@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "_comment": "block/stalagnate_bowl_wart references item/nether_wart, which lives on the item atlas. 26.3 rejects a block model that names a sprite the block atlas has no source for, so the model was dropped entirely and the wart-filled bowl rendered as a missing model. Atlas definitions merge across namespaces, so adding the sprite here extends vanilla's blocks.json rather than replacing it, and keeps the original texture.",
+      "type": "minecraft:single",
+      "resource": "minecraft:item/nether_wart"
+    }
+  ]
+}

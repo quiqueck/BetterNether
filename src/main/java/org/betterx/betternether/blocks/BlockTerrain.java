@@ -8,9 +8,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -38,12 +39,14 @@ public class BlockTerrain extends Block implements BonemealNyliumLike {
     public boolean isValidBonemealTarget(
             LevelReader blockGetter,
             BlockPos blockPos,
-            BlockState blockState
+            BlockState blockState,
+            BonemealSource bonemealSource
     ) {
         return vegetationFeature != null && BonemealNyliumLike.super.isValidBonemealTarget(
                 blockGetter,
                 blockPos,
-                blockState
+                blockState,
+                bonemealSource
         );
     }
 
@@ -53,7 +56,7 @@ public class BlockTerrain extends Block implements BonemealNyliumLike {
     }
 
     @Override
-    public @Nullable Holder<? extends ConfiguredFeature<?, ?>> getCoverFeature() {
+    public @Nullable Holder<Feature> getCoverFeature() {
         return vegetationFeature.getFeature();
     }
 }

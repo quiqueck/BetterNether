@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:nether_brick_wall"
+        "recipes": "betternether:nether_brick_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

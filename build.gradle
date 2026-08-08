@@ -119,26 +119,35 @@ dependencies {
     // https://mvnrepository.com/artifact/javax.annotation/jsr305
     compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 
+    // Optional-integration mods are published against older Minecraft versions than we target, so each of
+    // them drags in an older fabric-api. Loom applies the class tweakers of every mod on the classpath to the
+    // Minecraft jar, and an older fabric-api's tweakers reference signatures that no longer exist (e.g. the
+    // 26.1 datagen module injects FabricTagAppender<E,T> into what is now TagAppender<T>, failing the build
+    // with "Failed to setup Minecraft"). We declare the matching fabric-api ourselves above, so strip theirs.
+    def noFabricApi = { exclude group: "net.fabricmc.fabric-api" }
 
-    // compile against the API
-    compileOnly "mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}"
-
-    // run against the full jar
-    runtimeOnly "mcp.mobius.waila:wthit:fabric-${project.wthit_version}"
+    // WTHIT and JEI are disabled for 26.3: neither has published a compatible build (WTHIT tops out at
+    // fabric-19.0.1 targeting 26.1.x, and JEI's artifact id embeds the Minecraft version, so there simply is
+    // no `jei-26.3-snapshot-5-fabric*` to resolve). Disabled the same way EMI is below; re-enable once they
+    // ship 26.3 builds (also un-comment the *_version properties in gradle.properties, un-comment the source
+    // files under integrations/wthit + integrations/jei, flip the *_disabled entrypoint in fabric.mod.json
+    // back, and re-add them to optional_dependencies in gradle.properties).
+//    compileOnly("mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}", noFabricApi) // compile against the API
+//    runtimeOnly("mcp.mobius.waila:wthit:fabric-${project.wthit_version}", noFabricApi) // run against the full jar
 
     // alsoInclude=false: BetterNether doesn't bundle BCLib into its own jar.
     gradle.modApiOrLocal(dependencies, ':BCLib', "org.betterx:bclib:${project.bclib_version}", false)
 
-    // EMI 1.1.8+1.21 targets 1.21.1 and its mixins fail against 1.21.7; the BetterNether EMI
+    // EMI 1.1.8+1.21 targets 1.21.1 and its mixins fail against 26.3; the BetterNether EMI
     // integration is disabled for now (see integrations/emi, entrypoint emi_disabled). Re-enable
-    // with an EMI build for 26.1.
-//    compileOnly "dev.emi:emi-fabric:${emi_version}:api"
-//    localRuntime "dev.emi:emi-fabric:${emi_version}"
+    // with an EMI build for 26.3.
+//    compileOnly("dev.emi:emi-fabric:${emi_version}:api", noFabricApi)
+//    localRuntime("dev.emi:emi-fabric:${emi_version}", noFabricApi)
 
-    compileOnly "mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}" // compile against the API
-    localRuntime "mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}" // run against the full jar
+//    compileOnly("mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}", noFabricApi) // compile against the API
+//    localRuntime("mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}", noFabricApi) // run against the full jar
 
-    localRuntime "com.terraformersmc:modmenu:${project.modmenu_version}"
+    localRuntime("com.terraformersmc:modmenu:${project.modmenu_version}", noFabricApi)
 
     // alsoInclude=false: BetterNether doesn't bundle wunderlib into its own jar.
     gradle.modApiOrLocal(dependencies, ':wunderlib', "de.ambertation:wunderlib:${project.wunderlib_version}", false)

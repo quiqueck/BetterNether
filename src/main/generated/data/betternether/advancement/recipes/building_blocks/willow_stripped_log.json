@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:willow_stripped_log"
+        "recipes": "betternether:willow_stripped_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

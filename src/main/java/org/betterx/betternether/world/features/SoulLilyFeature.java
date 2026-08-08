@@ -7,17 +7,20 @@ import org.betterx.betternether.blocks.BlockSoulLily;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class SoulLilyFeature extends ContextFeature<NoneFeatureConfiguration> {
-    public SoulLilyFeature() {
-        super(NoneFeatureConfiguration.CODEC);
+public class SoulLilyFeature extends ContextFeature {
+    public static final MapCodec<SoulLilyFeature> CODEC = MapCodec.unit(SoulLilyFeature::new);
+
+    @Override
+    public MapCodec<SoulLilyFeature> codec() {
+        return CODEC;
     }
 
     @Override
@@ -25,7 +28,6 @@ public class SoulLilyFeature extends ContextFeature<NoneFeatureConfiguration> {
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NoneFeatureConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {

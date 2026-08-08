@@ -14,6 +14,7 @@ import org.betterx.betternether.world.structures.StructureGeneratorThreadContext
 import de.ambertation.wover.feature.api.WriteZone;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -25,7 +26,19 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
-public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguration> implements GrowableFeature<NaturalTreeConfiguration> {
+public class OldWillowTree extends NonOverlappingFeature implements GrowableFeature {
+    public static final MapCodec<OldWillowTree> CODEC =
+            NaturalTreeConfiguration.mapCodecFor(OldWillowTree::new);
+
+    public OldWillowTree(NaturalTreeConfiguration config) {
+        super(config);
+    }
+
+    @Override
+    public MapCodec<OldWillowTree> codec() {
+        return CODEC;
+    }
+
     /**
      * How much narrower a crown is than its nominal radius. {@link #crown} tests
      * {@code 2*cx^2 + cy^2 + 2*cz^2 < r^2}, so the shell is squashed by {@code sqrt(2)} horizontally and
@@ -42,12 +55,6 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
             NetherWallPlantBlocks.WALL_MUSHROOM_BROWN,
             NetherWallPlantBlocks.WALL_MUSHROOM_RED
     };
-
-
-    public OldWillowTree() {
-        super(NaturalTreeConfiguration.CODEC);
-    }
-
 
     @Override
     protected boolean grow(
@@ -154,7 +161,6 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
             }
         }
 
-
         BlockState state;
 
         for (BlockPos bpos : context.BLOCKS) {
@@ -213,17 +219,15 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NaturalTreeConfiguration config,
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
         int length = BlocksHelper.upRay(world, pos, BlockStalagnateSeed.MAX_SEARCH_LENGTH + 2);
         if (length >= BlockStalagnateSeed.MAX_SEARCH_LENGTH)
-            return super.place(world, pos, random, config, MAX_HEIGHT, context);
+            return super.place(world, pos, random, MAX_HEIGHT, context);
 
         return false;
     }
-
 
     @Override
     protected boolean isStructure(BlockState state) {
@@ -389,14 +393,13 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
     public boolean grow(
             ServerLevelAccessor level,
             BlockPos pos,
-            RandomSource random,
-            NaturalTreeConfiguration configuration
+            RandomSource random
     ) {
         return grow(
                 level,
                 pos,
                 random,
-                new NaturalTreeConfiguration(false, configuration.distance),
+                new NaturalTreeConfiguration(false, config.distance),
                 NetherThreadDataStorage.generatorForThread().context
         );
     }

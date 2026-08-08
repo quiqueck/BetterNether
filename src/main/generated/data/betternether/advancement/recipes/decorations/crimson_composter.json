@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:crimson_composter"
+        "recipes": "betternether:crimson_composter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

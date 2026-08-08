@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betternether:rubeus_sign"
+        "recipes": "betternether:rubeus_sign"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

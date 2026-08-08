@@ -89,9 +89,8 @@ public class NetherEntities {
     private static final List<BCLEntityWrapper<?>> NETHER_ENTITIES = Lists.newArrayList();
 
 
-    // Fabric dropped FabricEntityTypeBuilder in 26.2 (fabric-object-builder-api-v1 24.1.0); vanilla's
-    // EntityType.Builder is the replacement (same shape as BCLib's BaseBlockEntities.CHAIR and
-    // WoVer's BoatItemDefinition on 26.2).
+    // Fabric dropped FabricEntityTypeBuilder in 26.3; vanilla's EntityType.Builder is the replacement
+    // (same shape as BCLib's BaseBlockEntities.CHAIR and WoVer's BoatItemDefinition on 26.3).
     // `.dimensions(...)` -> `.sized(...)`, `.disableSummon()` -> `.noSummon()`.
     // NAGA_PROJECTILE is a plain Entity, so Entity#getDimensions never scales the type dimensions and
     // fixed vs. scalable is indistinguishable for it.
@@ -196,10 +195,10 @@ public class NetherEntities {
     ) {
         Identifier id = BetterNether.C.id(name);
         ResourceKey<EntityType<?>> key = ResourceKey.create(Registries.ENTITY_TYPE, id);
-        // EntityType.Builder#sized always stores EntityDimensions.scalable and there is no public
-        // fixed-dimensions setter; up to 26.1 the fixed variant only ever reached the builder through
-        // FabricEntityTypeBuilder#dimensions, which 26.2 dropped. Assigning the field directly -
-        // widened in betternether.accesswidener - is the only way left to honour `fixedSize`. It matters for the age-scaled types: without it,
+        // 26.3: EntityType.Builder#sized always stores EntityDimensions.scalable, and the public
+        // fixed-dimensions setter is gone (vanilla's own EntityTypes never calls EntityDimensions.fixed
+        // any more). Assigning the field directly - widened in betternether.accesswidener - is the only
+        // way left to honour `fixedSize`. It matters for the age-scaled types: without it,
         // LivingEntity#getDefaultDimensions multiplies by getAgeScale() and EntityDimensions#scale only
         // short-circuits when the dimensions are fixed, so baby fireflies and baby flying pigs would get
         // a half-size hitbox.

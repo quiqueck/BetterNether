@@ -1,7 +1,6 @@
 {
   "feature": {
-    "type": "betternether:obsidian_crystal",
-    "config": {}
+    "type": "betternether:obsidian_crystal"
   },
   "placement": [
     {

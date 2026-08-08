@@ -12,7 +12,5 @@ body:
     attributes:
       label: Description
       description: Tell us your idea
-      placeholder: 
-      value: 
     validations:
       required: true

@@ -1,5 +1,6 @@
 {
   "values": [
-    "minecraft:sculk_catalyst"
+    "betternether:gloomsculk_crystal",
+    "betternether:gloomsculk_geode_crystal"
   ]
 }

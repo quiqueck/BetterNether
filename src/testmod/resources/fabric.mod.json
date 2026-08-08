@@ -31,7 +31,8 @@
       "org.betterx.betternether.testmod.gametest.BowlGameTest",
       "org.betterx.betternether.testmod.gametest.MedicineGameTest",
       "org.betterx.betternether.testmod.gametest.CincinnasitePotGameTest",
-      "org.betterx.betternether.testmod.gametest.FlamingRubyUpgradeGameTest"
+      "org.betterx.betternether.testmod.gametest.FlamingRubyUpgradeGameTest",
+      "org.betterx.betternether.testmod.gametest.BrewingStandGameTest"
     ]
   },
   "depends": {

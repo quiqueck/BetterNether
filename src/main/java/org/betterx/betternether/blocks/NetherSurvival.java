@@ -130,13 +130,20 @@ public class NetherSurvival {
         return List.of(SurvivesOnBlockTrait.withBlocks(Blocks.GRAVEL));
     }
 
-    public static List<BlockTrait<?, ?>> magmaBlockOrSand() {
-        return List.of(SurvivesOnBlockTrait.withBlocks(
-                Blocks.MAGMA_BLOCK,
-                Blocks.RED_SAND,
-                Blocks.SAND,
-                Blocks.SCULK
-        ));
+    /**
+     * The magma flower's ground: hot rock and sand, plus the whole sculk family.
+     * <p>
+     * Vanilla sculk was already on the list on its own; widening that one entry to
+     * {@link CommonBlockTags#SCULK_LIKE} is what lets the flower stand on the gloomwood's own floor
+     * blocks - most of all on molten gloomsculk, which is sculk with lava in its fissures and about the
+     * most obvious ground a magma flower could ask for. The mega lava lake's shore is built out of those
+     * blocks and needs a warm plant that will actually live on them.
+     */
+    public static List<BlockTrait<?, ?>> magmaSandOrSculk() {
+        return List.of(
+                SurvivesOnBlockTrait.withBlocks(Blocks.MAGMA_BLOCK, Blocks.RED_SAND, Blocks.SAND),
+                SurvivesOnBlockTrait.withTag(CommonBlockTags.SCULK_LIKE)
+        );
     }
 
     public static List<BlockTrait<?, ?>> boneBlocks() {

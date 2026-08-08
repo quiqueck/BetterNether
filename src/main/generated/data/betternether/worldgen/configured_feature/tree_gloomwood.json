@@ -1,7 +1,7 @@
 {
   "type": "betternether:gloomwood_tree",
   "config": {
-    "distance": 7,
+    "distance": 9,
     "natural": true
   }
 }

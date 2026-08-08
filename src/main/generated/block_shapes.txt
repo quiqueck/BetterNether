@@ -293,7 +293,10 @@ betternether:anchor_tree_log  shape=[0,0,0|1,1,1] collision=[0,0,0|1,1,1]
 betternether:anchor_tree_planks  shape=[0,0,0|1,1,1] collision=[0,0,0|1,1,1]
 betternether:anchor_tree_plate[powered=true]  shape=[0.0625,0,0.0625|0.9375,0.0313,0.9375] collision=empty
 betternether:anchor_tree_plate[powered=false]  shape=[0.0625,0,0.0625|0.9375,0.0625,0.9375] collision=empty
-betternether:anchor_tree_sapling  shape=[0.25,0.125,0.25|0.75,1,0.75] collision=[0.25,0.125,0.25|0.75,1,0.75]
+betternether:anchor_tree_sapling[hanging=true,stage=0]  shape=[0.25,0.125,0.25|0.75,1,0.75] collision=[0.25,0.125,0.25|0.75,1,0.75]
+betternether:anchor_tree_sapling[hanging=true,stage=1]  shape=[0.25,0.125,0.25|0.75,1,0.75] collision=[0.25,0.125,0.25|0.75,1,0.75]
+betternether:anchor_tree_sapling[hanging=false,stage=0]  shape=[0.25,0,0.25|0.75,0.875,0.75] collision=[0.25,0,0.25|0.75,0.875,0.75]
+betternether:anchor_tree_sapling[hanging=false,stage=1]  shape=[0.25,0,0.25|0.75,0.875,0.75] collision=[0.25,0,0.25|0.75,0.875,0.75]
 betternether:anchor_tree_shelf[facing=north,powered=true,side_chain=unconnected,waterlogged=true]  shape=[0,0,0.6875|1,0.25,1][0,0.25,0.8125|1,1,1][0,0.75,0.6875|1,1,0.8125] collision=[0,0,0.6875|1,0.25,1][0,0.25,0.8125|1,1,1][0,0.75,0.6875|1,1,0.8125]
 betternether:anchor_tree_shelf[facing=north,powered=true,side_chain=unconnected,waterlogged=false]  shape=[0,0,0.6875|1,0.25,1][0,0.25,0.8125|1,1,1][0,0.75,0.6875|1,1,0.8125] collision=[0,0,0.6875|1,0.25,1][0,0.25,0.8125|1,1,1][0,0.75,0.6875|1,1,0.8125]
 betternether:anchor_tree_shelf[facing=north,powered=true,side_chain=right,waterlogged=true]  shape=[0,0,0.6875|1,0.25,1][0,0.25,0.8125|1,1,1][0,0.75,0.6875|1,1,0.8125] collision=[0,0,0.6875|1,0.25,1][0,0.25,0.8125|1,1,1][0,0.75,0.6875|1,1,0.8125]

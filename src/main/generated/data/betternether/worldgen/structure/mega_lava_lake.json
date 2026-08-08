@@ -1,0 +1,6 @@
+{
+  "type": "betternether:mega_lava_lake",
+  "biomes": "#betternether:has_structure/mega_lava_lake",
+  "spawn_overrides": {},
+  "step": "surface_structures"
+}

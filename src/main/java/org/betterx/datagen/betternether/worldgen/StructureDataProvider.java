@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 public class StructureDataProvider extends WoverStructureProvider {
     public static final int CITY_SPACING = 64;
+    public static final int MEGA_LAVA_LAKE_SPACING = 24;
 
     /**
      * Creates a new instance of {@link WoverStructureProvider}.
@@ -38,6 +39,7 @@ public class StructureDataProvider extends WoverStructureProvider {
         NetherStructures.PORTALS.bootstrap(context).register();
         NetherStructures.ALTARS.bootstrap(context).register();
         NetherStructures.JUNGLE_TEMPLES.bootstrap(context).register();
+        NetherStructures.MEGA_LAVA_LAKE.bootstrap(context).register();
     }
 
     @Override
@@ -87,6 +89,16 @@ public class StructureDataProvider extends WoverStructureProvider {
         StructureSetManager
                 .bootstrap(NetherStructures.ALTARS, context)
                 .randomPlacement(40, 16)
+                .register();
+
+        // Spacing 24 gives one attempt per ~576 chunks, and almost all of those land outside the gloomwood
+        // and fail. Read against the other entries here it looks generous, but it is the only structure in
+        // the list restricted to a single biome, and the two filters compound: what comes out is roughly
+        // one lake per couple of dozen gloomwood forests, which is the "rare, but there" this is meant to
+        // be rather than something a player is unlikely ever to meet.
+        StructureSetManager
+                .bootstrap(NetherStructures.MEGA_LAVA_LAKE, context)
+                .randomPlacement(MEGA_LAVA_LAKE_SPACING, MEGA_LAVA_LAKE_SPACING / 3)
                 .register();
     }
 

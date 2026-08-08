@@ -87,13 +87,16 @@
       "betternether:patch_gloomwisp_vine",
       "betternether:patch_gloomwisp_vine_head",
       "betternether:tree_gloomwood",
+      "betternether:tree_gloomwood_edge",
+      "betternether:tree_gloomwood_solitary",
       "betternether:vegetation_gloomwood",
       "betternether:gloomsculk_crystal_floor",
       "betternether:gloomsculk_crystal_ceiling",
       "betternether:sculk_vein_floor",
       "betternether:sculk_vein_wall",
       "betternether:sculk_vein_ceiling",
-      "betternether:patch_gloomsculk_vine"
+      "betternether:patch_gloomsculk_vine",
+      "betternether:patch_lumabus_vine_sparse"
     ]
   ],
   "has_precipitation": false,

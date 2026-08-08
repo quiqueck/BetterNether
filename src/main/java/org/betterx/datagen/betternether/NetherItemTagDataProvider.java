@@ -1,5 +1,6 @@
 package org.betterx.datagen.betternether;
 
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
 import org.betterx.betternether.registry.item.NetherEquipmentItems;
 import org.betterx.betternether.registry.item.NetherResourceItems;
 
@@ -11,7 +12,6 @@ import de.ambertation.wover.datagen.api.WoverTagProvider;
 import de.ambertation.wover.tag.api.event.context.ItemTagBootstrapContext;
 
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.Set;
 
@@ -39,6 +39,13 @@ public class NetherItemTagDataProvider extends WoverTagProvider.ForItems {
         context.add(BNToolMaterial.CINCINNASITE.repairItems(), NetherResourceItems.CINCINNASITE_INGOT);
         context.add(BNToolMaterial.CINCINNASITE_DIAMOND.repairItems(), Items.DIAMOND);
         context.add(BNToolMaterial.NETHER_RUBY.repairItems(), NetherResourceItems.NETHER_RUBY);
-        context.add(BNToolMaterial.FLAMING_RUBY.repairItems(), Blocks.SCULK_CATALYST.asItem());
+        // Either gloomsculk crystal repairs flaming ruby gear. Both are the burning orange crystal the
+        // tier is themed on, and taking both keeps the farmable budded one and the silk-touch-only
+        // ground variant equally useful.
+        context.add(
+                BNToolMaterial.FLAMING_RUBY.repairItems(),
+                NetherTerrainBlocks.GLOOMSCULK_CRYSTAL.asItem(),
+                NetherTerrainBlocks.GLOOMSCULK_GEODE_CRYSTAL.asItem()
+        );
     }
 }

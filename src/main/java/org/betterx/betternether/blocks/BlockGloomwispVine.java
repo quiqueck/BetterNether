@@ -3,6 +3,7 @@ package org.betterx.betternether.blocks;
 import de.ambertation.wover.block.api.BlockProperties;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnSolidTrait;
+import org.betterx.bclib.util.LootUtil;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
@@ -25,7 +26,6 @@ import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -60,10 +60,38 @@ import net.fabricmc.api.Environment;
  */
 public class BlockGloomwispVine extends Block {
     /**
-     * How tall a wisp may grow. Worldgen places them anywhere from {@link #MIN_HEIGHT} to this, so a
-     * stand of wisps is ragged rather than a row of identical stalks.
+     * How tall a <em>placed</em> wisp may be, counted in blocks <b>including the head</b> - so 6 here is
+     * five stem segments under one head. Worldgen places them anywhere from {@link #MIN_HEIGHT} to this,
+     * so a stand of wisps is ragged rather than a row of identical stalks, and a player stacking segments
+     * by hand is not limited at all.
      */
-    public static final int MAX_HEIGHT = 5;
+    public static final int MAX_HEIGHT = 6;
+
+    /**
+     * How tall a wisp may get by growing on its own - see {@link #randomTick}. Counted the same way as
+     * {@link #MAX_HEIGHT}, so 4 is three stem segments under one head.
+     * <p>
+     * Lower than {@link #MAX_HEIGHT} on purpose. The tall wisps are meant to be something the world put
+     * there, not something any wisp becomes if left alone long enough: with one cap for both, every stand
+     * eventually levelled out at the maximum and the raggedness worldgen went to the trouble of creating
+     * was gone a few thousand ticks later.
+     */
+    public static final int MAX_NATURAL_HEIGHT = 4;
+
+    /**
+     * One random tick in this many adds a segment - see {@link #randomTick}.
+     * <p>
+     * A wisp is scenery, and the whole point of {@link #MAX_NATURAL_HEIGHT} is that a stand should keep
+     * the shape worldgen gave it rather than converging on one height. A slow climb to that cap is what
+     * makes the difference visible for any length of time; at the old one-in-sixteen a short wisp was at
+     * its limit within an hour of the chunk being loaded.
+     * <p>
+     * A single block is random-ticked about every 68 seconds at the default {@code randomTickSpeed} of 3
+     * ({@code 4096 / 3} ticks), so this is roughly 36 minutes per segment and a little under two hours
+     * for a bare head to reach the cap - all of it in loaded, ticking chunks. The relationship is linear
+     * if it wants retuning.
+     */
+    private static final int GROW_CHANCE = 32;
 
     /**
      * The shortest a wisp can be: just the head, sitting on the ground.
@@ -298,7 +326,7 @@ public class BlockGloomwispVine extends Block {
             InteractionHand hand,
             BlockHitResult hit
     ) {
-        if (!stack.is(Items.SHEARS) || state.getValue(PERSISTENT)) {
+        if (!LootUtil.isShear(stack) || state.getValue(PERSISTENT)) {
             return super.useItemOn(stack, state, level, pos, player, hand, hit);
         }
         if (!level.isClientSide()) {
@@ -489,9 +517,14 @@ public class BlockGloomwispVine extends Block {
             return;
         }
         if (state.getValue(PERSISTENT)) return;
-        if (state.getValue(SHAPE) == BlockProperties.TripleShape.TOP && random.nextInt(16) == 0) {
+        if (state.getValue(SHAPE) == BlockProperties.TripleShape.TOP && random.nextInt(GROW_CHANCE) == 0) {
             BlockPos up = pos.above();
-            if (world.isEmptyBlock(up) && BlocksHelper.getLengthDown(world, pos, this) < MAX_HEIGHT) {
+            // getLengthDown counts this block too, so it is the wisp's total height including the head -
+            // the same thing MAX_NATURAL_HEIGHT measures, and the growth stops with three stems under it.
+            // MAX_NATURAL_HEIGHT rather than MAX_HEIGHT: a wisp that grew here stops there, while one the
+            // world placed - or one a player stacked - keeps whatever height it was given.
+            if (world.isEmptyBlock(up)
+                    && BlocksHelper.getLengthDown(world, pos, this) < MAX_NATURAL_HEIGHT) {
                 // The new head inherits this segment's aim and offset rather than taking the default. The offset
                 // especially: a wisp whose segments disagreed about it would grow a stalk that stepped sideways
                 // halfway up, since the offset moves the model and the outline with it.

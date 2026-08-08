@@ -3,6 +3,7 @@ package org.betterx.betternether.registry.features.configured;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.*;
+import org.betterx.betternether.world.features.configs.GloomwoodTreeConfiguration;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.feature.api.configured.ConfiguredFeatureKey;
@@ -19,8 +20,16 @@ public class NetherTrees {
     public static final ConfiguredFeatureKey<WithConfiguration<RubeusTreeFeature, NaturalTreeConfiguration>> RUBEUS_TREE
             = ConfiguredFeatureManager.configuration(C.id("tree_rubeus"), NetherFeatures.RUBEUS_TREE);
 
-    public static final ConfiguredFeatureKey<WithConfiguration<GloomwoodTreeFeature, NaturalTreeConfiguration>> GLOOMWOOD_TREE
+    public static final ConfiguredFeatureKey<WithConfiguration<GloomwoodTreeFeature, GloomwoodTreeConfiguration>> GLOOMWOOD_TREE
             = ConfiguredFeatureManager.configuration(C.id("tree_gloomwood"), NetherFeatures.GLOOMWOOD_TREE);
+
+    /**
+     * The same tree with a chance of coming out bleached, used only by the solitary placement in the
+     * gloomwood's open ground. A second configured feature rather than a flag on the placement, because
+     * the palette is a property of the tree and the placement layer has no say over it.
+     */
+    public static final ConfiguredFeatureKey<WithConfiguration<GloomwoodTreeFeature, GloomwoodTreeConfiguration>> GLOOMWOOD_TREE_SOLITARY
+            = ConfiguredFeatureManager.configuration(C.id("tree_gloomwood_solitary"), NetherFeatures.GLOOMWOOD_TREE);
 
     public static final ConfiguredFeatureKey<WithConfiguration<MushroomFirFeature, NoneFeatureConfiguration>> MUSHROOM_FIR
             = ConfiguredFeatureManager.configuration(C.id("tree_mushroom_fir"), NetherFeatures.MUSHROOM_FIR);
@@ -45,6 +54,14 @@ public class NetherTrees {
 
     public static final ConfiguredFeatureKey<WithConfiguration<WillowTreeFeature, NoneFeatureConfiguration>> WILLOW_TREE
             = ConfiguredFeatureManager.configuration(C.id("tree_willow"), NetherFeatures.WILLOW_TREE);
+
+    /**
+     * The giant willow. Used both for the natural placement in the {@code OldSwampland} and as the 2x2
+     * variant of the willow sapling, which is why it is a named configured feature rather than the inline
+     * one the placement used to carry - the sapling needs something it can look up by key.
+     */
+    public static final ConfiguredFeatureKey<WithConfiguration<OldWillowTree, NaturalTreeConfiguration>> OLD_WILLOW_TREE
+            = ConfiguredFeatureManager.configuration(C.id("tree_old_willow"), NetherFeatures.OLD_WILLOW_TREE);
 
     public static final ConfiguredFeatureKey<WithConfiguration<AnchorTreeBranchFeature, NoneFeatureConfiguration>> ANCHOR_TREE_BRANCH
             = ConfiguredFeatureManager.configuration(C.id("anchor_tree_branch"), NetherFeatures.ANCHOR_TREE_BRANCH);

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#betternether:flaming_ruby/repair",
+  "base": "betternether:nether_ruby_spear",
+  "result": {
+    "id": "betternether:flaming_ruby_spear"
+  },
+  "template": "betternether:flaming_ruby_upgrade_smithing_template"
+}

@@ -18,10 +18,16 @@
     },
     {
       "type": "minecraft:count_on_every_layer",
-      "count": 10
+      "count": 8
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "wover:noise_filter",
+      "min_noise_level": 0.25,
+      "noise": "minecraft:gravel",
+      "scale_xz": 2.0
     },
     {
       "type": "minecraft:block_predicate_filter",

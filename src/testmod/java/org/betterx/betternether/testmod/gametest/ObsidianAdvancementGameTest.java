@@ -2,6 +2,8 @@ package org.betterx.betternether.testmod.gametest;
 
 import org.betterx.betternether.registry.block.NetherObsidianBlocks;
 
+import de.ambertation.wover.test.api.gametest.MockPlayers;
+
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;

@@ -18,8 +18,6 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 
 public class DestructionPiece extends CustomPiece {
-    private final MutableBlockPos POS = new MutableBlockPos();
-
     private final BlockPos center;
     private final int radius;
     private final int radSqr;
@@ -65,6 +63,10 @@ public class DestructionPiece extends CustomPiece {
             ChunkPos chunkPos,
             BlockPos blockPos
     ) {
+        // Local, not a field: this piece's postProcess() runs once per intersecting chunk, and under
+        // parallel worldgen (e.g. c2me) two workers can run it for the same piece concurrently. A
+        // shared MutableBlockPos field would let those calls interleave writes to one cursor object.
+        final MutableBlockPos POS = new MutableBlockPos();
         for (int x = blockBox.maxZ(); x <= blockBox.minZ(); x++) {
             int px = x - center.getX();
             px *= px;

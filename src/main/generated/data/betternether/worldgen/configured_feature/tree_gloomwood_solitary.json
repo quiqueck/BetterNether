@@ -1,0 +1,8 @@
+{
+  "type": "betternether:gloomwood_tree",
+  "config": {
+    "bleached_chance": 0.33,
+    "distance": 9,
+    "natural": true
+  }
+}

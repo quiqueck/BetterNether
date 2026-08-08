@@ -12,6 +12,8 @@ public class NetherVinesPlaced {
     public static final ModCore C = BetterNether.C;
 
     public static final PlacedConfiguredFeatureKey PLACED_LUMABUS_VINE = PlacedFeatureManager.createKey(NetherVines.LUMABUS_VINE);
+    public static final PlacedConfiguredFeatureKey PLACED_LUMABUS_VINE_GLOOM = PlacedFeatureManager
+            .createKey(C.id("lumabus_vine_gloom"), NetherVines.LUMABUS_VINE);
     public static final PlacedConfiguredFeatureKey PLACED_GOLDEN_LUMABUS_VINE = PlacedFeatureManager.createKey(NetherVines.GOLDEN_LUMABUS_VINE);
     public static final PlacedConfiguredFeatureKey PLACED_EYE_VINE = PlacedFeatureManager.createKey(NetherVines.EYE_VINE);
     public static final PlacedConfiguredFeatureKey PLACED_NEON_EQUISETUM = PlacedFeatureManager.createKey(NetherVines.NEON_EQUISETUM);
@@ -33,6 +35,15 @@ public class NetherVinesPlaced {
             .setDecoration(GenerationStep.Decoration.VEGETAL_DECORATION);
     public static final PlacedConfiguredFeatureKey GLOOMSCULK_VINE = PlacedFeatureManager
             .createKey(NetherVines.PATCH_GLOOMSCULK_VINE)
+            .setDecoration(GenerationStep.Decoration.VEGETAL_DECORATION);
+    /**
+     * The lumabus at a fraction of its usual density, for the gloomwood ceiling. Its pale blue-green
+     * glow is the one warm-neutral light in a biome otherwise lit only by the gloomwisps, and it hangs
+     * from the same sculk-crusted rock they do - but it is a guest there, so it comes in well under the
+     * gloomsculk vine it shares the ceiling with rather than alongside it.
+     */
+    public static final PlacedConfiguredFeatureKey LUMABUS_VINE_SPARSE = PlacedFeatureManager
+            .createKey(C.id("patch_lumabus_vine_sparse"), NetherVines.PATCH_LUMABUS_VINE_GLOOM)
             .setDecoration(GenerationStep.Decoration.VEGETAL_DECORATION);
     public static final PlacedConfiguredFeatureKey BLACK_VINE = PlacedFeatureManager
             .createKey(NetherVines.PATCH_BLACK_VINE)

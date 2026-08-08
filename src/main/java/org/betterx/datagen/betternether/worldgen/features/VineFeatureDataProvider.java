@@ -44,6 +44,14 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
                 .tries(48)
                 .spreadXZ(5)
                 .register();
+        // Fewer tries than the patch above, on top of the sparser placement: in the gloomwood the lumabus
+        // is meant to read as a handful of strands, not as the ceiling cover it is in its own biomes.
+        NetherVines.PATCH_LUMABUS_VINE_GLOOM
+                .bootstrap(ctx)
+                .featureToPlace(NetherVinesPlaced.PLACED_LUMABUS_VINE_GLOOM)
+                .tries(16)
+                .spreadXZ(5)
+                .register();
         NetherVines.GOLDEN_LUMABUS_VINE
                 .bootstrap(ctx)
                 .direction(Direction.DOWN)
@@ -184,6 +192,10 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
     @Override
     protected void bootstrapPlaced(BootstrapContext<PlacedFeature> ctx) {
         NetherVinesPlaced.PLACED_LUMABUS_VINE.place(ctx).isEmptyAndUnderNetherGround().register();
+        NetherVinesPlaced.PLACED_LUMABUS_VINE_GLOOM
+                .place(ctx)
+                .isEmptyAndUnder(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                .register();
         NetherVinesPlaced.PLACED_GOLDEN_LUMABUS_VINE.place(ctx).isEmptyAndUnderNetherGround().register();
         NetherVinesPlaced.PLACED_EYE_VINE.place(ctx).isEmptyAndUnderNetherGround().register();
         NetherVinesPlaced.PLACED_NEON_EQUISETUM.place(ctx).isEmptyAndUnderNetherGround().register();
@@ -194,6 +206,9 @@ public class VineFeatureDataProvider extends WoverFeatureProvider {
         NetherVinesPlaced.GOLDEN_VINE_SPARSE.place(ctx).betterNetherCeiling(4).onceEvery(3).register();
         NetherVinesPlaced.EYE_VINE.place(ctx).betterNetherCeiling(4).onceEvery(2).register();
         NetherVinesPlaced.GLOOMSCULK_VINE.place(ctx).betterNetherCeiling(6).register();
+        // A quarter of LUMABUS_VINE's count and twice its rarity - about an eighth of the gloomsculk vine
+        // above, which is what "a few, scattered" comes out as on a ceiling that already carries one vine.
+        NetherVinesPlaced.LUMABUS_VINE_SPARSE.place(ctx).betterNetherCeiling(3).onceEvery(4).register();
         NetherVinesPlaced.BLACK_VINE.place(ctx).betterNetherCeiling(4).onceEvery(2).register();
         NetherVinesPlaced.BLOOMING_VINE.place(ctx).betterNetherCeiling(4).onceEvery(2).register();
         NetherVinesPlaced.TWISTING_VINES.place(ctx).vanillaNetherGround(12).onceEvery(2).register();

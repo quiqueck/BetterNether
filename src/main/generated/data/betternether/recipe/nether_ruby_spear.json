@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "spear",
+  "key": {
+    "#": "#betternether:nether_ruby/repair",
+    "I": "betternether:nether_reed_stem"
+  },
+  "pattern": [
+    "  #",
+    " I ",
+    "I  "
+  ],
+  "result": {
+    "id": "betternether:nether_ruby_spear"
+  }
+}

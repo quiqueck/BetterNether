@@ -4,7 +4,7 @@ import org.betterx.betternether.registry.block.NetherLeavesBlocks;
 import org.betterx.betternether.registry.block.NetherWoodBlocks;
 
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
+import org.betterx.betternether.world.features.configs.GloomwoodTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import org.betterx.betternether.world.tree.TreeSpace;
 import org.betterx.betternether.world.tree.build.TreeBuilder;
@@ -23,6 +23,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
@@ -41,12 +42,22 @@ import net.minecraft.world.level.block.state.BlockState;
  * the canopies rather than stopping underneath them so that the solver has wood to measure from. Where
  * the hem of a large canopy still falls out of range, {@link DecayRepair#CARVE_BRANCH} grows a real
  * branch into it rather than hiding a detached log in the foliage.
+ *
+ * <h2>Bleached trees</h2>
+ * {@link GloomwoodTreeConfiguration#bleachedChance} inverts the canopy palette on a fraction of the
+ * trees - see {@link #palette}. Only the solitary placement sets it, so the pale specimens are the ones
+ * standing on their own.
+ * <p>
+ * The palette is not only a marking: a bleached tree has ancient debris buried under its roots
+ * ({@link #ancientDebrisRoots}). That makes the pale crown a landmark worth crossing a biome for, and it
+ * is why the variant is confined to the lone trees in the open - one standing clear of a grove can be
+ * seen and walked to, where the same tree inside a stand would be a thing you found by accident.
  */
-public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfiguration>
-        implements GrowableFeature<NaturalTreeConfiguration> {
+public class GloomwoodTreeFeature extends NonOverlappingFeature<GloomwoodTreeConfiguration>
+        implements GrowableFeature<GloomwoodTreeConfiguration> {
 
     public GloomwoodTreeFeature() {
-        super(NaturalTreeConfiguration.CODEC);
+        super(GloomwoodTreeConfiguration.CODEC);
     }
 
     @Override
@@ -178,6 +189,13 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
     private static final int ROOT_RADIUS = 2;
 
     /**
+     * How deep the ancient debris under a bleached tree's roots runs, drawn per column so the pocket is
+     * ragged rather than a slab.
+     */
+    private static final int MIN_DEBRIS_DEPTH = 1;
+    private static final int MAX_DEBRIS_DEPTH = 4;
+
+    /**
      * How likely each column of a molten root is to be molten. Anything under 1 will do; a bit over
      * half keeps the patch clearly ragged without the molten wood becoming a minority speckle.
      * <p>
@@ -203,11 +221,14 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
             ServerLevelAccessor world,
             BlockPos pos,
             RandomSource random,
-            NaturalTreeConfiguration config,
+            GloomwoodTreeConfiguration config,
             StructureGeneratorThreadContext context
     ) {
         final int headroom = clearanceAbove(world, pos);
         final Size[] sizes = Size.values();
+        // Rolled once, before the size loop: a tree that is rebuilt a size down is the same tree, and
+        // re-rolling per attempt would quietly raise the real chance above the configured one.
+        final boolean bleached = config.bleachedChance > 0 && random.nextFloat() < config.bleachedChance;
         // One in three is a small gloomwood whatever the room available - the fallback below only ever
         // makes a tree smaller, so without this the small variant would exist solely under low ceilings
         // and an open cavern would fill with identical full-size trees.
@@ -219,12 +240,16 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
             final Size size = sizes[i];
             if (headroom < size.clearance) continue;
 
-            final TreeBuilder builder = builder(random, size);
+            final TreeBuilder builder = builder(random, size, bleached);
             final TreeSpace space = TreeSpace.of(world, pos);
             final TreeVoxels voxels = builder.build(space, random, builder.filterFor(world, space));
             if (voxels.minY() + voxels.sizeY() + CROWN_MARGIN > headroom) continue;
 
             if (builder.commit(world, space, voxels) > 0) {
+                // Debris before the molten swap, not after: it looks for this tree's own logs to decide
+                // which columns are root, and the swap would have turned some of them into a fourth block
+                // it does not know about.
+                if (bleached) ancientDebrisRoots(world, space, pos, random);
                 if (random.nextInt(MOLTEN_ROOT_CHANCE) == 0) moltenRoot(world, space, pos, random);
                 return true;
             }
@@ -267,6 +292,46 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
                 cursor.set(base.getX() + dx, base.getY(), base.getZ() + dz);
                 if (!world.getBlockState(cursor).is(darkLog)) continue;
                 world.setBlock(cursor, molten, BlocksHelper.SET_SILENT);
+            }
+        }
+    }
+
+    /**
+     * Bury ancient debris under a bleached tree's roots.
+     * <p>
+     * The bleached palette is the tell, and this is what it tells: every column of the tree's lowest log
+     * layer gets {@link #MIN_DEBRIS_DEPTH}-{@link #MAX_DEBRIS_DEPTH} blocks of debris hung under it. Only
+     * columns that actually came out as log are touched, so the pocket sits entirely beneath the trunk
+     * and none of it is visible from the surface - the tree has to be felled and dug out, which is the
+     * point of tying it to a marking rather than to an ore distribution.
+     * <p>
+     * The depth is drawn per column and before the tests, for the same reason
+     * {@link #moltenRoot} draws its own roll there: the pocket's shape is then the tree's, and does not
+     * change with where the chunk's write zone or the terrain happens to fall.
+     * <p>
+     * Only ground is replaced, using the same {@link #isGround} test that decided the tree could stand
+     * here, and a column stops at the first block that is not - so a root over a cave hangs its debris
+     * down to the roof of it and no further, and nothing structural is ever overwritten.
+     */
+    private void ancientDebrisRoots(
+            ServerLevelAccessor world, TreeSpace space, BlockPos base, RandomSource random
+    ) {
+        final BlockState debris = Blocks.ANCIENT_DEBRIS.defaultBlockState();
+        final BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+        for (int dx = -ROOT_RADIUS; dx <= ROOT_RADIUS; dx++) {
+            for (int dz = -ROOT_RADIUS; dz <= ROOT_RADIUS; dz++) {
+                final int depth = MIN_DEBRIS_DEPTH
+                        + random.nextInt(MAX_DEBRIS_DEPTH - MIN_DEBRIS_DEPTH + 1);
+                if (!space.canWrite(dx, dz)) continue;
+
+                cursor.set(base.getX() + dx, base.getY(), base.getZ() + dz);
+                if (!isStructure(world.getBlockState(cursor))) continue;
+
+                for (int down = 1; down <= depth; down++) {
+                    cursor.set(base.getX() + dx, base.getY() - down, base.getZ() + dz);
+                    if (!isGround(world.getBlockState(cursor))) break;
+                    world.setBlock(cursor, debris, BlocksHelper.SET_SILENT);
+                }
             }
         }
     }
@@ -316,13 +381,13 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
             ServerLevelAccessor level,
             BlockPos pos,
             RandomSource random,
-            NaturalTreeConfiguration configuration
+            GloomwoodTreeConfiguration configuration
     ) {
         return grow(
                 level,
                 pos,
                 random,
-                new NaturalTreeConfiguration(false, configuration.distance),
+                new GloomwoodTreeConfiguration(false, configuration.distance, configuration.bleachedChance),
                 NetherThreadDataStorage.generatorForThread().context
         );
     }
@@ -331,7 +396,7 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
      * A fresh builder per tree: the palette bakes in this tree's random facing for the eyes, and the
      * bark noise is seeded per tree so neighbouring gloomwoods do not share a crackle pattern.
      */
-    private static TreeBuilder builder(RandomSource random, Size size) {
+    private static TreeBuilder builder(RandomSource random, Size size, boolean bleached) {
         final float facing = random.nextFloat() * (float) Math.PI * 2;
 
         return TreeBuilder.create()
@@ -368,7 +433,7 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
                                              .hemWobble(size.hemWobble)
                                              .minRadius(size.minRadius)
                                              .build())
-                          .palette(palette(random, facing, size))
+                          .palette(palette(random, facing, size, bleached))
                           // A hem 5.5 blocks below the anchor is well outside the 6-step decay budget
                           // once the path has to go around the hollow, so every lobe needs a carved
                           // spine down its middle. That is the intended outcome - a hanging canopy with
@@ -383,7 +448,7 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
                           .build();
     }
 
-    private static TreePalette palette(RandomSource random, float facing, Size size) {
+    private static TreePalette palette(RandomSource random, float facing, Size size, boolean bleached) {
         // The transition log is a seam, not a band: it is the block on which the dark wood becomes pale,
         // and a column gets exactly one of them, somewhere between darkUpTo and transitionUpTo. Given a
         // band of its own it filled that whole range instead - two or three transition logs stacked up,
@@ -401,8 +466,19 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
                 .seamSeed(random.nextLong())
                 .build();
 
+        // A bleached tree is the same two leaves the other way round: the pale block, which normally only
+        // marks the eyes, becomes the whole crown and the ordinary dark one is cut out of it for the face.
+        // Nothing else about the tree changes - the wood, the shape and the mark geometry are the same, so
+        // it reads as one of the same species rather than as a different tree.
+        final Block canopyLeaves = bleached
+                ? NetherLeavesBlocks.GLOOMWOOD_BLEACHED_LEAVES
+                : NetherLeavesBlocks.GLOOMWOOD_LEAVES;
+        final Block eyeLeaves = bleached
+                ? NetherLeavesBlocks.GLOOMWOOD_LEAVES
+                : NetherLeavesBlocks.GLOOMWOOD_BLEACHED_LEAVES;
+
         final LeafMarks leaves = LeafMarks
-                .of(() -> NetherLeavesBlocks.GLOOMWOOD_LEAVES.defaultBlockState())
+                .of(canopyLeaves::defaultBlockState)
                 // One face on the tree, on whichever lobe ended up highest - a grove of ghosts, not a
                 // tree covered in eyes. Height +3 puts the pair in the upper body where the dome starts
                 // to close in, i.e. where a head would be on a hanging figure. forward 3.4 against a
@@ -410,7 +486,7 @@ public class GloomwoodTreeFeature extends NonOverlappingFeature<NaturalTreeConfi
                 // out of it; sitting it flush on the radius leaves too few leaves inside to read.
                 .eyesOnPrimaryLobe(
                         facing, size.eyeHeight, size.canopyRadius, size.eyeSeparation, size.eyeForward,
-                        () -> NetherLeavesBlocks.GLOOMWOOD_BLEACHED_LEAVES.defaultBlockState()
+                        eyeLeaves::defaultBlockState
                 )
                 .build();
 

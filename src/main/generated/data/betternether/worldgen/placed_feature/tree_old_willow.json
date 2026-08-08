@@ -1,11 +1,5 @@
 {
-  "feature": {
-    "type": "betternether:old_willow_tree",
-    "config": {
-      "distance": 13,
-      "natural": true
-    }
-  },
+  "feature": "betternether:tree_old_willow",
   "placement": [
     {
       "type": "minecraft:height_range",

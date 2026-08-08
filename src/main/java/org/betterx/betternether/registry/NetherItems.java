@@ -107,8 +107,13 @@ public class NetherItems {
                                 @Override
                                 public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
                                     if (stack.getCount() == 1) {
+                                        // super.finishUsingItem() -> Consumable#onConsume shrinks stack
+                                        // in place (to empty, since count was 1), so it must not be read
+                                        // again afterwards - the replacement bowl is always a single
+                                        // item regardless, matching the count this branch was entered
+                                        // with.
                                         super.finishUsingItem(stack, world, user);
-                                        return new ItemStack(NetherFoodItems.STALAGNATE_BOWL, stack.getCount());
+                                        return new ItemStack(NetherFoodItems.STALAGNATE_BOWL, 1);
                                     } else {
                                         if (user instanceof Player player) {
                                             if (!player.isCreative())

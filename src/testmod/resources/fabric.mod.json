@@ -23,6 +23,8 @@
       "org.betterx.betternether.testmod.gametest.OreDropGameTest",
       "org.betterx.betternether.testmod.gametest.PortalShapeGameTest",
       "org.betterx.betternether.testmod.gametest.GameRuleGameTest",
+      "org.betterx.betternether.testmod.gametest.GloomwispExperienceGameTest",
+      "org.betterx.betternether.testmod.gametest.GloomwispPistonGameTest",
       "org.betterx.betternether.testmod.gametest.RecipeCoverageGameTest",
       "org.betterx.betternether.testmod.gametest.AdvancementSweepGameTest",
       "org.betterx.betternether.testmod.gametest.ChestOfDrawersGameTest",
@@ -32,7 +34,15 @@
       "org.betterx.betternether.testmod.gametest.MedicineGameTest",
       "org.betterx.betternether.testmod.gametest.CincinnasitePotGameTest",
       "org.betterx.betternether.testmod.gametest.FlamingRubyUpgradeGameTest",
-      "org.betterx.betternether.testmod.gametest.BrewingStandGameTest"
+      "org.betterx.betternether.testmod.gametest.BrewingStandGameTest",
+      "org.betterx.betternether.testmod.gametest.ComposterGameTest",
+      "org.betterx.betternether.testmod.gametest.SaplingGrowthGameTest",
+      "org.betterx.betternether.testmod.gametest.SpawnerTicksGameTest",
+      "org.betterx.betternether.testmod.gametest.CustomSpawnRulesGameTest",
+      "org.betterx.betternether.testmod.gametest.CitySpawnerGameTest",
+      "org.betterx.betternether.testmod.gametest.PyramidSpawnerGameTest",
+      "org.betterx.betternether.testmod.gametest.SpawnRateProbeGameTest",
+      "org.betterx.betternether.SpawnerPatchGameTest"
     ]
   },
   "depends": {

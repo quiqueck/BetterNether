@@ -1,9 +1,10 @@
 package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
+import org.betterx.bclib.trait.block.PlantBlockTrait;
 import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
+import org.betterx.bclib.trait.block.SaplingBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
-import org.betterx.bclib.trait.block.VegetationTagTrait;
 import org.betterx.betternether.blocks.NetherRender;
 import de.ambertation.wover.block.api.BlockDefinition;
 import de.ambertation.wover.block.api.BlockRegistry;
@@ -16,7 +17,9 @@ import de.ambertation.wover.sets.api.blocks.BlockSet;
 import de.ambertation.wover.sets.api.blocks.SlotFromDefinition;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -46,6 +49,20 @@ public class Sapling extends SlotFromDefinition {
 
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        // The sapling's properties, built here rather than inherited from the set. A wood set describes a
+        // plank, and until this trait was added these saplings were planks: strength 2.0, solid, occluding,
+        // BASS on a note block, NETHER_WOOD underfoot - a sapling a player collided with and needed two
+        // seconds to break. This is the same core BetterNether's standalone saplings get from
+        // NetherMaterial.sapling(): instabreak, no collision, no occlusion, pushReaction(DESTROY) and the
+        // CROP sound, with no XZ offset (a sapling stands where it was planted).
+        // <p>
+        // MapColor.PLANT is a placeholder, not a decision: NetherWoodenMaterial.addCommonBlockDefinitions
+        // runs after this method (see SlotFromDefinition) and its mapColor(woodColor) is the last write, so
+        // each sapling still takes its own species colour. That is the one thing a sapling does want from
+        // its wood set.
+        def.addTrait(PlantBlockTrait.withColor(
+                MapColor.PLANT, false, BlockBehaviour.OffsetType.NONE, SoundType.CROP, false
+        ));
         def.addTrait(survival);
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
         // Cutout, like every other sapling. These blocks extend bclib's FeatureSaplingBlock rather than
@@ -64,7 +81,18 @@ public class Sapling extends SlotFromDefinition {
         // bundle is not used here (it would add compostable a second time).
         def.addTrait(PlantLikeBlockTrait.withDefault());
         def.addTrait(BlockTraits.MINEABLE_WITH.needsHoe());
-        def.addTrait(VegetationTagTrait.sapling());
+        // SaplingBlockTrait.ticking() rather than the bare VegetationTagTrait.sapling() this used to add:
+        // it contributes the same four sapling block/item tags plus the random ticks the block class needs
+        // to grow at all. Without them FeatureSaplingBlock's randomTick() is never called and every sapling
+        // in this slot (gloomwood, willow, rubeus, mushroom fir, nether sakura, anchor tree) only ever grew
+        // from bone meal. The standalone saplings kept random ticks through NetherMaterial.sapling(); this
+        // slot, which hand-assembles the pieces of bclib's sapling bundle instead of taking it whole, is
+        // where the property was dropped.
+        // ticking() and NOT SaplingBlockTrait.withColor(...): the full bundle carries
+        // FLAMMABLE.withDefault(), and nothing burns in the Nether (see NetherWoodenMaterial, which drops
+        // the same trait from the wood set for this reason). ticking() is the sapling's own behaviour
+        // only - random ticks, tags, light - with no fire.
+        def.addTrait(SaplingBlockTrait.ticking());
     }
 
     @Override

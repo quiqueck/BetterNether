@@ -25,7 +25,8 @@
                     "offset": "true",
                     "persistent": "false",
                     "rotation": "random",
-                    "shape": "bottom"
+                    "shape": "bottom",
+                    "spent": "false"
                   }
                 }
               }
@@ -40,7 +41,8 @@
                     "offset": "true",
                     "persistent": "false",
                     "rotation": "random",
-                    "shape": "middle"
+                    "shape": "middle",
+                    "spent": "false"
                   }
                 }
               }
@@ -55,7 +57,8 @@
                     "offset": "true",
                     "persistent": "false",
                     "rotation": "random",
-                    "shape": "top"
+                    "shape": "top",
+                    "spent": "false"
                   }
                 }
               }

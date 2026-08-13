@@ -4,7 +4,7 @@
 		"particle": "betternether:block/stalagnate_trunk_middle",
 		"side": "betternether:block/stalagnate_trunk_middle",
 		"top": "betternether:block/stalagnate_top",
-		"wart": "item/nether_wart",
+		"wart": "block/nether_wart_stage2",
 		"wart_block": "block/nether_wart_block"
 	},
 	"elements": [ 	 

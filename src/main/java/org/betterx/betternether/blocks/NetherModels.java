@@ -304,14 +304,20 @@ public class NetherModels {
         // texture content. Each non-default one is a texture-override child of the hand-authored head,
         // so the mesh itself is still declared once.
         //
-        // The dispatch is over SHAPE and ROTATION together. ROTATION.RANDOM keeps the whole sixteen-entry list, so
-        // a worldgen wisp is still the client picking a rotation off the block position exactly as it did before
-        // the property existed; each compass value narrows the list to that one rotation's four phases, which is
-        // what makes a hand-placed wisp stay where it was aimed. Only the head turns - the stalks are a plain
-        // cross, and rotating one would be four identical models - so their cases ignore ROTATION entirely.
-        final java.util.function.Function<Integer, List<WeightedTemplateModelTrait.Layer>> tipAt = rot -> {
+        // The dispatch is over SHAPE, ROTATION and SPENT together. ROTATION.RANDOM keeps the whole sixteen-entry
+        // list, so a worldgen wisp is still the client picking a rotation off the block position exactly as it did
+        // before the property existed; each compass value narrows the list to that one rotation's four phases, which
+        // is what makes a hand-placed wisp stay where it was aimed. Only the head turns - the stalks are a plain
+        // cross, and rotating one would be four identical models - so their cases ignore ROTATION entirely, and
+        // being spent is a thing the head does, so they ignore that too.
+        //
+        // A spent head takes one static face instead of the four phases: gloomwisp_vine_head_spent is the closed-eye
+        // frame of the blink strip, cut out as its own sprite with no mcmeta. That is the only way to hold that frame
+        // - animation runs per sprite and cannot be paused for one block - and it is also why the phases are pointless
+        // there: they exist to desync a blink that a spent wisp is not doing.
+        final java.util.function.BiFunction<Integer, Boolean, List<WeightedTemplateModelTrait.Layer>> tipAt = (rot, spent) -> {
             final java.util.List<WeightedTemplateModelTrait.Layer> layers = new java.util.ArrayList<>();
-            for (String suffix : List.of("", "_b", "_c", "_d")) {
+            for (String suffix : spent ? List.of("_spent") : List.of("", "_b", "_c", "_d")) {
                 final var face = BetterNether.C.mk("block/gloomwisp_vine_head" + suffix);
                 final var layer = suffix.isEmpty()
                         ? WeightedTemplateModelTrait.model(head)
@@ -325,28 +331,34 @@ public class NetherModels {
             return layers;
         };
 
-        final var cases = new java.util.ArrayList<WeightedTemplateModelTrait.Case2<BlockProperties.TripleShape, WispRotation>>();
+        final var cases = new java.util.ArrayList<WeightedTemplateModelTrait.Case3<BlockProperties.TripleShape, WispRotation, Boolean>>();
         for (WispRotation rotation : WispRotation.values()) {
-            cases.add(WeightedTemplateModelTrait.Case2.of(
-                    BlockProperties.TripleShape.TOP,
-                    rotation,
-                    tipAt.apply(rotation == WispRotation.RANDOM ? null : rotation.yRotation())
-            ));
-            cases.add(WeightedTemplateModelTrait.Case2.of(
-                    BlockProperties.TripleShape.MIDDLE,
-                    rotation,
-                    List.of(stalk.apply("gloomwisp_vine_stem"))
-            ));
-            cases.add(WeightedTemplateModelTrait.Case2.of(
-                    BlockProperties.TripleShape.BOTTOM,
-                    rotation,
-                    List.of(stalk.apply("gloomwisp_vine_stem_lower"))
-            ));
+            for (boolean spent : new boolean[]{false, true}) {
+                cases.add(WeightedTemplateModelTrait.Case3.of(
+                        BlockProperties.TripleShape.TOP,
+                        rotation,
+                        spent,
+                        tipAt.apply(rotation == WispRotation.RANDOM ? null : rotation.yRotation(), spent)
+                ));
+                cases.add(WeightedTemplateModelTrait.Case3.of(
+                        BlockProperties.TripleShape.MIDDLE,
+                        rotation,
+                        spent,
+                        List.of(stalk.apply("gloomwisp_vine_stem"))
+                ));
+                cases.add(WeightedTemplateModelTrait.Case3.of(
+                        BlockProperties.TripleShape.BOTTOM,
+                        rotation,
+                        spent,
+                        List.of(stalk.apply("gloomwisp_vine_stem_lower"))
+                ));
+            }
         }
 
         return WeightedTemplateModelTrait.propertyDispatch(
                 BlockGloomwispVine.SHAPE,
                 BlockGloomwispVine.ROTATION,
+                BlockGloomwispVine.SPENT,
                 cases,
                 // A hand-authored still of the head: the block model's head texture blinks and its soul
                 // fire is animated, neither of which belongs on an inventory icon, and the fire sat in

@@ -65,6 +65,37 @@ public class NetherGameRules {
             .category(GameRuleCategory.UPDATES)
             .buildAndRegister(BetterNether.C.id("grow_large_anchor_trees"));
 
+    /**
+     * Whether {@code custom_spawn_rules}' sky-light test is corrected in dimensions that have no sky
+     * light, so mob spawners using those rules can work there at all.
+     * <p>
+     * Since 1.20.5 {@code SpawnData.CustomSpawnRules.isValidPosition} compares the authored
+     * {@code sky_light_limit} against {@code getEffectiveSkyBrightness}, which is
+     * {@code getBrightness(SKY, pos) - getSkyDarken()}. The Nether's dimension type sets
+     * {@code gameplay/sky_light_level} to 4, so {@code skyDarken} is 11 and the expression evaluates to
+     * <b>-11</b> everywhere. Every limit is clamped to {@code 0..15} by
+     * {@code CustomSpawnRules.checkLightBoundaries}, so no authored range can contain it: the check
+     * fails at every position and the spawner sits at {@code Delay: 0} forever, ticking and spawning
+     * nothing. Up to 1.20.4 the line read {@code getBrightness(LightLayer.SKY, pos)} - 0 in the Nether,
+     * and inside {@code 0..15}.
+     * <p>
+     * Defaults to on, because with it off every city guard spawner in the mod is inert. It exists as a
+     * rule because the correction touches a vanilla method: a server owner who would rather have stock
+     * behaviour, or who is running alongside another mod that addresses the same defect, can turn it
+     * off with {@code /gamerule betternether:fix_sky_light_spawn_rules false} instead of removing the
+     * mixin from the jar.
+     * <p>
+     * Filed under MOBS beside the other spawning rules. See
+     * {@code org.betterx.betternether.mixin.common.CustomSpawnRulesMixin} for the gating.
+     * <p>
+     * Tracked upstream as <b>MC-307449</b>; this rule and the mixin behind it should be removed once
+     * that is fixed in a version the mod targets.
+     */
+    public static final GameRule<Boolean> FIX_SKY_LIGHT_SPAWN_RULES = GameRuleBuilder
+            .forBoolean(true)
+            .category(GameRuleCategory.MOBS)
+            .buildAndRegister(BetterNether.C.id("fix_sky_light_spawn_rules"));
+
     public static void ensureStaticallyLoaded() {
     }
 }

@@ -1,7 +1,9 @@
 package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
+import org.betterx.bclib.trait.block.PlantBlockTrait;
 import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
+import org.betterx.bclib.trait.block.SaplingBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.trait.block.VegetationTagTrait;
 import de.ambertation.wover.block.api.BlockDefinition;
@@ -15,7 +17,9 @@ import de.ambertation.wover.sets.api.blocks.BlockSet;
 import de.ambertation.wover.sets.api.blocks.SlotFromDefinition;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -39,20 +43,23 @@ public class AbstractSeed extends SlotFromDefinition {
     private final List<BlockTrait<?, ?>> survival;
     @Nullable
     private final Supplier<BlockModelTrait> modelTrait;
+    private final boolean growsOnRandomTick;
 
     private AbstractSeed(
             Function<BlockBehaviour.Properties, Block> maker,
             List<BlockTrait<?, ?>> survival,
-            @Nullable Supplier<BlockModelTrait> modelTrait
+            @Nullable Supplier<BlockModelTrait> modelTrait,
+            boolean growsOnRandomTick
     ) {
         super(NetherSlots.SEED);
         this.maker = maker;
         this.survival = survival;
         this.modelTrait = modelTrait;
+        this.growsOnRandomTick = growsOnRandomTick;
     }
 
     public static AbstractSeed create(Function<BlockBehaviour.Properties, Block> maker, List<BlockTrait<?, ?>> survival) {
-        return new AbstractSeed(maker, survival, null);
+        return new AbstractSeed(maker, survival, null, false);
     }
 
     /**
@@ -65,11 +72,36 @@ public class AbstractSeed extends SlotFromDefinition {
             List<BlockTrait<?, ?>> survival,
             Supplier<BlockModelTrait> modelTrait
     ) {
-        return new AbstractSeed(maker, survival, modelTrait);
+        return new AbstractSeed(maker, survival, modelTrait, false);
+    }
+
+    /**
+     * Like {@link #create(Function, List, Supplier)} but for a seed that grows into a tree by itself - a
+     * {@code FeatureSaplingBlock} in a seed-shaped slot (the stalagnate).
+     * <p>
+     * Whether the seed grows on its own is a per-block property, not a slot-wide one, which is why it is a
+     * separate factory rather than a default: the other block in this slot ({@code BlockWartSeed}) is a
+     * plain {@code Block} that grows only from bone meal and would gain nothing but a wasted random-tick
+     * slot. See {@link SaplingBlockTrait#ticking()} for what "grows by itself" actually needs.
+     */
+    public static AbstractSeed createGrowing(
+            Function<BlockBehaviour.Properties, Block> maker,
+            List<BlockTrait<?, ?>> survival,
+            Supplier<BlockModelTrait> modelTrait
+    ) {
+        return new AbstractSeed(maker, survival, modelTrait, true);
     }
 
     @Override
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
+        // Plant properties, for the same reason the Sapling slot has them: a wood set describes a plank, and
+        // these seeds were inheriting one - strength 2.0, solid, occluding, BASS, NETHER_WOOD - where every
+        // standalone seed in the mod (ink bush, black apple, lumabus) is an instabreak plant with no
+        // collision. MapColor.PLANT is a placeholder; the set's mapColor(woodColor) runs after this method
+        // and wins. See the Sapling slot for the full note.
+        def.addTrait(PlantBlockTrait.withColor(
+                MapColor.PLANT, false, BlockBehaviour.OffsetType.NONE, SoundType.CROP, false
+        ));
         def.addTrait(survival);
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
         // See Sapling: the BehaviourCompostable marker these blocks carry never registered a composter entry.
@@ -80,7 +112,14 @@ public class AbstractSeed extends SlotFromDefinition {
         // so the PlantLikeBlockTrait.sapling() bundle (which re-adds compostable) is not used here.
         def.addTrait(PlantLikeBlockTrait.withDefault());
         def.addTrait(BlockTraits.MINEABLE_WITH.needsHoe());
-        def.addTrait(VegetationTagTrait.sapling());
+        if (growsOnRandomTick) {
+            // Same four sapling tags as VegetationTagTrait.sapling(), plus the random ticks the block class
+            // grows in - see SaplingBlockTrait.ticking() and the Sapling slot, which had lost the same
+            // property. Without it the stalagnate seed only ever grew from bone meal.
+            def.addTrait(SaplingBlockTrait.ticking());
+        } else {
+            def.addTrait(VegetationTagTrait.sapling());
+        }
     }
 
     @Override

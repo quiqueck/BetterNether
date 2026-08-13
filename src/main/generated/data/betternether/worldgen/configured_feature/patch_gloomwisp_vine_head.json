@@ -21,7 +21,8 @@
                     "offset": "true",
                     "persistent": "false",
                     "rotation": "random",
-                    "shape": "top"
+                    "shape": "top",
+                    "spent": "false"
                   }
                 }
               }

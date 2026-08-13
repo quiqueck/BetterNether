@@ -25,7 +25,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.FloatTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
@@ -210,84 +209,109 @@ public class NetherItems {
         }
     }
 
+    /**
+     * Builds an {@code ItemStack} in the format {@link net.minecraft.world.item.ItemStack#MAP_CODEC}
+     * expects: {@code count} (lower case) plus a {@code components} patch. Up to 1.20.4 this was
+     * {@code Count} and a {@code tag} compound holding {@code Enchantments: [{id, lvl}]}; both are
+     * read by nothing today, so the old shape produced a bare, unenchanted item without any error.
+     */
     private static CompoundTag buildItem(int count, Item item, ResourceKey<Enchantment>... enchantments) {
         Identifier id = BuiltInRegistries.ITEM.getKey(item);
         CompoundTag tag = new CompoundTag();
         tag.putString("id", id.toString());
-        tag.putByte("Count", (byte) count);
+        tag.putInt("count", count);
 
         if (enchantments.length > 0 && WorldState.registryAccess() != null) {
-            ListTag chants = new ListTag();
+            // ItemEnchantments.CODEC is an unbounded map of enchantment id -> level; there is no
+            // longer a list of {id, lvl} pairs and no "levels" wrapper around the map.
+            CompoundTag chants = new CompoundTag();
             final var enchReg = WorldState.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
-            tag.put("Enchantments", chants);
             for (ResourceKey<Enchantment> e : enchantments) {
                 final var ench = enchReg.getValue(e);
-                final var eTag = new CompoundTag();
-                eTag.putInt("lvl", ench.getMaxLevel());
-                eTag.putString("id", e.identifier().toString());
-                chants.add(eTag);
+                chants.putInt(e.identifier().toString(), ench.getMaxLevel());
             }
+
+            CompoundTag components = new CompoundTag();
+            components.put("minecraft:enchantments", chants);
+            tag.put("components", components);
         }
         return tag;
     }
 
+    /**
+     * A light limit covering the full {@code 0..15} range, i.e. one that never rejects a position.
+     * <p>
+     * {@code InclusiveRange}'s codec requires <b>both</b> bounds, so a compound carrying only
+     * {@code max_inclusive} fails to decode - and because {@code custom_spawn_rules} is a strict
+     * {@code optionalFieldOf}, that failure takes the whole {@code SpawnData} with it. Writing both
+     * bounds is therefore not cosmetic.
+     */
+    private static CompoundTag fullLightRange() {
+        CompoundTag range = new CompoundTag();
+        range.putInt("min_inclusive", 0);
+        range.putInt("max_inclusive", 15);
+        return range;
+    }
+
+    /**
+     * The city guards' spawner payload, and the reference for what
+     * {@code data/betternether/structure/city/city_tower_*.nbt} and {@code city_building_05.nbt}
+     * carry - the debug item exists to stamp exactly that data onto a spawner in world.
+     * <p>
+     * Equipment moved into a single {@code equipment} compound keyed by slot name in 1.21.5, and the
+     * drop chances into {@code drop_chances}. The old {@code ArmorItems} / {@code HandItems} /
+     * {@code ArmorDropChances} / {@code HandDropChances} lists are read by nothing now: they used to
+     * fail silently, leaving the skeletons bare-handed rather than raising anything.
+     */
     @NotNull
     private static CompoundTag buildCitySpawnerData() {
-        ListTag handItems = new ListTag();
-        handItems.add(buildItem(1, NetherEquipmentItems.CINCINNASITE_DIAMOND_SET.get(ToolSlot.SWORD_SLOT)));
-        handItems.add(buildItem(1, Items.SHIELD));
-
-        ListTag armorItems = new ListTag();
-        armorItems.add(buildItem(
+        CompoundTag equipment = new CompoundTag();
+        equipment.put(
+                "mainhand",
+                buildItem(1, NetherEquipmentItems.CINCINNASITE_DIAMOND_SET.get(ToolSlot.SWORD_SLOT))
+        );
+        equipment.put("offhand", buildItem(1, Items.SHIELD));
+        equipment.put("feet", buildItem(
                 1,
                 NetherEquipmentItems.CINCINNASITE_SET.get(ArmorSlot.BOOTS_SLOT),
                 Enchantments.PROTECTION
         ));
-        armorItems.add(buildItem(
+        equipment.put("legs", buildItem(
                 1,
                 NetherEquipmentItems.CINCINNASITE_SET.get(ArmorSlot.LEGGINGS_SLOT),
                 Enchantments.PROTECTION
         ));
-        armorItems.add(buildItem(
+        equipment.put("chest", buildItem(
                 1,
                 NetherEquipmentItems.CINCINNASITE_SET.get(ArmorSlot.CHESTPLATE_SLOT),
                 Enchantments.PROTECTION,
                 Enchantments.THORNS
         ));
-        armorItems.add(buildItem(
+        equipment.put("head", buildItem(
                 1,
                 NetherEquipmentItems.CINCINNASITE_SET.get(ArmorSlot.HELMET_SLOT),
                 Enchantments.PROTECTION
         ));
 
-        ListTag handDropChance = new ListTag();
-        handDropChance.add(FloatTag.valueOf(0));
-        handDropChance.add(FloatTag.valueOf(0));
-
-        ListTag armorDropChance = new ListTag();
-        armorDropChance.add(FloatTag.valueOf(0));
-        armorDropChance.add(FloatTag.valueOf(0));
-        armorDropChance.add(FloatTag.valueOf(0));
-        armorDropChance.add(FloatTag.valueOf(0));
-
+        // A guard's gear is part of the building, not loot: nothing drops. Slots left out of
+        // drop_chances default to 0.085, so every occupied slot has to be listed.
+        CompoundTag dropChances = new CompoundTag();
+        for (String slot : new String[]{"mainhand", "offhand", "feet", "legs", "chest", "head"}) {
+            dropChances.put(slot, FloatTag.valueOf(0));
+        }
 
         CompoundTag entity = new CompoundTag();
         entity.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.WITHER_SKELETON).toString());
         entity.putBoolean("PersistenceRequired", true);
-        entity.put("HandItems", handItems);
-        entity.put("ArmorItems", armorItems);
-        entity.put("HandDropChances", handDropChance);
-        entity.put("ArmorDropChances", armorDropChance);
+        entity.put("equipment", equipment);
+        entity.put("drop_chances", dropChances);
 
-        CompoundTag skyLightLimit = new CompoundTag();
-        skyLightLimit.putByte("max_inclusive", (byte) 13);
-
-        CompoundTag blockLightLimit = new CompoundTag();
-        skyLightLimit.putByte("max_inclusive", (byte) 13);
-
+        // Guards hold their posts in lit rooms, so the vanilla darkness check is bypassed by
+        // supplying custom rules that accept any light level. The mere presence of
+        // custom_spawn_rules is what makes BaseSpawner skip SpawnPlacements.checkSpawnRules.
         CompoundTag customSpawnRules = new CompoundTag();
-        customSpawnRules.put("sky_light_limit", skyLightLimit);
-        customSpawnRules.put("block_light_limit", blockLightLimit);
+        customSpawnRules.put("sky_light_limit", fullLightRange());
+        customSpawnRules.put("block_light_limit", fullLightRange());
 
         CompoundTag spawnData = new CompoundTag();
         spawnData.put("entity", entity);

@@ -39,6 +39,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -114,25 +115,49 @@ public class BlockGloomwispVine extends Block {
      */
     private static final int SHEAR_PARTICLES = 12;
 
-    /** Souls shaken loose per tick while something is pushing through the wisp. */
-    private static final int DISTURB_PARTICLES = 2;
+    /**
+     * Souls shaken loose when something arrives in the wisp.
+     * <p>
+     * A puff on entry, not a trickle per tick - see {@link #entityInside}. Higher than the two this was
+     * while it fired every tick: a walker used to accumulate its souls over the several ticks it took to
+     * clear a plant, and the same crossing now has to read off two entries (the stem and the head).
+     */
+    private static final int DISTURB_PARTICLES = 6;
 
     /**
      * Squared horizontal speed below which a wisp is left alone, mirroring the sweet berry bush's
-     * per-axis 0.003. Without it the plant would ring and shed souls under a player who is merely
-     * standing in it, because entityInside keeps firing whether or not anything is moving.
+     * per-axis 0.003.
+     * <p>
+     * The cheaper half of the "did something arrive" test in {@link #entityInside} - the entry check
+     * there is what actually rules out standing still, and this rules out the case that check cannot
+     * see: something creeping across the block boundary a hundredth at a time, which would otherwise
+     * read as a fresh arrival on every tick it drifted back and forth over the edge.
      */
     private static final double DISTURB_SPEED_SQR = 9.0E-6;
 
     /**
-     * Chance per tick, per intersected segment, that a disturbed wisp chimes.
+     * Slack on the rewound box in {@link #entityInside}, so that a previous position flush against the
+     * block face counts as having been outside it.
      * <p>
-     * Deliberately low. entityInside runs every tick for every segment the entity's box overlaps, so a
-     * walker clips two of them at once and clears a plant in a handful of ticks; ringing on all of
-     * those would give a fistful of chimes per plant. At this rate crossing a stand comes out as an
-     * occasional note rather than a peal.
+     * Something walking a grid-aligned line in even steps arrives exactly on the boundary, and whether
+     * the rewound box lands a hair inside or a hair outside is then decided by accumulated float error
+     * in the position - which is to say, arbitrarily, but consistently for any one walker. Without this
+     * such a walker can cross a plant indefinitely and never once register as having arrived. Vanilla
+     * deflates by {@code 1.0E-5} against the same hazard when it decides which blocks an entity is
+     * inside; this is an order larger, and still far below the {@link #DISTURB_SPEED_SQR} floor, so it
+     * cannot turn standing still into a stream of arrivals.
      */
-    private static final float CHIME_CHANCE = 0.08F;
+    private static final double BOUNDARY_EPSILON = 1.0E-4;
+
+    /**
+     * Chance that a wisp chimes when something arrives in one of its segments.
+     * <p>
+     * Reads high next to the 0.08 this was, and is the same thing: that was a per-tick roll, and a
+     * walker was inside a given segment for about seven ticks - fifteen rolls across the two segments
+     * it clips, which came to a little over one chime per plant crossed. Two entry rolls at a half do
+     * the same, so a stand still rings an occasional note rather than a peal.
+     */
+    private static final float CHIME_CHANCE = 0.5F;
 
     /** Quiet: a wisp is something you brush past, not something you knock over. */
     private static final float CHIME_VOLUME = 0.35F;
@@ -165,18 +190,64 @@ public class BlockGloomwispVine extends Block {
     private static final float BOON_PITCH_SPREAD = 0.16F;
 
     /**
-     * Chance per tick, per intersected segment, that a disturbed wisp sheds experience.
+     * Chance that a wisp sheds experience when something arrives in one of its segments.
      * <p>
-     * Sixteen times rarer than the chime, and rolled independently of it. Crossing one plant is a
-     * handful of these rolls, so a single wisp almost never pays out and walking a whole stand
-     * occasionally does - which is the intent: a thing you notice, not a thing you farm. Anyone who
-     * does want to farm it can, slowly, which is what the game rule is there for.
+     * Fourteen times rarer than the chime, and rolled independently of it. Crossing a plant is two of
+     * these rolls, so about one crossing in fifteen pays - a single wisp almost never does and walking
+     * a whole stand occasionally does, which is the intent: a thing you notice, not a thing you farm.
+     * Anyone who does want to farm it can, which is what {@link #RECHARGE_TICKS} sets the ceiling on
+     * and the game rule turns off entirely.
+     * <p>
+     * Set to leave a crossing worth exactly what it was worth as a per-tick roll: seven ticks in a
+     * segment at the old 0.005, two segments deep, came to 6.8% a plant, and two entries at this come
+     * to 6.9%. What the move to entry-rolling changed is not what a walker gets but what standing
+     * still gets, which is now nothing.
      */
-    private static final float EXPERIENCE_CHANCE = 0.005F;
+    private static final float EXPERIENCE_CHANCE = 0.035F;
 
-    /** Orb size, in the same one-to-three band as a smelted ore. */
+    /**
+     * Total experience per payout, in the same one-to-three band as a smelted ore. Shed as that many
+     * separate one-point orbs rather than one orb worth the lot - see {@link #shedExperience}.
+     */
     private static final int EXPERIENCE_MIN = 1;
     private static final int EXPERIENCE_SPREAD = 3;
+
+    /**
+     * How long a wisp stays drained after paying out, in ticks, and the extra it may draw on top -
+     * so one to two minutes, per plant, rolled fresh each time.
+     * <p>
+     * This is what makes the drip farmable without making it a fountain. The roll above is per tick,
+     * so anything that keeps an entity moving through a wisp indefinitely - a water stream, a mob
+     * pacing its pen - hits {@link #EXPERIENCE_CHANCE} about every ten seconds, and without a
+     * recharge a field of wisps would pay out at whatever rate the builder could push mobs through
+     * it. With it, a plant is worth at most {@link #EXPERIENCE_MIN}..{@code MIN + SPREAD - 1} points a
+     * minute no matter how hard it is worked, so the yield scales with how many wisps were planted
+     * rather than with traffic - which is a farm you build once, not one you idle in.
+     * <p>
+     * The spread is there so a stand disturbed all at once does not come back all at once and start
+     * ringing in lockstep.
+     * <p>
+     * A player crossing a stand is barely touched by this: they are inside any one plant for a few
+     * ticks, so the odds of coming back to the same wisp inside a minute <em>and</em> winning the
+     * roll again are remote. It binds farms, not walkers.
+     */
+    private static final int RECHARGE_TICKS = 1200;
+    private static final int RECHARGE_SPREAD_TICKS = 1200;
+
+    /**
+     * Horizontal radius, in blocks, that shed orbs are scattered over.
+     * <p>
+     * Slightly wider than the head, so the orbs land in a patch around the foot of the plant rather
+     * than in the one spot the stalk occupies - the same read as ore experience popping out of the
+     * block you just broke.
+     */
+    private static final double SCATTER_RADIUS = 0.75;
+
+    /**
+     * Height above the head's block origin that orbs are shaken loose at - just inside the hem, where
+     * the ash falls out, so they are seen to come off the head and drop past the stalk to the floor.
+     */
+    private static final double SHED_HEIGHT = 0.4;
 
     private static final VoxelShape STEM_SHAPE = box(6, 0, 6, 10, 16, 10);
     private static final VoxelShape HEAD_SHAPE = box(3, 0, 3, 13, 15, 13);
@@ -211,6 +282,26 @@ public class BlockGloomwispVine extends Block {
      */
     public static final BooleanProperty OFFSET = BooleanProperty.create("offset");
 
+    /**
+     * Whether this wisp has already paid out and is still recharging - see {@link #RECHARGE_TICKS}.
+     * <p>
+     * Set on every segment of the plant at once and cleared by a scheduled tick per segment, so the
+     * cooldown is per <em>plant</em>: a six-block stalk is one wisp and pays like one, rather than
+     * six times over because a walker clips several of its segments.
+     * <p>
+     * A blockstate flag rather than a table of positions kept on the side, because that is the one
+     * place a per-block cooldown survives the chunk unloading with the scheduled tick that ends it -
+     * and it can be read straight off the state {@code entityInside} was handed, which matters for
+     * something that runs every tick for every entity in the plant.
+     * <p>
+     * Unlike {@link #PERSISTENT} this one is dispatched on, so it does cost model variants: a spent
+     * head shuts its eyes. That is the closed frame of the blink strip, cut out as its own static
+     * sprite, because texture animation runs per sprite and there is no way to hold one block's
+     * animation on a frame - see {@code NetherModels.gloomwispVineModelTrait}. The stalk segments
+     * carry the flag too (the cooldown is per plant) but look no different for it.
+     */
+    public static final BooleanProperty SPENT = BooleanProperty.create("spent");
+
     public BlockGloomwispVine(Properties settings) {
         super(stateAwareOffset(settings));
         this.registerDefaultState(getStateDefinition()
@@ -218,7 +309,8 @@ public class BlockGloomwispVine extends Block {
                 .setValue(SHAPE, BlockProperties.TripleShape.TOP)
                 .setValue(PERSISTENT, false)
                 .setValue(ROTATION, WispRotation.RANDOM)
-                .setValue(OFFSET, true));
+                .setValue(OFFSET, true)
+                .setValue(SPENT, false));
     }
 
     /**
@@ -242,7 +334,7 @@ public class BlockGloomwispVine extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(SHAPE, PERSISTENT, ROTATION, OFFSET);
+        stateManager.add(SHAPE, PERSISTENT, ROTATION, OFFSET, SPENT);
     }
 
     /**
@@ -370,14 +462,38 @@ public class BlockGloomwispVine extends Block {
             InsideBlockEffectApplier insideBlockEffectApplier,
             boolean isPrecise
     ) {
-        if (!(level instanceof ServerLevel server) || !(entity instanceof LivingEntity)) {
+        if (!(level instanceof ServerLevel server) || !(entity instanceof LivingEntity living)) {
             return;
         }
 
-        final Vec3 movement = entity.isClientAuthoritative()
+        // A drained wisp does not respond at all until its recharge lands - no souls, no chime, no
+        // advancement, no payout - which is the whole of what "spent" looks like from outside. Checked
+        // first because it is a single property read, and in a pen it drops most of the traffic.
+        if (state.getValue(SPENT)) {
+            return;
+        }
+
+        // Where the entity went this tick, as a from->to vector. A player is client-authoritative and
+        // its position is written straight out of the movement packet, so the server's own old position
+        // is not a reliable "where it was" for one - the client's reported delta is.
+        final Vec3 travelled = entity.isClientAuthoritative()
                 ? entity.getKnownMovement()
-                : entity.oldPosition().subtract(entity.position());
-        if (movement.horizontalDistanceSqr() < DISTURB_SPEED_SQR) {
+                : entity.position().subtract(entity.oldPosition());
+        if (travelled.horizontalDistanceSqr() < DISTURB_SPEED_SQR) {
+            return;
+        }
+
+        // Entering the plant is the event, not being in it. Rewind the entity by the distance it covered
+        // this tick: if it was already overlapping this block back there, it did not arrive, it stayed -
+        // and a wisp someone is standing in has already given what it is going to give.
+        // <p>
+        // Level-triggering was wrong in two ways that only show up with livestock. A cow milling about
+        // inside a plant re-rolled every single tick, so a plant under a herd was worked far harder than
+        // one being walked through; and the moment a plant came back from its recharge the animal still
+        // standing in it set it off again immediately, which is not a disturbance, just the same cow.
+        // Rolling on arrival makes a plant worth the same whoever crosses it, and ties a farm's yield to
+        // how many animals are pushed through rather than to how many are parked in it.
+        if (entity.getBoundingBox().move(travelled.reverse()).deflate(BOUNDARY_EPSILON).intersects(new AABB(pos))) {
             return;
         }
 
@@ -394,15 +510,15 @@ public class BlockGloomwispVine extends Block {
                 0.12, 0.16, 0.12, 0.0
         );
 
+        if (entity instanceof ServerPlayer serverPlayer) {
+            // Awarded on the disturbance rather than on the chime: the chime is a 1-in-12 gate, and an
+            // advancement that only sometimes fires when you do the thing reads as broken.
+            BNCriterion.DISTURBED_WISP.trigger(serverPlayer);
+        }
+
         // Rolled before the chime, because a payout speaks in its own voice and silences the chime for that
         // tick - the two never overlap, so what you hear tells you which of the two happened.
-        // Awarded on the disturbance rather than on the chime: the chime is a 1-in-12 gate, and an
-        // advancement that only sometimes fires when you do the thing reads as broken.
-        boolean shed = false;
-        if (entity instanceof ServerPlayer serverPlayer) {
-            BNCriterion.DISTURBED_WISP.trigger(serverPlayer);
-            shed = shedExperience(server, state, pos, serverPlayer, random);
-        }
+        final boolean shed = shedExperience(server, state, pos, living, random);
 
         if (shed) {
             level.playSound(
@@ -426,38 +542,102 @@ public class BlockGloomwispVine extends Block {
     }
 
     /**
-     * The occasional orb shaken out of a wisp's head.
+     * The occasional handful of orbs shaken out of a wisp's head.
      * <p>
-     * Players only. A wisp rung by a wandering piglin should not be quietly minting experience into an
-     * empty room, and tying the drop to a player is also what lets the advancement fire from the same
-     * roll that produced the orb - so the criterion cannot claim a payout that never happened.
+     * Anything alive sets this off, not just players. A wisp does not know who is pushing through it,
+     * and one rung by a piglin dropping nothing was the difference between a plant that can be farmed
+     * and one that can only be walked through - which is what {@link #RECHARGE_TICKS} exists to keep
+     * honest, since a mob can lean on a plant indefinitely and a player cannot. The advancement is
+     * still players-only, fired from the same roll that produced the orbs so it cannot claim a payout
+     * that never happened.
+     * <p>
+     * The orbs come off the head and fall to the floor in a patch around the plant rather than
+     * appearing in one spot: a payout under a mob two rooms away should leave something lying on the
+     * ground to come and collect, which is the whole of what makes it a farm.
      *
-     * @return whether an orb was actually awarded, which is what the caller swaps the chime out on.
+     * @param disturber whatever pushed through the plant; only used for the advancement.
+     * @return whether orbs were actually shed, which is what the caller swaps the chime out on.
      */
     private boolean shedExperience(
             ServerLevel level,
             BlockState state,
             BlockPos pos,
-            ServerPlayer player,
+            LivingEntity disturber,
             RandomSource random
     ) {
+        // No SPENT check here: entityInside has already returned for a drained plant, and one guard for
+        // the whole dormant state is what keeps the orbs from ever diverging from the souls and the chime.
         if (!level.getGameRules().get(NetherGameRules.GLOOMWISP_DROPS_EXPERIENCE)
                 || random.nextFloat() >= EXPERIENCE_CHANCE) {
             return false;
         }
 
+        // Off the head, whichever segment was actually brushed - the orbs are meant to be seen falling
+        // out of the light. Every segment of a plant shares one XZ offset (vanilla's XZ offset function
+        // hashes x and z only), so the disturbed segment's is the head's too.
         final Vec3 offset = state.getOffset(pos);
-        ExperienceOrb.award(
-                level,
-                new Vec3(
-                        pos.getX() + offset.x + 0.5,
-                        pos.getY() + offset.y + 0.5,
-                        pos.getZ() + offset.z + 0.5
-                ),
-                EXPERIENCE_MIN + random.nextInt(EXPERIENCE_SPREAD)
-        );
-        BNCriterion.WISP_SHED_EXPERIENCE.trigger(player);
+        final BlockPos head = head(level, pos);
+        final double x = head.getX() + offset.x + 0.5;
+        final double y = head.getY() + offset.y + SHED_HEIGHT;
+        final double z = head.getZ() + offset.z + 0.5;
+
+        final int amount = EXPERIENCE_MIN + random.nextInt(EXPERIENCE_SPREAD);
+        for (int i = 0; i < amount; i++) {
+            // Uniform over the disc rather than over the radius, so the orbs do not bunch up on the stalk.
+            final double angle = random.nextDouble() * Math.PI * 2;
+            final double distance = SCATTER_RADIUS * Math.sqrt(random.nextDouble());
+            final Vec3 outward = new Vec3(Math.cos(angle), 0.0, Math.sin(angle));
+
+            // Built directly instead of through ExperienceOrb.award, which is what ore blocks use: award
+            // packs the amount into as few orbs as vanilla's value tiers allow, so a three-point payout
+            // through it is one orb worth three at one spot - the opposite of the handful this wants. It
+            // would also roll to merge the result into any orb already lying within a block, which for a
+            // scatter this tight is the same collapse a second time. The direction gives each orb a pop
+            // away from the stalk before gravity takes it down; they do not re-merge on the ground,
+            // because vanilla only merges orbs whose entity ids happen to be 40 apart.
+            level.addFreshEntity(new ExperienceOrb(
+                    level,
+                    new Vec3(x + outward.x * distance, y, z + outward.z * distance),
+                    outward,
+                    1
+            ));
+        }
+
+        drain(level, pos, random);
+        if (disturber instanceof ServerPlayer player) {
+            BNCriterion.WISP_SHED_EXPERIENCE.trigger(player);
+        }
         return true;
+    }
+
+    /**
+     * Marks the whole plant spent and books the tick that brings it back.
+     * <p>
+     * Every segment gets the flag and its own scheduled tick, on the same deadline: the flag has to be
+     * on each of them because {@code entityInside} reads it off whichever segment was brushed, and the
+     * tick has to be on each of them because a segment broken off in the meantime should not take the
+     * rest of the plant's recharge with it.
+     */
+    private void drain(ServerLevel level, BlockPos pos, RandomSource random) {
+        final int recharge = RECHARGE_TICKS + random.nextInt(RECHARGE_SPREAD_TICKS);
+        for (BlockPos p = base(level, pos); level.getBlockState(p).getBlock() == this; p = p.above()) {
+            level.setBlock(p, level.getBlockState(p).setValue(SPENT, true), BlocksHelper.SET_SILENT);
+            level.scheduleTick(p, this, recharge);
+        }
+    }
+
+    /**
+     * The end of a recharge: the wisp lights back up and can pay out again.
+     * <p>
+     * The only scheduled tick this block books, so it needs no further guard - and if one arrives at a
+     * wisp that is not spent (a segment broken and replaced inside the cooldown, say) clearing a flag
+     * that is already clear is exactly the right thing to do.
+     */
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (state.getValue(SPENT)) {
+            level.setBlock(pos, state.setValue(SPENT, false), BlocksHelper.SET_SILENT);
+        }
     }
 
     /**
@@ -466,6 +646,17 @@ public class BlockGloomwispVine extends Block {
     private BlockPos base(Level level, BlockPos pos) {
         BlockPos p = pos;
         while (level.getBlockState(p.below()).getBlock() == this) p = p.below();
+        return p;
+    }
+
+    /**
+     * The head of the wisp {@code pos} belongs to - the topmost segment, which is where the light and
+     * the smoke are. Walked rather than read off {@link #SHAPE}, so it is right even for a stalk whose
+     * shapes have not caught up with an update yet.
+     */
+    private BlockPos head(Level level, BlockPos pos) {
+        BlockPos p = pos;
+        while (level.getBlockState(p.above()).getBlock() == this) p = p.above();
         return p;
     }
 
@@ -490,11 +681,17 @@ public class BlockGloomwispVine extends Block {
      * gravity {@code +0.1}, a 20-tick life and no collision, which is what lets it sink past the stalk
      * and drift to the floor. Its provider also negates the y velocity it is given, hence the positive
      * value below for downward motion.
+     * <p>
+     * A wisp that has just paid out stops smoking until it recharges - one half of the visible dormancy,
+     * the other being the closed eyes the model dispatch gives it (see {@link #SPENT}). Withholding the
+     * ash costs nothing, since the flag is already on the state the client has; dimming the head instead
+     * would mean a block light update on every payout, which on a field of wisps built to be farmed is a
+     * steady drip of relighting for a cosmetic.
      */
     @Environment(EnvType.CLIENT)
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        if (state.getValue(SHAPE) != BlockProperties.TripleShape.TOP) return;
+        if (state.getValue(SHAPE) != BlockProperties.TripleShape.TOP || state.getValue(SPENT)) return;
 
         // the head is drawn offset with the rest of the block, so the smoke has to be too
         final Vec3 offset = state.getOffset(pos);

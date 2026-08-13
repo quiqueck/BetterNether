@@ -5,6 +5,7 @@ import org.betterx.bclib.api.v2.datafixer.DataFixerAPI;
 import org.betterx.bclib.api.v2.datafixer.MigrationProfile;
 import org.betterx.bclib.api.v2.datafixer.Patch;
 import org.betterx.bclib.interfaces.PatchBiFunction;
+import org.betterx.bclib.interfaces.PatchFunction;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -18,6 +19,26 @@ public class Patcher {
         DataFixerAPI.registerPatch(Patcher_002::new);
         DataFixerAPI.registerPatch(Patcher_003::new);
         DataFixerAPI.registerPatch(Patcher_004::new);
+        DataFixerAPI.registerPatch(Patcher_005::new);
+    }
+}
+
+/**
+ * Brings already-generated mob spawners up to the current NBT layout.
+ * <p>
+ * The templates themselves are fixed in the resources, but that only affects cities generated from
+ * now on - the block entities already written into a world have to be rewritten in place. See
+ * {@link LegacySpawnerFix} for what changed and why the vanilla structure datafixer cannot be
+ * retrofitted onto BetterNether's template loader instead.
+ */
+class Patcher_005 extends Patch {
+    Patcher_005() {
+        super(BetterNether.C, new Version(26, 201, 2));
+    }
+
+    @Override
+    public PatchFunction<CompoundTag, Boolean> getChunkPatcher() {
+        return (root, profile) -> LegacySpawnerFix.patchChunk(root);
     }
 }
 

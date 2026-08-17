@@ -10,6 +10,7 @@
     "BlockBehaviourPropertiesAccessor",
     "BrewingRecipeRegistryMixin",
     "CraftingScreenHandlerMixin",
+    "CustomSpawnRulesMixin",
     "DefaultAttributeRegistryMixin",
     "DeltaFeatureMixin",
     "FlatLevelGeneratorPresetsMixin",

@@ -61,7 +61,9 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                             BlockStalagnate::new,
                             TraitLists.and(NetherRender.cutout(), NetherLoot.stalagnateTrunk())
                     ))
-                    .add(AbstractSeed.create(
+                    // createGrowing: BlockStalagnateSeed is a FeatureSaplingBlock, so it grows on its own
+                    // random ticks - unlike the wart seed, the other block in this slot.
+                    .add(AbstractSeed.createGrowing(
                             BlockStalagnateSeed::new,
                             NetherSurvival.netherrack(),
                             () -> WeightedCrossModelTrait.booleanDispatch(

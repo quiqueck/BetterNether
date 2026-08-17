@@ -98,20 +98,26 @@ public class StructureCityBuilding extends NetherStructureNBT {
         }
     }
 
+    /**
+     * Processors run in the order given. The palette processor must come first: it reads the original
+     * block state out of the info it is handed, which only holds true while nothing has rewritten it
+     * (see {@link BuildingStructureProcessor#processBlock}).
+     */
     public void placeInChunk(
             ServerLevelAccessor world,
             BlockPos pos,
             BoundingBox boundingBox,
-            StructureProcessor paletteProcessor
+            StructureProcessor... processors
     ) {
         BlockPos p = pos.offset(rotationOffset);
-        structure.placeInWorld(world, p, p, new StructurePlaceSettings()
-                        .setRotation(rotation)
-                        .setMirror(mirror)
-                        .setBoundingBox(boundingBox)
-                        .addProcessor(paletteProcessor),
-                world.getRandom(), Block.UPDATE_CLIENTS
-        );
+        final StructurePlaceSettings settings = new StructurePlaceSettings()
+                .setRotation(rotation)
+                .setMirror(mirror)
+                .setBoundingBox(boundingBox);
+        for (StructureProcessor processor : processors) {
+            settings.addProcessor(processor);
+        }
+        structure.placeInWorld(world, p, p, settings, world.getRandom(), Block.UPDATE_CLIENTS);
     }
 
     public BlockPos[] getEnds() {

@@ -129,9 +129,9 @@ public class NetherPlantBlocks {
     // Pale gloomgrass: the bone-grass silhouette in the gloomwood's dark-to-bright transition palette.
     // Same block shape and traits as the bone grasses either side of it, so it reuses BoneGrass rather
     // than adding a class that would only differ by its textures.
-    // Survives on anything solid rather than on a ground list: worldgen only ever puts it on the sculk
-    // floor (its placed feature filters on SCULK_LIKE), so the rule here is purely about where a player
-    // may replant one, and a decorative tuft is not worth a lookup table for that.
+    // Survives on anything solid rather than on a ground list: worldgen only ever puts it on the
+    // bleached gloomsculk (its placed feature filters on that block), so the rule here is purely about
+    // where a player may replant one, and a decorative tuft is not worth a lookup table for that.
     public static final Block PALE_GLOOMGRASS = NetherBlocks.defineBlock("pale_gloomgrass", BlockNetherGrass.BoneGrass::new)
             .addTrait(NetherRender.cutout())
             .addTrait(SurvivesOnSolidTrait.DEFAULT)
@@ -140,8 +140,9 @@ public class NetherPlantBlocks {
             .addTrait(NetherMaterial.grass(MapColor.TERRACOTTA_WHITE))
             .addTrait(NetherTraits.plant())
             .buildAndRegister();
-    // Gloomgrass: the same tuft on sculk's own palette, growing mixed in with the pale one rather
-    // than anywhere of its own - see VEGETATION_GLOOMWOOD, where it takes the larger share.
+    // Gloomgrass: the same tuft on sculk's own palette, and it grows on sculk - the vanilla sculk
+    // patches in the gloomwood floor, which is where VEGETATION_GLOOMWOOD_SCULK puts it. The pale
+    // variant above covers the bleached gloomsculk around those patches.
     public static final Block GLOOMGRASS = NetherBlocks.defineBlock("gloomgrass", BlockNetherGrass.BoneGrass::new)
             .addTrait(NetherRender.cutout())
             .addTrait(SurvivesOnSolidTrait.DEFAULT)

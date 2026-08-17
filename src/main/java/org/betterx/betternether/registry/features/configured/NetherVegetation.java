@@ -47,13 +47,23 @@ public class NetherVegetation {
     public static final ConfiguredFeatureKey<WeightedBlockPatch> BONEMEAL_SOUL_SOIL =
             ConfiguredFeatureManager.bonemeal(C.id("bonemeal_soul_soil"));
     /**
-     * Gloomwood ground cover. A random block patch rather than
-     * {@code netherForrestVegetation()}: that wraps vanilla's nether-forest-vegetation feature, which
-     * refuses to place unless the block below is {@code #minecraft:nylium}, and the gloomwood floor is
-     * sculk. Same reason {@code VEGETATION_MAGMA_LAND} below is built this way.
+     * Gloomwood ground cover, one feature per floor material: the pale gloomgrass grows on the bleached
+     * gloomsculk, the dark one on the vanilla sculk patches in it. Two features rather than one weighted
+     * pick because the choice is made by the ground, and a block provider cannot see the ground - only a
+     * placement filter can, and there is one filter per feature.
+     * <p>
+     * A random block patch rather than {@code netherForrestVegetation()}: that wraps vanilla's
+     * nether-forest-vegetation feature, which refuses to place unless the block below is
+     * {@code #minecraft:nylium}, and the gloomwood floor is sculk. Same reason
+     * {@code VEGETATION_MAGMA_LAND} below is built this way.
      */
-    public static final ConfiguredFeatureKey<WeightedBlock> VEGETATION_GLOOMWOOD =
-            ConfiguredFeatureManager.randomBlock(C.id("vegetation_gloomwood"));
+    public static final ConfiguredFeatureKey<ForSimpleBlock> VEGETATION_GLOOMWOOD_BLEACHED =
+            ConfiguredFeatureManager.simple(C.id("vegetation_gloomwood_bleached"));
+    /**
+     * @see #VEGETATION_GLOOMWOOD_BLEACHED
+     */
+    public static final ConfiguredFeatureKey<ForSimpleBlock> VEGETATION_GLOOMWOOD_SCULK =
+            ConfiguredFeatureManager.simple(C.id("vegetation_gloomwood_sculk"));
     public static final ConfiguredFeatureKey<WeightedBlock> VEGETATION_MAGMA_LAND =
             ConfiguredFeatureManager.randomBlock(C.id("vegetation_magma_land"));
     public static final ConfiguredFeatureKey<WeightedBlock> VEGETATION_GRASSLANDS =

@@ -1,12 +1,18 @@
 {
   "variants": {
-    "rotation=east,shape=bottom": {
+    "rotation=east,shape=bottom,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t4"
     },
-    "rotation=east,shape=middle": {
+    "rotation=east,shape=bottom,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=east,shape=middle,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t3"
     },
-    "rotation=east,shape=top": [
+    "rotation=east,shape=middle,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=east,shape=top,spent=false": [
       {
         "model": "betternether:block/gloomwisp_vine_head",
         "y": 90
@@ -24,13 +30,23 @@
         "y": 90
       }
     ],
-    "rotation=north,shape=bottom": {
+    "rotation=east,shape=top,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t5",
+      "y": 90
+    },
+    "rotation=north,shape=bottom,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t4"
     },
-    "rotation=north,shape=middle": {
+    "rotation=north,shape=bottom,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=north,shape=middle,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t3"
     },
-    "rotation=north,shape=top": [
+    "rotation=north,shape=middle,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=north,shape=top,spent=false": [
       {
         "model": "betternether:block/gloomwisp_vine_head"
       },
@@ -44,13 +60,22 @@
         "model": "betternether:block/gloomwisp_vine_t2"
       }
     ],
-    "rotation=random,shape=bottom": {
+    "rotation=north,shape=top,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t5"
+    },
+    "rotation=random,shape=bottom,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t4"
     },
-    "rotation=random,shape=middle": {
+    "rotation=random,shape=bottom,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=random,shape=middle,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t3"
     },
-    "rotation=random,shape=top": [
+    "rotation=random,shape=middle,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=random,shape=top,spent=false": [
       {
         "model": "betternether:block/gloomwisp_vine_head"
       },
@@ -112,13 +137,36 @@
         "y": 270
       }
     ],
-    "rotation=south,shape=bottom": {
+    "rotation=random,shape=top,spent=true": [
+      {
+        "model": "betternether:block/gloomwisp_vine_t5"
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t5",
+        "y": 90
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t5",
+        "y": 180
+      },
+      {
+        "model": "betternether:block/gloomwisp_vine_t5",
+        "y": 270
+      }
+    ],
+    "rotation=south,shape=bottom,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t4"
     },
-    "rotation=south,shape=middle": {
+    "rotation=south,shape=bottom,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=south,shape=middle,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t3"
     },
-    "rotation=south,shape=top": [
+    "rotation=south,shape=middle,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=south,shape=top,spent=false": [
       {
         "model": "betternether:block/gloomwisp_vine_head",
         "y": 180
@@ -136,13 +184,23 @@
         "y": 180
       }
     ],
-    "rotation=west,shape=bottom": {
+    "rotation=south,shape=top,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t5",
+      "y": 180
+    },
+    "rotation=west,shape=bottom,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t4"
     },
-    "rotation=west,shape=middle": {
+    "rotation=west,shape=bottom,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t4"
+    },
+    "rotation=west,shape=middle,spent=false": {
       "model": "betternether:block/gloomwisp_vine_t3"
     },
-    "rotation=west,shape=top": [
+    "rotation=west,shape=middle,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t3"
+    },
+    "rotation=west,shape=top,spent=false": [
       {
         "model": "betternether:block/gloomwisp_vine_head",
         "y": 270
@@ -159,6 +217,10 @@
         "model": "betternether:block/gloomwisp_vine_t2",
         "y": 270
       }
-    ]
+    ],
+    "rotation=west,shape=top,spent=true": {
+      "model": "betternether:block/gloomwisp_vine_t5",
+      "y": 270
+    }
   }
 }

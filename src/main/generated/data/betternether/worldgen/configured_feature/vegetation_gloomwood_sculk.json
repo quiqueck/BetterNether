@@ -6,21 +6,10 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:weighted_state_provider",
-            "entries": [
-              {
-                "data": {
-                  "Name": "betternether:gloomgrass"
-                },
-                "weight": 140
-              },
-              {
-                "data": {
-                  "Name": "betternether:pale_gloomgrass"
-                },
-                "weight": 60
-              }
-            ]
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "betternether:gloomgrass"
+            }
           }
         }
       },
@@ -40,8 +29,8 @@
             0
           ],
           "predicate": {
-            "type": "minecraft:matching_block_tag",
-            "tag": "wover:surfaces/sculk_like"
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:sculk"
           }
         }
       ]

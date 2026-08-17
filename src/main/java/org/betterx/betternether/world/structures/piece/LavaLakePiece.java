@@ -128,11 +128,14 @@ public class LavaLakePiece extends CustomPiece {
     private static final double MOLTEN_FADE = 0.40;
 
     /**
-     * How much of the ground cover is the dark gloomgrass rather than the pale one, out of ten. The same
-     * 70/30 split {@code VEGETATION_GLOOMWOOD} uses, so the shore's cover and the floor's are the same
-     * mix and the join does not show.
+     * Where the non-molten part of the shore turns from bleached gloomsculk to vanilla sculk.
+     * <p>
+     * Not a 50/50 split: the biome floor this shore has to run into is 19% sculk, and measured over the
+     * noise below this threshold leaves the same 19% here. See
+     * {@link org.betterx.betternether.world.biomes.Gloomwood} for the floor it is matched to - if that
+     * mix is retuned, this has to be re-measured with it or the shore stops matching the floor.
      */
-    private static final int DARK_GRASS_IN_TEN = 7;
+    private static final double SCULK_PATCH_THRESHOLD = 0.305;
 
     /**
      * The magma flower's share of the cover at the waterline; it falls to nothing at the outer edge of
@@ -404,11 +407,12 @@ public class LavaLakePiece extends CustomPiece {
         }
 
         cursor.set(x, groundY, z);
-        BlocksHelper.setWithoutUpdate(world, cursor, shoreGround(x, z, s));
+        final BlockState ground = shoreGround(x, z, s);
+        BlocksHelper.setWithoutUpdate(world, cursor, ground);
 
         // Lush at the waterline, thinning to about a quarter at the outer edge of the band.
         if (random.nextDouble() < 1.0 - 0.75 * s) {
-            vegetate(world, cursor.immutable(), random, s);
+            vegetate(world, cursor.immutable(), ground, random, s);
         }
     }
 
@@ -471,10 +475,12 @@ public class LavaLakePiece extends CustomPiece {
         }
 
         // The same two-block mix, on the same kind of noise, that the biome's surface rule lays over the
-        // rest of its floor - so the outer shore is already the biome floor by the time it stops.
-        return noise.eval(x * 0.12, z * 0.12, -60) > 0
-                ? NetherTerrainBlocks.BLEACHED_GLOOMSCULK.defaultBlockState()
-                : Blocks.SCULK.defaultBlockState();
+        // rest of its floor - so the outer shore is already the biome floor by the time it stops. The
+        // threshold is what makes the shares match: measured over this noise it leaves sculk on 10% of
+        // the skin, which is the share the biome's FLOOR_SCULK condition was tuned to.
+        return noise.eval(x * 0.12, z * 0.12, -60) > SCULK_PATCH_THRESHOLD
+                ? Blocks.SCULK.defaultBlockState()
+                : NetherTerrainBlocks.BLEACHED_GLOOMSCULK.defaultBlockState();
     }
 
     /**
@@ -486,11 +492,20 @@ public class LavaLakePiece extends CustomPiece {
      * than being scattered over the whole band and happening to land on it. It never takes more than
      * {@link #MAX_FLOWER_SHARE} of the cover, and that only at the waterline.
      * <p>
+     * Which gloomgrass grows is decided by the block under it rather than by a roll, the same way the
+     * biome's two grass features are split by their ground filters: pale on the bleached gloomsculk,
+     * dark on the sculk and on the molten patches, whose skin is sculk with fissures in it.
+     * <p>
      * {@code canSurvive} is still asked before anything is written. All three of these accept the shore's
      * materials by their registered traits, so it should never refuse; asking anyway is what keeps this
      * honest if one of those traits is narrowed later.
+     *
+     * @param groundState the block just written at {@code ground} - read from the argument rather than
+     *                    from the world, which has not been told about it (it was set without updates).
      */
-    private void vegetate(WorldGenLevel world, BlockPos ground, RandomSource random, double s) {
+    private void vegetate(
+            WorldGenLevel world, BlockPos ground, BlockState groundState, RandomSource random, double s
+    ) {
         final BlockPos above = ground.above();
         if (!world.getBlockState(above).isAir()) return;
 
@@ -501,9 +516,9 @@ public class LavaLakePiece extends CustomPiece {
             plant = NetherPlantBlocks.MAGMA_FLOWER.defaultBlockState()
                                                   .setValue(BlockMagmaFlower.AGE, 1 + random.nextInt(3));
         } else {
-            plant = (random.nextInt(10) < DARK_GRASS_IN_TEN
-                    ? NetherPlantBlocks.GLOOMGRASS
-                    : NetherPlantBlocks.PALE_GLOOMGRASS).defaultBlockState();
+            plant = (groundState.is(NetherTerrainBlocks.BLEACHED_GLOOMSCULK)
+                    ? NetherPlantBlocks.PALE_GLOOMGRASS
+                    : NetherPlantBlocks.GLOOMGRASS).defaultBlockState();
         }
 
         if (plant.canSurvive(world, above)) {

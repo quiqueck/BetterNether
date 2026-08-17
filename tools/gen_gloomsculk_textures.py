@@ -55,6 +55,16 @@ SEED = 0x5C17
 # How many distinct pale tones the bleached crust may use (see bleached_top).
 PALE_STEPS = 8
 
+# Frames in the shipped bleached_gloomsculk sprites - the base the molten variant is cut out of.
+BLEACHED_FRAMES = 4
+
+# The pale gloomgrass shadow lift (see `lift_colour`). LIFT_BLACK is the darkest tone the
+# transition-log gradient puts in the tuft today; it lands on LIFT_FLOOR instead, everything at or
+# above LIFT_PIVOT is untouched, and the range between is a straight ramp.
+LIFT_BLACK = 44.0
+LIFT_FLOOR = 78.0
+LIFT_PIVOT = 140.0
+
 # Repo layout: <root>/BetterNether/tools/<this file>, <root>/minecraft/...
 _TOOLS = os.path.dirname(os.path.abspath(__file__))
 _MOD = os.path.dirname(_TOOLS)
@@ -115,6 +125,27 @@ def pick(ramp: Sequence[RGBA], t: float) -> RGBA:
 def mix(a: Sequence[int], b: Sequence[int], t: float) -> RGBA:
     t = max(0.0, min(1.0, t))
     return tuple(int(round(a[i] + (b[i] - a[i]) * t)) for i in range(4))  # type: ignore
+
+
+def lift_colour(c: Sequence[int]) -> RGBA:
+    """Raise a dark colour towards LIFT_FLOOR, leaving anything at or above LIFT_PIVOT alone.
+
+    A black-point lift rather than a brightness or gamma change: only the bottom of the range moves,
+    so the highlights and the white tips stay exactly as authored. The new luminance is applied as a
+    scale factor on RGB, which keeps the hue - adding a constant would wash the colour towards grey.
+    """
+    old = 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]   # Rec.601, as perceived brightness
+    if c[3] == 0 or old >= LIFT_PIVOT or old <= 0:
+        return tuple(c)  # type: ignore
+    new = LIFT_FLOOR + (old - LIFT_BLACK) * (LIFT_PIVOT - LIFT_FLOOR) / (LIFT_PIVOT - LIFT_BLACK)
+    f = new / old
+    return (min(255, round(c[0] * f)), min(255, round(c[1] * f)), min(255, round(c[2] * f)), c[3])
+
+
+def lift_shadows(img: Image.Image) -> Image.Image:
+    out = blank(img.width, img.height)
+    out.putdata([lift_colour(c) for c in img.getdata()])
+    return out
 
 
 def blank(w: int = SIZE, h: int = SIZE) -> Image.Image:
@@ -187,6 +218,22 @@ class Sources:
 
         leaves_alt = load(assets, "gloomwood_leaves_alt.png")
         self.leaves_alt = leaves_alt
+
+        # The bleached crust as it actually ships, read back out of the assets.
+        #
+        # `bleached_top`/`bleached_side` below still build the first version of that block - one static
+        # tile - but the shipped art has since been reworked into four animated frames with three
+        # variants, and those are what a player sees on the floor. The molten variant is cut out of
+        # this rather than out of `bleached_top(src)` for exactly that reason: the two blocks lie next
+        # to each other in the same biome, and a molten tile built from the older crust would read as a
+        # third kind of rock rather than as the same crust with lava in it.
+        self.bleached = {
+            face: (
+                frames(load(assets, "bleached_gloomsculk_%s.png" % face), BLEACHED_FRAMES),
+                frames(load(assets, "bleached_gloomsculk_%s_e.png" % face), BLEACHED_FRAMES),
+            )
+            for face in ("top", "side")
+        }
 
         # The pale ramp comes from the gloomwood log, not from the bleached
         # leaves, even though the leaves are what the crust is shaped like.
@@ -536,20 +583,89 @@ def assert_crossings(width: Dict[Tuple[int, int], float], edges: Sequence[str]) 
             )
 
 
-def molten_face(src: Sources, rng: random.Random, vertical_only: bool
+# How far the crust hangs on over a fissure that crosses its lower edge, in pixels. The crust is
+# the last thing off the block, so where a vein runs under it the pale keeps going for this many
+# rows on top of the lava instead of being cut by it.
+CRUST_DRAPE = 1
+
+
+def is_crust(c: Sequence[int]) -> bool:
+    """Pale crust rather than the sculk under it. Sculk's cyan specks are bright but saturated."""
+    return c[3] != 0 and luma(c) > 70 and saturation(c) < 60
+
+
+def crust_line(base: Image.Image) -> List[int]:
+    """How many rows of pale crust hang in each column of the bleached side."""
+    depths = []
+    for x in range(SIZE):
+        d = 0
+        while d < SIZE and is_crust(base.getpixel((x, d))):
+            d += 1
+        depths.append(d)
+    return depths
+
+
+def drape_crust(img: Image.Image, emit: Image.Image, base: Image.Image, base_emit: Image.Image,
+                width: Dict[Tuple[int, int], float]) -> None:
+    """Put the crust back on top of the fissures, in place, on the two edges and over the veins.
+
+    The fissures are drawn into the crust band, and a vein crossing the band's lower edge takes the
+    drip with it - which is what flattened the band into a plain stripe. Draping the crust back over
+    those crossings is the cheaper half of the fix and the truer one: the crust is a skin over the
+    rock, so where it meets a crack it hangs over the glow rather than stopping at it.
+
+    The two edge columns get the whole band back, not just the drip. A fissure crosses the tile edge
+    at a fixed offset, and where that offset lands inside the crust the pale line ended one pixel
+    higher than on the bleached block next door - the join read as a step. Their cracks still meet
+    below the crust, at the other crossing.
+    """
+    for x, depth in enumerate(crust_line(base)):
+        if not depth:
+            continue
+        if x in (0, SIZE - 1):
+            rows = range(depth)              # the seam: the crust line has to match the neighbour
+        elif width.get((x, depth), 0) > W_HALO:
+            rows = range(depth, depth + CRUST_DRAPE)   # a vein under the drip: hang on over it
+        else:
+            continue
+        for y in rows:
+            if y >= SIZE:
+                break
+            # a draped pixel takes the colour of the crust directly above it
+            img.putpixel((x, y), base.getpixel((x, min(y, depth - 1))))
+            emit.putpixel((x, y), base_emit.getpixel((x, min(y, depth - 1))))
+
+
+def molten_face(src: Sources, rng: random.Random, vertical_only: bool, face: str
                 ) -> Tuple[Image.Image, Image.Image]:
+    """Crack the bleached crust open with lava fissures. `face` is "top" or "side".
+
+    The rock here is the bleached crust rather than vanilla sculk, which is what it used to be: the
+    molten block is the biome's own floor with the rock pulled open, not a separate dark stone that
+    happens to be hot, and against a floor that is now four fifths bleached the sculk-based version
+    read as a third material.
+
+    The crust has fewer frames than the fissures do, so each crust frame is held across two molten
+    frames - the same stretch the sculk base was already getting, so its glimmers run at the pace
+    sculk's specks used to.
+    """
     width, phase = lattice(rng, vertical_only)
     assert_crossings(
         width,
         ("north", "south") if vertical_only else ("north", "south", "east", "west"),
     )
 
+    bases, base_emits = src.bleached[face]
+
     out, emits = [], []
     for f in range(MOLTEN_FRAMES):
         t = f / MOLTEN_FRAMES
-        base = src.sculk[(f * len(src.sculk)) // MOLTEN_FRAMES]
+        i = (f * len(bases)) // MOLTEN_FRAMES
+        base = bases[i]
         img = base.copy()
-        emit = blank()
+        # The crust's own glimmers keep glowing through - they are the block's, not the fissures'.
+        # Any of them a fissure runs over is overwritten below, in both the colour and the glow.
+        emit = base_emits[i].copy()
         for (x, y), w in width.items():
             # A wave of heat travels along each crack. Width sets how hot a
             # pixel can get, the pulse sets how much of that it is showing, so
@@ -565,13 +681,21 @@ def molten_face(src: Sources, rng: random.Random, vertical_only: bool
                 temp = max(temp, 0.92)
             c = pick(src.heat, temp)
             if w <= W_HALO:
-                # halo: scorched sculk rather than open lava
-                img.putpixel((x, y), mix(base.getpixel((x, y)), c, 0.35 + 0.35 * pulse))
+                # halo: scorched rock rather than open lava
+                scorched = mix(base.getpixel((x, y)), c, 0.35 + 0.35 * pulse)
+                img.putpixel((x, y), scorched)
+                # a glimmer inside the scorch reads as the scorch, not as a cold speck over it
+                if emit.getpixel((x, y))[3]:
+                    emit.putpixel((x, y), scorched)
             else:
                 img.putpixel((x, y), c)
                 # only what is genuinely glowing lights up
                 if temp >= W_THIN * 0.6:
                     emit.putpixel((x, y), c)
+                else:
+                    emit.putpixel((x, y), (0, 0, 0, 0))
+        if face == "side":
+            drape_crust(img, emit, base, base_emits[i], width)
         out.append(img)
         emits.append(emit)
     return stack(out), stack(emits)
@@ -1222,6 +1346,10 @@ def pale_grass(src: Sources, bone: Image.Image, index: int) -> Tuple[Image.Image
 
     The gradient is normalised over each variant's own bounding box, so a short
     tuft spans the same dark-base-to-bright-tip range as a tall stalk.
+
+    The shadows are then lifted (see `lift_shadows`). The transition log runs from near-black to
+    bone, which is right for a metre of trunk read at arm's length and wrong for a tuft: on the pale
+    floor the dark half of the gradient turned a field of these into static.
     """
     rng = random.Random(SEED + 10 + index)
     solid = [(x, y) for y in range(SIZE) for x in range(SIZE) if bone.getpixel((x, y))[3] > 0]
@@ -1241,10 +1369,14 @@ def pale_grass(src: Sources, bone: Image.Image, index: int) -> Tuple[Image.Image
             c = mix(c, pick(src.pale, 1.0), 0.35 * (1 - t / 0.25))
         out.putpixel((x, y), (c[0], c[1], c[2], alpha))
 
+    out = lift_shadows(out)
+
     # a spark on one of the topmost pixels, echoing the bleached leaves
     tips = [(x, y) for x, y in solid if y <= y0 + 1]
     for x, y in rng.sample(tips, min(2, len(tips))):
-        c = pick(src.spark, rng.random())
+        # lifted like the body it sits in, and written into both maps, so the emissive overlay and
+        # the albedo under it are the same colour
+        c = lift_colour(pick(src.spark, rng.random()))
         out.putpixel((x, y), c)
         emit.putpixel((x, y), c)
     return out, emit
@@ -1430,8 +1562,8 @@ def build(vanilla: str, assets: str) -> Dict[str, object]:
     for n in ("top", "top_e", "side", "side_e"):
         files["veined_gloomsculk_%s.png.mcmeta" % n] = mcmeta(20)
 
-    mol_top, mol_top_e = molten_face(src, random.Random(SEED + 3), False)
-    mol_side, mol_side_e = molten_face(src, random.Random(SEED + 4), False)
+    mol_top, mol_top_e = molten_face(src, random.Random(SEED + 3), False, face="top")
+    mol_side, mol_side_e = molten_face(src, random.Random(SEED + 4), False, face="side")
     files["molten_gloomsculk_top.png"] = mol_top
     files["molten_gloomsculk_top_e.png"] = mol_top_e
     files["molten_gloomsculk_side.png"] = mol_side

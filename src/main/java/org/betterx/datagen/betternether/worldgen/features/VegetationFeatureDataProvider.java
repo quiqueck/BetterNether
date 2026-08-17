@@ -87,15 +87,23 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
                 .register();
 
-        // The two gloomgrasses share one patch feature, so a tuft comes out mixed rather than in
-        // single-colour clumps. Weights inside a weighted_state_provider are relative, so the pair is
-        // written out of 200 - the total the pale grass had on its own - as 70% dark to 30% pale.
-        NetherVegetation.VEGETATION_GLOOMWOOD
+        // One gloomgrass per floor material rather than the two mixed through one patch: each tuft is
+        // the same colour as the block it stands on, which is what keeps the floor reading as ground
+        // with cover on it instead of as speckle. The ground predicates name the blocks instead of
+        // SCULK_LIKE - that tag holds both of them (and the molten variant), so it cannot tell them
+        // apart, which is the entire point here.
+        NetherVegetation.VEGETATION_GLOOMWOOD_BLEACHED
                 .bootstrap(ctx)
-                .add(NetherPlantBlocks.GLOOMGRASS, 140)
-                .add(NetherPlantBlocks.PALE_GLOOMGRASS, 60)
+                .block(NetherPlantBlocks.PALE_GLOOMGRASS)
                 .inlinePlace()
-                .isEmptyAndOn(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                .isEmptyAndOn(BlockPredicate.matchesBlocks(NetherTerrainBlocks.BLEACHED_GLOOMSCULK))
+                .inRandomPatch()
+                .register();
+        NetherVegetation.VEGETATION_GLOOMWOOD_SCULK
+                .bootstrap(ctx)
+                .block(NetherPlantBlocks.GLOOMGRASS)
+                .inlinePlace()
+                .isEmptyAndOn(BlockPredicate.matchesBlocks(Blocks.SCULK))
                 .inRandomPatch()
                 .register();
         NetherVegetation.VEGETATION_MAGMA_LAND
@@ -524,10 +532,19 @@ public class VegetationFeatureDataProvider extends WoverFeatureProvider {
                 .vanillaNetherGround(24)
                 .register();
 
-        NetherVegetationPlaced.VEGETATION_GLOOMWOOD
-                .place(ctx, NetherVegetation.VEGETATION_GLOOMWOOD)
+        // Both at the count the single mixed patch had: a patch that lands on the wrong material is
+        // dropped by its filter rather than moved, so the two together put about as much grass on the
+        // floor as the one did - each on its own share of it.
+        NetherVegetationPlaced.VEGETATION_GLOOMWOOD_BLEACHED
+                .place(ctx, NetherVegetation.VEGETATION_GLOOMWOOD_BLEACHED)
                 .betterNetherGround(10)
-                .isEmptyAndOn(BlockPredicate.matchesTag(CommonBlockTags.SCULK_LIKE))
+                .isEmptyAndOn(BlockPredicate.matchesBlocks(NetherTerrainBlocks.BLEACHED_GLOOMSCULK))
+                .register();
+
+        NetherVegetationPlaced.VEGETATION_GLOOMWOOD_SCULK
+                .place(ctx, NetherVegetation.VEGETATION_GLOOMWOOD_SCULK)
+                .betterNetherGround(10)
+                .isEmptyAndOn(BlockPredicate.matchesBlocks(Blocks.SCULK))
                 .register();
 
         // Heights one to four, as two columns behind a weighted pick: a lone head, or a head over one

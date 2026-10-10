@@ -20,8 +20,8 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
@@ -88,7 +88,7 @@ public class NetherEntityLootTableProvider extends WoverLootTableProvider {
     private LootPool.Builder nagaPlayerKill(HolderLookup.@NotNull Provider lookup) {
         return LootPool
                 .lootPool()
-                .setRolls(ConstantValue.exactly(1))
+                .setRolls(ContextIntProviders.exactly(1))
                 .add(LootItem
                         .lootTableItem(Blocks.WITHER_SKELETON_SKULL)
                         .when(LootItemKilledByPlayerCondition.killedByPlayer())
@@ -108,13 +108,13 @@ public class NetherEntityLootTableProvider extends WoverLootTableProvider {
     ) {
         return LootPool
                 .lootPool()
-                .setRolls(ConstantValue.exactly(1))
+                .setRolls(ContextIntProviders.exactly(1))
                 .add(LootItem
                         .lootTableItem(drop)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, maxDrop)))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, maxDrop)))
                         .apply(EnchantedCountIncreaseFunction.lootingMultiplier(
                                 enchantments(lookup),
-                                UniformGenerator.between(0, maxLootingDrop)
+                                ContextFloatProviders.between(0, maxLootingDrop)
                         ))
                 );
 

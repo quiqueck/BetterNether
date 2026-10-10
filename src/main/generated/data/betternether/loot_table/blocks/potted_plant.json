@@ -15,7 +15,7 @@
           "name": "betternether:agave"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -31,7 +31,7 @@
           "name": "betternether:barrel_cactus"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -47,7 +47,7 @@
           "name": "betternether:black_apple_seed"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -63,7 +63,7 @@
           "name": "betternether:black_bush"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -79,7 +79,7 @@
           "name": "betternether:egg_plant"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -95,7 +95,7 @@
           "name": "betternether:ink_bush_seed"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -111,7 +111,7 @@
           "name": "betternether:nether_reed_stem"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -127,7 +127,7 @@
           "name": "betternether:nether_cactus"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -143,7 +143,7 @@
           "name": "betternether:nether_grass"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -159,7 +159,7 @@
           "name": "betternether:orange_mushroom"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -175,7 +175,7 @@
           "name": "betternether:red_mold"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -191,7 +191,7 @@
           "name": "betternether:gray_mold"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -207,7 +207,7 @@
           "name": "betternether:magma_flower"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -223,7 +223,7 @@
           "name": "betternether:wart_seed"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -239,7 +239,7 @@
           "name": "betternether:willow_sapling"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -255,7 +255,7 @@
           "name": "betternether:smoker"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -271,7 +271,7 @@
           "name": "minecraft:nether_wart"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -287,7 +287,7 @@
           "name": "betternether:jungle_plant"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -303,7 +303,7 @@
           "name": "betternether:jellyfish_mushroom_sapling"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -319,7 +319,7 @@
           "name": "betternether:swamp_grass"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -335,7 +335,7 @@
           "name": "betternether:soul_grass"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -351,7 +351,7 @@
           "name": "betternether:bone_grass"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -367,7 +367,7 @@
           "name": "betternether:bone_mushroom"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -383,7 +383,7 @@
           "name": "betternether:gloomwood_sapling"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

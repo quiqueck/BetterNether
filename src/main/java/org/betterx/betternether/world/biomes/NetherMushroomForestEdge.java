@@ -15,7 +15,7 @@ import de.ambertation.wover.surface.impl.BaseSurfaceRuleBuilder;
 import de.ambertation.wover.surface.impl.rules.SwitchRuleSource;
 
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
 
 import java.util.List;
 
@@ -38,13 +38,13 @@ public class NetherMushroomForestEdge extends NetherBiomeConfig {
     public void surface(BiomeSurfaceRuleBuilder<NetherBiomeBuilder> builder) {
         super.surface(builder);
         builder.rule(
-                SurfaceRules.ifTrue(
+                MaterialRules.ifTrue(
                         NetherBiomeBuilder.ON_FLOOR,
                         new SwitchRuleSource(
                                 NetherMushroomForestEdgeNumericProvider.DEFAULT,
                                 List.of(
-                                        SurfaceRules.state(NetherTerrainBlocks.NETHER_MYCELIUM.defaultBlockState()),
-                                        SurfaceRules.state(NetherTerrainBlocks.NETHERRACK_MOSS.defaultBlockState()),
+                                        MaterialRules.state(NetherTerrainBlocks.NETHER_MYCELIUM.defaultBlockState()),
+                                        MaterialRules.state(NetherTerrainBlocks.NETHERRACK_MOSS.defaultBlockState()),
                                         NETHERRACK
                                 )
                         )

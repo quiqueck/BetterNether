@@ -1,5 +1,4 @@
 package org.betterx.betternether.integrations.jei;
-/*
 
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.block.NetherFunctionalBlocks;
@@ -25,4 +24,3 @@ public class JeiPlugin implements IModPlugin {
         registration.addCraftingStation(RecipeTypes.SMELTING, NetherFunctionalBlocks.CINCINNASITE_FORGE);
     }
 }
-*/

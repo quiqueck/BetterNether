@@ -3,7 +3,6 @@
 	"parent": "block/block",
 	"textures": {
 		"particle": "betternether:block/brown_head",
-		"skin": "betternether:block/brown_head",
 		"inside": "block/mushroom_block_inside",
 		"stem": "betternether:block/brown_stem"
 	},

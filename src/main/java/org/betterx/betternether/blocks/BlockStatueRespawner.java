@@ -114,8 +114,11 @@ public class BlockStatueRespawner extends Block {
                         pos.getY() + y + world.getRandom().nextFloat() * 0.2,
                         pos.getZ() + world.getRandom().nextFloat(), 0, 0, 0
                 );
-            player.sendOverlayMessage(Component.translatable("message.spawn_set", new Object[0]));
             if (!world.isClientSide()) {
+                // Server side only, like every vanilla overlay message: the client runs this method too,
+                // and a local sendOverlayMessage there showed the text a second time on top of the
+                // server's packet.
+                player.sendOverlayMessage(Component.translatable("message.spawn_set", new Object[0]));
                 ((ServerPlayer) player).setRespawnPosition(
                         new ServerPlayer.RespawnConfig(
                                 LevelData.RespawnData.of(world.dimension(), pos, player.getYHeadRot(), 0.0F),
@@ -126,13 +129,23 @@ public class BlockStatueRespawner extends Block {
             }
             player.playSound(SoundEvents.TOTEM_USE, 0.7F, 1.0F);
             return InteractionResult.SUCCESS;
-        } else {
-            player.sendOverlayMessage(Component.translatable(
-                    "message.spawn_help",
-                    new ItemStack(requiredItemType, requiredItemCount)
-            ));
+        } else if (!world.isClientSide()) {
+            player.sendOverlayMessage(getHelpMessage());
         }
         return InteractionResult.SUCCESS;
+    }
+
+    /**
+     * The message shown when the player does not hold enough of the required item. The item is passed as a
+     * text component (count + item name): an {@link ItemStack} is not a valid translation argument and can not
+     * be sent to a client.
+     */
+    public Component getHelpMessage() {
+        return Component.translatable(
+                "message.spawn_help",
+                Component.literal(requiredItemCount + " ")
+                         .append(new ItemStack(requiredItemType).getHoverName())
+        );
     }
 
     @Override

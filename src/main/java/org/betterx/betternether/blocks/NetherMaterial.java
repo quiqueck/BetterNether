@@ -234,11 +234,17 @@ public class NetherMaterial {
      * with the default {@link SoundType#GRASS} sound, the XZ ground-offset, and the preset's own forced
      * {@code isValidSpawn(-> true)} (every mob may spawn on nether grass, matching the preset's original
      * intent - not part of vanilla {@code PlantBlockTrait} before Batch 0's {@code validSpawnAlways} flag).
+     * <p>
+     * Plus {@link GrassTrait}: like vanilla {@code short_grass}, a grass tuft is {@code replaceable} (placing a
+     * block into it overwrites it) and sits in {@code #replaceable}, {@code #replaceable_by_trees} and
+     * {@code #replaceable_by_mushrooms} (quiqueck/BetterNether#166). {@code #washed_away_by_fluids} comes from
+     * {@link PlantBlockTrait}, like for every other non-colliding plant.
      */
     public static List<BlockTrait<?, ?>> grass(MapColor color) {
-        return TraitLists.of(PlantBlockTrait.withColor(
-                color, false, BlockBehaviour.OffsetType.XZ, SoundType.GRASS, true
-        ));
+        return TraitLists.of(
+                PlantBlockTrait.withColor(color, false, BlockBehaviour.OffsetType.XZ, SoundType.GRASS, true),
+                GrassTrait.INSTANCE
+        );
     }
 
     /**
@@ -253,7 +259,7 @@ public class NetherMaterial {
     /**
      * Former {@code Materials.staticVine(color)} preset (Shape B): {@code mapColor(color)},
      * {@code noOcclusion}, {@code noCollission}, {@code sound(VINE)}, {@code pushReaction(DESTROY)},
-     * {@code replaceable}. Deliberately carries <b>no</b> {@code instabreak} - unlike
+     * {@code replaceable}, plus {@code #washed_away_by_fluids} like vanilla vines. Deliberately carries <b>no</b> {@code instabreak} - unlike
      * {@link PlantBlockTrait}, which always forces one - because several vines chain their own
      * {@code instabreak()}/{@code strength(0.2f)} <em>after</em> this preset and must still win.
      */
@@ -279,6 +285,28 @@ public class NetherMaterial {
      */
     public static List<BlockTrait<?, ?>> mushroomStem(MapColor color) {
         return TraitLists.of(new MushroomStemTrait(color));
+    }
+
+    /** The vanilla {@code short_grass} replaceability: the {@code replaceable} property and the three replaceable tags. */
+    private static final class GrassTrait extends BlockTraitImpl.Generic {
+        private static final BlockTraitKey KEY = BlockTraitKey.ofUnique(BetterNether.C, "material_grass");
+        private static final GrassTrait INSTANCE = new GrassTrait();
+
+        @Override
+        public BlockTraitKey key() {
+            return KEY;
+        }
+
+        @Override
+        public void configure(BlockDefinition<Block, ? extends BlockDefinition<Block, ?>> definition) {
+            super.configure(definition);
+            definition.replaceable()
+                      .addTags(
+                              BlockTags.REPLACEABLE,
+                              BlockTags.REPLACEABLE_BY_TREES,
+                              BlockTags.REPLACEABLE_BY_MUSHROOMS
+                      );
+        }
     }
 
     /** Adds {@code randomTicks()} and nothing else - shared by {@link #sapling(MapColor)} and {@link #cactus(MapColor)}. */
@@ -320,7 +348,10 @@ public class NetherMaterial {
                       .noCollission()
                       .sound(SoundType.VINE)
                       .pushReaction(PushReaction.POPPED)
-                      .replaceable();
+                      .replaceable()
+                      // Like vanilla's vines, weeping and twisting vines: 26.3 lets fluids flow into (and wash
+                      // away) only blocks in this tag, where 26.2 took every block that did not blocksMotion().
+                      .addTags(BlockTags.WASHED_AWAY_BY_FLUIDS);
         }
     }
 

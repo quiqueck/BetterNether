@@ -8,6 +8,7 @@
     "BlockBehaviourAccessor",
     "BlockBehaviourMixin",
     "BlockBehaviourPropertiesAccessor",
+    "CopperGolemAiMixin",
     "CraftingScreenHandlerMixin",
     "DefaultAttributeRegistryMixin",
     "DeltaFeatureMixin",

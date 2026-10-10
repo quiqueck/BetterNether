@@ -76,13 +76,28 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
             BlockState state,
             BonemealSource bonemealSource
     ) {
-        if (super.isBonemealSuccess(world, random, pos, state, bonemealSource)) {
-            if (growsDownward(state))
-                return BlocksHelper.downRay(world, pos, MIN_LENGTH) > 0;
-            else
-                return BlocksHelper.upRay(world, pos, MIN_LENGTH) > 0;
-        }
-        return false;
+        return super.isBonemealSuccess(world, random, pos, state, bonemealSource) && hasRoomToGrow(world, pos, state);
+    }
+
+    @Override
+    protected boolean isRandomGrowthSuccess(
+            @NotNull Level world,
+            @NotNull RandomSource random,
+            @NotNull BlockPos pos,
+            @NotNull BlockState state
+    ) {
+        return super.isRandomGrowthSuccess(world, random, pos, state) && hasRoomToGrow(world, pos, state);
+    }
+
+    /**
+     * Whether there is any air on the side the stem grows towards. Checked by both growth paths: bone meal
+     * and random ticks roll different odds, but neither should advance a seed that is boxed in.
+     */
+    private static boolean hasRoomToGrow(Level world, BlockPos pos, BlockState state) {
+        if (growsDownward(state))
+            return BlocksHelper.downRay(world, pos, MIN_LENGTH) > 0;
+        else
+            return BlocksHelper.upRay(world, pos, MIN_LENGTH) > 0;
     }
 
     @Override

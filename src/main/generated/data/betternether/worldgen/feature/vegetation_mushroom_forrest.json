@@ -7,24 +7,18 @@
         "feature": {
           "type": "minecraft:simple_block",
           "to_place": {
-            "type": "minecraft:weighted_state_provider",
+            "type": "minecraft:weighted",
             "entries": [
               {
-                "data": {
-                  "Name": "betternether:sepia_bone_grass"
-                },
+                "data": "betternether:sepia_bone_grass",
                 "weight": 1
               },
               {
-                "data": {
-                  "Name": "betternether:bone_grass"
-                },
+                "data": "betternether:bone_grass",
                 "weight": 1
               },
               {
-                "data": {
-                  "Name": "betternether:jungle_plant"
-                },
+                "data": "betternether:jungle_plant",
                 "weight": 1
               }
             ]
@@ -68,10 +62,7 @@
             "feature": {
               "type": "minecraft:simple_block",
               "to_place": {
-                "type": "minecraft:simple_state_provider",
-                "state": {
-                  "Name": "betternether:gray_mold"
-                }
+                "id": "betternether:gray_mold"
               }
             },
             "placement": [
@@ -112,10 +103,7 @@
             "feature": {
               "type": "minecraft:simple_block",
               "to_place": {
-                "type": "minecraft:simple_state_provider",
-                "state": {
-                  "Name": "betternether:red_mold"
-                }
+                "id": "betternether:red_mold"
               }
             },
             "placement": [
@@ -156,21 +144,16 @@
             "feature": {
               "type": "minecraft:simple_block",
               "to_place": {
-                "type": "minecraft:weighted_state_provider",
+                "type": "minecraft:weighted",
                 "entries": [
                   {
-                    "data": {
-                      "Name": "betternether:orange_mushroom",
-                      "Properties": {
-                        "age": "0"
-                      }
-                    },
+                    "data": "betternether:orange_mushroom",
                     "weight": 1
                   },
                   {
                     "data": {
-                      "Name": "betternether:orange_mushroom",
-                      "Properties": {
+                      "id": "betternether:orange_mushroom",
+                      "properties": {
                         "age": "1"
                       }
                     },
@@ -178,8 +161,8 @@
                   },
                   {
                     "data": {
-                      "Name": "betternether:orange_mushroom",
-                      "Properties": {
+                      "id": "betternether:orange_mushroom",
+                      "properties": {
                         "age": "2"
                       }
                     },
@@ -187,8 +170,8 @@
                   },
                   {
                     "data": {
-                      "Name": "betternether:orange_mushroom",
-                      "Properties": {
+                      "id": "betternether:orange_mushroom",
+                      "properties": {
                         "age": "3"
                       }
                     },
@@ -235,18 +218,14 @@
             "feature": {
               "type": "minecraft:simple_block",
               "to_place": {
-                "type": "minecraft:weighted_state_provider",
+                "type": "minecraft:weighted",
                 "entries": [
                   {
-                    "data": {
-                      "Name": "minecraft:red_mushroom"
-                    },
+                    "data": "minecraft:red_mushroom",
                     "weight": 1
                   },
                   {
-                    "data": {
-                      "Name": "minecraft:brown_mushroom"
-                    },
+                    "data": "minecraft:brown_mushroom",
                     "weight": 1
                   }
                 ]
@@ -290,10 +269,7 @@
             "feature": {
               "type": "minecraft:simple_block",
               "to_place": {
-                "type": "minecraft:simple_state_provider",
-                "state": {
-                  "Name": "minecraft:crimson_fungus"
-                }
+                "id": "minecraft:crimson_fungus"
               }
             },
             "placement": [
@@ -334,10 +310,7 @@
             "feature": {
               "type": "minecraft:simple_block",
               "to_place": {
-                "type": "minecraft:simple_state_provider",
-                "state": {
-                  "Name": "minecraft:warped_fungus"
-                }
+                "id": "minecraft:warped_fungus"
               }
             },
             "placement": [

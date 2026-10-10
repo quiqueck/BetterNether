@@ -284,6 +284,7 @@
     "betternether:obsidian_tile_small",
     "betternether:obsidian_tile_stairs",
     "betternether:pig_statue_respawner",
+    "betternether:potted_plant",
     "betternether:quartz_glass",
     "betternether:quartz_glass_black",
     "betternether:quartz_glass_blue",
@@ -489,7 +490,6 @@
     "betternether:willow_stairs",
     "betternether:willow_stripped_bark",
     "betternether:willow_stripped_log",
-    "betternether:willow_torch",
     "betternether:willow_trapdoor",
     "betternether:willow_trunk",
     "betternether:willow_wall"

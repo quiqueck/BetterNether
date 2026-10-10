@@ -32,8 +32,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 1.0,
-                    "min": 0.0
+                    "max": 1,
+                    "min": 0
                   }
                 },
                 {
@@ -45,53 +45,47 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:match_tool",
+          "predicate": {
+            "predicates": {
+              "minecraft:enchantments": [
+                {
+                  "enchantments": "minecraft:silk_touch",
+                  "levels": {
+                    "min": 1
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
       "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
+          "type": "minecraft:item",
+          "modifier": [
             {
-              "type": "minecraft:item",
-              "condition": {
-                "type": "minecraft:match_tool",
-                "predicate": {
-                  "predicates": {
-                    "minecraft:enchantments": [
-                      {
-                        "enchantments": "minecraft:silk_touch",
-                        "levels": {
-                          "min": 1
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              "name": "betternether:giant_lucis"
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2,
+                "min": 0
+              }
             },
             {
-              "type": "minecraft:item",
-              "modifier": [
-                {
-                  "type": "minecraft:set_count",
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 2.0,
-                    "min": 0.0
-                  }
-                },
-                {
-                  "type": "minecraft:explosion_decay"
-                }
-              ],
-              "name": "betternether:glowstone_pile"
+              "type": "minecraft:explosion_decay"
             }
-          ]
+          ],
+          "name": "betternether:glowstone_pile"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

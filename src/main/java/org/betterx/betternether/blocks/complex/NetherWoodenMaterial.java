@@ -3,12 +3,10 @@ package org.betterx.betternether.blocks.complex;
 import de.ambertation.wover.block.api.BlockDefinition;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
-import de.ambertation.wover.block.api.trait.behaviour.MineableWithTagTrait;
 import de.ambertation.wover.sets.api.blocks.SlotMap;
 import de.ambertation.wover.sets.api.blocks.SlotType;
 import de.ambertation.wover.sets.api.blocks.WoodenBlockSet;
 import de.ambertation.wover.sets.api.blocks.slots.WoodSlots;
-import de.ambertation.wover.tag.api.predefined.MineableTags;
 import org.betterx.bclib.furniture.slots.BarStool;
 import org.betterx.bclib.furniture.slots.Chair;
 import org.betterx.bclib.furniture.slots.Taburet;
@@ -85,31 +83,34 @@ public class NetherWoodenMaterial<T extends NetherWoodenMaterial<T>> extends Woo
         // WOOD_BLOCK.withDefault() would silently make every nether wood flammable. Datagen output is the
         // same either way; both variants still declare MINEABLE_WITH.needsAxe().
         //
-        // Sapling/seed slots are the exception (WP: mineable-audit §B): they are plants, not wood, and their
-        // own slot config (NetherSlots's Sapling class) already adds mineable/hoe - keeping WOOD_BLOCK's axe
-        // tag on top double-tags them (axe+hoe), whereas BetterEnd's saplings are hoe-only. Filter the axe
-        // trait back out for those two slots while keeping the rest of netherWood()'s bundle (mapColor/
-        // instrument/strength/sound) untouched.
+        // Sapling/seed slots get none of it: they are plants, not wood, and netherWood() is a description of
+        // a plank - strength(2.0F, 3.0F), instrument(BASS), sound(WOOD) and mineable/axe. Applying it here
+        // gave every wood-set sapling and seed a solid, collidable, occluding block with a two-second break
+        // time, where BetterNether's own standalone saplings (giant mold, jellyfish mushroom, soul lily) are
+        // instabreak plants that a player walks through. Nothing in the set ever wanted that: the only thing
+        // a sapling needs from its wood set is the species colour, applied below. The slots build their own
+        // properties from PlantBlockTrait instead - see the Sapling and AbstractSeed slot classes.
+        // <p>
+        // The colour still comes from here, and deliberately after the slot's plant trait: the slot's
+        // PlantBlockTrait forces mapColor(PLANT) and SlotFromDefinition runs addSlotSpecificDefinitions
+        // *before* this method, so the mapColor(woodColor) at the end of it is the last write and wins.
         boolean isSaplingLike = slot.equals(NetherSlots.SAPLING) || slot.equals(NetherSlots.SEED);
-        List<BlockTrait<?, ?>> woodTraits = BlockTraits.WOOD_BLOCK.netherWood();
-        if (woodTraits != null) {
-            for (BlockTrait<?, ?> trait : woodTraits) {
-                if (isSaplingLike
-                        && trait instanceof MineableWithTagTrait mineableTrait
-                        && mineableTrait.mineableTag().equals(MineableTags.AXE)) {
-                    continue;
+        if (!isSaplingLike) {
+            List<BlockTrait<?, ?>> woodTraits = BlockTraits.WOOD_BLOCK.netherWood();
+            if (woodTraits != null) {
+                for (BlockTrait<?, ?> trait : woodTraits) {
+                    blockDefinition.addTrait(trait);
                 }
-                blockDefinition.addTrait(trait);
             }
+            // WP8.3 (REVIEWED): WOOD_BLOCK's Trait.configure() sets sound(SoundType.WOOD) unconditionally; a
+            // chained sound(...) call queued after it (BlockDefinition interleaves traits/setters in call
+            // order - see BlockDefinition#addTrait) wins. soundOverride(slot) returns null for {@link
+            // org.betterx.betternether.blocks.complex.slots.VanillaFallback} sets (vanilla-wood furniture,
+            // out of this review's scope), so the sound(...) call is skipped there and those blocks keep
+            // whatever sound their copied/trait-default properties already carry.
+            SoundType sound = soundOverride(slot);
+            if (sound != null) blockDefinition.sound(sound);
         }
-        // WP8.3 (REVIEWED): WOOD_BLOCK's Trait.configure() sets sound(SoundType.WOOD) unconditionally; a
-        // chained sound(...) call queued after it (BlockDefinition interleaves traits/setters in call order -
-        // see BlockDefinition#addTrait) wins. soundOverride(slot) returns null for {@link
-        // org.betterx.betternether.blocks.complex.slots.VanillaFallback} sets (vanilla-wood furniture, out of
-        // this review's scope), so the sound(...) call is skipped there and those blocks keep whatever
-        // sound their copied/trait-default properties already carry.
-        SoundType sound = soundOverride(slot);
-        if (sound != null) blockDefinition.sound(sound);
         // addTrait(null) is a documented no-op (BlockDefinition#addTrait): bark/log/stem/trunk slots (absent
         // from FUEL_TICKS) get no fuel trait at all, matching decision 6.
         blockDefinition.addTrait(fuelTrait(slot));

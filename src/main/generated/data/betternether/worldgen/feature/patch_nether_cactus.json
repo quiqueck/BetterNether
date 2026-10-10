@@ -16,24 +16,18 @@
             "min_inclusive": 1
           },
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:nether_cactus",
-              "Properties": {
-                "top": "false"
-              }
+            "id": "betternether:nether_cactus",
+            "properties": {
+              "top": "false"
             }
           }
         },
         {
           "height": 1,
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:nether_cactus",
-              "Properties": {
-                "top": "true"
-              }
+            "id": "betternether:nether_cactus",
+            "properties": {
+              "top": "true"
             }
           }
         }

@@ -4,12 +4,10 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "betternether:sepia_bone_grass"
-            },
+            "data": "betternether:sepia_bone_grass",
             "weight": 180
           }
         ]

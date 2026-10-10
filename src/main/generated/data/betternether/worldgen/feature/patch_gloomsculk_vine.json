@@ -17,12 +17,9 @@
       },
       "min_height": 2,
       "state": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "betternether:gloomsculk_vine",
-          "Properties": {
-            "bottom": "true"
-          }
+        "id": "betternether:gloomsculk_vine",
+        "properties": {
+          "bottom": "true"
         }
       },
       "transform": "bottom_grow"

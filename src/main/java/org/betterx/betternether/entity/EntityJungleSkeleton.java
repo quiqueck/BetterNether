@@ -23,12 +23,6 @@ public class EntityJungleSkeleton extends Skeleton {
     }
 
     @Override
-    public void aiStep() {
-        this.updateSwingTime();
-        super.aiStep();
-    }
-
-    @Override
     public void checkDespawn() {
         // 26.1 removed the virtual Mob.shouldDespawnInPeaceful() hook; vanilla Skeleton's own EntityType
         // opts out of Peaceful via EntityType.Builder.notInPeaceful(), but that flag lives on the

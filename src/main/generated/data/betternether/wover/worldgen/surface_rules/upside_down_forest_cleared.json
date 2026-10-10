@@ -21,9 +21,7 @@
         },
         "then_run": {
           "type": "minecraft:block",
-          "result_state": {
-            "Name": "minecraft:bedrock"
-          }
+          "result_state": "minecraft:bedrock"
         }
       },
       {
@@ -40,9 +38,7 @@
         },
         "then_run": {
           "type": "minecraft:block",
-          "result_state": {
-            "Name": "minecraft:bedrock"
-          }
+          "result_state": "minecraft:bedrock"
         }
       },
       {
@@ -72,16 +68,12 @@
               },
               "then_run": {
                 "type": "minecraft:block",
-                "result_state": {
-                  "Name": "betternether:netherrack_moss"
-                }
+                "result_state": "betternether:netherrack_moss"
               }
             },
             {
               "type": "minecraft:block",
-              "result_state": {
-                "Name": "betternether:mushroom_grass"
-              }
+              "result_state": "betternether:mushroom_grass"
             }
           ]
         }
@@ -108,25 +100,19 @@
               },
               "then_run": {
                 "type": "minecraft:block",
-                "result_state": {
-                  "Name": "betternether:ceiling_mushrooms"
-                }
+                "result_state": "betternether:ceiling_mushrooms"
               }
             },
             {
               "type": "minecraft:block",
-              "result_state": {
-                "Name": "minecraft:netherrack"
-              }
+              "result_state": "minecraft:netherrack"
             }
           ]
         }
       },
       {
         "type": "minecraft:block",
-        "result_state": {
-          "Name": "minecraft:netherrack"
-        }
+        "result_state": "minecraft:netherrack"
       }
     ]
   }

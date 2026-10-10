@@ -4,18 +4,14 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "betternether:soul_vein"
-            },
+            "data": "betternether:soul_vein",
             "weight": 80
           },
           {
-            "data": {
-              "Name": "betternether:soul_grass"
-            },
+            "data": "betternether:soul_grass",
             "weight": 200
           }
         ]

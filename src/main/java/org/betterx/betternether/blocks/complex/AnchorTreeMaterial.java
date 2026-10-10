@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
 import org.betterx.betternether.blocks.NetherSurvival;
@@ -43,7 +44,10 @@ public class AnchorTreeMaterial extends NetherWoodenMaterial<AnchorTreeMaterial>
                             BlockAnchorTreeSapling::new,
                             TraitLists.and(
                                     NetherSurvival.netherrack(),
-                                    PottablePlantBlockTrait.withSoils(CommonBlockTags.NETHERRACK)
+                                    PottablePlantBlockTrait.withSoils(CommonBlockTags.NETHERRACK),
+                                    // A lone sapling on the floor never grows (smallFeatureEnabled); the
+                                    // floor is only for the opt-in 2x2 giant.
+                                    DescriptionBlockTrait.of("tooltip.betternether.anchor_tree_sapling.hanging")
                             )
                     ));
     }

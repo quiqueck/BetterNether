@@ -40,9 +40,8 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 
@@ -90,7 +89,7 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(block))));
     }
 
@@ -112,8 +111,8 @@ public class NetherLoot {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> provider.dropWithSilkTouch(
                 block,
                 List.of(
-                        new LootLookupProvider.DropInfo(NetherMushroomBlocks.LUCIS_SPORE, UniformGenerator.between(0, 1)),
-                        new LootLookupProvider.DropInfo(NetherResourceItems.GLOWSTONE_PILE, UniformGenerator.between(0, 2))
+                        new LootLookupProvider.DropInfo(NetherMushroomBlocks.LUCIS_SPORE, ContextIntProviders.between(0, 1)),
+                        new LootLookupProvider.DropInfo(NetherResourceItems.GLOWSTONE_PILE, ContextIntProviders.between(0, 2))
                 )
         ));
     }
@@ -131,7 +130,7 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         // See whisperingGourdVine(): LootItemBlockStatePropertyCondition -> MatchBlock.blockMatches.
                         .when(MatchBlock.blockMatches(
                                 provider.blockLookup(),
@@ -146,6 +145,16 @@ public class NetherLoot {
                         .add(LootItem.lootTableItem(block))));
     }
 
+    /**
+     * A door: drops itself from the lower half only, the same table every wood-set door gets.
+     * <p>
+     * For the bone doors, which are plain vanilla {@code DoorBlock}s rather than a wood set's door: they got
+     * this table from bclib's {@code BaseDoorBlock} until they were reparented off it, and had none since.
+     */
+    public static LootTableTrait door() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> provider.dropDoor(block));
+    }
+
     /** Terrain/mycelium cover blocks: silk-touch drops the block, otherwise plain netherrack. */
     public static LootTableTrait terrain() {
         return terrain(Blocks.NETHERRACK);
@@ -158,27 +167,22 @@ public class NetherLoot {
      */
     public static LootTableTrait terrain(Block base) {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) ->
-                provider.dropWithSilkTouch(block, base, ConstantValue.exactly(1)));
+                provider.dropWithSilkTouch(block, base, ContextIntProviders.exactly(1)));
     }
 
     // Nether ores (cincinnasite/ruby/lapis/redstone) now use BlockTraits.ORE_BLOCK.dropping(drop, min, max),
     // which bundles the ore classification with the vanilla ore-drop loot trait, so the old redstoneOre()/ore()
     // helpers here are no longer needed.
 
-    /** Black vine (and blooming vine): 1-2 of itself, and only when sheared/hoed/silk-touched. */
-    public static LootTableTrait blackVine() {
-        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
-                .lootTable()
-                .withPool(LootPool
-                        .lootPool()
-                        .setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .when(provider.shearsOrHoeSilkTouchCondition())
-                        .add(LootItem.lootTableItem(block))));
-    }
-
     /**
-     * Whispering gourd vine: any segment but the TOP one is "fruity" and yields 1-2 gourds when sheared or
-     * silk-touched; otherwise the vine itself drops on the vanilla leaves-sapling chance table.
+     * Whispering gourd vine (#84): a gourd-carrying ({@code MIDDLE}) segment yields 1-2 gourds however it is
+     * broken, like vanilla cave vines with berries; any other segment drops itself when sheared or
+     * silk-touched, and otherwise on the vanilla leaves-sapling chance table. The gourds also craft back
+     * into seeds, so a hand-harvested vine is never a dead end.
+     * <p>
+     * {@code BOTTOM} is the bare tip (the {@code _end} model), so it does not count as fruity - this used to
+     * be "anything but {@code TOP}", which handed out gourds for the tip and none for breaking a gourd
+     * segment by hand.
      */
     public static LootTableTrait whisperingGourdVine() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
@@ -193,16 +197,17 @@ public class NetherLoot {
                             block,
                             StatePropertiesPredicate.Builder
                                     .properties()
-                                    .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.TOP)
-                    )
-                    .invert();
+                                    .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.MIDDLE)
+                    );
 
             return LootTable.lootTable().withPool(LootPool
                     .lootPool()
-                    .setRolls(ConstantValue.exactly(1.0F))
+                    .setRolls(ContextIntProviders.exactly(1))
                     .add(LootItem.lootTableItem(NetherCropBlocks.WHISPERING_GOURD.asItem())
-                                 .when(fruityState.and(provider.shearsOrSilkTouchCondition()))
-                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+                                 .when(fruityState)
+                                 .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2)))
+                                 .otherwise(LootItem.lootTableItem(block.asItem())
+                                                    .when(provider.shearsOrSilkTouchCondition()))
                                  .otherwise(LootItem.lootTableItem(block.asItem())
                                                     .when(ExplosionCondition.survivesExplosion())
                                                     .when(BonusLevelTableCondition.bonusLevelFlatChance(
@@ -236,10 +241,10 @@ public class NetherLoot {
                     .lootTable()
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .add(LootItem.lootTableItem(seed)
                                          .when(fruityState.and(provider.shearsOrSilkTouchCondition()))
-                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                                          .otherwise(LootItem.lootTableItem(seed)
                                                             .when(ExplosionCondition.survivesExplosion())
                                                             .when(BonusLevelTableCondition.bonusLevelFlatChance(
@@ -251,10 +256,10 @@ public class NetherLoot {
                     )
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .add(LootItem.lootTableItem(NetherResourceItems.GLOWSTONE_PILE)
                                          .when(fruityState.and(provider.shearsOrHoeSilkTouchCondition()))
-                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                             )
                     );
         });
@@ -320,7 +325,7 @@ public class NetherLoot {
     private static LootPool.Builder survivingPool(ItemLike drop) {
         return LootPool
                 .lootPool()
-                .setRolls(ConstantValue.exactly(1.0F))
+                .setRolls(ContextIntProviders.exactly(1))
                 .when(ExplosionCondition.survivesExplosion())
                 .add(LootItem.lootTableItem(drop));
     }
@@ -335,11 +340,11 @@ public class NetherLoot {
             Property<Integer> age,
             int ripeAge,
             ItemLike drop,
-            Holder<NumberProvider> count
+            Holder<ContextIntProvider> count
     ) {
         return LootPool
                 .lootPool()
-                .setRolls(ConstantValue.exactly(1.0F))
+                .setRolls(ContextIntProviders.exactly(1))
                 .when(stateIs(provider, block, age, ripeAge))
                 .when(ExplosionCondition.survivesExplosion())
                 .add(LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(count)));
@@ -356,7 +361,7 @@ public class NetherLoot {
             Block block,
             Property<Integer> age,
             int ripeAge,
-            Holder<NumberProvider> ripeSelfCount,
+            Holder<ContextIntProvider> ripeSelfCount,
             List<LootLookupProvider.DropInfo> ripeDrops
     ) {
         final LootTable.Builder table = LootTable.lootTable();
@@ -391,7 +396,7 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(stateIs(provider, block, BlockCommonPlant.AGE, 3))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(NetherFoodItems.BLACK_APPLE)))
@@ -405,8 +410,8 @@ public class NetherLoot {
     public static LootTableTrait boneMushroom() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
                 provider, block, BlockBoneMushroom.AGE, 2,
-                UniformGenerator.between(1, 2),
-                List.of(new LootLookupProvider.DropInfo(Items.BONE_MEAL, UniformGenerator.between(1, 3)))
+                ContextIntProviders.between(1, 2),
+                List.of(new LootLookupProvider.DropInfo(Items.BONE_MEAL, ContextIntProviders.between(1, 3)))
         ));
     }
 
@@ -414,8 +419,8 @@ public class NetherLoot {
     public static LootTableTrait featherFern() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
                 provider, block, BlockCommonPlant.AGE, 3,
-                UniformGenerator.between(1, 2),
-                List.of(new LootLookupProvider.DropInfo(Items.FEATHER, UniformGenerator.between(1, 4)))
+                ContextIntProviders.between(1, 2),
+                List.of(new LootLookupProvider.DropInfo(Items.FEATHER, ContextIntProviders.between(1, 4)))
         ));
     }
 
@@ -423,8 +428,8 @@ public class NetherLoot {
     public static LootTableTrait magmaFlower() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
                 provider, block, BlockCommonPlant.AGE, 3,
-                UniformGenerator.between(1, 2),
-                List.of(new LootLookupProvider.DropInfo(Items.MAGMA_CREAM, UniformGenerator.between(1, 4)))
+                ContextIntProviders.between(1, 2),
+                List.of(new LootLookupProvider.DropInfo(Items.MAGMA_CREAM, ContextIntProviders.between(1, 4)))
         ));
     }
 
@@ -437,8 +442,8 @@ public class NetherLoot {
     public static LootTableTrait orangeMushroom() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> ripePlant(
                 provider, block, BlockCommonPlant.AGE, 3,
-                UniformGenerator.between(1, 2),
-                List.of(new LootLookupProvider.DropInfo(Items.DYE.orange(), UniformGenerator.between(1, 3)))
+                ContextIntProviders.between(1, 2),
+                List.of(new LootLookupProvider.DropInfo(Items.DYE.orange(), ContextIntProviders.between(1, 3)))
         ));
     }
 
@@ -451,7 +456,7 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(ripePool(
                         provider, block, BlockCommonPlant.AGE, 3,
-                        NetherPlantBlocks.INK_BUSH_SEED, UniformGenerator.between(2, 4)))
+                        NetherPlantBlocks.INK_BUSH_SEED, ContextIntProviders.between(2, 4)))
                 .withPool(survivingPool(NetherPlantBlocks.INK_BUSH_SEED)));
     }
 
@@ -461,16 +466,16 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(Items.SLIME_BALL)
-                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))))
+                                     .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 4)))))
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(NetherPlantBlocks.EYE_SEED)
-                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))))));
+                                     .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2))))));
     }
 
     /** Small eyeball: 1-2 slime balls and exactly one eye seed. */
@@ -479,10 +484,10 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(Items.SLIME_BALL)
-                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))))
+                                     .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2)))))
                 .withPool(survivingPool(NetherPlantBlocks.EYE_SEED)));
     }
 
@@ -499,9 +504,9 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.RED_MUSHROOM)
-                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
+                                     .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 4)))
                                      .when(stateIs(
                                              provider, block,
                                              BlockRedLargeMushroom.SHAPE, BlockProperties.TripleShape.TOP))
@@ -523,7 +528,7 @@ public class NetherLoot {
                     .lootTable()
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .add(AlternativesEntry.alternatives(
                                     LootItem.lootTableItem(stem)
                                             .when(stateIs(
@@ -536,7 +541,7 @@ public class NetherLoot {
                                                     BNBlockProperties.BrownMushroomShape.BOTTOM))
                                             .when(ExplosionCondition.survivesExplosion()),
                                     LootItem.lootTableItem(Items.BROWN_MUSHROOM)
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                                            .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                                             .when(ExplosionCondition.survivesExplosion())
                             )));
         });
@@ -554,9 +559,9 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(NetherSaplingBlocks.GIANT_MOLD_SAPLING)
-                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                                     .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                                      .when(stateIs(
                                              provider, block,
                                              BlockGiantMold.SHAPE, BlockProperties.TripleShape.TOP))
@@ -566,9 +571,9 @@ public class NetherLoot {
                                              .when(ExplosionCondition.survivesExplosion()))))
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.STRING)
-                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 8)))
+                                     .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 8)))
                                      .when(stateIs(
                                              provider, block,
                                              BlockGiantMold.SHAPE, BlockProperties.TripleShape.TOP))
@@ -576,39 +581,40 @@ public class NetherLoot {
     }
 
     /**
-     * Mushroom fir trunk: the {@code bottom}/{@code middle}/{@code top} segments each yield one mushroom fir
-     * stem; every other shape (the {@code side_*} branches and {@code end}) falls through to 0-2 saplings.
-     * The three stem children are identical apart from their shape condition and are kept separate only to
-     * mirror the source table.
+     * Chance that one mushroom fir cap block ({@code side_*} or {@code end}) drops a sapling. A grown fir
+     * has about seven cap blocks, so a felled tree yields about 1.4 saplings on average, like the
+     * saplings a vanilla tree's leaves give back.
+     */
+    public static final float MUSHROOM_FIR_SAPLING_CHANCE = 0.2F;
+
+    /**
+     * Mushroom fir trunk: every shape - trunk segments and caps alike - yields one mushroom fir stem (the
+     * fir's wood), so a felled tree gives back one stem per block, whether the block was mined or collapsed
+     * because it lost its support. The cap shapes ({@code side_*} and {@code end}) additionally drop a sapling
+     * with {@link #MUSHROOM_FIR_SAPLING_CHANCE}.
      */
     public static LootTableTrait mushroomFirTrunk() {
-        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
-            final Block stem = NetherWoodBlocks.MAT_MUSHROOM_FIR.getStem();
-            return LootTable
-                    .lootTable()
-                    .withPool(LootPool
-                            .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
-                            .add(AlternativesEntry.alternatives(
-                                    LootItem.lootTableItem(stem)
-                                            .when(stateIs(
-                                                    provider, block, BlockMushroomFir.SHAPE,
-                                                    BlockMushroomFir.MushroomFirShape.BOTTOM))
-                                            .when(ExplosionCondition.survivesExplosion()),
-                                    LootItem.lootTableItem(stem)
-                                            .when(stateIs(
-                                                    provider, block, BlockMushroomFir.SHAPE,
-                                                    BlockMushroomFir.MushroomFirShape.MIDDLE))
-                                            .when(ExplosionCondition.survivesExplosion()),
-                                    LootItem.lootTableItem(stem)
-                                            .when(stateIs(
-                                                    provider, block, BlockMushroomFir.SHAPE,
-                                                    BlockMushroomFir.MushroomFirShape.TOP))
-                                            .when(ExplosionCondition.survivesExplosion()),
-                                    LootItem.lootTableItem(NetherWoodBlocks.MAT_MUSHROOM_FIR.getSapling())
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
-                            )));
-        });
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
+                .lootTable()
+                .withPool(survivingPool(NetherWoodBlocks.MAT_MUSHROOM_FIR.getStem()))
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .when(ExplosionCondition.survivesExplosion())
+                        .when(stateIsAnyOf(
+                                provider, block, BlockMushroomFir.SHAPE,
+                                BlockMushroomFir.MushroomFirShape.END,
+                                BlockMushroomFir.MushroomFirShape.SIDE_BIG_N,
+                                BlockMushroomFir.MushroomFirShape.SIDE_BIG_S,
+                                BlockMushroomFir.MushroomFirShape.SIDE_BIG_E,
+                                BlockMushroomFir.MushroomFirShape.SIDE_BIG_W,
+                                BlockMushroomFir.MushroomFirShape.SIDE_SMALL_N,
+                                BlockMushroomFir.MushroomFirShape.SIDE_SMALL_S,
+                                BlockMushroomFir.MushroomFirShape.SIDE_SMALL_E,
+                                BlockMushroomFir.MushroomFirShape.SIDE_SMALL_W
+                        ))
+                        .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_MUSHROOM_FIR.getSapling())
+                                     .when(LootItemRandomChanceCondition.randomChance(MUSHROOM_FIR_SAPLING_CHANCE)))));
     }
 
     /**
@@ -621,7 +627,7 @@ public class NetherLoot {
                 .withPool(survivingPool(NetherWoodBlocks.MAT_STALAGNATE.getStem()))
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_STALAGNATE.getSeed())
                                      .when(LootItemRandomChanceCondition.randomChance(0.25F)))));
@@ -636,7 +642,7 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(stateIs(provider, block, BlockStatueRespawner.TOP, false))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(block))));
@@ -650,7 +656,7 @@ public class NetherLoot {
     // class javadoc). None of those overrides consulted survives_explosion - most never called
     // super.getDrops() at all - so none of these tables carry it either: the drops are reproduced exactly,
     // including that oddity. MHelper.randRange(min, max) is inclusive at both ends, so it maps onto
-    // UniformGenerator.between(min, max) unchanged, and a rolled count of 0 yields an empty stack that both
+    // ContextIntProviders.between(min, max) unchanged, and a rolled count of 0 yields an empty stack that both
     // paths discard.
     // ------------------------------------------------------------------------------------------------------
 
@@ -677,13 +683,13 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(NetherMushroomBlocks.LUCIS_SPORE)))
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(NetherResourceItems.GLOWSTONE_PILE)
-                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4))))));
+                                     .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 4))))));
     }
 
     /** Barrel cactus: a ripe ({@code age=3}) one yields 1-3 of itself, any other age exactly one. */
@@ -692,9 +698,9 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(block)
-                                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                                     .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                                      .when(stateIs(provider, block, BlockCommonPlant.AGE, 3))
                                      .otherwise(LootItem.lootTableItem(block)))));
     }
@@ -710,17 +716,17 @@ public class NetherLoot {
                     .lootTable()
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .add(LootItem.lootTableItem(block)
-                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+                                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2)))
                                          .when(ripe)
                                          .otherwise(LootItem.lootTableItem(block))))
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .when(ripe)
                             .add(LootItem.lootTableItem(NetherResourceItems.AGAVE_LEAF)
-                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 5)))));
+                                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 5)))));
         });
     }
 
@@ -742,25 +748,25 @@ public class NetherLoot {
                     .lootTable()
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .when(top.or(bottom))
                             .add(LootItem.lootTableItem(NetherSaplingBlocks.JELLYFISH_MUSHROOM_SAPLING)
-                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))))
+                                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2)))))
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .when(top)
                             .add(LootItem.lootTableItem(NetherResourceItems.GLOWSTONE_PILE)
-                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))))
+                                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2)))))
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .when(top)
                             .add(LootItem.lootTableItem(Items.SLIME_BALL)
-                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))))
+                                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 1)))))
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .when(middle)
                             .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_NETHER_MUSHROOM.getStem())));
         });
@@ -772,7 +778,7 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(stateIs(
                                 provider, block,
                                 BlockWillowBranch.SHAPE, BNBlockProperties.WillowBranchShape.END))
@@ -793,11 +799,11 @@ public class NetherLoot {
                     .lootTable()
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_NETHER_MUSHROOM.getStem())))
                     .withPool(LootPool
                             .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(ContextIntProviders.exactly(1))
                             .add(LootItem.lootTableItem(sapling)
                                          .when(stateIsAnyOf(
                                                  provider, block, shape,
@@ -806,7 +812,7 @@ public class NetherLoot {
                                                  BlockSoulLily.SoulLilyShape.BIG_TOP_CENTER))
                                          .otherwise(LootItem
                                                  .lootTableItem(sapling)
-                                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(
+                                                 .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
                                                          0,
                                                          1
                                                  )))
@@ -834,7 +840,7 @@ public class NetherLoot {
                 .lootTable()
                 .withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(toolIsIn(provider, ItemTags.PICKAXES)
                                 .or(toolIsIn(provider, ToolTags.FABRIC_PICKAXES)))
                         .add(LootItem.lootTableItem(block))));
@@ -857,7 +863,7 @@ public class NetherLoot {
             for (BNBlockProperties.FoodShape food : BNBlockProperties.FoodShape.values()) {
                 table = table.withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(stateIs(provider, block, BlockStalagnateBowl.FOOD, food))
                         .add(LootItem.lootTableItem(food.getItem())));
             }
@@ -878,7 +884,7 @@ public class NetherLoot {
             for (BNBlockProperties.PottedPlantShape plant : BNBlockProperties.PottedPlantShape.values()) {
                 table = table.withPool(LootPool
                         .lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .when(stateIs(provider, block, BlockPottedPlant.PLANT, plant))
                         .add(LootItem.lootTableItem(plant.getBlock())));
             }

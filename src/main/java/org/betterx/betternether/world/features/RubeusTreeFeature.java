@@ -18,16 +18,21 @@ import de.ambertation.wover.feature.api.features.GrowableFeature;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 public class RubeusTreeFeature extends NonOverlappingFeature implements GrowableFeature {
     public static final MapCodec<RubeusTreeFeature> CODEC =
@@ -70,44 +75,52 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
     private static final float[] CURVE_Y = new float[]{20F, 17F, 12F, 4F, 0F, -2F};
     private static final int MIDDLE_Y = 10;
 
-    private void updateSDFFrom(BlockPos bpos, StructureGeneratorThreadContext context) {
-        for (int x = -7; x <= 7; x++) {
-            for (int y = -7; y <= 7; y++) {
-                for (int z = -7; z <= 7; z++) {
-                    if (x == 0 && y == 0 && z == 0) continue;
-                    final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
-                    if (dist <= 7) {
-                        final BlockPos blPos = bpos.offset(x, y, z);
-                        context.LOGS_DIST.merge(
-                                blPos,
-                                (byte) dist,
-                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist)
-                        );
-                    }
-                }
+    /**
+     * Gives every leaf of the crown its true vanilla decay distance and prunes the ones out of reach.
+     * <p>
+     * {@code LeavesBlock} relaxes {@code distance} through other leaves from the nearest log, and a
+     * non-persistent leaf that ends up at {@link LeavesBlock#DECAY_DISTANCE} decays. So this is a
+     * breadth-first sweep from the tree's wood through the leaves it placed - a path length, not the
+     * straight-line distance used before, which under-reported leaves around the hollow of a crown and
+     * would have let them vanish the first time a neighbour changed. Leaves that cannot be reached
+     * within the budget are removed now, together with any cone hanging from them, rather than left to
+     * decay in front of the player.
+     */
+    private void updateDistances(ServerLevelAccessor world, Set<BlockPos> leaves, StructureGeneratorThreadContext context) {
+        final Map<BlockPos, Integer> distance = new HashMap<>();
+        final ArrayDeque<BlockPos> queue = new ArrayDeque<>();
+        for (BlockPos log : context.POINTS) {
+            if (world.getBlockState(log).is(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)) {
+                distance.put(log, 0);
+                queue.add(log);
             }
         }
-    }
 
-    private void updateDistances(ServerLevelAccessor world, StructureGeneratorThreadContext context) {
-        for (Map.Entry<BlockPos, Byte> entry : context.LOGS_DIST.entrySet()) {
-            final int dist = entry.getValue();
-            final BlockPos logPos = entry.getKey();
+        while (!queue.isEmpty()) {
+            final BlockPos current = queue.poll();
+            final int next = distance.get(current) + 1;
+            if (next >= LeavesBlock.DECAY_DISTANCE) continue;
+            for (Direction dir : Direction.values()) {
+                final BlockPos neighbour = current.relative(dir);
+                if (!leaves.contains(neighbour) || distance.containsKey(neighbour)) continue;
+                if (!world.getBlockState(neighbour).is(NetherLeavesBlocks.RUBEUS_LEAVES)) continue;
+                distance.put(neighbour, next);
+                queue.add(neighbour);
+            }
+        }
 
-            BlockState currentState = world.getBlockState(logPos);
-            if (currentState.hasProperty(BlockStateProperties.DISTANCE)) {
-                int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
-                if (dist < cDist) {
-                    BlocksHelper.setWithoutUpdate(
-                            world,
-                            logPos,
-                            currentState.setValue(BlockStateProperties.DISTANCE, dist)
-                    );
-                    cDist = dist;
-                }
-
-                if (cDist >= 7) {
-                    BlocksHelper.setWithoutUpdate(world, logPos, Blocks.AIR.defaultBlockState());
+        final BlockState cone = NetherWoodBlocks.MAT_RUBEUS.getCone().defaultBlockState();
+        for (BlockPos leaf : leaves) {
+            final BlockState state = world.getBlockState(leaf);
+            if (!state.is(NetherLeavesBlocks.RUBEUS_LEAVES)) continue;
+            final Integer dist = distance.get(leaf);
+            if (dist != null) {
+                BlocksHelper.setWithoutUpdate(world, leaf, state.setValue(LeavesBlock.DISTANCE, dist));
+            } else {
+                BlocksHelper.setWithoutUpdate(world, leaf, Blocks.AIR.defaultBlockState());
+                final BlockPos below = leaf.below();
+                if (world.getBlockState(below).is(cone.getBlock())) {
+                    BlocksHelper.setWithoutUpdate(world, below, Blocks.AIR.defaultBlockState());
                 }
             }
         }
@@ -122,6 +135,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
     ) {
         final boolean natural = config.natural;
         context.clear();
+        final Set<BlockPos> leaves = new HashSet<>();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
         float scale = MHelper.randRange(0.5F, 1F, random);
         int minCount = scale < 0.75 ? 3 : 4;
@@ -145,7 +159,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
             float crownR = 5 * branchSize;
             if (crownR < 1.5F)
                 crownR = 1.5F;
-            crown(world, x1, y1 + 1, z1, crownR, random);
+            crown(world, x1, y1 + 1, z1, crownR, random, leaves);
 
             int middle = Math.round(pos.getY() + (MIDDLE_Y + MHelper.randRange(-2, 2, random)) * branchSize);
             boolean generate = true;
@@ -275,11 +289,9 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
                             random
                     );
             }
-            updateSDFFrom(bpos, context);
         }
 
-        updateDistances(world, context);
-        context.LOGS_DIST.clear();
+        updateDistances(world, leaves, context);
 
         context.POINTS.clear();
         context.MIDDLE.clear();
@@ -339,10 +351,20 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
         }
     }
 
-    private void crown(LevelAccessor world, int x, int y, int z, float radius, RandomSource random) {
+    private void crown(
+            LevelAccessor world,
+            int x,
+            int y,
+            int z,
+            float radius,
+            RandomSource random,
+            Set<BlockPos> placed
+    ) {
         final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 
-        BlockState leaves = NetherLeavesBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
+        // Not persistent: these leaves decay once the tree is felled (#97). updateDistances() gives each
+        // one its real distance afterwards; until then they carry the default (DECAY_DISTANCE).
+        BlockState leaves = NetherLeavesBlocks.RUBEUS_LEAVES.defaultBlockState();
         BlockState cone = NetherWoodBlocks.MAT_RUBEUS.getCone().defaultBlockState();
         float halfR = radius * 0.5F;
         float r2 = radius * radius;
@@ -351,7 +373,9 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
             int cy2_out = cy * cy;
             float cy2_in = cy + halfR;
             cy2_in *= cy2_in;
-            POS.setY((int) (y + cy - halfR));
+            // Mth.floor, not an (int) cast: the cast rounds toward zero, which lifts the crown a block off
+            // its branch whenever it sits below y=0.
+            POS.setY(Mth.floor(y + cy - halfR));
             for (int cx = start; cx <= radius; cx++) {
                 int cx2 = cx * cx;
                 POS.setX(x + cx);
@@ -359,7 +383,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
                     int cz2 = cz * cz;
                     if (cx2 + cy2_out + cz2 < r2 && cx2 + cy2_in + cz2 > r2) {
                         POS.setZ(z + cz);
-                        setIfAirLeaves(world, POS, leaves);
+                        if (setIfAirLeaves(world, POS, leaves)) placed.add(POS.immutable());
                         if (((POS.getX() + POS.getZ()) & 1) == 0 && random.nextInt(6) == 0)
                             setIfAir(world, POS.below(), cone);
                     }
@@ -389,11 +413,14 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
         }
     }
 
+    // Cones count as free space here and in setIfGroundOrAir: a crown hangs them before its own branch
+    // is drawn up into it, and the wood has to win or the branch gets a gap.
     private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {
         BlockState bState = world.getBlockState(pos);
         if (world.isEmptyBlock(pos)
                 || bState.canBeReplaced()
                 || bState.getBlock() == NetherLeavesBlocks.RUBEUS_LEAVES
+                || bState.getBlock() == NetherWoodBlocks.MAT_RUBEUS.getCone()
         ) {
             if (state.canSurvive(world, pos)) {
                 BlocksHelper.setWithoutUpdate(world, pos, state);
@@ -405,6 +432,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
         BlockState bState = world.getBlockState(pos);
         if (bState.isAir()
                 || bState.getBlock() == NetherLeavesBlocks.RUBEUS_LEAVES
+                || bState.getBlock() == NetherWoodBlocks.MAT_RUBEUS.getCone()
                 || bState.canBeReplaced()
                 || BlocksHelper.isNetherGround(bState)) {
             if (state.canSurvive(world, pos)) {
@@ -413,10 +441,13 @@ public class RubeusTreeFeature extends NonOverlappingFeature implements Growable
         }
     }
 
-    private void setIfAirLeaves(LevelAccessor world, BlockPos pos, BlockState state) {
+    private boolean setIfAirLeaves(LevelAccessor world, BlockPos pos, BlockState state) {
         BlockState bState = world.getBlockState(pos);
-        if (world.isEmptyBlock(pos) || bState.canBeReplaced())
+        if (world.isEmptyBlock(pos) || bState.canBeReplaced()) {
             BlocksHelper.setWithoutUpdate(world, pos, state);
+            return true;
+        }
+        return false;
     }
 
     @Override

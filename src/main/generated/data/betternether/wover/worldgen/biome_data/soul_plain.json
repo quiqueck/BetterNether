@@ -2,6 +2,7 @@
   "type": "betternether:biome",
   "parent": "minecraft:soul_sand_valley",
   "biome": "betternether:soul_plain",
+  "genChance": 1.25,
   "generation_data": {
     "intended_placement": "minecraft:is_nether",
     "parameter_points": [

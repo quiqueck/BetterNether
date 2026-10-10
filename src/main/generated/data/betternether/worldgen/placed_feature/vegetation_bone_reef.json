@@ -5,27 +5,20 @@
       "feature": {
         "type": "minecraft:simple_block",
         "to_place": {
-          "type": "minecraft:weighted_state_provider",
+          "type": "minecraft:weighted",
           "entries": [
             {
-              "data": {
-                "Name": "betternether:bone_grass"
-              },
+              "data": "betternether:bone_grass",
               "weight": 180
             },
             {
-              "data": {
-                "Name": "betternether:feather_fern",
-                "Properties": {
-                  "age": "0"
-                }
-              },
+              "data": "betternether:feather_fern",
               "weight": 5
             },
             {
               "data": {
-                "Name": "betternether:feather_fern",
-                "Properties": {
+                "id": "betternether:feather_fern",
+                "properties": {
                   "age": "1"
                 }
               },
@@ -33,8 +26,8 @@
             },
             {
               "data": {
-                "Name": "betternether:feather_fern",
-                "Properties": {
+                "id": "betternether:feather_fern",
+                "properties": {
                   "age": "2"
                 }
               },
@@ -42,8 +35,8 @@
             },
             {
               "data": {
-                "Name": "betternether:feather_fern",
-                "Properties": {
+                "id": "betternether:feather_fern",
+                "properties": {
                   "age": "3"
                 }
               },

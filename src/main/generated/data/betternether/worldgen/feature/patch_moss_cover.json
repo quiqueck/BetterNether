@@ -4,10 +4,7 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "betternether:moss_cover"
-        }
+        "id": "betternether:moss_cover"
       }
     },
     "placement": [

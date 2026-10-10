@@ -20,7 +20,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 import java.util.List;
@@ -64,8 +64,8 @@ public class WartForest extends NetherBiomeConfig {
     public void surface(BiomeSurfaceRuleBuilder<NetherBiomeBuilder> builder) {
         super.surface(builder);
         builder.rule(
-                SurfaceRules.sequence(
-                        SurfaceRules.ifTrue(
+                MaterialRules.sequence(
+                        MaterialRules.ifTrue(
                                 NetherBiomeBuilder.ON_FLOOR,
                                 new SwitchRuleSource(
                                         NetherNoiseCondition.INSTANCE,
@@ -78,17 +78,17 @@ public class WartForest extends NetherBiomeConfig {
                                         )
                                 )
                         ),
-                        SurfaceRules.ifTrue(
-                                SurfaceRules.stoneDepthCheck(4, true, 1, CaveSurface.FLOOR),
+                        MaterialRules.ifTrue(
+                                MaterialRules.stoneDepthCheck(4, true, 1, CaveSurface.FLOOR),
                                 new SwitchRuleSource(
                                         NetherNoiseCondition.INSTANCE,
                                         List.of(
-                                                SurfaceRules.state(
+                                                MaterialRules.state(
                                                         NetherStoneBlocks.SOUL_SANDSTONE
                                                                 .defaultBlockState()
                                                                 .setValue(BlockSoulSandstone.UP, true)
                                                 ),
-                                                SurfaceRules.state(
+                                                MaterialRules.state(
                                                         NetherStoneBlocks.SOUL_SANDSTONE
                                                                 .defaultBlockState()
                                                                 .setValue(BlockSoulSandstone.UP, false)

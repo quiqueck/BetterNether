@@ -4,9 +4,7 @@
   "size": 4,
   "targets": [
     {
-      "state": {
-        "Name": "betternether:nether_lapis_ore"
-      },
+      "state": "betternether:nether_lapis_ore",
       "target": {
         "block": "minecraft:netherrack",
         "predicate_type": "minecraft:block_match"

@@ -95,8 +95,12 @@ public class NetherSurvival {
         );
     }
 
+    /**
+     * Nether nylium only - {@link NetherTags#NETHER_NYLIUM}, not {@code #minecraft:nylium}, which BetterEnd
+     * fills with its End mosses (#118).
+     */
     public static List<BlockTrait<?, ?>> nylium() {
-        return List.of(SurvivesOnBlockTrait.withTag(BlockTags.NYLIUM));
+        return List.of(SurvivesOnBlockTrait.withTag(NetherTags.NETHER_NYLIUM));
     }
 
     public static List<BlockTrait<?, ?>> netherMycelium() {

@@ -23,16 +23,16 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-import net.minecraft.world.level.levelgen.SurfaceRules.RuleSource;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
+import net.minecraft.world.level.levelgen.material.rule.MaterialRule;
 
 import java.util.List;
 
 public class SoulPlain extends NetherBiomeConfig {
-    private static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
-    private static final SurfaceRules.RuleSource SOUL_SOIL = SurfaceRules.state(Blocks.SOUL_SOIL.defaultBlockState());
-    private static final SurfaceRules.RuleSource SOUL_SANDSTONE = SurfaceRules.state(NetherStoneBlocks.SOUL_SANDSTONE.defaultBlockState());
-    private static final SurfaceRules.RuleSource LAVA = SurfaceRules.state(Blocks.MAGMA_BLOCK.defaultBlockState());
+    private static final MaterialRule SOUL_SAND = MaterialRules.state(Blocks.SOUL_SAND.defaultBlockState());
+    private static final MaterialRule SOUL_SOIL = MaterialRules.state(Blocks.SOUL_SOIL.defaultBlockState());
+    private static final MaterialRule SOUL_SANDSTONE = MaterialRules.state(NetherStoneBlocks.SOUL_SANDSTONE.defaultBlockState());
+    private static final MaterialRule LAVA = MaterialRules.state(Blocks.MAGMA_BLOCK.defaultBlockState());
 
     @Override
     public void addCustomBuildData(NetherBiomeBuilder builder) {
@@ -57,11 +57,11 @@ public class SoulPlain extends NetherBiomeConfig {
     public void surface(BiomeSurfaceRuleBuilder<NetherBiomeBuilder> builder) {
         super.surface(builder);
 
-        RuleSource soilSandDist
-                = SurfaceRules.sequence(SurfaceRules.ifTrue(Conditions.NETHER_VOLUME_NOISE, SOUL_SOIL), SOUL_SAND);
+        MaterialRule soilSandDist
+                = MaterialRules.sequence(MaterialRules.ifTrue(Conditions.NETHER_VOLUME_NOISE, SOUL_SOIL), SOUL_SAND);
 
-        RuleSource soilSandStoneDist
-                = SurfaceRules.sequence(new SwitchRuleSource(
+        MaterialRule soilSandStoneDist
+                = MaterialRules.sequence(new SwitchRuleSource(
                 NetherNoiseCondition.INSTANCE,
                 List.of(
                         SOUL_SOIL,
@@ -73,19 +73,19 @@ public class SoulPlain extends NetherBiomeConfig {
                 )
         ));
 
-        RuleSource soilStoneDist
-                = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(Conditions.NETHER_VOLUME_NOISE, SOUL_SOIL),
+        MaterialRule soilStoneDist
+                = MaterialRules.sequence(
+                MaterialRules.ifTrue(Conditions.NETHER_VOLUME_NOISE, SOUL_SOIL),
                 SOUL_SANDSTONE
         );
 
         builder.rule(
-                       SurfaceRules.ifTrue(NetherBiomeBuilder.ON_FLOOR, soilSandDist),
+                       MaterialRules.ifTrue(NetherBiomeBuilder.ON_FLOOR, soilSandDist),
                        BaseSurfaceRuleBuilder.CEILING_PRIORITY + 1
                )
                .ceil(NetherStoneBlocks.SOUL_SANDSTONE.defaultBlockState())
                .rule(
-                       SurfaceRules.ifTrue(NetherBiomeBuilder.UNDER_CEILING, soilStoneDist),
+                       MaterialRules.ifTrue(NetherBiomeBuilder.UNDER_CEILING, soilStoneDist),
                        BaseSurfaceRuleBuilder.CEILING_PRIORITY - 1
                )
                .rule(soilSandStoneDist, BaseSurfaceRuleBuilder.CEILING_PRIORITY - 2);

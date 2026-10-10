@@ -9,8 +9,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 12.0,
-              "min": 4.0
+              "max": 12,
+              "min": 4
             }
           },
           "name": "minecraft:netherrack",
@@ -22,8 +22,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 8.0,
-              "min": 2.0
+              "max": 8,
+              "min": 2
             }
           },
           "name": "minecraft:nether_wart",
@@ -40,15 +40,15 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 12.0,
-              "min": 2.0
+              "max": 12,
+              "min": 2
             }
           },
           "name": "minecraft:quartz",
           "weight": 8
         }
       ],
-      "rolls": 2.0
+      "rolls": 2
     },
     {
       "condition": {
@@ -65,7 +65,7 @@
           "name": "betternether:flaming_ruby_sword"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -80,8 +80,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 4.0,
-        "min": 1.0
+        "max": 4,
+        "min": 1
       }
     },
     {
@@ -129,8 +129,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 2.0,
-        "min": 1.0
+        "max": 2,
+        "min": 1
       }
     },
     {
@@ -178,8 +178,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 1.0,
-        "min": 1.0
+        "max": 1,
+        "min": 1
       }
     },
     {
@@ -190,8 +190,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "minecraft:gold_block",
@@ -203,8 +203,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 6.0,
-              "min": 2.0
+              "max": 6,
+              "min": 2
             }
           },
           "name": "minecraft:gold_ingot",
@@ -216,8 +216,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 8.0,
-              "min": 3.0
+              "max": 8,
+              "min": 3
             }
           },
           "name": "betternether:nether_ruby",
@@ -229,8 +229,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 5.0,
-              "min": 1.0
+              "max": 5,
+              "min": 1
             }
           },
           "name": "minecraft:netherite_scrap",
@@ -242,8 +242,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 6.0,
-              "min": 1.0
+              "max": 6,
+              "min": 1
             }
           },
           "name": "minecraft:sculk_catalyst",
@@ -255,8 +255,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 1.0
+              "max": 2,
+              "min": 1
             }
           },
           "name": "minecraft:netherite_block",
@@ -265,8 +265,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 6.0,
-        "min": 3.0
+        "max": 6,
+        "min": 3
       }
     }
   ]

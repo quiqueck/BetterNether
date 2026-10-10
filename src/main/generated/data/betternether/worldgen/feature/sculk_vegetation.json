@@ -4,27 +4,20 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "betternether:swamp_grass"
-            },
+            "data": "betternether:swamp_grass",
             "weight": 200
           },
           {
-            "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:magma_flower",
             "weight": 20
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "1"
               }
             },
@@ -32,8 +25,8 @@
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "2"
               }
             },
@@ -41,8 +34,8 @@
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "3"
               }
             },

@@ -4,21 +4,16 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "minecraft:nether_wart",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "minecraft:nether_wart",
             "weight": 30
           },
           {
             "data": {
-              "Name": "minecraft:nether_wart",
-              "Properties": {
+              "id": "minecraft:nether_wart",
+              "properties": {
                 "age": "1"
               }
             },
@@ -26,8 +21,8 @@
           },
           {
             "data": {
-              "Name": "minecraft:nether_wart",
-              "Properties": {
+              "id": "minecraft:nether_wart",
+              "properties": {
                 "age": "2"
               }
             },
@@ -35,20 +30,15 @@
           },
           {
             "data": {
-              "Name": "minecraft:nether_wart",
-              "Properties": {
+              "id": "minecraft:nether_wart",
+              "properties": {
                 "age": "3"
               }
             },
             "weight": 30
           },
           {
-            "data": {
-              "Name": "betternether:wart_seed",
-              "Properties": {
-                "facing": "up"
-              }
-            },
+            "data": "betternether:wart_seed",
             "weight": 60
           }
         ]

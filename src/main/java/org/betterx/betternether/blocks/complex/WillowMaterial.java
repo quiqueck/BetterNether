@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
 import org.betterx.betternether.blocks.BlockWillowBranch;
@@ -23,6 +25,7 @@ import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
 import de.ambertation.wover.pottable.api.trait.PottablePlantBlockTrait;
 import de.ambertation.wover.sets.api.blocks.SlotMap;
 
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 
@@ -65,7 +68,12 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                             // netherGround() is a 5-way union (no single existing tag covers it), so unlike
                             // the single-tag saplings this is left unrestricted rather than picking one
                             // arbitrary member of the union as the pot soil.
-                            TraitLists.and(NetherSurvival.netherGround(), PottablePlantBlockTrait.any())
+                            TraitLists.and(
+                                    NetherSurvival.netherGround(),
+                                    PottablePlantBlockTrait.any(),
+                                    // The 2x2 old willow (gamerule betternether:grow_large_willows, on by default).
+                                    DescriptionBlockTrait.of("tooltip.betternether.willow_sapling.large")
+                            )
                     ))
                     // The branch's loot was a getDrops() override: only the `end` segment drops anything,
                     // a single willow torch.
@@ -82,7 +90,14 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
                             (set, props) -> new BlockWillowTorch(props),
                             // Replaces BlockWillowTorch's BehaviourCompostable marker, which only tagged the
                             // item and never registered a composter entry.
-                            TraitLists.and(NetherTraits.compostable(NetherRender.cutout()), NetherLoot.dropSelfNoExplosion())
+                            TraitLists.and(NetherTraits.compostable(NetherRender.cutout()), NetherLoot.dropSelfNoExplosion()),
+                            // The wover-sets rewrite switched to the (Properties) ctor and lost what the old
+                            // no-arg ctor set: light 15, no collision, no occlusion. Without noCollision the
+                            // wall-mounted torch counted as solid, so water neither flowed into nor broke it
+                            // the way it breaks a vanilla torch (#55). 26.3 additionally only lets a fluid
+                            // flow into blocks listed in #minecraft:washed_away_by_fluids, like vanilla's torches.
+                            def -> def.lightLevel(state -> 15).noCollission().noOcclusion()
+                                      .addTags(BlockTags.WASHED_AWAY_BY_FLUIDS)
                     ));
     }
 
@@ -94,7 +109,7 @@ public class WillowMaterial extends RoofMaterial<WillowMaterial> {
      * templates and are referenced directly. Trunk has no item ({@code noBlockItem}).
      */
     @org.jetbrains.annotations.Nullable
-    private static de.ambertation.wover.block.api.client.trait.BlockModelTrait willowTrunkModelTrait() {
+    private static BlockTrait<Block, ?> willowTrunkModelTrait() {
         final var mossy = BetterNether.C.mk("block/willow_bark_mossy");
         final var swap = java.util.Map.of("particle", mossy, "texture", mossy);
         final var bottom = BetterNether.C.mk("block/willow_trunk_bottom");

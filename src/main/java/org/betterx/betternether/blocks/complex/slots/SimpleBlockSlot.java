@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks.complex.slots;
 import de.ambertation.wover.block.api.BlockDefinition;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTraitLookup;
@@ -127,7 +126,20 @@ public class SimpleBlockSlot extends SlotFromDefinition {
             BiFunction<BlockSet<?>, BlockBehaviour.Properties, Block> maker,
             List<BlockTrait<?, ?>> extraTraits
     ) {
-        return new SimpleBlockSlot(type, maker, false, extraTraits, null, true);
+        return withItemNotFullCube(type, maker, extraTraits, null);
+    }
+
+    /**
+     * {@link #withItemNotFullCube(SlotType, BiFunction, List)} plus chained property setters, see
+     * {@link #blockOnly(SlotType, BiFunction, List, Consumer)}.
+     */
+    public static SimpleBlockSlot withItemNotFullCube(
+            SlotType type,
+            BiFunction<BlockSet<?>, BlockBehaviour.Properties, Block> maker,
+            List<BlockTrait<?, ?>> extraTraits,
+            Consumer<BlockDefinition<?, ?>> extraProperties
+    ) {
+        return new SimpleBlockSlot(type, maker, false, extraTraits, extraProperties, true);
     }
 
     @Override

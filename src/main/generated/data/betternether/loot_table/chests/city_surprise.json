@@ -9,8 +9,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "betternether:blue_crying_obsidian",
@@ -22,8 +22,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 1.0
+              "max": 2,
+              "min": 1
             }
           },
           "name": "betternether:blue_weeping_obsidian",
@@ -35,8 +35,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "minecraft:crying_obsidian",
@@ -48,8 +48,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 1.0
+              "max": 2,
+              "min": 1
             }
           },
           "name": "betternether:weeping_obsidian",
@@ -61,8 +61,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "betternether:blue_obsidian",
@@ -74,8 +74,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "minecraft:obsidian",
@@ -84,8 +84,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 3.0,
-        "min": 1.0
+        "max": 3,
+        "min": 1
       }
     },
     {
@@ -96,8 +96,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 12.0,
-              "min": 4.0
+              "max": 12,
+              "min": 4
             }
           },
           "name": "minecraft:netherrack",
@@ -109,8 +109,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 8.0,
-              "min": 2.0
+              "max": 8,
+              "min": 2
             }
           },
           "name": "minecraft:nether_wart",
@@ -127,15 +127,15 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 12.0,
-              "min": 2.0
+              "max": 12,
+              "min": 2
             }
           },
           "name": "minecraft:quartz",
           "weight": 8
         }
       ],
-      "rolls": 2.0
+      "rolls": 2
     },
     {
       "entries": [
@@ -145,8 +145,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 8.0,
-              "min": 2.0
+              "max": 8,
+              "min": 2
             }
           },
           "name": "minecraft:obsidian",
@@ -158,8 +158,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 8.0,
-              "min": 2.0
+              "max": 8,
+              "min": 2
             }
           },
           "name": "betternether:blue_obsidian",
@@ -171,8 +171,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "minecraft:crying_obsidian",
@@ -184,8 +184,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "betternether:blue_crying_obsidian",
@@ -197,8 +197,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "betternether:weeping_obsidian"
@@ -209,14 +209,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "betternether:blue_weeping_obsidian"
         }
       ],
-      "rolls": 3.0
+      "rolls": 3
     },
     {
       "condition": {
@@ -239,11 +239,11 @@
         "type": "minecraft:set_count",
         "count": {
           "type": "minecraft:uniform",
-          "max": 6.0,
-          "min": 2.0
+          "max": 6,
+          "min": 2
         }
       },
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -264,7 +264,7 @@
           "name": "betternether:music_disc_gloomsculk"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -292,7 +292,7 @@
           "name": "betternether:flaming_ruby_chestplate"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

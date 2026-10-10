@@ -19,8 +19,8 @@
                 "type": "minecraft:set_count",
                 "count": {
                   "type": "minecraft:uniform",
-                  "max": 2.0,
-                  "min": 1.0
+                  "max": 2,
+                  "min": 1
                 }
               },
               "name": "betternether:agave"
@@ -32,7 +32,7 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -49,14 +49,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 5.0,
-              "min": 2.0
+              "max": 5,
+              "min": 2
             }
           },
           "name": "betternether:agave_leaf"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

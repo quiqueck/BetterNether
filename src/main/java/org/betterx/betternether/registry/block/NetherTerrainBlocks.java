@@ -29,8 +29,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.block.api.trait.behaviour.FuelBlockTrait;
@@ -195,6 +193,9 @@ public class NetherTerrainBlocks {
             .requiresCorrectToolForDrops()
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTags(CommonBlockTags.SOUL_GROUND, CommonBlockTags.NETHERRACK, NetherTags.NETHER_FARMLAND)
+            // #38: vanilla crops (CropBlock/StemBlock/PitcherCropBlock.mayPlaceOn) accept #supports_crops, and
+            // #grows_crops gives them dry-farmland growth speed; it never hydrates, so it never gets the wet bonus.
+            .addTags(BlockTags.SUPPORTS_CROPS, BlockTags.GROWS_CROPS)
             .buildAndRegister();
     public static final BlockTerrain CEILING_MUSHROOMS = NetherBlocks.registerBlock(
             "ceiling_mushrooms",
@@ -240,8 +241,13 @@ public class NetherTerrainBlocks {
             // matches the SOIL tag above.
             .addTrait(PottableSoilBlockTrait.DEFAULT)
             .buildAndRegister();
-    // The fissures glow, so the block carries a little light of its own - not enough to light a room,
-    // enough to pick the block out of an unlit gloomwood floor.
+    // The fissures glow, so the block carries a little light of its own - half what vanilla's magma
+    // block gives (3), rounded up, which is as far as an integer light level lets "half" go.
+    //
+    // It used to be 5, from when the rock here was sculk: a light level multiplies the texture under
+    // it, and on a near-black tile 5 was barely visible. The rock is the bleached crust now, three
+    // times as bright, and the same 5 turned the block into a lamp sitting in the floor. The glow
+    // that matters is the fissures' own, and that comes from the emissive overlay, not from here.
     public static final BlockMoltenGloomsculk MOLTEN_GLOOMSCULK = NetherBlocks
             .defineBlock("molten_gloomsculk", BlockMoltenGloomsculk::new)
             .replacePropertiesWithCopy(Blocks.SCULK)
@@ -251,7 +257,7 @@ public class NetherTerrainBlocks {
             .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.hot())
             .addTrait(NetherLoot.terrain(Blocks.SCULK))
             .addTrait(NetherModels.terrainCover(() -> Blocks.SCULK))
-            .lightLevel(bs -> 5)
+            .lightLevel(bs -> 2)
             // The same trade as the molten log: redstone worked into plain sculk.
             .addTrait(BlockTraits.RECIPE.with((key, block, context) ->
                     RecipeBuilder.crafting(key.identifier(), block)

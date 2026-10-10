@@ -107,8 +107,14 @@ public class NetherVegetationPlaced {
             .createKey(C.id("patch_upside_down"))
             .setDecoration(VEGETAL_DECORATION);
 
-    public static final PlacedFeatureKey VEGETATION_GLOOMWOOD = PlacedFeatureManager
-            .createKey(C.id("vegetation_gloomwood"))
+    // One per floor material - see NetherVegetation.VEGETATION_GLOOMWOOD_BLEACHED. Both run in the
+    // gloomwood at the same count: each only takes where its own ground is, so between them they cover
+    // the floor once, not twice.
+    public static final PlacedFeatureKey VEGETATION_GLOOMWOOD_BLEACHED = PlacedFeatureManager
+            .createKey(C.id("vegetation_gloomwood_bleached"))
+            .setDecoration(VEGETAL_DECORATION);
+    public static final PlacedFeatureKey VEGETATION_GLOOMWOOD_SCULK = PlacedFeatureManager
+            .createKey(C.id("vegetation_gloomwood_sculk"))
             .setDecoration(VEGETAL_DECORATION);
 
     public static final PlacedFeatureKey GLOOMWISP_VINE_HEAD = PlacedFeatureManager

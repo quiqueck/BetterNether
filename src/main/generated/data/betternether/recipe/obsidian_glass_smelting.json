@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 200,
   "ingredient": "minecraft:obsidian",
   "result": {
     "id": "betternether:obsidian_glass"

@@ -4,21 +4,16 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:magma_flower",
             "weight": 7
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "1"
               }
             },
@@ -26,8 +21,8 @@
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "2"
               }
             },
@@ -35,26 +30,21 @@
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "3"
               }
             },
             "weight": 7
           },
           {
-            "data": {
-              "Name": "betternether:ink_bush",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:ink_bush",
             "weight": 20
           },
           {
             "data": {
-              "Name": "betternether:ink_bush",
-              "Properties": {
+              "id": "betternether:ink_bush",
+              "properties": {
                 "age": "1"
               }
             },
@@ -62,8 +52,8 @@
           },
           {
             "data": {
-              "Name": "betternether:ink_bush",
-              "Properties": {
+              "id": "betternether:ink_bush",
+              "properties": {
                 "age": "2"
               }
             },
@@ -71,26 +61,21 @@
           },
           {
             "data": {
-              "Name": "betternether:ink_bush",
-              "Properties": {
+              "id": "betternether:ink_bush",
+              "properties": {
                 "age": "3"
               }
             },
             "weight": 20
           },
           {
-            "data": {
-              "Name": "minecraft:nether_wart",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "minecraft:nether_wart",
             "weight": 10
           },
           {
             "data": {
-              "Name": "minecraft:nether_wart",
-              "Properties": {
+              "id": "minecraft:nether_wart",
+              "properties": {
                 "age": "1"
               }
             },
@@ -98,8 +83,8 @@
           },
           {
             "data": {
-              "Name": "minecraft:nether_wart",
-              "Properties": {
+              "id": "minecraft:nether_wart",
+              "properties": {
                 "age": "2"
               }
             },
@@ -107,32 +92,25 @@
           },
           {
             "data": {
-              "Name": "minecraft:nether_wart",
-              "Properties": {
+              "id": "minecraft:nether_wart",
+              "properties": {
                 "age": "3"
               }
             },
             "weight": 10
           },
           {
-            "data": {
-              "Name": "betternether:nether_grass"
-            },
+            "data": "betternether:nether_grass",
             "weight": 200
           },
           {
-            "data": {
-              "Name": "betternether:black_apple",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:black_apple",
             "weight": 12
           },
           {
             "data": {
-              "Name": "betternether:black_apple",
-              "Properties": {
+              "id": "betternether:black_apple",
+              "properties": {
                 "age": "1"
               }
             },
@@ -140,8 +118,8 @@
           },
           {
             "data": {
-              "Name": "betternether:black_apple",
-              "Properties": {
+              "id": "betternether:black_apple",
+              "properties": {
                 "age": "2"
               }
             },
@@ -149,20 +127,15 @@
           },
           {
             "data": {
-              "Name": "betternether:black_apple",
-              "Properties": {
+              "id": "betternether:black_apple",
+              "properties": {
                 "age": "3"
               }
             },
             "weight": 12
           },
           {
-            "data": {
-              "Name": "betternether:wart_seed",
-              "Properties": {
-                "facing": "up"
-              }
-            },
+            "data": "betternether:wart_seed",
             "weight": 60
           }
         ]

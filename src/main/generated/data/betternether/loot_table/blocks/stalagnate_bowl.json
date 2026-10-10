@@ -15,7 +15,7 @@
           "name": "betternether:stalagnate_bowl"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -31,7 +31,7 @@
           "name": "betternether:stalagnate_bowl_wart"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -47,7 +47,7 @@
           "name": "betternether:stalagnate_bowl_mushroom"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -63,7 +63,7 @@
           "name": "betternether:stalagnate_bowl_apple"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

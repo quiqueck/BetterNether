@@ -15,10 +15,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
+import net.minecraft.world.level.levelgen.material.rule.MaterialRule;
 
 public class GravelDesert extends NetherBiomeConfig {
-    public static final SurfaceRules.RuleSource GRAVEL = SurfaceRules.state(Blocks.GRAVEL.defaultBlockState());
+    public static final MaterialRule GRAVEL = MaterialRules.state(Blocks.GRAVEL.defaultBlockState());
 
 
     @Override
@@ -45,7 +46,7 @@ public class GravelDesert extends NetherBiomeConfig {
 
         builder.ceil(Blocks.NETHERRACK.defaultBlockState())
                .floor(Blocks.GRAVEL.defaultBlockState())
-               .rule(SurfaceRules.ifTrue(NetherBiomeBuilder.UNDER_FLOOR, GRAVEL), BaseSurfaceRuleBuilder.FLOOR_PRIORITY + 1)
+               .rule(MaterialRules.ifTrue(NetherBiomeBuilder.UNDER_FLOOR, GRAVEL), BaseSurfaceRuleBuilder.FLOOR_PRIORITY + 1)
                .belowFloor(Blocks.GRAVEL.defaultBlockState(), 4, Conditions.NETHER_VOLUME_NOISE)
         ;
     }

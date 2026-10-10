@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 200,
   "ingredient": "betternether:ink_bush_seed",
   "result": {
     "id": "minecraft:black_dye"

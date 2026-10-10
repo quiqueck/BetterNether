@@ -1,6 +1,3 @@
 {
-	"parent": "betternether:block/quartz_glass_framed_post",
-	"textures": {
-		"bars": "betternether:block/quartz_stained_glass_framed_blue"
-	}
+	"parent": "betternether:block/quartz_glass_framed_post"
 }

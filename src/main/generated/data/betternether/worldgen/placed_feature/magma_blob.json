@@ -2,10 +2,7 @@
   "feature": {
     "type": "minecraft:simple_block",
     "to_place": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "minecraft:magma_block"
-      }
+      "id": "minecraft:magma_block"
     }
   },
   "placement": [

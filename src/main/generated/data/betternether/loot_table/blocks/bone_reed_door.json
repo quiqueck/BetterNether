@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:match_block",
+            "blocks": "betternether:bone_reed_door",
+            "state": {
+              "half": "lower"
+            }
+          },
+          "name": "betternether:bone_reed_door"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

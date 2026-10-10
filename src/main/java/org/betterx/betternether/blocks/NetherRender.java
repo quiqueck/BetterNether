@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import de.ambertation.wover.block.api.render.BlockRenderTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The render layer a block is drawn with, as {@link ClientBlockTraits#RENDER_LAYER} traits to hand to a
+ * The render layer a block is drawn with, as {@link BlockRenderTraits#RENDER_LAYER} traits to hand to a
  * block's definition at registration. Replaces the old {@code IRenderTypeable} interface plus the
  * {@code BetterNetherClient.registerRenderLayers()} registry walk: the layer now lives on the block
  * definition rather than in the class hierarchy, and wover applies it in {@code afterBlockRegistration}.
@@ -16,7 +16,7 @@ import java.util.List;
  * A block that is neither given one of these nor carries a {@code render_type} in its model renders as
  * SOLID, so every cutout/translucent block needs one.
  * <p>
- * These are methods rather than constants because {@link ClientBlockTraits#RENDER_LAYER} returns
+ * These are methods rather than constants because {@link BlockRenderTraits#RENDER_LAYER} returns
  * {@code null} outside the client - the trait is client-only, and a constant would bake that null in at
  * class-init time. The lists returned here are already null-free, so they compose with
  * {@link NetherSurvival}'s lists and can be handed straight to the {@code register*} helpers.
@@ -24,22 +24,22 @@ import java.util.List;
 public class NetherRender {
     /** {@code RenderType.cutout()} - fully opaque or fully transparent pixels, no blending. */
     public static List<BlockTrait<?, ?>> cutout() {
-        return only(ClientBlockTraits.RENDER_LAYER.cutout());
+        return only(BlockRenderTraits.RENDER_LAYER.cutout());
     }
 
     /** {@code RenderType.translucent()} - alpha-blended, partially transparent pixels. */
     public static List<BlockTrait<?, ?>> translucent() {
-        return only(ClientBlockTraits.RENDER_LAYER.translucent());
+        return only(BlockRenderTraits.RENDER_LAYER.translucent());
     }
 
     /** {@link #cutout()} combined with further traits, e.g. a {@link NetherSurvival} rule. */
     public static List<BlockTrait<?, ?>> cutoutAnd(List<BlockTrait<?, ?>> more) {
-        return combine(ClientBlockTraits.RENDER_LAYER.cutout(), more);
+        return combine(BlockRenderTraits.RENDER_LAYER.cutout(), more);
     }
 
     /** {@link #translucent()} combined with further traits, e.g. a {@link NetherSurvival} rule. */
     public static List<BlockTrait<?, ?>> translucentAnd(List<BlockTrait<?, ?>> more) {
-        return combine(ClientBlockTraits.RENDER_LAYER.translucent(), more);
+        return combine(BlockRenderTraits.RENDER_LAYER.translucent(), more);
     }
 
     private static List<BlockTrait<?, ?>> only(BlockTrait<?, ?> trait) {

@@ -5,27 +5,18 @@
       "feature": {
         "type": "minecraft:simple_block",
         "to_place": {
-          "type": "minecraft:weighted_state_provider",
+          "type": "minecraft:weighted",
           "entries": [
             {
-              "data": {
-                "Name": "minecraft:crimson_roots"
-              },
+              "data": "minecraft:crimson_roots",
               "weight": 120
             },
             {
-              "data": {
-                "Name": "minecraft:crimson_fungus"
-              },
+              "data": "minecraft:crimson_fungus",
               "weight": 80
             },
             {
-              "data": {
-                "Name": "betternether:wart_seed",
-                "Properties": {
-                  "facing": "up"
-                }
-              },
+              "data": "betternether:wart_seed",
               "weight": 80
             }
           ]

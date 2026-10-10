@@ -4,27 +4,18 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "betternether:soul_vein"
-            },
+            "data": "betternether:soul_vein",
             "weight": 80
           },
           {
-            "data": {
-              "Name": "betternether:swamp_grass"
-            },
+            "data": "betternether:swamp_grass",
             "weight": 200
           },
           {
-            "data": {
-              "Name": "betternether:feather_fern",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:feather_fern",
             "weight": 80
           }
         ]

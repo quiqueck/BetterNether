@@ -15,8 +15,8 @@
               "type": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
+                "max": 3,
+                "min": 1
               }
             },
             "name": "betternether:blue_crying_obsidian",
@@ -28,8 +28,8 @@
               "type": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
+                "max": 2,
+                "min": 1
               }
             },
             "name": "betternether:blue_weeping_obsidian",
@@ -41,8 +41,8 @@
               "type": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
+                "max": 2,
+                "min": 1
               }
             },
             "name": "betternether:weeping_obsidian",

@@ -21,9 +21,7 @@
         },
         "then_run": {
           "type": "minecraft:block",
-          "result_state": {
-            "Name": "minecraft:bedrock"
-          }
+          "result_state": "minecraft:bedrock"
         }
       },
       {
@@ -40,9 +38,7 @@
         },
         "then_run": {
           "type": "minecraft:block",
-          "result_state": {
-            "Name": "minecraft:bedrock"
-          }
+          "result_state": "minecraft:bedrock"
         }
       },
       {
@@ -73,9 +69,7 @@
               },
               "then_run": {
                 "type": "minecraft:block",
-                "result_state": {
-                  "Name": "minecraft:magma_block"
-                }
+                "result_state": "minecraft:magma_block"
               }
             },
             {
@@ -106,25 +100,19 @@
                         },
                         "then_run": {
                           "type": "minecraft:block",
-                          "result_state": {
-                            "Name": "minecraft:netherrack"
-                          }
+                          "result_state": "minecraft:netherrack"
                         }
                       },
                       {
                         "type": "minecraft:block",
-                        "result_state": {
-                          "Name": "minecraft:red_sand"
-                        }
+                        "result_state": "minecraft:red_sand"
                       }
                     ]
                   }
                 },
                 {
                   "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:netherrack"
-                  }
+                  "result_state": "minecraft:netherrack"
                 }
               ]
             }
@@ -133,9 +121,7 @@
       },
       {
         "type": "minecraft:block",
-        "result_state": {
-          "Name": "minecraft:netherrack"
-        }
+        "result_state": "minecraft:netherrack"
       }
     ]
   }

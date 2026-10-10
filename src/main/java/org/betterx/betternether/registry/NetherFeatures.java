@@ -6,11 +6,14 @@ import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.features.configs.GloomwoodTreeConfiguration;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
+import org.betterx.betternether.world.structures.city.AvoidNetherCity;
 import org.betterx.betternether.world.structures.city.CityStructure;
 import de.ambertation.wover.events.api.WorldLifecycle;
 import de.ambertation.wover.feature.api.FeatureManager;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -138,6 +141,15 @@ public class NetherFeatures {
             BN.id("twisting_vines"),
             TwistedVinesFeature.CODEC,
             new TwistedVinesFeature()
+    );
+
+    /**
+     * Keeps a feature out of nether cities, see {@link AvoidNetherCity}.
+     */
+    public static final MapCodec<AvoidNetherCity> AVOID_NETHER_CITY = Registry.register(
+            BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,
+            BN.id("avoid_nether_city"),
+            AvoidNetherCity.CODEC
     );
 
     /**

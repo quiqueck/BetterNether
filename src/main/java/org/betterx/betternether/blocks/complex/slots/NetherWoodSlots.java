@@ -3,7 +3,6 @@ package org.betterx.betternether.blocks.complex.slots;
 import org.betterx.bclib.trait.block.TemplateModelTrait;
 import org.betterx.betternether.BetterNether;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraitLookup;
 import de.ambertation.wover.sets.api.blocks.BlockSet;

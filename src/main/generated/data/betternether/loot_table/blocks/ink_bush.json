@@ -24,14 +24,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 4.0,
-              "min": 2.0
+              "max": 4,
+              "min": 2
             }
           },
           "name": "betternether:ink_bush_seed"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -43,7 +43,7 @@
           "name": "betternether:ink_bush_seed"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

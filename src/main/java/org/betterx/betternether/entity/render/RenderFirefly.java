@@ -86,10 +86,10 @@ class FireflyGlowFeatureRenderer extends RenderLayer<FireflyRenderState, ModelEn
         // the rotation itself, so its transpose is the inverse - then rotate by the camera's
         // orientation so the quad billboards to the viewer regardless of how the firefly is facing.
         Matrix3f entityRotation = new Matrix3f(matrices.last().normal());
-        matrices.mulPose(entityRotation.transpose().getNormalizedRotation(new Quaternionf()));
+        matrices.rotate(entityRotation.transpose().getNormalizedRotation(new Quaternionf()));
 
-        matrices.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation());
-        matrices.mulPose(Axis.YP.rotationDegrees(180.0F));
+        matrices.rotate(Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation());
+        matrices.rotate(Axis.YP.rotationDegrees(180.0F));
 
         // The collector snapshots a copy of matrices.last(), so popping afterwards is safe.
         submitNodeCollector.submitCustomGeometry(matrices, renderType, (pose, buffer) -> {

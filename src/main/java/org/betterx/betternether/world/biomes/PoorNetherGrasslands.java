@@ -17,7 +17,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
+import net.minecraft.world.level.levelgen.material.rule.MaterialRule;
 
 import java.util.List;
 
@@ -44,18 +45,18 @@ public class PoorNetherGrasslands extends NetherBiomeConfig {
     @Override
     public void surface(BiomeSurfaceRuleBuilder<NetherBiomeBuilder> builder) {
         super.surface(builder);
-        SurfaceRules.RuleSource soilStoneDist
-                = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(
+        MaterialRule soilStoneDist
+                = MaterialRules.sequence(
+                MaterialRules.ifTrue(
                         Conditions.NETHER_VOLUME_NOISE,
                         NetherGrasslands.SOUL_SOIL
                 ),
-                SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState())
+                MaterialRules.state(Blocks.NETHERRACK.defaultBlockState())
         );
 
         builder.rule(
-                SurfaceRules.sequence(
-                        SurfaceRules.ifTrue(
+                MaterialRules.sequence(
+                        MaterialRules.ifTrue(
                                 NetherBiomeBuilder.ON_FLOOR,
                                 new SwitchRuleSource(
                                         NetherNoiseCondition.INSTANCE,

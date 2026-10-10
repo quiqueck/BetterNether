@@ -4,21 +4,16 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "betternether:agave",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:agave",
             "weight": 20
           },
           {
             "data": {
-              "Name": "betternether:agave",
-              "Properties": {
+              "id": "betternether:agave",
+              "properties": {
                 "age": "1"
               }
             },
@@ -26,8 +21,8 @@
           },
           {
             "data": {
-              "Name": "betternether:agave",
-              "Properties": {
+              "id": "betternether:agave",
+              "properties": {
                 "age": "2"
               }
             },
@@ -35,26 +30,21 @@
           },
           {
             "data": {
-              "Name": "betternether:agave",
-              "Properties": {
+              "id": "betternether:agave",
+              "properties": {
                 "age": "3"
               }
             },
             "weight": 20
           },
           {
-            "data": {
-              "Name": "betternether:barrel_cactus",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:barrel_cactus",
             "weight": 5
           },
           {
             "data": {
-              "Name": "betternether:barrel_cactus",
-              "Properties": {
+              "id": "betternether:barrel_cactus",
+              "properties": {
                 "age": "1"
               }
             },
@@ -62,8 +52,8 @@
           },
           {
             "data": {
-              "Name": "betternether:barrel_cactus",
-              "Properties": {
+              "id": "betternether:barrel_cactus",
+              "properties": {
                 "age": "2"
               }
             },
@@ -71,8 +61,8 @@
           },
           {
             "data": {
-              "Name": "betternether:barrel_cactus",
-              "Properties": {
+              "id": "betternether:barrel_cactus",
+              "properties": {
                 "age": "3"
               }
             },

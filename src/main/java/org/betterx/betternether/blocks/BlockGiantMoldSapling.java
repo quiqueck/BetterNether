@@ -76,6 +76,11 @@ public class BlockGiantMoldSapling extends Block implements BonemealableBlock {
                 : (random.nextInt(16) == 0);
     }
 
+    /**
+     * The chance that one application of bone meal grows the giant mold, the same 40% vanilla mushrooms use.
+     */
+    public static final float BONEMEAL_SUCCESS_CHANCE = 0.4f;
+
     @Override
     public boolean isBonemealSuccess(
             Level world,
@@ -84,7 +89,9 @@ public class BlockGiantMoldSapling extends Block implements BonemealableBlock {
             BlockState state,
             BonemealSource bonemealSource
     ) {
-        return canGrowRandomly(world, random, pos, state);
+        // Vanilla's mushroom odds (MushroomBlock): 40% per application, one step to the grown plant.
+        // Random ticks keep their own, much slower roll in canGrowRandomly.
+        return random.nextFloat() < BONEMEAL_SUCCESS_CHANCE;
     }
 
     private void grow(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {

@@ -2,14 +2,11 @@
   "feature": {
     "type": "minecraft:simple_block",
     "to_place": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "minecraft:sculk_sensor",
-        "Properties": {
-          "power": "0",
-          "sculk_sensor_phase": "inactive",
-          "waterlogged": "false"
-        }
+      "id": "minecraft:sculk_sensor",
+      "properties": {
+        "power": "0",
+        "sculk_sensor_phase": "inactive",
+        "waterlogged": "false"
       }
     }
   },

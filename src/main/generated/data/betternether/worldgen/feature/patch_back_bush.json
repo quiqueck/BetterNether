@@ -4,10 +4,7 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "betternether:black_bush"
-        }
+        "id": "betternether:black_bush"
       }
     },
     "placement": [

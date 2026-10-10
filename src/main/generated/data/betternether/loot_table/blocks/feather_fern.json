@@ -24,14 +24,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 4.0,
-              "min": 1.0
+              "max": 4,
+              "min": 1
             }
           },
           "name": "minecraft:feather"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -56,14 +56,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 1.0
+              "max": 2,
+              "min": 1
             }
           },
           "name": "betternether:feather_fern"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -75,7 +75,7 @@
           "name": "betternether:feather_fern"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

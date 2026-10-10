@@ -22,11 +22,10 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
  * <p>
  * <b>Scope note</b>: this checks the rule values themselves round-trip correctly through the real
  * vanilla {@code GameRules} API, not each rule's downstream behavioural effect (a specific willow
- * growing 2x2 vs 1x1, a gloomwisp actually shedding an experience orb - the latter's own method,
- * {@code BlockGloomwispVine#shedExperience}, is private and gated on both the rule and a
- * {@code EXPERIENCE_CHANCE} random roll, so proving it needs driving the vine's public push-through
- * interaction rather than the rule alone). The rule itself is confirmed to gate real behavior by reading
- * {@code BlockWillowSapling.java:35} and {@code BlockGloomwispVine.java:444} directly.
+ * growing 2x2 vs 1x1). The willow rule is confirmed to gate real behavior by reading
+ * {@code BlockWillowSapling.java:35} directly. {@code gloomwisp_drops_experience} is the exception:
+ * driving it needs the vine's push-through interaction rather than the rule alone, which is what
+ * {@link GloomwispExperienceGameTest} does - including the rule's own off case.
  */
 public class GameRuleGameTest {
     @GameTest

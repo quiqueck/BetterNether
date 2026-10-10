@@ -16,45 +16,39 @@
             "min_inclusive": 0
           },
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:gloomwisp_vine",
-              "Properties": {
-                "offset": "true",
-                "persistent": "false",
-                "rotation": "random",
-                "shape": "bottom"
-              }
+            "id": "betternether:gloomwisp_vine",
+            "properties": {
+              "offset": "true",
+              "persistent": "false",
+              "rotation": "random",
+              "shape": "bottom",
+              "spent": "false"
             }
           }
         },
         {
           "height": 1,
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:gloomwisp_vine",
-              "Properties": {
-                "offset": "true",
-                "persistent": "false",
-                "rotation": "random",
-                "shape": "middle"
-              }
+            "id": "betternether:gloomwisp_vine",
+            "properties": {
+              "offset": "true",
+              "persistent": "false",
+              "rotation": "random",
+              "shape": "middle",
+              "spent": "false"
             }
           }
         },
         {
           "height": 1,
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:gloomwisp_vine",
-              "Properties": {
-                "offset": "true",
-                "persistent": "false",
-                "rotation": "random",
-                "shape": "top"
-              }
+            "id": "betternether:gloomwisp_vine",
+            "properties": {
+              "offset": "true",
+              "persistent": "false",
+              "rotation": "random",
+              "shape": "top",
+              "spent": "false"
             }
           }
         }

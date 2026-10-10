@@ -29,8 +29,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -100,6 +98,10 @@ public class NetherDecorBlocks {
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
             .noOcclusion()
+            // Like vanilla's flower_pot. The plant lives in the separate potted_plant block above, which is not a
+            // pot and stays out. On 26.3 this tag is part of #minecraft:washed_away_by_fluids, so the pots keep
+            // being washed away by water and lava as they were up to 26.2.
+            .addTags(BlockTags.FLOWER_POTS)
             .addTrait(NetherLoot.dropSelfNoExplosion())
             // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
             .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())
@@ -108,6 +110,8 @@ public class NetherDecorBlocks {
             .replacePropertiesWithCopy(Blocks.NETHER_BRICKS)
             .addTrait(NetherMaterial.stone())
             .noOcclusion()
+            // See CINCINNASITE_POT.
+            .addTags(BlockTags.FLOWER_POTS)
             .addTrait(NetherLoot.dropSelfNoExplosion())
             // Not a full cube, so no sulfur cube archetype - vanilla tags no block of this shape.
             .addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable())

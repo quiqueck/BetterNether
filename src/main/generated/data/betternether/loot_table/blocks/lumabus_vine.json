@@ -50,8 +50,8 @@
                 "type": "minecraft:set_count",
                 "count": {
                   "type": "minecraft:uniform",
-                  "max": 3.0,
-                  "min": 1.0
+                  "max": 3,
+                  "min": 1
                 }
               },
               "name": "betternether:lumabus_seed"
@@ -81,7 +81,7 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "entries": [
@@ -140,14 +140,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "betternether:glowstone_pile"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

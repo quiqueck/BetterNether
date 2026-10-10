@@ -2,12 +2,9 @@
   "feature": {
     "type": "minecraft:simple_block",
     "to_place": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "betternether:gloomsculk_crystal",
-        "Properties": {
-          "facing": "up"
-        }
+      "id": "betternether:gloomsculk_crystal",
+      "properties": {
+        "facing": "up"
       }
     }
   },

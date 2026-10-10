@@ -4,18 +4,14 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "minecraft:warped_fungus"
-            },
+            "data": "minecraft:warped_fungus",
             "weight": 50
           },
           {
-            "data": {
-              "Name": "minecraft:warped_roots"
-            },
+            "data": "minecraft:warped_roots",
             "weight": 200
           }
         ]

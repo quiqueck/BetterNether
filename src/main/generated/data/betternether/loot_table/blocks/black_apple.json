@@ -23,7 +23,7 @@
           "name": "betternether:black_apple"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -35,7 +35,7 @@
           "name": "betternether:black_apple_seed"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

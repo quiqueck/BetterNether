@@ -28,13 +28,25 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
+import net.minecraft.world.level.levelgen.material.rule.MaterialRule;
+import net.minecraft.world.level.levelgen.material.condition.MaterialCondition;
+import net.minecraft.world.level.levelgen.material.condition.VerticalGradientCondition;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
 public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuilder<NetherBiomeBuilder> {
+    /**
+     * Every BetterNether Biome competes with a slightly higher weight than vanilla Biomes and Biomes of other mods,
+     * which use WoVer's default {@code genChance} of {@code 1.0}. The factor is applied to every
+     * {@code genChance} (top-level, sub- and edge-biomes alike), so the weights between BetterNether Biomes stay
+     * as configured.
+     */
+    private static final float GEN_CHANCE_FACTOR = 1.25f;
 
     protected NetherBiomeBuilder(
             BiomeBootstrapContext context,
@@ -58,7 +70,7 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
             .feature(NetherVegetationPlaced.WART_CAP);
     }
 
-    public static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
+    public static final MaterialRule BEDROCK = MaterialRules.state(Blocks.BEDROCK.defaultBlockState());
 
     /**
      * Replacement for {@code SurfaceRules.ON_FLOOR}, which Minecraft 26.3 deleted.
@@ -66,11 +78,11 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
      * 26.3 moved these four constants out of Java and into the new
      * {@code minecraft:worldgen/material_condition} <b>datapack</b> registry (see
      * {@code net.minecraft.data.worldgen.material.VanillaMaterialConditions}). We deliberately do
-     * <b>not</b> go through {@link SurfaceRules#getCondition(net.minecraft.core.HolderGetter,
+     * <b>not</b> go through {@link MaterialRules#getCondition(net.minecraft.core.HolderGetter,
      * net.minecraft.resources.ResourceKey)} for them, for the same two reasons WoVer's
      * {@code SurfaceRuleBuilderImpl} inlines them:
      * <ul>
-     * <li>resolving the key needs a {@code HolderGetter<ConditionSource>}, and the biome configs
+     * <li>resolving the key needs a {@code HolderGetter<MaterialCondition>}, and the biome configs
      * build their rules eagerly - in static initialisers and in {@code surface(...)} - outside any
      * registry bootstrap;</li>
      * <li>a holder reference would make every rule BetterNether emits depend on a vanilla data file
@@ -81,35 +93,35 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
      * {@code stoneDepthCheck(0, true, FLOOR)}, {@code stoneDepthCheck(0, false, CEILING)} and
      * {@code stoneDepthCheck(0, true, CEILING)} respectively.
      */
-    public static final SurfaceRules.ConditionSource ON_FLOOR
-            = SurfaceRules.stoneDepthCheck(0, false, CaveSurface.FLOOR);
+    public static final MaterialCondition ON_FLOOR
+            = MaterialRules.stoneDepthCheck(0, false, CaveSurface.FLOOR);
 
     /**
      * Replacement for the deleted {@code SurfaceRules.UNDER_FLOOR}. See {@link #ON_FLOOR}.
      */
-    public static final SurfaceRules.ConditionSource UNDER_FLOOR
-            = SurfaceRules.stoneDepthCheck(0, true, CaveSurface.FLOOR);
+    public static final MaterialCondition UNDER_FLOOR
+            = MaterialRules.stoneDepthCheck(0, true, CaveSurface.FLOOR);
 
     /**
      * Replacement for the deleted {@code SurfaceRules.ON_CEILING}. See {@link #ON_FLOOR}.
      */
-    public static final SurfaceRules.ConditionSource ON_CEILING
-            = SurfaceRules.stoneDepthCheck(0, false, CaveSurface.CEILING);
+    public static final MaterialCondition ON_CEILING
+            = MaterialRules.stoneDepthCheck(0, false, CaveSurface.CEILING);
 
     /**
      * Replacement for the deleted {@code SurfaceRules.UNDER_CEILING}. See {@link #ON_FLOOR}.
      */
-    public static final SurfaceRules.ConditionSource UNDER_CEILING
-            = SurfaceRules.stoneDepthCheck(0, true, CaveSurface.CEILING);
+    public static final MaterialCondition UNDER_CEILING
+            = MaterialRules.stoneDepthCheck(0, true, CaveSurface.CEILING);
 
-    public static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM
-            = new SurfaceRules.VerticalGradientConditionSource(
+    public static final VerticalGradientCondition BEDROCK_BOTTOM
+            = new VerticalGradientCondition(
             BetterNether.C.id("bedrock_floor"),
             VerticalAnchor.bottom(),
             VerticalAnchor.aboveBottom(5)
     );
-    public static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP
-            = new SurfaceRules.VerticalGradientConditionSource(
+    public static final VerticalGradientCondition BEDROCK_TOP
+            = new VerticalGradientCondition(
             BetterNether.C.id("bedrock_roof"),
             VerticalAnchor.belowTop(5),
             VerticalAnchor.top()
@@ -175,7 +187,7 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
 
     public static <C extends NetherBiomeConfig> NetherBiomeKey<C> createKey(@NotNull String name) {
         return new NetherBiomeKey<>(BetterNether.C.id(name.replace(' ', '_')
-                                                          .toLowerCase()));
+                                                          .toLowerCase(Locale.ROOT)));
     }
 
     @Override
@@ -184,7 +196,7 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
                 key.dataKey,
                 new NetherBiome(
                         fogDensity, key.key, new BiomeGenerationDataContainer(parameters, intendedPlacement),
-                        terrainHeight, genChance, edgeSize, vertical, edge, parent
+                        terrainHeight, genChance * GEN_CHANCE_FACTOR, edgeSize, vertical, edge, parent
                 )
         );
     }

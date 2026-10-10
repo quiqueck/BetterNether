@@ -9,16 +9,17 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
+import net.minecraft.world.level.levelgen.material.rule.MaterialRule;
 
 public abstract class NetherBiomeConfig {
-    public static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
-    public static final SurfaceRules.RuleSource BEDROCK_BOTTOM = SurfaceRules.ifTrue(
+    public static final MaterialRule NETHERRACK = MaterialRules.state(Blocks.NETHERRACK.defaultBlockState());
+    public static final MaterialRule BEDROCK_BOTTOM = MaterialRules.ifTrue(
             NetherBiomeBuilder.BEDROCK_BOTTOM,
             NetherBiomeBuilder.BEDROCK
     );
-    public static final SurfaceRules.RuleSource BEDROCK_TOP = SurfaceRules.ifTrue(
-            SurfaceRules.not(NetherBiomeBuilder.BEDROCK_TOP),
+    public static final MaterialRule BEDROCK_TOP = MaterialRules.ifTrue(
+            MaterialRules.not(NetherBiomeBuilder.BEDROCK_TOP),
             NetherBiomeBuilder.BEDROCK
     );
 

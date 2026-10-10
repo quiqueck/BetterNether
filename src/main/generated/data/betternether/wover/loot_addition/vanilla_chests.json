@@ -12,8 +12,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 2.0,
-                    "min": 1.0
+                    "max": 2,
+                    "min": 1
                   }
                 },
                 "name": "betternether:blue_obsidian"
@@ -25,8 +25,8 @@
             ],
             "rolls": {
               "type": "minecraft:uniform",
-              "max": 4.0,
-              "min": 0.0
+              "max": 4,
+              "min": 0
             }
           },
           {
@@ -40,7 +40,7 @@
                 "name": "betternether:bowl_upgrade_smithing_template"
               }
             ],
-            "rolls": 1.0
+            "rolls": 1
           }
         ]
       },
@@ -61,8 +61,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 8.0,
-                    "min": 3.0
+                    "max": 8,
+                    "min": 3
                   }
                 },
                 "name": "betternether:blue_crying_obsidian",
@@ -74,8 +74,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 4.0,
-                    "min": 1.0
+                    "max": 4,
+                    "min": 1
                   }
                 },
                 "name": "betternether:blue_weeping_obsidian"
@@ -86,8 +86,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 4.0,
-                    "min": 1.0
+                    "max": 4,
+                    "min": 1
                   }
                 },
                 "name": "betternether:weeping_obsidian"
@@ -99,8 +99,8 @@
             ],
             "rolls": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 1.0
+              "max": 2,
+              "min": 1
             }
           },
           {
@@ -114,7 +114,7 @@
                 "name": "betternether:bowl_upgrade_smithing_template"
               }
             ],
-            "rolls": 1.0
+            "rolls": 1
           }
         ]
       },
@@ -136,8 +136,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 6.0,
-                    "min": 4.0
+                    "max": 6,
+                    "min": 4
                   }
                 },
                 "name": "betternether:blue_obsidian",
@@ -149,8 +149,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 5.0,
-                    "min": 1.0
+                    "max": 5,
+                    "min": 1
                   }
                 },
                 "name": "betternether:blue_crying_obsidian",
@@ -162,8 +162,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 2.0,
-                    "min": 1.0
+                    "max": 2,
+                    "min": 1
                   }
                 },
                 "name": "betternether:blue_weeping_obsidian"
@@ -174,8 +174,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 2.0,
-                    "min": 1.0
+                    "max": 2,
+                    "min": 1
                   }
                 },
                 "name": "betternether:weeping_obsidian"
@@ -187,8 +187,8 @@
             ],
             "rolls": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 1.0
+              "max": 2,
+              "min": 1
             }
           },
           {
@@ -202,7 +202,7 @@
                 "name": "betternether:bowl_upgrade_smithing_template"
               }
             ],
-            "rolls": 1.0
+            "rolls": 1
           }
         ]
       },

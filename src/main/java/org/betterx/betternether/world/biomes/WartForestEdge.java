@@ -16,7 +16,7 @@ import de.ambertation.wover.surface.impl.rules.SwitchRuleSource;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
 
 import java.util.List;
 
@@ -41,8 +41,8 @@ public class WartForestEdge extends NetherBiomeConfig {
     public void surface(BiomeSurfaceRuleBuilder<NetherBiomeBuilder> builder) {
         super.surface(builder);
         builder.rule(
-                SurfaceRules.sequence(
-                        SurfaceRules.ifTrue(
+                MaterialRules.sequence(
+                        MaterialRules.ifTrue(
                                 NetherBiomeBuilder.ON_FLOOR,
                                 new SwitchRuleSource(
                                         NetherNoiseCondition.INSTANCE,
@@ -54,7 +54,7 @@ public class WartForestEdge extends NetherBiomeConfig {
                                         )
                                 )
                         ),
-                        SurfaceRules.ifTrue(
+                        MaterialRules.ifTrue(
                                 Conditions.NETHER_VOLUME_NOISE,
                                 NetherGrasslands.SOUL_SAND
                         ),

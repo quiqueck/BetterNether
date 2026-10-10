@@ -4,22 +4,16 @@
     "feature": {
       "type": "minecraft:simple_block",
       "to_place": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "betternether:egg_plant",
-              "Properties": {
-                "age": "0",
-                "destructed": "false"
-              }
-            },
+            "data": "betternether:egg_plant",
             "weight": 20
           },
           {
             "data": {
-              "Name": "betternether:egg_plant",
-              "Properties": {
+              "id": "betternether:egg_plant",
+              "properties": {
                 "age": "1",
                 "destructed": "false"
               }
@@ -28,8 +22,8 @@
           },
           {
             "data": {
-              "Name": "betternether:egg_plant",
-              "Properties": {
+              "id": "betternether:egg_plant",
+              "properties": {
                 "age": "2",
                 "destructed": "false"
               }
@@ -38,8 +32,8 @@
           },
           {
             "data": {
-              "Name": "betternether:egg_plant",
-              "Properties": {
+              "id": "betternether:egg_plant",
+              "properties": {
                 "age": "3",
                 "destructed": "false"
               }
@@ -47,24 +41,17 @@
             "weight": 20
           },
           {
-            "data": {
-              "Name": "betternether:jungle_plant"
-            },
+            "data": "betternether:jungle_plant",
             "weight": 80
           },
           {
-            "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:magma_flower",
             "weight": 7
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "1"
               }
             },
@@ -72,8 +59,8 @@
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "2"
               }
             },
@@ -81,26 +68,21 @@
           },
           {
             "data": {
-              "Name": "betternether:magma_flower",
-              "Properties": {
+              "id": "betternether:magma_flower",
+              "properties": {
                 "age": "3"
               }
             },
             "weight": 7
           },
           {
-            "data": {
-              "Name": "betternether:feather_fern",
-              "Properties": {
-                "age": "0"
-              }
-            },
+            "data": "betternether:feather_fern",
             "weight": 5
           },
           {
             "data": {
-              "Name": "betternether:feather_fern",
-              "Properties": {
+              "id": "betternether:feather_fern",
+              "properties": {
                 "age": "1"
               }
             },
@@ -108,8 +90,8 @@
           },
           {
             "data": {
-              "Name": "betternether:feather_fern",
-              "Properties": {
+              "id": "betternether:feather_fern",
+              "properties": {
                 "age": "2"
               }
             },
@@ -117,8 +99,8 @@
           },
           {
             "data": {
-              "Name": "betternether:feather_fern",
-              "Properties": {
+              "id": "betternether:feather_fern",
+              "properties": {
                 "age": "3"
               }
             },

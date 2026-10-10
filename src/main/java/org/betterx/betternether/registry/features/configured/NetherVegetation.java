@@ -44,13 +44,23 @@ public class NetherVegetation {
     public static final FeatureKey<WeightedBlockPatch> BONEMEAL_SOUL_SOIL =
             FeatureContentManager.bonemeal(C.id("bonemeal_soul_soil"));
     /**
-     * Gloomwood ground cover. A random block patch rather than
-     * {@code netherForrestVegetation()}: that wraps vanilla's nether-forest-vegetation feature, which
-     * refuses to place unless the block below is {@code #minecraft:nylium}, and the gloomwood floor is
-     * sculk. Same reason {@code VEGETATION_MAGMA_LAND} below is built this way.
+     * Gloomwood ground cover, one feature per floor material: the pale gloomgrass grows on the bleached
+     * gloomsculk, the dark one on the vanilla sculk patches in it. Two features rather than one weighted
+     * pick because the choice is made by the ground, and a block provider cannot see the ground - only a
+     * placement filter can, and there is one filter per feature.
+     * <p>
+     * A random block patch rather than {@code netherForrestVegetation()}: that wraps vanilla's
+     * nether-forest-vegetation feature, which refuses to place unless the block below is
+     * {@code #minecraft:nylium}, and the gloomwood floor is sculk. Same reason
+     * {@code VEGETATION_MAGMA_LAND} below is built this way.
      */
-    public static final FeatureKey<WeightedBlock> VEGETATION_GLOOMWOOD =
-            FeatureContentManager.randomBlock(C.id("vegetation_gloomwood"));
+    public static final FeatureKey<ForSimpleBlock> VEGETATION_GLOOMWOOD_BLEACHED =
+            FeatureContentManager.simple(C.id("vegetation_gloomwood_bleached"));
+    /**
+     * @see #VEGETATION_GLOOMWOOD_BLEACHED
+     */
+    public static final FeatureKey<ForSimpleBlock> VEGETATION_GLOOMWOOD_SCULK =
+            FeatureContentManager.simple(C.id("vegetation_gloomwood_sculk"));
     public static final FeatureKey<WeightedBlock> VEGETATION_MAGMA_LAND =
             FeatureContentManager.randomBlock(C.id("vegetation_magma_land"));
     /**

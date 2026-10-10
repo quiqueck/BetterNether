@@ -3,6 +3,7 @@
   "biome": "betternether:nether_mushroom_forest",
   "edge": "betternether:nether_mushroom_forest_edge",
   "edgeSize": 6,
+  "genChance": 1.25,
   "generation_data": {
     "intended_placement": "minecraft:is_nether",
     "parameter_points": [

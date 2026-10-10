@@ -2,10 +2,7 @@
   "feature": {
     "type": "minecraft:simple_block",
     "to_place": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "betternether:gloomsculk_geode"
-      }
+      "id": "betternether:gloomsculk_geode"
     }
   },
   "placement": [

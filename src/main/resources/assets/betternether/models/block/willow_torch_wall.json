@@ -3,8 +3,7 @@
 	"parent": "block/block",
 	"textures": {
 		"particle": "betternether:block/willow_bark_end",
-		"texture": "betternether:block/willow_bark_end",
-		"leaves": "betternether:block/willow_leaves_end"
+		"texture": "betternether:block/willow_bark_end"
 	},
 	"elements": [ 	 
 		{

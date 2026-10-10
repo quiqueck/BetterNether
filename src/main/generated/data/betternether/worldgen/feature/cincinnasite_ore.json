@@ -4,9 +4,7 @@
   "size": 8,
   "targets": [
     {
-      "state": {
-        "Name": "betternether:cincinnasite_ore"
-      },
+      "state": "betternether:cincinnasite_ore",
       "target": {
         "block": "minecraft:netherrack",
         "predicate_type": "minecraft:block_match"

@@ -6,10 +6,7 @@
         "feature": {
           "type": "minecraft:simple_block",
           "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:bone_block"
-            }
+            "id": "betternether:bone_block"
           }
         },
         "placement": [
@@ -59,12 +56,9 @@
               },
               "min_height": 0,
               "state": {
-                "type": "minecraft:simple_state_provider",
-                "state": {
-                  "Name": "betternether:bone_stalactite",
-                  "Properties": {
-                    "size": "0"
-                  }
+                "id": "betternether:bone_stalactite",
+                "properties": {
+                  "size": "0"
                 }
               },
               "transform": "size_decrease"

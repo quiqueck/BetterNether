@@ -4,9 +4,7 @@
   "size": 5,
   "targets": [
     {
-      "state": {
-        "Name": "betternether:nether_ruby_ore"
-      },
+      "state": "betternether:nether_ruby_ore",
       "target": {
         "block": "minecraft:soul_soil",
         "predicate_type": "minecraft:block_match"

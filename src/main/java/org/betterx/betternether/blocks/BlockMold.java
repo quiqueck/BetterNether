@@ -65,10 +65,10 @@ class BaseBlockMold extends Block {
         super.randomTick(state, world, pos, random);
         if (random.nextInt(16) == 0) {
             int c = 0;
-            c = world.getBlockState(pos.north()).getBlock() == this ? c++ : c;
-            c = world.getBlockState(pos.south()).getBlock() == this ? c++ : c;
-            c = world.getBlockState(pos.east()).getBlock() == this ? c++ : c;
-            c = world.getBlockState(pos.west()).getBlock() == this ? c++ : c;
+            if (world.getBlockState(pos.north()).getBlock() == this) c++;
+            if (world.getBlockState(pos.south()).getBlock() == this) c++;
+            if (world.getBlockState(pos.east()).getBlock() == this) c++;
+            if (world.getBlockState(pos.west()).getBlock() == this) c++;
             if (c < 2) {
                 // 26.3 removed the BlockPos(Vec3i) copy constructor; immutable() is the equivalent
                 // (it returns this for an already-immutable BlockPos and copies a MutableBlockPos).

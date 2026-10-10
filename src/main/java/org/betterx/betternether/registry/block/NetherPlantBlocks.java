@@ -1,5 +1,6 @@
 package org.betterx.betternether.registry.block;
 
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.registry.item.NetherResourceItems;
 
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
@@ -30,8 +31,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -81,6 +80,7 @@ public class NetherPlantBlocks {
     public static final Block EYE_SEED = NetherBlocks.defineBlock("eye_seed", BlockEyeSeed::new)
             .addTrait(NetherRender.cutout())
             .addTrait(NetherSurvival.netherrack())
+            .addTrait(DescriptionBlockTrait.of("tooltip.betternether.sapling.hanging"))
             .addTrait(NetherMaterial.sapling(MapColor.COLOR_RED))
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherTraits.seed())
@@ -129,9 +129,9 @@ public class NetherPlantBlocks {
     // Pale gloomgrass: the bone-grass silhouette in the gloomwood's dark-to-bright transition palette.
     // Same block shape and traits as the bone grasses either side of it, so it reuses BoneGrass rather
     // than adding a class that would only differ by its textures.
-    // Survives on anything solid rather than on a ground list: worldgen only ever puts it on the sculk
-    // floor (its placed feature filters on SCULK_LIKE), so the rule here is purely about where a player
-    // may replant one, and a decorative tuft is not worth a lookup table for that.
+    // Survives on anything solid rather than on a ground list: worldgen only ever puts it on the
+    // bleached gloomsculk (its placed feature filters on that block), so the rule here is purely about
+    // where a player may replant one, and a decorative tuft is not worth a lookup table for that.
     public static final Block PALE_GLOOMGRASS = NetherBlocks.defineBlock("pale_gloomgrass", BlockNetherGrass.BoneGrass::new)
             .addTrait(NetherRender.cutout())
             .addTrait(SurvivesOnSolidTrait.DEFAULT)
@@ -140,8 +140,9 @@ public class NetherPlantBlocks {
             .addTrait(NetherMaterial.grass(MapColor.TERRACOTTA_WHITE))
             .addTrait(NetherTraits.plant())
             .buildAndRegister();
-    // Gloomgrass: the same tuft on sculk's own palette, growing mixed in with the pale one rather
-    // than anywhere of its own - see VEGETATION_GLOOMWOOD, where it takes the larger share.
+    // Gloomgrass: the same tuft on sculk's own palette, and it grows on sculk - the vanilla sculk
+    // patches in the gloomwood floor, which is where VEGETATION_GLOOMWOOD_SCULK puts it. The pale
+    // variant above covers the bleached gloomsculk around those patches.
     public static final Block GLOOMGRASS = NetherBlocks.defineBlock("gloomgrass", BlockNetherGrass.BoneGrass::new)
             .addTrait(NetherRender.cutout())
             .addTrait(SurvivesOnSolidTrait.DEFAULT)
@@ -236,8 +237,10 @@ public class NetherPlantBlocks {
     // NetherMaterial.grass() GRASS/XZ alias): the ctor's own sound(CROP)/offsetType(NONE) overrides replace
     // the preset's GRASS sound and XZ offset, and both are baked into the trait's own configure() so they
     // must be passed as the trait's parameters rather than left as separate chained calls.
+    // Drops itself when sheared or silk-touched, like the molds it shares BaseBlockMold with (see HOOK_MUSHROOM).
     public static final Block MOSS_COVER = NetherBlocks.defineBlock("moss_cover", BlockMossCover::new)
             .addTrait(NetherRender.cutout())
+            .addTrait(NetherLoot.netherGrass())
             .addTrait(PlantBlockTrait.withColor(
                     MapColor.COLOR_GREEN, false, BlockBehaviour.OffsetType.NONE, SoundType.CROP, true
             ))
@@ -291,6 +294,9 @@ public class NetherPlantBlocks {
             .instabreak()
             .offsetType(BlockBehaviour.OffsetType.XZ)
             .addTrait(NetherTraits.plant())
+            // Not a PlantBlockTrait (see above), so the #washed_away_by_fluids that trait gives every
+            // non-colliding plant is added here: 26.3 lets fluids wash away only blocks in that tag.
+            .addTags(BlockTags.WASHED_AWAY_BY_FLUIDS)
             .buildAndRegister();
     // stays inline: unlike AGAVE, this block's final chain replaces cactus()'s requiresCorrectToolForDrops/
     // noCollission/instabreak with strength(0.4F)/dynamicShape() instead - NetherMaterial.cactus()'s trait
@@ -311,6 +317,11 @@ public class NetherPlantBlocks {
             .dynamicShape()
             .offsetType(BlockBehaviour.OffsetType.XZ)
             .addTrait(NetherTraits.plant())
+            // Only a grown barrel cactus collides; being dynamic-shape it never counted as solid, so 26.2 let
+            // fluids wash it away at every age.
+            // Not a PlantBlockTrait (see above), so the #washed_away_by_fluids that trait gives every
+            // non-colliding plant is added here: 26.3 lets fluids wash away only blocks in that tag.
+            .addTags(BlockTags.WASHED_AWAY_BY_FLUIDS)
             .buildAndRegister();
     // BlockNetherCactus (WP6.12): always dropped itself unconditionally via BlockBase's inherited getDrops()
     // override (no loot table json was generated for it), reproduced explicitly as
@@ -375,6 +386,9 @@ public class NetherPlantBlocks {
             // Was the hand-authored loot_table/blocks/eyeball.json, whose 26.1-schema functions 26.3
             // silently dropped on load.
             .addTrait(NetherLoot.eyeball())
+            // The eye vine's fruit carries no plant trait; like vanilla's berry-bearing cave vines it washes
+            // away, which 26.3 only allows for blocks in this tag.
+            .addTags(BlockTags.WASHED_AWAY_BY_FLUIDS)
             .buildAndRegister();
     // stays inline: same ordering hazard as EYEBALL above.
     public static final Block EYEBALL_SMALL = NetherBlocks.defineBlock("eyeball_small", BlockEyeballSmall::new)
@@ -389,6 +403,7 @@ public class NetherPlantBlocks {
             // Was the hand-authored loot_table/blocks/eyeball_small.json, whose 26.1-schema functions 26.3
             // silently dropped on load.
             .addTrait(NetherLoot.eyeballSmall())
+            .addTags(BlockTags.WASHED_AWAY_BY_FLUIDS)
             .buildAndRegister();
 
     // Former Materials.netherPlant() preset, folded onto NetherMaterial.plant() - the trailing lightLevel
@@ -397,9 +412,20 @@ public class NetherPlantBlocks {
             .withBlockItem((d, b) -> null)
             .addTrait(NetherRender.cutout())
             .addTrait(BlockTraits.MINEABLE_WITH.needsHoe())
-            .addTrait(NetherMaterial.plant(MapColor.COLOR_BLACK))
+            // NetherMaterial.plant()'s PlantBlockTrait, but walkable: the block has the full-cube collision
+            // below, so it must neither be noCollission() nor - like leaves - be washed away by fluids.
+            .addTrait(PlantBlockTrait.withColor(
+                    MapColor.COLOR_BLACK, true, BlockBehaviour.OffsetType.NONE, SoundType.CROP, false
+            ))
             .addTrait(NetherLoot.pottedPlant())
             .lightLevel(BlockPottedPlant::getLuminance)
+            // BlockPottedPlant has a full-cube collision so it can be built on like leaves (#85); like
+            // vanilla leavesProperties() that must not make it suffocate, block view, conduct redstone or
+            // become a mob-spawn floor.
+            .isValidSpawn(Blocks::never)
+            .isSuffocating(Blocks::never)
+            .isViewBlocking(Blocks::never)
+            .isRedstoneConductor(Blocks::never)
             .buildAndRegister();
 
     public static void ensureLoaded() {}

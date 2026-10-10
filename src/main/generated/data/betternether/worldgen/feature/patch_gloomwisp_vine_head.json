@@ -12,15 +12,13 @@
         {
           "height": 1,
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:gloomwisp_vine",
-              "Properties": {
-                "offset": "true",
-                "persistent": "false",
-                "rotation": "random",
-                "shape": "top"
-              }
+            "id": "betternether:gloomwisp_vine",
+            "properties": {
+              "offset": "true",
+              "persistent": "false",
+              "rotation": "random",
+              "shape": "top",
+              "spent": "false"
             }
           }
         }

@@ -10,24 +10,14 @@
         "south"
       ],
       "entries": {
-        "type": "minecraft:weighted_state_provider",
+        "type": "minecraft:weighted",
         "entries": [
           {
-            "data": {
-              "Name": "betternether:wall_mushroom_red",
-              "Properties": {
-                "facing": "north"
-              }
-            },
+            "data": "betternether:wall_mushroom_red",
             "weight": 40
           },
           {
-            "data": {
-              "Name": "betternether:wall_moss",
-              "Properties": {
-                "facing": "north"
-              }
-            },
+            "data": "betternether:wall_moss",
             "weight": 20
           }
         ]

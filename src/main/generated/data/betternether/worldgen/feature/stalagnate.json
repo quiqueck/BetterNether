@@ -8,12 +8,9 @@
   "max_height": 64,
   "min_height": 3,
   "state": {
-    "type": "minecraft:simple_state_provider",
-    "state": {
-      "Name": "betternether:stalagnate_trunk",
-      "Properties": {
-        "shape": "middle"
-      }
+    "id": "betternether:stalagnate_trunk",
+    "properties": {
+      "shape": "middle"
     }
   },
   "transform": "triple_shape_fill"

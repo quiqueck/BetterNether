@@ -5,11 +5,10 @@ import de.ambertation.wover.enchantment.api.EnchantmentUtils;
 import org.betterx.betternether.registry.block.NetherTerrainBlocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -77,15 +76,14 @@ public class BlockGloomsculkGeode extends Block {
      */
     @Override
     public void playerDestroy(
-            Level level,
-            Player player,
+            ServerLevel level,
+            ServerPlayer player,
             BlockPos pos,
             BlockState state,
             BlockEntity blockEntity,
             ItemStack tool
     ) {
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
-        if (level.isClientSide()) return;
         if (EnchantmentUtils.getItemEnchantmentLevel(level, Enchantments.SILK_TOUCH, tool) > 0) return;
         // only fill air: a geode broken under water or inside another block should not blow a hole in it
         if (!level.getBlockState(pos).isAir()) return;

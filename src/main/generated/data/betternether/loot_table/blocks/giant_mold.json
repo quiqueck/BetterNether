@@ -27,8 +27,8 @@
                 "type": "minecraft:set_count",
                 "count": {
                   "type": "minecraft:uniform",
-                  "max": 3.0,
-                  "min": 1.0
+                  "max": 3,
+                  "min": 1
                 }
               },
               "name": "betternether:giant_mold_sapling"
@@ -43,7 +43,7 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "entries": [
@@ -68,14 +68,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 8.0,
-              "min": 2.0
+              "max": 8,
+              "min": 2
             }
           },
           "name": "minecraft:string"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

@@ -55,8 +55,8 @@ public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile, E
         final int light = state.lightCoords;
         matrixStack.pushPose();
         matrixStack.scale(2.0F, 2.0F, 2.0F);
-        matrixStack.mulPose(camera.orientation);
-        matrixStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+        matrixStack.rotate(camera.orientation);
+        matrixStack.rotate(Axis.YP.rotationDegrees(180.0F));
         submitNodeCollector.submitCustomGeometry(matrixStack, LAYER, (pose, buffer) -> {
             vertex(buffer, pose, light, 0.0F, 0, 0, end);
             vertex(buffer, pose, light, 1.0F, 0, 1, end);

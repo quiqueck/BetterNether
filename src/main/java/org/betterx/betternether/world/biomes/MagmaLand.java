@@ -12,7 +12,7 @@ import de.ambertation.wover.surface.api.Conditions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
 
 ;
 
@@ -42,18 +42,18 @@ public class MagmaLand extends NetherBiomeConfig {
         super.surface(builder);
         builder.chancedFloor(
                 Blocks.MAGMA_BLOCK.defaultBlockState(),
-                SurfaceRules.sequence(
-                        SurfaceRules.ifTrue(
+                MaterialRules.sequence(
+                        MaterialRules.ifTrue(
                                 Conditions.NETHER_VOLUME_NOISE,
-                                SurfaceRules.sequence(
-                                        SurfaceRules.ifTrue(
-                                                SurfaceRules.hole(),
-                                                SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState())
+                                MaterialRules.sequence(
+                                        MaterialRules.ifTrue(
+                                                MaterialRules.hole(),
+                                                MaterialRules.state(Blocks.NETHERRACK.defaultBlockState())
                                         ),
-                                        SurfaceRules.state(Blocks.RED_SAND.defaultBlockState())
+                                        MaterialRules.state(Blocks.RED_SAND.defaultBlockState())
                                 )
                         ),
-                        SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState())
+                        MaterialRules.state(Blocks.NETHERRACK.defaultBlockState())
                 ),
                 de.ambertation.wover.surface.api.Conditions.NETHER_SURFACE_NOISE
         );

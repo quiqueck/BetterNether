@@ -126,26 +126,24 @@ dependencies {
     // with "Failed to setup Minecraft"). We declare the matching fabric-api ourselves above, so strip theirs.
     def noFabricApi = { exclude group: "net.fabricmc.fabric-api" }
 
-    // WTHIT and JEI are disabled for 26.3: neither has published a compatible build (WTHIT tops out at
-    // fabric-19.0.1 targeting 26.1.x, and JEI's artifact id embeds the Minecraft version, so there simply is
-    // no `jei-26.3-snapshot-5-fabric*` to resolve). Disabled the same way EMI is below; re-enable once they
-    // ship 26.3 builds (also un-comment the *_version properties in gradle.properties, un-comment the source
-    // files under integrations/wthit + integrations/jei, flip the *_disabled entrypoint in fabric.mod.json
-    // back, and re-add them to optional_dependencies in gradle.properties).
+    // WTHIT is disabled for 26.3: no compatible build has been published (checked for the 26.3 release; it
+    // tops out at fabric-19.0.1 targeting 26.1.x). Re-enable once it ships a 26.3 build (also un-comment
+    // wthit_version in gradle.properties, un-comment the source files under integrations/wthit, re-add it to
+    // optional_dependencies in gradle.properties, and remove the waila_plugins.json exclude in processResources).
 //    compileOnly("mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}", noFabricApi) // compile against the API
 //    runtimeOnly("mcp.mobius.waila:wthit:fabric-${project.wthit_version}", noFabricApi) // run against the full jar
 
     // alsoInclude=false: BetterNether doesn't bundle BCLib into its own jar.
     gradle.modApiOrLocal(dependencies, ':BCLib', "org.betterx:bclib:${project.bclib_version}", false)
 
-    // EMI 1.1.8+1.21 targets 1.21.1 and its mixins fail against 26.3; the BetterNether EMI
-    // integration is disabled for now (see integrations/emi, entrypoint emi_disabled). Re-enable
-    // with an EMI build for 26.3.
+    // EMI stays disabled: no 26.3 build exists (checked for the 26.3 release; EMI 1.1.8+1.21 targets 1.21.1
+    // and its mixins fail against 26.3). The BetterNether EMI integration is disabled for now (see
+    // integrations/emi, entrypoint emi_disabled). Re-enable with an EMI build for 26.3.
 //    compileOnly("dev.emi:emi-fabric:${emi_version}:api", noFabricApi)
 //    localRuntime("dev.emi:emi-fabric:${emi_version}", noFabricApi)
 
-//    compileOnly("mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}", noFabricApi) // compile against the API
-//    localRuntime("mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}", noFabricApi) // run against the full jar
+    compileOnly("mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}", noFabricApi) // compile against the API
+    localRuntime("mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}", noFabricApi) // run against the full jar
 
     localRuntime("com.terraformersmc:modmenu:${project.modmenu_version}", noFabricApi)
 
@@ -247,6 +245,10 @@ processResources {
     exclude 'block_registrations.txt'
     exclude 'item_registrations.txt'
     exclude 'block_shapes.txt'
+    // WTHIT is disabled for 26.3 (see the dependencies block) and the integrations/wthit sources are commented
+    // out, so the plugin class waila_plugins.json names is not compiled. Shipping the file would make WTHIT try
+    // to load a missing class; drop this exclude when re-enabling WTHIT.
+    exclude 'waila_plugins.json'
     println "Version: ${project.version}"
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") {

@@ -15,8 +15,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
@@ -46,17 +45,17 @@ public class NetherLootAdditionProvider extends WoverLootAdditionProvider {
         chests.forTables(BuiltInLootTables.RUINED_PORTAL, BuiltInLootTables.NETHER_BRIDGE)
               .addPool(
                       LootPool.lootPool()
-                              .setRolls(UniformGenerator.between(0, 4))
+                              .setRolls(ContextIntProviders.between(0, 4))
                               .add(LootItem.lootTableItem(NetherObsidianBlocks.BLUE_OBSIDIAN.asItem())
                                            .setWeight(1)
-                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(
-                                                   1.0F,
-                                                   2.0F
+                                           .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
+                                                   1,
+                                                   2
                                            ))))
                               .add(EmptyLootItem.emptyItem()
                                                 .setWeight(9)),
                       LootPool.lootPool()
-                              .setRolls(ConstantValue.exactly(1.0f))
+                              .setRolls(ContextIntProviders.exactly(1))
                               .add(EmptyLootItem.emptyItem().setWeight(9))
                               .add(LootItem.lootTableItem(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
                                            .setWeight(1))
@@ -69,30 +68,30 @@ public class NetherLootAdditionProvider extends WoverLootAdditionProvider {
               )
               .addPool(
                       LootPool.lootPool()
-                              .setRolls(UniformGenerator.between(1, 2))
+                              .setRolls(ContextIntProviders.between(1, 2))
                               .add(LootItem.lootTableItem(NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN.asItem())
                                            .setWeight(5)
-                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(
-                                                   3.0F,
-                                                   8.0F
+                                           .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
+                                                   3,
+                                                   8
                                            ))))
                               .add(LootItem
                                       .lootTableItem(NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
                                       .setWeight(1)
-                                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(
-                                              1.0F,
-                                              4.0F
+                                      .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
+                                              1,
+                                              4
                                       ))))
                               .add(LootItem.lootTableItem(NetherObsidianBlocks.WEEPING_OBSIDIAN.asItem())
                                            .setWeight(1)
-                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(
-                                                   1.0F,
-                                                   4.0F
+                                           .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
+                                                   1,
+                                                   4
                                            ))))
                               .add(EmptyLootItem.emptyItem()
                                                 .setWeight(50)),
                       LootPool.lootPool()
-                              .setRolls(ConstantValue.exactly(1.0f))
+                              .setRolls(ContextIntProviders.exactly(1))
                               .add(EmptyLootItem.emptyItem().setWeight(99))
                               .add(LootItem.lootTableItem(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
                                            .setWeight(1))
@@ -101,36 +100,36 @@ public class NetherLootAdditionProvider extends WoverLootAdditionProvider {
         chests.forTables(BuiltInLootTables.BASTION_OTHER)
               .addPool(
                       LootPool.lootPool()
-                              .setRolls(UniformGenerator.between(1, 2))
+                              .setRolls(ContextIntProviders.between(1, 2))
                               .add(LootItem.lootTableItem(NetherObsidianBlocks.BLUE_OBSIDIAN.asItem())
                                            .setWeight(10)
-                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(
-                                                   4.0F,
-                                                   6.0F
+                                           .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
+                                                   4,
+                                                   6
                                            ))))
                               .add(LootItem.lootTableItem(NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN.asItem())
                                            .setWeight(5)
-                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(
-                                                   1.0F,
-                                                   5.0F
+                                           .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
+                                                   1,
+                                                   5
                                            ))))
                               .add(LootItem
                                       .lootTableItem(NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
                                       .setWeight(1)
-                                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(
-                                              1.0F,
-                                              2.0F
+                                      .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
+                                              1,
+                                              2
                                       ))))
                               .add(LootItem.lootTableItem(NetherObsidianBlocks.WEEPING_OBSIDIAN.asItem())
                                            .setWeight(1)
-                                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(
-                                                   1.0F,
-                                                   2.0F
+                                           .apply(SetItemCountFunction.setCount(ContextIntProviders.between(
+                                                   1,
+                                                   2
                                            ))))
                               .add(EmptyLootItem.emptyItem()
                                                 .setWeight(50)),
                       LootPool.lootPool()
-                              .setRolls(ConstantValue.exactly(1.0f))
+                              .setRolls(ContextIntProviders.exactly(1))
                               .add(EmptyLootItem.emptyItem().setWeight(9))
                               .add(LootItem.lootTableItem(NetherTemplates.NETHER_BOWL_SMITHING_TEMPLATE)
                                            .setWeight(1))
@@ -151,25 +150,25 @@ public class NetherLootAdditionProvider extends WoverLootAdditionProvider {
                                  .lootTableItem(NetherObsidianBlocks.BLUE_CRYING_OBSIDIAN.asItem())
                                  .setWeight(40)
                                  .apply(SetItemCountFunction.setCount(
-                                         UniformGenerator.between(
-                                                 1.0F,
-                                                 3.0F
+                                         ContextIntProviders.between(
+                                                 1,
+                                                 3
                                          ))),
                          LootItem
                                  .lootTableItem(NetherObsidianBlocks.BLUE_WEEPING_OBSIDIAN.asItem())
                                  .setWeight(20)
                                  .apply(SetItemCountFunction.setCount(
-                                         UniformGenerator.between(
-                                                 1.0F,
-                                                 2.0F
+                                         ContextIntProviders.between(
+                                                 1,
+                                                 2
                                          ))),
                          LootItem
                                  .lootTableItem(NetherObsidianBlocks.WEEPING_OBSIDIAN.asItem())
                                  .setWeight(20)
                                  .apply(SetItemCountFunction.setCount(
-                                         UniformGenerator.between(
-                                                 1.0F,
-                                                 2.0F
+                                         ContextIntProviders.between(
+                                                 1,
+                                                 2
                                          ))),
                          // The gloomwood discs sit at the rare end of the pool (vanilla's own pool totals
                          // ~459, so weight 3 is roughly a 0.5% chance each, on par with the iron boots).

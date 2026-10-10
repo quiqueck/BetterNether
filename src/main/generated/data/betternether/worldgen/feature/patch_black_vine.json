@@ -17,12 +17,9 @@
       },
       "min_height": 3,
       "state": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "betternether:black_vine",
-          "Properties": {
-            "bottom": "true"
-          }
+        "id": "betternether:black_vine",
+        "properties": {
+          "bottom": "true"
         }
       },
       "transform": "bottom_grow"

@@ -19,7 +19,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Noises;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
 
 ;
 
@@ -65,15 +65,15 @@ public class OldSwampland extends NetherBiomeConfig {
     public void surface(BiomeSurfaceRuleBuilder<NetherBiomeBuilder> builder) {
         super.surface(builder);
         builder.rule(
-                SurfaceRules.sequence(
-                        SurfaceRules.ifTrue(
+                MaterialRules.sequence(
+                        MaterialRules.ifTrue(
                                 NetherBiomeBuilder.ON_FLOOR,
-                                SurfaceRules.ifTrue(
+                                MaterialRules.ifTrue(
                                         Conditions.roughNoise(Noises.NETHERRACK, 0.19),
-                                        SurfaceRules.state(NetherTerrainBlocks.SWAMPLAND_GRASS.defaultBlockState())
+                                        MaterialRules.state(NetherTerrainBlocks.SWAMPLAND_GRASS.defaultBlockState())
                                 )
                         ),
-                        SurfaceRules.ifTrue(
+                        MaterialRules.ifTrue(
                                 Conditions.NETHER_SURFACE_NOISE_LARGE,
                                 NetherGrasslands.SOUL_SAND
                         ),

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
 import org.betterx.betternether.blocks.BlockWartRoots;
@@ -29,7 +30,15 @@ public class WartMaterial extends RoofMaterial<WartMaterial> {
                     // #side texture swapped (wart_planks) - generate it from the shared template.
                     .replace(new org.betterx.betternether.blocks.complex.slots.NetherWoodSlots.TrapdoorSideTemplate(
                             org.betterx.betternether.BetterNether.C.mk("block/wart_planks")))
-                    .add(AbstractSeed.create(BlockWartSeed::new, NetherSurvival.soulSand()))
+                    .add(AbstractSeed.create(
+                            BlockWartSeed::new,
+                            // It also sticks to walls and ceilings, but only grows on top of soul ground
+                            // (BlockWartSeed.isValidBonemealTarget).
+                            TraitLists.and(
+                                    NetherSurvival.soulSand(),
+                                    DescriptionBlockTrait.of("tooltip.betternether.wart_seed.tree")
+                            )
+                    ))
                     // The roots' loot was the hand-authored loot_table/blocks/wart_roots.json (drops a wart
                     // log), whose 26.1-schema survives_explosion condition 26.3 silently dropped on load.
                     .add(SimpleBlockSlot.blockOnly(

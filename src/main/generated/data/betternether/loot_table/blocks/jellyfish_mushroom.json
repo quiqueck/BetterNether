@@ -28,14 +28,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 1.0
+              "max": 2,
+              "min": 1
             }
           },
           "name": "betternether:jellyfish_mushroom_sapling"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -52,14 +52,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 0.0
+              "max": 2,
+              "min": 0
             }
           },
           "name": "betternether:glowstone_pile"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -76,14 +76,14 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 1.0,
-              "min": 0.0
+              "max": 1,
+              "min": 0
             }
           },
           "name": "minecraft:slime_ball"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -99,7 +99,7 @@
           "name": "betternether:nether_mushroom_stem"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

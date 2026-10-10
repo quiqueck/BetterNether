@@ -12,12 +12,9 @@
         {
           "height": 1,
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:smoker",
-              "Properties": {
-                "shape": "bottom"
-              }
+            "id": "betternether:smoker",
+            "properties": {
+              "shape": "bottom"
             }
           }
         },
@@ -28,24 +25,18 @@
             "min_inclusive": 0
           },
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:smoker",
-              "Properties": {
-                "shape": "middle"
-              }
+            "id": "betternether:smoker",
+            "properties": {
+              "shape": "middle"
             }
           }
         },
         {
           "height": 1,
           "provider": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "betternether:smoker",
-              "Properties": {
-                "shape": "top"
-              }
+            "id": "betternether:smoker",
+            "properties": {
+              "shape": "top"
             }
           }
         }

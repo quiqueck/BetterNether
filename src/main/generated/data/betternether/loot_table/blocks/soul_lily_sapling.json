@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "betternether:soul_lily_sapling"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

@@ -9,8 +9,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 12.0,
-              "min": 4.0
+              "max": 12,
+              "min": 4
             }
           },
           "name": "minecraft:netherrack",
@@ -22,8 +22,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 8.0,
-              "min": 2.0
+              "max": 8,
+              "min": 2
             }
           },
           "name": "minecraft:nether_wart",
@@ -40,15 +40,15 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 12.0,
-              "min": 2.0
+              "max": 12,
+              "min": 2
             }
           },
           "name": "minecraft:quartz",
           "weight": 8
         }
       ],
-      "rolls": 2.0
+      "rolls": 2
     },
     {
       "condition": {
@@ -67,8 +67,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "betternether:cincinnasite_diamond_upgrade_smithing_template",
@@ -80,7 +80,7 @@
           "weight": 2
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "entries": [
@@ -90,8 +90,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 3.0,
-              "min": 1.0
+              "max": 3,
+              "min": 1
             }
           },
           "name": "minecraft:diamond",
@@ -103,8 +103,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 4.0,
-              "min": 2.0
+              "max": 4,
+              "min": 2
             }
           },
           "name": "betternether:nether_ruby",
@@ -116,8 +116,8 @@
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "max": 2.0,
-              "min": 1.0
+              "max": 2,
+              "min": 1
             }
           },
           "name": "minecraft:netherite_scrap",
@@ -126,8 +126,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 3.0,
-        "min": 1.0
+        "max": 3,
+        "min": 1
       }
     },
     {
@@ -153,7 +153,7 @@
           "name": "betternether:cincinnasite_sword"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -178,7 +178,7 @@
           "name": "betternether:cincinnasite_hoe"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "condition": {
@@ -193,8 +193,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 2.0,
-        "min": 1.0
+        "max": 2,
+        "min": 1
       }
     },
     {
@@ -242,8 +242,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 1.0,
-        "min": 1.0
+        "max": 1,
+        "min": 1
       }
     },
     {
@@ -291,8 +291,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 1.0,
-        "min": 1.0
+        "max": 1,
+        "min": 1
       }
     }
   ]

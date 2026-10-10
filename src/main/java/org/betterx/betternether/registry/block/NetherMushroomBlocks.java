@@ -29,8 +29,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -90,6 +88,9 @@ public class NetherMushroomBlocks {
             .randomTicks()
             .destroyTime(0.5F)
             .addTrait(NetherTraits.plant())
+            // Not a PlantBlockTrait (see above), so the #washed_away_by_fluids that trait gives every
+            // non-colliding plant is added here: 26.3 lets fluids wash away only blocks in that tag.
+            .addTags(BlockTags.WASHED_AWAY_BY_FLUIDS)
             // Was the hand-authored loot_table/blocks/orange_mushroom.json, whose 26.1-schema conditions/
             // functions 26.3 silently dropped on load.
             .addTrait(NetherLoot.orangeMushroom())
@@ -169,13 +170,18 @@ public class NetherMushroomBlocks {
             .buildAndRegister();
     // Former Materials.makeNetherGrass() preset, folded onto PlantBlockTrait directly (sound(CROP)
     // deviation baked into the trait call, same as RED_MOLD/GRAY_MOLD above).
+    // Drops itself when sheared or silk-touched, like the molds it shares BaseBlockMold with: that base class
+    // used to supply this through a getDrops() override, and losing it left the block with no drops at all.
     public static final Block HOOK_MUSHROOM = NetherBlocks.defineBlock("hook_mushroom", BlockHookMushroom::new)
             .addTrait(NetherRender.cutout())
             .addTrait(NetherSurvival.netherrack())
+            .addTrait(NetherLoot.netherGrass())
             .addTrait(PlantBlockTrait.withColor(
                     MapColor.COLOR_PINK, false, BlockBehaviour.OffsetType.XZ, SoundType.CROP, true
             ))
             .lightLevel(s -> 13)
+            // Spreads along the ceiling in BaseBlockMold#randomTick, which never runs without this (#54).
+            .randomTicks()
             .addTrait(NetherTraits.plant())
             .buildAndRegister();
     // Large & Small Mushrooms //

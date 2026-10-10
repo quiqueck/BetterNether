@@ -4,12 +4,7 @@
   "size": 16,
   "targets": [
     {
-      "state": {
-        "Name": "betternether:nether_redstone_ore",
-        "Properties": {
-          "lit": "false"
-        }
-      },
+      "state": "betternether:nether_redstone_ore",
       "target": {
         "block": "minecraft:netherrack",
         "predicate_type": "minecraft:block_match"

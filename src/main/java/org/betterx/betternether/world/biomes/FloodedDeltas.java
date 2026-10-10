@@ -17,7 +17,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.material.MaterialRules;
 
 import java.util.List;
 
@@ -55,8 +55,8 @@ public class FloodedDeltas extends NetherBiomeConfig {
                        new SwitchRuleSource(
                                NetherGrasslandsNumericProvider.DEFAULT,
                                List.of(
-                                       SurfaceRules.state(Blocks.DEEPSLATE.defaultBlockState()),
-                                       SurfaceRules.state(Blocks.BLACKSTONE.defaultBlockState())
+                                       MaterialRules.state(Blocks.DEEPSLATE.defaultBlockState()),
+                                       MaterialRules.state(Blocks.BLACKSTONE.defaultBlockState())
                                )
                        ),
                        BaseSurfaceRuleBuilder.FLOOR_PRIORITY

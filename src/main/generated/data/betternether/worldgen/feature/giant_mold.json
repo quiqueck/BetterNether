@@ -9,12 +9,9 @@
     {
       "height": 1,
       "provider": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "betternether:giant_mold",
-          "Properties": {
-            "shape": "bottom"
-          }
+        "id": "betternether:giant_mold",
+        "properties": {
+          "shape": "bottom"
         }
       }
     },
@@ -27,24 +24,18 @@
         "min_inclusive": 3
       },
       "provider": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "betternether:giant_mold",
-          "Properties": {
-            "shape": "middle"
-          }
+        "id": "betternether:giant_mold",
+        "properties": {
+          "shape": "middle"
         }
       }
     },
     {
       "height": 1,
       "provider": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "betternether:giant_mold",
-          "Properties": {
-            "shape": "top"
-          }
+        "id": "betternether:giant_mold",
+        "properties": {
+          "shape": "top"
         }
       }
     }

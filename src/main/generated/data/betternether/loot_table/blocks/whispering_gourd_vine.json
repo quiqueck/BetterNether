@@ -9,55 +9,51 @@
             {
               "type": "minecraft:item",
               "condition": {
-                "type": "minecraft:all_of",
-                "terms": [
-                  {
-                    "type": "minecraft:inverted",
-                    "term": {
-                      "type": "minecraft:match_block",
-                      "blocks": "betternether:whispering_gourd_vine",
-                      "state": {
-                        "shape": "top"
-                      }
-                    }
-                  },
-                  {
-                    "type": "minecraft:any_of",
-                    "terms": [
-                      {
-                        "type": "minecraft:match_tool",
-                        "predicate": {
-                          "items": "#c:tools/shear"
-                        }
-                      },
-                      {
-                        "type": "minecraft:match_tool",
-                        "predicate": {
-                          "predicates": {
-                            "minecraft:enchantments": [
-                              {
-                                "enchantments": "minecraft:silk_touch",
-                                "levels": {
-                                  "min": 1
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
+                "type": "minecraft:match_block",
+                "blocks": "betternether:whispering_gourd_vine",
+                "state": {
+                  "shape": "middle"
+                }
               },
               "modifier": {
                 "type": "minecraft:set_count",
                 "count": {
                   "type": "minecraft:uniform",
-                  "max": 2.0,
-                  "min": 1.0
+                  "max": 2,
+                  "min": 1
                 }
               },
               "name": "betternether:whispering_gourd"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:any_of",
+                "terms": [
+                  {
+                    "type": "minecraft:match_tool",
+                    "predicate": {
+                      "items": "#c:tools/shear"
+                    }
+                  },
+                  {
+                    "type": "minecraft:match_tool",
+                    "predicate": {
+                      "predicates": {
+                        "minecraft:enchantments": [
+                          {
+                            "enchantments": "minecraft:silk_touch",
+                            "levels": {
+                              "min": 1
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "name": "betternether:whispering_gourd_vine"
             },
             {
               "type": "minecraft:item",
@@ -84,7 +80,7 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

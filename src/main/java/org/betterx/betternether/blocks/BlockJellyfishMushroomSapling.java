@@ -64,11 +64,22 @@ public class BlockJellyfishMushroomSapling extends Block implements Bonemealable
         return true;
     }
 
-    @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    private boolean canGrowRandomly(Level world, RandomSource random, BlockPos pos, BlockState state) {
         return BlocksHelper.isFertile(world.getBlockState(pos.below()))
                 ? (random.nextInt(8) == 0)
                 : (random.nextInt(16) == 0);
+    }
+
+    /**
+     * The chance that one application of bone meal grows the jellyfish mushroom, the same 40% vanilla mushrooms use.
+     */
+    public static final float BONEMEAL_SUCCESS_CHANCE = 0.4f;
+
+    @Override
+    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+        // Vanilla's mushroom odds (MushroomBlock): 40% per application, one step to the grown plant.
+        // Random ticks keep their own, much slower roll in canGrowRandomly.
+        return random.nextFloat() < BONEMEAL_SUCCESS_CHANCE;
     }
 
     @Override
@@ -79,7 +90,7 @@ public class BlockJellyfishMushroomSapling extends Block implements Bonemealable
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         super.randomTick(state, world, pos, random);
-        if (isBonemealSuccess(world, random, pos, state))
+        if (canGrowRandomly(world, random, pos, state))
             performBonemeal(world, random, pos, state);
     }
 }

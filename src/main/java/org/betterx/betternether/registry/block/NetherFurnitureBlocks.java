@@ -28,8 +28,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -79,12 +77,14 @@ public class NetherFurnitureBlocks {
     // resolved to the Wood variant, confirmed against the committed datapack (taburet_cincinnasite/
     // chair_cincinnasite/bar_stool_cincinnasite all show class=Wood). The .Wood factory is used directly
     // instead of the dispatch call.
+    // All three copy the slab's requiresCorrectToolForDrops, so they are pickaxe-only like the slab (metal);
+    // the former axe tag let an axe drop them while a pickaxe destroyed them without a drop.
     public static final Block TABURET_CINCINNASITE = NetherBlocks.defineBlock(
             "taburet_cincinnasite",
             p -> new BaseTaburet.Wood(NetherMetalBlocks.CINCINNASITE_SLAB, p)
     )
             .replacePropertiesWithCopy(NetherMetalBlocks.CINCINNASITE_SLAB)
-            .addTags(BlockTags.MINEABLE_WITH_AXE)
+            .addTags(BlockTags.MINEABLE_WITH_PICKAXE)
             .addTrait(FurnitureTraits.taburet(NetherMetalBlocks.CINCINNASITE_SLAB, NetherModels.taburetCincinnasite()))
             .buildAndRegister();
     public static final Block CHAIR_CINCINNASITE = NetherBlocks.defineBlock(
@@ -92,7 +92,7 @@ public class NetherFurnitureBlocks {
             p -> new BaseChair.Wood(NetherMetalBlocks.CINCINNASITE_SLAB, NetherStoneBlocks.NETHER_BRICK_TILE_LARGE, p)
     )
             .replacePropertiesWithCopy(NetherMetalBlocks.CINCINNASITE_SLAB)
-            .addTags(BlockTags.MINEABLE_WITH_AXE)
+            .addTags(BlockTags.MINEABLE_WITH_PICKAXE)
             .addTrait(FurnitureTraits.chair(NetherMetalBlocks.CINCINNASITE_SLAB, NetherModels.chairCincinnasite()))
             .buildAndRegister();
     public static final Block BAR_STOOL_CINCINNASITE = NetherBlocks.defineBlock(
@@ -100,7 +100,7 @@ public class NetherFurnitureBlocks {
             p -> new BaseBarStool.Wood(NetherMetalBlocks.CINCINNASITE_SLAB, NetherStoneBlocks.NETHER_BRICK_TILE_LARGE, p)
     )
             .replacePropertiesWithCopy(NetherMetalBlocks.CINCINNASITE_SLAB)
-            .addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_AXE)
+            .addTags(BlockTags.MINEABLE_WITH_PICKAXE)
             .addTrait(FurnitureTraits.barStool(NetherMetalBlocks.CINCINNASITE_SLAB, NetherModels.barStoolCincinnasite()))
             .buildAndRegister();
     // Storage

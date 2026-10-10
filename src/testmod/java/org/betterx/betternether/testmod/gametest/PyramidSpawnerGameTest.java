@@ -1,6 +1,6 @@
 package org.betterx.betternether.testmod.gametest;
 
-import org.betterx.bclib.api.v2.levelgen.structures.StructureNBT;
+import de.ambertation.wover.structure.api.StructureNBT;
 import org.betterx.betternether.BetterNether;
 
 import com.mojang.logging.LogUtils;

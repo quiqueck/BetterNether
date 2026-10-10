@@ -56,8 +56,9 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
  * push proves anything and every test here has to keep pushing. The direct-call tests drive
  * {@code entityInside} {@link #ROLLS} times in one tick, which makes a false negative a
  * {@code 0.965^8000} event - too small to write down.
- * {@link #aMobPushingThroughShedsOrbsOntoTheGround} instead earns its arrivals by walking, about one
- * per segment per patrol leg, which comes to a couple of hundred rolls over its timeout.
+ * {@link #aMobPushingThroughShedsOrbsOntoTheGround} instead earns its arrivals by walking: two rolls
+ * (stem and head) per patrol leg, {@link #STRIDES_PER_TICK} strides a tick, which comes to well over a
+ * thousand rolls before its timeout - a false negative of about {@code 0.965^1000}, or {@code 1e-15}.
  */
 public class GloomwispExperienceGameTest {
     private static final BlockPos GROUND = new BlockPos(2, 1, 2);
@@ -94,10 +95,21 @@ public class GloomwispExperienceGameTest {
      * measured, an aligned 0.2 stride registered a third of the crossings it actually made, which left
      * this test a coin flip dressed up as an assertion. An odd stride walks the phase across the boundary
      * instead, so a crossing registers as one. The short reach is the other half: it keeps the round trip
-     * to about a dozen ticks, which is a couple of hundred rolls over the timeout.
+     * to a dozen strides.
      */
     private static final double PATROL_STEP = 0.37;
     private static final double PATROL_REACH = 1.1;
+
+    /**
+     * How many patrol strides the walker takes per game tick - a round trip every three ticks, so four
+     * rolls every three ticks.
+     * <p>
+     * At one stride a tick a round trip took twelve ticks, so the whole 1200-tick budget only ever came to
+     * about 400 rolls ({@code 0.965^400}, roughly 1 in 1.5 million) - and in practice to far fewer, see
+     * the note on the walker's invulnerability. Each stride is still a separate stamped step through the
+     * same vanilla entry, so this is the same walk, only quicker.
+     */
+    private static final int STRIDES_PER_TICK = 4;
 
     /**
      * How far a shed orb may be from the stalk, horizontally.
@@ -138,6 +150,11 @@ public class GloomwispExperienceGameTest {
     public void aMobPushingThroughShedsOrbsOntoTheGround(GameTestHelper helper) {
         plant(helper);
         final Zombie walker = helper.spawnWithNoFreeWill(EntityTypes.ZOMBIE, STEM);
+        // The suite runs at a pinned noon (GameTestWorldConditions) in an open arena, so an unprotected
+        // zombie catches fire within a few ticks and burns to death at about tick 400. A dead entity is no
+        // longer affected by blocks, so from then on the patrol pushed nothing through the wisp and the
+        // test sat out its timeout - about 130 rolls instead of the budget's 400, a 1-in-100 flake.
+        walker.setInvulnerable(true);
 
         // A NoAI mob never travels, so it is walked across the stalk by hand. It has to leave the block
         // and come back rather than shuffle about inside it: the wisp rolls on arrival, so a mob that
@@ -147,23 +164,29 @@ public class GloomwispExperienceGameTest {
         final double[] step = {PATROL_STEP};
         final double centre = walker.getX();
         helper.onEachTick(() -> {
-            if (Math.abs(x[0] - centre) > PATROL_REACH) {
-                step[0] = -step[0];
+            for (int stride = 0; stride < STRIDES_PER_TICK; stride++) {
+                if (Math.abs(x[0] - centre) > PATROL_REACH) {
+                    step[0] = -step[0];
+                }
+                // Stamping the old position first is what makes this a step rather than a teleport: the
+                // server does exactly this at the top of every entity tick, and the wisp measures how far
+                // something came from the gap between the two. Without it the zombie's old position stays
+                // where it spawned, and the block sees one enormous stride that started inside the plant.
+                walker.setOldPosAndRot();
+                final Vec3 from = walker.position();
+                x[0] += step[0];
+                walker.setPos(x[0], from.y, from.z);
+                walker.applyEffectsFromBlocks(from, walker.position());
             }
-            // Stamping the old position first is what makes this a step rather than a teleport: the
-            // server does exactly this at the top of every entity tick, and the wisp measures how far
-            // something came from the gap between the two. Without it the zombie's old position stays
-            // where it spawned, and the block sees one enormous stride that started inside the plant.
-            walker.setOldPosAndRot();
-            final Vec3 from = walker.position();
-            x[0] += step[0];
-            walker.setPos(x[0], from.y, from.z);
-            walker.applyEffectsFromBlocks(from, walker.position());
         });
 
         helper.succeedWhen(() -> {
             final List<ExperienceOrb> orbs = orbs(helper);
             final List<String> failures = new ArrayList<>();
+            if (!walker.isAlive()) {
+                failures.add("the walker died at tick " + helper.getTick() + " - a dead entity is not affected"
+                        + " by blocks, so nothing is pushing through the wisp any more");
+            }
             if (orbs.isEmpty()) {
                 failures.add("a mob pushed through the wisp for " + helper.getTick()
                         + " ticks and it never shed anything - mobs cannot trigger the payout");

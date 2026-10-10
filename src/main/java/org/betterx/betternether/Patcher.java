@@ -338,8 +338,8 @@ class Patcher_001 extends Patch {
     }
 
     @Override
-    public PatchBiFunction<ListTag, ListTag, Boolean> getBlockStatePatcher() {
-        return Patcher_001::patchBlockState;
+    public PatchFunction<CompoundTag, Boolean> getChunkPatcher() {
+        return Patcher_001::patchChunk;
     }
 
     private static final List<String> LEAVE_IDS = List.of(
@@ -349,19 +349,38 @@ class Patcher_001 extends Patch {
             "betternether:nether_sakura_leaves"
     );
 
-    private static boolean patchBlockState(ListTag palette, ListTag states, MigrationProfile profile) {
+    /**
+     * Makes the leaves of trees generated before 5.3.5 persistent.
+     * <p>
+     * Those trees were placed with non-persistent leaves but without valid leaf distances, so they
+     * started to decay once leaf decay was introduced. Their palette entries are indistinguishable
+     * from the leaves current features place on purpose as non-persistent (so they decay once the
+     * tree is felled, #97), which is why the fix is limited to chunks that were last saved in the
+     * pre-1.18 layout (content nested below {@code Level}): BetterNether 5.3.5 targeted 1.17, so
+     * every chunk saved in the flat 1.18+ layout either holds correctly generated trees or was
+     * already patched. Re-running the patch on a modern world therefore no longer flips naturally
+     * generated leaves to persistent.
+     */
+    private static boolean patchChunk(CompoundTag root, MigrationProfile profile) {
+        final CompoundTag level = root.getCompound("Level").orElse(null);
+        if (level == null) return false;
+
         boolean[] changed = {false};
-        palette.forEach((blockTag) -> {
-            CompoundTag blockTagCompound = ((CompoundTag) blockTag);
-            final String id = blockTagCompound.getStringOr("Name", "");
-            if (LEAVE_IDS.contains(id)) {
-                final CompoundTag props = blockTagCompound.getCompoundOrEmpty("Properties");
-                if (!props.contains("persistent") || !"true".equals(props.getStringOr("persistent", ""))) {
-                    props.putString("persistent", "true");
-                    changed[0] = true;
+        level.getList("Sections").ifPresent(sections -> sections.forEach(sectionTag -> {
+            if (!(sectionTag instanceof CompoundTag section)) return;
+            section.getList("Palette").ifPresent(palette -> palette.forEach(blockTag -> {
+                if (!(blockTag instanceof CompoundTag block)) return;
+                final String id = block.getStringOr("Name", "");
+                if (LEAVE_IDS.contains(id)) {
+                    final CompoundTag props = block.getCompound("Properties").orElseGet(CompoundTag::new);
+                    if (!"true".equals(props.getStringOr("persistent", ""))) {
+                        props.putString("persistent", "true");
+                        block.put("Properties", props);
+                        changed[0] = true;
+                    }
                 }
-            }
-        });
+            }));
+        }));
         return changed[0];
     }
 }

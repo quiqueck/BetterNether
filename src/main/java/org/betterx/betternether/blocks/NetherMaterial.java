@@ -234,11 +234,16 @@ public class NetherMaterial {
      * with the default {@link SoundType#GRASS} sound, the XZ ground-offset, and the preset's own forced
      * {@code isValidSpawn(-> true)} (every mob may spawn on nether grass, matching the preset's original
      * intent - not part of vanilla {@code PlantBlockTrait} before Batch 0's {@code validSpawnAlways} flag).
+     * <p>
+     * Plus {@link GrassTrait}: like vanilla {@code short_grass}, a grass tuft is {@code replaceable} (placing a
+     * block into it overwrites it) and sits in {@code #replaceable}, {@code #replaceable_by_trees} and
+     * {@code #replaceable_by_mushrooms} (quiqueck/BetterNether#166).
      */
     public static List<BlockTrait<?, ?>> grass(MapColor color) {
-        return TraitLists.of(PlantBlockTrait.withColor(
-                color, false, BlockBehaviour.OffsetType.XZ, SoundType.GRASS, true
-        ));
+        return TraitLists.of(
+                PlantBlockTrait.withColor(color, false, BlockBehaviour.OffsetType.XZ, SoundType.GRASS, true),
+                GrassTrait.INSTANCE
+        );
     }
 
     /**
@@ -279,6 +284,24 @@ public class NetherMaterial {
      */
     public static List<BlockTrait<?, ?>> mushroomStem(MapColor color) {
         return TraitLists.of(new MushroomStemTrait(color));
+    }
+
+    /** The vanilla {@code short_grass} replaceability: the {@code replaceable} property and the three replaceable tags. */
+    private static final class GrassTrait extends BlockTraitImpl.Generic {
+        private static final BlockTraitKey KEY = BlockTraitKey.ofUnique(BetterNether.C, "material_grass");
+        private static final GrassTrait INSTANCE = new GrassTrait();
+
+        @Override
+        public BlockTraitKey key() {
+            return KEY;
+        }
+
+        @Override
+        public void configure(BlockDefinition<Block, ? extends BlockDefinition<Block, ?>> definition) {
+            super.configure(definition);
+            definition.replaceable()
+                      .addTags(BlockTags.REPLACEABLE, BlockTags.REPLACEABLE_BY_TREES, BlockTags.REPLACEABLE_BY_MUSHROOMS);
+        }
     }
 
     /** Adds {@code randomTicks()} and nothing else - shared by {@link #sapling(MapColor)} and {@link #cactus(MapColor)}. */

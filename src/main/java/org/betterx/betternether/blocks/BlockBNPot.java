@@ -57,7 +57,9 @@ public abstract class BlockBNPot extends Block {
         BlockPos plantPos = pos.above();
         if (hit.getDirection() == Direction.UP && world.isEmptyBlock(plantPos)) {
             BlockState plant = BlockPottedPlant.getPlant(player.getMainHandItem().getItem());
-            if (plant != null) {
+            // The plant has a full-cube collision (#85), so - like placing any block - don't plant it into
+            // a player or mob standing on the pot.
+            if (plant != null && world.isUnobstructed(plant, plantPos, CollisionContext.of(player))) {
                 if (!world.isClientSide())
                     BlocksHelper.setWithUpdate(world, plantPos, plant);
                 world.playLocalSound(

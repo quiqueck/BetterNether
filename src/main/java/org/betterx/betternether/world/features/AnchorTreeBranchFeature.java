@@ -9,6 +9,7 @@ import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.betternether.world.structures.city.CityStructure;
 import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.feature.api.WriteZone;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
@@ -47,6 +48,10 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
     ) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
         if (pos.getY() < 56 + random.nextInt((int) (20 * scale_factor))) return false;
+        // Hangs low enough to reach the roofs of a nether city, which generates before it. The branch
+        // reaches (9 * scale + 2) * 0.8 + 9 * 0.8 blocks sideways at most.
+        if (CityStructure.buildingsWithin(world, pos, (int) Math.ceil((9 * scale_factor + 2) * 0.8f + 9 * 0.8f)))
+            return false;
         return grow(world, pos, random, scale_factor, context, false);
     }
 

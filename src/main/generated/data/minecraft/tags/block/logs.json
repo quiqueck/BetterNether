@@ -19,6 +19,7 @@
     "betternether:mushroom_fir_log",
     "betternether:mushroom_fir_stripped_bark",
     "betternether:mushroom_fir_stripped_log",
+    "betternether:mushroom_fir_trunk",
     "betternether:nether_sakura_bark",
     "betternether:nether_sakura_log",
     "betternether:nether_sakura_stripped_bark",
@@ -31,6 +32,7 @@
     "betternether:stalagnate_log",
     "betternether:stalagnate_stripped_bark",
     "betternether:stalagnate_stripped_log",
+    "betternether:stalagnate_trunk",
     "betternether:wart_bark",
     "betternether:wart_log",
     "betternether:wart_stripped_bark",
@@ -38,6 +40,7 @@
     "betternether:willow_bark",
     "betternether:willow_log",
     "betternether:willow_stripped_bark",
-    "betternether:willow_stripped_log"
+    "betternether:willow_stripped_log",
+    "betternether:willow_trunk"
   ]
 }

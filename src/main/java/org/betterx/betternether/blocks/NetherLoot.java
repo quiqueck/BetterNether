@@ -146,6 +146,16 @@ public class NetherLoot {
                         .add(LootItem.lootTableItem(block))));
     }
 
+    /**
+     * A door: drops itself from the lower half only, the same table every wood-set door gets.
+     * <p>
+     * For the bone doors, which are plain vanilla {@code DoorBlock}s rather than a wood set's door: they got
+     * this table from bclib's {@code BaseDoorBlock} until they were reparented off it, and had none since.
+     */
+    public static LootTableTrait door() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> provider.dropDoor(block));
+    }
+
     /** Terrain/mycelium cover blocks: silk-touch drops the block, otherwise plain netherrack. */
     public static LootTableTrait terrain() {
         return terrain(Blocks.NETHERRACK);
@@ -165,20 +175,15 @@ public class NetherLoot {
     // which bundles the ore classification with the vanilla ore-drop loot trait, so the old redstoneOre()/ore()
     // helpers here are no longer needed.
 
-    /** Black vine (and blooming vine): 1-2 of itself, and only when sheared/hoed/silk-touched. */
-    public static LootTableTrait blackVine() {
-        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
-                .lootTable()
-                .withPool(LootPool
-                        .lootPool()
-                        .setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .when(provider.shearsOrHoeSilkTouchCondition())
-                        .add(LootItem.lootTableItem(block))));
-    }
-
     /**
-     * Whispering gourd vine: any segment but the TOP one is "fruity" and yields 1-2 gourds when sheared or
-     * silk-touched; otherwise the vine itself drops on the vanilla leaves-sapling chance table.
+     * Whispering gourd vine (#84): a gourd-carrying ({@code MIDDLE}) segment yields 1-2 gourds however it is
+     * broken, like vanilla cave vines with berries; any other segment drops itself when sheared or
+     * silk-touched, and otherwise on the vanilla leaves-sapling chance table. The gourds also craft back
+     * into seeds, so a hand-harvested vine is never a dead end.
+     * <p>
+     * {@code BOTTOM} is the bare tip (the {@code _end} model), so it does not count as fruity - this used to
+     * be "anything but {@code TOP}", which handed out gourds for the tip and none for breaking a gourd
+     * segment by hand.
      */
     public static LootTableTrait whisperingGourdVine() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
@@ -186,15 +191,16 @@ public class NetherLoot {
                     .hasBlockStateProperties(block)
                     .setProperties(StatePropertiesPredicate.Builder
                             .properties()
-                            .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.TOP))
-                    .invert();
+                            .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.MIDDLE));
 
             return LootTable.lootTable().withPool(LootPool
                     .lootPool()
                     .setRolls(ConstantValue.exactly(1.0F))
                     .add(LootItem.lootTableItem(NetherCropBlocks.WHISPERING_GOURD.asItem())
-                                 .when(fruityState.and(provider.shearsOrSilkTouchCondition()))
+                                 .when(fruityState)
                                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+                                 .otherwise(LootItem.lootTableItem(block.asItem())
+                                                    .when(provider.shearsOrSilkTouchCondition()))
                                  .otherwise(LootItem.lootTableItem(block.asItem())
                                                     .when(ExplosionCondition.survivesExplosion())
                                                     .when(BonusLevelTableCondition.bonusLevelFlatChance(
@@ -546,39 +552,40 @@ public class NetherLoot {
     }
 
     /**
-     * Mushroom fir trunk: the {@code bottom}/{@code middle}/{@code top} segments each yield one mushroom fir
-     * stem; every other shape (the {@code side_*} branches and {@code end}) falls through to 0-2 saplings.
-     * The three stem children are identical apart from their shape condition and are kept separate only to
-     * mirror the source table.
+     * Chance that one mushroom fir cap block ({@code side_*} or {@code end}) drops a sapling. A grown fir
+     * has about seven cap blocks, so a felled tree yields about 1.4 saplings on average, like the
+     * saplings a vanilla tree's leaves give back.
+     */
+    public static final float MUSHROOM_FIR_SAPLING_CHANCE = 0.2F;
+
+    /**
+     * Mushroom fir trunk: every shape - trunk segments and caps alike - yields one mushroom fir stem (the
+     * fir's wood), so a felled tree gives back one stem per block, whether the block was mined or collapsed
+     * because it lost its support. The cap shapes ({@code side_*} and {@code end}) additionally drop a sapling
+     * with {@link #MUSHROOM_FIR_SAPLING_CHANCE}.
      */
     public static LootTableTrait mushroomFirTrunk() {
-        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
-            final Block stem = NetherWoodBlocks.MAT_MUSHROOM_FIR.getStem();
-            return LootTable
-                    .lootTable()
-                    .withPool(LootPool
-                            .lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
-                            .add(AlternativesEntry.alternatives(
-                                    LootItem.lootTableItem(stem)
-                                            .when(stateIs(
-                                                    block, BlockMushroomFir.SHAPE,
-                                                    BlockMushroomFir.MushroomFirShape.BOTTOM))
-                                            .when(ExplosionCondition.survivesExplosion()),
-                                    LootItem.lootTableItem(stem)
-                                            .when(stateIs(
-                                                    block, BlockMushroomFir.SHAPE,
-                                                    BlockMushroomFir.MushroomFirShape.MIDDLE))
-                                            .when(ExplosionCondition.survivesExplosion()),
-                                    LootItem.lootTableItem(stem)
-                                            .when(stateIs(
-                                                    block, BlockMushroomFir.SHAPE,
-                                                    BlockMushroomFir.MushroomFirShape.TOP))
-                                            .when(ExplosionCondition.survivesExplosion()),
-                                    LootItem.lootTableItem(NetherWoodBlocks.MAT_MUSHROOM_FIR.getSapling())
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
-                            )));
-        });
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
+                .lootTable()
+                .withPool(survivingPool(NetherWoodBlocks.MAT_MUSHROOM_FIR.getStem()))
+                .withPool(LootPool
+                        .lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .when(ExplosionCondition.survivesExplosion())
+                        .when(stateIsAnyOf(
+                                block, BlockMushroomFir.SHAPE,
+                                BlockMushroomFir.MushroomFirShape.END,
+                                BlockMushroomFir.MushroomFirShape.SIDE_BIG_N,
+                                BlockMushroomFir.MushroomFirShape.SIDE_BIG_S,
+                                BlockMushroomFir.MushroomFirShape.SIDE_BIG_E,
+                                BlockMushroomFir.MushroomFirShape.SIDE_BIG_W,
+                                BlockMushroomFir.MushroomFirShape.SIDE_SMALL_N,
+                                BlockMushroomFir.MushroomFirShape.SIDE_SMALL_S,
+                                BlockMushroomFir.MushroomFirShape.SIDE_SMALL_E,
+                                BlockMushroomFir.MushroomFirShape.SIDE_SMALL_W
+                        ))
+                        .add(LootItem.lootTableItem(NetherWoodBlocks.MAT_MUSHROOM_FIR.getSapling())
+                                     .when(LootItemRandomChanceCondition.randomChance(MUSHROOM_FIR_SAPLING_CHANCE)))));
     }
 
     /**

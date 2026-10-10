@@ -33,7 +33,16 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
 public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuilder<NetherBiomeBuilder> {
+    /**
+     * Every BetterNether Biome competes with a slightly higher weight than vanilla Biomes and Biomes of other mods,
+     * which use WoVer's default {@code genChance} of {@code 1.0}. The factor is applied to every
+     * {@code genChance} (top-level, sub- and edge-biomes alike), so the weights between BetterNether Biomes stay
+     * as configured.
+     */
+    private static final float GEN_CHANCE_FACTOR = 1.25f;
 
     protected NetherBiomeBuilder(
             BiomeBootstrapContext context,
@@ -132,7 +141,7 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
 
     public static <C extends NetherBiomeConfig> NetherBiomeKey<C> createKey(@NotNull String name) {
         return new NetherBiomeKey<>(BetterNether.C.id(name.replace(' ', '_')
-                                                          .toLowerCase()));
+                                                          .toLowerCase(Locale.ROOT)));
     }
 
     @Override
@@ -141,7 +150,7 @@ public class NetherBiomeBuilder extends WoverBiomeBuilder.AbstractWoverBiomeBuil
                 key.dataKey,
                 new NetherBiome(
                         fogDensity, key.key, new BiomeGenerationDataContainer(parameters, intendedPlacement),
-                        terrainHeight, genChance, edgeSize, vertical, edge, parent
+                        terrainHeight, genChance * GEN_CHANCE_FACTOR, edgeSize, vertical, edge, parent
                 )
         );
     }

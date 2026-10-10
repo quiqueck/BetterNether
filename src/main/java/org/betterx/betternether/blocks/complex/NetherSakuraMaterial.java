@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
 import org.betterx.betternether.blocks.NetherSurvival;
@@ -28,7 +29,13 @@ public class NetherSakuraMaterial extends NetherWoodenMaterial<NetherSakuraMater
                             BlockNetherSakuraSapling::new,
                             TraitLists.and(
                                     NetherSurvival.netherrack(),
-                                    PottablePlantBlockTrait.withSoils(CommonBlockTags.NETHERRACK)
+                                    PottablePlantBlockTrait.withSoils(CommonBlockTags.NETHERRACK),
+                                    // It grows downwards, and NetherSakuraFeature declines unless the air
+                                    // column below holds trunk + crown - 10, i.e. 15 to 29 blocks.
+                                    DescriptionBlockTrait.of(
+                                            "tooltip.betternether.sapling.hanging",
+                                            "tooltip.betternether.nether_sakura_sapling.space"
+                                    )
                             )
                     ));
     }

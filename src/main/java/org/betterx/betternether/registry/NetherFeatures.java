@@ -4,16 +4,20 @@ import org.betterx.betternether.BN;
 import org.betterx.betternether.registry.features.placed.NetherOresPlaced;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
 import org.betterx.betternether.world.features.*;
+import org.betterx.betternether.world.structures.city.AvoidNetherCity;
 import org.betterx.betternether.world.structures.city.CityStructure;
 import de.ambertation.wover.events.api.WorldLifecycle;
 import de.ambertation.wover.feature.api.FeatureManager;
 
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
 public class NetherFeatures {
     public static final Feature<NoneFeatureConfiguration> JELLYFISH_MUSHROOM = FeatureManager.register(
@@ -99,6 +103,15 @@ public class NetherFeatures {
     public static final TwistedVinesFeature TWISTING_VINES = FeatureManager.register(
             BN.id("twisting_vines"),
             new TwistedVinesFeature()
+    );
+
+    /**
+     * Keeps a feature out of nether cities, see {@link AvoidNetherCity}.
+     */
+    public static final PlacementModifierType<AvoidNetherCity> AVOID_NETHER_CITY = Registry.register(
+            BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,
+            BN.id("avoid_nether_city"),
+            () -> AvoidNetherCity.CODEC
     );
 
     // Features that should be added to all Nether Biomes

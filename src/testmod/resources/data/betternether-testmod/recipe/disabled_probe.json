@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:dead_bush",
+    "minecraft:poisonous_potato"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:cobweb"
+  }
+}

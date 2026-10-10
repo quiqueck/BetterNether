@@ -3,15 +3,28 @@ package org.betterx.betternether.registry;
 import org.betterx.betternether.BetterNether;
 import de.ambertation.wover.tag.api.TagManager;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
 public class NetherTags {
     public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagManager.BIOMES.makeStructureTag(
             BetterNether.C,
             "nether_decorations"
+    );
+
+    /**
+     * Structures a nether city neither builds into nor carves its cave through (see
+     * {@link org.betterx.betternether.world.structures.city.StructureAvoidingProcessor}); fortress and
+     * bastion by default. Hand-written in
+     * {@code resources/data/betternether/tags/worldgen/structure/}, as Wover has no structure tag registry.
+     */
+    public static final TagKey<Structure> CITY_AVOIDS = TagKey.create(
+            Registries.STRUCTURE,
+            BetterNether.C.id("city_avoids")
     );
 
     public static final TagKey<Item> SOUL_GROUND_ITEM = TagManager.ITEMS.makeTag(BetterNether.C, "soul_ground");
@@ -20,6 +33,12 @@ public class NetherTags {
 
 
     public static final TagKey<Block> NETHER_SAND = TagManager.BLOCKS.makeTag(BetterNether.C, "nether_sand");
+    /**
+     * Nylium that belongs to the Nether. {@code #minecraft:nylium} is not usable as a plant's ground rule:
+     * BetterEnd puts its End mosses into it, so a nether plant planted on that tag grows on End terrain
+     * (#118).
+     */
+    public static final TagKey<Block> NETHER_NYLIUM = TagManager.BLOCKS.makeTag(BetterNether.C, "nether_nylium");
     public static final TagKey<Biome> BETTER_NETHER = TagManager.BIOMES.makeTag(BetterNether.C, "biome");
 
     public static final TagKey<Block> FIREFLY_FLOWERS = TagManager.BLOCKS.makeTag(

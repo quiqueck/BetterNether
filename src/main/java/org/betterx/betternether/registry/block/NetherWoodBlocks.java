@@ -28,8 +28,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockRecipeTrait;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
@@ -270,6 +268,7 @@ public class NetherWoodBlocks {
             .addTags(BlockTags.PLANKS)
             .addItemTags(ItemTags.PLANKS)
             .addTrait(BlockTraits.MINEABLE_WITH.needsAxe())
+            .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .mapColor(MapColor.COLOR_GRAY)
             .sound(SoundType.NETHER_WOOD)
             .addTrait(transitionConversion(

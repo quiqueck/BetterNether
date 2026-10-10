@@ -4,6 +4,7 @@ import org.betterx.betternether.registry.block.NetherCropBlocks;
 import org.betterx.betternether.registry.block.NetherMetalBlocks;
 import org.betterx.betternether.registry.block.NetherObsidianBlocks;
 import org.betterx.betternether.registry.block.NetherPlantBlocks;
+import org.betterx.betternether.registry.block.NetherTerrainBlocks;
 import org.betterx.betternether.registry.block.NetherVineBlocks;
 import org.betterx.betternether.registry.block.NetherWoodBlocks;
 
@@ -26,6 +27,15 @@ public class NetherBlockTagDataProvider extends WoverTagProvider.ForBlocks {
     @Override
     public void prepareTags(TagBootstrapContext<Block> context) {
         context.add(NetherTags.NETHER_SAND, Blocks.SOUL_SAND);
+        context.add(
+                NetherTags.NETHER_NYLIUM,
+                Blocks.CRIMSON_NYLIUM,
+                Blocks.WARPED_NYLIUM,
+                NetherTerrainBlocks.JUNGLE_GRASS,
+                NetherTerrainBlocks.MUSHROOM_GRASS,
+                NetherTerrainBlocks.SEPIA_MUSHROOM_GRASS,
+                NetherTerrainBlocks.SWAMPLAND_GRASS
+        );
         context.add(BlockTags.BEACON_BASE_BLOCKS, NetherMetalBlocks.NETHER_RUBY_BLOCK);
 
         context.add(

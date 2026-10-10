@@ -12,6 +12,7 @@ import org.betterx.betternether.blocks.BlockPlantWall;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.betternether.world.structures.city.CityStructure;
 import org.betterx.betternether.world.structures.plants.LegacyStructureAnchorTree;
 import de.ambertation.wover.feature.api.features.GrowableFeature;
 
@@ -69,6 +70,13 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
      */
     private static final int SHAPED_FOR_DEPTH = 128;
 
+    /**
+     * How far sideways a naturally placed tree can reach from its (snapped) origin: branch endpoints are
+     * clamped to 16 blocks and the cylinders drawn around them are at most 7 wide. A tree that close to a
+     * city building is not placed at all - see {@link CityStructure#buildingsIntersect}.
+     */
+    private static final int CITY_CLEARANCE = 16 + 7;
+
     private static int toMiddle(int val) {
 
         return val + (7 - (val & 0xF));
@@ -86,7 +94,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         pos = new BlockPos(toMiddle(pos.getX()), pos.getY(), toMiddle(pos.getZ()));
 
         BlockPos down = pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT));
-        if (canGenerate(pos)) {
+        if (canGenerate(pos) && !CityStructure.buildingsWithin(world, pos, CITY_CLEARANCE)) {
             // Result deliberately dropped: this returned an unconditional true before, and worldgen keeps
             // it that way. Propagating the real outcome cannot move a block - the placement pipeline only
             // accumulates it into a "placed anything" flag - but the willow crown taught that reasoning of
@@ -487,7 +495,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             double max = b.getY() - a.getY();
             if (max < 1) max = 1;
             for (int y = a.getY(); y <= b.getY(); y++)
-                cylinder(lerpCos(a, b, y, (y - a.getY()) / max), radius, MAX_HEIGHT, context);
+                cylinder(lerpCos(a, b, y, (y - a.getY()) / max), radius, level.getMinY(), MAX_HEIGHT, context);
         }
     }
 
@@ -524,7 +532,21 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         return result;
     }
 
-    private void cylinder(BlockPos pos, double radius, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+    /**
+     * Collects one horizontal disc of trunk into {@code context.BLOCKS}.
+     * <p>
+     * The floor cut-off is relative to {@code minY}, not to absolute Y 2. In the Nether the two are the
+     * same; in a dimension whose floor is below zero - the overworld, where a player can grow the giant
+     * from a 2x2 of saplings - an absolute cut-off dropped every disc below Y 3, so the tree "grew",
+     * consumed the four saplings and placed nothing.
+     */
+    private void cylinder(
+            BlockPos pos,
+            double radius,
+            final int minY,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         int x1 = MHelper.floor(pos.getX() - radius);
         int z1 = MHelper.floor(pos.getZ() - radius);
         int x2 = MHelper.floor(pos.getX() + radius + 1);
@@ -541,7 +563,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                         x * 0.5,
                         pos.getY() * 0.5,
                         z * 0.5
-                ) * 0.25 + 0.75) && pos.getY() > 2 && pos.getY() < MAX_HEIGHT - 2)
+                ) * 0.25 + 0.75) && pos.getY() > minY + 2 && pos.getY() < MAX_HEIGHT - 2)
                     context.BLOCKS.add(new BlockPos(x, pos.getY(), z));
             }
         }
@@ -583,7 +605,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             elem.add(end);
             result.add(elem);
 
-            if (findSurface && end.getY() > 2 && end.getY() < MAX_HEIGHT - 2) {
+            if (findSurface && end.getY() > level.getMinY() + 2 && end.getY() < MAX_HEIGHT - 2) {
                 int dist = length < 0
                         ? -BlocksHelper.downRay(level, end, Math.abs(length * 2))
                         : BlocksHelper.upRay(level, end, Math.abs(length * 2));

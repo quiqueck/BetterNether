@@ -2,6 +2,7 @@
   "type": "betternether:biome",
   "parent": "betternether:nether_swampland",
   "biome": "betternether:old_swampland",
+  "genChance": 1.25,
   "generation_data": {
     "intended_placement": "minecraft:is_nether",
     "parameter_points": [

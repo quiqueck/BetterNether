@@ -4,7 +4,6 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "betternether:block/bone_mushroom_up_pre",
-		"texture": "betternether:block/bone_mushroom_up_pre",
 		"wall": "betternether:block/bone_mycelium"
 	},
 	"elements": [ 	 

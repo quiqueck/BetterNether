@@ -28,8 +28,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -123,10 +121,10 @@ public class NetherLeavesBlocks {
             .buildAndRegister();
 
     // --- gloomwood -------------------------------------------------------------------------------
-    // Unlike every leaf block above, these two are plain TintedParticleLeavesBlocks rather than
-    // BNLeaves. That is the point: BNLeaves overrides isRandomlyTicking to false and empties both
-    // randomTick and tick, which switches vanilla leaf decay off entirely - the reason no BetterNether
-    // canopy has ever decayed. The gloomwood tree is built through
+    // Unlike every leaf block above except rubeus (see BlockRubeusLeaves, #97), these two are plain
+    // TintedParticleLeavesBlocks rather than BNLeaves. That is the point: BNLeaves overrides
+    // isRandomlyTicking to false and empties both randomTick and tick, which switches vanilla leaf
+    // decay off entirely - the reason no BetterNether canopy has ever decayed. The gloomwood tree is built through
     // org.betterx.betternether.world.tree, which guarantees every leaf it places is inside the vanilla
     // decay budget, so these blocks can keep the vanilla behaviour and behave like real leaves when the
     // tree is felled.

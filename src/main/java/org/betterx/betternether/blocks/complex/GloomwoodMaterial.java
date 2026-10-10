@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.blocks.BlockGloomwoodSapling;
 import org.betterx.betternether.blocks.NetherSurvival;
 import org.betterx.betternether.blocks.complex.slots.NetherSlots;
@@ -44,7 +45,10 @@ public class GloomwoodMaterial extends NetherWoodenMaterial<GloomwoodMaterial> {
                             // Pottable on the same sculk-like floor it grows on in the wild.
                             TraitLists.and(
                                     NetherSurvival.netherGroundAndSculk(),
-                                    PottablePlantBlockTrait.withSoils(CommonBlockTags.SCULK_LIKE)
+                                    PottablePlantBlockTrait.withSoils(CommonBlockTags.SCULK_LIKE),
+                                    // The number is GloomwoodTreeFeature.MIN_CLEARANCE, below which the sapling
+                                    // refuses bone meal; SaplingTooltipGameTest keeps the text in step.
+                                    DescriptionBlockTrait.of("tooltip.betternether.gloomwood_sapling.space")
                             )
                     ))
                     .replace(new Log(true))

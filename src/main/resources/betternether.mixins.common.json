@@ -9,6 +9,7 @@
     "BlockBehaviourMixin",
     "BrewingRecipeRegistryMixin",
     "CraftingScreenHandlerMixin",
+    "CropSoilMixin",
     "DefaultAttributeRegistryMixin",
     "DeltaFeatureMixin",
     "FlatLevelGeneratorPresetsMixin",

@@ -2,5 +2,5 @@
   "type": "betternether:nether_city",
   "biomes": "#betternether:has_structure/nether_city",
   "spawn_overrides": {},
-  "step": "surface_structures"
+  "step": "fluid_springs"
 }

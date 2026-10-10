@@ -5,6 +5,7 @@ import org.betterx.bclib.api.v2.datafixer.DataFixerAPI;
 import org.betterx.bclib.api.v2.datafixer.MigrationProfile;
 import org.betterx.bclib.api.v2.datafixer.Patch;
 import org.betterx.bclib.interfaces.PatchBiFunction;
+import org.betterx.bclib.interfaces.PatchFunction;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -18,6 +19,26 @@ public class Patcher {
         DataFixerAPI.registerPatch(Patcher_002::new);
         DataFixerAPI.registerPatch(Patcher_003::new);
         DataFixerAPI.registerPatch(Patcher_004::new);
+        DataFixerAPI.registerPatch(Patcher_005::new);
+    }
+}
+
+/**
+ * Brings already-generated mob spawners up to the current NBT layout.
+ * <p>
+ * The templates themselves are fixed in the resources, but that only affects cities generated from
+ * now on - the block entities already written into a world have to be rewritten in place. See
+ * {@link LegacySpawnerFix} for what changed and why the vanilla structure datafixer cannot be
+ * retrofitted onto BetterNether's template loader instead.
+ */
+class Patcher_005 extends Patch {
+    Patcher_005() {
+        super(BetterNether.C, new Version(21, 800, 1));
+    }
+
+    @Override
+    public PatchFunction<CompoundTag, Boolean> getChunkPatcher() {
+        return (root, profile) -> LegacySpawnerFix.patchChunk(root);
     }
 }
 
@@ -317,8 +338,8 @@ class Patcher_001 extends Patch {
     }
 
     @Override
-    public PatchBiFunction<ListTag, ListTag, Boolean> getBlockStatePatcher() {
-        return Patcher_001::patchBlockState;
+    public PatchFunction<CompoundTag, Boolean> getChunkPatcher() {
+        return Patcher_001::patchChunk;
     }
 
     private static final List<String> LEAVE_IDS = List.of(
@@ -328,19 +349,38 @@ class Patcher_001 extends Patch {
             "betternether:nether_sakura_leaves"
     );
 
-    private static boolean patchBlockState(ListTag palette, ListTag states, MigrationProfile profile) {
+    /**
+     * Makes the leaves of trees generated before 5.3.5 persistent.
+     * <p>
+     * Those trees were placed with non-persistent leaves but without valid leaf distances, so they
+     * started to decay once leaf decay was introduced. Their palette entries are indistinguishable
+     * from the leaves current features place on purpose as non-persistent (so they decay once the
+     * tree is felled, #97), which is why the fix is limited to chunks that were last saved in the
+     * pre-1.18 layout (content nested below {@code Level}): BetterNether 5.3.5 targeted 1.17, so
+     * every chunk saved in the flat 1.18+ layout either holds correctly generated trees or was
+     * already patched. Re-running the patch on a modern world therefore no longer flips naturally
+     * generated leaves to persistent.
+     */
+    private static boolean patchChunk(CompoundTag root, MigrationProfile profile) {
+        final CompoundTag level = root.getCompound("Level").orElse(null);
+        if (level == null) return false;
+
         boolean[] changed = {false};
-        palette.forEach((blockTag) -> {
-            CompoundTag blockTagCompound = ((CompoundTag) blockTag);
-            final String id = blockTagCompound.getStringOr("Name", "");
-            if (LEAVE_IDS.contains(id)) {
-                final CompoundTag props = blockTagCompound.getCompoundOrEmpty("Properties");
-                if (!props.contains("persistent") || !"true".equals(props.getStringOr("persistent", ""))) {
-                    props.putString("persistent", "true");
-                    changed[0] = true;
+        level.getList("Sections").ifPresent(sections -> sections.forEach(sectionTag -> {
+            if (!(sectionTag instanceof CompoundTag section)) return;
+            section.getList("Palette").ifPresent(palette -> palette.forEach(blockTag -> {
+                if (!(blockTag instanceof CompoundTag block)) return;
+                final String id = block.getStringOr("Name", "");
+                if (LEAVE_IDS.contains(id)) {
+                    final CompoundTag props = block.getCompound("Properties").orElseGet(CompoundTag::new);
+                    if (!"true".equals(props.getStringOr("persistent", ""))) {
+                        props.putString("persistent", "true");
+                        block.put("Properties", props);
+                        changed[0] = true;
+                    }
                 }
-            }
-        });
+            }));
+        }));
         return changed[0];
     }
 }

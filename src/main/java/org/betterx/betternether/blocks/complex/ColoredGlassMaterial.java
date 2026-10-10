@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks.complex;
 
+import de.ambertation.wover.block.api.render.BlockRenderTraits;
 import org.betterx.bclib.blocks.BaseGlassBlock;
 import org.betterx.bclib.trait.TraitLists;
 import org.betterx.bclib.trait.block.GlassBlockTrait;
@@ -9,7 +10,6 @@ import org.betterx.betternether.blocks.NetherRender;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import de.ambertation.wover.block.api.BlockDefinition;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.core.api.ModCore;
@@ -141,7 +141,7 @@ public class ColoredGlassMaterial {
             // used to come from BaseGlassBlock's RenderLayerProvider interface; it is now the
             // RENDER_LAYER trait.
             definition
-                    .addTrait(ClientBlockTraits.RENDER_LAYER.translucent())
+                    .addTrait(BlockRenderTraits.RENDER_LAYER.translucent())
                     .addTrait(NetherModels.quartzGlass())
                     .addTrait(BlockTraits.LOOT_TABLE.silkTouchSelf())
                     // BaseGlassBlock used to get mineable/pickaxe from the retired AddMineablePickaxe marker.

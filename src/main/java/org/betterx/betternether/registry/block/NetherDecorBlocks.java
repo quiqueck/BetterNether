@@ -29,8 +29,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -100,12 +98,17 @@ public class NetherDecorBlocks {
             .strength(3.0F, 10.0F)
             .sound(SoundType.IRON)
             .noOcclusion()
+            // Like vanilla's flower_pot. The plant lives in the separate potted_plant block above, which is not a
+            // pot and stays out.
+            .addTags(BlockTags.FLOWER_POTS)
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .buildAndRegister();
     public static final Block BRICK_POT = NetherBlocks.defineBlock("brick_pot", p -> new BlockBNPot.Stone(p))
             .replacePropertiesWithCopy(Blocks.NETHER_BRICKS)
             .addTrait(NetherMaterial.stone())
             .noOcclusion()
+            // See CINCINNASITE_POT.
+            .addTags(BlockTags.FLOWER_POTS)
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .buildAndRegister();
     // BlockGeyser (WP6.12): lightLevel(10)/noOcclusion() moved out of its constructor (R1); it always

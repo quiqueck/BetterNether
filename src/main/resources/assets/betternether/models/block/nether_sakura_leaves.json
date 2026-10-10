@@ -4,8 +4,7 @@
 	"textures": {
 		"particle": "betternether:block/nether_sakura_leaves_2",
 		"texture": "betternether:block/nether_sakura_leaves_2",
-		"sides": "betternether:block/nether_sakura_leaves_side",
-		"flowers": "betternether:block/nether_sakura_flowers_1"
+		"sides": "betternether:block/nether_sakura_leaves_side"
 	},
 	"elements": [ 	 
 		{

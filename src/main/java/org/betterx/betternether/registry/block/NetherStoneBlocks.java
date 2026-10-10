@@ -28,8 +28,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -142,17 +140,14 @@ public class NetherStoneBlocks {
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.slabFrom(BONE_BLOCK))
             .buildAndRegister();
-    // registerButton never dispatched through the retired material-dispatch helper (unlike registerPlate
-    // below) - it just built a plain ButtonBlock with the material list the call site passed explicitly,
-    // so no branch resolution is needed here: this reproduces the same (BlockTraits.BUTTON_BLOCK trait not
-    // used) unclassified behaviour byte-for-byte (bone_button is in neither minecraft:buttons nor
-    // wooden_buttons today).
+    // BUTTON_BLOCK puts it into minecraft:buttons (and stone_buttons via the STONE_BLOCK trait), like every
+    // set-built button.
     public static final Block BONE_BUTTON = NetherBlocks.defineBlock(
             "bone_button",
             p -> new ButtonBlock(BlockSetType.CRIMSON, 30, p)
     )
             .replacePropertiesWithCopy(BONE_BLOCK)
-            .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
+            .addTrait(BlockTraits.BUTTON_BLOCK.withDefault())
             .addTrait(NetherModels.button("block/bone_button"))
             .addTrait(NetherMaterial.stone())
             .addTrait(RecipeTraits.buttonFrom(BONE_BLOCK))
@@ -196,11 +191,13 @@ public class NetherStoneBlocks {
             // BNWoodlikeDoor carries no Behaviour* marker, so - like the slot blocks (see the stairs above) -
             // it needs its mineable tool tag spelled out or it drops nothing. Every door built here is wood.
             .addTrait(NetherMaterial.wood())
+            .addTrait(NetherLoot.door())
             .buildAndRegister();
     public static final Block BONE_CINCINNASITE_DOOR = NetherBlocks.defineBlock("bone_cincinnasite_door", p -> new BNWoodlikeDoor(p, WoodType.CRIMSON))
             .replacePropertiesWithCopy(BONE_BLOCK)
             .addTrait(ModelTraitLibrary.door())
             .addTrait(NetherMaterial.wood())
+            .addTrait(NetherLoot.door())
             .buildAndRegister();
     // Soul Sandstone //
     // Former registerMakeable2X2Soul/registerMakeable2X2 bundle, inlined at the registration site (WP5.12):

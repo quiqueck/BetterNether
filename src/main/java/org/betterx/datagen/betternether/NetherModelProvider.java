@@ -4,8 +4,9 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import de.ambertation.wover.block.api.model.BlockModelBinding;
 import de.ambertation.wover.block.api.model.WoverBlockModelGenerators;
+import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.WoverModelProvider;
 import de.ambertation.wover.item.api.ItemRegistry;
@@ -103,25 +104,25 @@ public class NetherModelProvider extends WoverModelProvider {
     @Override
     protected void bootstrapBlockStateModels(WoverBlockModelGenerators generator) {
         this.generator = generator;
-        // Every BetterNether block now declares its model as a ClientBlockTraits.MODEL trait at
+        // Every BetterNether block now declares its model as a model trait (BlockModelBinding) at
         // registration (ModelTraitLibrary / NetherModels / its wood slot), so there is nothing left to
         // override centrally by block identity. The map stays only to feed the two filters below.
         final ModelOverides overrides = ModelOverides.create();
 
         final BlockRegistry registry = BlockRegistry.forMod(BetterNether.C);
 
-        // The blocks and wover block sets express their models as ClientBlockTraits.MODEL traits, which
+        // The blocks and wover block sets express their models as model traits, which
         // only this call honours - without it none of them (planks, chests, doors, furniture, ...) get a
         // blockstate at all. The filter keeps the contract that anything re-added to the (now empty)
         // override map above wins over its trait, rather than generating both.
         BlockModelTrait.bootstrapModels(modCore, generator, (key, block) -> !overrides.contain(block));
 
-        // Blocks with an explicit ClientBlockTraits.MODEL trait are now fully handled above - skip the
+        // Blocks with an explicit model trait are now fully handled above - skip the
         // legacy BlockModelProvider-interface fallback in addFromRegistry() for them, so a block carrying
         // a MODEL trait does not also get a plain cube model registered by the fallback (which would
         // register the same model twice).
         registry.allBlocks().forEach(block -> {
-            if (!overrides.contain(block) && ClientBlockTraits.MODEL.getRuntimeTraits(block) != null) {
+            if (!overrides.contain(block) && BlockTrait.getRuntimeTraits(block, BlockModelBinding.MODEL_TRAIT_KEY) != null) {
                 overrides.ignore(block);
             }
         });

@@ -42,8 +42,8 @@ public class NetherGameRules {
      * Whether a 2x2 of anchor tree saplings may grow the giant anchor tree.
      * <p>
      * The one rule here that ships <em>off</em>. The giant anchor tree is not a big tree so much as a
-     * cavern-sized structure: it reaches from the ceiling it was planted on all the way down to the floor
-     * beneath it, and it needs 30 blocks of clearance before it will grow at all. Four saplings placed
+     * cavern-sized structure: it reaches from the floor it was planted on all the way up to the ceiling
+     * above it, and it needs 30 blocks of clearance before it will grow at all. Four saplings placed
      * without knowing that is a lot of landscape to rearrange by accident, so this one is opt-in -
      * {@code /gamerule growLargeAnchorTrees true} - while the willow, which grows something a player
      * can stand next to, is opt-out.

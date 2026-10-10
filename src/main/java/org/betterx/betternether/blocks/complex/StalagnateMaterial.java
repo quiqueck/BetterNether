@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.bclib.trait.TraitLists;
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.registry.block.NetherStoneBlocks;
 
 import org.betterx.betternether.blocks.BlockStalagnate;
@@ -29,7 +31,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 import org.betterx.betternether.BetterNether;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -54,9 +55,16 @@ public class StalagnateMaterial extends RoofMaterial<StalagnateMaterial> {
                         }
                     })
                     .add(TrunkSlot.createClimbable(BlockStalagnate::new, NetherRender.cutout()))
-                    .add(AbstractSeed.create(
+                    // createGrowing: BlockStalagnateSeed is a FeatureSaplingBlock, so it grows on its own
+                    // random ticks - unlike the wart seed, the other block in this slot.
+                    .add(AbstractSeed.createGrowing(
                             BlockStalagnateSeed::new,
-                            NetherSurvival.netherrack(),
+                            // The stem is a pillar feature (min 3, max 64) that only places when it ends
+                            // against a block - with nothing within reach the seed never grows.
+                            TraitLists.and(
+                                    NetherSurvival.netherrack(),
+                                    DescriptionBlockTrait.of("tooltip.betternether.stalagnate_seed.reach")
+                            ),
                             () -> WeightedCrossModelTrait.booleanDispatch(
                                     BlockStalagnateSeed.TOP,
                                     java.util.List.of(WeightedCrossModelTrait.cross(

@@ -117,7 +117,7 @@ String generateChangelog() {
         changelog += "\n\n"
     }
 
-    def validation = buildValidationSection()
+    def validation = buildServerSmokeLine() + buildValidationSection()
     if (!validation.isEmpty()) {
         changelog += "#### Validation\n"
         changelog += validation.trim()
@@ -126,6 +126,28 @@ String generateChangelog() {
 
     println "Changelog since $lastTag:\n$changelog"
     return changelog
+}
+
+// build/server-smoke/result.json is written by `mod-task.js validate` when config-version.js gives the version a
+// smokeTest: it boots a real dedicated server with the freshly built jars (Servers/smoke-test.sh), which catches
+// shared code touching client-only classes - runServer cannot, its classpath has them. Absent means the smoke
+// test did not run this cycle, and the line is omitted, same as the compat lines below.
+String buildServerSmokeLine() {
+    def resultFile = new File(projectDir, "build/server-smoke/result.json")
+    if (!resultFile.exists()) {
+        return ""
+    }
+    def result = new groovy.json.JsonSlurper().parse(resultFile)
+    def mc = result.minecraft ? "Minecraft ${result.minecraft}" : "dedicated server"
+    def mods = (result.mods ?: []).collect { "${it.name} ${it.version}" }.join(", ")
+    switch (result.status) {
+        case "PASS":
+            return "- ✅ Dedicated server (${mc}) started (${mods})\n"
+        case "FAIL":
+            return "- ❌ Dedicated server (${mc}) did not start — ${result.reason ?: 'see the smoke-test log'}\n"
+        default:
+            return "- ⚠️ Dedicated server — ${result.status}\n"
+    }
 }
 
 // Reads build/compat-test/results.json (written by compat-test.gradle's compatTest task, see

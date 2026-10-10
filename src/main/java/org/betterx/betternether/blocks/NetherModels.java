@@ -9,9 +9,12 @@ import org.betterx.betternether.registry.block.NetherStoneBlocks;
 import org.betterx.betternether.registry.block.NetherWoodBlocks;
 import org.betterx.bclib.trait.block.WeightedTemplateModelTrait;
 import de.ambertation.wover.block.api.BlockProperties;
+import de.ambertation.wover.block.api.client.model.ClientBlockModelRegistry;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
 import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait.ModelFactory;
+import de.ambertation.wover.block.api.model.BlockModelBinding;
+import de.ambertation.wover.block.api.model.ModelKey;
 import de.ambertation.wover.block.api.model.WoverBlockModelGenerators;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.item.api.client.trait.ItemModelTrait;
@@ -60,8 +63,8 @@ import java.util.function.Supplier;
  */
 public class NetherModels {
     /** Basalt bricks: a plain block plus a randomised {@code _cracked} variant. */
-    public static BlockModelTrait basaltBricks() {
-        return ModCore.isDatagen() ? Impl.basaltBricks() : null;
+    public static BlockModelBinding basaltBricks() {
+        return BlockModelBinding.of(MODEL_BASALT_BRICKS, null);
     }
 
     /**
@@ -76,13 +79,13 @@ public class NetherModels {
      *
      * @param source supplies the block whose own model backs the {@code type=double} state
      */
-    public static BlockModelTrait slab(
+    public static BlockModelBinding slab(
             Supplier<Block> source,
             ResourceLocation top,
             ResourceLocation bottom,
             ResourceLocation side
     ) {
-        return ModCore.isDatagen() ? Impl.slab(source, top, bottom, side) : null;
+        return BlockModelBinding.of(MODEL_SLAB, new SlabParams(source, top, bottom, side));
     }
 
     /**
@@ -93,77 +96,77 @@ public class NetherModels {
      * block's model (e.g. bone / nether-ruby / cincinnasite / nether-brick-tile slabs, whose doubled block
      * carries the same slab seam texture as the half slab).
      */
-    public static BlockModelTrait slabColumnDouble(
+    public static BlockModelBinding slabColumnDouble(
             ResourceLocation topBottom,
             ResourceLocation side
     ) {
-        return ModCore.isDatagen() ? Impl.slabColumnDouble(topBottom, side) : null;
+        return BlockModelBinding.of(MODEL_SLAB_COLUMN_DOUBLE, new SlabColumnDoubleParams(topBottom, side));
     }
 
     /** Soul sandstone stairs, textured top/side/bottom from the soul-sandstone set. */
-    public static BlockModelTrait soulSandstoneStairs() {
-        return ModCore.isDatagen() ? Impl.soulSandstoneStairs() : null;
+    public static BlockModelBinding soulSandstoneStairs() {
+        return BlockModelBinding.of(MODEL_SOUL_SANDSTONE_STAIRS, null);
     }
 
     /** Smooth soul sandstone stairs: the top texture on every face. */
-    public static BlockModelTrait soulSandstoneSmoothStairs() {
-        return ModCore.isDatagen() ? Impl.soulSandstoneSmoothStairs() : null;
+    public static BlockModelBinding soulSandstoneSmoothStairs() {
+        return BlockModelBinding.of(MODEL_SOUL_SANDSTONE_SMOOTH_STAIRS, null);
     }
 
     /** Cut soul sandstone stairs. */
-    public static BlockModelTrait soulSandstoneCutStairs() {
-        return ModCore.isDatagen() ? Impl.soulSandstoneCutStairs() : null;
+    public static BlockModelBinding soulSandstoneCutStairs() {
+        return BlockModelBinding.of(MODEL_SOUL_SANDSTONE_CUT_STAIRS, null);
     }
 
     /**
      * Reed stairs: the reed planks are axis-aware and top-textured, so the stairs need the plank texture on
      * the sides and a dedicated {@code _top} texture on top, rather than the slot's single-texture default.
      */
-    public static BlockModelTrait reedStairs() {
-        return ModCore.isDatagen() ? Impl.reedStairs() : null;
+    public static BlockModelBinding reedStairs() {
+        return BlockModelBinding.of(MODEL_REED_STAIRS, null);
     }
 
     /** A pressure plate using an explicit texture rather than its material block's. */
-    public static BlockModelTrait pressurePlate(String texture) {
-        return ModCore.isDatagen() ? Impl.pressurePlate(texture) : null;
+    public static BlockModelBinding pressurePlate(String texture) {
+        return BlockModelBinding.of(MODEL_PRESSURE_PLATE, new PressurePlateParams(texture));
     }
 
     /** A button using an explicit texture rather than its material block's. */
-    public static BlockModelTrait button(String texture) {
-        return ModCore.isDatagen() ? Impl.button(texture) : null;
+    public static BlockModelBinding button(String texture) {
+        return BlockModelBinding.of(MODEL_BUTTON, new ButtonParams(texture));
     }
 
     /** The cincinnasite chair: a chair block model plus a hand-built item model with a view transform. */
-    public static BlockModelTrait chairCincinnasite() {
-        return ModCore.isDatagen() ? Impl.chairCincinnasite() : null;
+    public static BlockModelBinding chairCincinnasite() {
+        return BlockModelBinding.of(MODEL_CHAIR_CINCINNASITE, null);
     }
 
     /** The cincinnasite bar stool. */
-    public static BlockModelTrait barStoolCincinnasite() {
-        return ModCore.isDatagen() ? Impl.barStoolCincinnasite() : null;
+    public static BlockModelBinding barStoolCincinnasite() {
+        return BlockModelBinding.of(MODEL_BAR_STOOL_CINCINNASITE, null);
     }
 
     /** The cincinnasite taburet. */
-    public static BlockModelTrait taburetCincinnasite() {
-        return ModCore.isDatagen() ? Impl.taburetCincinnasite() : null;
+    public static BlockModelBinding taburetCincinnasite() {
+        return BlockModelBinding.of(MODEL_TABURET_CINCINNASITE, null);
     }
 
     /**
      * A nether-grass-family block built from {@code <name>_1..<variants>} cross textures - swamp/bone/sepia
      * bone grass (3 variants) and soul grass (2).
      */
-    public static BlockModelTrait grass(String name, int variants) {
-        return ModCore.isDatagen() ? Impl.grass(name, variants) : null;
+    public static BlockModelBinding grass(String name, int variants) {
+        return BlockModelBinding.of(MODEL_GRASS, new GrassParams(name, variants));
     }
 
     /** Nether grass: two weighted grass fans plus a cross, all equally likely. */
-    public static BlockModelTrait netherGrass() {
-        return ModCore.isDatagen() ? Impl.netherGrass() : null;
+    public static BlockModelBinding netherGrass() {
+        return BlockModelBinding.of(MODEL_NETHER_GRASS, null);
     }
 
     /** Jungle plant: a weighted mix of two crosses, a crop model and a 4-way-rotated jungle-plant model. */
-    public static BlockModelTrait junglePlant() {
-        return ModCore.isDatagen() ? Impl.junglePlant() : null;
+    public static BlockModelBinding junglePlant() {
+        return BlockModelBinding.of(MODEL_JUNGLE_PLANT, null);
     }
 
     /**
@@ -171,13 +174,13 @@ public class NetherModels {
      * every coloured variant re-points {@code quartz_glass_<colour>} at the {@code quartz_stained_glass_<colour>}
      * texture. Plain {@code quartz_glass} additionally gets a hand-built item model off its item texture.
      */
-    public static BlockModelTrait quartzGlass() {
-        return ModCore.isDatagen() ? Impl.quartzGlass() : null;
+    public static BlockModelBinding quartzGlass() {
+        return BlockModelBinding.of(MODEL_QUARTZ_GLASS, null);
     }
 
     /** The weeping/crying obsidian variants. */
-    public static BlockModelTrait obsidianVariants() {
-        return ModCore.isDatagen() ? Impl.obsidianVariants() : null;
+    public static BlockModelBinding obsidianVariants() {
+        return BlockModelBinding.of(MODEL_OBSIDIAN_VARIANTS, null);
     }
 
     /**
@@ -206,7 +209,7 @@ public class NetherModels {
      * Relocated from {@code NetherBlocks} (WP7.6-7.8, docs/registry-split-map.md section 4): needs no
      * {@code ModCore.isDatagen()}/{@link Impl} gating since it never references client-only datagen types.
      */
-    public static BlockModelTrait lumabusVineModelTrait(String prefix) {
+    public static BlockModelBinding lumabusVineModelTrait(String prefix) {
         final var roots = BetterNether.C.mk("block/" + prefix + "_roots");
         final var vine = BetterNether.C.mk("block/" + prefix + "_vine");
         final var mirrored = BetterNether.C.mk("block/" + prefix + "_vine_mirrored");
@@ -248,7 +251,7 @@ public class NetherModels {
      * <p>
      * Relocated from {@code NetherBlocks} (WP7.6-7.8, docs/registry-split-map.md section 4).
      */
-    public static BlockModelTrait netherSakuraLeavesModelTrait() {
+    public static BlockModelBinding netherSakuraLeavesModelTrait() {
         final var base = BetterNether.C.mk("block/nether_sakura_leaves");
         final var tmplP = BetterNether.C.mk("block/nether_sakura_leaves_flowers_3");
         final var tmplM = BetterNether.C.mk("block/nether_sakura_leaves_flowers_6");
@@ -277,19 +280,187 @@ public class NetherModels {
         return WeightedTemplateModelTrait.simple(variants, WeightedTemplateModelTrait.Item.none());
     }
 
+    private record GrassParams(String name, int variants) {
+    }
+
+    private static final ModelKey<GrassParams> MODEL_GRASS = NetherModelKeys.key("nether_models/grass");
+
+    private static final ModelKey<Void> MODEL_NETHER_GRASS = NetherModelKeys.key("nether_models/nether_grass");
+
+    private static final ModelKey<Void> MODEL_JUNGLE_PLANT = NetherModelKeys.key("nether_models/jungle_plant");
+
+    private static final ModelKey<Void> MODEL_QUARTZ_GLASS = NetherModelKeys.key("nether_models/quartz_glass");
+
+    private static final ModelKey<Void> MODEL_OBSIDIAN_VARIANTS =
+            NetherModelKeys.key("nether_models/obsidian_variants");
+
+    private static final ModelKey<Void> MODEL_BASALT_BRICKS = NetherModelKeys.key("nether_models/basalt_bricks");
+
+    private record SlabParams(
+            Supplier<Block> source,
+            ResourceLocation top,
+            ResourceLocation bottom,
+            ResourceLocation side
+    ) {
+    }
+
+    private static final ModelKey<SlabParams> MODEL_SLAB = NetherModelKeys.key("nether_models/slab");
+
+    private record SlabColumnDoubleParams(ResourceLocation topBottom, ResourceLocation side) {
+    }
+
+    private static final ModelKey<SlabColumnDoubleParams> MODEL_SLAB_COLUMN_DOUBLE =
+            NetherModelKeys.key("nether_models/slab_column_double");
+
+    private static final ModelKey<Void> MODEL_SOUL_SANDSTONE_STAIRS =
+            NetherModelKeys.key("nether_models/soul_sandstone_stairs");
+
+    private static final ModelKey<Void> MODEL_SOUL_SANDSTONE_SMOOTH_STAIRS =
+            NetherModelKeys.key("nether_models/soul_sandstone_smooth_stairs");
+
+    private static final ModelKey<Void> MODEL_SOUL_SANDSTONE_CUT_STAIRS =
+            NetherModelKeys.key("nether_models/soul_sandstone_cut_stairs");
+
+    private static final ModelKey<Void> MODEL_REED_STAIRS = NetherModelKeys.key("nether_models/reed_stairs");
+
+    private record PressurePlateParams(String texture) {
+    }
+
+    private static final ModelKey<PressurePlateParams> MODEL_PRESSURE_PLATE =
+            NetherModelKeys.key("nether_models/pressure_plate");
+
+    private record ButtonParams(String texture) {
+    }
+
+    private static final ModelKey<ButtonParams> MODEL_BUTTON = NetherModelKeys.key("nether_models/button");
+
+    private static final ModelKey<Void> MODEL_CHAIR_CINCINNASITE =
+            NetherModelKeys.key("nether_models/chair_cincinnasite");
+
+    private static final ModelKey<Void> MODEL_BAR_STOOL_CINCINNASITE =
+            NetherModelKeys.key("nether_models/bar_stool_cincinnasite");
+
+    private static final ModelKey<Void> MODEL_TABURET_CINCINNASITE =
+            NetherModelKeys.key("nether_models/taburet_cincinnasite");
+
+    /**
+     * Registers the client generators behind this class's model keys. Called from the mod's
+     * {@code wover.client.traits} entrypoint.
+     */
+    @Environment(EnvType.CLIENT)
+    public static void registerClientModels() {
+        Impl.register();
+    }
+
     @Environment(EnvType.CLIENT)
     private static class Impl {
+        private static void register() {
+            ClientBlockModelRegistry.register(
+                    MODEL_GRASS,
+                    (key, block, generator, payload) -> grassFrom(payload).provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_NETHER_GRASS,
+                    (key, block, generator, payload) -> netherGrass().provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_JUNGLE_PLANT,
+                    (key, block, generator, payload) -> junglePlant().provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_QUARTZ_GLASS,
+                    (key, block, generator, payload) -> quartzGlass().provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_OBSIDIAN_VARIANTS,
+                    (key, block, generator, payload) -> obsidianVariants().provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_BASALT_BRICKS,
+                    (key, block, generator, payload) -> basaltBricks().provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_SLAB,
+                    (key, block, generator, payload) -> slabFrom(payload).provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_SLAB_COLUMN_DOUBLE,
+                    (key, block, generator, payload) -> slabColumnDoubleFrom(payload)
+                            .provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_SOUL_SANDSTONE_STAIRS,
+                    (key, block, generator, payload) -> soulSandstoneStairs().provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_SOUL_SANDSTONE_SMOOTH_STAIRS,
+                    (key, block, generator, payload) -> soulSandstoneSmoothStairs()
+                            .provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_SOUL_SANDSTONE_CUT_STAIRS,
+                    (key, block, generator, payload) -> soulSandstoneCutStairs()
+                            .provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_REED_STAIRS,
+                    (key, block, generator, payload) -> reedStairs().provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_PRESSURE_PLATE,
+                    (key, block, generator, payload) -> pressurePlateFrom(payload)
+                            .provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_BUTTON,
+                    (key, block, generator, payload) -> buttonFrom(payload).provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_CHAIR_CINCINNASITE,
+                    (key, block, generator, payload) -> chairCincinnasite().provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_BAR_STOOL_CINCINNASITE,
+                    (key, block, generator, payload) -> barStoolCincinnasite()
+                            .provideBlockModels(key, block, generator)
+            );
+            ClientBlockModelRegistry.register(
+                    MODEL_TABURET_CINCINNASITE,
+                    (key, block, generator, payload) -> taburetCincinnasite().provideBlockModels(key, block, generator)
+            );
+        }
+
+        private static ModelFactory grassFrom(GrassParams p) {
+            return grass(p.name(), p.variants());
+        }
+
+        private static ModelFactory slabFrom(SlabParams p) {
+            return slab(p.source(), p.top(), p.bottom(), p.side());
+        }
+
+        private static ModelFactory slabColumnDoubleFrom(SlabColumnDoubleParams p) {
+            return slabColumnDouble(p.topBottom(), p.side());
+        }
+
+        private static ModelFactory pressurePlateFrom(PressurePlateParams p) {
+            return pressurePlate(p.texture());
+        }
+
+        private static ModelFactory buttonFrom(ButtonParams p) {
+            return button(p.texture());
+        }
+
         private static ItemTrait<Item, ?> debugItem(Supplier<Item> icon) {
             return ModelTraitLibrary.itemModel(icon);
         }
 
-        private static BlockModelTrait grass(String name, int variants) {
-            return ClientBlockTraits.MODEL.with((key, block, generator) ->
-                    BNModels.provideGrassBlockModels(generator, block, name, variants));
+        private static ModelFactory grass(String name, int variants) {
+            return (key, block, generator) ->
+                    BNModels.provideGrassBlockModels(generator, block, name, variants);
         }
 
-        private static BlockModelTrait netherGrass() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+        private static ModelFactory netherGrass() {
+            return (key, block, generator) -> {
                 final ResourceLocation T1 = BetterNether.C.mk("block/ngrass_1");
                 final ResourceLocation T2 = BetterNether.C.mk("block/ngrass_2");
                 final ResourceLocation T3 = BetterNether.C.mk("block/ngrass_3");
@@ -318,11 +489,11 @@ public class NetherModels {
                                 )
                         )
                 );
-            });
+            };
         }
 
-        private static BlockModelTrait junglePlant() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+        private static ModelFactory junglePlant() {
+            return (key, block, generator) -> {
                 final ResourceLocation JP1 = BetterNether.C.mk("block/jungle_plant_1");
                 final ResourceLocation JP2 = BetterNether.C.mk("block/jungle_plant_2");
                 final ResourceLocation JP3 = BetterNether.C.mk("block/jungle_plant_3");
@@ -380,11 +551,11 @@ public class NetherModels {
                                 )
                         )
                 );
-            });
+            };
         }
 
-        private static BlockModelTrait quartzGlass() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+        private static ModelFactory quartzGlass() {
+            return (key, block, generator) -> {
                 final ResourceLocation resource = TextureMapping.getBlockTexture(block);
                 if (!resource.getPath().equals("block/quartz_glass")
                         && !resource.getPath().equals("block/quartz_glass_framed")) {
@@ -430,37 +601,37 @@ public class NetherModels {
                     // doesn't re-generate (and collide with) this model.
                     generator.delegateItemModel(block, itemModel);
                 }
-            });
+            };
         }
 
-        private static BlockModelTrait obsidianVariants() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) ->
-                    generator.createObsidianVariants(generator, block));
+        private static ModelFactory obsidianVariants() {
+            return (key, block, generator) ->
+                    generator.createObsidianVariants(generator, block);
         }
 
-        private static BlockModelTrait basaltBricks() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) ->
-                    BNModels.provideSimpleMultiStateBlock(generator, block, "", "_cracked"));
+        private static ModelFactory basaltBricks() {
+            return (key, block, generator) ->
+                    BNModels.provideSimpleMultiStateBlock(generator, block, "", "_cracked");
         }
 
-        private static BlockModelTrait slab(
+        private static ModelFactory slab(
                 Supplier<Block> source,
                 ResourceLocation top,
                 ResourceLocation bottom,
                 ResourceLocation side
         ) {
-            return ClientBlockTraits.MODEL.with((key, block, generator) ->
+            return (key, block, generator) ->
                     generator.createSlab(block, source.get(), new TextureMapping()
                             .put(TextureSlot.TOP, top)
                             .put(TextureSlot.BOTTOM, bottom)
-                            .put(TextureSlot.SIDE, side)));
+                            .put(TextureSlot.SIDE, side));
         }
 
-        private static BlockModelTrait slabColumnDouble(
+        private static ModelFactory slabColumnDouble(
                 ResourceLocation topBottom,
                 ResourceLocation side
         ) {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+            return (key, block, generator) -> {
                 final TextureMapping halfMapping = new TextureMapping()
                         .put(TextureSlot.TOP, topBottom)
                         .put(TextureSlot.BOTTOM, topBottom)
@@ -485,53 +656,53 @@ public class NetherModels {
                         BlockModelGenerators.plainVariant(topModel),
                         BlockModelGenerators.plainVariant(doubleModel)));
                 generator.delegateItemModel(block, bottomModel);
-            });
+            };
         }
 
-        private static BlockModelTrait soulSandstoneStairs() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> generator.createStairs(
+        private static ModelFactory soulSandstoneStairs() {
+            return (key, block, generator) -> generator.createStairs(
                     block,
                     BetterNether.C.mk("block/soul_sandstone_top"),
                     BetterNether.C.mk("block/soul_sandstone_slabs"),
                     BetterNether.C.mk("block/soul_sandstone_bottom")
-            ));
+            );
         }
 
-        private static BlockModelTrait soulSandstoneSmoothStairs() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+        private static ModelFactory soulSandstoneSmoothStairs() {
+            return (key, block, generator) -> {
                 final ResourceLocation top = BetterNether.C.mk("block/soul_sandstone_top");
                 generator.createStairs(block, top, top, top);
-            });
+            };
         }
 
-        private static BlockModelTrait soulSandstoneCutStairs() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+        private static ModelFactory soulSandstoneCutStairs() {
+            return (key, block, generator) -> {
                 final ResourceLocation top = BetterNether.C.mk("block/soul_sandstone_top");
                 generator.createStairs(block, top, BetterNether.C.mk("block/soul_sandstone_cut_slabs"), top);
-            });
+            };
         }
 
-        private static BlockModelTrait reedStairs() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+        private static ModelFactory reedStairs() {
+            return (key, block, generator) -> {
                 final ResourceLocation planks = TextureMapping.getBlockTexture(
                         NetherWoodBlocks.MAT_REED.getBlock(SlotType.PLANKS)
                 );
                 generator.createStairs(block, planks, planks, BetterNether.C.mk("block/nether_reed_planks_top"));
-            });
+            };
         }
 
-        private static BlockModelTrait pressurePlate(String texture) {
-            return ClientBlockTraits.MODEL.with((key, block, generator) ->
-                    generator.createPressurePlate(block, BetterNether.C.mk(texture)));
+        private static ModelFactory pressurePlate(String texture) {
+            return (key, block, generator) ->
+                    generator.createPressurePlate(block, BetterNether.C.mk(texture));
         }
 
-        private static BlockModelTrait button(String texture) {
-            return ClientBlockTraits.MODEL.with((key, block, generator) ->
-                    generator.createButton(block, BetterNether.C.mk(texture)));
+        private static ModelFactory button(String texture) {
+            return (key, block, generator) ->
+                    generator.createButton(block, BetterNether.C.mk(texture));
         }
 
-        private static BlockModelTrait chairCincinnasite() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+        private static ModelFactory chairCincinnasite() {
+            return (key, block, generator) -> {
                 //this was a custom Item with a view transform, it is easier to recreate the json instead of finding
                 //an appropriate API call that fits this special case...
                 generator.acceptModelOutput(ModelLocationUtils.getModelLocation(block.asItem()), () -> {
@@ -565,24 +736,24 @@ public class NetherModels {
                         NetherMetalBlocks.CINCINNASITE_FORGED,
                         NetherStoneBlocks.NETHER_BRICK_TILE_LARGE
                 );
-            });
+            };
         }
 
-        private static BlockModelTrait barStoolCincinnasite() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> BCLModels.createBarStoolBlockModel(
+        private static ModelFactory barStoolCincinnasite() {
+            return (key, block, generator) -> BCLModels.createBarStoolBlockModel(
                     generator,
                     block,
                     NetherMetalBlocks.CINCINNASITE_FORGED,
                     NetherStoneBlocks.NETHER_BRICK_TILE_LARGE
-            ));
+            );
         }
 
-        private static BlockModelTrait taburetCincinnasite() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> BCLModels.createTaburetBlockModel(
+        private static ModelFactory taburetCincinnasite() {
+            return (key, block, generator) -> BCLModels.createTaburetBlockModel(
                     generator,
                     block,
                     NetherMetalBlocks.CINCINNASITE_FORGED
-            ));
+            );
         }
 
         private static JsonElement toArray(float... values) {

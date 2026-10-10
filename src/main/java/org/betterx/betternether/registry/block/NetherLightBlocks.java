@@ -28,8 +28,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -106,6 +104,9 @@ public class NetherLightBlocks {
             .addTrait(BlockTraits.PLANT_LIGHT_BLOCK.withDefault())
             .addTrait(CompostableBlockTrait.withChance(0.65f))
             .mapColor(MapColor.COLOR_BLUE)
+            // PLANT_LIGHT_BLOCK carries no loot, and the lantern never had a table of its own, so it dropped
+            // nothing (#84). A plain self-drop, like shroomlight.
+            .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
             .buildAndRegister();
     // Fire Bowls
     // Former registerFireBowl bundle, inlined at the registration site (WP5.11): cutout render layer plus

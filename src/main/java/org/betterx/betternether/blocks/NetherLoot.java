@@ -65,6 +65,14 @@ import java.util.List;
  */
 public class NetherLoot {
     /**
+     * Chance that one mushroom fir cap block ({@code side_*} or {@code end}) drops a sapling, as used by the
+     * hand-authored {@code loot_table/blocks/mushroom_fir_trunk.json}. A grown fir has about seven cap
+     * blocks, so a felled tree yields about 1.4 saplings on average, like the saplings a vanilla tree's
+     * leaves give back. Every fir block also drops one mushroom fir stem.
+     */
+    public static final float MUSHROOM_FIR_SAPLING_CHANCE = 0.2F;
+
+    /**
      * A plain self-drop with <b>no</b> {@code survives_explosion} condition.
      * <p>
      * Reproduces byte-for-byte the table bclib's {@code DropSelfLootProvider} generated for a block that is
@@ -108,6 +116,16 @@ public class NetherLoot {
     }
 
 
+    /**
+     * A door: drops itself from the lower half only, the same table every wood-set door gets.
+     * <p>
+     * For the bone doors, which are plain vanilla {@code DoorBlock}s rather than a wood set's door: they got
+     * this table from bclib's {@code BaseDoorBlock} until they were reparented off it, and had none since.
+     */
+    public static LootTableTrait door() {
+        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> provider.dropDoor(block));
+    }
+
     /** Terrain/mycelium cover blocks: silk-touch drops the block, otherwise plain netherrack. */
     public static LootTableTrait terrain() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) ->
@@ -118,20 +136,15 @@ public class NetherLoot {
     // which bundles the ore classification with the vanilla ore-drop loot trait, so the old redstoneOre()/ore()
     // helpers here are no longer needed.
 
-    /** Black vine (and blooming vine): 1-2 of itself, and only when sheared/hoed/silk-touched. */
-    public static LootTableTrait blackVine() {
-        return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> LootTable
-                .lootTable()
-                .withPool(LootPool
-                        .lootPool()
-                        .setRolls(UniformGenerator.between(1.0F, 2.0F))
-                        .when(provider.shearsOrHoeSilkTouchCondition())
-                        .add(LootItem.lootTableItem(block))));
-    }
-
     /**
-     * Whispering gourd vine: any segment but the TOP one is "fruity" and yields 1-2 gourds when sheared or
-     * silk-touched; otherwise the vine itself drops on the vanilla leaves-sapling chance table.
+     * Whispering gourd vine (#84): a gourd-carrying ({@code MIDDLE}) segment yields 1-2 gourds however it is
+     * broken, like vanilla cave vines with berries; any other segment drops itself when sheared or
+     * silk-touched, and otherwise on the vanilla leaves-sapling chance table. The gourds also craft back
+     * into seeds, so a hand-harvested vine is never a dead end.
+     * <p>
+     * {@code BOTTOM} is the bare tip (the {@code _end} model), so it does not count as fruity - this used to
+     * be "anything but {@code TOP}", which handed out gourds for the tip and none for breaking a gourd
+     * segment by hand.
      */
     public static LootTableTrait whisperingGourdVine() {
         return BlockTraits.LOOT_TABLE.with((tableKey, blockKey, block, provider) -> {
@@ -139,15 +152,16 @@ public class NetherLoot {
                     .hasBlockStateProperties(block)
                     .setProperties(StatePropertiesPredicate.Builder
                             .properties()
-                            .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.TOP))
-                    .invert();
+                            .hasProperty(BaseVineBlock.SHAPE, BlockProperties.TripleShape.MIDDLE));
 
             return LootTable.lootTable().withPool(LootPool
                     .lootPool()
                     .setRolls(ConstantValue.exactly(1.0F))
                     .add(LootItem.lootTableItem(NetherCropBlocks.WHISPERING_GOURD.asItem())
-                                 .when(fruityState.and(provider.shearsOrSilkTouchCondition()))
+                                 .when(fruityState)
                                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+                                 .otherwise(LootItem.lootTableItem(block.asItem())
+                                                    .when(provider.shearsOrSilkTouchCondition()))
                                  .otherwise(LootItem.lootTableItem(block.asItem())
                                                     .when(ExplosionCondition.survivesExplosion())
                                                     .when(BonusLevelTableCondition.bonusLevelFlatChance(

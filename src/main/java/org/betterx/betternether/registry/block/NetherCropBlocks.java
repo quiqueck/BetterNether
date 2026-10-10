@@ -28,8 +28,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;

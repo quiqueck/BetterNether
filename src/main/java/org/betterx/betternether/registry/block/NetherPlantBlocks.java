@@ -1,5 +1,6 @@
 package org.betterx.betternether.registry.block;
 
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.registry.item.NetherResourceItems;
 
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
@@ -29,8 +30,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -80,6 +79,7 @@ public class NetherPlantBlocks {
     public static final Block EYE_SEED = NetherBlocks.defineBlock("eye_seed", BlockEyeSeed::new)
             .addTrait(NetherRender.cutout())
             .addTrait(NetherSurvival.netherrack())
+            .addTrait(DescriptionBlockTrait.of("tooltip.betternether.sapling.hanging"))
             .addTrait(NetherMaterial.sapling(MapColor.COLOR_RED))
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherTraits.seed())
@@ -202,8 +202,10 @@ public class NetherPlantBlocks {
     // NetherMaterial.grass() GRASS/XZ alias): the ctor's own sound(CROP)/offsetType(NONE) overrides replace
     // the preset's GRASS sound and XZ offset, and both are baked into the trait's own configure() so they
     // must be passed as the trait's parameters rather than left as separate chained calls.
+    // Drops itself when sheared or silk-touched, like the molds it shares BaseBlockMold with (see HOOK_MUSHROOM).
     public static final Block MOSS_COVER = NetherBlocks.defineBlock("moss_cover", BlockMossCover::new)
             .addTrait(NetherRender.cutout())
+            .addTrait(NetherLoot.netherGrass())
             .addTrait(PlantBlockTrait.withColor(
                     MapColor.COLOR_GREEN, false, BlockBehaviour.OffsetType.NONE, SoundType.CROP, true
             ))
@@ -359,6 +361,13 @@ public class NetherPlantBlocks {
             .addTrait(BlockTraits.MINEABLE_WITH.needsHoe())
             .addTrait(NetherMaterial.plant(MapColor.COLOR_BLACK))
             .lightLevel(BlockPottedPlant::getLuminance)
+            // BlockPottedPlant has a full-cube collision so it can be built on like leaves (#85); like
+            // vanilla leavesProperties() that must not make it suffocate, block view, conduct redstone or
+            // become a mob-spawn floor.
+            .isValidSpawn(Blocks::never)
+            .isSuffocating(Blocks::never)
+            .isViewBlocking(Blocks::never)
+            .isRedstoneConductor(Blocks::never)
             .buildAndRegister();
 
     public static void ensureLoaded() {}

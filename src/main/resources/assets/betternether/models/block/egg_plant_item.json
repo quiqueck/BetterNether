@@ -3,8 +3,7 @@
 	"parent": "block/block",
 	"textures": {
 		"particle": "betternether:block/egg_plant",
-		"texture": "betternether:block/egg_plant",
-		"vine": "betternether:block/egg_plant_vine"
+		"texture": "betternether:block/egg_plant"
 	},
 	"elements": [ 	 
 		{

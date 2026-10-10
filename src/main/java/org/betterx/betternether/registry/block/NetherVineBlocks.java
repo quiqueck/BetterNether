@@ -1,5 +1,6 @@
 package org.betterx.betternether.registry.block;
 
+import org.betterx.bclib.trait.block.DescriptionBlockTrait;
 import org.betterx.betternether.registry.item.NetherResourceItems;
 
 import org.betterx.bclib.api.v3.tag.BCLBlockTags;
@@ -28,8 +29,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -94,7 +93,9 @@ public class NetherVineBlocks {
                     ),
                     WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("block/black_vine"))
             ))
-            .addTrait(NetherLoot.blackVine())
+            // Exactly one of itself, like golden vine and vanilla vines. These two used to roll the pool
+            // 1-2 times, so a sheared or silk-touched segment could come back as two vines.
+            .addTrait(BlockTraits.LOOT_TABLE.dropWithSilktouchOrHoeOrShears())
             // Former Materials.staticVine(COLOR_BLACK) preset, folded (category-traits Batch 3) onto
             // NetherMaterial.staticVine() - the trailing instabreak() stays chained since the preset never
             // sets destroyTime/resistance itself, so there's no ordering hazard.
@@ -120,7 +121,7 @@ public class NetherVineBlocks {
                     ),
                     WeightedCrossModelTrait.Item.flat(BetterNether.C.mk("item/flowered_vine"))
             ))
-            .addTrait(NetherLoot.blackVine())
+            .addTrait(BlockTraits.LOOT_TABLE.dropWithSilktouchOrHoeOrShears())
             // Former Materials.staticVine(COLOR_BLACK) preset, folded onto NetherMaterial.staticVine().
             .addTrait(NetherMaterial.staticVine(MapColor.COLOR_BLACK))
             .instabreak()
@@ -265,6 +266,7 @@ public class NetherVineBlocks {
             .addTrait(NetherMaterial.sapling(MapColor.COLOR_RED))
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherTraits.seed())
+            .addTrait(DescriptionBlockTrait.of("tooltip.betternether.sapling.hanging"))
             .buildAndRegister();
 
     public static final Block GOLDEN_LUMABUS_SEED = NetherBlocks.defineBlock(
@@ -275,6 +277,7 @@ public class NetherVineBlocks {
             .addTrait(NetherMaterial.sapling(MapColor.COLOR_RED))
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherTraits.seed())
+            .addTrait(DescriptionBlockTrait.of("tooltip.betternether.sapling.hanging"))
             .buildAndRegister();
 
     public static void ensureLoaded() {}

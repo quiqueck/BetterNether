@@ -108,8 +108,11 @@ public class BlockStatueRespawner extends Block {
                         pos.getY() + y + world.random.nextFloat() * 0.2,
                         pos.getZ() + world.random.nextFloat(), 0, 0, 0
                 );
-            player.displayClientMessage(Component.translatable("message.spawn_set", new Object[0]), true);
             if (!world.isClientSide) {
+                // Server side only, like every vanilla overlay message: the client runs this method too,
+                // and a local displayClientMessage there showed the text a second time on top of the
+                // server's packet.
+                player.displayClientMessage(Component.translatable("message.spawn_set", new Object[0]), true);
                 ((ServerPlayer) player).setRespawnPosition(
                         new ServerPlayer.RespawnConfig(world.dimension(), pos, player.getYHeadRot(), false),
                         true
@@ -117,10 +120,23 @@ public class BlockStatueRespawner extends Block {
             }
             player.playSound(SoundEvents.TOTEM_USE, 0.7F, 1.0F);
             return InteractionResult.SUCCESS;
-        } else {
-            player.displayClientMessage(Component.translatable("message.spawn_help", requiredItem), true);
+        } else if (!world.isClientSide) {
+            player.displayClientMessage(getHelpMessage(), true);
         }
         return InteractionResult.SUCCESS;
+    }
+
+    /**
+     * The message shown when the player does not hold enough of the required item. The item is passed as a
+     * text component (count + item name): an {@link ItemStack} is not a valid translation argument and can not
+     * be sent to a client.
+     */
+    public Component getHelpMessage() {
+        return Component.translatable(
+                "message.spawn_help",
+                Component.literal(requiredItem.getCount() + " ")
+                         .append(new ItemStack(requiredItem.getItem()).getHoverName())
+        );
     }
 
     @Override

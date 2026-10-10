@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.jetbrains.annotations.NotNull;
 
 public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock {
 
@@ -28,8 +29,17 @@ public class BlockMushroomFirSapling extends FeatureSaplingBlock implements Bone
         return SurvivesOnBlockTrait.survivesOn(this, blockState);
     }
 
+    /**
+     * Grows faster on its own on fertile soil. Bone meal is not affected; it takes at the vanilla sapling's
+     * rate inherited from {@link FeatureSaplingBlock#isBonemealSuccess}.
+     */
     @Override
-    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
+    protected boolean isRandomGrowthSuccess(
+            @NotNull Level world,
+            @NotNull RandomSource random,
+            @NotNull BlockPos pos,
+            @NotNull BlockState state
+    ) {
         return BlocksHelper.isFertile(world.getBlockState(pos.below()))
                 ? (random.nextInt(8) == 0)
                 : (random.nextInt(16) == 0);

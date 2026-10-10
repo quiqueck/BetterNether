@@ -10,6 +10,7 @@ import org.betterx.datagen.betternether.entity.NetherEntityTypeTagProvider;
 import org.betterx.datagen.betternether.presets.FlatLevelPresetsDataProvider;
 import org.betterx.datagen.betternether.recipes.*;
 import org.betterx.datagen.betternether.worldgen.NetherBiomeModificationProvider;
+import org.betterx.datagen.betternether.worldgen.NetherBiomeTagProvider;
 import org.betterx.datagen.betternether.worldgen.NetherBiomesProvider;
 import org.betterx.datagen.betternether.worldgen.StructureDataProvider;
 import org.betterx.datagen.betternether.worldgen.features.*;
@@ -33,6 +34,7 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         NetherBlocks.register();
 
         globalPack.addMultiProvider(NetherBiomesProvider::new);
+        globalPack.addProvider(NetherBiomeTagProvider::new);
         globalPack.addMultiProvider(ObjectFeatureDataProvider::new);
         globalPack.addMultiProvider(OreFeatureDataProvider::new);
         globalPack.addMultiProvider(TerrainFeatureDataProvider::new);

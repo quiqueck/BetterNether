@@ -1,8 +1,11 @@
 package org.betterx.betternether.blocks.complex.slots;
 
 import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import org.betterx.betternether.blocks.NetherModelKeys;
+import de.ambertation.wover.block.api.client.model.ClientBlockModelRegistry;
+import de.ambertation.wover.block.api.client.trait.BlockModelTrait.ModelFactory;
+import de.ambertation.wover.block.api.model.BlockModelBinding;
+import de.ambertation.wover.block.api.model.ModelKey;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraitLookup;
 import de.ambertation.wover.sets.api.blocks.BlockSet;
@@ -51,7 +54,18 @@ public class AnchorTreeSaplingSlot extends Sapling {
     @Environment(EnvType.CLIENT)
     @Override
     protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
-        return ClientModel.build();
+        return BlockModelBinding.of(MODEL, null);
+    }
+
+    private static final ModelKey<Void> MODEL = NetherModelKeys.key("anchor_tree_sapling_slot");
+
+    /**
+     * Registers the client generators behind this class's model keys. Called from the mod's
+     * {@code wover.client.traits} entrypoint.
+     */
+    @Environment(EnvType.CLIENT)
+    public static void registerClientModels() {
+        ClientModel.register();
     }
 
     /**
@@ -62,8 +76,16 @@ public class AnchorTreeSaplingSlot extends Sapling {
      */
     @Environment(EnvType.CLIENT)
     private static class ClientModel {
-        private static BlockModelTrait build() {
-            return ClientBlockTraits.MODEL.with((key, block, generator) -> {
+        private static void register() {
+            ClientBlockModelRegistry.register(
+                    MODEL,
+                    (key, block, generator, payload) -> build().provideBlockModels(key, block, generator)
+            );
+        }
+
+
+        private static ModelFactory build() {
+            return (key, block, generator) -> {
                 final ResourceLocation texture = TextureMapping.getBlockTexture(block);
                 final ResourceLocation model = ModelTemplates.CROSS.create(
                         block, TextureMapping.cross(block), generator.modelOutput()
@@ -75,7 +97,7 @@ public class AnchorTreeSaplingSlot extends Sapling {
 
                 generator.acceptBlockState(MultiVariantGenerator.dispatch(block).with(props));
                 generator.createFlatItem(block, texture);
-            });
+            };
         }
     }
 }

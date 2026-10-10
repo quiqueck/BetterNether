@@ -1,6 +1,7 @@
 {
   "type": "betternether:biome",
   "biome": "betternether:magma_land",
+  "genChance": 1.25,
   "generation_data": {
     "intended_placement": "minecraft:is_nether",
     "parameter_points": [

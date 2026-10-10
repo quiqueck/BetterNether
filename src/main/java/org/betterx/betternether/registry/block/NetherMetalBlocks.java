@@ -102,14 +102,13 @@ public class NetherMetalBlocks {
                                                               .sound(SoundType.IRON)
                                                               .addTrait(RecipeTraits.slabFrom(CINCINNASITE_FORGED))
                                                               .buildAndRegister();
-    // Former registerBlockDropSelf bundle, inlined at the registration site (WP5.12): the
-    // BlockTraits.LOOT_TABLE.dropSelf() the helper baked in unconditionally, made visible.
+    // BUTTON_BLOCK (drop-self loot included) puts it into minecraft:buttons like every set-built button.
     public static final Block CINCINNASITE_BUTTON = NetherBlocks.defineBlock(
                                                                         "cincinnasite_button",
                                                                         p -> new ButtonBlock(BlockSetType.GOLD, 20, p)
                                                                 )
                                                                 .replacePropertiesWithCopy(CINCINNASITE_FORGED)
-                                                                .addTrait(BlockTraits.LOOT_TABLE.dropSelf())
+                                                                .addTrait(BlockTraits.BUTTON_BLOCK.withDefault())
                                                                 .addTrait(NetherModels.button(
                                                                         "block/cincinnasite_button"))
                                                                 .addTrait(NetherMaterial.cincinnasite())
@@ -188,7 +187,7 @@ public class NetherMetalBlocks {
             )
             .replacePropertiesWithCopy(CINCINNASITE_FORGED)
             .addTrait(BlockTraits.BARS_BLOCK)
-            .addTrait(BlockRenderTraits.RENDER_LAYER.translucent())
+            .addTrait(BlockRenderTraits.RENDER_LAYER.cutout())
             .addTrait(NetherMaterial.cincinnasite())
             .sound(SoundType.IRON)
             .strength(3.0F, 10.0F)

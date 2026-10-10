@@ -1,7 +1,7 @@
 package org.betterx.betternether.world.structures.city;
 
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.world.structures.NetherStructureNBT;
+import de.ambertation.wover.structure.api.StructureNBT;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -21,8 +22,11 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import java.util.List;
 
-public class StructureCityBuilding extends NetherStructureNBT {
+public class StructureCityBuilding extends StructureNBT {
     protected static final BlockState AIR = Blocks.AIR.defaultBlockState();
+
+    protected Rotation rotation = Rotation.NONE;
+    protected Mirror mirror = Mirror.NONE;
 
     private BoundingBox2D bb;
     public BlockPos[] ends;
@@ -42,8 +46,7 @@ public class StructureCityBuilding extends NetherStructureNBT {
     }
 
     protected StructureCityBuilding(ResourceLocation location, StructureTemplate structure) {
-        super(location);
-        this.structure = structure;
+        super(location, structure);
         init();
     }
 
@@ -98,20 +101,26 @@ public class StructureCityBuilding extends NetherStructureNBT {
         }
     }
 
+    /**
+     * Processors run in the order given. The palette processor must come first: it reads the original
+     * block state out of the info it is handed, which only holds true while nothing has rewritten it
+     * (see {@link BuildingStructureProcessor#processBlock}).
+     */
     public void placeInChunk(
             ServerLevelAccessor world,
             BlockPos pos,
             BoundingBox boundingBox,
-            StructureProcessor paletteProcessor
+            StructureProcessor... processors
     ) {
         BlockPos p = pos.offset(rotationOffset);
-        structure.placeInWorld(world, p, p, new StructurePlaceSettings()
-                        .setRotation(rotation)
-                        .setMirror(mirror)
-                        .setBoundingBox(boundingBox)
-                        .addProcessor(paletteProcessor),
-                world.getRandom(), Block.UPDATE_CLIENTS
-        );
+        final StructurePlaceSettings settings = new StructurePlaceSettings()
+                .setRotation(rotation)
+                .setMirror(mirror)
+                .setBoundingBox(boundingBox);
+        for (StructureProcessor processor : processors) {
+            settings.addProcessor(processor);
+        }
+        structure.placeInWorld(world, p, p, settings, world.getRandom(), Block.UPDATE_CLIENTS);
     }
 
     public BlockPos[] getEnds() {
@@ -189,6 +198,15 @@ public class StructureCityBuilding extends NetherStructureNBT {
         return rotation;
     }
 
+    public Mirror getMirror() {
+        return mirror;
+    }
+
+    public StructureCityBuilding setMirror(Mirror mirror) {
+        this.mirror = mirror;
+        return this;
+    }
+
     /*
      * private static StructureProcessor makeProcessorReplace() { return new
      * RuleStructureProcessor( ImmutableList.of( new StructureProcessorRule( new
@@ -203,7 +221,6 @@ public class StructureCityBuilding extends NetherStructureNBT {
         );
     }
 
-    @Override
     public StructureCityBuilding setRotation(Rotation rotation) {
         this.rotation = rotation;
         rotationOffset = new BlockPos(structure.getSize()).rotate(rotation);

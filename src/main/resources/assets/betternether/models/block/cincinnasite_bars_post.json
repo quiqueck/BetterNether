@@ -3,7 +3,6 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "betternether:block/cincinnasite_tiles_small",
-		"bars": "betternether:block/quartz_glass",
 		"edge": "betternether:block/cincinnasite_tiles_small"
 	},
 	"elements": [ 	 

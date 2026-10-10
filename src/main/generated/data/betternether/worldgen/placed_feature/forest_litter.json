@@ -69,6 +69,11 @@
     {
       "type": "minecraft:rarity_filter",
       "chance": 2
+    },
+    {
+      "type": "betternether:avoid_nether_city",
+      "include_cave": true,
+      "reach": 8
     }
   ]
 }

@@ -6,13 +6,13 @@ import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -131,6 +131,13 @@ public class BlockMushroomFir extends Block {
         return down.getBlock() == this || down.isFaceSturdy(world, pos.below(), Direction.UP);
     }
 
+    /**
+     * A fir block that lost its support (the trunk segment below it, or the trunk block a cap hangs on) does
+     * not turn into air on the spot: it schedules a tick and then breaks with its drops, like a chorus plant.
+     * So breaking any trunk block takes down everything above and attached to it - one layer per tick, each
+     * block through its loot table - while the part below stays; breaking the bottom block fells the whole
+     * tree. The tick keeps the cascade out of the neighbour-update recursion.
+     */
     @Override
     public BlockState updateShape(
             BlockState state,
@@ -142,6 +149,16 @@ public class BlockMushroomFir extends Block {
             BlockState neighborState,
             RandomSource randomSource
     ) {
-        return canSurvive(state, world, pos) ? state : Blocks.AIR.defaultBlockState();
+        if (!canSurvive(state, world, pos)) {
+            scheduledTickAccess.scheduleTick(pos, this, 1);
+        }
+        return state;
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!state.canSurvive(level, pos)) {
+            level.destroyBlock(pos, true);
+        }
     }
 }

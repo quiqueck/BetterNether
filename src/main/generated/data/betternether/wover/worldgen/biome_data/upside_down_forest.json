@@ -1,7 +1,7 @@
 {
   "type": "betternether:biome",
   "biome": "betternether:upside_down_forest",
-  "genChance": 0.25,
+  "genChance": 0.3125,
   "generation_data": {
     "intended_placement": "minecraft:is_nether",
     "parameter_points": [

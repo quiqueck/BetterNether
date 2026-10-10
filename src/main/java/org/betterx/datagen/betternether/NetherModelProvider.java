@@ -2,10 +2,14 @@ package org.betterx.datagen.betternether;
 
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.item.NetherEquipmentItems;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
+import de.ambertation.wover.block.api.model.BlockModelBinding;
 import de.ambertation.wover.block.api.model.WoverBlockModelGenerators;
+import de.ambertation.wover.block.api.trait.BlockTrait;
+import de.ambertation.wover.complex.api.equipment.ArmorSlot;
+import de.ambertation.wover.complex.api.equipment.EquipmentSet;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.WoverModelProvider;
 import de.ambertation.wover.item.api.ItemRegistry;
@@ -17,10 +21,20 @@ import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.resources.Identifier;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.renderer.item.SelectItemModel;
+import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NetherModelProvider extends WoverModelProvider {
@@ -77,6 +91,7 @@ public class NetherModelProvider extends WoverModelProvider {
             if (ClientItemTraits.MODEL.getRuntimeTraits(item) != null) return;
 
             final Identifier model = ModelLocationUtils.getModelLocation(item);
+            if (generateTrimmableArmor(itemModelGenerator, item, model)) return;
             if (!shipsHandAuthoredModel(model) && item instanceof BlockItem blockItem) {
                 // A block item whose block generated (or hand-authors) a model, but did not register an item
                 // model for it - e.g. the blocks handled by a ModelOverides entry. Delegate to the block
@@ -100,28 +115,85 @@ public class NetherModelProvider extends WoverModelProvider {
         });
     }
 
+    /**
+     * Humanoid armor is in {@code #minecraft:trimmable_armor} (through {@code #minecraft:head_armor} and
+     * friends), so it can be trimmed, and the worn trim renders from vanilla's generic trim atlas. The
+     * inventory icon, however, only shows the trim if the item-model definition selects on
+     * {@code minecraft:trim_material} like vanilla's own armor does (see
+     * {@link ItemModelGenerators#generateTrimmableItem}). This is that method, except that the untrimmed
+     * case points at the hand-authored model instead of overwriting it.
+     *
+     * @return {@code true} if {@code item} is BetterNether humanoid armor and its item model was generated here
+     */
+    private boolean generateTrimmableArmor(ItemModelGenerators itemModelGenerator, Item item, Identifier model) {
+        // Item components are not bound during datagen, so the EQUIPPABLE asset/slot cannot be read off the
+        // item; take them from the equipment set that registered it instead.
+        for (EquipmentSet set : List.of(
+                NetherEquipmentItems.CINCINNASITE_SET,
+                NetherEquipmentItems.NETHER_RUBY_SET,
+                NetherEquipmentItems.FLAMING_RUBY_SET
+        )) {
+            if (set.armorTier == null) continue;
+            for (ArmorSlot slot : List.of(ArmorSlot.HELMET_SLOT, ArmorSlot.CHESTPLATE_SLOT, ArmorSlot.LEGGINGS_SLOT, ArmorSlot.BOOTS_SLOT)) {
+                if (set.get(slot) != item) continue;
+                final Identifier slotTrimPrefix = ItemModelGenerators.prefixForSlotTrim(slot.name);
+                final ResourceKey<EquipmentAsset> equipmentAsset = set.armorTier.armorMaterial.assetId();
+                generateTrimmableArmor(itemModelGenerator, item, model, equipmentAsset, slotTrimPrefix);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void generateTrimmableArmor(
+            ItemModelGenerators itemModelGenerator,
+            Item item,
+            Identifier model,
+            ResourceKey<EquipmentAsset> equipmentAsset,
+            Identifier slotTrimPrefix
+    ) {
+        final Material itemTexture = TextureMapping.getItemTexture(item);
+        final List<SelectItemModel.SwitchCase<ResourceKey<TrimMaterial>>> cases = new ArrayList<>();
+        for (ItemModelGenerators.TrimMaterialData material : ItemModelGenerators.TRIM_MATERIAL_MODELS) {
+            final Identifier trimModel = model.withSuffix("_" + material.assets().base().suffix() + "_trim");
+            final Material trimOverlay = new Material(
+                    slotTrimPrefix.withSuffix("_" + material.assets().assetId(equipmentAsset).suffix())
+            );
+            itemModelGenerator.generateLayeredItem(trimModel, itemTexture, trimOverlay);
+            cases.add(ItemModelUtils.when(material.materialKey(), ItemModelUtils.plainModel(trimModel)));
+        }
+
+        if (!shipsHandAuthoredModel(model)) {
+            ModelTemplates.FLAT_ITEM.create(model, TextureMapping.layer0(itemTexture), itemModelGenerator.modelOutput);
+        }
+        itemModelGenerator.itemModelOutput.accept(
+                item,
+                ItemModelUtils.select(new TrimMaterialProperty(), ItemModelUtils.plainModel(model), cases)
+        );
+    }
+
     @Override
     protected void bootstrapBlockStateModels(WoverBlockModelGenerators generator) {
         this.generator = generator;
-        // Every BetterNether block now declares its model as a ClientBlockTraits.MODEL trait at
+        // Every BetterNether block now declares its model as a model trait (BlockModelBinding) at
         // registration (ModelTraitLibrary / NetherModels / its wood slot), so there is nothing left to
         // override centrally by block identity. The map stays only to feed the two filters below.
         final ModelOverides overrides = ModelOverides.create();
 
         final BlockRegistry registry = BlockRegistry.forMod(BetterNether.C);
 
-        // The blocks and wover block sets express their models as ClientBlockTraits.MODEL traits, which
+        // The blocks and wover block sets express their models as model traits, which
         // only this call honours - without it none of them (planks, chests, doors, furniture, ...) get a
         // blockstate at all. The filter keeps the contract that anything re-added to the (now empty)
         // override map above wins over its trait, rather than generating both.
         BlockModelTrait.bootstrapModels(modCore, generator, (key, block) -> !overrides.contain(block));
 
-        // Blocks with an explicit ClientBlockTraits.MODEL trait are now fully handled above - skip the
+        // Blocks with an explicit model trait are now fully handled above - skip the
         // legacy BlockModelProvider-interface fallback in addFromRegistry() for them, so a block carrying
         // a MODEL trait does not also get a plain cube model registered by the fallback (which would
         // register the same model twice).
         registry.allBlocks().forEach(block -> {
-            if (!overrides.contain(block) && ClientBlockTraits.MODEL.getRuntimeTraits(block) != null) {
+            if (!overrides.contain(block) && BlockTrait.getRuntimeTraits(block, BlockModelBinding.MODEL_TRAIT_KEY) != null) {
                 overrides.ignore(block);
             }
         });

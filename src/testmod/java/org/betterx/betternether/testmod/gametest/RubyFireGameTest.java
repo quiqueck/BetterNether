@@ -1,5 +1,7 @@
 package org.betterx.betternether.testmod.gametest;
 
+import org.betterx.betternether.registry.NetherEnchantments;
+import org.betterx.betternether.registry.block.NetherOreBlocks;
 import org.betterx.betternether.registry.item.NetherEquipmentItems;
 import de.ambertation.wover.complex.api.equipment.ArmorSlot;
 import de.ambertation.wover.complex.api.equipment.ToolSlot;
@@ -10,23 +12,31 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.entity.projectile.arrow.Arrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 
@@ -90,6 +100,286 @@ public class RubyFireGameTest {
 
         failIfAny(helper, "Ruby Fire auto-smelt regression", failures);
         helper.succeed();
+    }
+
+    /**
+     * Nether gold ore drops gold nuggets, and nuggets have no blasting recipe - so converting the drops
+     * alone left the nuggets untouched (#248). The ore itself blasts into a gold ingot, and that is what
+     * a Fireruby pickaxe must produce, without the nuggets on top.
+     */
+    @GameTest
+    public void rubyFirePickaxeSmeltsNetherGoldOreIntoAnIngot(GameTestHelper helper) {
+        final ServerPlayer player = MockPlayers.survival(helper, PLAYER_POS);
+        final ItemStack pickaxe = gameReady(
+                helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ToolSlot.PICKAXE_SLOT)
+        );
+
+        final Broken broken = breakOre(helper, player, pickaxe, Blocks.NETHER_GOLD_ORE);
+
+        final List<String> failures = new ArrayList<>();
+        if (broken.drops().stream().noneMatch(s -> s.is(Items.GOLD_INGOT))) {
+            failures.add("expected a gold ingot from nether gold ore but got " + broken.drops());
+        }
+        if (broken.drops().stream().anyMatch(s -> s.is(Items.GOLD_NUGGET))) {
+            failures.add("gold nuggets were dropped - the ore's drops were not replaced: " + broken.drops());
+        }
+        failIfAny(helper, "Ruby Fire nether gold ore regression (#248)", failures);
+        helper.succeed();
+    }
+
+    /**
+     * Blasting XP is fractional (raw iron 0.7, quartz 0.2). It used to be summed into an {@code int},
+     * which truncated every one of those to zero (#167). Like a furnace, the fraction must be paid out
+     * as a chance, so a run of iron ore breaks has to yield some XP. 0.3^20 makes a false failure
+     * irrelevant; iron ore itself drops no XP, so every orb seen here comes from the auto-smelt.
+     */
+    @GameTest
+    public void rubyFirePickaxeAwardsFractionalSmeltingXp(GameTestHelper helper) {
+        final ServerPlayer player = MockPlayers.survival(helper, PLAYER_POS);
+        final ItemStack pickaxe = gameReady(
+                helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ToolSlot.PICKAXE_SLOT)
+        );
+
+        int xp = 0;
+        boolean smelted = true;
+        for (int i = 0; i < 20; i++) {
+            final Broken broken = breakOre(helper, player, pickaxe, Blocks.IRON_ORE);
+            xp += broken.xp();
+            smelted &= broken.drops().stream().anyMatch(s -> s.is(Items.IRON_INGOT));
+        }
+
+        final List<String> failures = new ArrayList<>();
+        if (!smelted) failures.add("the iron ore was not auto-smelted, so this test measured nothing");
+        if (xp == 0) failures.add("20 auto-smelted iron ores awarded no XP at all");
+        failIfAny(helper, "Ruby Fire smelting XP regression (#167)", failures);
+        helper.succeed();
+    }
+
+    /**
+     * Silk Touch asks for the block itself, so it wins over the auto-smelt (#168): a Fireruby pickaxe
+     * with Silk Touch drops the ore block, unsmelted, and - exactly like a vanilla Silk Touch pickaxe -
+     * no XP (the XP comes later, from the furnace). Quartz ore is the case from #167, iron ore the
+     * case where the drop would otherwise have been an ingot.
+     */
+    @GameTest
+    public void rubyFirePickaxeWithSilkTouchDoesNotSmelt(GameTestHelper helper) {
+        final ServerPlayer player = MockPlayers.survival(helper, PLAYER_POS);
+        final ItemStack pickaxe = gameReady(
+                helper, NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ToolSlot.PICKAXE_SLOT)
+        );
+        pickaxe.enchant(
+                helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
+                      .getOrThrow(Enchantments.SILK_TOUCH),
+                1
+        );
+
+        final List<String> failures = new ArrayList<>();
+        for (Block ore : List.of(Blocks.NETHER_QUARTZ_ORE, Blocks.IRON_ORE, Blocks.NETHER_GOLD_ORE)) {
+            final Broken broken = breakOre(helper, player, pickaxe, ore);
+            final boolean onlyTheOre = !broken.drops().isEmpty()
+                    && broken.drops().stream().allMatch(s -> s.is(ore.asItem()));
+            if (!onlyTheOre) {
+                failures.add(ore.getName().getString() + " with Silk Touch dropped " + broken.drops()
+                        + " instead of the block itself");
+            }
+            if (broken.xp() > 0) {
+                failures.add(ore.getName().getString() + " with Silk Touch awarded " + broken.xp()
+                        + " XP; vanilla Silk Touch awards none");
+            }
+        }
+        failIfAny(helper, "Ruby Fire Silk Touch regression (#168)", failures);
+        helper.succeed();
+    }
+
+    /**
+     * Mining with Ruby Fire must pay, on average, what mining normally and then smelting what Ruby Fire
+     * smelted pays: the block's own mining XP plus the smelting recipe's XP for every smelted item. For
+     * ores whose drop does not smelt (coal, diamond, redstone, ...) nothing is smelted, so only the
+     * mining XP is due - and the drops must be the vanilla ones.
+     * <p>
+     * Both sides are measured the way a player experiences them - a real {@code destroyBlock} by a
+     * survival player, every orb absorbed through {@code playerTouch} - so orb merging and pickup are part
+     * of what is checked. Both pickaxes are the bare Fireruby pickaxe item (same tier, no Mending, no
+     * Fortune); the Ruby Fire one only gets {@code ruby_fire} on top. The vanilla side adds the furnace XP
+     * of the smelted drops (or, when the ore block itself was smelted - nether gold ore, whose nuggets
+     * do not smelt - of the ore block).
+     */
+    @GameTest(maxTicks = 100)
+    public void rubyFireXpMatchesMiningAndSmeltingOnAverage(GameTestHelper helper) {
+        final ServerPlayer player = MockPlayers.survival(helper, PLAYER_POS);
+        final Item pickaxeItem = NetherEquipmentItems.FLAMING_RUBY_SET.<Item>get(ToolSlot.PICKAXE_SLOT);
+        final ItemStack plainPickaxe = new ItemStack(pickaxeItem);
+        final ItemStack rubyPickaxe = new ItemStack(pickaxeItem);
+        rubyPickaxe.enchant(NetherEnchantments.RUBY_FIRE.getHolder(helper.getLevel().registryAccess()), 1);
+
+        final List<String> failures = new ArrayList<>();
+        final StringBuilder numbers = new StringBuilder();
+        for (Block ore : XP_ORES) {
+            final String name = BuiltInRegistries.BLOCK.getKey(ore).toString();
+            final ItemStack oreResult = smeltingResult(helper, new ItemStack(ore));
+            final Stats vanilla = new Stats();
+            final Stats rubyFire = new Stats();
+            boolean droppedSomething = false;
+            boolean oreSmelted = false;
+            boolean anySmelted = false;
+            for (int i = 0; i < XP_SAMPLES; i++) {
+                final Broken plain = mine(helper, player, plainPickaxe, ore);
+                final Broken fire = mine(helper, player, rubyPickaxe, ore);
+                droppedSomething |= !plain.drops().isEmpty();
+
+                double furnaceXp = 0;
+                for (ItemStack drop : plain.drops()) furnaceXp += smeltingXp(helper, drop) * drop.getCount();
+                // Nothing in the drop smelts, but Ruby Fire produced what smelting the ore block yields
+                // (and mining normally does not drop it): the ore block itself went into the furnace.
+                if (furnaceXp == 0 && !oreResult.isEmpty()
+                        && fire.drops().stream().anyMatch(d -> d.is(oreResult.getItem()))
+                        && plain.drops().stream().noneMatch(d -> d.is(oreResult.getItem()))) {
+                    furnaceXp = smeltingXp(helper, new ItemStack(ore));
+                    oreSmelted = true;
+                }
+                if (furnaceXp == 0 && !sameItems(plain.drops(), fire.drops())) {
+                    failures.add(name + ": nothing smeltable was dropped, yet Ruby Fire dropped "
+                            + fire.drops() + " instead of " + plain.drops());
+                    break;
+                }
+                anySmelted |= furnaceXp > 0;
+                vanilla.add(plain.xp() + furnaceXp);
+                rubyFire.add(fire.xp());
+            }
+            if (!droppedSomething) {
+                failures.add(name + ": the plain pickaxe never got a drop - wrong tool tier, nothing measured");
+                continue;
+            }
+            // Four standard errors of the difference: a correct implementation fails about once in 16000.
+            final double tolerance = 4 * Math.sqrt((vanilla.variance() + rubyFire.variance()) / XP_SAMPLES);
+            numbers.append(String.format(
+                    "%n  %s%s: ruby fire %.3f, mine+smelt %.3f (+-%.3f)",
+                    name, anySmelted ? (oreSmelted ? " [ore smelted]" : " [drops smelted]") : " [not smelted]",
+                    rubyFire.mean(), vanilla.mean(), tolerance
+            ));
+            if (Math.abs(rubyFire.mean() - vanilla.mean()) > tolerance) {
+                failures.add(name + ": Ruby Fire paid " + String.format("%.3f", rubyFire.mean())
+                        + " XP per block over " + XP_SAMPLES + " breaks, mining and smelting pays "
+                        + String.format("%.3f", vanilla.mean()) + String.format(" (+-%.3f)", tolerance));
+            }
+        }
+        helper.getLevel().getServer().sendSystemMessage(Component.literal("Ruby Fire XP:" + numbers));
+        failIfAny(helper, "Ruby Fire XP average regression", failures);
+        helper.succeed();
+    }
+
+    /** Every vanilla ore (and deepslate variant), ancient debris, and BetterNether's ores. */
+    private static final List<Block> XP_ORES = List.of(
+            Blocks.COAL_ORE, Blocks.DEEPSLATE_COAL_ORE,
+            Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE,
+            Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE,
+            Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.NETHER_GOLD_ORE,
+            Blocks.REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE,
+            Blocks.LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE,
+            Blocks.DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE,
+            Blocks.EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE,
+            Blocks.NETHER_QUARTZ_ORE, Blocks.ANCIENT_DEBRIS,
+            NetherOreBlocks.CINCINNASITE_ORE, NetherOreBlocks.NETHER_RUBY_ORE,
+            NetherOreBlocks.NETHER_LAPIS_ORE, NetherOreBlocks.NETHER_REDSTONE_ORE
+    );
+
+    private static final int XP_SAMPLES = 200;
+
+    private static boolean sameItems(List<ItemStack> a, List<ItemStack> b) {
+        return a.stream().map(ItemStack::getItem).collect(Collectors.toSet())
+                .equals(b.stream().map(ItemStack::getItem).collect(Collectors.toSet()));
+    }
+
+    private static ItemStack smeltingResult(GameTestHelper helper, ItemStack stack) {
+        final SingleRecipeInput input = new SingleRecipeInput(stack);
+        return helper.getLevel()
+                     .recipeAccess()
+                     .getRecipeFor(RecipeType.SMELTING, input, helper.getLevel())
+                     .map(holder -> holder.value().assemble(input))
+                     .orElse(ItemStack.EMPTY);
+    }
+
+    private static final class Stats {
+        private int n;
+        private double sum;
+        private double sumSq;
+
+        void add(double v) {
+            n++;
+            sum += v;
+            sumSq += v * v;
+        }
+
+        double mean() {
+            return sum / n;
+        }
+
+        double variance() {
+            return n < 2 ? 0 : (sumSq - sum * sum / n) / (n - 1);
+        }
+    }
+
+    private static float smeltingXp(GameTestHelper helper, ItemStack stack) {
+        return helper.getLevel()
+                     .recipeAccess()
+                     .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(stack), helper.getLevel())
+                     .map(holder -> holder.value().experience())
+                     .orElse(0.0f);
+    }
+
+    /**
+     * Places {@code ore} and has {@code player} mine it with {@code tool} through
+     * {@code ServerPlayerGameMode#destroyBlock}, then lets the player absorb every orb it produced (so a
+     * merged orb counts for all it holds) and collects the drops.
+     */
+    private static Broken mine(GameTestHelper helper, ServerPlayer player, ItemStack tool, Block ore) {
+        helper.setBlock(ORE_POS, ore);
+        final BlockPos abs = helper.absolutePos(ORE_POS);
+        player.setItemInHand(InteractionHand.MAIN_HAND, tool.copy());
+        final int before = player.totalExperience;
+        player.gameMode.destroyBlock(abs);
+
+        final AABB box = new AABB(abs).inflate(3.0);
+        final List<ItemStack> drops = new ArrayList<>();
+        for (ItemEntity item : helper.getLevel().getEntitiesOfClass(ItemEntity.class, box)) {
+            drops.add(item.getItem().copy());
+            item.discard();
+        }
+        for (ExperienceOrb orb : helper.getLevel().getEntitiesOfClass(ExperienceOrb.class, box)) {
+            while (!orb.isRemoved()) {
+                player.takeXpDelay = 0;
+                orb.playerTouch(player);
+            }
+        }
+        return new Broken(drops, player.totalExperience - before);
+    }
+
+    private record Broken(List<ItemStack> drops, int xp) {}
+
+    /**
+     * Places {@code ore}, breaks it the way {@code ServerPlayerGameMode#destroyBlock} would, and
+     * collects (then removes) every item and XP orb it produced, so the call can be repeated.
+     */
+    private static Broken breakOre(GameTestHelper helper, ServerPlayer player, ItemStack tool, Block ore) {
+        helper.setBlock(ORE_POS, ore);
+        final BlockPos abs = helper.absolutePos(ORE_POS);
+        final BlockState state = helper.getLevel().getBlockState(abs);
+        helper.setBlock(ORE_POS, Blocks.AIR);
+
+        Block.dropResources(state, helper.getLevel(), abs, null, player, tool);
+
+        final AABB box = new AABB(abs).inflate(3.0);
+        final List<ItemStack> drops = new ArrayList<>();
+        for (ItemEntity item : helper.getLevel().getEntitiesOfClass(ItemEntity.class, box)) {
+            drops.add(item.getItem().copy());
+            item.discard();
+        }
+        int xp = 0;
+        for (ExperienceOrb orb : helper.getLevel().getEntitiesOfClass(ExperienceOrb.class, box)) {
+            xp += orb.getValue();
+            orb.discard();
+        }
+        return new Broken(drops, xp);
     }
 
     /**

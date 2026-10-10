@@ -97,9 +97,9 @@ public class CityPiece extends CustomPiece {
         int cmaxY = Math.min(clamped.maxY(), blockBox.maxY());
         clamped = new BoundingBox(cminX, cminY, cminZ, cmaxX, cmaxY, cmaxZ);
 
-        // Yield to fortresses/bastions rather than bulldoze them. The city generates in the last
-        // decoration step so nothing overwrites IT; this keeps that from being at the fortress's
-        // expense. Gathered once per chunk - a fortress can have 170 pieces.
+        // Yield to the #betternether:city_avoids structures (fortresses and bastions by default) rather
+        // than bulldoze them. The city generates in the last decoration step so nothing overwrites IT; this
+        // keeps that from being at their expense. Gathered once per chunk - a fortress can have 170 pieces.
         final StructureAvoidingProcessor avoiding = new StructureAvoidingProcessor(
                 StructureAvoidingProcessor.collect(world, arg, clamped)
         );

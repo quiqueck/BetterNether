@@ -3,11 +3,11 @@ package org.betterx.betternether.blocks.complex.slots;
 import de.ambertation.wover.block.api.BlockDefinition;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraitLookup;
 import de.ambertation.wover.sets.api.blocks.BlockSet;
 import de.ambertation.wover.sets.api.blocks.SlotFromDefinition;
+import de.ambertation.wover.sets.api.blocks.WoodenBlockSet;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -40,7 +40,7 @@ public class TrunkSlot extends SlotFromDefinition {
     // model. willow_trunk supplies a WeightedTemplateModelTrait so its weighted blockstate + the _2 texture-swap
     // children are generated instead of hand-authored. Evaluated lazily in buildModel (client/datagen only).
     @Nullable
-    private Supplier<BlockModelTrait> modelTraitOverride = null;
+    private Supplier<? extends BlockTrait<Block, ?>> modelTraitOverride = null;
 
     private TrunkSlot(
             Function<BlockBehaviour.Properties, Block> maker,
@@ -83,7 +83,7 @@ public class TrunkSlot extends SlotFromDefinition {
      * Overrides the shared external model with a custom (generated) block-model trait - e.g. willow_trunk's
      * {@link WeightedTemplateModelTrait} weighted blockstate. The supplier is evaluated once at datagen time.
      */
-    public TrunkSlot withModelTrait(Supplier<BlockModelTrait> supplier) {
+    public TrunkSlot withModelTrait(Supplier<? extends BlockTrait<Block, ?>> supplier) {
         this.modelTraitOverride = supplier;
         return this;
     }
@@ -107,6 +107,13 @@ public class TrunkSlot extends SlotFromDefinition {
     protected void addSlotSpecificDefinitions(BlockSet<?> set, BlockDefinition<?, ?> def) {
         super.addSlotSpecificDefinitions(set, def);
         def.addTrait(extraTraits);
+        // The trunk is the tree's wood, so it belongs in #minecraft:logs (and the material's own #<name>_logs)
+        // like the logs and barks. That keeps leaves next to it from decaying and lets tree-felling mods find
+        // the tree. Block tags only: the trunk has no item, and Nether woods do not burn (#logs_that_burn).
+        def.addTags(BlockTags.LOGS);
+        if (set instanceof WoodenBlockSet<?> wood) {
+            def.addTags(wood.logsBlocksTag);
+        }
         if (climbable) {
             def.addTags(BlockTags.MINEABLE_WITH_AXE, BlockTags.CLIMBABLE);
         } else {

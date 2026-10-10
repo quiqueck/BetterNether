@@ -4,8 +4,7 @@
 	"textures": {
 		"particle": "block/brown_mushroom_block",
 		"skin": "block/brown_mushroom_block",
-		"inside": "block/mushroom_block_inside",
-		"stem": "betternether:block/brown_stem"
+		"inside": "block/mushroom_block_inside"
 	},
 	"elements": [ 	 
 		{

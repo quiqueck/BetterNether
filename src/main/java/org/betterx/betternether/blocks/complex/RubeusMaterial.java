@@ -18,7 +18,6 @@ import org.betterx.bclib.trait.block.TripleShapePillarModelTrait;
 import org.betterx.betternether.BetterNether;
 import de.ambertation.wover.block.api.BlockDefinition;
 import de.ambertation.wover.block.api.BlockRegistry;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraitLookup;
 import de.ambertation.wover.pottable.api.trait.PottablePlantBlockTrait;

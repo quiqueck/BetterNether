@@ -1,5 +1,6 @@
 package org.betterx.betternether.registry;
 
+import de.ambertation.wunderlib.utils.ColorUtilARGB32;
 import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
 import org.betterx.bclib.entity.BCLEntityWrapper;
 import org.betterx.bclib.interfaces.SpawnRule;
@@ -7,7 +8,6 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.entity.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.util.NetherBiomeBuilder;
-import org.betterx.ui.ColorUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -112,8 +112,8 @@ public class NetherEntities {
                     EntityFirefly::new,
                     EntityFirefly.createMobAttributes(),
                     true,
-                    ColorUtil.color(255, 223, 168),
-                    ColorUtil.color(233, 182, 95)
+                    ColorUtilARGB32.color(255, 223, 168),
+                    ColorUtilARGB32.color(233, 182, 95)
             );
 
     public static final BCLEntityWrapper<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH =
@@ -125,8 +125,8 @@ public class NetherEntities {
                     EntityHydrogenJellyfish::new,
                     EntityHydrogenJellyfish.createMobAttributes(),
                     false,
-                    ColorUtil.color(253, 164, 24),
-                    ColorUtil.color(88, 21, 4)
+                    ColorUtilARGB32.color(253, 164, 24),
+                    ColorUtilARGB32.color(88, 21, 4)
             );
 
     public static final BCLEntityWrapper<EntityNaga> NAGA =
@@ -138,8 +138,8 @@ public class NetherEntities {
                     EntityNaga::new,
                     EntityNaga.createMobAttributes(),
                     true,
-                    ColorUtil.color(12, 12, 12),
-                    ColorUtil.color(210, 90, 26)
+                    ColorUtilARGB32.color(12, 12, 12),
+                    ColorUtilARGB32.color(210, 90, 26)
             );
 
     public static final BCLEntityWrapper<EntityFlyingPig> FLYING_PIG =
@@ -151,8 +151,8 @@ public class NetherEntities {
                     EntityFlyingPig::new,
                     EntityFlyingPig.createMobAttributes(),
                     true,
-                    ColorUtil.color(241, 140, 93),
-                    ColorUtil.color(176, 58, 47)
+                    ColorUtilARGB32.color(241, 140, 93),
+                    ColorUtilARGB32.color(176, 58, 47)
             );
 
     public static final BCLEntityWrapper<EntityJungleSkeleton> JUNGLE_SKELETON =
@@ -164,8 +164,8 @@ public class NetherEntities {
                     EntityJungleSkeleton::new,
                     EntityJungleSkeleton.createMonsterAttributes(),
                     true,
-                    ColorUtil.color(134, 162, 149),
-                    ColorUtil.color(6, 111, 79)
+                    ColorUtilARGB32.color(134, 162, 149),
+                    ColorUtilARGB32.color(6, 111, 79)
             );
 
     public static final BCLEntityWrapper<EntitySkull> SKULL =
@@ -177,8 +177,8 @@ public class NetherEntities {
                     EntitySkull::new,
                     EntitySkull.createMobAttributes(),
                     true,
-                    ColorUtil.color(24, 19, 19),
-                    ColorUtil.color(255, 28, 18)
+                    ColorUtilARGB32.color(24, 19, 19),
+                    ColorUtilARGB32.color(255, 28, 18)
             );
 
 

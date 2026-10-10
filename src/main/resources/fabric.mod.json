@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "betternether",
-    "version": "26.101.2",
+    "version": "26.101.3",
     "name": "Better Nether",
     "description": "Mod that improves Nether",
     "authors": [
@@ -25,6 +25,9 @@
         ],
         "client": [
             "org.betterx.betternether.client.BetterNetherClient"
+        ],
+        "wover.client.traits": [
+            "org.betterx.betternether.client.NetherClientModels"
         ],
         "fabric-datagen": [
             "org.betterx.datagen.betternether.BetterNetherDatagen"
@@ -55,12 +58,12 @@
         "wunderlib": "26.101.x"
     },
     "breaks": {
-        "bclib": "<26.101.2",
-        "wover": "<26.101.2",
-        "wunderlib": "<26.101.1"
+        "bclib": "<26.101.3",
+        "wover": "<26.101.3",
+        "wunderlib": "<26.101.2"
     },
     "suggests": {
-        "jei": ">=29.0.0"
+        "jei": ">=29.43.0.107"
     },
     "custom": {
         "wover": {

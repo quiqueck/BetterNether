@@ -35,16 +35,20 @@ public class BlockWillowSapling extends FeatureSaplingBlock implements Bonemeala
         return level.getGameRules().get(NetherGameRules.GROW_LARGE_WILLOWS);
     }
 
+    /**
+     * Grows faster on its own on fertile soil. Bone meal is not affected; it takes at the vanilla sapling's
+     * rate inherited from {@link FeatureSaplingBlock#isBonemealSuccess}.
+     */
     @Override
-    public boolean isBonemealSuccess(
-            Level world,
+    protected boolean isRandomGrowthSuccess(
+            @NotNull Level world,
             @NotNull RandomSource random,
-            BlockPos pos,
+            @NotNull BlockPos pos,
             @NotNull BlockState state
     ) {
-        return (BlocksHelper.isFertile(world.getBlockState(pos.below()))
+        return BlocksHelper.isFertile(world.getBlockState(pos.below()))
                 ? (random.nextInt(8) == 0)
-                : (random.nextInt(16) == 0));
+                : (random.nextInt(16) == 0);
     }
 
     @Override

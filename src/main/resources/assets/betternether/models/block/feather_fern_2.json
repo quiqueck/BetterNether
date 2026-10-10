@@ -2,8 +2,8 @@
 	"parent": "betternether:block/feather_fern",
 	"textures": {
 		"base": "betternether:block/feather_fern_base_2",
-		"texture": "betternether:block/feather_fern_leaf_2",
-		"texture1": "betternether:block/feather_fern_center_2",
+		"leaf": "betternether:block/feather_fern_leaf_2",
+		"center": "betternether:block/feather_fern_center_2",
 		"particle": "betternether:block/feather_fern_leaf_2"
 	}
 }

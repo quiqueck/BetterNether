@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ScheduledTickAccess;
@@ -51,11 +52,30 @@ public class BlockPottedPlant extends Block {
 
     }
 
+    // The plant lives in the cell ABOVE its 8px pot, rendered half a block down, so a filled pot is two cells
+    // tall and the plant cell's top is the only surface left to build on (#85). It behaves like leaves there:
+    // a full-cube outline and collision, so blocks placed against it sit flush on the cell's top and mobs
+    // stand on it, but an empty support shape, so - exactly like leaves - nothing needing a sturdy face
+    // (torches, buttons, pressure plates) attaches. The outline keeps the plant's own (lowered) shape on top of
+    // the cube so the part of the plant drawn inside the pot's cell stays clickable.
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
         Block block = state.getValue(PLANT).getBlock();
         Vec3 vec3d = block.defaultBlockState().getOffset(pos);
-        return block.getShape(block.defaultBlockState(), view, pos, ePos).move(-vec3d.x, -0.5 - vec3d.y, -vec3d.z);
+        return Shapes.or(
+                Shapes.block(),
+                block.getShape(block.defaultBlockState(), view, pos, ePos).move(-vec3d.x, -0.5 - vec3d.y, -vec3d.z)
+        );
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ctx) {
+        return Shapes.block();
+    }
+
+    @Override
+    protected VoxelShape getBlockSupportShape(BlockState state, BlockGetter view, BlockPos pos) {
+        return Shapes.empty();
     }
 
     @Override

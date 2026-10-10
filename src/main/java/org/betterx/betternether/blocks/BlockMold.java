@@ -65,10 +65,10 @@ class BaseBlockMold extends Block {
         super.randomTick(state, world, pos, random);
         if (random.nextInt(16) == 0) {
             int c = 0;
-            c = world.getBlockState(pos.north()).getBlock() == this ? c++ : c;
-            c = world.getBlockState(pos.south()).getBlock() == this ? c++ : c;
-            c = world.getBlockState(pos.east()).getBlock() == this ? c++ : c;
-            c = world.getBlockState(pos.west()).getBlock() == this ? c++ : c;
+            if (world.getBlockState(pos.north()).getBlock() == this) c++;
+            if (world.getBlockState(pos.south()).getBlock() == this) c++;
+            if (world.getBlockState(pos.east()).getBlock() == this) c++;
+            if (world.getBlockState(pos.west()).getBlock() == this) c++;
             if (c < 2) {
                 BlockPos npos = new BlockPos(pos);
                 switch (random.nextInt(4)) {

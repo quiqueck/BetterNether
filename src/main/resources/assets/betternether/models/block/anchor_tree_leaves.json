@@ -4,8 +4,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "betternether:block/anchor_tree_vine",
-		"texture": "betternether:block/anchor_tree_leaves_2",
-		"texture1": "betternether:block/anchor_tree_vine"
+		"texture": "betternether:block/anchor_tree_leaves_2"
 	},
 	"elements": [ 	 
 		{

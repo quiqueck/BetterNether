@@ -1,5 +1,6 @@
 package org.betterx.betternether.entity;
 
+import de.ambertation.wunderlib.utils.ColorUtilARGB32;
 import org.betterx.betternether.registry.block.NetherPlantBlocks;
 
 import org.betterx.bclib.entity.DespawnableAnimal;
@@ -9,7 +10,6 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherTags;
 import org.betterx.betternether.registry.SoundsRegistry;
-import org.betterx.ui.ColorUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -189,7 +189,8 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
     protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
 
-        int color = 0xFFFFFFFF;
+        //keep the random color from defineSynchedData when the data has none (e.g. /summon)
+        int color = this.entityData.get(COLOR);
         var stored = input.getInt("color");
         if (stored.isPresent()) {
             color = stored.get();
@@ -199,7 +200,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
             float b = input.getFloatOr("ColorBlue", Float.NaN);
 
             if (!Float.isNaN(r) && !Float.isNaN(g) && !Float.isNaN(b)) {
-                color = ColorUtil.color((int) (r * 0xFF), (int) (g * 0xFF), (int) (b * 0xFF));
+                color = ColorUtilARGB32.color((int) (r * 0xFF), (int) (g * 0xFF), (int) (b * 0xFF));
             }
         }
 
@@ -504,7 +505,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                 break;
         }
 
-        return ColorUtil.color((int) red, (int) green, (int) blue);
+        return ColorUtilARGB32.color((int) red, (int) green, (int) blue);
     }
 
     @Override

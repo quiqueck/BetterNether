@@ -8,10 +8,19 @@ import org.betterx.betternether.items.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherTags;
 import de.ambertation.wover.complex.api.equipment.*;
+import de.ambertation.wover.tag.api.predefined.MineableTags;
 
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.level.block.Block;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
@@ -100,6 +109,7 @@ public class NetherSet extends EquipmentSet {
                         (definition, values) -> new ShearsItem(
                                 commonToolProperties(definition.getProperties())
                                         .durability((int) (toolTier.toolMaterial.durability() * 0.75))
+                                        .component(DataComponents.TOOL, shearsTool(toolTier.toolMaterial))
                         )
                 );
             }
@@ -123,6 +133,20 @@ public class NetherSet extends EquipmentSet {
                     (definition) -> new NetherArmor(armorTier.armorMaterial, commonArmorProperties(definition.getProperties()))
             );
         }
+    }
+
+    /**
+     * The generic digger tool component only speeds up {@code #wover:mineable/shears}, so on vanilla leaves,
+     * wool, vines and cobwebs these shears were no faster than a bare hand - and Efficiency, which only
+     * applies when the base speed is above 1, did nothing (quiqueck/BetterNether#181). Keep vanilla's shear
+     * rules first and add the mineable tag at the material's speed behind them.
+     */
+    private static Tool shearsTool(ToolMaterial material) {
+        final Tool vanilla = ShearsItem.createToolProperties();
+        final HolderGetter<Block> blocks = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
+        final List<Tool.Rule> rules = new ArrayList<>(vanilla.rules());
+        rules.add(Tool.Rule.minesAndDrops(blocks.getOrThrow(MineableTags.SHEARS), material.speed()));
+        return new Tool(rules, vanilla.defaultMiningSpeed(), vanilla.damagePerBlock(), vanilla.canDestroyBlocksInCreative());
     }
 
     @Override

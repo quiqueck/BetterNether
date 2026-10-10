@@ -11,45 +11,11 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "condition": "minecraft:all_of",
-                  "terms": [
-                    {
-                      "condition": "minecraft:inverted",
-                      "term": {
-                        "block": "betternether:whispering_gourd_vine",
-                        "condition": "minecraft:block_state_property",
-                        "properties": {
-                          "shape": "top"
-                        }
-                      }
-                    },
-                    {
-                      "condition": "minecraft:any_of",
-                      "terms": [
-                        {
-                          "condition": "minecraft:match_tool",
-                          "predicate": {
-                            "items": "#c:tools/shear"
-                          }
-                        },
-                        {
-                          "condition": "minecraft:match_tool",
-                          "predicate": {
-                            "predicates": {
-                              "minecraft:enchantments": [
-                                {
-                                  "enchantments": "minecraft:silk_touch",
-                                  "levels": {
-                                    "min": 1
-                                  }
-                                }
-                              ]
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  ]
+                  "block": "betternether:whispering_gourd_vine",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "shape": "middle"
+                  }
                 }
               ],
               "functions": [
@@ -64,6 +30,38 @@
                 }
               ],
               "name": "betternether:whispering_gourd"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:any_of",
+                  "terms": [
+                    {
+                      "condition": "minecraft:match_tool",
+                      "predicate": {
+                        "items": "#c:tools/shear"
+                      }
+                    },
+                    {
+                      "condition": "minecraft:match_tool",
+                      "predicate": {
+                        "predicates": {
+                          "minecraft:enchantments": [
+                            {
+                              "enchantments": "minecraft:silk_touch",
+                              "levels": {
+                                "min": 1
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "betternether:whispering_gourd_vine"
             },
             {
               "type": "minecraft:item",

@@ -3,6 +3,7 @@ package org.betterx.betternether.world.structures.piece;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherStructurePieces;
+import org.betterx.betternether.world.structures.city.StructureAvoidingProcessor;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -59,6 +60,15 @@ public class CavePiece extends CustomPiece {
             ChunkPos chunkPos,
             BlockPos blockPos
     ) {
+        // The cave runs after a bastion or fortress it overlaps (the city generates last), so carving
+        // freely hollowed out the complex - and the buildings, which yield to those pieces through
+        // StructureAvoidingProcessor, then left gaps around a structure that was no longer there.
+        // Measured on one city/bastion overlap: 63k bastion cells turned to cave_air, ~10% of the
+        // city's building blocks missing. Leave the other structure's boxes exactly as it built them -
+        // that covers every structure in #betternether:city_avoids (fortress and bastion by default).
+        final StructureAvoidingProcessor avoiding = new StructureAvoidingProcessor(
+                StructureAvoidingProcessor.collect(world, arg, blockBox)
+        );
         MutableBlockPos POS = new MutableBlockPos();
         BlockState bottom = LAVA;
         if (!(world.dimensionType().hasCeiling())) {
@@ -75,6 +85,7 @@ public class CavePiece extends CustomPiece {
                     py *= py;
                     if (px + py + pz <= radSqr + NOISE.eval(x * 0.1, y * 0.1, z * 0.1) * 800) {
                         POS.set(x, y, z);
+                        if (avoiding.claimed(POS)) continue;
                         if (y > 31) {
                             BlocksHelper.setWithoutUpdate(world, POS, CAVE_AIR);
                             //world.setBlock(POS, CAVE_AIR, 0);

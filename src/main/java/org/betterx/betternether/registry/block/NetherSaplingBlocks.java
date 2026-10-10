@@ -28,8 +28,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.complex.api.equipment.ToolTiers;
@@ -104,7 +102,9 @@ public class NetherSaplingBlocks {
             .addTrait(NetherTraits.sapling())
             .addTrait(ModelTraitLibrary.crossPlant())
             .addTrait(NetherMaterial.sapling(MapColor.COLOR_ORANGE))
-            .noLootTable()
+            // Relied on BlockBase's unconditional self-drop like INK_BUSH_SEED/BLACK_APPLE_SEED, and kept its
+            // stray noLootTable() when that went away, so it dropped nothing at all.
+            .addTrait(NetherLoot.dropSelfNoExplosion())
             .buildAndRegister();
 
     public static void ensureLoaded() {}

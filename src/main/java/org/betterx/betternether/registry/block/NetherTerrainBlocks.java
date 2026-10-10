@@ -29,8 +29,6 @@ import de.ambertation.wover.block.api.BlockProperties;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.DefaultBlockDefinition;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
-import de.ambertation.wover.block.api.client.trait.BlockModelTrait;
-import de.ambertation.wover.block.api.client.trait.ClientBlockTraits;
 import de.ambertation.wover.block.api.trait.BlockTrait;
 import de.ambertation.wover.block.api.trait.BlockTraits;
 import de.ambertation.wover.block.api.trait.behaviour.FuelBlockTrait;
@@ -197,6 +195,9 @@ public class NetherTerrainBlocks {
             .requiresCorrectToolForDrops()
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTags(CommonBlockTags.SOUL_GROUND, CommonBlockTags.NETHERRACK, NetherTags.NETHER_FARMLAND)
+            // #38: vanilla crops (CropBlock/StemBlock/PitcherCropBlock.mayPlaceOn) accept #supports_crops, and
+            // #grows_crops gives them dry-farmland growth speed; it never hydrates, so it never gets the wet bonus.
+            .addTags(BlockTags.SUPPORTS_CROPS, BlockTags.GROWS_CROPS)
             .buildAndRegister();
     public static final BlockTerrain CEILING_MUSHROOMS = NetherBlocks.registerBlock(
             "ceiling_mushrooms",

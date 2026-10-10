@@ -9,6 +9,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.configured.NetherObjects;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.world.structures.city.AvoidNetherCity;
 import de.ambertation.wover.block.api.predicate.BlockPredicates;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.multi.WoverFeatureProvider;
@@ -302,6 +303,9 @@ public class ObjectFeatureDataProvider extends WoverFeatureProvider {
                 .inlinePlace()
                 .vanillaNetherGround(4)
                 .onceEvery(2)
+                // Placed before the city, so it must keep out of the cave as well as the buildings. Centred on
+                // the position, the largest template (tree_fallen, 9x14) reaches 7 blocks sideways.
+                .modifier(new AvoidNetherCity(8, true))
                 .register();
 
     }

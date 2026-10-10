@@ -9,6 +9,7 @@
     "BlockBehaviourMixin",
     "BlockBehaviourPropertiesAccessor",
     "BrewingRecipeRegistryMixin",
+    "CopperGolemAiMixin",
     "CraftingScreenHandlerMixin",
     "CustomSpawnRulesMixin",
     "DefaultAttributeRegistryMixin",

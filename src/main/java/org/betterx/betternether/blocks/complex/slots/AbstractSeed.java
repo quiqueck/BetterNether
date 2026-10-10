@@ -6,6 +6,7 @@ import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
 import org.betterx.bclib.trait.block.SaplingBlockTrait;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
 import org.betterx.bclib.trait.block.VegetationTagTrait;
+import org.betterx.betternether.blocks.NetherRender;
 import de.ambertation.wover.block.api.BlockDefinition;
 import de.ambertation.wover.block.api.BlockRegistry;
 import de.ambertation.wover.block.api.model.ModelTraitLibrary;
@@ -42,13 +43,13 @@ public class AbstractSeed extends SlotFromDefinition {
     private final Function<BlockBehaviour.Properties, Block> maker;
     private final List<BlockTrait<?, ?>> survival;
     @Nullable
-    private final Supplier<BlockModelTrait> modelTrait;
+    private final Supplier<? extends BlockTrait<Block, ?>> modelTrait;
     private final boolean growsOnRandomTick;
 
     private AbstractSeed(
             Function<BlockBehaviour.Properties, Block> maker,
             List<BlockTrait<?, ?>> survival,
-            @Nullable Supplier<BlockModelTrait> modelTrait,
+            @Nullable Supplier<? extends BlockTrait<Block, ?>> modelTrait,
             boolean growsOnRandomTick
     ) {
         super(NetherSlots.SEED);
@@ -70,7 +71,7 @@ public class AbstractSeed extends SlotFromDefinition {
     public static AbstractSeed create(
             Function<BlockBehaviour.Properties, Block> maker,
             List<BlockTrait<?, ?>> survival,
-            Supplier<BlockModelTrait> modelTrait
+            Supplier<? extends BlockTrait<Block, ?>> modelTrait
     ) {
         return new AbstractSeed(maker, survival, modelTrait, false);
     }
@@ -87,7 +88,7 @@ public class AbstractSeed extends SlotFromDefinition {
     public static AbstractSeed createGrowing(
             Function<BlockBehaviour.Properties, Block> maker,
             List<BlockTrait<?, ?>> survival,
-            Supplier<BlockModelTrait> modelTrait
+            Supplier<? extends BlockTrait<Block, ?>> modelTrait
     ) {
         return new AbstractSeed(maker, survival, modelTrait, true);
     }
@@ -104,6 +105,9 @@ public class AbstractSeed extends SlotFromDefinition {
         ));
         def.addTrait(survival);
         def.addTrait(BlockTraits.LOOT_TABLE.dropSelf());
+        // Cutout, like the Sapling slot: the seed blocks render a cross model, which drew its transparent
+        // pixels opaque without it.
+        def.addTrait(NetherRender.cutout());
         // See Sapling: the BehaviourCompostable marker these blocks carry never registered a composter entry.
         def.addTrait(CompostableBlockTrait.withDefault());
         // The blocks in this slot (BlockStalagnateSeed, BlockWartSeed) are named "seed" but actually

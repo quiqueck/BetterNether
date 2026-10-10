@@ -67,9 +67,9 @@ public class SaplingGrowthGameTest {
     /**
      * Bone meal only takes on an {@code isBonemealSuccess} roll, so a survival player has to keep clicking.
      * <p>
-     * A gloomwood off farmland rolls 1-in-16 and needs two takes (the {@code STAGE} step, then the tree),
-     * so the applications needed are negative-binomial with a mean of 32. At 500 the chance of not getting
-     * there is about 3e-13 - small enough that a failure here is a real regression rather than a bad run.
+     * A sapling rolls vanilla's 45% and needs two takes (the {@code STAGE} step, then the tree), so the
+     * applications needed are negative-binomial with a mean of 4.4. 500 is far more than any run needs; it
+     * only bounds the loop when the sapling cannot grow at all.
      */
     private static final int MAX_BONE_MEAL_CLICKS = 500;
     private static final int BONE_MEAL_STACK = 64;
@@ -147,16 +147,16 @@ public class SaplingGrowthGameTest {
      * {@code isBonemealSuccess} and {@code advanceTree}. Only the survival path can show that the
      * {@code STAGE} step and the success roll still work.
      * <p>
-     * Clicking in a loop rather than once: the roll is 1-in-16 and two applications are needed, so a single
+     * Clicking in a loop rather than once: the roll is 45% and two applications are needed, so a single
      * click proves nothing either way.
      * <p>
      * The hand is refilled before every click, which is what a survival player with more bone meal in their
      * inventory does. It is not a convenience: {@code BoneMealItem.growCrop} shrinks the stack on every
-     * valid application, <em>outside</em> the {@code isBonemealSuccess} branch, so a single stack buys 64
-     * rolls of a 1-in-16 chance and not the {@link #MAX_BONE_MEAL_CLICKS} the loop appears to allow. Two
-     * takes out of 64 rolls fails about 8.5% of the time, which is exactly what this test used to do - fail
-     * roughly one run in ten, on a growth path that was working. Refilling makes the click count the real
-     * bound, and the count of bone meal actually consumed is what the assertion below reads.
+     * valid application, <em>outside</em> the {@code isBonemealSuccess} branch, so a single stack buys only 64
+     * rolls and not the {@link #MAX_BONE_MEAL_CLICKS} the loop appears to allow. At the old 1-in-16 roll two
+     * takes out of 64 failed about 8.5% of the time, which is exactly what this test used to do. Refilling
+     * makes the click count the real bound, and the count of bone meal actually consumed is what the
+     * assertion below reads.
      */
     @GameTest(structure = TALL_ARENA, maxTicks = 200)
     public void aSurvivalPlayerGrowsASaplingWithBoneMeal(GameTestHelper helper) {

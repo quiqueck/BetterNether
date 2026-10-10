@@ -1,14 +1,17 @@
 package org.betterx.betternether.world.structures.city;
 
+import org.betterx.betternether.registry.NetherTags;
+
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -19,7 +22,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Drops any city block that would land inside another structure's piece, so the two interleave
@@ -44,13 +46,15 @@ import java.util.Set;
  */
 public class StructureAvoidingProcessor extends StructureProcessor {
     /**
-     * Structures a city yields to. Both live in the {@code minecraft:nether_complexes} set and are
-     * built of solid masonry that a city cannot absorb gracefully.
+     * Structures a city yields to, both its buildings and the cave it carves. By default only the
+     * {@code minecraft:nether_complexes} (fortress, bastion): solid masonry that a city cannot absorb
+     * gracefully and that is big enough to read as part of the cave wall. Small structures (BetterNether's
+     * portals, pillars, altars, the nether ruined portal, ...) are deliberately not in it - a protected
+     * box keeps the terrain inside it, so a small structure in the middle of a city cave floated there as
+     * a cube of netherrack; carving it is the lesser evil. A tag rather than a list, so datapacks and
+     * other mods can protect their own structures.
      */
-    private static final Set<Identifier> AVOIDED = Set.of(
-            Identifier.withDefaultNamespace("fortress"),
-            Identifier.withDefaultNamespace("bastion_remnant")
-    );
+    public static final TagKey<Structure> AVOIDED = NetherTags.CITY_AVOIDS;
 
     /** Never serialized - this processor is built in Java per chunk and holds live bounding boxes. */
     public static final MapCodec<StructureAvoidingProcessor> CODEC =
@@ -72,24 +76,33 @@ public class StructureAvoidingProcessor extends StructureProcessor {
             StructureManager structureManager,
             BoundingBox within
     ) {
-        final Registry<net.minecraft.world.level.levelgen.structure.Structure> structures =
-                world.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+        final Registry<Structure> structures = world.registryAccess().lookupOrThrow(Registries.STRUCTURE);
 
         final List<BoundingBox> result = new ArrayList<>();
         final var chunkPos = new net.minecraft.world.level.ChunkPos(
                 within.minX() >> 4, within.minZ() >> 4
         );
 
-        for (StructureStart start : structureManager.startsForStructure(chunkPos, structure -> {
-            final Identifier id = structures.getKey(structure);
-            return id != null && AVOIDED.contains(id);
-        })) {
+        for (StructureStart start : structureManager.startsForStructure(
+                chunkPos,
+                structure -> isAvoided(structures, structure)
+        )) {
             for (StructurePiece piece : start.getPieces()) {
                 final BoundingBox box = piece.getBoundingBox();
                 if (box.intersects(within)) result.add(box);
             }
         }
         return result;
+    }
+
+    /**
+     * @return {@code true} if a city yields to {@code structure}, i.e. it is in {@link #AVOIDED}
+     */
+    public static boolean isAvoided(Registry<Structure> structures, Structure structure) {
+        return structures.getResourceKey(structure)
+                         .flatMap(structures::get)
+                         .map(holder -> holder.is(AVOIDED))
+                         .orElse(false);
     }
 
     public boolean isEmpty() {

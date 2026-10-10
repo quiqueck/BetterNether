@@ -2,6 +2,7 @@ package org.betterx.betternether.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -33,9 +34,17 @@ public class BlockRubeusCone extends Block {
         return SHAPE;
     }
 
+    /**
+     * Hangs from anything sturdy, and from leaves. Leaves need naming explicitly: vanilla gives
+     * {@code LeavesBlock} an empty block-support shape, so a sturdy-face check alone rejects them - and
+     * the rubeus crown hangs every cone it places under a leaf, which is why grown trees came out nearly
+     * bare (#97).
+     */
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return world.getBlockState(pos.above()).isFaceSturdy(world, pos.above(), Direction.DOWN);
+        final BlockPos above = pos.above();
+        final BlockState support = world.getBlockState(above);
+        return support.is(BlockTags.LEAVES) || support.isFaceSturdy(world, above, Direction.DOWN);
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.betterx.betternether.registry.block.NetherWoodBlocks;
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockPlantWall;
+import org.betterx.bclib.blocks.BaseWallPlantBlock;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.AnchorTreeFeature;
@@ -131,19 +131,19 @@ public class LegacyStructureAnchorTree implements IStructure {
                     state = AnchorTreeFeature.wallPlants[random.nextInt(AnchorTreeFeature.wallPlants.length)].defaultBlockState();
                     BlockPos _pos = bpos.north();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() >= blockBox.minZ())
-                        BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.NORTH));
+                        BlocksHelper.setWithUpdate(level, _pos, state.setValue(BaseWallPlantBlock.FACING, Direction.NORTH));
 
                     _pos = bpos.south();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() <= blockBox.maxZ())
-                        BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
+                        BlocksHelper.setWithUpdate(level, _pos, state.setValue(BaseWallPlantBlock.FACING, Direction.SOUTH));
 
                     _pos = bpos.east();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() <= blockBox.maxX())
-                        BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.EAST));
+                        BlocksHelper.setWithUpdate(level, _pos, state.setValue(BaseWallPlantBlock.FACING, Direction.EAST));
 
                     _pos = bpos.west();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() >= blockBox.minX())
-                        BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.WEST));
+                        BlocksHelper.setWithUpdate(level, _pos, state.setValue(BaseWallPlantBlock.FACING, Direction.WEST));
                 }
             }
         }

@@ -7,6 +7,7 @@ import org.betterx.betternether.registry.block.NetherWoodBlocks;
 import de.ambertation.wover.sets.api.blocks.SlotType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
+import org.betterx.bclib.blocks.BaseWallPlantBlock;
 import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
@@ -193,7 +194,7 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                         BlocksHelper.setWithUpdate(
                                 world,
                                 sidePos,
-                                state.setValue(BlockPlantWall.FACING, side),
+                                state.setValue(BaseWallPlantBlock.FACING, side),
                                 blockBox
                         );
                     }

@@ -8,7 +8,7 @@ import org.betterx.betternether.registry.block.NetherWoodBlocks;
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockPlantWall;
+import org.betterx.bclib.blocks.BaseWallPlantBlock;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
@@ -391,7 +391,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                         BlocksHelper.setWithoutUpdate(
                                 level,
                                 _pos,
-                                state.setValue(BlockPlantWall.FACING, Direction.NORTH)
+                                state.setValue(BaseWallPlantBlock.FACING, Direction.NORTH)
                         );
 
                     _pos = bpos.south();
@@ -399,7 +399,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                         BlocksHelper.setWithoutUpdate(
                                 level,
                                 _pos,
-                                state.setValue(BlockPlantWall.FACING, Direction.SOUTH)
+                                state.setValue(BaseWallPlantBlock.FACING, Direction.SOUTH)
                         );
 
                     _pos = bpos.east();
@@ -407,7 +407,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                         BlocksHelper.setWithoutUpdate(
                                 level,
                                 _pos,
-                                state.setValue(BlockPlantWall.FACING, Direction.EAST)
+                                state.setValue(BaseWallPlantBlock.FACING, Direction.EAST)
                         );
 
                     _pos = bpos.west();
@@ -415,7 +415,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                         BlocksHelper.setWithoutUpdate(
                                 level,
                                 _pos,
-                                state.setValue(BlockPlantWall.FACING, Direction.WEST)
+                                state.setValue(BaseWallPlantBlock.FACING, Direction.WEST)
                         );
                 }
             }

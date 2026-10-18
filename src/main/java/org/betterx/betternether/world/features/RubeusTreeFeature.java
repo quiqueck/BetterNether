@@ -6,7 +6,7 @@ import org.betterx.betternether.registry.block.NetherWoodBlocks;
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockPlantWall;
+import org.betterx.bclib.blocks.BaseWallPlantBlock;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -401,7 +401,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
             for (Direction dir : BlocksHelper.HORIZONTAL) {
                 if (random.nextInt(3) > 0)
                     setIfAir(world, pos.relative(dir), NetherPlantBlocks.JUNGLE_MOSS.defaultBlockState().setValue(
-                            BlockPlantWall.FACING, dir));
+                            BaseWallPlantBlock.FACING, dir));
             }
         }
     }

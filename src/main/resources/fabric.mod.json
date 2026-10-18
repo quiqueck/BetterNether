@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "betternether",
-    "version": "26.201.3",
+    "version": "26.201.4",
     "name": "Better Nether",
     "description": "Mod that improves Nether",
     "authors": [
@@ -56,9 +56,9 @@
         "wunderlib": "26.201.x"
     },
     "breaks": {
-        "bclib": "<26.201.3",
-        "wover": "<26.201.3",
-        "wunderlib": "<26.201.1"
+        "bclib": "<26.201.4",
+        "wover": "<26.201.4",
+        "wunderlib": "<26.201.2"
     },
     "suggests": {
         "jei": ">=30.39.0.233"

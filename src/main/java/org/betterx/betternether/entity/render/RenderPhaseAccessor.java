@@ -9,6 +9,7 @@ import com.mojang.renderpearl.api.pipeline.DepthStencilState;
 import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderSetup.OutlineProperty;
@@ -53,6 +54,10 @@ public abstract class RenderPhaseAccessor {
             .withDepthStencilState(new DepthStencilState(CompareOp.GREATER_THAN_OR_EQUAL, false))
             .build();
 
+    static {
+        assignIrisProgram(FIREFLY_PIPELINE);
+    }
+
     private static final Function<Identifier, RenderType> FIREFLY_RENDER_TYPE = Util.memoize(RenderPhaseAccessor::createFirefly);
 
     private static RenderType createFirefly(Identifier texture) {
@@ -67,5 +72,23 @@ public abstract class RenderPhaseAccessor {
 
     public static RenderType getFirefly(Identifier texture) {
         return FIREFLY_RENDER_TYPE.apply(texture);
+    }
+
+    /**
+     * Iris maps every pipeline to a shader-pack program. It does not know our own pipeline, and with a shader pack
+     * the firefly glow then turned into long stretched triangles across the whole screen (#317). We assign it the
+     * program Iris uses for vanilla's glowing eyes. Iris is optional, so this goes through reflection.
+     */
+    private static void assignIrisProgram(RenderPipeline pipeline) {
+        if (!FabricLoader.getInstance().isModLoaded("iris")) return;
+        try {
+            final Class<?> apiClass = Class.forName("net.irisshaders.iris.api.v0.IrisApi");
+            final Class<?> programClass = Class.forName("net.irisshaders.iris.api.v0.IrisProgram");
+            final Object api = apiClass.getMethod("getInstance").invoke(null);
+            final Object program = programClass.getMethod("valueOf", String.class).invoke(null, "EMISSIVE_ENTITIES");
+            apiClass.getMethod("assignPipeline", RenderPipeline.class, programClass).invoke(api, pipeline, program);
+        } catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
+            BetterNether.C.log.warn("Unable to register the firefly glow with Iris, it may render wrong with shaders", e);
+        }
     }
 }

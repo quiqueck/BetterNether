@@ -8,6 +8,7 @@ import org.betterx.bclib.blocks.*;
 import org.betterx.bclib.trait.block.CompostableBlockTrait;
 import org.betterx.bclib.trait.block.FurnitureTraits;
 import org.betterx.bclib.trait.block.PlantBlockTrait;
+import org.betterx.bclib.trait.block.MushroomBlockTrait;
 import org.betterx.bclib.trait.block.PlantLikeBlockTrait;
 import org.betterx.bclib.trait.block.RecipeTraits;
 import org.betterx.bclib.trait.block.SurvivesOnBlockTrait;
@@ -73,15 +74,17 @@ import org.betterx.betternether.registry.NetherBlocks;
 public class NetherWallPlantBlocks {
 
     // Wall plants
-    // BlockPlantWall (WP6.12): all four always dropped themselves unconditionally via BlockBase's inherited
-    // getDrops() override (no loot table json was generated for any of them), reproduced explicitly as
+    // BCLib's BaseWallPlantBlock (BetterNether's own BlockPlantWall was merged into it): all four always
+    // dropped themselves unconditionally - even in explosions - via BlockBase's inherited getDrops() override
+    // (no loot table json was generated for any of them), reproduced explicitly as
     // NetherLoot.dropSelfNoExplosion() on each.
+    // createShapes(2, 6) keeps the smaller outline BlockPlantWall had (BCLib's default is createShapes(1, 8)).
     // Former Materials.makeNetherGrass() preset, folded (category-traits Batch 3) onto BCLib
     // PlantBlockTrait's Shape-A overload directly (not the NetherMaterial.grass() alias, which hardcodes
     // the XZ ground-offset) - these three keep the ctor's own offsetType(NONE) override, and since a
     // trait's configure() always runs after any inline chain, NetherMaterial.grass()'s baked-in XZ would
     // have won regardless of chain position.
-    public static final Block WALL_MOSS = NetherBlocks.defineBlock("wall_moss", BlockPlantWall::new)
+    public static final Block WALL_MOSS = NetherBlocks.defineBlock("wall_moss", p -> new BaseWallPlantBlock(p, BaseWallPlantBlock.createShapes(2, 6)))
             .addTrait(NetherRender.cutout())
             .addTrait(PlantBlockTrait.withColor(
                     MapColor.COLOR_RED, false, BlockBehaviour.OffsetType.NONE, SoundType.GRASS, true
@@ -90,20 +93,16 @@ public class NetherWallPlantBlocks {
             .addTrait(NetherTraits.plant())
             .addTrait(SurvivesOnSolidTrait.DEFAULT)
             .buildAndRegister();
-    public static final Block WALL_MUSHROOM_BROWN = NetherBlocks.defineBlock("wall_mushroom_brown", BlockPlantWall::new)
+    public static final Block WALL_MUSHROOM_BROWN = NetherBlocks.defineBlock("wall_mushroom_brown", p -> new BaseWallPlantBlock(p, BaseWallPlantBlock.createShapes(2, 6)))
             .addTrait(NetherRender.cutout())
-            .addTrait(PlantBlockTrait.withColor(
-                    MapColor.COLOR_BROWN, false, BlockBehaviour.OffsetType.NONE, SoundType.GRASS, true
-            ))
+            .addTrait(MushroomBlockTrait.wallMushroom(MapColor.COLOR_BROWN, true))
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherTraits.plant())
             .addTrait(SurvivesOnSolidTrait.DEFAULT)
             .buildAndRegister();
-    public static final Block WALL_MUSHROOM_RED = NetherBlocks.defineBlock("wall_mushroom_red", BlockPlantWall::new)
+    public static final Block WALL_MUSHROOM_RED = NetherBlocks.defineBlock("wall_mushroom_red", p -> new BaseWallPlantBlock(p, BaseWallPlantBlock.createShapes(2, 6)))
             .addTrait(NetherRender.cutout())
-            .addTrait(PlantBlockTrait.withColor(
-                    MapColor.COLOR_RED, false, BlockBehaviour.OffsetType.NONE, SoundType.GRASS, true
-            ))
+            .addTrait(MushroomBlockTrait.wallMushroom(MapColor.COLOR_RED, true))
             .addTrait(NetherLoot.dropSelfNoExplosion())
             .addTrait(NetherTraits.plant())
             .addTrait(SurvivesOnSolidTrait.DEFAULT)

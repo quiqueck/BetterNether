@@ -343,7 +343,7 @@ public class NetherPlantBlocks {
     // Former Materials.makeNetherGrass() preset, folded onto PlantBlockTrait directly (offsetType(NONE)
     // override baked into the trait call - same recipe as WALL_MOSS/JUNGLE_MOSS's siblings in
     // NetherWallPlantBlocks).
-    public static final Block JUNGLE_MOSS = NetherBlocks.defineBlock("jungle_moss", BlockPlantWall::new)
+    public static final Block JUNGLE_MOSS = NetherBlocks.defineBlock("jungle_moss", p -> new BaseWallPlantBlock(p, BaseWallPlantBlock.createShapes(2, 6)))
             .addTrait(NetherRender.cutout())
             .addTrait(PlantBlockTrait.withColor(
                     MapColor.COLOR_LIGHT_GREEN, false, BlockBehaviour.OffsetType.NONE, SoundType.GRASS, true

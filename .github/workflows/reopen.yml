@@ -1,0 +1,22 @@
+# Lets the author of a closed issue reopen it by commenting `/reopen`.
+# GitHub itself only allows that when the author closed the issue themselves.
+name: Reopen on request
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  issues: write
+jobs:
+  reopen:
+    if: >
+      !github.event.issue.pull_request &&
+      github.event.issue.state == 'closed' &&
+      github.event.comment.user.login == github.event.issue.user.login &&
+      startsWith(github.event.comment.body, '/reopen')
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh issue reopen "$NUMBER" --repo "$REPO"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}

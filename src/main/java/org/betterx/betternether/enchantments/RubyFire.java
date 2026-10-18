@@ -9,6 +9,7 @@ import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -128,11 +129,13 @@ public class RubyFire extends Enchantment {
             ItemStack breakingItem
     ) {
         final int fireLevel = EnchantmentHelper.getItemEnchantmentLevel(NetherEnchantments.RUBY_FIRE, breakingItem);
-        if (fireLevel > 0) {
+        // Silk Touch asks for the block itself, so it wins: no smelting, and the vanilla drops (and
+        // the vanilla "no XP with Silk Touch") apply unchanged.
+        if (fireLevel > 0 && !EnchantmentHelper.hasSilkTouch(breakingItem)) {
             if (FIRE_CONVERSIONS.isEmpty()) buildConversionTable(level);
 
             boolean didConvert = false;
-            int xpDrop = 0;
+            float xpDrop = 0;
             try {
                 final List<ItemStack> drops = Block.getDrops(brokenBlock, level, blockPos, null, player, breakingItem);
                 convertedDrops.get().clear();
@@ -142,7 +145,7 @@ public class RubyFire extends Enchantment {
                     if (result != null) {
                         didConvert = true;
                         final ItemStack resultStack = result.getResultItem(level.registryAccess());
-                        xpDrop += result.getExperience();
+                        xpDrop += result.getExperience() * stack.getCount();
                         convertedDrops.get()
                                       .add(new ItemStack(
                                               resultStack.getItem(),
@@ -171,9 +174,20 @@ public class RubyFire extends Enchantment {
         return false;
     }
 
-    private static void popExperience(ServerLevel level, BlockPos blockPos, int amount) {
+    /**
+     * Pays out smelting XP the way a furnace does: recipe XP is fractional (raw iron 0.7, quartz 0.2),
+     * so the whole part is awarded and the remainder is a chance at one more point.
+     */
+    private static void popExperience(ServerLevel level, BlockPos blockPos, float amount) {
         if (level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
-            ExperienceOrb.award(level, Vec3.atCenterOf(blockPos), amount);
+            int xp = Mth.floor(amount);
+            final float fraction = Mth.frac(amount);
+            if (fraction != 0.0f && level.getRandom().nextFloat() < fraction) {
+                xp++;
+            }
+            if (xp > 0) {
+                ExperienceOrb.award(level, Vec3.atCenterOf(blockPos), xp);
+            }
         }
     }
 

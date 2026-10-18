@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,8 +19,8 @@ import net.fabricmc.api.Environment;
 
 public class BlockEyeball extends BlockEyeBase {
     public BlockEyeball() {
-        super(Materials.NETHER_PLANT
-                .mapColor(MapColor.COLOR_BROWN)
+        super(BehaviourBuilders
+                .createPlant(MapColor.COLOR_BROWN)
                 .sound(SoundType.SLIME_BLOCK)
                 .strength(0.5F, 0.5F)
                 .randomTicks()

@@ -14,10 +14,12 @@ import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.features.configured.*;
 import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.features.*;
+import org.betterx.betternether.world.structures.city.AvoidNetherCity;
 import org.betterx.betternether.world.structures.city.CityStructure;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -32,12 +34,22 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
 public class NetherFeatures {
+    /**
+     * Keeps a feature out of nether cities, see {@link AvoidNetherCity}.
+     */
+    public static final PlacementModifierType<AvoidNetherCity> AVOID_NETHER_CITY = Registry.register(
+            BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,
+            BN.id("avoid_nether_city"),
+            () -> AvoidNetherCity.CODEC
+    );
+
     public static final Feature<NoneFeatureConfiguration> JELLYFISH_MUSHROOM = BCLFeature.register(
             BN.id("jellyfish_mushroom"),
             new JellyfishMushroomFeature()

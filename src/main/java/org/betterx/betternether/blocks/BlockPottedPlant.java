@@ -30,7 +30,7 @@ public class BlockPottedPlant extends BlockBaseNotFull implements AddMineableHoe
     public static final EnumProperty<PottedPlantShape> PLANT = BNBlockProperties.PLANT;
 
     public BlockPottedPlant() {
-        super(Materials.NETHER_PLANT
+        super(Materials.netherPlant()
                 .mapColor(MapColor.COLOR_BLACK)
                 .lightLevel(BlockPottedPlant::getLuminance)
                 .offsetType(OffsetType.NONE)

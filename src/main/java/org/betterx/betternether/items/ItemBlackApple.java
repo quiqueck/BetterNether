@@ -1,5 +1,7 @@
 package org.betterx.betternether.items;
 
+import org.betterx.betternether.registry.NetherItems;
+
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,8 +18,7 @@ public class ItemBlackApple extends Item {
 
     public ItemBlackApple() {
         super(new Item.Properties()
-                .food(BLACK_APPLE)
-                .food(Foods.APPLE));
+                .food(NetherItems.copyFood(Foods.APPLE)));
     }
 
     @Override

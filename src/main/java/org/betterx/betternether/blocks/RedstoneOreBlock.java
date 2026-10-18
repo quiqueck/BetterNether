@@ -7,6 +7,7 @@ import org.betterx.bclib.interfaces.BlockModelProvider;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
+import net.fabricmc.fabric.api.mininglevel.v1.MiningLevelManager;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -21,7 +22,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
@@ -48,26 +54,25 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        return BaseOreBlock.getDroppedItems(
-                this,
-                Items.REDSTONE,
-                maxCount,
-                minCount,
-                Tiers.IRON.getLevel(),
-                state,
-                builder
-        );
+        // Ask the tool itself (mining level comes from the needs_iron_tool tag) instead of checking for a vanilla
+        // TieredItem, so modded tools like Modern Industrialization's drills get drops as well.
+        final ItemStack tool = builder.getOptionalParameter(LootContextParams.TOOL);
+        if (tool == null || !tool.isCorrectToolForDrops(state)) {
+            return Collections.emptyList();
+        }
+        return BaseOreBlock.getDroppedItems(this, Items.REDSTONE, maxCount, minCount, builder);
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public BlockModel getItemModel(ResourceLocation resourceLocation) {
         return getBlockModel(resourceLocation, defaultBlockState());
     }
 
     @Override
     public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
+        blockTags.add(MiningLevelManager.getBlockTag(Tiers.IRON.getLevel()));
         blockTags.add(CommonBlockTags.NETHERRACK);
         blockTags.add(CommonBlockTags.NETHER_ORES);
     }

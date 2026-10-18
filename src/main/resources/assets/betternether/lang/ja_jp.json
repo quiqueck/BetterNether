@@ -19,11 +19,11 @@
 	"item.betternether.cincinnasite_axe_diamond": "シンシナサイトダイヤモンドの斧",
 	"item.betternether.cincinnasite_pickaxe": "シンシナサイトのツルハシ",
 	"item.betternether.cincinnasite_pickaxe_diamond": "シンシナサイトダイヤモンドのツルハシ",
-	"block.betternether.stalagnate_bowl": "ス���ラグネートボウル",
+	"block.betternether.stalagnate_bowl": "スタラグネートボウル",
 	"item.betternether.stalagnate_bowl": "スタラグネートボウル",
 	"item.betternether.stalagnate_bowl_apple": "ボウル入りブラックアップル",
 	"item.betternether.stalagnate_bowl_mushroom": "きのこシチュー",
-	"item.betternether.stalagnate_bowl_wart": "ウォートスープ",,
+	"item.betternether.stalagnate_bowl_wart": "ウォートスープ",
 
 	"itemGroup.betternether.items": "Better Nether",
 
@@ -134,7 +134,7 @@
 	"block.betternether.quartz_glass_pink": "桃色のクォーツガラス",
 	"block.betternether.quartz_glass_purple": "紫色のクォーツガラス",
 	"block.betternether.quartz_glass_red": "赤色のクォーツガラス",
-	"block.betternether.quartz_glass_light_gray": "薄灰色のクォーツガラ��",
+	"block.betternether.quartz_glass_light_gray": "薄灰色のクォーツガラス",
 	"block.betternether.quartz_glass_white": "白色のクォーツガラス",
 	"block.betternether.quartz_glass_yellow": "黄色のクォーツガラス",
 	"block.betternether.quartz_glass_framed_black": "黒色のフレーム付きクォーツガラス",
@@ -214,7 +214,7 @@
 	
 	"block.betternether.wart_planks": "ネザーウォートの板材",
 	"block.betternether.wart_stairs": "ネザーウォートの階段",
-	"block.betternether.wart_slab": "ネザーウォートのハーフブ��ック",
+	"block.betternether.wart_slab": "ネザーウォートのハーフブロック",
 	"block.betternether.wart_fence": "ネザーウォートのフェンス",
 	"block.betternether.wart_gate": "ネザーウォートのフェンスゲート",
 	"block.betternether.wart_button": "ネザーウォートのボタン",
@@ -235,7 +235,7 @@
 	"item.betternether.cincinnasite_chestplate": "シンシナサイトのチェストプレート",
 	"item.betternether.cincinnasite_leggings": "シンシナサイトのレギンス",
 	"item.betternether.cincinnasite_boots": "シンシナサイトのブーツ",
-	"item.betternether.cincinnasite_sword": "シ��シナサイトの剣",
+	"item.betternether.cincinnasite_sword": "シンシナサイトの剣",
 	"item.betternether.cincinnasite_sword_diamond": "シンシナサイトダイヤモンドの剣",
 	"item.betternether.spawn_egg_firefly": "ホタルのスポーンエッグ",
 	"item.betternether.cincinnasite_ingot": "シンシナサイトインゴット",
@@ -304,7 +304,7 @@
 	"block.betternether.stalagnate_roof": "スタラグネートの屋根タイル",
 	"block.betternether.stalagnate_roof_stairs": "スタラグネートの屋根タイルの階段",
 	"block.betternether.stalagnate_roof_slab": "スタラグネートの屋根タイルのハーフブロック",
-	"block.betternether.roof_tile_nether_bricks": "ネザーレンガ屋根タイ���",
+	"block.betternether.roof_tile_nether_bricks": "ネザーレンガ屋根タイル",
 	"block.betternether.roof_tile_nether_bricks_stairs": "ネザーレンガ屋根タイルの階段",
 	"block.betternether.roof_tile_nether_bricks_slab": "ネザーレンガ屋根タイルのハーフブロック",
 	"block.betternether.roof_tile_cincinnasite": "シンシナサイト屋根タイル",
@@ -319,7 +319,7 @@
 	
 	"block.betternether.nether_reed_taburet": "リードのスツール",
 	"block.betternether.stalagnate_taburet": "スタラグネートのスツール",
-	"block.betternether.willow_taburet": ネザー柳のスツール",
+	"block.betternether.willow_taburet": "ネザー柳のスツール",
 	"block.betternether.wart_taburet": "ネザーウォートのスツール",
 	"block.betternether.taburet_cincinnasite": "シンシナサイトのスツール",
 	
@@ -385,7 +385,7 @@
 	"block.betternether.mushroom_fir_slab": "モミキノコのハーフブロック",
 	"block.betternether.mushroom_fir_fence": "モミキノコのフェンス",
 	"block.betternether.mushroom_fir_gate": "モミキノコのフェンスゲート",
-	"block.betternether.mushroom_fir_button": "モ��キノコのボタン",
+	"block.betternether.mushroom_fir_button": "モミキノコのボタン",
 	"block.betternether.mushroom_fir_plate": "モミキノコの感圧版",
 	"block.betternether.mushroom_fir_trapdoor": "モミキノコのトラップドア",
 	"block.betternether.mushroom_fir_door": "モミキノコのドア",
@@ -424,7 +424,7 @@
 	"block.betternether.birch_taburet": "シラカバのスツール",
 	"block.betternether.birch_chair": "シラカバの椅子",
 	"block.betternether.birch_bar_stool": "シラカバのバースツール",
-	"block.betternether.jungle_taburet": "ジャング��のスツール",
+	"block.betternether.jungle_taburet": "ジャングルのスツール",
 	"block.betternether.jungle_chair": "ジャングルの椅子",
 	"block.betternether.jungle_bar_stool": "ジャングルのバースツール",
 	"block.betternether.acacia_taburet": "アカシアのスツール",
@@ -457,7 +457,7 @@
 	"block.betternether.rubeus_fence": "ルベウスのフェンス",
 	"block.betternether.rubeus_gate": "ルベウスのフェンスゲート",
 	"block.betternether.rubeus_button": "ルベウスのボタン",
-	"block.betternether.rubeus_plate": ルベウスの感圧板",
+	"block.betternether.rubeus_plate": "ルベウスの感圧板",
 	"block.betternether.rubeus_trapdoor": "ルベウスのトラップドア",
 	"block.betternether.rubeus_door": "ルベウスのドア",
 	"block.betternether.rubeus_taburet": "ルベウスのスツール",
@@ -489,7 +489,7 @@
 	"item.betternether.nether_ruby_helmet": "ネザールビーのヘルメット",
 	"item.betternether.nether_ruby_chestplate": "ネザールビーのチェストプレート",
 	"item.betternether.nether_ruby_leggings": "ネザールビーのレギンス",
-	"item.betternether.nether_ruby_boots": "ネザールビーのブーツ"
+	"item.betternether.nether_ruby_boots": "ネザールビーのブーツ",
 	
 	"block.betternether.soul_sandstone": "ソウルサンドストーン",
 	"block.betternether.soul_sandstone_cut": "研がれたソウルサンドストーン",
@@ -556,7 +556,7 @@
 	"block.betternether.crimson_chest": "深紅のチェスト",
 	"block.betternether.warped_chest": "歪んだチェスト",
 	
-	"block.betternether.jungle_moss": "��ャングル苔",
+	"block.betternether.jungle_moss": "ジャングル苔",
 	
 	"block.betternether.feather_fern": "羽シダ",
 	
@@ -606,7 +606,7 @@
 	"block.betternether.cincinnasite_chain": "シンシナサイトの鎖",
 	"block.betternether.nether_lapis_ore": "ネザーラピスラズリ鉱石",
 	"item.betternether.lapis_pile": "ラピスラズリの欠片",
-	"item.betternether.cincinnasite_excavator": "シンシナ��イトエクスカベーター",
+	"item.betternether.cincinnasite_excavator": "シンシナサイトエクスカベーター",
 	"item.betternether.cincinnasite_excavator_diamond": "シンシナサイトダイヤモンドエクスカベーター",
 	"item.betternether.nether_ruby_excavator": "ネザールビーエクスカベーター",
 	

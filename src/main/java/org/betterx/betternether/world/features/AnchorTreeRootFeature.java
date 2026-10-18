@@ -7,6 +7,7 @@ import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.blocks.BlockPlantWall;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.betternether.world.structures.city.CityStructure;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,6 +38,9 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
             StructureGeneratorThreadContext context
     ) {
         if (pos.getY() < MAX_HEIGHT * 0.75) return false;
+        // The root arcs down from the ceiling far enough to drive through the walls of a nether city, which
+        // generates before it. It spans at most 12.5 + 2 blocks sideways.
+        if (CityStructure.buildingsWithin(world, pos, 15)) return false;
 
         double angle = random.nextDouble() * Math.PI * 2;
         double dx = Math.sin(angle);
@@ -82,22 +86,22 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
             ) > 0) {
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.north()))
                     if (random.nextBoolean())
-                        AnchorTreeFeature.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox);
+                        AnchorTreeFeature.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox, false);
                     else
                         LUCIS.grow(world, bpos, random, false);
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.south()))
                     if (random.nextBoolean())
-                        AnchorTreeFeature.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5, blockBox);
+                        AnchorTreeFeature.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5, blockBox, false);
                     else
                         LUCIS.grow(world, bpos, random, false);
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.east()))
                     if (random.nextBoolean())
-                        AnchorTreeFeature.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5, blockBox);
+                        AnchorTreeFeature.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5, blockBox, false);
                     else
                         LUCIS.grow(world, bpos, random, false);
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.west()))
                     if (random.nextBoolean())
-                        AnchorTreeFeature.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5, blockBox);
+                        AnchorTreeFeature.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5, blockBox, false);
                     else
                         LUCIS.grow(world, bpos, random, false);
             }

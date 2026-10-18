@@ -74,8 +74,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:sharpness",
                 "minecraft:looting",
+                "minecraft:sharpness",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"

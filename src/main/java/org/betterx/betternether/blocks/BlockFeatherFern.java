@@ -18,7 +18,7 @@ public class BlockFeatherFern extends BlockCommonPlant implements SurvivesOnNeth
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
     public BlockFeatherFern() {
-        super(Materials.NETHER_PLANT
+        super(Materials.netherPlant()
                 .mapColor(MapColor.COLOR_LIGHT_BLUE)
                 .randomTicks()
                 .offsetType(Block.OffsetType.XZ)

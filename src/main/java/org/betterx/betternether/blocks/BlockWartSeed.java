@@ -43,7 +43,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
     }
 
     public BlockWartSeed() {
-        super(Materials.NETHER_SAPLING
+        super(Materials.netherSapling()
                 .mapColor(MapColor.TERRACOTTA_RED)
                 .sound(SoundType.WART_BLOCK)
                 .strength(1F)

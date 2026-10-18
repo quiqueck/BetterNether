@@ -40,7 +40,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
     public static final IntegerProperty AGE = BlockProperties.AGE_THREE;
 
     public BlockBoneMushroom() {
-        super(Materials.NETHER_PLANT
+        super(Materials.netherPlant()
                 .mapColor(MapColor.COLOR_LIGHT_GREEN)
                 .randomTicks()
         );

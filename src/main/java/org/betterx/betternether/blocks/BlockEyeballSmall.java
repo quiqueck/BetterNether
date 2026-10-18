@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.bclib.behaviours.BehaviourBuilders;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,8 +21,8 @@ public class BlockEyeballSmall extends BlockEyeBase {
     protected static final VoxelShape SHAPE = Block.box(4, 8, 4, 12, 16, 12);
 
     public BlockEyeballSmall() {
-        super(Materials.NETHER_PLANT
-                .mapColor(MapColor.COLOR_BROWN)
+        super(BehaviourBuilders
+                .createPlant(MapColor.COLOR_BROWN)
                 .sound(SoundType.SLIME_BLOCK)
                 .strength(0.5F, 0.5F)
         );

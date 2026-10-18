@@ -32,7 +32,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 1, 16);
 
     public BlockSoulVein() {
-        super(Materials.NETHER_PLANT
+        super(Materials.netherPlant()
                 .mapColor(MapColor.COLOR_PURPLE)
                 .randomTicks());
         this.setRenderLayer(BNRenderLayer.CUTOUT);

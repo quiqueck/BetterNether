@@ -38,6 +38,7 @@ public class BetterNether implements ModInitializer {
         //MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures/lava"));
         initOptions();
         SoundsRegistry.ensureStaticallyLoaded();
+        NetherGameRules.ensureStaticallyLoaded();
         NetherBlocks.register();
         BlockEntitiesRegistry.register();
         NetherItems.register();

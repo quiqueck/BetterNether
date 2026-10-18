@@ -22,7 +22,7 @@ public class BlockOrangeMushroom extends BlockCommonPlant implements SurvivesOnN
     };
 
     public BlockOrangeMushroom() {
-        super(Materials.NETHER_PLANT
+        super(Materials.netherPlant()
                 .mapColor(MapColor.COLOR_ORANGE)
                 .destroyTime(0.5F)
         );

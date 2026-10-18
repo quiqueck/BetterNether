@@ -8,6 +8,7 @@ import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.betternether.world.structures.city.CityStructure;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,7 +44,11 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
     ) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
         if (pos.getY() < 56 + random.nextInt((int) (20 * scale_factor))) return false;
-        return grow(world, pos, random, scale_factor, context);
+        // Hangs low enough to reach the roofs of a nether city, which generates before it. The branch
+        // reaches (9 * scale + 2) * 0.8 + 9 * 0.8 blocks sideways at most.
+        if (CityStructure.buildingsWithin(world, pos, (int) Math.ceil((9 * scale_factor + 2) * 0.8f + 9 * 0.8f)))
+            return false;
+        return grow(world, pos, random, scale_factor, context, false);
     }
 
     private boolean grow(
@@ -51,7 +56,8 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
             BlockPos pos,
             RandomSource random,
             float scale_factor,
-            StructureGeneratorThreadContext context
+            StructureGeneratorThreadContext context,
+            final boolean airOnly
     ) {
         context.clear();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
@@ -89,7 +95,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
             float crownR = 9 * branchSize;
             if (crownR < 1.5F)
                 crownR = 1.5F;
-            crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, scale_factor, context);
+            crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, scale_factor, context, airOnly);
 
             int middle = Math.round(pos.getY() + (MIDDLE_Y + MHelper.randRange(-2, 2, random)) * branchSize);
             boolean generate = true;
@@ -166,7 +172,9 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
             else
                 state = NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState();
 
-            BlocksHelper.setWithUpdate(world, bpos, state);
+            // Air-only on the grow path: a player-grown branch must not carve through anything it was
+            // planted next to.
+            if (!airOnly || world.getBlockState(bpos).isAir()) BlocksHelper.setWithUpdate(world, bpos, state);
 
             boolean hasLeavesOnLevel = false;
             for (Direction d : directions) {
@@ -239,6 +247,14 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
         context.LOGS_DIST.clear();
 
         return true;
+    }
+
+    /**
+     * {@link #safeSet} that additionally refuses anything but air when {@code airOnly}, for the
+     * sapling-grown path where the tree may not overwrite what the player built around it.
+     */
+    private static void safeSetIfAir(LevelAccessor level, BlockPos pos, BlockState state, boolean airOnly) {
+        if (!airOnly || level.getBlockState(pos).isAir()) safeSet(level, pos, state);
     }
 
     public static void safeSet(LevelAccessor level, BlockPos pos, BlockState state) {
@@ -354,7 +370,8 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
             float radius,
             RandomSource random,
             float scale_factor,
-            StructureGeneratorThreadContext context
+            StructureGeneratorThreadContext context,
+            final boolean airOnly
     ) {
         scale_factor = (scale_factor - 1) * 0.25f + 1;
 
@@ -392,7 +409,7 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
                     int cz2 = cz * cz;
                     if (cx2 + cy2_out + cz2 < r2 && cx2 + cy2_in + cz2 > r2) {
                         context.POS.setZ(pos.getZ() + cz);
-                        if (world.getBlockState(context.POS).canBeReplaced()) {
+                        if (airOnly ? world.getBlockState(context.POS).isAir() : world.getBlockState(context.POS).canBeReplaced()) {
                             int length = BlocksHelper.downRay(world, context.POS, HEIGHT_17);
                             if (length < 5) {
                                 safeSet(world, context.POS, leaves);
@@ -407,17 +424,19 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
 
                             if (length > 4) {
                                 for (int i = 1; i < length - 2; i++) {
-                                    safeSet(world, context.POS.below(i), vine);
+                                    safeSetIfAir(world, context.POS.below(i), vine, airOnly);
                                 }
-                                safeSet(
+                                safeSetIfAir(
                                         world,
                                         context.POS.below(length - 2),
-                                        vine.setValue(BlockAnchorTreeVine.SHAPE, BlockProperties.TripleShape.MIDDLE)
+                                        vine.setValue(BlockAnchorTreeVine.SHAPE, BlockProperties.TripleShape.MIDDLE),
+                                        airOnly
                                 );
-                                safeSet(
+                                safeSetIfAir(
                                         world,
                                         context.POS.below(length - 1),
-                                        vine.setValue(BlockAnchorTreeVine.SHAPE, BlockProperties.TripleShape.BOTTOM)
+                                        vine.setValue(BlockAnchorTreeVine.SHAPE, BlockProperties.TripleShape.BOTTOM),
+                                        airOnly
                                 );
                             }
                             safeSet(world, context.POS, leaves);
@@ -434,6 +453,6 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
 
     @Override
     public boolean grow(ServerLevelAccessor level, BlockPos pos, RandomSource random, NoneFeatureConfiguration cfg) {
-        return grow(level, pos, random, 1, NetherThreadDataStorage.generatorForThread().context);
+        return grow(level, pos, random, 1, NetherThreadDataStorage.generatorForThread().context, true);
     }
 }

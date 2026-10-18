@@ -25,7 +25,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
     private final BCLConfigureFeature feature;
 
     public BlockLumabusSeed(DeferedSeedBlock parent, BCLConfigureFeature feature) {
-        super(Materials.NETHER_SAPLING.mapColor(MapColor.COLOR_RED));
+        super(Materials.netherSapling().mapColor(MapColor.COLOR_RED));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.feature = feature;
         parent.setSeed(this);

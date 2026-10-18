@@ -59,20 +59,20 @@ public class NetherItems extends ItemRegistry {
     public static final Item STALAGNATE_BOWL_WART = registerItem(
             "stalagnate_bowl_wart",
             new ItemBowlFood(
-                    Foods.COOKED_CHICKEN,
+                    copyFood(Foods.COOKED_CHICKEN),
                     FoodShape.WART
             )
     );
     public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem(
             "stalagnate_bowl_mushroom",
             new ItemBowlFood(
-                    Foods.MUSHROOM_STEW,
+                    copyFood(Foods.MUSHROOM_STEW),
                     FoodShape.MUSHROOM
             )
     );
     public static final Item STALAGNATE_BOWL_APPLE = registerItem(
             "stalagnate_bowl_apple",
-            new ItemBowlFood(Foods.APPLE, FoodShape.APPLE)
+            new ItemBowlFood(copyFood(Foods.APPLE), FoodShape.APPLE)
     );
     public static final Item HOOK_MUSHROOM_COOKED = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
@@ -164,7 +164,7 @@ public class NetherItems extends ItemRegistry {
     public static final Item HERBAL_MEDICINE = registerMedicine("herbal_medicine", 10, 5, true);
 
     protected NetherItems() {
-        super(Configs.ITEMS);
+        super();
     }
 
     private static ItemRegistry ITEMS_REGISTRY;
@@ -204,7 +204,7 @@ public class NetherItems extends ItemRegistry {
     }
 
     public static Item registerItem(String name, Item item, TagKey<Item>... tags) {
-        if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
+        if (item != Items.AIR) {
             getItemRegistry().register(BetterNether.makeID(name), item);
             //item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
             if (tags.length > 0)
@@ -262,6 +262,24 @@ public class NetherItems extends ItemRegistry {
                         power
                 ), 1).build()))
         );
+    }
+
+    /**
+     * Every food item needs its own {@link FoodProperties} instance (never a vanilla {@link Foods} constant or one
+     * shared with another item), otherwise mods that adjust food values per item (e.g. IguanaTweaks Reborn) change
+     * several items at once. This returns a new instance with the same values as {@code source}.
+     */
+    public static FoodProperties copyFood(FoodProperties source) {
+        FoodProperties.Builder builder = new FoodProperties.Builder()
+                .nutrition(source.getNutrition())
+                .saturationMod(source.getSaturationModifier());
+        if (source.isMeat()) builder.meat();
+        if (source.canAlwaysEat()) builder.alwaysEat();
+        if (source.isFastFood()) builder.fast();
+        for (var effect : source.getEffects()) {
+            builder.effect(new MobEffectInstance(effect.getFirst()), effect.getSecond());
+        }
+        return builder.build();
     }
 
     public static Properties defaultSettings() {

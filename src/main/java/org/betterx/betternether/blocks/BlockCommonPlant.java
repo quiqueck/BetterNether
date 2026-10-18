@@ -23,7 +23,7 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
     public static final IntegerProperty AGE = BlockProperties.AGE;
 
     public BlockCommonPlant(MapColor color) {
-        this(Materials.NETHER_PLANT
+        this(Materials.netherPlant()
                 .mapColor(color)
                 .randomTicks()
         );

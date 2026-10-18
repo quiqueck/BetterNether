@@ -1,0 +1,429 @@
+// Shared publishing helper: changelog generation, version bumping, and
+// publishing to Modrinth + CurseForge (via mod-publish-plugin).
+// Copy-paste this file identically into every library/mod repo's 1.20.1
+// checkout. Everything here is driven by that repo's own gradle.properties.
+// Derived from the 1.21.6 copy (same Loom remap step, so the published
+// artifact is `remapJar`), plus the 26.3 nextVersion fixes. Differs from both
+// in nextVersion only copying the depends entries the root manifest actually
+// has - the 1.20 manifests name Fabric API `fabric`, not `fabric-api`.
+//
+// Libraries additionally apply common-publish-maven.gradle (publishing to our
+// Ambertation maven repo). Mods do not - see the project's build.gradle.
+//
+// This includes WorldWeaver, which used to keep its own fork of this file
+// under the name helper.gradle. The only thing that fork actually needed was
+// a different set of projects for nextVersion to rewrite; that is now derived
+// from the project layout instead of hardcoded - see nextVersion below. Keep
+// it that way rather than reintroducing a per-repo variant.
+
+// Finds the owner/repo slug of the first configured remote that points at
+// github.com (remote name may be anything - e.g. "origin" or "home" - and
+// non-GitHub remotes are ignored). Returns null if none is found.
+String findGithubSlug() {
+    def remoteNames = "git remote".execute().text.trim().split("\n").findAll { it }
+    for (name in remoteNames) {
+        def url = "git remote get-url ${name}".execute().text.trim()
+        def matcher = url =~ /github\.com[:\/]([^\/]+)\/(.+?)(\.git)?$/
+        if (matcher.find()) {
+            return "${matcher.group(1)}/${matcher.group(2)}"
+        }
+    }
+    return null
+}
+
+// Turns issue references (`#123` for this repo, `owner/repo#123` for a
+// cross-repo reference) into links to the matching GitHub issue. If no
+// GitHub remote is configured, issue references are stripped instead, same
+// as before GitHub links were supported.
+String linkifyIssues(String comment, String repoSlug) {
+    if (repoSlug == null) {
+        //filter issue links
+        if (comment.contains("(")) {
+            def cline = comment.split("\\(", 2)
+            if (cline.length == 2 && cline[1].contains("#")) {
+                comment = cline[0].trim()
+            }
+        }
+        return comment
+    }
+    return comment.replaceAll(/(?:[\w.-]+\/[\w.-]+)?#\d+/) { match ->
+        def slug = match.contains("/") ? match.substring(0, match.indexOf("#")) : repoSlug
+        def num = match.substring(match.indexOf('#') + 1)
+        def repoName = slug.contains("/") ? slug.substring(slug.indexOf("/") + 1) : slug
+        "[${repoName}#${num}](https://github.com/${slug}/issues/${num})"
+    }
+}
+
+//from https://lowcarbrob.medium.com/android-pro-tip-generating-your-apps-changelog-from-git-inside-build-gradle-19a07533eec4
+String generateChangelog() {
+    println "Assembeling Changelog ..."
+    def lastTag = "git describe --tags --abbrev=0".execute().text.trim()
+    def gitLogCmd = "git log $lastTag..HEAD --oneline --no-merges --pretty=format:\"%s\"".execute().text.trim()
+    def githubSlug = findGithubSlug()
+
+    def features = ""
+    def fixes = ""
+    def changes = ""
+    gitLogCmd.eachLine { gitLine ->
+        def line = gitLine.substring(1, gitLine.length() - 1)
+        if (line.trim().startsWith("[")) {
+            def sline = line.split("]", 2)
+            if (sline.length == 2) {
+                def type = sline[0].trim().toLowerCase().substring(1)
+                def comment = linkifyIssues(sline[1].trim(), githubSlug)
+
+                if (type == "fix" || type == "fixes" || type == "fixed") {
+                    fixes += "- $comment \n"
+                } else if (type == "feature" || type == "features") {
+                    features += "- $comment \n"
+                } else if (type == "change" || type == "changes" || type == "changed") {
+                    changes += "- $comment \n"
+                } else {
+                    println "Unknown Type: $type ($line)"
+                }
+            }
+        }
+
+    }
+
+    // Never let a run with nothing to say replace CHANGES.md. The file is
+    // generated but git-ignored, so an empty write destroys the released notes
+    // for good - and CHANGES.md is also the body of the release commit (see
+    // common-publish-tag.gradle). Guard on the absence of entries rather than on
+    // an empty commit range: a range of ordinary unprefixed commits (version
+    // bumps and the like) produces nothing either, and in the mods the
+    // Validation section below would otherwise write out a changelog made
+    // entirely of stale compat-test results. Both are normal outcomes, not
+    // errors. Returning null tells the task to leave the existing file alone.
+    if (features.isEmpty() && changes.isEmpty() && fixes.isEmpty()) {
+        def commitCount = gitLogCmd.isEmpty() ? 0 : gitLogCmd.readLines().size()
+        def reason = commitCount == 0
+                ? "no commits since $lastTag"
+                : "$commitCount commit(s) since $lastTag, none of them a changelog entry"
+        logger.lifecycle("Nothing to write ($reason) - CHANGES.md left as it is.")
+        return null
+    }
+
+    def changelog = ""
+    if (!features.isEmpty()) {
+        changelog += "#### Features\n"
+        changelog += features.trim()
+        changelog += "\n\n"
+    }
+    if (!changes.isEmpty()) {
+        changelog += "#### Changes\n"
+        changelog += changes.trim()
+        changelog += "\n\n"
+    }
+    if (!fixes.isEmpty()) {
+        changelog += "#### Fixes\n"
+        changelog += fixes.trim()
+        changelog += "\n\n"
+    }
+
+    def validation = buildServerSmokeLine() + buildValidationSection()
+    if (!validation.isEmpty()) {
+        changelog += "#### Validation\n"
+        changelog += validation.trim()
+        changelog += "\n\n"
+    }
+
+    println "Changelog since $lastTag:\n$changelog"
+    return changelog
+}
+
+// build/server-smoke/result.json is written by `mod-task.js validate` when config-version.js gives the version a
+// smokeTest: it boots a real dedicated server with the freshly built jars (Servers/smoke-test.sh), which catches
+// shared code touching client-only classes - runServer cannot, its classpath has them. Absent means the smoke
+// test did not run this cycle, and the line is omitted, same as the compat lines below.
+String buildServerSmokeLine() {
+    def resultFile = new File(projectDir, "build/server-smoke/result.json")
+    if (!resultFile.exists()) {
+        return ""
+    }
+    def result = new groovy.json.JsonSlurper().parse(resultFile)
+    def mc = result.minecraft ? "Minecraft ${result.minecraft}" : "dedicated server"
+    def mods = (result.mods ?: []).collect { "${it.name} ${it.version}" }.join(", ")
+    switch (result.status) {
+        case "PASS":
+            return "- ✅ Dedicated server (${mc}) started (${mods})\n"
+        case "FAIL":
+            return "- ❌ Dedicated server (${mc}) did not start — ${result.reason ?: 'see the smoke-test log'}\n"
+        default:
+            return "- ⚠️ Dedicated server — ${result.status}\n"
+    }
+}
+
+// Reads build/compat-test/results.json (written by compat-test.gradle's compatTest task, see
+// compat-test.gradle for the full framework) into one changelog line per mod-set. Entirely absent (the
+// compat-test task was never run this cycle) means the section is omitted, same as an empty
+// Features/Changes/Fixes block above - this differs from a real "WunderVault checkout not found"
+// SKIPPED entry inside the file, which the compat-test task always writes once it actually runs, so a
+// vault that's missing on the machine doing the release still shows up here rather than silently
+// vanishing.
+String buildValidationSection() {
+    def resultsFile = new File(projectDir, "build/compat-test/results.json")
+    if (!resultsFile.exists()) {
+        return ""
+    }
+    def results = new groovy.json.JsonSlurper().parse(resultsFile)
+    def lines = results.collect { result ->
+        def mods = (result.mods ?: []).join(", ")
+        switch (result.status) {
+            case "PASS":
+                def checks = (result.checks ?: [:]).findAll { it.value }.keySet().join("+")
+                return "- ✅ ${result.name} (${mods}, tested: ${checks})"
+            case "FAIL":
+                def failed = (result.checks ?: [:]).findAll { !it.value }.keySet().join(", ")
+                return "- ❌ ${result.name} — failed: ${failed ?: (result.reason ?: 'unknown')}"
+            case "TIMEOUT":
+                return "- ⏱ ${result.name} — TIMEOUT"
+            case "SKIPPED":
+                return "- ⚠️ ${result.name} — SKIPPED (${result.reason ?: 'unknown reason'})"
+            default:
+                return "- ${result.name} — ${result.status}"
+        }
+    }
+    return lines.join("\n") + (lines.isEmpty() ? "" : "\n")
+}
+
+task changelog() {
+    group = 'publishing'
+    doLast {
+        def generated = generateChangelog()
+        // null is generateChangelog's "nothing to write"; the trim() covers any
+        // other way the body could come out blank. Neither ever reaches the file.
+        if (generated == null || generated.trim().isEmpty()) {
+            return
+        }
+        new File(projectDir, "CHANGES.md").text = generated
+    }
+}
+
+def requiredDependencies = evaluate(project.required_dependencies)
+def optionalDependencies = evaluate(project.optional_dependencies)
+
+// CurseForge doesn't always use the same project slug as Modrinth, e.g. REI's
+// Modrinth slug is "rei" but its CurseForge slug is "roughly-enough-items".
+// Map those exceptions here; anything not listed is assumed to match on both.
+def curseforgeSlugOverrides = [
+    "rei": "roughly-enough-items",
+]
+
+publishMods {
+    dryRun = project.hasProperty("dryRun") ? (project.property("dryRun").toString().toLowerCase() in ["true", "", "1", "yes"]) : false
+    file = remapJar.archiveFile
+    def changes = new File(projectDir, "CHANGES.md")
+    changelog = changes.exists() ? changes.getText('UTF-8') : ""
+
+    type = STABLE
+    if (project.release_channel == "beta") {
+        type = BETA
+    } else if (project.release_channel == "alpha") {
+        type = ALPHA
+    }
+
+    modLoaders.add("fabric")
+
+    def slurper = new groovy.json.JsonSlurper()
+    def versions = slurper.parseText(project.modrinth_versions)
+    def latestVersion = versions.isEmpty() ? "" : "[${versions.last()}]"
+
+    curseforge {
+        projectId = project.curseforge_id
+
+        def cfTokenFile = new File(projectDir, "../CURSEFORGE_TOKEN")
+        accessToken = cfTokenFile.exists() ? cfTokenFile.text.trim() : ""
+
+        versions.each { v ->
+            minecraftVersions.add(v)
+        }
+
+        // CurseForge requires at least one of client/server to be set.
+        client = true
+        server = true
+
+        displayName = "${project.archives_base_name}-${project.mod_version} ${latestVersion}"
+
+        requiredDependencies.each { dep ->
+            requires(curseforgeSlugOverrides.getOrDefault(dep, dep))
+        }
+        optionalDependencies.each { dep ->
+            optional(curseforgeSlugOverrides.getOrDefault(dep, dep))
+        }
+    }
+
+    modrinth {
+        projectId = findProperty('modrinth_id') ?: project.archives_base_name
+
+        def mrTokenFile = new File(projectDir, "../MODRINTH_TOKEN")
+        accessToken = mrTokenFile.exists() ? mrTokenFile.text.trim() : ""
+
+        versions.each { v ->
+            minecraftVersions.add(v)
+        }
+
+        displayName = "${project.archives_base_name}-${project.mod_version}"
+
+        requiredDependencies.each { dep ->
+            requires(dep)
+        }
+        optionalDependencies.each { dep ->
+            optional(dep)
+        }
+    }
+}
+
+
+task nextVersion() {
+    group = 'publishing'
+
+    doLast {
+        def slurper = new groovy.json.JsonSlurper();
+        def projectID = findProperty('modrinth_id') ?: project.archives_base_name
+        def inputFile = rootProject.file('modrinth.json')
+        def gameVersions = java.net.URLEncoder.encode(project.modrinth_versions, "UTF-8")
+        def json = slurper.parseText('[{ "version_number" : "1.0.-1" }]')
+        try {
+            new URL("https://api.modrinth.com/v2/project/${projectID}/version?&game_versions=${gameVersions}").withInputStream { i -> inputFile.withOutputStream { it << i } }
+            json = slurper.parseText(inputFile.text)
+            // Nothing published for these game versions yet (first release on a new
+            // Minecraft version): Modrinth answers with an empty list rather than a 404.
+            if (json.isEmpty()) {
+                json = slurper.parseText('[{ "version_number" : "1.0.-1" }]')
+            }
+        } catch (FileNotFoundException) {
+        }
+        println(json)
+        def version = json[0].version_number
+
+        //increment patch version
+        def indexedVersionList = version.split(/\./).toList().withIndex()
+        indexedVersionList = indexedVersionList.collect { num, idx -> num.toInteger() }
+        indexedVersionList[2] = indexedVersionList[2].value + 1
+        def updatedVersion = indexedVersionList.join(".")
+
+        // A local mod_version that is already ahead of what Modrinth implies is an
+        // intentional bump - opening a new minor line (26.100.x -> 26.101.0) is the
+        // usual reason. Modrinth only knows what was published, so deriving the next
+        // version from it alone would silently drag such a bump back down every time
+        // this task runs, and it runs a lot (prepare-release, and runDatagenClient).
+        // Take the higher of the two instead: the result is never a version that is
+        // already published, and the local value stops winning on its own as soon as
+        // the new line has had its first release.
+        def versionNumbers = { String s ->
+            def parts = s == null ? new String[0] : s.trim().split(/\./)
+            if (parts.length != 3) return null
+            try {
+                return parts.collect { it.toInteger() }
+            } catch (NumberFormatException ignored) {
+                return null
+            }
+        }
+        def localVersion = findProperty('mod_version')?.toString()
+        def localNumbers = versionNumbers(localVersion)
+        def derivedNumbers = versionNumbers(updatedVersion)
+        // Element-wise on purpose: Gradle's Groovy refuses `<=>` between two Lists.
+        def isNewer = { List a, List b ->
+            for (int i = 0; i < 3; i++) {
+                if (a[i] != b[i]) return a[i] > b[i]
+            }
+            return false
+        }
+        def keepLocal = localNumbers != null && derivedNumbers != null && isNewer(localNumbers, derivedNumbers)
+        if (keepLocal) {
+            updatedVersion = localVersion
+        }
+
+        println "\n\n"
+        println "------------- CURRENT VERSION -------------"
+        println "Last Published Version: " + version
+        println "         Game Versions: " + json[0].game_versions
+        println "                Status: " + json[0].status
+        println "              Featured: " + json[0].featured
+        println "            Downloaded: " + json[0].downloads
+        println "\n"
+        println "-------------- NEXT VERSION ---------------"
+        println "Local Version: " + (localVersion ?: "(unset)")
+        println " Next Version: " + updatedVersion + (keepLocal ? "   <- kept the local bump" : "")
+        println "\n\n"
+
+
+        def propertiesFile = new File("gradle.properties")
+        def newContents = propertiesFile.text.replaceFirst("mod_version=\\d+.\\d+.\\d+", "mod_version=${updatedVersion}")
+        propertiesFile.text = newContents
+
+        def rootFabricFile = rootProject.file("src/main/resources/fabric.mod.json")
+        def rootFabricFileJson = slurper.parseText(rootFabricFile.text)
+
+        // Rewrite the manifest of every project that belongs to THIS repository and
+        // ships one: the root, plus any real subproject of it (WorldWeaver's wover-*
+        // modules - for every other repo the root is the only match).
+        //
+        // Sibling repos pulled in via includeLocalLib (BCLib/WunderLib/WorldWeaver
+        // inside a mod's build) are ordinary Gradle projects and would otherwise be
+        // caught by this loop, rewriting another repo's fabric.mod.json. They are
+        // excluded by projectDir rather than by name, so a new sibling include never
+        // needs a change here. This file is only ever applied from a repo's own root
+        // build.gradle - the *-composit.gradle files that a sibling is included with
+        // do not apply it - so rootDir is always this repository's own folder.
+        def repoRoot = project.rootDir.canonicalFile
+        allprojects.each { proj ->
+            def projDir = proj.projectDir.canonicalFile
+            def ownedByThisRepo = projDir == repoRoot || projDir.path.startsWith(repoRoot.path + File.separator)
+            def fabricFile = proj.file("src/main/resources/fabric.mod.json")
+            if (!ownedByThisRepo || !fabricFile.exists()) {
+                println "Ignoring ${proj}"
+                return
+            }
+            println "Updating Version in ${proj}"
+
+            def fabricJson = slurper.parseText(fabricFile.text)
+            fabricJson.version = updatedVersion
+            // modrinth_versions lists only the versions we publish FOR; merge it into
+            // depends.minecraft instead of assigning over it, so hand-written alternatives
+            // are kept (same as the 26.3 copy).
+            def publishedVersions = slurper.parseText(modrinth_versions)
+            def declaredVersions = fabricJson.depends.minecraft
+            if (declaredVersions == null) {
+                declaredVersions = []
+            } else if (!(declaredVersions instanceof List)) {
+                declaredVersions = [declaredVersions]
+            }
+            fabricJson.depends.minecraft = (declaredVersions + publishedVersions).unique()
+            // Only the keys the root manifest has: assigning a missing one would write an
+            // explicit null into the manifest (the 1.20 manifests use `fabric`, not `fabric-api`).
+            ['fabricloader', 'fabric', 'fabric-api', 'java'].each { key ->
+                if (rootFabricFileJson.depends.containsKey(key)) {
+                    fabricJson.depends[key] = rootFabricFileJson.depends[key]
+                }
+            }
+
+            fabricFile.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(fabricJson))
+        }
+    }
+}
+
+// Locates the WunderVault checkout (third-party mod-set jars and configs for compat-test.gradle).
+// Exposed via ext under a name distinct from the -PwunderVaultDir override flag it checks below -
+// naming the ext property identically to that flag makes findProperty('wunderVaultDir') resolve to
+// this closure instead of the property, causing infinite self-reference. Needs to be visible from
+// compat-test.gradle, applied after this file - call resolveWunderVaultDir() rather than each needing
+// its own copy of this resolution logic.
+ext.resolveWunderVaultDir = {
+    def configured = findProperty('wunderVaultDir') ?: findProperty('wunder_vault_dir') ?: System.getenv('WUNDER_VAULT')
+    if (configured) {
+        def dir = file(configured)
+        if (!dir.isDirectory()) {
+            throw new GradleException("WunderVault was pointed at '${configured}', which is not a directory.")
+        }
+        return dir
+    }
+    for (def dir = projectDir.canonicalFile; dir != null; dir = dir.parentFile) {
+        def candidate = new File(dir, "Tools/WunderVault")
+        if (candidate.isDirectory()) {
+            return candidate
+        }
+    }
+    return null
+}

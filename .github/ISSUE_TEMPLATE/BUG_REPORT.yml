@@ -33,7 +33,7 @@ body:
     attributes:
       label: BCLib
       description: What version of BCLib are you running? Older Versions of BetterNether did not require BCLib.
-      placeholder: 3.0.x
+      placeholder: 3.0.15
     validations:
       required: true
   - type: input

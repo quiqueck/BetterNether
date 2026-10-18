@@ -25,7 +25,7 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
 
     public BlockGiantMoldSapling() {
-        super(Materials.NETHER_SAPLING
+        super(Materials.netherSapling()
                 .mapColor(MapColor.COLOR_LIGHT_GREEN)
                 .noLootTable()
         );

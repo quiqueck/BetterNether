@@ -25,7 +25,7 @@ public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBloc
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
 
     public BlockBlackBush() {
-        super(Materials.NETHER_PLANT.mapColor(MapColor.COLOR_BLACK));
+        super(Materials.netherPlant().mapColor(MapColor.COLOR_BLACK));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 

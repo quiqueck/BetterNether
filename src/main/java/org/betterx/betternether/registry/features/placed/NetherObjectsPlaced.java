@@ -7,6 +7,7 @@ import org.betterx.bclib.api.v3.levelgen.features.features.SequenceFeature;
 import org.betterx.bclib.api.v3.levelgen.features.features.TemplateFeature;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.registry.features.configured.NetherObjects;
+import org.betterx.betternether.world.structures.city.AvoidNetherCity;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
@@ -163,6 +164,9 @@ public class NetherObjectsPlaced {
             .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
             .vanillaNetherGround(4)
             .onceEvery(2)
+            // Placed in the same step as the city, so it must keep out of the cave as well as the buildings.
+            // Centred on the position, the largest template (tree_fallen, 9x14) reaches 7 blocks sideways.
+            .modifier(new AvoidNetherCity(8, true))
             .build();
 
 

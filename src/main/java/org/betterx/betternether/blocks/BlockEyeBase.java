@@ -16,6 +16,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
+/**
+ * Eyeball blocks need their own, fresh {@link Properties} (not the shared, mutable
+ * {@code Materials.NETHER_PLANT}): blocks registered earlier chain {@code noLootTable()} onto that shared
+ * instance, which left the eyeballs pointing at {@code minecraft:empty} - they dropped neither slime balls
+ * nor eye seeds (quiqueck/BetterNether#153, #159, #179).
+ */
 public class BlockEyeBase extends BlockBase implements AddMineableHoe {
     public BlockEyeBase(Properties settings) {
         super(settings);

@@ -1,5 +1,6 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.bclib.api.v3.levelgen.features.UserGrowableFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockPlantWall;
@@ -7,6 +8,7 @@ import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.betternether.world.structures.city.CityStructure;
 import org.betterx.betternether.world.structures.plants.LegacyStructureAnchorTree;
 
 import net.minecraft.core.BlockPos;
@@ -24,7 +26,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
     public AnchorTreeFeature() {
         super(NoneFeatureConfiguration.CODEC);
         legacyStructure = new LegacyStructureAnchorTree();
@@ -38,6 +40,26 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             NetherBlocks.WALL_MUSHROOM_RED
     };
     final private LegacyStructureAnchorTree legacyStructure;
+
+    /**
+     * How far sideways a naturally placed tree can reach from its (snapped) origin: branch endpoints are
+     * clamped to 16 blocks and the cylinders drawn around them are at most 7 wide. A tree that close to a
+     * city building is not placed at all - see {@link CityStructure#buildingsWithin}.
+     */
+    private static final int CITY_CLEARANCE = 16 + 7;
+
+    /**
+     * The leafy half of an anchor tree. This feature places no leaves itself - in the Upside Down Forest
+     * the foliage comes from ANCHOR_TREE_BRANCH, scattered as a separate feature alongside it. A sapling
+     * has no biome to do that composing, so {@link #growFoliage} does it for a grown tree.
+     */
+    private static final AnchorTreeBranchFeature FOLIAGE = new AnchorTreeBranchFeature();
+
+    /**
+     * The generator depth the anchor tree is shaped for. A grown tree pins only its scale to this, never
+     * {@code MAX_HEIGHT} itself, which {@link #cylinder} also uses as an absolute Y ceiling.
+     */
+    private static final int SHAPED_FOR_DEPTH = 128;
 
     private static int toMiddle(int val) {
 
@@ -54,6 +76,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             StructureGeneratorThreadContext context
     ) {
         pos = new BlockPos(toMiddle(pos.getX()), pos.getY(), toMiddle(pos.getZ()));
+        if (CityStructure.buildingsWithin(world, pos, CITY_CLEARANCE)) return false;
         if (NetherBiomeBuilder.useLegacyGeneration) {
             legacyStructure.generate(world, pos, random, MAX_HEIGHT, context);
             return true;
@@ -61,30 +84,117 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
 
         BlockPos down = pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT));
         if (canGenerate(pos)) {
-            grow(world, pos, down, random, MAX_HEIGHT, context);
+            // Result deliberately dropped: worldgen keeps its unconditional true.
+            grow(world, pos, down, random, MAX_HEIGHT, context, false);
             return true;
         }
         return false;
+    }
+
+    /**
+     * Grows the tree from a 2x2 of saplings a player planted on the floor, upward to whatever ceiling is
+     * above it (or the build limit).
+     * <p>
+     * {@code pos} is the floor end here, not the ceiling end {@link #place} works from; the tree's geometry
+     * spans {@code down..up} either way. Skips the {@link #toMiddle} snap, which would move the tree up to
+     * 15 blocks away from the saplings. Like worldgen it keeps clear of nether city buildings.
+     */
+    @Override
+    public boolean grow(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration configuration
+    ) {
+        if (CityStructure.buildingsWithin(level, pos, CITY_CLEARANCE)) return false;
+        // MAX_HEIGHT doubles as the absolute Y cap of the trunk. The generator depth alone (128 in the
+        // Nether) would drop every block of a tree planted above the Nether roof while still using up the
+        // saplings, so it is raised to the build limit where that is higher.
+        final int maxHeight = Math.max(
+                level.getLevel().getChunkSource().getGenerator().getGenDepth(),
+                level.getMaxBuildHeight()
+        );
+        final BlockPos up = pos.above(BlocksHelper.upRay(level, pos, level.getMaxBuildHeight() - pos.getY()));
+        return grow(
+                level, up, pos, random, maxHeight,
+                NetherThreadDataStorage.generatorForThread().context,
+                true
+        );
+    }
+
+    /**
+     * Hangs leafy branch clusters off the upper trunk, so a grown tree looks like the ones in the Upside
+     * Down Forest rather than a bare stem. Anchored to the trunk rather than to the ceiling, which a
+     * player may have built barely wider than the saplings.
+     */
+    private void growFoliage(
+            ServerLevelAccessor level,
+            BlockPos up,
+            BlockPos down,
+            RandomSource random,
+            StructureGeneratorThreadContext context
+    ) {
+        // Snapshot first: FOLIAGE.grow clears the shared per-thread context.
+        final int span = up.getY() - down.getY();
+        final int minY = up.getY() - Math.max(6, span * 2 / 3);
+        final List<BlockPos> canopy = new ArrayList<>();
+        for (BlockPos b : context.BLOCKS) {
+            if (b.getY() >= minY && b.getY() <= up.getY()) canopy.add(b);
+        }
+        if (canopy.isEmpty()) return;
+        canopy.sort((a, b) -> Integer.compare(b.getY(), a.getY()));
+
+        // Roughly one cluster per 8 blocks of trunk, spread over the trunk's height by band.
+        final int count = Mth.clamp(span / 8, 4, 48);
+        for (int i = 0; i < count; i++) {
+            final int from = canopy.size() * i / count;
+            final int to = Math.max(from + 1, canopy.size() * (i + 1) / count);
+            final BlockPos on = canopy.get(from + random.nextInt(to - from));
+
+            // Start the cluster at the first air block next to the trunk, so its branches touch it.
+            for (int attempt = 0; attempt < 4; attempt++) {
+                final double angle = random.nextDouble() * Math.PI * 2;
+                final double dx = Math.cos(angle);
+                final double dz = Math.sin(angle);
+                BlockPos at = null;
+                for (int step = 1; step <= 10; step++) {
+                    final BlockPos probe = new BlockPos(
+                            on.getX() + (int) Math.round(dx * step),
+                            on.getY(),
+                            on.getZ() + (int) Math.round(dz * step)
+                    );
+                    if (level.getBlockState(probe).isAir()) {
+                        at = probe;
+                        break;
+                    }
+                }
+                if (at == null) continue;
+                FOLIAGE.grow(level, at, random, NoneFeatureConfiguration.INSTANCE);
+                break;
+            }
+        }
     }
 
     private boolean canGenerate(BlockPos pos) {
         return true;
     }
 
-    private void grow(
+    private boolean grow(
             ServerLevelAccessor level,
             BlockPos up,
             BlockPos down,
             RandomSource random,
             final int MAX_HEIGHT,
-            StructureGeneratorThreadContext context
+            StructureGeneratorThreadContext context,
+            final boolean airOnly
     ) {
-        final float scale_factor = MAX_HEIGHT / 128.0f;
-        final int HEIGHT_64;
-        final int HEIGHT_45;
-        final int HEIGHT_90;
+        // A grown tree is always built at the scale the anchor tree is designed for.
+        final float scale_factor = airOnly ? 1.0f : MAX_HEIGHT / (float) SHAPED_FOR_DEPTH;
+        int HEIGHT_64;
+        int HEIGHT_45;
+        int HEIGHT_90;
         final int SEGMENT_LENGTH;
-        if (NetherBiomeBuilder.useLegacyGeneration) {
+        if (NetherBiomeBuilder.useLegacyGeneration && !airOnly) {
             HEIGHT_64 = MAX_HEIGHT / 2;
             HEIGHT_45 = (int) (MAX_HEIGHT * 0.36);
             HEIGHT_90 = (int) (MAX_HEIGHT * 0.7);
@@ -95,12 +205,23 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             HEIGHT_90 = (int) (MAX_HEIGHT / 2.0 + MHelper.nextFloat(random, 15 * scale_factor));
             SEGMENT_LENGTH = (int) ((15 + MHelper.nextFloat(random, 5 * scale_factor)) * scale_factor);
         }
-        if (up.getY() - down.getY() < 30) return;
+        if (up.getY() - down.getY() < 30) return false;
+
+        // The mushroom and moss bands are absolute Y values tuned for a tree spanning a 128 block Nether.
+        // A grown tree spans whatever room the player gave it, so map them onto its own span.
+        if (airOnly) {
+            final int base = down.getY();
+            final float span = (up.getY() - base) / (float) MAX_HEIGHT;
+            HEIGHT_45 = base + (int) (HEIGHT_45 * span);
+            HEIGHT_64 = base + (int) (HEIGHT_64 * span);
+            HEIGHT_90 = base + (int) (HEIGHT_90 * span);
+        }
+
         int pd = BlocksHelper.downRay(level, down, MAX_HEIGHT) + 1;
         for (int i = 0; i < 5; i++) {
             Block block = level.getBlockState(down.below(pd + i)).getBlock();
             if (block == Blocks.NETHER_BRICKS || block == NetherBlocks.NETHER_BRICK_TILE_LARGE || block == NetherBlocks.NETHER_BRICK_TILE_SMALL)
-                return;
+                return false;
         }
 
         final BlockPos trunkTop = lerp(down, up, 0.6);
@@ -148,15 +269,20 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         BlockState state;
         int offset = random.nextInt(4);
         final int minBuildHeight = level.getMinBuildHeight() + 1;
-        final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(
-                level,
-                up,
-                minBuildHeight,
-                MAX_HEIGHT - 2
-        );
+        // A grown tree is confined to the space it was grown in, from the floor it stands on to the ceiling
+        // above: air-only alone would let the geometry skip a floor and carry on in the cave below.
+        final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = airOnly
+                ? BlocksHelper.decorationBounds(level, up, down.getY(), up.getY())
+                : BlocksHelper.decorationBounds(level, up, minBuildHeight, MAX_HEIGHT - 2);
+        // The canopy is the lucis mushrooms; a shorter grown trunk gets a proportionally higher chance.
+        final int mushroomChance = airOnly
+                ? Math.max(2, (int) (32 * scale_factor * (up.getY() - down.getY()) / (float) MAX_HEIGHT))
+                : (int) (32 * scale_factor);
         for (BlockPos bpos : context.BLOCKS) {
             if (!blockBox.isInside(bpos)) continue;
-            if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.canBeReplaced())
+            state = level.getBlockState(bpos);
+            // Air-only for a grown tree, so it never eats what the player built around it.
+            if (airOnly ? !state.isAir() : (!BlocksHelper.isNetherGround(state) && !state.canBeReplaced()))
                 continue;
             boolean blockUp = true;
             if ((blockUp = context.BLOCKS.contains(bpos.above())) && context.BLOCKS.contains(bpos.below()))
@@ -169,19 +295,30 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                     bpos.getY() * 0.1,
                     bpos.getZ() * 0.1
             ) > 0) {
-                if (random.nextInt((int) (32 * scale_factor)) == 0 && !context.BLOCKS.contains(bpos.north()))
-                    makeMushroom(level, bpos.north(), random.nextDouble() * 3 + 1.5, blockBox);
-                if (random.nextInt((int) (32 * scale_factor)) == 0 && !context.BLOCKS.contains(bpos.south()))
-                    makeMushroom(level, bpos.south(), random.nextDouble() * 3 + 1.5, blockBox);
-                if (random.nextInt((int) (32 * scale_factor)) == 0 && !context.BLOCKS.contains(bpos.east()))
-                    makeMushroom(level, bpos.east(), random.nextDouble() * 3 + 1.5, blockBox);
-                if (random.nextInt((int) (32 * scale_factor)) == 0 && !context.BLOCKS.contains(bpos.west()))
-                    makeMushroom(level, bpos.west(), random.nextDouble() * 3 + 1.5, blockBox);
+                if (random.nextInt(mushroomChance) == 0 && !context.BLOCKS.contains(bpos.north()))
+                    makeMushroom(level, bpos.north(), random.nextDouble() * 3 + 1.5, blockBox, airOnly);
+                if (random.nextInt(mushroomChance) == 0 && !context.BLOCKS.contains(bpos.south()))
+                    makeMushroom(level, bpos.south(), random.nextDouble() * 3 + 1.5, blockBox, airOnly);
+                if (random.nextInt(mushroomChance) == 0 && !context.BLOCKS.contains(bpos.east()))
+                    makeMushroom(level, bpos.east(), random.nextDouble() * 3 + 1.5, blockBox, airOnly);
+                if (random.nextInt(mushroomChance) == 0 && !context.BLOCKS.contains(bpos.west()))
+                    makeMushroom(level, bpos.west(), random.nextDouble() * 3 + 1.5, blockBox, airOnly);
             }
 
             if (bpos.getY() > HEIGHT_64) {
-                if (!blockUp && level.getBlockState(bpos.above()).canBeReplaced()) {
-                    BlocksHelper.setWithoutUpdate(level, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
+                final BlockState above = level.getBlockState(bpos.above());
+                if (!blockUp && (airOnly ? above.isAir() : above.canBeReplaced())) {
+                    if (airOnly) {
+                        // bpos.above() need not be inside the box, which on a grown tree ends at the ceiling.
+                        BlocksHelper.setWithoutUpdate(
+                                level,
+                                bpos.above(),
+                                NetherBlocks.MOSS_COVER.defaultBlockState(),
+                                blockBox
+                        );
+                    } else {
+                        BlocksHelper.setWithoutUpdate(level, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
+                    }
                 }
 
                 if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
@@ -220,6 +357,11 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 }
             }
         }
+
+        // Grow path only: the trunk is finished and context.BLOCKS still holds it.
+        if (airOnly) growFoliage(level, up, down, random, context);
+
+        return true;
     }
 
     private void buildBigCircle(
@@ -288,7 +430,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             double max = b.getY() - a.getY();
             if (max < 1) max = 1;
             for (int y = a.getY(); y <= b.getY(); y++)
-                cylinder(lerpCos(a, b, y, (y - a.getY()) / max), radius, MAX_HEIGHT, context);
+                cylinder(lerpCos(a, b, y, (y - a.getY()) / max), radius, level.getMinBuildHeight(), MAX_HEIGHT, context);
         }
     }
 
@@ -325,7 +467,18 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         return result;
     }
 
-    private void cylinder(BlockPos pos, double radius, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+    /**
+     * Collects one horizontal disc of trunk. The floor cut-off is relative to {@code minY}: in a dimension
+     * whose floor is below zero an absolute cut-off at Y 2 dropped every disc below Y 3, so a tree grown
+     * there used up the saplings and placed nothing.
+     */
+    private void cylinder(
+            BlockPos pos,
+            double radius,
+            final int minY,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         int x1 = MHelper.floor(pos.getX() - radius);
         int z1 = MHelper.floor(pos.getZ() - radius);
         int x2 = MHelper.floor(pos.getX() + radius + 1);
@@ -342,7 +495,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                         x * 0.5,
                         pos.getY() * 0.5,
                         z * 0.5
-                ) * 0.25 + 0.75) && pos.getY() > 2 && pos.getY() < MAX_HEIGHT - 2)
+                ) * 0.25 + 0.75) && pos.getY() > minY + 2 && pos.getY() < MAX_HEIGHT - 2)
                     context.BLOCKS.add(new BlockPos(x, pos.getY(), z));
             }
         }
@@ -384,7 +537,7 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             elem.add(end);
             result.add(elem);
 
-            if (findSurface && end.getY() > 2 && end.getY() < MAX_HEIGHT - 2) {
+            if (findSurface && end.getY() > level.getMinBuildHeight() + 2 && end.getY() < MAX_HEIGHT - 2) {
                 int dist = length < 0
                         ? -BlocksHelper.downRay(level, end, Math.abs(length * 2))
                         : BlocksHelper.upRay(level, end, Math.abs(length * 2));
@@ -410,8 +563,14 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         return result;
     }
 
-    protected static void makeMushroom(ServerLevelAccessor world, BlockPos pos, double radius, BoundingBox bounds) {
-        if (!world.getBlockState(pos).canBeReplaced()) return;
+    protected static void makeMushroom(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            double radius,
+            BoundingBox bounds,
+            boolean airOnly
+    ) {
+        if (airOnly ? !world.getBlockState(pos).isAir() : !world.getBlockState(pos).canBeReplaced()) return;
 
         int x1 = MHelper.floor(pos.getX() - radius);
         int z1 = MHelper.floor(pos.getZ() - radius);
@@ -428,7 +587,8 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 pz2 *= pz2;
                 if (px2 + pz2 <= radius) {
                     BlockPos p = new BlockPos(x, pos.getY(), z);
-                    if (world.getBlockState(p).canBeReplaced() && bounds.isInside(p)) {
+                    final BlockState at = world.getBlockState(p);
+                    if ((airOnly ? at.isAir() : at.canBeReplaced()) && bounds.isInside(p)) {
                         placed.add(p);
                     }
                 }

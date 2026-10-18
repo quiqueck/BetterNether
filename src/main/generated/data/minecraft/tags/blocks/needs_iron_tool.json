@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "betternether:cincinnasite_ore",
-    "betternether:nether_lapis_ore"
+    "betternether:nether_lapis_ore",
+    "betternether:nether_redstone_ore"
   ]
 }

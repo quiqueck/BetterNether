@@ -15,7 +15,6 @@ import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
 import org.betterx.betternether.blocks.complex.slots.VanillaNetherWood;
 import org.betterx.betternether.blocks.complex.slots.VanillaWood;
-import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
@@ -712,7 +711,7 @@ public class NetherBlocks extends BlockRegistry {
     );
 
     protected NetherBlocks() {
-        super(Configs.BLOCKS);
+        super();
     }
 
     @NotNull
@@ -733,21 +732,16 @@ public class NetherBlocks extends BlockRegistry {
 
     @SafeVarargs
     public static <T extends Block> T registerBlock(String name, T block, TagKey<Block>... tags) {
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            if (tags.length > 0) {
-                TagManager.BLOCKS.add(block, tags);
-            }
+        registerBlockDirectly(name, block);
+        if (tags.length > 0) {
+            TagManager.BLOCKS.add(block, tags);
         }
         return block;
     }
 
     @SafeVarargs
     private static <B extends Block> B registerBlockNI(String name, B block, TagKey<Block>... tags) {
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            return registerBlock(name, block, false, tags);
-        }
-        return block;
+        return registerBlock(name, block, false, tags);
     }
 
 
@@ -778,59 +772,49 @@ public class NetherBlocks extends BlockRegistry {
 
     public static Block registerStairs(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
         Block stairs = BaseStairsBlock.from(source, fireproof);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, stairs);
-            if (stairs.defaultBlockState().ignitedByLava())
-                addFuel(source, stairs);
-            RecipesHelper.makeStairsRecipe(source, stairs);
-            if (tags.length > 0) {
-                TagManager.BLOCKS.add(stairs, tags);
-            }
+        registerBlockDirectly(name, stairs);
+        if (stairs.defaultBlockState().ignitedByLava())
+            addFuel(source, stairs);
+        RecipesHelper.makeStairsRecipe(source, stairs);
+        if (tags.length > 0) {
+            TagManager.BLOCKS.add(stairs, tags);
         }
         return stairs;
     }
 
     public static Block registerSlab(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
         Block slab = BaseSlabBlock.from(source, fireproof);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, slab);
-            if (slab.defaultBlockState().ignitedByLava())
-                addFuel(source, slab);
-            RecipesHelper.makeSlabRecipe(source, slab);
-            if (tags.length > 0) {
-                TagManager.BLOCKS.add(slab, tags);
-            }
+        registerBlockDirectly(name, slab);
+        if (slab.defaultBlockState().ignitedByLava())
+            addFuel(source, slab);
+        RecipesHelper.makeSlabRecipe(source, slab);
+        if (tags.length > 0) {
+            TagManager.BLOCKS.add(slab, tags);
         }
         return slab;
     }
 
     private static Block registerRoof(String name, Block source) {
         Block roof = BlockBase.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, roof);
-            addFuel(source, roof);
-            RecipesHelper.makeRoofRecipe(source, roof);
-        }
+        registerBlockDirectly(name, roof);
+        addFuel(source, roof);
+        RecipesHelper.makeRoofRecipe(source, roof);
         return roof;
     }
 
     public static Block registerButton(String name, Block source, BlockSetType type) {
         Block button = BaseButtonBlock.from(source, type);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, button);
-            addFuel(source, button);
-            RecipesHelper.makeButtonRecipe(source, button);
-        }
+        registerBlockDirectly(name, button);
+        addFuel(source, button);
+        RecipesHelper.makeButtonRecipe(source, button);
         return button;
     }
 
     public static Block registerPlate(String name, Block source, BlockSetType type) {
         Block plate = BasePressurePlateBlock.from(source, type);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, plate);
-            addFuel(source, plate);
-            RecipesHelper.makePlateRecipe(source, plate);
-        }
+        registerBlockDirectly(name, plate);
+        addFuel(source, plate);
+        RecipesHelper.makePlateRecipe(source, plate);
         return plate;
     }
 
@@ -867,91 +851,77 @@ public class NetherBlocks extends BlockRegistry {
             RecipeCategory category,
             Block... sources
     ) {
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, result);
-            for (Block source : sources) {
-                RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
-            }
+        registerBlockDirectly(name, result);
+        for (Block source : sources) {
+            RecipesHelper.makeSimpleRecipe2(source, result, 4, group, category);
         }
         return result;
     }
 
     public static Block registerWall(String name, Block source) {
         Block wall = BNWall.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, wall);
-            TagManager.BLOCKS.add(wall, BlockTags.WALLS);
-            RecipesHelper.makeWallRecipe(source, wall);
-        }
+        registerBlockDirectly(name, wall);
+        TagManager.BLOCKS.add(wall, BlockTags.WALLS);
+        RecipesHelper.makeWallRecipe(source, wall);
         return wall;
     }
 
 
     public static Block registerTaburet(String name, Block source) {
         Block block = BaseTaburet.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            addFuel(source, block);
-            Taburet.makeTaburetRecipe(
-                    new ResourceLocation(BetterNether.MOD_ID, name),
-                    block,
-                    source
-            );
+        registerBlockDirectly(name, block);
+        addFuel(source, block);
+        Taburet.makeTaburetRecipe(
+                new ResourceLocation(BetterNether.MOD_ID, name),
+                block,
+                source
+        );
 
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
-        }
+        TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
 
         return block;
     }
 
     public static Block registerChair(String name, Block source) {
         Block block = BaseChair.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            addFuel(source, block);
-            Chair.makeChairRecipe(
-                    new ResourceLocation(BetterNether.MOD_ID, name),
-                    block,
-                    source
-            );
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
-        }
+        registerBlockDirectly(name, block);
+        addFuel(source, block);
+        Chair.makeChairRecipe(
+                new ResourceLocation(BetterNether.MOD_ID, name),
+                block,
+                source
+        );
+        TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
 
         return block;
     }
 
     public static Block registerBarStool(String name, Block source) {
         Block block = BaseBarStool.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            addFuel(source, block);
-            BarStool.makeBarStoolRecipe(
-                    new ResourceLocation(BetterNether.MOD_ID, name),
-                    block,
-                    source
-            );
-            TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
-        }
+        registerBlockDirectly(name, block);
+        addFuel(source, block);
+        BarStool.makeBarStoolRecipe(
+                new ResourceLocation(BetterNether.MOD_ID, name),
+                block,
+                source
+        );
+        TagManager.BLOCKS.add(block, BlockTags.MINEABLE_WITH_PICKAXE);
 
         return block;
     }
 
     public static Block registerFurnace(String name, Block source) {
         Block block = new BlockNetherFurnace(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
-        }
+        registerBlockDirectly(name, block);
+        RecipesHelper.makeRoundRecipe(source, block, "nether_furnace", RecipeCategory.DECORATIONS);
 
         return block;
     }
 
     private static Block registerStalactite(String name, Block source) {
         Block block = new BlockStalactite(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite", RecipeCategory.DECORATIONS);
-        }
+        registerBlockDirectly(name, block);
+        RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite", RecipeCategory.DECORATIONS);
 
         return block;
     }
@@ -959,11 +929,9 @@ public class NetherBlocks extends BlockRegistry {
     private static Block registerFireBowl(String name, Block source, Block inside, Item leg) {
         final boolean isNetherite = name.startsWith("netherite");
         Block block = isNetherite ? new BlockFireBowl.Metal(source) : BlockFireBowl.from(source);
-        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-            registerBlockDirectly(name, block);
-            if (!isNetherite) {
-                RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
-            }
+        registerBlockDirectly(name, block);
+        if (!isNetherite) {
+            RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
         }
 
         return block;

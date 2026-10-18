@@ -170,8 +170,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:sharpness",
                 "minecraft:looting",
+                "minecraft:sharpness",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -184,8 +184,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:sharpness",
                 "minecraft:looting",
+                "minecraft:sharpness",
                 "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
@@ -210,8 +210,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:efficiency",
                 "minecraft:silk_touch",
+                "minecraft:efficiency",
                 "minecraft:unbreaking"
               ],
               "function": "minecraft:enchant_randomly"
@@ -224,8 +224,8 @@
           "functions": [
             {
               "enchantments": [
-                "minecraft:efficiency",
                 "minecraft:silk_touch",
+                "minecraft:efficiency",
                 "minecraft:unbreaking"
               ],
               "function": "minecraft:enchant_randomly"

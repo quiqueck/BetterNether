@@ -6,9 +6,9 @@
         "items": [
           {
             "items": [
-              "betternether:anchor_tree_log",
               "betternether:anchor_tree_bark",
-              "betternether:anchor_tree_planks"
+              "betternether:anchor_tree_planks",
+              "betternether:anchor_tree_log"
             ]
           }
         ]
@@ -21,8 +21,8 @@
           {
             "items": [
               "minecraft:crimson_hyphae",
-              "minecraft:crimson_planks",
-              "minecraft:crimson_stem"
+              "minecraft:crimson_stem",
+              "minecraft:crimson_planks"
             ]
           }
         ]
@@ -34,8 +34,8 @@
         "items": [
           {
             "items": [
-              "betternether:mushroom_fir_log",
               "betternether:mushroom_fir_bark",
+              "betternether:mushroom_fir_log",
               "betternether:mushroom_fir_planks"
             ]
           }
@@ -48,8 +48,8 @@
         "items": [
           {
             "items": [
-              "betternether:nether_mushroom_stem",
-              "betternether:nether_mushroom_planks"
+              "betternether:nether_mushroom_planks",
+              "betternether:nether_mushroom_stem"
             ]
           }
         ]
@@ -61,8 +61,8 @@
         "items": [
           {
             "items": [
-              "betternether:nether_reed_planks",
-              "betternether:nether_reed_stem"
+              "betternether:nether_reed_stem",
+              "betternether:nether_reed_planks"
             ]
           }
         ]
@@ -74,9 +74,9 @@
         "items": [
           {
             "items": [
+              "betternether:nether_sakura_log",
               "betternether:nether_sakura_bark",
-              "betternether:nether_sakura_planks",
-              "betternether:nether_sakura_log"
+              "betternether:nether_sakura_planks"
             ]
           }
         ]
@@ -88,9 +88,9 @@
         "items": [
           {
             "items": [
-              "betternether:rubeus_planks",
+              "betternether:rubeus_log",
               "betternether:rubeus_bark",
-              "betternether:rubeus_log"
+              "betternether:rubeus_planks"
             ]
           }
         ]
@@ -102,9 +102,9 @@
         "items": [
           {
             "items": [
-              "betternether:stalagnate_bark",
+              "betternether:stalagnate_planks",
               "betternether:stalagnate_log",
-              "betternether:stalagnate_planks"
+              "betternether:stalagnate_bark"
             ]
           }
         ]
@@ -116,9 +116,9 @@
         "items": [
           {
             "items": [
-              "minecraft:warped_hyphae",
               "minecraft:warped_planks",
-              "minecraft:warped_stem"
+              "minecraft:warped_stem",
+              "minecraft:warped_hyphae"
             ]
           }
         ]
@@ -130,9 +130,9 @@
         "items": [
           {
             "items": [
-              "betternether:wart_planks",
+              "betternether:wart_log",
               "betternether:wart_bark",
-              "betternether:wart_log"
+              "betternether:wart_planks"
             ]
           }
         ]
@@ -145,8 +145,8 @@
           {
             "items": [
               "betternether:willow_planks",
-              "betternether:willow_bark",
-              "betternether:willow_log"
+              "betternether:willow_log",
+              "betternether:willow_bark"
             ]
           }
         ]

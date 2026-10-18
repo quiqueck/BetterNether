@@ -47,7 +47,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
     public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
     public BlockNeonEquisetum() {
-        super(Materials.NETHER_PLANT
+        super(Materials.netherPlant()
                 .mapColor(MapColor.COLOR_GREEN)
                 .lightLevel(s -> 15)
                 .noLootTable()

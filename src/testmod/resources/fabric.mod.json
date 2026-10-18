@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "betternether-testmod",
+  "version": "1.0.0",
+  "name": "BetterNether (TestMod)",
+  "description": "Headless GameTest suite and cross-mod compat checks for BetterNether. Never shipped.",
+  "authors": [
+    "Quiqueck"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "org.betterx.betternether.testmod.compat.CompatWorldgenBootCheck"
+    ],
+    "fabric-gametest": [
+      "org.betterx.betternether.testmod.gametest.BlockRegistrationGameTest"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "fabric-api": "*",
+    "betternether": "*"
+  }
+}

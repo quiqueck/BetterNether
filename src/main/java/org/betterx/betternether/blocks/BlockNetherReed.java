@@ -27,7 +27,7 @@ public class BlockNetherReed extends BlockBase implements AddMineableSword, AddM
     public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherReed() {
-        super(Materials.NETHER_PLANT
+        super(Materials.netherPlant()
                 .mapColor(MapColor.COLOR_CYAN)
                 .randomTicks());
         this.setRenderLayer(BNRenderLayer.CUTOUT);

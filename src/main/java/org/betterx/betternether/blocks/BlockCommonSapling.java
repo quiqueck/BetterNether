@@ -40,7 +40,7 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
     private final Block plant;
 
     public BaseBlockCommonSapling(@NotNull Block plant, MapColor color) {
-        super(Materials.NETHER_SAPLING
+        super(Materials.netherSapling()
                 .mapColor(color)
                 .noLootTable()
         );

@@ -49,49 +49,12 @@
 		"category": "music",
 		"sounds": [
 			{
-				"name": "betternether:music/gloom_woods",
-				"volume": 0.2,
-				"stream": true
+				"name": "minecraft:music.overworld.deep_dark",
+				"type": "event"
 			},
 			{
-				"name": "betternether:music/gloom_wisps",
-				"volume": 0.2,
-				"stream": true
-			},
-			{
-				"name": "betternether:music/gloomsculk",
-				"volume": 0.2,
-				"stream": true
-			}
-		]
-	},
-	"betternether.music_disc.gloom_woods": {
-		"category": "record",
-		"subtitle": "subtitles.betternether.music_disc.gloom_woods",
-		"sounds": [
-			{
-				"name": "betternether:music/gloom_woods",
-				"stream": true
-			}
-		]
-	},
-	"betternether.music_disc.gloom_wisps": {
-		"category": "record",
-		"subtitle": "subtitles.betternether.music_disc.gloom_wisps",
-		"sounds": [
-			{
-				"name": "betternether:music/gloom_wisps",
-				"stream": true
-			}
-		]
-	},
-	"betternether.music_disc.gloomsculk": {
-		"category": "record",
-		"subtitle": "subtitles.betternether.music_disc.gloomsculk",
-		"sounds": [
-			{
-				"name": "betternether:music/gloomsculk",
-				"stream": true
+				"name": "minecraft:music.nether.soul_sand_valley",
+				"type": "event"
 			}
 		]
 	},

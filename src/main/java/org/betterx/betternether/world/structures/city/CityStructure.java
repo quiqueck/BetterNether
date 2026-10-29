@@ -48,7 +48,7 @@ public class CityStructure extends Structure {
         generator = new CityGenerator();
     }
 
-    private static final int DEFAULT_HEIGHT = 40;
+    private static final int DEFAULT_HEIGHT = 35;
 
     @Override
     public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {

@@ -49,7 +49,6 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.betterx.betternether.registry.item.NetherFoodItems;
 import org.betterx.betternether.registry.item.NetherEquipmentItems;
-import org.betterx.betternether.registry.item.NetherMusicDiscItems;
 import org.betterx.betternether.registry.item.NetherResourceItems;
 
 /**
@@ -335,6 +334,5 @@ public class NetherItems {
         NetherFoodItems.ensureLoaded();
         NetherEquipmentItems.ensureLoaded();
         NetherResourceItems.ensureLoaded();
-        NetherMusicDiscItems.ensureLoaded();
     }
 }

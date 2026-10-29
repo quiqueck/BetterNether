@@ -53,7 +53,6 @@ public class BetterNetherDatagen extends WoverDataGenEntryPoint {
         globalPack.addProvider(NetherEntityLootTableProvider::new);
         globalPack.addProvider(NetherLootAdditionProvider::new);
         globalPack.addProvider(NetherEnchantmentProvider::new);
-        globalPack.addProvider(NetherJukeboxSongProvider::new);
         globalPack.addProvider(NetherBlockTagDataProvider::new);
         globalPack.addProvider(NetherItemTagDataProvider::new);
         globalPack.addProvider(NetherEnchantmentTagProvider::new);

@@ -2,7 +2,6 @@ package org.betterx.datagen.betternether.recipes;
 
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.block.NetherObsidianBlocks;
-import org.betterx.betternether.registry.item.NetherMusicDiscItems;
 import org.betterx.betternether.registry.NetherTemplates;
 import de.ambertation.wover.core.api.ModCore;
 import de.ambertation.wover.datagen.api.provider.WoverLootAdditionProvider;
@@ -170,18 +169,7 @@ public class NetherLootAdditionProvider extends WoverLootAdditionProvider {
                                          UniformGenerator.between(
                                                  1.0F,
                                                  2.0F
-                                         ))),
-                         // The gloomwood discs sit at the rare end of the pool (vanilla's own pool totals
-                         // ~459, so weight 3 is roughly a 0.5% chance each, on par with the iron boots).
-                         LootItem
-                                 .lootTableItem(NetherMusicDiscItems.MUSIC_DISC_GLOOM_WOODS)
-                                 .setWeight(3),
-                         LootItem
-                                 .lootTableItem(NetherMusicDiscItems.MUSIC_DISC_GLOOM_WISPS)
-                                 .setWeight(3),
-                         LootItem
-                                 .lootTableItem(NetherMusicDiscItems.MUSIC_DISC_GLOOMSCULK)
-                                 .setWeight(3)
+                                         )))
                  );
 
         consumer.accept(BetterNether.C.id("piglin_bartering"), bartering);

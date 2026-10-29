@@ -23,6 +23,8 @@ import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.NotNull;
 import net.minecraft.world.level.block.Block;
 
+import java.util.function.BiConsumer;
+
 /**
  * The thin axis-aligned "stem" of a Nether tree. Four stems craft into a log.
  */
@@ -50,7 +52,7 @@ public class Stem extends SlotFromDefinition {
         // BlockBase's inherited getDrops() override (no loot table json was generated for any of them -
         // StalagnateMaterial/NetherMushroomMaterial/MushroomFirMaterial each add a Stem), reproduced
         // explicitly as NetherLoot.dropSelfNoExplosion() here so all three stay in sync.
-        def.strength(0.5f).noOcclusion().addTags(BlockTags.MINEABLE_WITH_AXE).addTrait(NetherLoot.dropSelfNoExplosion());
+        def.noOcclusion().addTags(BlockTags.MINEABLE_WITH_AXE).addTrait(NetherLoot.dropSelfNoExplosion());
     }
 
     @Override
@@ -69,5 +71,18 @@ public class Stem extends SlotFromDefinition {
     @Override
     protected BlockTrait<Block, ?> buildModel(BlockSet<?> set, BlockTraitLookup traitLookup) {
         return ModelTraitLibrary.pillar();
+    }
+
+    @Override
+    protected void finalizeBlockDefinitions(
+            BlockSet<?> set,
+            BlockDefinition<?, ? extends BlockDefinition<?, ?>> def,
+            BiConsumer<SlotType, Block> blockDefinitionConsumer
+    ) {
+        // Set here rather than in addSlotSpecificDefinitions: the wood set's WOOD_BLOCK.netherWood() runs in
+        // the common hook after that and sets strength(2, 3), which used to replace the stem's own 0.5. This
+        // branch has no finalizeDefinitions hook, so the setter is queued here, right before the build.
+        def.strength(0.5f);
+        super.finalizeBlockDefinitions(set, def, blockDefinitionConsumer);
     }
 }

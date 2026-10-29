@@ -76,7 +76,8 @@
       "org.betterx.betternether.testmod.gametest.StructureTemplateGameTest",
       "org.betterx.betternether.testmod.gametest.StatueRespawnerMessageGameTest",
       "org.betterx.betternether.testmod.gametest.WaystonesBiomeTagGameTest",
-      "org.betterx.betternether.testmod.gametest.MushroomFirCollapseGameTest"
+      "org.betterx.betternether.testmod.gametest.MushroomFirCollapseGameTest",
+      "org.betterx.betternether.testmod.gametest.SetPropertyOrderGameTest"
     ]
   },
   "depends": {

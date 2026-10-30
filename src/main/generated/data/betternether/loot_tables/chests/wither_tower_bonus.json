@@ -75,8 +75,8 @@
             {
               "enchantments": [
                 "minecraft:looting",
-                "minecraft:sharpness",
-                "minecraft:mending"
+                "minecraft:mending",
+                "minecraft:sharpness"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -163,8 +163,8 @@
             {
               "enchantments": [
                 "minecraft:fire_protection",
-                "minecraft:feather_falling",
-                "minecraft:mending"
+                "minecraft:mending",
+                "minecraft:feather_falling"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -236,8 +236,8 @@
             {
               "enchantments": [
                 "minecraft:fire_protection",
-                "minecraft:feather_falling",
-                "minecraft:mending"
+                "minecraft:mending",
+                "minecraft:feather_falling"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -269,7 +269,7 @@
             }
           ],
           "name": "minecraft:gold_block",
-          "weight": 6
+          "weight": 42
         },
         {
           "type": "minecraft:item",
@@ -285,7 +285,7 @@
             }
           ],
           "name": "minecraft:gold_ingot",
-          "weight": 8
+          "weight": 56
         },
         {
           "type": "minecraft:item",
@@ -301,7 +301,7 @@
             }
           ],
           "name": "betternether:nether_ruby",
-          "weight": 8
+          "weight": 56
         },
         {
           "type": "minecraft:item",
@@ -310,14 +310,14 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 5.0,
+                "max": 3.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
           "name": "minecraft:netherite_scrap",
-          "weight": 6
+          "weight": 21
         },
         {
           "type": "minecraft:item",
@@ -333,23 +333,16 @@
             }
           ],
           "name": "minecraft:sculk_catalyst",
-          "weight": 5
+          "weight": 35
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "minecraft:netherite_block",
-          "weight": 4
+          "name": "minecraft:ancient_debris",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_block"
         }
       ],
       "rolls": {

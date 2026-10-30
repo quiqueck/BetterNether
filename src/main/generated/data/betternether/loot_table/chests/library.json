@@ -124,7 +124,7 @@
             }
           ],
           "name": "minecraft:lapis_block",
-          "weight": 8
+          "weight": 32
         },
         {
           "type": "minecraft:item",
@@ -134,7 +134,8 @@
               "options": "minecraft:unbreaking"
             }
           ],
-          "name": "betternether:flaming_ruby_pickaxe"
+          "name": "betternether:flaming_ruby_pickaxe",
+          "weight": 4
         },
         {
           "type": "minecraft:item",
@@ -145,7 +146,7 @@
             }
           ],
           "name": "betternether:nether_ruby_pickaxe",
-          "weight": 4
+          "weight": 16
         },
         {
           "type": "minecraft:item",
@@ -167,7 +168,7 @@
             }
           ],
           "name": "minecraft:diamond_pickaxe",
-          "weight": 8
+          "weight": 32
         }
       ],
       "rolls": 1.0

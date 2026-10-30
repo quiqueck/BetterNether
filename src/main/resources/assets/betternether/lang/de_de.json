@@ -788,7 +788,7 @@
   "title.config.betternether.client.performance.lavafall_particles": "Lavafall-Partikel anzeigen",
   "title.config.betternether.client.performance.weeping_obsidian_particles": "Partikel für schluchzenden Obsidian anzeigen",
   "title.config.betternether.default_game_rules.egg_plant.mob_damage": "Auberginen verletzen Mobs",
-  "title.config.betternether.default_game_rules.egg_plant.player_damage": "Auerginen verletzen Spieler",
+  "title.config.betternether.default_game_rules.egg_plant.player_damage": "Auberginen verletzen Spieler",
   "title.config.betternether.default_game_rules.piglin.ignore_nether_armor": "Piglins ignorieren Nether-Rüstung",
   "title.config.betternether.default_game_rules.piglin.wear_nether_armor": "Piglins tragen Nether-Rüstung",
   "title.config.betternether.world.structure.city_in_overworld": "Nether-Städte im Oberwelt generieren",

@@ -124,25 +124,30 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
         );
     }
 
+    /**
+     * Weights add up to 1000 (inside a pool that only triggers for 10% of the chests):
+     * Ruby Block 95%, Flaming Ruby Chestplate 2.9%, Ancient Debris 2%, Netherite Block 0.1%.
+     */
     private LootPool.Builder surpriseItem() {
         return LootPool
                 .lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
                         .lootTableItem(NetherMetalBlocks.NETHER_RUBY_BLOCK)
-                        .setWeight(15)
-                )
-                .add(LootItem
-                        .lootTableItem(NetherMetalBlocks.NETHER_RUBY_BLOCK)
-                        .setWeight(15)
+                        .setWeight(950)
                 )
                 .add(LootItem
                         .lootTableItem(Blocks.NETHERITE_BLOCK)
-                        .setWeight(3)
+                        .setWeight(1)
+                )
+                // Ancient Debris: rare single piece instead of the former 3-in-34 Netherite Block
+                .add(LootItem
+                        .lootTableItem(Blocks.ANCIENT_DEBRIS)
+                        .setWeight(20)
                 )
                 .add(LootItem
                         .lootTableItem(NetherEquipmentItems.FLAMING_RUBY_SET.get(ArmorSlot.CHESTPLATE_SLOT))
-                        .setWeight(1)
+                        .setWeight(29)
                 )
                 .when(LootItemRandomChanceCondition.randomChance(0.1f));
     }
@@ -389,7 +394,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem
                         .lootTableItem(Blocks.LAPIS_BLOCK)
-                        .setWeight(8)
+                        .setWeight(32)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)))
                 ).add(LootItem
                         .lootTableItem(NetherEquipmentItems.FLAMING_RUBY_SET.get(ToolSlot.PICKAXE_SLOT))
@@ -397,7 +402,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                                 .withEnchantment(lookup.getOrThrow(Enchantments.EFFICIENCY))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SILK_TOUCH))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.UNBREAKING)))
-                        .setWeight(1)
+                        .setWeight(4)
                 ).add(LootItem
                         .lootTableItem(NetherEquipmentItems.NETHER_RUBY_SET.get(ToolSlot.PICKAXE_SLOT))
                         .apply(new EnchantRandomlyFunction.Builder()
@@ -405,7 +410,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SILK_TOUCH))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.UNBREAKING))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.MENDING)))
-                        .setWeight(4)
+                        .setWeight(16)
                 ).add(LootItem
                         .lootTableItem(Items.NETHERITE_PICKAXE)
                         .apply(new EnchantRandomlyFunction.Builder()
@@ -421,7 +426,7 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                                 .withEnchantment(lookup.getOrThrow(Enchantments.SILK_TOUCH))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.UNBREAKING))
                                 .withEnchantment(lookup.getOrThrow(Enchantments.MENDING)))
-                        .setWeight(8)
+                        .setWeight(32)
                 );
 
     }
@@ -485,33 +490,36 @@ public class NetherChestLootTableProvider extends WoverLootTableProvider {
                 .setRolls(UniformGenerator.between(3, 6))
                 .add(LootItem
                         .lootTableItem(Blocks.GOLD_BLOCK)
-                        .setWeight(6)
+                        .setWeight(42)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 )
                 .add(LootItem
                         .lootTableItem(Items.GOLD_INGOT)
-                        .setWeight(8)
+                        .setWeight(56)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)))
                 )
                 .add(LootItem
                         .lootTableItem(NetherResourceItems.NETHER_RUBY)
-                        .setWeight(8)
+                        .setWeight(56)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(3, 8)))
                 )
                 .add(LootItem
                         .lootTableItem(Items.NETHERITE_SCRAP)
-                        .setWeight(6)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 5)))
+                        .setWeight(21)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                 )
                 .add(LootItem
                         .lootTableItem(Blocks.SCULK_CATALYST)
-                        .setWeight(5)
+                        .setWeight(35)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 6)))
                 )
                 .add(LootItem
+                        .lootTableItem(Items.ANCIENT_DEBRIS)
+                        .setWeight(8)
+                )
+                .add(LootItem
                         .lootTableItem(Blocks.NETHERITE_BLOCK)
-                        .setWeight(4)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+                        .setWeight(1)
                 );
     }
 

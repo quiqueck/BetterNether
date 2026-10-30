@@ -202,6 +202,8 @@ public class NetherStoneBlocks {
     public static final Block BONE_REED_DOOR = NetherBlocks.defineBlock("bone_reed_door", p -> new BNWoodlikeDoor(p, WoodType.CRIMSON))
             .replacePropertiesWithCopy(BONE_BLOCK)
             .addTrait(ModelTraitLibrary.door())
+            // Cutout render layer + noOcclusion for the glass panes (copying BONE_BLOCK made them SOLID and occluding)
+            .addTrait(BlockTraits.DOOR_BLOCK)
             // BNWoodlikeDoor carries no Behaviour* marker, so - like the slot blocks (see the stairs above) -
             // it needs its mineable tool tag spelled out or it drops nothing. Every door built here is wood.
             .addTrait(NetherMaterial.wood())
@@ -210,6 +212,8 @@ public class NetherStoneBlocks {
     public static final Block BONE_CINCINNASITE_DOOR = NetherBlocks.defineBlock("bone_cincinnasite_door", p -> new BNWoodlikeDoor(p, WoodType.CRIMSON))
             .replacePropertiesWithCopy(BONE_BLOCK)
             .addTrait(ModelTraitLibrary.door())
+            // Cutout render layer + noOcclusion for the glass panes (copying BONE_BLOCK made them SOLID and occluding)
+            .addTrait(BlockTraits.DOOR_BLOCK)
             .addTrait(NetherMaterial.wood())
             .addTrait(NetherLoot.door())
             .buildAndRegister();

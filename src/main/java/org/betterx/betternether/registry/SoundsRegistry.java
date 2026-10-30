@@ -16,19 +16,10 @@ public class SoundsRegistry {
     public static final Holder<SoundEvent> AMBIENT_SWAMPLAND = registerHolder("betternether.ambient.swampland");
 
     /**
-     * A {@link net.minecraft.sounds.Music} names a single sound event, so all three gloomwood tracks
-     * hang off this one event and the sound engine picks between them each time the music starts.
+     * A {@link net.minecraft.sounds.Music} names a single sound event, so the gloomwood's tracks all hang
+     * off this one event and the sound engine picks between them each time the music starts.
      */
     public static final Holder<SoundEvent> MUSIC_GLOOMWOOD = registerHolder("betternether.music.gloomwood");
-
-    /**
-     * A {@link net.minecraft.world.item.JukeboxSong} also names a single sound event, but a disc has to play
-     * the one track printed on its label - so the three gloomwood tracks get an event each here, next to the
-     * pooled {@link #MUSIC_GLOOMWOOD} the biome uses.
-     */
-    public static final Holder<SoundEvent> MUSIC_DISC_GLOOM_WOODS = registerHolder("betternether.music_disc.gloom_woods");
-    public static final Holder<SoundEvent> MUSIC_DISC_GLOOM_WISPS = registerHolder("betternether.music_disc.gloom_wisps");
-    public static final Holder<SoundEvent> MUSIC_DISC_GLOOMSCULK = registerHolder("betternether.music_disc.gloomsculk");
 
     public static final Holder<SoundEvent> BLOCK_GLOOMWISP_CHIME = registerHolder("betternether.block.gloomwisp_chime");
 

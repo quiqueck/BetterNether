@@ -282,29 +282,6 @@
     {
       "conditions": [
         {
-          "chance": 0.25,
-          "condition": "minecraft:random_chance"
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "betternether:music_disc_gloom_woods"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "betternether:music_disc_gloom_wisps"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "betternether:music_disc_gloomsculk"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "conditions": [
-        {
           "chance": 0.1,
           "condition": "minecraft:random_chance"
         }
@@ -313,21 +290,21 @@
         {
           "type": "minecraft:item",
           "name": "betternether:nether_ruby_block",
-          "weight": 15
+          "weight": 950
         },
         {
           "type": "minecraft:item",
-          "name": "betternether:nether_ruby_block",
-          "weight": 15
+          "name": "minecraft:netherite_block"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:netherite_block",
-          "weight": 3
+          "name": "minecraft:ancient_debris",
+          "weight": 20
         },
         {
           "type": "minecraft:item",
-          "name": "betternether:flaming_ruby_chestplate"
+          "name": "betternether:flaming_ruby_chestplate",
+          "weight": 29
         }
       ],
       "rolls": 1.0

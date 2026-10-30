@@ -50,7 +50,7 @@ public class Stem extends SlotFromDefinition {
         // BlockBase's inherited getDrops() override (no loot table json was generated for any of them -
         // StalagnateMaterial/NetherMushroomMaterial/MushroomFirMaterial each add a Stem), reproduced
         // explicitly as NetherLoot.dropSelfNoExplosion() here so all three stay in sync.
-        def.strength(0.5f).noOcclusion().addTags(BlockTags.MINEABLE_WITH_AXE).addTrait(NetherLoot.dropSelfNoExplosion());
+        def.noOcclusion().addTags(BlockTags.MINEABLE_WITH_AXE).addTrait(NetherLoot.dropSelfNoExplosion());
     }
 
     @Override
@@ -76,5 +76,8 @@ public class Stem extends SlotFromDefinition {
         // Not a full cube (a 6x16x6 post), so it must not inherit the set material's sulfur cube archetype
         // - a cube renders what it swallowed as a block model, and a stem inside one reads as a bug.
         def.addTrait(BlockTraits.SULFUR_CUBE_ARCHETYPE.notSwallowable());
+        // Set here rather than in addSlotSpecificDefinitions: the wood set's WOOD_BLOCK.netherWood() runs in
+        // the common hook after that and sets strength(2, 3), which used to replace the stem's own 0.5.
+        def.strength(0.5f);
     }
 }

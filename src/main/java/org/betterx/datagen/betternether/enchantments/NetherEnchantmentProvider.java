@@ -59,7 +59,8 @@ public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
                                 new ChangeItemDamage(
                                         LevelBasedValue.constant(1.0F)
                                 ),
-                                new Ignite(LevelBasedValue.constant(100.0F))
+                                // Ignite takes seconds, not ticks (pre-1.21 this was 100 fire ticks).
+                                new Ignite(LevelBasedValue.constant(5.0F))
                         ),
                         // Half of all hits. At the old quarter a short fight often produced nothing at
                         // all - four hits miss entirely about a third of the time - which read as the

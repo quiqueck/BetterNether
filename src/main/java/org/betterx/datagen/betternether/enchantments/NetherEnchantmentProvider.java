@@ -60,7 +60,8 @@ public class NetherEnchantmentProvider extends WoverEnchantmentProvider {
                                 new ChangeItemDamage(
                                         LevelBasedValue.constant(1.0F)
                                 ),
-                                new Ignite(LevelBasedValue.constant(100.0F)),
+                                // Ignite takes seconds, not ticks (pre-1.21 this was 100 fire ticks).
+                                new Ignite(LevelBasedValue.constant(5.0F)),
                                 // Knock the attacker away as well. minecraft:knockback, further down,
                                 // only boosts the knockback the holder *deals* when attacking - it does
                                 // nothing for someone attacking the holder - so the retaliation needs

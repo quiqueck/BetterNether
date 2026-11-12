@@ -34,7 +34,7 @@
             },
             {
               "type": "minecraft:ignite",
-              "duration": 100.0
+              "duration": 5.0
             },
             {
               "type": "minecraft:apply_impulse",

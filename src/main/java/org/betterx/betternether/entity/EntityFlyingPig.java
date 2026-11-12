@@ -209,14 +209,13 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
     }
 
     @Override
-    protected void tickDeath() {
+    protected void dropCustomDeathLoot(DamageSource damageSource, int looting, boolean killedByPlayer) {
+        super.dropCustomDeathLoot(damageSource, looting, killedByPlayer);
         if (!level().isClientSide && this.isWarted() && level().getServer()
                                                                .getGameRules()
                                                                .getBoolean(GameRules.RULE_DOENTITYDROPS)) {
             this.spawnAtLocation(new ItemStack(Items.NETHER_WART, MHelper.randRange(1, 3, random)));
         }
-        super.tickDeath();
-
     }
 
     @Override

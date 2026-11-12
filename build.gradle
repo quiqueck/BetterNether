@@ -12,6 +12,13 @@ group = project.maven_group
 
 loom {
     accessWidenerPath = file("src/main/resources/betternether.accesswidener")
+    // Ship a mixin refmap like releases up to 9.0.10 did. Loom 1.18 would otherwise
+    // remap the mixin annotations in the class files only, which Sinytra Connector
+    // (Forge) can not fully remap (quiqueck/BCLib#249).
+    mixin {
+        useLegacyMixinAp = true
+        defaultRefmapName = "better-nether-refmap.json"
+    }
     runs {
         // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
         datagenClient {
